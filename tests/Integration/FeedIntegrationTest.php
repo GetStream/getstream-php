@@ -32,7 +32,7 @@ class FeedIntegrationTest extends TestCase
 {
     private Client $client;
 
-    private FeedsV3Client $feedsV3;
+    private FeedsV3Client $feedsV3Client;
     private string $testUserId;
     private string $testUserId2; // For follow operations
     private Feed $testFeed;
@@ -50,12 +50,12 @@ class FeedIntegrationTest extends TestCase
     protected function setUp(): void
     {
         $this->client = ClientBuilder::fromEnv()->build();
-        $this->feedsV3 = ClientBuilder::fromEnv()->buildFeedsClient();
+        $this->feedsV3Client = ClientBuilder::fromEnv()->buildFeedsClient();
 
         $this->testUserId = 'test-user-' . uniqid();
         $this->testUserId2 = 'test-user-2-' . uniqid();
-        $this->testFeed = $this->feedsV3->feed('user', $this->testUserId);
-        $this->testFeed2 = $this->feedsV3->feed('user', $this->testUserId2);
+        $this->testFeed = $this->feedsV3Client->feed('user', $this->testUserId);
+        $this->testFeed2 = $this->feedsV3Client->feed('user', $this->testUserId2);
 
         // Setup environment for each test
         $this->setupEnvironment();
@@ -148,7 +148,8 @@ class FeedIntegrationTest extends TestCase
     public function test02_CreateActivity(): void
     {
         echo "\n📝 Testing activity creation...\n";
-        
+
+        // snippet-start: AddActivity
         $activity = [
             'type' => 'post',
             'text' => 'This is a test activity from PHP SDK',
@@ -160,8 +161,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
 
-        // snippet-start: AddActivity
-        $response = $this->feedsV3->addActivity($activity);
+        $response = $this->feedsV3Client->addActivity($activity);
         // snippet-end: AddActivity
 
         $this->assertResponseSuccess($response, 'add activity');
@@ -181,7 +181,10 @@ class FeedIntegrationTest extends TestCase
         echo "\n🔍 Testing activity querying...\n";
         
         // snippet-start: QueryActivities
-        $response = $this->feedsV3->queryActivities([
+        $response = $this->feedsV3Client->queryActivities([
+            'filter'=> [
+                'activity_type' => 'post'
+            ],
             'limit' => 10,
             'offset' => 0
         ]);
@@ -209,7 +212,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
 
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for retrieval test');
         
         $createData = $createResponse->getData();
@@ -217,7 +220,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // snippet-start: GetActivity
-        $response = $this->feedsV3->getActivity($activityId);
+        $response = $this->feedsV3Client->getActivity($activityId);
         // snippet-end: GetActivity
 
         $this->assertResponseSuccess($response, 'get activity');
@@ -241,7 +244,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for update test');
         
         $createData = $createResponse->getData();
@@ -249,7 +252,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // snippet-start: UpdateActivity
-        $response = $this->feedsV3->updateActivity($activityId, [
+        $response = $this->feedsV3Client->updateActivity($activityId, [
             'text' => 'Updated activity text from PHP SDK',
             'user_id' => $this->testUserId,  // Required for server-side auth
             'custom' => [
@@ -279,7 +282,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for reaction test');
         
         $createData = $createResponse->getData();
@@ -287,7 +290,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // snippet-start: AddReaction
-        $response = $this->feedsV3->addReaction($activityId, [
+        $response = $this->feedsV3Client->addReaction($activityId, [
             'type' => 'like',
             'user_id' => $this->testUserId
         ]);
@@ -309,7 +312,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for query reactions test');
         
         $createData = $createResponse->getData();
@@ -317,14 +320,14 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
         
         // Add a reaction first
-        $reactionResponse = $this->feedsV3->addReaction($activityId, [
+        $reactionResponse = $this->feedsV3Client->addReaction($activityId, [
             'type' => 'like',
             'user_id' => $this->testUserId
         ]);
         $this->assertResponseSuccess($reactionResponse, 'add reaction for query test');
 
         // snippet-start: QueryActivityReactions
-        $response = $this->feedsV3->queryActivityReactions($activityId, [
+        $response = $this->feedsV3Client->queryActivityReactions($activityId, [
             'type' => 'like',
             'limit' => 10
         ]);
@@ -350,7 +353,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for comment test');
         
         $createData = $createResponse->getData();
@@ -358,7 +361,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // snippet-start: AddComment
-        $response = $this->feedsV3->addComment([
+        $response = $this->feedsV3Client->addComment([
             'comment' => 'This is a test comment from PHP SDK',
             'object_id' => $activityId,
             'object_type' => 'activity',
@@ -390,7 +393,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for query comments test');
         
         $createData = $createResponse->getData();
@@ -398,7 +401,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
         
         // Add a comment first
-        $commentResponse = $this->feedsV3->addComment([
+        $commentResponse = $this->feedsV3Client->addComment([
             'comment' => 'Comment for query test',
             'object_id' => $activityId,
             'object_type' => 'activity',
@@ -407,7 +410,7 @@ class FeedIntegrationTest extends TestCase
         $this->assertResponseSuccess($commentResponse, 'add comment for query test');
 
         // snippet-start: QueryComments
-            $response = $this->feedsV3->queryComments([
+            $response = $this->feedsV3Client->queryComments([
             'filter'=>[
                 'object_id' => $activityId,
             ],
@@ -431,7 +434,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for update comment test');
         
         $createData = $createResponse->getData();
@@ -439,7 +442,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
         
         // Add a comment to update
-        $commentResponse = $this->feedsV3->addComment([
+        $commentResponse = $this->feedsV3Client->addComment([
             'comment' => 'Comment to be updated',
             'object_id' => $activityId,
             'object_type' => 'activity',
@@ -451,7 +454,7 @@ class FeedIntegrationTest extends TestCase
         $commentId = $commentData['id'] ?? 'comment-id';  // Fallback if ID not returned
 
         // snippet-start: UpdateComment
-        $response = $this->feedsV3->updateComment($commentId, [
+        $response = $this->feedsV3Client->updateComment($commentId, [
             'text' => 'Updated comment text from PHP SDK',
         ]);
         // snippet-end: UpdateComment
@@ -476,16 +479,19 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for bookmark test');
         
         $createData = $createResponse->getData();
         $activityId = $createData['activity']['id'];
         $this->createdActivityIds[] = $activityId;
 
-        // snippet-start: AddBookmark
         try {
-            $response = $this->feedsV3->addBookmark($activityId, [
+            // snippet-start: AddBookmark
+            $response = $this->feedsV3Client->addBookmark($activityId, [
+                'new_folder' => [ //optional
+                    'name' => 'test-bookmarks1',
+                ],
                 'user_id' => $this->testUserId
             ]);
             // snippet-end: AddBookmark
@@ -507,7 +513,7 @@ class FeedIntegrationTest extends TestCase
         echo "\n🔍 Testing bookmark querying...\n";
 
         // snippet-start: QueryBookmarks
-        $response = $this->feedsV3->queryBookmarks([
+        $response = $this->feedsV3Client->queryBookmarks([
             'user_id' => $this->testUserId,
             'limit' => 10
         ]);
@@ -530,7 +536,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for update bookmark test');
         
         $createData = $createResponse->getData();
@@ -538,7 +544,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
         
         // Add a bookmark first
-        $bookmarkResponse = $this->feedsV3->addBookmark($activityId, [
+        $bookmarkResponse = $this->feedsV3Client->addBookmark($activityId, [
             'new_folder' => [
                 'name' => 'test-bookmarks1',
             ],
@@ -548,7 +554,7 @@ class FeedIntegrationTest extends TestCase
 
         // snippet-start: UpdateBookmark
         $folderID = $bookmarkResponse->getData()['bookmark']['folder']['id'];
-        $response = $this->feedsV3->updateBookmark($activityId, [
+        $response = $this->feedsV3Client->updateBookmark($activityId, [
             'folder_id' => $folderID,
             'notes' => 'Updated bookmark notes',
             'user_id' => $this->testUserId,
@@ -567,9 +573,9 @@ class FeedIntegrationTest extends TestCase
     {
         echo "\n👥 Testing follow operation...\n";
 
-        // snippet-start: Follow
         try {
-            $response = $this->feedsV3->follow([
+            // snippet-start: Follow
+            $response = $this->feedsV3Client->follow([
                 'source' => 'user:' . $this->testUserId,
                 'target' => 'user:' . $this->testUserId2,
                 'activity_copy_limit' => 100
@@ -591,7 +597,7 @@ class FeedIntegrationTest extends TestCase
         echo "\n🔍 Testing follow querying...\n";
 
         // snippet-start: QueryFollows
-        $response = $this->feedsV3->queryFollows([
+        $response = $this->feedsV3Client->queryFollows([
             'limit' => 10,
             'offset' => 0
         ]);
@@ -610,6 +616,8 @@ class FeedIntegrationTest extends TestCase
     {
         echo "\n📝 Testing batch activity upsert...\n";
 
+        // snippet-start: UpsertActivities
+
         $activities = [
             [
                 'type' => 'post',
@@ -623,8 +631,7 @@ class FeedIntegrationTest extends TestCase
             ]
         ];
 
-        // snippet-start: UpsertActivities
-        $response = $this->feedsV3->upsertActivities([
+        $response = $this->feedsV3Client->upsertActivities([
             'activities' => $activities
         ]);
         // snippet-end: UpsertActivities
@@ -661,7 +668,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for pin test');
         
         $createData = $createResponse->getData();
@@ -692,7 +699,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for unpin test');
         
         $createData = $createResponse->getData();
@@ -730,7 +737,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for delete bookmark test');
         
         $createData = $createResponse->getData();
@@ -738,7 +745,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
         
         // Add a bookmark first
-        $bookmarkResponse = $this->feedsV3->addBookmark($activityId, [
+        $bookmarkResponse = $this->feedsV3Client->addBookmark($activityId, [
             'user_id' => $this->testUserId,
             'new_folder' => [
                 'name' => 'test-bookmarks1',
@@ -748,7 +755,7 @@ class FeedIntegrationTest extends TestCase
 
         // snippet-start: DeleteBookmark
         $folderId = $bookmarkResponse->getData()['bookmark']['folder']['id'];
-        $response = $this->feedsV3->deleteBookmark($activityId, $folderId, $this->testUserId);
+        $response = $this->feedsV3Client->deleteBookmark($activityId, $folderId, $this->testUserId);
         // snippet-end: DeleteBookmark
 
         $this->assertResponseSuccess($response, 'delete bookmark');
@@ -767,7 +774,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for delete reaction test');
         
         $createData = $createResponse->getData();
@@ -775,14 +782,14 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
         
         // Add a reaction first
-        $reactionResponse = $this->feedsV3->addReaction($activityId, [
+        $reactionResponse = $this->feedsV3Client->addReaction($activityId, [
             'type' => 'like',
             'user_id' => $this->testUserId
         ]);
         $this->assertResponseSuccess($reactionResponse, 'add reaction for delete test');
 
         // snippet-start: DeleteActivityReaction
-        $response = $this->feedsV3->deleteActivityReaction($activityId, 'like', $this->testUserId);
+        $response = $this->feedsV3Client->deleteActivityReaction($activityId, 'like', $this->testUserId);
         // snippet-end: DeleteActivityReaction
 
         $this->assertResponseSuccess($response, 'delete reaction');
@@ -801,7 +808,7 @@ class FeedIntegrationTest extends TestCase
             'fids' => [$this->testFeed->getFeedIdentifier()],
         ];
         
-        $createResponse = $this->feedsV3->addActivity($activity);
+        $createResponse = $this->feedsV3Client->addActivity($activity);
         $this->assertResponseSuccess($createResponse, 'create activity for delete comment test');
         
         $createData = $createResponse->getData();
@@ -809,7 +816,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
         
         // Add a comment first
-        $commentResponse = $this->feedsV3->addComment([
+        $commentResponse = $this->feedsV3Client->addComment([
             'comment' => 'Comment to be deleted',
             'object_id' => $activityId,
             'object_type' => 'activity',
@@ -821,7 +828,7 @@ class FeedIntegrationTest extends TestCase
         $commentId = $commentData['id'] ?? 'comment-id';  // Fallback if ID not returned
 
         // snippet-start: DeleteComment
-        $response = $this->feedsV3->deleteComment($commentId, false); // soft delete
+        $response = $this->feedsV3Client->deleteComment($commentId, false); // soft delete
         // snippet-end: DeleteComment
 
         $this->assertResponseSuccess($response, 'delete comment');
@@ -833,7 +840,7 @@ class FeedIntegrationTest extends TestCase
         echo "\n👥 Testing unfollow operation...\n";
 
         // snippet-start: Unfollow
-        $response = $this->feedsV3->unfollow(
+        $response = $this->feedsV3Client->unfollow(
             'user:' . $this->testUserId,
             'user:' . $this->testUserId2
         );
@@ -858,7 +865,7 @@ class FeedIntegrationTest extends TestCase
                 'fids' => [$this->testFeed->getFeedIdentifier()],
             ];
             
-            $createResponse = $this->feedsV3->addActivity($activity);
+            $createResponse = $this->feedsV3Client->addActivity($activity);
             $this->assertResponseSuccess($createResponse, "create activity {$i} for delete test");
             
             $createData = $createResponse->getData();
@@ -869,7 +876,7 @@ class FeedIntegrationTest extends TestCase
 
         foreach ($activitiesToDelete as $activityId) {
             // snippet-start: DeleteActivity
-            $response = $this->feedsV3->deleteActivity($activityId, false); // soft delete
+            $response = $this->feedsV3Client->deleteActivity($activityId, false); // soft delete
             // snippet-end: DeleteActivity
 
             $this->assertResponseSuccess($response, 'delete activity');
@@ -891,7 +898,7 @@ class FeedIntegrationTest extends TestCase
         if (!empty($this->createdActivityIds)) {
             foreach ($this->createdActivityIds as $activityId) {
                 try {
-                    $this->feedsV3->deleteActivity($activityId, true); // hard delete
+                    $this->feedsV3Client->deleteActivity($activityId, true); // hard delete
                 } catch (StreamApiException $e) {
                     // Ignore cleanup errors
                     echo "Warning: Failed to cleanup activity {$activityId}: " . $e->getMessage() . "\n";
@@ -903,7 +910,7 @@ class FeedIntegrationTest extends TestCase
         if (!empty($this->createdCommentIds)) {
             foreach ($this->createdCommentIds as $commentId) {
                 try {
-                    $this->feedsV3->deleteComment($commentId, true); // hard delete
+                    $this->feedsV3Client->deleteComment($commentId, true); // hard delete
                 } catch (StreamApiException $e) {
                     // Ignore cleanup errors
                     echo "Warning: Failed to cleanup comment {$commentId}: " . $e->getMessage() . "\n";
