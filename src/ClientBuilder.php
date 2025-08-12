@@ -15,7 +15,7 @@ class ClientBuilder
 {
     private ?string $apiKey = null;
     private ?string $apiSecret = null;
-    private string $baseUrl = 'https://api.getstream.io';
+    private string $baseUrl = 'https://chat.stream-io-api.com';
     private ?HttpClientInterface $httpClient = null;
     private bool $loadEnv = true;
     private ?string $envPath = null;
@@ -88,8 +88,23 @@ class ClientBuilder
 
     /**
      * Build the client
+     * @throws StreamException
      */
     public function build(): Client
+    {
+        $this->loadCreds();
+        return new Client($this->apiKey, $this->apiSecret, $this->baseUrl);
+    }
+
+    /**
+     * @throws StreamException
+     */
+    public function buildFeedsClient(): FeedsV3Client{
+        $this->loadCreds();
+        return new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl);
+    }
+
+    public function loadCreds(): void
     {
         // Load environment variables if enabled
         if ($this->loadEnv) {
@@ -100,9 +115,9 @@ class ClientBuilder
         $apiKey = $this->apiKey ?? $this->getEnvVar('STREAM_API_KEY');
         $apiSecret = $this->apiSecret ?? $this->getEnvVar('STREAM_API_SECRET');
         $baseUrl = $this->baseUrl;
-        
+
         // Override baseUrl with environment variable if not explicitly set and env var exists
-        if ($this->baseUrl === 'https://api.getstream.io') {
+        if ($this->baseUrl === 'https://chat.stream-io-api.com') {
             $envBaseUrl = $this->getEnvVar('STREAM_BASE_URL');
             if ($envBaseUrl !== null) {
                 $baseUrl = $envBaseUrl;
@@ -121,10 +136,12 @@ class ClientBuilder
             );
         }
 
-        return new Client($apiKey, $apiSecret, $baseUrl, $this->httpClient);
+        $this->apiKey = $apiKey;
+        $this->apiSecret = $apiSecret;
+        $this->baseUrl = $baseUrl;
     }
 
-    /**
+        /**
      * Load environment variables from .env file
      */
     private function loadEnvironmentVariables(): void

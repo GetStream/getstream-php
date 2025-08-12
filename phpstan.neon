@@ -1,0 +1,8 @@
+parameters:
+    level: 8
+    paths:
+        - src
+    ignoreErrors:
+        # Add any specific errors to ignore here
+        -
+            identifier: missingType.iterableValue

@@ -8,12 +8,14 @@ use GetStream\Exceptions\StreamException;
 use GetStream\Http\HttpClientInterface;
 use GetStream\Http\GuzzleHttpClient;
 use GetStream\Auth\JWTGenerator;
+use GetStream\Generated\CommonClient;
 
 /**
  * Main GetStream client for interacting with the API
  */
 class Client
 {
+    use CommonClient;
     private string $apiKey;
     private string $apiSecret;
     private string $baseUrl;
@@ -32,7 +34,7 @@ class Client
     public function __construct(
         string $apiKey,
         string $apiSecret,
-        string $baseUrl = 'https://api.getstream.io',
+        string $baseUrl = 'https://chat.stream-io-api.com',
         ?HttpClientInterface $httpClient = null
     ) {
         if (empty($apiKey)) {
@@ -102,10 +104,13 @@ class Client
      * @param string $feedGroup The feed group (e.g., 'user', 'timeline')
      * @param string $feedId The feed ID (e.g., user ID)
      * @return Feed
+     * @throws StreamException
      */
     public function feed(string $feedGroup, string $feedId): Feed
     {
-        return new Feed($this, $feedGroup, $feedId);
+        // Create a FeedsV3Client instance using the same configuration
+        $feedsV3Client = new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+        return new Feed($feedsV3Client, $feedGroup, $feedId);
     }
 
     /**
@@ -164,5 +169,20 @@ class Client
     public function createUserToken(string $userId, array $claims = [], ?int $expiration = null): string
     {
         return $this->jwtGenerator->generateUserToken($userId, $claims, $expiration);
+    }
+
+    /**
+     * Create or update users
+     *
+     * @param array $users Array of user data keyed by user ID
+     * @return StreamResponse
+     * @throws StreamException
+     */
+    public function upsertUsers(array $users): StreamResponse
+    {
+        $path = '/api/v2/users';
+        $requestData = ['users' => $users];
+        
+        return $this->makeRequest('POST', $path, [], $requestData);
     }
 }

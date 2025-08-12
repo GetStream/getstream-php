@@ -75,6 +75,7 @@ class GuzzleHttpClient implements HttpClientInterface
                 $streamResponse->getData() ?? []
             );
         } catch (GuzzleException $e) {
+            echo 'HTTP Error: ' . $e->getMessage();
             throw new StreamException('HTTP request failed: ' . $e->getMessage(), $e->getCode());
         }
     }
