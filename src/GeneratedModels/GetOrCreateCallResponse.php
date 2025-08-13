@@ -1,0 +1,55 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+
+use JsonSerializable;
+/**
+ * 
+ */
+class GetOrCreateCallResponse implements JsonSerializable
+{
+    public function __construct(public ?bool $created = null,
+        public ?string $duration = null,
+        public ?array $members = null,
+        public ?array $ownCapabilities = null,
+        public ?CallResponse $call = null
+    ) {}
+
+    public function jsonSerialize(): array
+    {
+        return array_filter([
+            'created' => $this->created,
+            'duration' => $this->duration,
+            'members' => $this->members,
+            'own_capabilities' => $this->ownCapabilities,
+            'call' => $this->call,
+        ], fn($v) => $v !== null);
+    }
+
+    public function toArray(): array
+    {
+        return $this->jsonSerialize();
+    }
+
+    /**
+     * Create a new instance from JSON data.
+     *
+     * @param array<string, mixed>|string $json JSON data
+     * @return static
+     */
+    public static function fromJson($json): self
+    {
+        if (is_string($json)) {
+            $json = json_decode($json, true);
+        }
+        
+        return new static(created: $json['created'] ?? null,
+            duration: $json['duration'] ?? null,
+            members: $json['members'] ?? null,
+            ownCapabilities: $json['own_capabilities'] ?? null,
+            call: $json['call'] ?? null
+        );
+    }
+} 

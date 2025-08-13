@@ -4,6 +4,7 @@ namespace GetStream\Generated;
 
 use GetStream\StreamResponse;
 use GetStream\Exceptions\StreamException;
+use GetStream\GeneratedModels;
 
 /**
  * Generated API methods for Stream Client
@@ -21,7 +22,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function addActivity(array $requestData = []): StreamResponse {
+    public function addActivity(GeneratedModels\AddActivityRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities';
 
         $queryParams = [];
@@ -37,7 +38,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function upsertActivities(array $requestData = []): StreamResponse {
+    public function upsertActivities(GeneratedModels\UpsertActivitiesRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/batch';
 
         $queryParams = [];
@@ -53,7 +54,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function deleteActivities(array $requestData = []): StreamResponse {
+    public function deleteActivities(GeneratedModels\DeleteActivitiesRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/delete';
 
         $queryParams = [];
@@ -69,7 +70,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryActivities(array $requestData = []): StreamResponse {
+    public function queryActivities(GeneratedModels\QueryActivitiesRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/query';
 
         $queryParams = [];
@@ -111,7 +112,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateBookmark(string $activityID, array $requestData = []): StreamResponse {
+    public function updateBookmark(string $activityID, GeneratedModels\UpdateBookmarkRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/bookmarks';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -129,7 +130,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function addBookmark(string $activityID, array $requestData = []): StreamResponse {
+    public function addBookmark(string $activityID, GeneratedModels\AddBookmarkRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/bookmarks';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -147,7 +148,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function activityFeedback(string $activityID, array $requestData = []): StreamResponse {
+    public function activityFeedback(string $activityID, GeneratedModels\ActivityFeedbackRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/feedback';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -174,7 +175,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function castPollVote(string $activityID, string $pollID, array $requestData = []): StreamResponse {
+    public function castPollVote(string $activityID, string $pollID, GeneratedModels\CastPollVoteRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/polls/{poll_id}/vote';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
         $path = str_replace('{poll_id}', (string) $pollID, $path);
@@ -222,7 +223,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function addReaction(string $activityID, array $requestData = []): StreamResponse {
+    public function addReaction(string $activityID, GeneratedModels\AddReactionRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/reactions';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -240,7 +241,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryActivityReactions(string $activityID, array $requestData = []): StreamResponse {
+    public function queryActivityReactions(string $activityID, GeneratedModels\QueryActivityReactionsRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/reactions/query';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -322,7 +323,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateActivityPartial(string $id, array $requestData = []): StreamResponse {
+    public function updateActivityPartial(string $id, GeneratedModels\UpdateActivityPartialRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -343,7 +344,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateActivity(string $id, array $requestData = []): StreamResponse {
+    public function updateActivity(string $id, GeneratedModels\UpdateActivityRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -360,7 +361,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryBookmarkFolders(array $requestData = []): StreamResponse {
+    public function queryBookmarkFolders(GeneratedModels\QueryBookmarkFoldersRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/bookmark_folders/query';
 
         $queryParams = [];
@@ -394,7 +395,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateBookmarkFolder(string $folderID, array $requestData = []): StreamResponse {
+    public function updateBookmarkFolder(string $folderID, GeneratedModels\UpdateBookmarkFolderRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/bookmark_folders/{folder_id}';
         $path = str_replace('{folder_id}', (string) $folderID, $path);
 
@@ -411,7 +412,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryBookmarks(array $requestData = []): StreamResponse {
+    public function queryBookmarks(GeneratedModels\QueryBookmarksRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/bookmarks/query';
 
         $queryParams = [];
@@ -474,7 +475,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function addComment(array $requestData = []): StreamResponse {
+    public function addComment(GeneratedModels\AddCommentRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments';
 
         $queryParams = [];
@@ -490,7 +491,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function addCommentsBatch(array $requestData = []): StreamResponse {
+    public function addCommentsBatch(GeneratedModels\AddCommentsBatchRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/batch';
 
         $queryParams = [];
@@ -506,7 +507,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryComments(array $requestData = []): StreamResponse {
+    public function queryComments(GeneratedModels\QueryCommentsRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/query';
 
         $queryParams = [];
@@ -561,7 +562,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateComment(string $id, array $requestData = []): StreamResponse {
+    public function updateComment(string $id, GeneratedModels\UpdateCommentRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -579,7 +580,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function addCommentReaction(string $id, array $requestData = []): StreamResponse {
+    public function addCommentReaction(string $id, GeneratedModels\AddCommentReactionRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/reactions';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -597,7 +598,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryCommentReactions(string $id, array $requestData = []): StreamResponse {
+    public function queryCommentReactions(string $id, GeneratedModels\QueryCommentReactionsRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/reactions/query';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -693,7 +694,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createFeedGroup(array $requestData = []): StreamResponse {
+    public function createFeedGroup(GeneratedModels\CreateFeedGroupRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups';
 
         $queryParams = [];
@@ -734,7 +735,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function getOrCreateFeed(string $feedGroupID, string $feedID, array $requestData = []): StreamResponse {
+    public function getOrCreateFeed(string $feedGroupID, string $feedID, GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -754,7 +755,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateFeed(string $feedGroupID, string $feedID, array $requestData = []): StreamResponse {
+    public function updateFeed(string $feedGroupID, string $feedID, GeneratedModels\UpdateFeedRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -774,7 +775,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function markActivity(string $feedGroupID, string $feedID, array $requestData = []): StreamResponse {
+    public function markActivity(string $feedGroupID, string $feedID, GeneratedModels\MarkActivityRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/activities/mark/batch';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -820,7 +821,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function pinActivity(string $feedGroupID, string $feedID, string $activityID, array $requestData = []): StreamResponse {
+    public function pinActivity(string $feedGroupID, string $feedID, string $activityID, GeneratedModels\PinActivityRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/activities/{activity_id}/pin';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -841,7 +842,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateFeedMembers(string $feedGroupID, string $feedID, array $requestData = []): StreamResponse {
+    public function updateFeedMembers(string $feedGroupID, string $feedID, GeneratedModels\UpdateFeedMembersRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/members';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -861,7 +862,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function acceptFeedMemberInvite(string $feedID, string $feedGroupID, array $requestData = []): StreamResponse {
+    public function acceptFeedMemberInvite(string $feedID, string $feedGroupID, GeneratedModels\AcceptFeedMemberInviteRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/members/accept';
         $path = str_replace('{feed_id}', (string) $feedID, $path);
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
@@ -881,7 +882,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryFeedMembers(string $feedGroupID, string $feedID, array $requestData = []): StreamResponse {
+    public function queryFeedMembers(string $feedGroupID, string $feedID, GeneratedModels\QueryFeedMembersRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/members/query';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -901,7 +902,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function rejectFeedMemberInvite(string $feedGroupID, string $feedID, array $requestData = []): StreamResponse {
+    public function rejectFeedMemberInvite(string $feedGroupID, string $feedID, GeneratedModels\RejectFeedMemberInviteRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/members/reject';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -983,7 +984,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function getOrCreateFeedGroup(string $id, array $requestData = []): StreamResponse {
+    public function getOrCreateFeedGroup(string $id, GeneratedModels\GetOrCreateFeedGroupRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1001,7 +1002,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateFeedGroup(string $id, array $requestData = []): StreamResponse {
+    public function updateFeedGroup(string $id, GeneratedModels\UpdateFeedGroupRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1033,7 +1034,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createFeedView(array $requestData = []): StreamResponse {
+    public function createFeedView(GeneratedModels\CreateFeedViewRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_views';
 
         $queryParams = [];
@@ -1084,7 +1085,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function getOrCreateFeedView(string $id, array $requestData = []): StreamResponse {
+    public function getOrCreateFeedView(string $id, GeneratedModels\GetOrCreateFeedViewRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_views/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1102,7 +1103,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateFeedView(string $id, array $requestData = []): StreamResponse {
+    public function updateFeedView(string $id, GeneratedModels\UpdateFeedViewRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_views/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1119,7 +1120,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createFeedsBatch(array $requestData = []): StreamResponse {
+    public function createFeedsBatch(GeneratedModels\CreateFeedsBatchRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feeds/batch';
 
         $queryParams = [];
@@ -1135,7 +1136,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryFeeds(array $requestData = []): StreamResponse {
+    public function queryFeeds(GeneratedModels\QueryFeedsRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feeds/query';
 
         $queryParams = [];
@@ -1151,7 +1152,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateFollow(array $requestData = []): StreamResponse {
+    public function updateFollow(GeneratedModels\UpdateFollowRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows';
 
         $queryParams = [];
@@ -1167,7 +1168,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function follow(array $requestData = []): StreamResponse {
+    public function follow(GeneratedModels\FollowRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows';
 
         $queryParams = [];
@@ -1183,7 +1184,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function acceptFollow(array $requestData = []): StreamResponse {
+    public function acceptFollow(GeneratedModels\AcceptFollowRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows/accept';
 
         $queryParams = [];
@@ -1199,7 +1200,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function followBatch(array $requestData = []): StreamResponse {
+    public function followBatch(GeneratedModels\FollowBatchRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows/batch';
 
         $queryParams = [];
@@ -1215,7 +1216,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryFollows(array $requestData = []): StreamResponse {
+    public function queryFollows(GeneratedModels\QueryFollowsRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows/query';
 
         $queryParams = [];
@@ -1231,7 +1232,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function rejectFollow(array $requestData = []): StreamResponse {
+    public function rejectFollow(GeneratedModels\RejectFollowRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows/reject';
 
         $queryParams = [];
@@ -1266,7 +1267,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function unfollowBatch(array $requestData = []): StreamResponse {
+    public function unfollowBatch(GeneratedModels\UnfollowBatchRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/unfollow/batch';
 
         $queryParams = [];
@@ -1300,7 +1301,7 @@ trait FeedsClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function exportFeedUserData(string $userID, array $requestData = []): StreamResponse {
+    public function exportFeedUserData(string $userID, GeneratedModels\ExportFeedUserDataRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/users/{user_id}/export';
         $path = str_replace('{user_id}', (string) $userID, $path);
 

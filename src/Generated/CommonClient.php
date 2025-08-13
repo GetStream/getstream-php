@@ -4,6 +4,7 @@ namespace GetStream\Generated;
 
 use GetStream\StreamResponse;
 use GetStream\Exceptions\StreamException;
+use GetStream\GeneratedModels;
 
 /**
  * Generated API methods for Stream Client
@@ -36,7 +37,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateApp(array $requestData = []): StreamResponse {
+    public function updateApp(GeneratedModels\UpdateAppRequest $requestData): StreamResponse {
         $path = '/api/v2/app';
 
         $queryParams = [];
@@ -71,7 +72,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createBlockList(array $requestData = []): StreamResponse {
+    public function createBlockList(GeneratedModels\CreateBlockListRequest $requestData): StreamResponse {
         $path = '/api/v2/blocklists';
 
         $queryParams = [];
@@ -130,7 +131,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateBlockList(string $name, array $requestData = []): StreamResponse {
+    public function updateBlockList(string $name, GeneratedModels\UpdateBlockListRequest $requestData): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
@@ -147,7 +148,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function checkPush(array $requestData = []): StreamResponse {
+    public function checkPush(GeneratedModels\CheckPushRequest $requestData): StreamResponse {
         $path = '/api/v2/check_push';
 
         $queryParams = [];
@@ -163,7 +164,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function checkSNS(array $requestData = []): StreamResponse {
+    public function checkSNS(GeneratedModels\CheckSNSRequest $requestData): StreamResponse {
         $path = '/api/v2/check_sns';
 
         $queryParams = [];
@@ -179,7 +180,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function checkSQS(array $requestData = []): StreamResponse {
+    public function checkSQS(GeneratedModels\CheckSQSRequest $requestData): StreamResponse {
         $path = '/api/v2/check_sqs';
 
         $queryParams = [];
@@ -237,7 +238,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createDevice(array $requestData = []): StreamResponse {
+    public function createDevice(GeneratedModels\CreateDeviceRequest $requestData): StreamResponse {
         $path = '/api/v2/devices';
 
         $queryParams = [];
@@ -253,7 +254,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function exportUsers(array $requestData = []): StreamResponse {
+    public function exportUsers(GeneratedModels\ExportUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/export/users';
 
         $queryParams = [];
@@ -284,7 +285,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createExternalStorage(array $requestData = []): StreamResponse {
+    public function createExternalStorage(GeneratedModels\CreateExternalStorageRequest $requestData): StreamResponse {
         $path = '/api/v2/external_storage';
 
         $queryParams = [];
@@ -318,7 +319,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateExternalStorage(string $name, array $requestData = []): StreamResponse {
+    public function updateExternalStorage(string $name, GeneratedModels\UpdateExternalStorageRequest $requestData): StreamResponse {
         $path = '/api/v2/external_storage/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
@@ -352,7 +353,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createGuest(array $requestData = []): StreamResponse {
+    public function createGuest(GeneratedModels\CreateGuestRequest $requestData): StreamResponse {
         $path = '/api/v2/guest';
 
         $queryParams = [];
@@ -368,7 +369,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createImportURL(array $requestData = []): StreamResponse {
+    public function createImportURL(GeneratedModels\CreateImportURLRequest $requestData): StreamResponse {
         $path = '/api/v2/import_urls';
 
         $queryParams = [];
@@ -399,7 +400,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createImport(array $requestData = []): StreamResponse {
+    public function createImport(GeneratedModels\CreateImportRequest $requestData): StreamResponse {
         $path = '/api/v2/imports';
 
         $queryParams = [];
@@ -483,7 +484,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createPoll(array $requestData = []): StreamResponse {
+    public function createPoll(GeneratedModels\CreatePollRequest $requestData): StreamResponse {
         $path = '/api/v2/polls';
 
         $queryParams = [];
@@ -505,7 +506,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updatePoll(array $requestData = []): StreamResponse {
+    public function updatePoll(GeneratedModels\UpdatePollRequest $requestData): StreamResponse {
         $path = '/api/v2/polls';
 
         $queryParams = [];
@@ -522,7 +523,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryPolls(?string $userID = null, array $requestData = []): StreamResponse {
+    public function queryPolls(?string $userID = null, GeneratedModels\QueryPollsRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/query';
 
         $queryParams = [];
@@ -594,7 +595,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updatePollPartial(string $pollID, array $requestData = []): StreamResponse {
+    public function updatePollPartial(string $pollID, GeneratedModels\UpdatePollPartialRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/{poll_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -616,7 +617,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createPollOption(string $pollID, array $requestData = []): StreamResponse {
+    public function createPollOption(string $pollID, GeneratedModels\CreatePollOptionRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -638,7 +639,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updatePollOption(string $pollID, array $requestData = []): StreamResponse {
+    public function updatePollOption(string $pollID, GeneratedModels\UpdatePollOptionRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -707,7 +708,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function queryPollVotes(string $pollID, ?string $userID = null, array $requestData = []): StreamResponse {
+    public function queryPollVotes(string $pollID, ?string $userID = null, GeneratedModels\QueryPollVotesRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/votes';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -742,7 +743,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function upsertPushProvider(array $requestData = []): StreamResponse {
+    public function upsertPushProvider(GeneratedModels\UpsertPushProviderRequest $requestData): StreamResponse {
         $path = '/api/v2/push_providers';
 
         $queryParams = [];
@@ -827,7 +828,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function createRole(array $requestData = []): StreamResponse {
+    public function createRole(GeneratedModels\CreateRoleRequest $requestData): StreamResponse {
         $path = '/api/v2/roles';
 
         $queryParams = [];
@@ -896,7 +897,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function uploadFileGlobal(array $requestData = []): StreamResponse {
+    public function uploadFileGlobal(GeneratedModels\FileUploadRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/file';
 
         $queryParams = [];
@@ -931,7 +932,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function uploadImageGlobal(array $requestData = []): StreamResponse {
+    public function uploadImageGlobal(GeneratedModels\ImageUploadRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/image';
 
         $queryParams = [];
@@ -971,7 +972,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateUsersPartial(array $requestData = []): StreamResponse {
+    public function updateUsersPartial(GeneratedModels\UpdateUsersPartialRequest $requestData): StreamResponse {
         $path = '/api/v2/users';
 
         $queryParams = [];
@@ -990,7 +991,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateUsers(array $requestData = []): StreamResponse {
+    public function updateUsers(GeneratedModels\UpdateUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/users';
 
         $queryParams = [];
@@ -1025,7 +1026,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function blockUsers(array $requestData = []): StreamResponse {
+    public function blockUsers(GeneratedModels\BlockUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/users/block';
 
         $queryParams = [];
@@ -1044,7 +1045,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function deactivateUsers(array $requestData = []): StreamResponse {
+    public function deactivateUsers(GeneratedModels\DeactivateUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/users/deactivate';
 
         $queryParams = [];
@@ -1064,7 +1065,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function deleteUsers(array $requestData = []): StreamResponse {
+    public function deleteUsers(GeneratedModels\DeleteUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/users/delete';
 
         $queryParams = [];
@@ -1100,7 +1101,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function updateLiveLocation(?string $userID = null, array $requestData = []): StreamResponse {
+    public function updateLiveLocation(?string $userID = null, GeneratedModels\UpdateLiveLocationRequest $requestData): StreamResponse {
         $path = '/api/v2/users/live_locations';
 
         $queryParams = [];
@@ -1123,7 +1124,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function reactivateUsers(array $requestData = []): StreamResponse {
+    public function reactivateUsers(GeneratedModels\ReactivateUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/users/reactivate';
 
         $queryParams = [];
@@ -1139,7 +1140,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function restoreUsers(array $requestData = []): StreamResponse {
+    public function restoreUsers(GeneratedModels\RestoreUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/users/restore';
 
         $queryParams = [];
@@ -1155,7 +1156,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function unblockUsers(array $requestData = []): StreamResponse {
+    public function unblockUsers(GeneratedModels\UnblockUsersRequest $requestData): StreamResponse {
         $path = '/api/v2/users/unblock';
 
         $queryParams = [];
@@ -1175,7 +1176,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function deactivateUser(string $userID, array $requestData = []): StreamResponse {
+    public function deactivateUser(string $userID, GeneratedModels\DeactivateUserRequest $requestData): StreamResponse {
         $path = '/api/v2/users/{user_id}/deactivate';
         $path = str_replace('{user_id}', (string) $userID, $path);
 
@@ -1213,7 +1214,7 @@ trait CommonClient
      * @return StreamResponse
      * @throws StreamException
      */
-    public function reactivateUser(string $userID, array $requestData = []): StreamResponse {
+    public function reactivateUser(string $userID, GeneratedModels\ReactivateUserRequest $requestData): StreamResponse {
         $path = '/api/v2/users/{user_id}/reactivate';
         $path = str_replace('{user_id}', (string) $userID, $path);
 

@@ -8,15 +8,25 @@ use GetStream\Client;
 use GetStream\ClientBuilder;
 use GetStream\Feed;
 use GetStream\FeedsV3Client;
+//use GetStream\GeneratedModels\AddActivityRequest;
+use GetStream\GeneratedModels;
 use GetStream\StreamResponse;
 use GetStream\Exceptions\StreamException;
 use GetStream\Exceptions\StreamApiException;
 use PHPUnit\Framework\TestCase;
 
+//$va=glob(__DIR__ . '/../../src/GeneratedModels/*.php');
+//
+//foreach (glob(__DIR__ . '/../../src/GeneratedModels/*.php') as $file) {
+//    require_once $file; // load the class definition
+//    $class = 'GetStream\\GeneratedModels\\' . basename($file, '.php');
+//    class_alias($class, basename($file, '.php'));
+//}
+
 /**
  * Systematic Integration tests for Feed operations
  * These tests follow a logical flow: setup → create → operate → cleanup
- * 
+ *
  * Test order:
  * 1. Environment Setup (user, feed creation)
  * 2. Activity Operations (create, read, update, delete)
@@ -37,7 +47,7 @@ class FeedIntegrationTest extends TestCase
     private string $testUserId2; // For follow operations
     private Feed $testFeed;
     private Feed $testFeed2;
-    
+
     // Track created resources for cleanup
     private array $createdActivityIds = [];
     private array $createdCommentIds = [];
@@ -76,42 +86,43 @@ class FeedIntegrationTest extends TestCase
         try {
             // Create test users
             // snippet-start: CreateUsers
-            $response = $this->client->updateUsers([
-                'users' => [
-                    $this->testUserId => [
-                        'id' => $this->testUserId,
-                        'name' => 'Test User 1',
-                        'role' => 'user'
-                    ],
-                    $this->testUserId2 => [
-                        'id' => $this->testUserId2,
-                        'name' => 'Test User 2',
-                        'role' => 'user'
-                    ]
-                ]
-            ]);
-            // snippet-end: CreateUsers
-            
-            if (!$response->isSuccessful()) {
-                throw new \Exception('Failed to create users: ' . $response->getRawBody());
-            }
-            
+//            $response = $this->client->updateUsers([
+//                'users' => [
+//                    $this->testUserId => [
+//                        'id' => $this->testUserId,
+//                        'name' => 'Test User 1',
+//                        'role' => 'user'
+//                    ],
+//                    $this->testUserId2 => [
+//                        'id' => $this->testUserId2,
+//                        'name' => 'Test User 2',
+//                        'role' => 'user'
+//                    ]
+//                ]
+//            ]);
+//            // snippet-end: CreateUsers
+//
+//            if (!$response->isSuccessful()) {
+//                throw new \Exception('Failed to create users: ' . $response->getRawBody());
+//            }
+
             // Create feeds
             // snippet-start: GetOrCreateFeed
-            $feedResponse1 = $this->testFeed->getOrCreateFeed(
-                ['user_id' => $this->testUserId],
-            );
-            $feedResponse2 = $this->testFeed2->getOrCreateFeed(
-                ['user_id' => $this->testUserId2],
-            );
-            // snippet-end: GetOrCreateFeed
-            
-            if (!$feedResponse1->isSuccessful()) {
-                throw new \Exception('Failed to create feed 1: ' . $feedResponse1->getRawBody());
-            }
-            if (!$feedResponse2->isSuccessful()) {
-                throw new \Exception('Failed to create feed 2: ' . $feedResponse2->getRawBody());
-            }
+
+//            $feedResponse1 = $this->testFeed->getOrCreateFeed(
+//                ['user_id' => $this->testUserId],
+//            );
+//            $feedResponse2 = $this->testFeed2->getOrCreateFeed(
+//                ['user_id' => $this->testUserId2],
+//            );
+//            // snippet-end: GetOrCreateFeed
+//
+//            if (!$feedResponse1->isSuccessful()) {
+//                throw new \Exception('Failed to create feed 1: ' . $feedResponse1->getRawBody());
+//            }
+//            if (!$feedResponse2->isSuccessful()) {
+//                throw new \Exception('Failed to create feed 2: ' . $feedResponse2->getRawBody());
+//            }
         } catch (StreamApiException $e) {
             echo "⚠️ Setup failed: " . $e->getMessage() . "\n";
             echo "ResponseBody: " . $e->getResponseBody() . "\n";
@@ -134,7 +145,7 @@ class FeedIntegrationTest extends TestCase
         echo "✅ Users and feeds are automatically created in setUp()\n";
         echo "   Test User 1: {$this->testUserId}\n";
         echo "   Test User 2: {$this->testUserId2}\n";
-        
+
         $this->assertTrue(true); // Just a demo test
     }
 
@@ -150,25 +161,28 @@ class FeedIntegrationTest extends TestCase
         echo "\n📝 Testing activity creation...\n";
 
         // snippet-start: AddActivity
-        $activity = [
-            'type' => 'post',
-            'text' => 'This is a test activity from PHP SDK',
-            'user_id' => $this->testUserId,
-            'custom' => [
-                'test_field' => 'test_value',
-                'timestamp' => time()
-            ],
-            'fids' => [$this->testFeed->getFeedIdentifier()],
-        ];
-
+        $activity = new GeneratedModels\AddActivityRequest(
+            type: 'post',
+            feeds: [$this->testFeed->getFeedIdentifier()],
+            text: 'This is a test activity from PHP SDK',
+            userID: $this->testUserId,
+//            custom: [
+//                'test_field' => 'test_value',
+//                'timestamp' => time()
+//            ]
+        );
         $response = $this->feedsV3Client->addActivity($activity);
         // snippet-end: AddActivity
 
         $this->assertResponseSuccess($response, 'add activity');
-        
+
         $data = $response->getData();
         $this->assertArrayHasKey('activity', $data);
         $this->assertArrayHasKey('id', $data['activity']);
+        $this->assertArrayHasKey('text', $data['activity']);
+
+        //compare text
+        $this->assertEquals($activity->text, $data['activity']['text']);
         
         $this->testActivityId = $data['activity']['id'];
         $this->createdActivityIds[] = $this->testActivityId;

@@ -4,6 +4,7 @@ namespace GetStream\Generated;
 
 use GetStream\StreamResponse;
 use GetStream\Exceptions\StreamException;
+use GetStream\GeneratedModels;
 
 /**
  * Generated Feed methods from OpenAPI specification
@@ -34,7 +35,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function getOrCreateFeed(
-        array $requestData = []): StreamResponse {
+        GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
         return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -46,7 +47,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function updateFeed(
-        array $requestData = []): StreamResponse {
+        GeneratedModels\UpdateFeedRequest $requestData): StreamResponse {
         return $this->feedsV3Client->updateFeed($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -58,7 +59,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function markActivity(
-        array $requestData = []): StreamResponse {
+        GeneratedModels\MarkActivityRequest $requestData): StreamResponse {
         return $this->feedsV3Client->markActivity($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -84,7 +85,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function pinActivity(
-        string $activityID, array $requestData = []): StreamResponse {
+        string $activityID, GeneratedModels\PinActivityRequest $requestData): StreamResponse {
         return $this->feedsV3Client->pinActivity($this->feedGroup, $this->feedId, $activityID, $requestData);
     }
     /**
@@ -96,7 +97,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function updateFeedMembers(
-        array $requestData = []): StreamResponse {
+        GeneratedModels\UpdateFeedMembersRequest $requestData): StreamResponse {
         return $this->feedsV3Client->updateFeedMembers($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -108,7 +109,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function acceptFeedMemberInvite(
-        array $requestData = []): StreamResponse {
+        GeneratedModels\AcceptFeedMemberInviteRequest $requestData): StreamResponse {
         return $this->feedsV3Client->acceptFeedMemberInvite($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -120,7 +121,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function queryFeedMembers(
-        array $requestData = []): StreamResponse {
+        GeneratedModels\QueryFeedMembersRequest $requestData): StreamResponse {
         return $this->feedsV3Client->queryFeedMembers($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -132,7 +133,7 @@ trait FeedMethods
      * @throws StreamException
      */
     public function rejectFeedMemberInvite(
-        array $requestData = []): StreamResponse {
+        GeneratedModels\RejectFeedMemberInviteRequest $requestData): StreamResponse {
         return $this->feedsV3Client->rejectFeedMemberInvite($this->feedGroup, $this->feedId, $requestData);
     }
 }
