@@ -8,48 +8,16 @@ use JsonSerializable;
 /**
  * 
  */
-class CreateFeedViewRequest implements JsonSerializable
+class CreateFeedViewRequest extends BaseModel
 {
-    public function __construct(public ?string $id = null,
-        public ?array $activityProcessors = null,
-        public ?array $activitySelectors = null,
+    public function __construct(
+        public ?string $id = null,    // Unique identifier for the feed view 
+        public ?array $activityProcessors = null,    // Configured activity Processors 
+        public ?array $activitySelectors = null,    // Configuration for selecting activities 
         public ?AggregationConfig $aggregation = null,
-        public ?RankingConfig $ranking = null
+        public ?RankingConfig $ranking = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'id' => $this->id,
-            'activity_processors' => $this->activityProcessors,
-            'activity_selectors' => $this->activitySelectors,
-            'aggregation' => $this->aggregation,
-            'ranking' => $this->ranking,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(id: $json['id'] ?? null,
-            activityProcessors: $json['activity_processors'] ?? null,
-            activitySelectors: $json['activity_selectors'] ?? null,
-            aggregation: $json['aggregation'] ?? null,
-            ranking: $json['ranking'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

@@ -8,51 +8,17 @@ use JsonSerializable;
 /**
  * 
  */
-class DecayFunctionConfig implements JsonSerializable
+class DecayFunctionConfig extends BaseModel
 {
-    public function __construct(public ?string $base = null,
-        public ?string $decay = null,
-        public ?string $direction = null,
-        public ?string $offset = null,
-        public ?string $origin = null,
-        public ?string $scale = null
+    public function __construct(
+        public ?string $base = null,    // Base value for decay function 
+        public ?string $decay = null,    // Decay rate 
+        public ?string $direction = null,    // Direction of decay 
+        public ?string $offset = null,    // Offset value for decay function 
+        public ?string $origin = null,    // Origin value for decay function 
+        public ?string $scale = null,    // Scale factor for decay function 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'base' => $this->base,
-            'decay' => $this->decay,
-            'direction' => $this->direction,
-            'offset' => $this->offset,
-            'origin' => $this->origin,
-            'scale' => $this->scale,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(base: $json['base'] ?? null,
-            decay: $json['decay'] ?? null,
-            direction: $json['direction'] ?? null,
-            offset: $json['offset'] ?? null,
-            origin: $json['origin'] ?? null,
-            scale: $json['scale'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

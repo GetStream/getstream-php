@@ -43,7 +43,7 @@ class GuzzleHttpClient implements HttpClientInterface
      * @param string $url Full URL to request
      * @param array $headers Request headers
      * @param mixed $body Request body
-     * @return StreamResponse
+     * @return StreamResponse<mixed>
      * @throws StreamException
      */
     public function request(string $method, string $url, array $headers = [], mixed $body = null): StreamResponse
@@ -82,6 +82,7 @@ class GuzzleHttpClient implements HttpClientInterface
 
     /**
      * Create a StreamResponse from a Guzzle response
+     * @return StreamResponse<mixed>
      */
     private function createStreamResponse(ResponseInterface $response): StreamResponse
     {

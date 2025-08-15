@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class LimitInfo implements JsonSerializable
+class LimitInfo extends BaseModel
 {
-    public function __construct(public ?int $limit = null,
-        public ?int $remaining = null,
-        public ?int $reset = null
+    public function __construct(
+        public ?int $limit = null,    // The maximum number of calls allowed for the time window 
+        public ?int $remaining = null,    // The number of remaining calls in the current window 
+        public ?int $reset = null,    // The Unix timestamp of the next window 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'limit' => $this->limit,
-            'remaining' => $this->remaining,
-            'reset' => $this->reset,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(limit: $json['limit'] ?? null,
-            remaining: $json['remaining'] ?? null,
-            reset: $json['reset'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

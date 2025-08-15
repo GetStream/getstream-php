@@ -23,3 +23,4 @@ class StreamException extends Exception
         parent::__construct($message, $code, $previous);
     }
 }
+

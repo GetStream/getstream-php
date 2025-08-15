@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * ReactionGroupResponse contains all information about a reaction of the same type.
  */
-class ReactionGroupResponse implements JsonSerializable
+class ReactionGroupResponse extends BaseModel
 {
-    public function __construct(public ?int $count = null,
-        public ?\DateTime $firstReactionAt = null,
-        public ?\DateTime $lastReactionAt = null,
-        public ?int $sumScores = null
+    public function __construct(
+        public ?int $count = null,    // Count is the number of reactions of this type. 
+        public ?\DateTime $firstReactionAt = null,    // FirstReactionAt is the time of the first reaction of this type. This is the same also if all reaction of this type are deleted, because if someone will react again with the same type, will be preserved the sorting. 
+        public ?\DateTime $lastReactionAt = null,    // LastReactionAt is the time of the last reaction of this type. 
+        public ?int $sumScores = null,    // SumScores is the sum of all scores of reactions of this type. Medium allows you to clap articles more than once and shows the sum of all claps from all users. For example, you can send `clap` x5 using `score: 5`. 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'count' => $this->count,
-            'first_reaction_at' => $this->firstReactionAt,
-            'last_reaction_at' => $this->lastReactionAt,
-            'sum_scores' => $this->sumScores,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(count: $json['count'] ?? null,
-            firstReactionAt: $json['first_reaction_at'] ?? null,
-            lastReactionAt: $json['last_reaction_at'] ?? null,
-            sumScores: $json['sum_scores'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

@@ -121,7 +121,7 @@ class Client
      * @param array $queryParams Query parameters
      * @param mixed $body Request body
      * @param array $pathParams Path parameters for URL substitution
-     * @return StreamResponse
+     * @return StreamResponse<mixed>
      * @throws StreamException
      */
     public function makeRequest(
@@ -158,6 +158,8 @@ class Client
         return $this->httpClient->request($method, $url, $headers, $body);
     }
 
+
+
     /**
      * Generate a user token for client-side authentication
      *
@@ -175,7 +177,7 @@ class Client
      * Create or update users
      *
      * @param array $users Array of user data keyed by user ID
-     * @return StreamResponse
+     * @return StreamResponse<mixed>
      * @throws StreamException
      */
     public function upsertUsers(array $users): StreamResponse

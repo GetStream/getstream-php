@@ -8,60 +8,20 @@ use JsonSerializable;
 /**
  * Emitted when a reminder is created.
  */
-class ReminderCreatedEvent implements JsonSerializable
+class ReminderCreatedEvent extends BaseModel
 {
-    public function __construct(public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $messageID = null,
-        public ?string $userID = null,
+    public function __construct(
+        public ?string $cid = null,    // The CID of the Channel for which the reminder was created 
+        public ?\DateTime $createdAt = null,    // Date/time of creation 
+        public ?string $messageID = null,    // The ID of the message for which the reminder was created 
+        public ?string $userID = null,    // The ID of the user for whom the reminder was created 
         public ?object $custom = null,
-        public ?string $type = null,
-        public ?string $parentID = null,
+        public ?string $type = null,    // The type of event: "reminder.created" in this case 
+        public ?string $parentID = null,    // The ID of the parent message, if the reminder is for a thread message 
         public ?\DateTime $receivedAt = null,
-        public ?ReminderResponseData $reminder = null
+        public ?ReminderResponseData $reminder = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'cid' => $this->cid,
-            'created_at' => $this->createdAt,
-            'message_id' => $this->messageID,
-            'user_id' => $this->userID,
-            'custom' => $this->custom,
-            'type' => $this->type,
-            'parent_id' => $this->parentID,
-            'received_at' => $this->receivedAt,
-            'reminder' => $this->reminder,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(cid: $json['cid'] ?? null,
-            createdAt: $json['created_at'] ?? null,
-            messageID: $json['message_id'] ?? null,
-            userID: $json['user_id'] ?? null,
-            custom: $json['custom'] ?? null,
-            type: $json['type'] ?? null,
-            parentID: $json['parent_id'] ?? null,
-            receivedAt: $json['received_at'] ?? null,
-            reminder: $json['reminder'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

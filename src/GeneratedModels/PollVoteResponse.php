@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * 
  */
-class PollVoteResponse implements JsonSerializable
+class PollVoteResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?PollVoteResponseData $vote = null
+    public function __construct(
+        public ?string $duration = null,    // Duration of the request in milliseconds 
+        public ?PollVoteResponseData $vote = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'vote' => $this->vote,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            vote: $json['vote'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

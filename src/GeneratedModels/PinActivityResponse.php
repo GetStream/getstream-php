@@ -8,48 +8,16 @@ use JsonSerializable;
 /**
  * 
  */
-class PinActivityResponse implements JsonSerializable
+class PinActivityResponse extends BaseModel
 {
-    public function __construct(public ?\DateTime $createdAt = null,
+    public function __construct(
+        public ?\DateTime $createdAt = null,    // When the activity was pinned 
         public ?string $duration = null,
-        public ?string $feed = null,
-        public ?string $userID = null,
-        public ?ActivityResponse $activity = null
+        public ?string $feed = null,    // Fully qualified ID of the feed the activity was pinned to 
+        public ?string $userID = null,    // ID of the user who pinned the activity 
+        public ?ActivityResponse $activity = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'created_at' => $this->createdAt,
-            'duration' => $this->duration,
-            'feed' => $this->feed,
-            'user_id' => $this->userID,
-            'activity' => $this->activity,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(createdAt: $json['created_at'] ?? null,
-            duration: $json['duration'] ?? null,
-            feed: $json['feed'] ?? null,
-            userID: $json['user_id'] ?? null,
-            activity: $json['activity'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

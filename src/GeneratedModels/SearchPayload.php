@@ -8,57 +8,19 @@ use JsonSerializable;
 /**
  * 
  */
-class SearchPayload implements JsonSerializable
+class SearchPayload extends BaseModel
 {
-    public function __construct(public ?object $filterConditions = null,
-        public ?int $limit = null,
-        public ?string $next = null,
-        public ?int $offset = null,
-        public ?string $query = null,
-        public ?array $sort = null,
-        public ?object $messageFilterConditions = null,
-        public ?MessageOptions $messageOptions = null
+    public function __construct(
+        public ?object $filterConditions = null,    // Channel filter conditions 
+        public ?int $limit = null,    // Number of messages to return 
+        public ?string $next = null,    // Pagination parameter. Cannot be used with non-zero offset. 
+        public ?int $offset = null,    // Pagination offset. Cannot be used with sort or next. 
+        public ?string $query = null,    // Search phrase 
+        public ?array $sort = null,    // Sort parameters. Cannot be used with non-zero offset 
+        public ?object $messageFilterConditions = null,    // Message filter conditions 
+        public ?MessageOptions $messageOptions = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'filter_conditions' => $this->filterConditions,
-            'limit' => $this->limit,
-            'next' => $this->next,
-            'offset' => $this->offset,
-            'query' => $this->query,
-            'sort' => $this->sort,
-            'message_filter_conditions' => $this->messageFilterConditions,
-            'message_options' => $this->messageOptions,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(filterConditions: $json['filter_conditions'] ?? null,
-            limit: $json['limit'] ?? null,
-            next: $json['next'] ?? null,
-            offset: $json['offset'] ?? null,
-            query: $json['query'] ?? null,
-            sort: $json['sort'] ?? null,
-            messageFilterConditions: $json['message_filter_conditions'] ?? null,
-            messageOptions: $json['message_options'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

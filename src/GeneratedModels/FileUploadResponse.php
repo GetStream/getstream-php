@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class FileUploadResponse implements JsonSerializable
+class FileUploadResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?string $file = null,
-        public ?string $thumbUrl = null
+    public function __construct(
+        public ?string $duration = null,    // Duration of the request in milliseconds 
+        public ?string $file = null,    // URL to the uploaded asset. Should be used to put to `asset_url` attachment field 
+        public ?string $thumbUrl = null,    // URL of the file thumbnail for supported file formats. Should be put to `thumb_url` attachment field 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'file' => $this->file,
-            'thumb_url' => $this->thumbUrl,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            file: $json['file'] ?? null,
-            thumbUrl: $json['thumb_url'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

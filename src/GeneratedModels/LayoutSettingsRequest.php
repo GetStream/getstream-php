@@ -8,48 +8,16 @@ use JsonSerializable;
 /**
  * 
  */
-class LayoutSettingsRequest implements JsonSerializable
+class LayoutSettingsRequest extends BaseModel
 {
-    public function __construct(public ?string $name = null,
+    public function __construct(
+        public ?string $name = null,
         public ?bool $detectOrientation = null,
         public ?string $externalAppUrl = null,
         public ?string $externalCssUrl = null,
-        public ?object $options = null
+        public ?object $options = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'name' => $this->name,
-            'detect_orientation' => $this->detectOrientation,
-            'external_app_url' => $this->externalAppUrl,
-            'external_css_url' => $this->externalCssUrl,
-            'options' => $this->options,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(name: $json['name'] ?? null,
-            detectOrientation: $json['detect_orientation'] ?? null,
-            externalAppUrl: $json['external_app_url'] ?? null,
-            externalCssUrl: $json['external_css_url'] ?? null,
-            options: $json['options'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

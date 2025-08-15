@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class UpsertPushPreferencesResponse implements JsonSerializable
+class UpsertPushPreferencesResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?array $userChannelPreferences = null,
-        public ?array $userPreferences = null
+    public function __construct(
+        public ?string $duration = null,    // Duration of the request in milliseconds 
+        public ?array $userChannelPreferences = null,    // The channel specific push notification preferences, only returned for channels you've edited. 
+        public ?array $userPreferences = null,    // The user preferences, always returned regardless if you edited it 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'user_channel_preferences' => $this->userChannelPreferences,
-            'user_preferences' => $this->userPreferences,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            userChannelPreferences: $json['user_channel_preferences'] ?? null,
-            userPreferences: $json['user_preferences'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * 
  */
-class QueryFollowsResponse implements JsonSerializable
+class QueryFollowsResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?array $follows = null,
-        public ?string $next = null,
-        public ?string $prev = null
+    public function __construct(
+        public ?string $duration = null,
+        public ?array $follows = null,    // List of follow relationships matching the query 
+        public ?string $next = null,    // Cursor for next page 
+        public ?string $prev = null,    // Cursor for previous page 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'follows' => $this->follows,
-            'next' => $this->next,
-            'prev' => $this->prev,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            follows: $json['follows'] ?? null,
-            next: $json['next'] ?? null,
-            prev: $json['prev'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

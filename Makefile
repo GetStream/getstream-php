@@ -1,6 +1,6 @@
 # GetStream PHP SDK Makefile
 
-.PHONY: help install test test-unit test-integration lint fix-style analyze clean generate
+.PHONY: help install test test-unit test-integration lint lint-fix phpstan phpstan-baseline phpstan-clear-cache cs-check cs-fix cs-dry-run quality ci clean generate
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -22,15 +22,75 @@ test-integration: ## Run integration tests only
 test-specific: ## Run a specific test (usage: make test-specific TEST=TestClassName::testMethodName)
 	./vendor/bin/phpunit --filter $(TEST)
 
-lint: ## Run code quality checks
+lint: ## Run all available code quality checks
+	@echo "🔍 Running PHPStan static analysis..."
 	./vendor/bin/phpstan analyse
-	./vendor/bin/php-cs-fixer check
+	@echo "✅ PHPStan analysis complete"
+	@if [ -f "./vendor/bin/php-cs-fixer" ]; then \
+		echo ""; \
+		echo "🎨 Checking code style..."; \
+		./vendor/bin/php-cs-fixer check --diff; \
+		echo "✅ Code style check complete"; \
+	else \
+		echo ""; \
+		echo "ℹ️  php-cs-fixer not installed. Run 'composer require --dev friendsofphp/php-cs-fixer' to enable code style checks."; \
+	fi
 
-fix-style: ## Fix code style issues
-	./vendor/bin/php-cs-fixer fix
-
-analyze: ## Run static analysis
+lint-fix: ## Run linting and fix issues automatically
+	@if [ -f "./vendor/bin/php-cs-fixer" ]; then \
+		echo "🔧 Fixing code style issues..."; \
+		./vendor/bin/php-cs-fixer fix; \
+		echo "✅ Code style fixes applied"; \
+		echo ""; \
+	fi
+	@echo "🔍 Running PHPStan analysis..."
 	./vendor/bin/phpstan analyse
+	@echo "✅ Linting complete"
+
+phpstan: ## Run PHPStan static analysis only
+	./vendor/bin/phpstan analyse
+
+phpstan-baseline: ## Generate PHPStan baseline (ignore current errors)
+	./vendor/bin/phpstan analyse --generate-baseline
+
+phpstan-clear-cache: ## Clear PHPStan cache
+	./vendor/bin/phpstan clear-result-cache
+
+cs-check: ## Check code style without fixing (requires php-cs-fixer)
+	@if [ -f "./vendor/bin/php-cs-fixer" ]; then \
+		./vendor/bin/php-cs-fixer check --diff; \
+	else \
+		echo "❌ php-cs-fixer not installed. Run: composer require --dev friendsofphp/php-cs-fixer"; \
+		exit 1; \
+	fi
+
+cs-fix: ## Fix code style issues (requires php-cs-fixer)
+	@if [ -f "./vendor/bin/php-cs-fixer" ]; then \
+		./vendor/bin/php-cs-fixer fix; \
+	else \
+		echo "❌ php-cs-fixer not installed. Run: composer require --dev friendsofphp/php-cs-fixer"; \
+		exit 1; \
+	fi
+
+cs-dry-run: ## Preview code style fixes without applying (requires php-cs-fixer)
+	@if [ -f "./vendor/bin/php-cs-fixer" ]; then \
+		./vendor/bin/php-cs-fixer fix --dry-run --diff; \
+	else \
+		echo "❌ php-cs-fixer not installed. Run: composer require --dev friendsofphp/php-cs-fixer"; \
+		exit 1; \
+	fi
+
+quality: ## Run comprehensive quality checks (lint + tests)
+	@echo "🚀 Running comprehensive quality checks..."
+	@echo ""
+	$(MAKE) lint
+	@echo ""
+	@echo "🧪 Running tests..."
+	$(MAKE) test-unit
+	@echo ""
+	@echo "🎉 All quality checks passed!"
+
+ci: quality ## Alias for quality (CI-friendly)
 
 clean: ## Clean generated files and cache
 	rm -rf vendor/
@@ -51,3 +111,4 @@ dev-setup: install setup-env ## Complete development setup
 	@echo "1. Edit .env with your GetStream API credentials"
 	@echo "2. Run 'make test-unit' to verify unit tests pass"
 	@echo "3. Run 'make test-integration' to test against the live API"
+

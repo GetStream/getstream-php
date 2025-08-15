@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * 
  */
-class ChannelMessages implements JsonSerializable
+class ChannelMessages extends BaseModel
 {
-    public function __construct(public ?array $messages = null,
-        public ?ChannelResponse $channel = null
+    public function __construct(
+        public ?array $messages = null,
+        public ?ChannelResponse $channel = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'messages' => $this->messages,
-            'channel' => $this->channel,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(messages: $json['messages'] ?? null,
-            channel: $json['channel'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

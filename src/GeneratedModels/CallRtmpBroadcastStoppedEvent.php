@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * This event is sent when RTMP broadcast has stopped
  */
-class CallRtmpBroadcastStoppedEvent implements JsonSerializable
+class CallRtmpBroadcastStoppedEvent extends BaseModel
 {
-    public function __construct(public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $name = null,
-        public ?string $type = null
+    public function __construct(
+        public ?string $callCid = null,    // The unique identifier for a call (<type>:<id>) 
+        public ?\DateTime $createdAt = null,    // Date/time of creation 
+        public ?string $name = null,    // Name of the given RTMP broadcast 
+        public ?string $type = null,    // The type of event: "call.rtmp_broadcast_stopped" in this case 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'call_cid' => $this->callCid,
-            'created_at' => $this->createdAt,
-            'name' => $this->name,
-            'type' => $this->type,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(callCid: $json['call_cid'] ?? null,
-            createdAt: $json['created_at'] ?? null,
-            name: $json['name'] ?? null,
-            type: $json['type'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

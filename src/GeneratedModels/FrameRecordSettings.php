@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class FrameRecordSettings implements JsonSerializable
+class FrameRecordSettings extends BaseModel
 {
-    public function __construct(public ?int $captureIntervalInSeconds = null,
+    public function __construct(
+        public ?int $captureIntervalInSeconds = null,
         public ?string $mode = null,
-        public ?string $quality = null
+        public ?string $quality = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'capture_interval_in_seconds' => $this->captureIntervalInSeconds,
-            'mode' => $this->mode,
-            'quality' => $this->quality,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(captureIntervalInSeconds: $json['capture_interval_in_seconds'] ?? null,
-            mode: $json['mode'] ?? null,
-            quality: $json['quality'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

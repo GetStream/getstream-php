@@ -8,63 +8,21 @@ use JsonSerializable;
 /**
  * 
  */
-class CheckRequest implements JsonSerializable
+class CheckRequest extends BaseModel
 {
-    public function __construct(public ?string $configKey = null,
-        public ?string $entityCreatorID = null,
-        public ?string $entityID = null,
-        public ?string $entityType = null,
-        public ?string $configTeam = null,
-        public ?bool $testMode = null,
+    public function __construct(
+        public ?string $configKey = null,    // Key of the moderation configuration to use 
+        public ?string $entityCreatorID = null,    // ID of the user who created the entity 
+        public ?string $entityID = null,    // Unique identifier of the entity to moderate 
+        public ?string $entityType = null,    // Type of entity to moderate 
+        public ?string $configTeam = null,    // Team associated with the configuration 
+        public ?bool $testMode = null,    // Whether to run moderation in test mode 
         public ?string $userID = null,
         public ?ModerationPayload $moderationPayload = null,
-        public ?object $options = null,
-        public ?UserRequest $user = null
+        public ?object $options = null,    // Additional moderation configuration options 
+        public ?UserRequest $user = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'config_key' => $this->configKey,
-            'entity_creator_id' => $this->entityCreatorID,
-            'entity_id' => $this->entityID,
-            'entity_type' => $this->entityType,
-            'config_team' => $this->configTeam,
-            'test_mode' => $this->testMode,
-            'user_id' => $this->userID,
-            'moderation_payload' => $this->moderationPayload,
-            'options' => $this->options,
-            'user' => $this->user,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(configKey: $json['config_key'] ?? null,
-            entityCreatorID: $json['entity_creator_id'] ?? null,
-            entityID: $json['entity_id'] ?? null,
-            entityType: $json['entity_type'] ?? null,
-            configTeam: $json['config_team'] ?? null,
-            testMode: $json['test_mode'] ?? null,
-            userID: $json['user_id'] ?? null,
-            moderationPayload: $json['moderation_payload'] ?? null,
-            options: $json['options'] ?? null,
-            user: $json['user'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

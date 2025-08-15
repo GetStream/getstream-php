@@ -8,51 +8,17 @@ use JsonSerializable;
 /**
  * 
  */
-class FeedViewResponse implements JsonSerializable
+class FeedViewResponse extends BaseModel
 {
-    public function __construct(public ?string $id = null,
-        public ?\DateTime $lastUsedAt = null,
-        public ?array $activityProcessors = null,
-        public ?array $activitySelectors = null,
+    public function __construct(
+        public ?string $id = null,    // Unique identifier for the custom feed view 
+        public ?\DateTime $lastUsedAt = null,    // When the feed view was last used 
+        public ?array $activityProcessors = null,    // Configured activity processors 
+        public ?array $activitySelectors = null,    // Configured activity selectors 
         public ?AggregationConfig $aggregation = null,
-        public ?RankingConfig $ranking = null
+        public ?RankingConfig $ranking = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'id' => $this->id,
-            'last_used_at' => $this->lastUsedAt,
-            'activity_processors' => $this->activityProcessors,
-            'activity_selectors' => $this->activitySelectors,
-            'aggregation' => $this->aggregation,
-            'ranking' => $this->ranking,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(id: $json['id'] ?? null,
-            lastUsedAt: $json['last_used_at'] ?? null,
-            activityProcessors: $json['activity_processors'] ?? null,
-            activitySelectors: $json['activity_selectors'] ?? null,
-            aggregation: $json['aggregation'] ?? null,
-            ranking: $json['ranking'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

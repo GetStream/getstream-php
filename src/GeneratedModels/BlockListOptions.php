@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * 
  */
-class BlockListOptions implements JsonSerializable
+class BlockListOptions extends BaseModel
 {
-    public function __construct(public ?string $behavior = null,
-        public ?string $blocklist = null
+    public function __construct(
+        public ?string $behavior = null,    // Blocklist behavior 
+        public ?string $blocklist = null,    // Blocklist name 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'behavior' => $this->behavior,
-            'blocklist' => $this->blocklist,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(behavior: $json['behavior'] ?? null,
-            blocklist: $json['blocklist'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

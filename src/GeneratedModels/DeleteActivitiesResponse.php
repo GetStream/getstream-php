@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * 
  */
-class DeleteActivitiesResponse implements JsonSerializable
+class DeleteActivitiesResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?array $deletedIds = null
+    public function __construct(
+        public ?string $duration = null,
+        public ?array $deletedIds = null,    // List of activity IDs that were successfully deleted 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'deleted_ids' => $this->deletedIds,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            deletedIds: $json['deleted_ids'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

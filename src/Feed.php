@@ -13,7 +13,6 @@ use GetStream\Generated\FeedMethods;
 class Feed
 {
     use FeedMethods;
-    private Client $client;
     private FeedsV3Client $feedsV3Client;
 
     private string $feedGroup;
@@ -25,7 +24,6 @@ class Feed
      * @param FeedsV3Client $feedsV3Client The FeedsV3 client
      * @param string $feedGroup The feed group
      * @param string $feedId The feed ID
-     * @param Client|null $client The original client (optional)
      */
     public function __construct(FeedsV3Client $feedsV3Client, string $feedGroup, string $feedId)
     {
@@ -72,13 +70,5 @@ class Feed
     public function getFeedIdentifier(): string
     {
         return $this->feedGroup . ':' . $this->feedId;
-    }
-
-    /**
-     * Get the client instance
-     */
-    public function getClient(): Client
-    {
-        return $this->client;
     }
 }

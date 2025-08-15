@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * Update call members
  */
-class UpdateCallMembersRequest implements JsonSerializable
+class UpdateCallMembersRequest extends BaseModel
 {
-    public function __construct(public ?array $removeMembers = null,
-        public ?array $updateMembers = null
+    public function __construct(
+        public ?array $removeMembers = null,    // List of userID to remove 
+        public ?array $updateMembers = null,    // List of members to update or insert 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'remove_members' => $this->removeMembers,
-            'update_members' => $this->updateMembers,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(removeMembers: $json['remove_members'] ?? null,
-            updateMembers: $json['update_members'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

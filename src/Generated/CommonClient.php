@@ -18,7 +18,7 @@ trait CommonClient
      * This Method returns the application settings
      * 
      *
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetApplicationResponse>
      * @throws StreamException
      */
     public function getApp(): StreamResponse {
@@ -26,15 +26,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetApplicationResponse::class);
     }
     /**
      * This Method updates one or more application settings
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdateAppRequest $requestData
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function updateApp(GeneratedModels\UpdateAppRequest $requestData): StreamResponse {
@@ -42,15 +41,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('PATCH', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Returns all available block lists
      * 
      *
      * @param string|null $team
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ListBlockListResponse>
      * @throws StreamException
      */
     public function listBlockLists(?string $team = null): StreamResponse {
@@ -61,15 +59,14 @@ trait CommonClient
             $queryParams['team'] = $team;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListBlockListResponse::class);
     }
     /**
      * Creates a new application blocklist, once created the blocklist can be used by any channel type
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreateBlockListRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateBlockListResponse>
      * @throws StreamException
      */
     public function createBlockList(GeneratedModels\CreateBlockListRequest $requestData): StreamResponse {
@@ -77,8 +74,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateBlockListResponse::class);
     }
     /**
      * Deletes previously created application blocklist
@@ -86,7 +82,7 @@ trait CommonClient
      *
      * @param string $name
      * @param string|null $team
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deleteBlockList(string $name, ?string $team = null): StreamResponse {
@@ -98,8 +94,7 @@ trait CommonClient
             $queryParams['team'] = $team;
         }
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Returns block list by given name
@@ -107,7 +102,7 @@ trait CommonClient
      *
      * @param string $name
      * @param string|null $team
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetBlockListResponse>
      * @throws StreamException
      */
     public function getBlockList(string $name, ?string $team = null): StreamResponse {
@@ -119,16 +114,15 @@ trait CommonClient
             $queryParams['team'] = $team;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetBlockListResponse::class);
     }
     /**
      * Updates contents of the block list
      * 
      *
      * @param string $name
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdateBlockListRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateBlockListResponse>
      * @throws StreamException
      */
     public function updateBlockList(string $name, GeneratedModels\UpdateBlockListRequest $requestData): StreamResponse {
@@ -137,15 +131,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('PUT', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateBlockListResponse::class);
     }
     /**
      * Sends a test message via push, this is a test endpoint to verify your push settings
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CheckPushRequest $requestData
+     * @return StreamResponse<GeneratedModels\CheckPushResponse>
      * @throws StreamException
      */
     public function checkPush(GeneratedModels\CheckPushRequest $requestData): StreamResponse {
@@ -153,15 +146,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckPushResponse::class);
     }
     /**
      * Validates Amazon SNS configuration
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CheckSNSRequest $requestData
+     * @return StreamResponse<GeneratedModels\CheckSNSResponse>
      * @throws StreamException
      */
     public function checkSNS(GeneratedModels\CheckSNSRequest $requestData): StreamResponse {
@@ -169,15 +161,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckSNSResponse::class);
     }
     /**
      * Validates Amazon SQS credentials
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CheckSQSRequest $requestData
+     * @return StreamResponse<GeneratedModels\CheckSQSResponse>
      * @throws StreamException
      */
     public function checkSQS(GeneratedModels\CheckSQSRequest $requestData): StreamResponse {
@@ -185,8 +176,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckSQSResponse::class);
     }
     /**
      * Deletes one device
@@ -194,7 +184,7 @@ trait CommonClient
      *
      * @param string|null $id
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deleteDevice(?string $id = null, ?string $userID = null): StreamResponse {
@@ -208,15 +198,14 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Returns all available devices
      * 
      *
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ListDevicesResponse>
      * @throws StreamException
      */
     public function listDevices(?string $userID = null): StreamResponse {
@@ -227,15 +216,14 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListDevicesResponse::class);
     }
     /**
      * Adds a new device to a user, if the same device already exists the call will have no effect
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreateDeviceRequest $requestData
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function createDevice(GeneratedModels\CreateDeviceRequest $requestData): StreamResponse {
@@ -243,15 +231,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Exports user profile, reactions and messages for list of given users
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\ExportUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\ExportUsersResponse>
      * @throws StreamException
      */
     public function exportUsers(GeneratedModels\ExportUsersRequest $requestData): StreamResponse {
@@ -259,14 +246,13 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportUsersResponse::class);
     }
     /**
      * Lists external storage
      * 
      *
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ListExternalStorageResponse>
      * @throws StreamException
      */
     public function listExternalStorage(): StreamResponse {
@@ -274,15 +260,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListExternalStorageResponse::class);
     }
     /**
      * Creates new external storage
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreateExternalStorageRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateExternalStorageResponse>
      * @throws StreamException
      */
     public function createExternalStorage(GeneratedModels\CreateExternalStorageRequest $requestData): StreamResponse {
@@ -290,15 +275,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateExternalStorageResponse::class);
     }
     /**
      * Deletes external storage
      * 
      *
      * @param string $name
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\DeleteExternalStorageResponse>
      * @throws StreamException
      */
     public function deleteExternalStorage(string $name): StreamResponse {
@@ -307,16 +291,15 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteExternalStorageResponse::class);
     }
     /**
      * 
      * 
      *
      * @param string $name
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdateExternalStorageRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateExternalStorageResponse>
      * @throws StreamException
      */
     public function updateExternalStorage(string $name, GeneratedModels\UpdateExternalStorageRequest $requestData): StreamResponse {
@@ -325,15 +308,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('PUT', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateExternalStorageResponse::class);
     }
     /**
      * 
      * 
      *
      * @param string $name
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\CheckExternalStorageResponse>
      * @throws StreamException
      */
     public function checkExternalStorage(string $name): StreamResponse {
@@ -342,15 +324,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\CheckExternalStorageResponse::class);
     }
     /**
      * 
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreateGuestRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateGuestResponse>
      * @throws StreamException
      */
     public function createGuest(GeneratedModels\CreateGuestRequest $requestData): StreamResponse {
@@ -358,15 +339,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateGuestResponse::class);
     }
     /**
      * Creates a new import URL
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreateImportURLRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateImportURLResponse>
      * @throws StreamException
      */
     public function createImportURL(GeneratedModels\CreateImportURLRequest $requestData): StreamResponse {
@@ -374,14 +354,13 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateImportURLResponse::class);
     }
     /**
      * Gets an import
      * 
      *
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ListImportsResponse>
      * @throws StreamException
      */
     public function listImports(): StreamResponse {
@@ -389,15 +368,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListImportsResponse::class);
     }
     /**
      * Creates a new import
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreateImportRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateImportResponse>
      * @throws StreamException
      */
     public function createImport(GeneratedModels\CreateImportRequest $requestData): StreamResponse {
@@ -405,15 +383,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateImportResponse::class);
     }
     /**
      * Gets an import
      * 
      *
      * @param string $id
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetImportResponse>
      * @throws StreamException
      */
     public function getImport(string $id): StreamResponse {
@@ -422,15 +399,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetImportResponse::class);
     }
     /**
      * Get an OpenGraph attachment for a link
      * 
      *
      * @param string|null $url
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetOGResponse>
      * @throws StreamException
      */
     public function getOG(?string $url = null): StreamResponse {
@@ -441,14 +417,13 @@ trait CommonClient
             $queryParams['url'] = $url;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetOGResponse::class);
     }
     /**
      * Lists all available permissions
      * 
      *
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ListPermissionsResponse>
      * @throws StreamException
      */
     public function listPermissions(): StreamResponse {
@@ -456,15 +431,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListPermissionsResponse::class);
     }
     /**
      * Gets custom permission
      * 
      *
      * @param string $id
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetCustomPermissionResponse>
      * @throws StreamException
      */
     public function getPermission(string $id): StreamResponse {
@@ -473,15 +447,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCustomPermissionResponse::class);
     }
     /**
      * Creates a new poll
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreatePollRequest $requestData
+     * @return StreamResponse<GeneratedModels\PollResponse>
      * @throws StreamException
      */
     public function createPoll(GeneratedModels\CreatePollRequest $requestData): StreamResponse {
@@ -489,8 +462,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PollResponse::class);
     }
     /**
      * Updates a poll
@@ -502,8 +474,8 @@ trait CommonClient
      * - poll.updated
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdatePollRequest $requestData
+     * @return StreamResponse<GeneratedModels\PollResponse>
      * @throws StreamException
      */
     public function updatePoll(GeneratedModels\UpdatePollRequest $requestData): StreamResponse {
@@ -511,16 +483,15 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('PUT', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\PollResponse::class);
     }
     /**
      * Queries polls
      * 
      *
      * @param string|null $userID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\QueryPollsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryPollsResponse>
      * @throws StreamException
      */
     public function queryPolls(?string $userID = null, GeneratedModels\QueryPollsRequest $requestData): StreamResponse {
@@ -531,8 +502,7 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryPollsResponse::class);
     }
     /**
      * Deletes a poll
@@ -544,7 +514,7 @@ trait CommonClient
      *
      * @param string $pollID
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deletePoll(string $pollID, ?string $userID = null): StreamResponse {
@@ -556,8 +526,7 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Retrieves a poll
@@ -565,7 +534,7 @@ trait CommonClient
      *
      * @param string $pollID
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\PollResponse>
      * @throws StreamException
      */
     public function getPoll(string $pollID, ?string $userID = null): StreamResponse {
@@ -577,8 +546,7 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PollResponse::class);
     }
     /**
      * Updates a poll partially
@@ -591,8 +559,8 @@ trait CommonClient
      * 
      *
      * @param string $pollID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdatePollPartialRequest $requestData
+     * @return StreamResponse<GeneratedModels\PollResponse>
      * @throws StreamException
      */
     public function updatePollPartial(string $pollID, GeneratedModels\UpdatePollPartialRequest $requestData): StreamResponse {
@@ -601,8 +569,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('PATCH', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\PollResponse::class);
     }
     /**
      * Creates a poll option
@@ -613,8 +580,8 @@ trait CommonClient
      * 
      *
      * @param string $pollID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreatePollOptionRequest $requestData
+     * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
     public function createPollOption(string $pollID, GeneratedModels\CreatePollOptionRequest $requestData): StreamResponse {
@@ -623,8 +590,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PollOptionResponse::class);
     }
     /**
      * Updates a poll option
@@ -635,8 +601,8 @@ trait CommonClient
      * 
      *
      * @param string $pollID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdatePollOptionRequest $requestData
+     * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
     public function updatePollOption(string $pollID, GeneratedModels\UpdatePollOptionRequest $requestData): StreamResponse {
@@ -645,8 +611,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('PUT', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\PollOptionResponse::class);
     }
     /**
      * Deletes a poll option
@@ -659,7 +624,7 @@ trait CommonClient
      * @param string $pollID
      * @param string $optionID
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deletePollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
@@ -672,8 +637,7 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Retrieves a poll option
@@ -682,7 +646,7 @@ trait CommonClient
      * @param string $pollID
      * @param string $optionID
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
     public function getPollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
@@ -695,8 +659,7 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PollOptionResponse::class);
     }
     /**
      * Queries votes
@@ -704,8 +667,8 @@ trait CommonClient
      *
      * @param string $pollID
      * @param string|null $userID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\QueryPollVotesRequest $requestData
+     * @return StreamResponse<GeneratedModels\PollVotesResponse>
      * @throws StreamException
      */
     public function queryPollVotes(string $pollID, ?string $userID = null, GeneratedModels\QueryPollVotesRequest $requestData): StreamResponse {
@@ -717,14 +680,13 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PollVotesResponse::class);
     }
     /**
      * List details of all push providers.
      * 
      *
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ListPushProvidersResponse>
      * @throws StreamException
      */
     public function listPushProviders(): StreamResponse {
@@ -732,15 +694,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListPushProvidersResponse::class);
     }
     /**
      * Upsert a push provider for v2 with multi bundle/package support
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpsertPushProviderRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertPushProviderResponse>
      * @throws StreamException
      */
     public function upsertPushProvider(GeneratedModels\UpsertPushProviderRequest $requestData): StreamResponse {
@@ -748,8 +709,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertPushProviderResponse::class);
     }
     /**
      * Delete a push provider from v2 with multi bundle/package support. v1 isn't supported in this endpoint
@@ -757,7 +717,7 @@ trait CommonClient
      *
      * @param string $type
      * @param string $name
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deletePushProvider(string $type, string $name): StreamResponse {
@@ -767,8 +727,7 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Get rate limits usage and quotas
@@ -779,7 +738,7 @@ trait CommonClient
      * @param bool|null $ios
      * @param bool|null $web
      * @param string|null $endpoints
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetRateLimitsResponse>
      * @throws StreamException
      */
     public function getRateLimits(?bool $serverSide = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?string $endpoints = null): StreamResponse {
@@ -802,14 +761,13 @@ trait CommonClient
             $queryParams['endpoints'] = $endpoints;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetRateLimitsResponse::class);
     }
     /**
      * Lists all available roles
      * 
      *
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ListRolesResponse>
      * @throws StreamException
      */
     public function listRoles(): StreamResponse {
@@ -817,15 +775,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListRolesResponse::class);
     }
     /**
      * Creates custom role
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\CreateRoleRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateRoleResponse>
      * @throws StreamException
      */
     public function createRole(GeneratedModels\CreateRoleRequest $requestData): StreamResponse {
@@ -833,15 +790,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateRoleResponse::class);
     }
     /**
      * Deletes custom role
      * 
      *
      * @param string $name
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deleteRole(string $name): StreamResponse {
@@ -850,15 +806,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Gets status of a task
      * 
      *
      * @param string $id
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetTaskResponse>
      * @throws StreamException
      */
     public function getTask(string $id): StreamResponse {
@@ -867,15 +822,14 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetTaskResponse::class);
     }
     /**
      * Deletes previously uploaded file
      * 
      *
      * @param string|null $url
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deleteFileGlobal(?string $url = null): StreamResponse {
@@ -886,15 +840,14 @@ trait CommonClient
             $queryParams['url'] = $url;
         }
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Uploads file
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\FileUploadRequest $requestData
+     * @return StreamResponse<GeneratedModels\FileUploadResponse>
      * @throws StreamException
      */
     public function uploadFileGlobal(GeneratedModels\FileUploadRequest $requestData): StreamResponse {
@@ -902,15 +855,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FileUploadResponse::class);
     }
     /**
      * Deletes previously uploaded image
      * 
      *
      * @param string|null $url
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function deleteImageGlobal(?string $url = null): StreamResponse {
@@ -921,15 +873,14 @@ trait CommonClient
             $queryParams['url'] = $url;
         }
         $requestData = null;
-
-        return $this->makeRequest('DELETE', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Uploads image
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\ImageUploadRequest $requestData
+     * @return StreamResponse<GeneratedModels\ImageUploadResponse>
      * @throws StreamException
      */
     public function uploadImageGlobal(GeneratedModels\ImageUploadRequest $requestData): StreamResponse {
@@ -937,15 +888,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ImageUploadResponse::class);
     }
     /**
      * Find and filter users
      * 
      *
      * @param QueryUsersPayload|null $payload
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\QueryUsersResponse>
      * @throws StreamException
      */
     public function queryUsers(?QueryUsersPayload $payload = null): StreamResponse {
@@ -956,8 +906,7 @@ trait CommonClient
             $queryParams['payload'] = $payload;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryUsersResponse::class);
     }
     /**
      * Updates certain fields of the user
@@ -968,8 +917,8 @@ trait CommonClient
      * - user.presence.changed
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdateUsersPartialRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateUsersResponse>
      * @throws StreamException
      */
     public function updateUsersPartial(GeneratedModels\UpdateUsersPartialRequest $requestData): StreamResponse {
@@ -977,8 +926,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('PATCH', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateUsersResponse::class);
     }
     /**
      * Update or create users in bulk
@@ -987,8 +935,8 @@ trait CommonClient
      * - user.updated
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdateUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateUsersResponse>
      * @throws StreamException
      */
     public function updateUsers(GeneratedModels\UpdateUsersRequest $requestData): StreamResponse {
@@ -996,15 +944,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateUsersResponse::class);
     }
     /**
      * Get list of blocked Users
      * 
      *
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\GetBlockedUsersResponse>
      * @throws StreamException
      */
     public function getBlockedUsers(?string $userID = null): StreamResponse {
@@ -1015,15 +962,14 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetBlockedUsersResponse::class);
     }
     /**
      * Block users
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\BlockUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\BlockUsersResponse>
      * @throws StreamException
      */
     public function blockUsers(GeneratedModels\BlockUsersRequest $requestData): StreamResponse {
@@ -1031,8 +977,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BlockUsersResponse::class);
     }
     /**
      * Deactivate users in batches
@@ -1041,8 +986,8 @@ trait CommonClient
      * - user.deactivated
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\DeactivateUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\DeactivateUsersResponse>
      * @throws StreamException
      */
     public function deactivateUsers(GeneratedModels\DeactivateUsersRequest $requestData): StreamResponse {
@@ -1050,8 +995,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeactivateUsersResponse::class);
     }
     /**
      * Deletes users and optionally all their belongings asynchronously.
@@ -1061,8 +1005,8 @@ trait CommonClient
      * - user.deleted
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\DeleteUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\DeleteUsersResponse>
      * @throws StreamException
      */
     public function deleteUsers(GeneratedModels\DeleteUsersRequest $requestData): StreamResponse {
@@ -1070,15 +1014,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteUsersResponse::class);
     }
     /**
      * Retrieves all active live locations for a user
      * 
      *
      * @param string|null $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\SharedLocationsResponse>
      * @throws StreamException
      */
     public function getUserLiveLocations(?string $userID = null): StreamResponse {
@@ -1089,16 +1032,15 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\SharedLocationsResponse::class);
     }
     /**
      * Updates an existing live location with new coordinates or expiration time
      * 
      *
      * @param string|null $userID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UpdateLiveLocationRequest $requestData
+     * @return StreamResponse<GeneratedModels\SharedLocationResponse>
      * @throws StreamException
      */
     public function updateLiveLocation(?string $userID = null, GeneratedModels\UpdateLiveLocationRequest $requestData): StreamResponse {
@@ -1109,8 +1051,7 @@ trait CommonClient
             $queryParams['user_id'] = $userID;
         }
         // Use the provided request data array directly
-
-        return $this->makeRequest('PUT', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\SharedLocationResponse::class);
     }
     /**
      * Reactivate users in batches
@@ -1120,8 +1061,8 @@ trait CommonClient
      * - user.reactivated
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\ReactivateUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\ReactivateUsersResponse>
      * @throws StreamException
      */
     public function reactivateUsers(GeneratedModels\ReactivateUsersRequest $requestData): StreamResponse {
@@ -1129,15 +1070,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ReactivateUsersResponse::class);
     }
     /**
      * Restore soft deleted users
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\RestoreUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function restoreUsers(GeneratedModels\RestoreUsersRequest $requestData): StreamResponse {
@@ -1145,15 +1085,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Unblock users
      * 
      *
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\UnblockUsersRequest $requestData
+     * @return StreamResponse<GeneratedModels\UnblockUsersResponse>
      * @throws StreamException
      */
     public function unblockUsers(GeneratedModels\UnblockUsersRequest $requestData): StreamResponse {
@@ -1161,8 +1100,7 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnblockUsersResponse::class);
     }
     /**
      * Deactivates user with possibility to activate it back
@@ -1172,8 +1110,8 @@ trait CommonClient
      * 
      *
      * @param string $userID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\DeactivateUserRequest $requestData
+     * @return StreamResponse<GeneratedModels\DeactivateUserResponse>
      * @throws StreamException
      */
     public function deactivateUser(string $userID, GeneratedModels\DeactivateUserRequest $requestData): StreamResponse {
@@ -1182,15 +1120,14 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeactivateUserResponse::class);
     }
     /**
      * Exports the user's profile, reactions and messages. Raises an error if a user has more than 10k messages or reactions
      * 
      *
      * @param string $userID
-     * @return StreamResponse
+     * @return StreamResponse<GeneratedModels\ExportUserResponse>
      * @throws StreamException
      */
     public function exportUser(string $userID): StreamResponse {
@@ -1199,8 +1136,7 @@ trait CommonClient
 
         $queryParams = [];
         $requestData = null;
-
-        return $this->makeRequest('GET', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ExportUserResponse::class);
     }
     /**
      * Activates user who's been deactivated previously
@@ -1210,8 +1146,8 @@ trait CommonClient
      * 
      *
      * @param string $userID
-     * @param array $requestData Request data
-     * @return StreamResponse
+     * @param GeneratedModels\ReactivateUserRequest $requestData
+     * @return StreamResponse<GeneratedModels\ReactivateUserResponse>
      * @throws StreamException
      */
     public function reactivateUser(string $userID, GeneratedModels\ReactivateUserRequest $requestData): StreamResponse {
@@ -1220,7 +1156,6 @@ trait CommonClient
 
         $queryParams = [];
         // Use the provided request data array directly
-
-        return $this->makeRequest('POST', $path, $queryParams, $requestData);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ReactivateUserResponse::class);
     }
 }

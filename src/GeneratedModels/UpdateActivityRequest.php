@@ -8,66 +8,22 @@ use JsonSerializable;
 /**
  * 
  */
-class UpdateActivityRequest implements JsonSerializable
+class UpdateActivityRequest extends BaseModel
 {
-    public function __construct(public ?\DateTime $expiresAt = null,
-        public ?string $pollID = null,
-        public ?string $text = null,
+    public function __construct(
+        public ?\DateTime $expiresAt = null,    // Time when the activity will expire 
+        public ?string $pollID = null,    // Poll ID 
+        public ?string $text = null,    // The text content of the activity 
         public ?string $userID = null,
-        public ?string $visibility = null,
-        public ?array $attachments = null,
-        public ?array $filterTags = null,
-        public ?array $interestTags = null,
-        public ?object $custom = null,
+        public ?string $visibility = null,    // Visibility setting for the activity 
+        public ?array $attachments = null,    // List of attachments for the activity 
+        public ?array $filterTags = null,    // Tags used for filtering the activity 
+        public ?array $interestTags = null,    // Tags indicating interest categories 
+        public ?object $custom = null,    // Custom data for the activity 
         public ?ActivityLocation $location = null,
-        public ?UserRequest $user = null
+        public ?UserRequest $user = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'expires_at' => $this->expiresAt,
-            'poll_id' => $this->pollID,
-            'text' => $this->text,
-            'user_id' => $this->userID,
-            'visibility' => $this->visibility,
-            'attachments' => $this->attachments,
-            'filter_tags' => $this->filterTags,
-            'interest_tags' => $this->interestTags,
-            'custom' => $this->custom,
-            'location' => $this->location,
-            'user' => $this->user,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(expiresAt: $json['expires_at'] ?? null,
-            pollID: $json['poll_id'] ?? null,
-            text: $json['text'] ?? null,
-            userID: $json['user_id'] ?? null,
-            visibility: $json['visibility'] ?? null,
-            attachments: $json['attachments'] ?? null,
-            filterTags: $json['filter_tags'] ?? null,
-            interestTags: $json['interest_tags'] ?? null,
-            custom: $json['custom'] ?? null,
-            location: $json['location'] ?? null,
-            user: $json['user'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

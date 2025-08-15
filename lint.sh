@@ -25,3 +25,4 @@ echo "Checking PHP syntax..."
 find src/ tests/ -name "*.php" -type f -exec php -l {} \; | grep -v "No syntax errors detected" || true
 
 echo "Linting completed successfully!"
+

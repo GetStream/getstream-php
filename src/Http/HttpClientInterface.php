@@ -19,8 +19,9 @@ interface HttpClientInterface
      * @param string $url Full URL to request
      * @param array $headers Request headers
      * @param mixed $body Request body (will be JSON encoded if array)
-     * @return StreamResponse
+     * @return StreamResponse<mixed>
      * @throws StreamException
      */
     public function request(string $method, string $url, array $headers = [], mixed $body = null): StreamResponse;
 }
+

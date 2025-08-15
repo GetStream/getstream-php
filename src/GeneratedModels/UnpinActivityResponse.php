@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * 
  */
-class UnpinActivityResponse implements JsonSerializable
+class UnpinActivityResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?string $feed = null,
-        public ?string $userID = null,
-        public ?ActivityResponse $activity = null
+    public function __construct(
+        public ?string $duration = null,
+        public ?string $feed = null,    // Fully qualified ID of the feed the activity was unpinned from 
+        public ?string $userID = null,    // ID of the user who unpinned the activity 
+        public ?ActivityResponse $activity = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'feed' => $this->feed,
-            'user_id' => $this->userID,
-            'activity' => $this->activity,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            feed: $json['feed'] ?? null,
-            userID: $json['user_id'] ?? null,
-            activity: $json['activity'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

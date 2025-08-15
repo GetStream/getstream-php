@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * MemberRequest is the payload for adding a member to a call.
  */
-class MemberRequest implements JsonSerializable
+class MemberRequest extends BaseModel
 {
-    public function __construct(public ?string $userID = null,
+    public function __construct(
+        public ?string $userID = null,
         public ?string $role = null,
-        public ?object $custom = null
+        public ?object $custom = null,    // Custom data for this object 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'user_id' => $this->userID,
-            'role' => $this->role,
-            'custom' => $this->custom,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(userID: $json['user_id'] ?? null,
-            role: $json['role'] ?? null,
-            custom: $json['custom'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

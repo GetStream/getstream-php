@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class SFUIDLastSeen implements JsonSerializable
+class SFUIDLastSeen extends BaseModel
 {
-    public function __construct(public ?string $id = null,
+    public function __construct(
+        public ?string $id = null,
         public ?\DateTime $lastSeen = null,
-        public ?int $processStartTime = null
+        public ?int $processStartTime = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'id' => $this->id,
-            'last_seen' => $this->lastSeen,
-            'process_start_time' => $this->processStartTime,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(id: $json['id'] ?? null,
-            lastSeen: $json['last_seen'] ?? null,
-            processStartTime: $json['process_start_time'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

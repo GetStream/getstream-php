@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * 
  */
-class ImageSize implements JsonSerializable
+class ImageSize extends BaseModel
 {
-    public function __construct(public ?string $crop = null,
-        public ?int $height = null,
-        public ?string $resize = null,
-        public ?int $width = null
+    public function __construct(
+        public ?string $crop = null,    // Crop mode 
+        public ?int $height = null,    // Target image height 
+        public ?string $resize = null,    // Resize method 
+        public ?int $width = null,    // Target image width 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'crop' => $this->crop,
-            'height' => $this->height,
-            'resize' => $this->resize,
-            'width' => $this->width,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(crop: $json['crop'] ?? null,
-            height: $json['height'] ?? null,
-            resize: $json['resize'] ?? null,
-            width: $json['width'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class StartClosedCaptionsRequest implements JsonSerializable
+class StartClosedCaptionsRequest extends BaseModel
 {
-    public function __construct(public ?bool $enableTranscription = null,
-        public ?string $externalStorage = null,
-        public ?string $language = null
+    public function __construct(
+        public ?bool $enableTranscription = null,    // Enable transcriptions along with closed captions 
+        public ?string $externalStorage = null,    // Which external storage to use for transcriptions (only applicable if enable_transcription is true) 
+        public ?string $language = null,    // The spoken language in the call, if not provided the language defined in the transcription settings will be used 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'enable_transcription' => $this->enableTranscription,
-            'external_storage' => $this->externalStorage,
-            'language' => $this->language,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(enableTranscription: $json['enable_transcription'] ?? null,
-            externalStorage: $json['external_storage'] ?? null,
-            language: $json['language'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

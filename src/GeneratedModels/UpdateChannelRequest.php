@@ -8,78 +8,26 @@ use JsonSerializable;
 /**
  * 
  */
-class UpdateChannelRequest implements JsonSerializable
+class UpdateChannelRequest extends BaseModel
 {
-    public function __construct(public ?bool $acceptInvite = null,
-        public ?int $cooldown = null,
-        public ?bool $hideHistory = null,
-        public ?bool $rejectInvite = null,
-        public ?bool $skipPush = null,
+    public function __construct(
+        public ?bool $acceptInvite = null,    // Set to `true` to accept the invite 
+        public ?int $cooldown = null,    // Sets cool down period for the channel in seconds 
+        public ?bool $hideHistory = null,    // Set to `true` to hide channel's history when adding new members 
+        public ?bool $rejectInvite = null,    // Set to `true` to reject the invite 
+        public ?bool $skipPush = null,    // When `message` is set disables all push notifications for it 
         public ?string $userID = null,
-        public ?array $addMembers = null,
-        public ?array $addModerators = null,
-        public ?array $assignRoles = null,
-        public ?array $demoteModerators = null,
-        public ?array $invites = null,
-        public ?array $removeMembers = null,
+        public ?array $addMembers = null,    // List of user IDs to add to the channel 
+        public ?array $addModerators = null,    // List of user IDs to make channel moderators 
+        public ?array $assignRoles = null,    // List of channel member role assignments. If any specified user is not part of the channel, the request will fail 
+        public ?array $demoteModerators = null,    // List of user IDs to take away moderators status from 
+        public ?array $invites = null,    // List of user IDs to invite to the channel 
+        public ?array $removeMembers = null,    // List of user IDs to remove from the channel 
         public ?ChannelInput $data = null,
         public ?MessageRequest $message = null,
-        public ?UserRequest $user = null
+        public ?UserRequest $user = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'accept_invite' => $this->acceptInvite,
-            'cooldown' => $this->cooldown,
-            'hide_history' => $this->hideHistory,
-            'reject_invite' => $this->rejectInvite,
-            'skip_push' => $this->skipPush,
-            'user_id' => $this->userID,
-            'add_members' => $this->addMembers,
-            'add_moderators' => $this->addModerators,
-            'assign_roles' => $this->assignRoles,
-            'demote_moderators' => $this->demoteModerators,
-            'invites' => $this->invites,
-            'remove_members' => $this->removeMembers,
-            'data' => $this->data,
-            'message' => $this->message,
-            'user' => $this->user,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(acceptInvite: $json['accept_invite'] ?? null,
-            cooldown: $json['cooldown'] ?? null,
-            hideHistory: $json['hide_history'] ?? null,
-            rejectInvite: $json['reject_invite'] ?? null,
-            skipPush: $json['skip_push'] ?? null,
-            userID: $json['user_id'] ?? null,
-            addMembers: $json['add_members'] ?? null,
-            addModerators: $json['add_moderators'] ?? null,
-            assignRoles: $json['assign_roles'] ?? null,
-            demoteModerators: $json['demote_moderators'] ?? null,
-            invites: $json['invites'] ?? null,
-            removeMembers: $json['remove_members'] ?? null,
-            data: $json['data'] ?? null,
-            message: $json['message'] ?? null,
-            user: $json['user'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

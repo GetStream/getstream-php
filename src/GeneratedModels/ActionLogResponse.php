@@ -8,63 +8,21 @@ use JsonSerializable;
 /**
  * 
  */
-class ActionLogResponse implements JsonSerializable
+class ActionLogResponse extends BaseModel
 {
-    public function __construct(public ?\DateTime $createdAt = null,
-        public ?string $id = null,
-        public ?string $reason = null,
-        public ?string $targetUserID = null,
-        public ?string $type = null,
-        public ?string $userID = null,
-        public ?object $custom = null,
+    public function __construct(
+        public ?\DateTime $createdAt = null,    // Timestamp when the action was taken 
+        public ?string $id = null,    // Unique identifier of the action log 
+        public ?string $reason = null,    // Reason for the moderation action 
+        public ?string $targetUserID = null,    // ID of the user who was the target of the action 
+        public ?string $type = null,    // Type of moderation action 
+        public ?string $userID = null,    // ID of the user who performed the action 
+        public ?object $custom = null,    // Additional metadata about the action 
         public ?ReviewQueueItemResponse $reviewQueueItem = null,
         public ?UserResponse $targetUser = null,
-        public ?UserResponse $user = null
+        public ?UserResponse $user = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'created_at' => $this->createdAt,
-            'id' => $this->id,
-            'reason' => $this->reason,
-            'target_user_id' => $this->targetUserID,
-            'type' => $this->type,
-            'user_id' => $this->userID,
-            'custom' => $this->custom,
-            'review_queue_item' => $this->reviewQueueItem,
-            'target_user' => $this->targetUser,
-            'user' => $this->user,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(createdAt: $json['created_at'] ?? null,
-            id: $json['id'] ?? null,
-            reason: $json['reason'] ?? null,
-            targetUserID: $json['target_user_id'] ?? null,
-            type: $json['type'] ?? null,
-            userID: $json['user_id'] ?? null,
-            custom: $json['custom'] ?? null,
-            reviewQueueItem: $json['review_queue_item'] ?? null,
-            targetUser: $json['target_user'] ?? null,
-            user: $json['user'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

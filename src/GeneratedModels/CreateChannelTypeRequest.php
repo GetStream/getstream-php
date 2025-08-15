@@ -8,120 +8,40 @@ use JsonSerializable;
 /**
  * 
  */
-class CreateChannelTypeRequest implements JsonSerializable
+class CreateChannelTypeRequest extends BaseModel
 {
-    public function __construct(public ?string $automod = null,
-        public ?string $automodBehavior = null,
-        public ?int $maxMessageLength = null,
-        public ?string $name = null,
-        public ?string $blocklist = null,
-        public ?string $blocklistBehavior = null,
-        public ?bool $connectEvents = null,
-        public ?bool $customEvents = null,
-        public ?bool $markMessagesPending = null,
-        public ?string $messageRetention = null,
-        public ?bool $mutes = null,
-        public ?int $partitionSize = null,
-        public ?string $partitionTtl = null,
-        public ?bool $polls = null,
-        public ?bool $pushNotifications = null,
-        public ?bool $reactions = null,
-        public ?bool $readEvents = null,
-        public ?bool $replies = null,
-        public ?bool $search = null,
-        public ?bool $sharedLocations = null,
+    public function __construct(
+        public ?string $automod = null,    // Automod 
+        public ?string $automodBehavior = null,    // Automod behavior 
+        public ?int $maxMessageLength = null,    // Max message length 
+        public ?string $name = null,    // Channel type name 
+        public ?string $blocklist = null,    // Blocklist 
+        public ?string $blocklistBehavior = null,    // Blocklist behavior 
+        public ?bool $connectEvents = null,    // Connect events 
+        public ?bool $customEvents = null,    // Custom events 
+        public ?bool $markMessagesPending = null,    // Mark messages pending 
+        public ?string $messageRetention = null,    // Message retention 
+        public ?bool $mutes = null,    // Mutes 
+        public ?int $partitionSize = null,    // Partition size 
+        public ?string $partitionTtl = null,    // Partition TTL 
+        public ?bool $polls = null,    // Polls 
+        public ?bool $pushNotifications = null,    // Push notifications 
+        public ?bool $reactions = null,    // Reactions 
+        public ?bool $readEvents = null,    // Read events 
+        public ?bool $replies = null,    // Replies 
+        public ?bool $search = null,    // Search 
+        public ?bool $sharedLocations = null,    // Enables shared location messages 
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
-        public ?bool $typingEvents = null,
-        public ?bool $uploads = null,
-        public ?bool $urlEnrichment = null,
+        public ?bool $typingEvents = null,    // Typing events 
+        public ?bool $uploads = null,    // Uploads 
+        public ?bool $urlEnrichment = null,    // URL enrichment 
         public ?bool $userMessageReminders = null,
-        public ?array $blocklists = null,
-        public ?array $commands = null,
-        public ?array $permissions = null,
-        public ?array $grants = null
+        public ?array $blocklists = null,    // Blocklists 
+        public ?array $commands = null,    // List of commands that channel supports 
+        public ?array $permissions = null,    // List of permissions for the channel type 
+        public ?array $grants = null,    // List of grants for the channel type 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'automod' => $this->automod,
-            'automod_behavior' => $this->automodBehavior,
-            'max_message_length' => $this->maxMessageLength,
-            'name' => $this->name,
-            'blocklist' => $this->blocklist,
-            'blocklist_behavior' => $this->blocklistBehavior,
-            'connect_events' => $this->connectEvents,
-            'custom_events' => $this->customEvents,
-            'mark_messages_pending' => $this->markMessagesPending,
-            'message_retention' => $this->messageRetention,
-            'mutes' => $this->mutes,
-            'partition_size' => $this->partitionSize,
-            'partition_ttl' => $this->partitionTtl,
-            'polls' => $this->polls,
-            'push_notifications' => $this->pushNotifications,
-            'reactions' => $this->reactions,
-            'read_events' => $this->readEvents,
-            'replies' => $this->replies,
-            'search' => $this->search,
-            'shared_locations' => $this->sharedLocations,
-            'skip_last_msg_update_for_system_msgs' => $this->skipLastMsgUpdateForSystemMsgs,
-            'typing_events' => $this->typingEvents,
-            'uploads' => $this->uploads,
-            'url_enrichment' => $this->urlEnrichment,
-            'user_message_reminders' => $this->userMessageReminders,
-            'blocklists' => $this->blocklists,
-            'commands' => $this->commands,
-            'permissions' => $this->permissions,
-            'grants' => $this->grants,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(automod: $json['automod'] ?? null,
-            automodBehavior: $json['automod_behavior'] ?? null,
-            maxMessageLength: $json['max_message_length'] ?? null,
-            name: $json['name'] ?? null,
-            blocklist: $json['blocklist'] ?? null,
-            blocklistBehavior: $json['blocklist_behavior'] ?? null,
-            connectEvents: $json['connect_events'] ?? null,
-            customEvents: $json['custom_events'] ?? null,
-            markMessagesPending: $json['mark_messages_pending'] ?? null,
-            messageRetention: $json['message_retention'] ?? null,
-            mutes: $json['mutes'] ?? null,
-            partitionSize: $json['partition_size'] ?? null,
-            partitionTtl: $json['partition_ttl'] ?? null,
-            polls: $json['polls'] ?? null,
-            pushNotifications: $json['push_notifications'] ?? null,
-            reactions: $json['reactions'] ?? null,
-            readEvents: $json['read_events'] ?? null,
-            replies: $json['replies'] ?? null,
-            search: $json['search'] ?? null,
-            sharedLocations: $json['shared_locations'] ?? null,
-            skipLastMsgUpdateForSystemMsgs: $json['skip_last_msg_update_for_system_msgs'] ?? null,
-            typingEvents: $json['typing_events'] ?? null,
-            uploads: $json['uploads'] ?? null,
-            urlEnrichment: $json['url_enrichment'] ?? null,
-            userMessageReminders: $json['user_message_reminders'] ?? null,
-            blocklists: $json['blocklists'] ?? null,
-            commands: $json['commands'] ?? null,
-            permissions: $json['permissions'] ?? null,
-            grants: $json['grants'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

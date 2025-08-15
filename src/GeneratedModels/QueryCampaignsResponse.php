@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * Basic response information
  */
-class QueryCampaignsResponse implements JsonSerializable
+class QueryCampaignsResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
+    public function __construct(
+        public ?string $duration = null,    // Duration of the request in milliseconds 
         public ?array $campaigns = null,
         public ?string $next = null,
-        public ?string $prev = null
+        public ?string $prev = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'campaigns' => $this->campaigns,
-            'next' => $this->next,
-            'prev' => $this->prev,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            campaigns: $json['campaigns'] ?? null,
-            next: $json['next'] ?? null,
-            prev: $json['prev'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

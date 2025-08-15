@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class PlatformDataResponse implements JsonSerializable
+class PlatformDataResponse extends BaseModel
 {
-    public function __construct(public ?BrowserDataResponse $browser = null,
+    public function __construct(
+        public ?BrowserDataResponse $browser = null,
         public ?DeviceDataResponse $device = null,
-        public ?ClientOSDataResponse $os = null
+        public ?ClientOSDataResponse $os = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'browser' => $this->browser,
-            'device' => $this->device,
-            'os' => $this->os,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(browser: $json['browser'] ?? null,
-            device: $json['device'] ?? null,
-            os: $json['os'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

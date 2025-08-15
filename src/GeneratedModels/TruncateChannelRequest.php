@@ -8,54 +8,18 @@ use JsonSerializable;
 /**
  * 
  */
-class TruncateChannelRequest implements JsonSerializable
+class TruncateChannelRequest extends BaseModel
 {
-    public function __construct(public ?bool $hardDelete = null,
-        public ?bool $skipPush = null,
-        public ?\DateTime $truncatedAt = null,
+    public function __construct(
+        public ?bool $hardDelete = null,    // Permanently delete channel data (messages, reactions, etc.) 
+        public ?bool $skipPush = null,    // When `message` is set disables all push notifications for it 
+        public ?\DateTime $truncatedAt = null,    // Truncate channel data up to `truncated_at`. The system message (if provided) creation time is always greater than `truncated_at` 
         public ?string $userID = null,
-        public ?array $memberIds = null,
+        public ?array $memberIds = null,    // List of member IDs to hide message history for. If empty, truncates the channel for all members 
         public ?MessageRequest $message = null,
-        public ?UserRequest $user = null
+        public ?UserRequest $user = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'hard_delete' => $this->hardDelete,
-            'skip_push' => $this->skipPush,
-            'truncated_at' => $this->truncatedAt,
-            'user_id' => $this->userID,
-            'member_ids' => $this->memberIds,
-            'message' => $this->message,
-            'user' => $this->user,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(hardDelete: $json['hard_delete'] ?? null,
-            skipPush: $json['skip_push'] ?? null,
-            truncatedAt: $json['truncated_at'] ?? null,
-            userID: $json['user_id'] ?? null,
-            memberIds: $json['member_ids'] ?? null,
-            message: $json['message'] ?? null,
-            user: $json['user'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

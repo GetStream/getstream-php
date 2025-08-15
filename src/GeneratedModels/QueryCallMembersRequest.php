@@ -8,54 +8,18 @@ use JsonSerializable;
 /**
  * 
  */
-class QueryCallMembersRequest implements JsonSerializable
+class QueryCallMembersRequest extends BaseModel
 {
-    public function __construct(public ?string $id = null,
+    public function __construct(
+        public ?string $id = null,
         public ?string $type = null,
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
         public ?array $sort = null,
-        public ?object $filterConditions = null
+        public ?object $filterConditions = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'id' => $this->id,
-            'type' => $this->type,
-            'limit' => $this->limit,
-            'next' => $this->next,
-            'prev' => $this->prev,
-            'sort' => $this->sort,
-            'filter_conditions' => $this->filterConditions,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(id: $json['id'] ?? null,
-            type: $json['type'] ?? null,
-            limit: $json['limit'] ?? null,
-            next: $json['next'] ?? null,
-            prev: $json['prev'] ?? null,
-            sort: $json['sort'] ?? null,
-            filterConditions: $json['filter_conditions'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

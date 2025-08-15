@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * 
  */
-class UserRatingReportResponse implements JsonSerializable
+class UserRatingReportResponse extends BaseModel
 {
-    public function __construct(public ?int $average = null,
-        public ?int $count = null
+    public function __construct(
+        public ?int $average = null,
+        public ?int $count = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'average' => $this->average,
-            'count' => $this->count,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(average: $json['average'] ?? null,
-            count: $json['count'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class Field implements JsonSerializable
+class Field extends BaseModel
 {
-    public function __construct(public ?bool $short = null,
+    public function __construct(
+        public ?bool $short = null,
         public ?string $title = null,
-        public ?string $value = null
+        public ?string $value = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'short' => $this->short,
-            'title' => $this->title,
-            'value' => $this->value,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(short: $json['short'] ?? null,
-            title: $json['title'] ?? null,
-            value: $json['value'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

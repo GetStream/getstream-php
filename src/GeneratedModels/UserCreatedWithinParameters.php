@@ -8,36 +8,12 @@ use JsonSerializable;
 /**
  * 
  */
-class UserCreatedWithinParameters implements JsonSerializable
+class UserCreatedWithinParameters extends BaseModel
 {
-    public function __construct(public ?string $maxAge = null
+    public function __construct(
+        public ?string $maxAge = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'max_age' => $this->maxAge,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(maxAge: $json['max_age'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

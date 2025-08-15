@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * 
  */
-class RankingConfig implements JsonSerializable
+class RankingConfig extends BaseModel
 {
-    public function __construct(public ?string $score = null,
-        public ?string $type = null,
-        public ?object $defaults = null,
-        public ?array $functions = null
+    public function __construct(
+        public ?string $score = null,    // Scoring formula 
+        public ?string $type = null,    // Type of ranking algorithm 
+        public ?object $defaults = null,    // Default values for ranking 
+        public ?array $functions = null,    // Decay functions configuration 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'score' => $this->score,
-            'type' => $this->type,
-            'defaults' => $this->defaults,
-            'functions' => $this->functions,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(score: $json['score'] ?? null,
-            type: $json['type'] ?? null,
-            defaults: $json['defaults'] ?? null,
-            functions: $json['functions'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

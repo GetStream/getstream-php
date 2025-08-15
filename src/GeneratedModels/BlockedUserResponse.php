@@ -8,48 +8,16 @@ use JsonSerializable;
 /**
  * 
  */
-class BlockedUserResponse implements JsonSerializable
+class BlockedUserResponse extends BaseModel
 {
-    public function __construct(public ?string $blockedUserID = null,
+    public function __construct(
+        public ?string $blockedUserID = null,    // ID of the user who got blocked 
         public ?\DateTime $createdAt = null,
-        public ?string $userID = null,
+        public ?string $userID = null,    // ID of the user who blocked another user 
         public ?UserResponse $blockedUser = null,
-        public ?UserResponse $user = null
+        public ?UserResponse $user = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'blocked_user_id' => $this->blockedUserID,
-            'created_at' => $this->createdAt,
-            'user_id' => $this->userID,
-            'blocked_user' => $this->blockedUser,
-            'user' => $this->user,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(blockedUserID: $json['blocked_user_id'] ?? null,
-            createdAt: $json['created_at'] ?? null,
-            userID: $json['user_id'] ?? null,
-            blockedUser: $json['blocked_user'] ?? null,
-            user: $json['user'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

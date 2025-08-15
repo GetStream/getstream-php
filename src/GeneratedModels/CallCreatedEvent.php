@@ -9,48 +9,16 @@ use JsonSerializable;
  * This event is sent when a call is created. Clients receiving this event should check if the ringing
  * field is set to true and if so, show the call screen
  */
-class CallCreatedEvent implements JsonSerializable
+class CallCreatedEvent extends BaseModel
 {
-    public function __construct(public ?string $callCid = null,
+    public function __construct(
+        public ?string $callCid = null,
         public ?\DateTime $createdAt = null,
-        public ?array $members = null,
+        public ?array $members = null,    // the members added to this call 
         public ?CallResponse $call = null,
-        public ?string $type = null
+        public ?string $type = null,    // The type of event: "call.created" in this case 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'call_cid' => $this->callCid,
-            'created_at' => $this->createdAt,
-            'members' => $this->members,
-            'call' => $this->call,
-            'type' => $this->type,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(callCid: $json['call_cid'] ?? null,
-            createdAt: $json['created_at'] ?? null,
-            members: $json['members'] ?? null,
-            call: $json['call'] ?? null,
-            type: $json['type'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

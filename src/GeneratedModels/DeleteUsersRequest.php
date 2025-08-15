@@ -8,57 +8,19 @@ use JsonSerializable;
 /**
  * 
  */
-class DeleteUsersRequest implements JsonSerializable
+class DeleteUsersRequest extends BaseModel
 {
-    public function __construct(public ?array $userIds = null,
-        public ?string $calls = null,
-        public ?string $conversations = null,
-        public ?bool $files = null,
-        public ?string $messages = null,
+    public function __construct(
+        public ?array $userIds = null,    // IDs of users to delete 
+        public ?string $calls = null,    // Calls delete mode. , Affected calls are those that include exactly two members, one of whom is the user being deleted. , * null or empty string - doesn't delete any calls , * soft - marks user's calls and their related data as deleted (soft-delete) , * hard - deletes user's calls and their data completely (hard-delete) 
+        public ?string $conversations = null,    // Conversation channels delete mode. , Conversation channel is any channel which only has two members one of which is the user being deleted. , * null or empty string - doesn't delete any conversation channels , * soft - marks all conversation channels as deleted (same effect as Delete Channels with 'hard' option disabled) , * hard - deletes channel and all its data completely including messages (same effect as Delete Channels with 'hard' option enabled) 
+        public ?bool $files = null,    // Delete user files. , * false or empty string - doesn't delete any files , * true - deletes all files uploaded by the user, including images and attachments. 
+        public ?string $messages = null,    // Message delete mode. , * null or empty string - doesn't delete user messages , * soft - marks all user messages as deleted without removing any related message data , * pruning - marks all user messages as deleted, nullifies message information and removes some message data such as reactions and flags , * hard - deletes messages completely with all related information 
         public ?string $newCallOwnerID = null,
         public ?string $newChannelOwnerID = null,
-        public ?string $user = null
+        public ?string $user = null,    // User delete mode. , * soft - marks user as deleted and retains all user data , * pruning - marks user as deleted and nullifies user information , * hard - deletes user completely. Requires 'hard' option for messages and conversations as well 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'user_ids' => $this->userIds,
-            'calls' => $this->calls,
-            'conversations' => $this->conversations,
-            'files' => $this->files,
-            'messages' => $this->messages,
-            'new_call_owner_id' => $this->newCallOwnerID,
-            'new_channel_owner_id' => $this->newChannelOwnerID,
-            'user' => $this->user,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(userIds: $json['user_ids'] ?? null,
-            calls: $json['calls'] ?? null,
-            conversations: $json['conversations'] ?? null,
-            files: $json['files'] ?? null,
-            messages: $json['messages'] ?? null,
-            newCallOwnerID: $json['new_call_owner_id'] ?? null,
-            newChannelOwnerID: $json['new_channel_owner_id'] ?? null,
-            user: $json['user'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

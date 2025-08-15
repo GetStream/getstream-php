@@ -19,16 +19,12 @@ fi
 set -ex
 
 # cd in API repo, generate new spec and then generate code from it
-( cd $SOURCE_PATH ;  go run ./cmd/chat-manager openapi generate-client --language php --spec ./releases/v2/serverside-api.yaml --output $DST_PATH )
+( cd $SOURCE_PATH ; make openapi ; go run ./cmd/chat-manager openapi generate-client --language php --spec ./releases/v2/serverside-api.yaml --output $DST_PATH )
 
 # Fix any potential issues in generated code
 echo "Applying PHP-specific fixes..."
 
-# Remove any duplicate use statements that might be generated
-find src/ -name "*.php" -type f -exec sed -i '' '/^use /!b; N; /^\(.*\)\n\1$/!b; s/.*\n//' {} \;
-
-# Ensure proper namespace formatting
-find src/ -name "*.php" -type f -exec sed -i '' 's/namespace GetStream\\StreamChat\\Generated/namespace GetStream/g' {} \;
+sed -i '' '/public ?string $role = null,/{N;s/public ?string $role = null,\n        public ?string $role = null,/public ?string $role = null,/;}' src/GeneratedModels/CallParticipant.php
 
 # Run PHP CS Fixer to ensure code style compliance
 if [ -f ".php-cs-fixer.php" ]; then
@@ -55,3 +51,4 @@ echo "3. Update your Feed.php to include: use GetStream\\Generated\\FeedMethods;
 echo "4. Run tests: ./vendor/bin/phpunit"
 echo ""
 echo "See CODEGEN_INTEGRATION.md for detailed integration instructions."
+

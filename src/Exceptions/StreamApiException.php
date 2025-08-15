@@ -57,3 +57,4 @@ class StreamApiException extends StreamException
         return $this->errorDetails;
     }
 }
+

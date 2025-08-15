@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class GetOrCreateFeedViewResponse implements JsonSerializable
+class GetOrCreateFeedViewResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?bool $wasCreated = null,
-        public ?FeedViewResponse $feedView = null
+    public function __construct(
+        public ?string $duration = null,
+        public ?bool $wasCreated = null,    // Indicates whether the feed view was newly created (true) or already existed (false) 
+        public ?FeedViewResponse $feedView = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'was_created' => $this->wasCreated,
-            'feed_view' => $this->feedView,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            wasCreated: $json['was_created'] ?? null,
-            feedView: $json['feed_view'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

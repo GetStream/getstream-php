@@ -6,12 +6,15 @@ namespace GetStream;
 
 /**
  * Represents a response from the GetStream API
+ * 
+ * @template T
  */
 class StreamResponse
 {
     private int $statusCode;
     private array $headers;
-    private mixed $data;
+    /** @var T */
+    public mixed $data;
     private ?string $rawBody;
 
     /**
@@ -30,6 +33,34 @@ class StreamResponse
         $this->rawBody = $rawBody;
     }
 
+    /**
+     * @template U
+     * @param StreamResponse<mixed> $res
+     * @param class-string<U> $dataClass
+     * @return StreamResponse<U>
+     */
+    public static function fromJson(StreamResponse $res, string $dataClass): self
+    {
+        $responseData = $res->getData();
+        
+        // If getData() returns an array, use it directly
+        // If it returns a string, parse it as JSON
+        if (is_string($responseData)) {
+            $arr = json_decode($responseData, true);
+        } else {
+            $arr = $responseData;
+        }
+
+        // Build data object from the response data
+        $data = $dataClass::fromJson($arr);
+
+        return new self(
+            $res->getStatusCode(),
+            $res->getHeaders(),
+            $data,
+            $res->getRawBody()
+        );
+    }
     /**
      * Get the HTTP status code
      */
@@ -56,6 +87,7 @@ class StreamResponse
 
     /**
      * Get the parsed response data
+     * @return T
      */
     public function getData(): mixed
     {
@@ -90,3 +122,4 @@ class StreamResponse
         ];
     }
 }
+

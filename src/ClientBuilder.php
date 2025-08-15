@@ -13,8 +13,8 @@ use Dotenv\Dotenv;
  */
 class ClientBuilder
 {
-    private ?string $apiKey = null;
-    private ?string $apiSecret = null;
+    private string $apiKey;
+    private string $apiSecret;
     private string $baseUrl = 'https://chat.stream-io-api.com';
     private ?HttpClientInterface $httpClient = null;
     private bool $loadEnv = true;
@@ -93,7 +93,7 @@ class ClientBuilder
     public function build(): Client
     {
         $this->loadCreds();
-        return new Client($this->apiKey, $this->apiSecret, $this->baseUrl);
+        return new Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
     }
 
     /**
@@ -101,7 +101,7 @@ class ClientBuilder
      */
     public function buildFeedsClient(): FeedsV3Client{
         $this->loadCreds();
-        return new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl);
+        return new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
     }
 
     public function loadCreds(): void
@@ -148,7 +148,7 @@ class ClientBuilder
     {
         try {
             $path = $this->envPath ?? getcwd();
-            
+
             if ($path !== false && file_exists($path . '/.env')) {
                 $dotenv = Dotenv::createImmutable($path);
                 $dotenv->load();

@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class CheckSNSRequest implements JsonSerializable
+class CheckSNSRequest extends BaseModel
 {
-    public function __construct(public ?string $snsKey = null,
-        public ?string $snsSecret = null,
-        public ?string $snsTopicArn = null
+    public function __construct(
+        public ?string $snsKey = null,    // AWS SNS access key 
+        public ?string $snsSecret = null,    // AWS SNS key secret 
+        public ?string $snsTopicArn = null,    // AWS SNS topic ARN 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'sns_key' => $this->snsKey,
-            'sns_secret' => $this->snsSecret,
-            'sns_topic_arn' => $this->snsTopicArn,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(snsKey: $json['sns_key'] ?? null,
-            snsSecret: $json['sns_secret'] ?? null,
-            snsTopicArn: $json['sns_topic_arn'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

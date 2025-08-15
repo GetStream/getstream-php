@@ -113,3 +113,4 @@ class JWTGenerator
         return hash_equals($expectedSignature, $signature);
     }
 }
+

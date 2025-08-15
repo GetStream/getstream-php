@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class AutomodSemanticFiltersRule implements JsonSerializable
+class AutomodSemanticFiltersRule extends BaseModel
 {
-    public function __construct(public ?string $action = null,
+    public function __construct(
+        public ?string $action = null,
         public ?string $name = null,
-        public ?int $threshold = null
+        public ?int $threshold = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'action' => $this->action,
-            'name' => $this->name,
-            'threshold' => $this->threshold,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(action: $json['action'] ?? null,
-            name: $json['name'] ?? null,
-            threshold: $json['threshold'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

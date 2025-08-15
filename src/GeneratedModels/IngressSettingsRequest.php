@@ -8,42 +8,14 @@ use JsonSerializable;
 /**
  * 
  */
-class IngressSettingsRequest implements JsonSerializable
+class IngressSettingsRequest extends BaseModel
 {
-    public function __construct(public ?bool $enabled = null,
+    public function __construct(
+        public ?bool $enabled = null,
         public ?IngressAudioEncodingOptionsRequest $audioEncodingOptions = null,
-        public ?array $videoEncodingOptions = null
+        public ?array $videoEncodingOptions = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'enabled' => $this->enabled,
-            'audio_encoding_options' => $this->audioEncodingOptions,
-            'video_encoding_options' => $this->videoEncodingOptions,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(enabled: $json['enabled'] ?? null,
-            audioEncodingOptions: $json['audio_encoding_options'] ?? null,
-            videoEncodingOptions: $json['video_encoding_options'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

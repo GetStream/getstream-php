@@ -8,48 +8,16 @@ use JsonSerializable;
 /**
  * 
  */
-class BookmarkFolderResponse implements JsonSerializable
+class BookmarkFolderResponse extends BaseModel
 {
-    public function __construct(public ?\DateTime $createdAt = null,
-        public ?string $id = null,
-        public ?string $name = null,
-        public ?\DateTime $updatedAt = null,
-        public ?object $custom = null
+    public function __construct(
+        public ?\DateTime $createdAt = null,    // When the folder was created 
+        public ?string $id = null,    // Unique identifier for the folder 
+        public ?string $name = null,    // Name of the folder 
+        public ?\DateTime $updatedAt = null,    // When the folder was last updated 
+        public ?object $custom = null,    // Custom data for the folder 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'created_at' => $this->createdAt,
-            'id' => $this->id,
-            'name' => $this->name,
-            'updated_at' => $this->updatedAt,
-            'custom' => $this->custom,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(createdAt: $json['created_at'] ?? null,
-            id: $json['id'] ?? null,
-            name: $json['name'] ?? null,
-            updatedAt: $json['updated_at'] ?? null,
-            custom: $json['custom'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

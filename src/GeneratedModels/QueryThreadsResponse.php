@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * 
  */
-class QueryThreadsResponse implements JsonSerializable
+class QueryThreadsResponse extends BaseModel
 {
-    public function __construct(public ?string $duration = null,
-        public ?array $threads = null,
+    public function __construct(
+        public ?string $duration = null,    // Duration of the request in milliseconds 
+        public ?array $threads = null,    // List of enriched thread states 
         public ?string $next = null,
-        public ?string $prev = null
+        public ?string $prev = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'duration' => $this->duration,
-            'threads' => $this->threads,
-            'next' => $this->next,
-            'prev' => $this->prev,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(duration: $json['duration'] ?? null,
-            threads: $json['threads'] ?? null,
-            next: $json['next'] ?? null,
-            prev: $json['prev'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * 
  */
-class UpdateFeedRequest implements JsonSerializable
+class UpdateFeedRequest extends BaseModel
 {
-    public function __construct(public ?string $createdByID = null,
-        public ?object $custom = null
+    public function __construct(
+        public ?string $createdByID = null,    // ID of the new feed creator (owner) 
+        public ?object $custom = null,    // Custom data for the feed 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'created_by_id' => $this->createdByID,
-            'custom' => $this->custom,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(createdByID: $json['created_by_id'] ?? null,
-            custom: $json['custom'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

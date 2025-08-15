@@ -8,63 +8,21 @@ use JsonSerializable;
 /**
  * User request object
  */
-class UserRequest implements JsonSerializable
+class UserRequest extends BaseModel
 {
-    public function __construct(public ?string $id = null,
-        public ?string $image = null,
+    public function __construct(
+        public ?string $id = null,    // User ID 
+        public ?string $image = null,    // User's profile image URL 
         public ?bool $invisible = null,
         public ?string $language = null,
-        public ?string $name = null,
-        public ?string $role = null,
-        public ?array $teams = null,
-        public ?object $custom = null,
+        public ?string $name = null,    // Optional name of user 
+        public ?string $role = null,    // User's global role 
+        public ?array $teams = null,    // List of teams the user belongs to 
+        public ?object $custom = null,    // Custom user data 
         public ?PrivacySettingsResponse $privacySettings = null,
-        public ?array $teamsRole = null
+        public ?array $teamsRole = null,    // Map of team-specific roles for the user 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'id' => $this->id,
-            'image' => $this->image,
-            'invisible' => $this->invisible,
-            'language' => $this->language,
-            'name' => $this->name,
-            'role' => $this->role,
-            'teams' => $this->teams,
-            'custom' => $this->custom,
-            'privacy_settings' => $this->privacySettings,
-            'teams_role' => $this->teamsRole,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(id: $json['id'] ?? null,
-            image: $json['image'] ?? null,
-            invisible: $json['invisible'] ?? null,
-            language: $json['language'] ?? null,
-            name: $json['name'] ?? null,
-            role: $json['role'] ?? null,
-            teams: $json['teams'] ?? null,
-            custom: $json['custom'] ?? null,
-            privacySettings: $json['privacy_settings'] ?? null,
-            teamsRole: $json['teams_role'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

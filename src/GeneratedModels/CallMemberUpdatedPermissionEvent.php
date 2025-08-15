@@ -8,51 +8,17 @@ use JsonSerializable;
 /**
  * This event is sent when one or more members get its role updated
  */
-class CallMemberUpdatedPermissionEvent implements JsonSerializable
+class CallMemberUpdatedPermissionEvent extends BaseModel
 {
-    public function __construct(public ?string $callCid = null,
+    public function __construct(
+        public ?string $callCid = null,
         public ?\DateTime $createdAt = null,
-        public ?array $members = null,
+        public ?array $members = null,    // The list of members that were updated 
         public ?CallResponse $call = null,
-        public ?array $capabilitiesByRole = null,
-        public ?string $type = null
+        public ?array $capabilitiesByRole = null,    // The capabilities by role for this call 
+        public ?string $type = null,    // The type of event: "call.member_added" in this case 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'call_cid' => $this->callCid,
-            'created_at' => $this->createdAt,
-            'members' => $this->members,
-            'call' => $this->call,
-            'capabilities_by_role' => $this->capabilitiesByRole,
-            'type' => $this->type,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(callCid: $json['call_cid'] ?? null,
-            createdAt: $json['created_at'] ?? null,
-            members: $json['members'] ?? null,
-            call: $json['call'] ?? null,
-            capabilitiesByRole: $json['capabilities_by_role'] ?? null,
-            type: $json['type'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

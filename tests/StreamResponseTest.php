@@ -84,3 +84,4 @@ class StreamResponseTest extends TestCase
         $this->assertNull($response->getData());
     }
 }
+

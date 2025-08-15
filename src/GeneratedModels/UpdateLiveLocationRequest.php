@@ -8,45 +8,15 @@ use JsonSerializable;
 /**
  * 
  */
-class UpdateLiveLocationRequest implements JsonSerializable
+class UpdateLiveLocationRequest extends BaseModel
 {
-    public function __construct(public ?string $messageID = null,
-        public ?\DateTime $endAt = null,
-        public ?int $latitude = null,
-        public ?int $longitude = null
+    public function __construct(
+        public ?string $messageID = null,    // Live location ID 
+        public ?\DateTime $endAt = null,    // Time when the live location expires 
+        public ?int $latitude = null,    // Latitude coordinate 
+        public ?int $longitude = null,    // Longitude coordinate 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'message_id' => $this->messageID,
-            'end_at' => $this->endAt,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(messageID: $json['message_id'] ?? null,
-            endAt: $json['end_at'] ?? null,
-            latitude: $json['latitude'] ?? null,
-            longitude: $json['longitude'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

@@ -8,39 +8,13 @@ use JsonSerializable;
 /**
  * 
  */
-class DeleteChannelsRequest implements JsonSerializable
+class DeleteChannelsRequest extends BaseModel
 {
-    public function __construct(public ?array $cids = null,
-        public ?bool $hardDelete = null
+    public function __construct(
+        public ?array $cids = null,    // All channels that should be deleted 
+        public ?bool $hardDelete = null,    // Specify if channels and all ressources should be hard deleted 
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'cids' => $this->cids,
-            'hard_delete' => $this->hardDelete,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(cids: $json['cids'] ?? null,
-            hardDelete: $json['hard_delete'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

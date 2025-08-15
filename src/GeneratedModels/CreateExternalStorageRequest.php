@@ -8,54 +8,18 @@ use JsonSerializable;
 /**
  * Create external storage
  */
-class CreateExternalStorageRequest implements JsonSerializable
+class CreateExternalStorageRequest extends BaseModel
 {
-    public function __construct(public ?string $bucket = null,
-        public ?string $name = null,
-        public ?string $storageType = null,
+    public function __construct(
+        public ?string $bucket = null,    // The name of the bucket on the service provider 
+        public ?string $name = null,    // The name of the provider, this must be unique 
+        public ?string $storageType = null,    // The type of storage to use 
         public ?string $gcsCredentials = null,
-        public ?string $path = null,
+        public ?string $path = null,    // The path prefix to use for storing files 
         public ?S3Request $awsS3 = null,
-        public ?AzureRequest $azureBlob = null
+        public ?AzureRequest $azureBlob = null,
     ) {}
 
-    public function jsonSerialize(): array
-    {
-        return array_filter([
-            'bucket' => $this->bucket,
-            'name' => $this->name,
-            'storage_type' => $this->storageType,
-            'gcs_credentials' => $this->gcsCredentials,
-            'path' => $this->path,
-            'aws_s3' => $this->awsS3,
-            'azure_blob' => $this->azureBlob,
-        ], fn($v) => $v !== null);
-    }
-
-    public function toArray(): array
-    {
-        return $this->jsonSerialize();
-    }
-
-    /**
-     * Create a new instance from JSON data.
-     *
-     * @param array<string, mixed>|string $json JSON data
-     * @return static
-     */
-    public static function fromJson($json): self
-    {
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-        
-        return new static(bucket: $json['bucket'] ?? null,
-            name: $json['name'] ?? null,
-            storageType: $json['storage_type'] ?? null,
-            gcsCredentials: $json['gcs_credentials'] ?? null,
-            path: $json['path'] ?? null,
-            awsS3: $json['aws_s3'] ?? null,
-            azureBlob: $json['azure_blob'] ?? null
-        );
-    }
-} 
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}
