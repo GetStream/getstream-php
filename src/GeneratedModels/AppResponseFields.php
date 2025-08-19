@@ -23,6 +23,7 @@ class AppResponseFields extends BaseModel
         public ?bool $imageModerationEnabled = null,
         public ?bool $moderationBulkSubmitActionEnabled = null,
         public ?bool $moderationEnabled = null,
+        public ?bool $moderationLlmConfigurabilityEnabled = null,
         public ?bool $moderationMultitenantBlocklistEnabled = null,
         public ?string $moderationWebhookUrl = null,
         public ?bool $multiTenantEnabled = null,

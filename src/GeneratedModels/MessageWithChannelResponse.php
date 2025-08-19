@@ -35,6 +35,7 @@ class MessageWithChannelResponse extends BaseModel
         public ?UserResponse $user = null,
         public ?string $command = null,    // Contains provided slash command 
         public ?\DateTime $deletedAt = null,    // Date/time of deletion 
+        public ?bool $deletedForMe = null,
         public ?\DateTime $messageTextUpdatedAt = null,
         public ?string $mml = null,    // Should be empty if `text` is provided. Can only be set when using server-side API 
         public ?string $parentID = null,    // ID of parent message (thread) 

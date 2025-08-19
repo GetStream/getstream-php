@@ -14,6 +14,7 @@ class ChannelConfigWithInfo extends BaseModel
         public ?string $automod = null,
         public ?string $automodBehavior = null,
         public ?bool $connectEvents = null,
+        public ?bool $countMessages = null,
         public ?\DateTime $createdAt = null,
         public ?bool $customEvents = null,
         public ?bool $markMessagesPending = null,

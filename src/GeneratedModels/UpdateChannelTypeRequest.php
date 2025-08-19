@@ -17,6 +17,7 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?string $blocklist = null,
         public ?string $blocklistBehavior = null,
         public ?bool $connectEvents = null,
+        public ?bool $countMessages = null,
         public ?bool $customEvents = null,
         public ?bool $markMessagesPending = null,
         public ?bool $mutes = null,

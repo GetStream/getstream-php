@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 
 use JsonSerializable;
 /**
- * Response for activity feedback submission
+ * 
  */
-class ActivityFeedbackResponse extends BaseModel
+class ActiveCallsResolutionStats extends BaseModel
 {
     public function __construct(
-        public ?string $activityID = null,    // The ID of the activity that received feedback 
-        public ?string $duration = null,
+        public ?int $p10 = null,
+        public ?int $p50 = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

@@ -12,7 +12,6 @@ class UserMessagesDeletedEvent extends BaseModel
 {
     public function __construct(
         public ?\DateTime $createdAt = null,    // Date/time of creation 
-        public ?bool $hardDelete = null,    // Whether Messages were hard deleted 
         public ?bool $softDelete = null,    // Whether Messages were soft deleted 
         public ?object $custom = null,
         public ?UserResponseCommonFields $user = null,
@@ -21,6 +20,7 @@ class UserMessagesDeletedEvent extends BaseModel
         public ?int $channelMemberCount = null,
         public ?string $channelType = null,    // The type of the channel where the target user's messages were deleted 
         public ?string $cid = null,    // The CID of the channel where the target user's messages were deleted 
+        public ?bool $hardDelete = null,    // Whether Messages were hard deleted 
         public ?\DateTime $receivedAt = null,
         public ?string $team = null,    // The team of the channel where the target user's messages were deleted 
         public ?object $channelCustom = null,

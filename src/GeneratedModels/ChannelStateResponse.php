@@ -20,6 +20,7 @@ class ChannelStateResponse extends BaseModel
         public ?\DateTime $hideMessagesBefore = null,
         public ?int $watcherCount = null,
         public ?array $activeLiveLocations = null,
+        public ?array $deletedMessages = null,
         public ?array $pendingMessages = null,
         public ?array $read = null,
         public ?array $watchers = null,

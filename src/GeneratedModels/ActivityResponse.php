@@ -38,7 +38,7 @@ class ActivityResponse extends BaseModel
         public ?\DateTime $deletedAt = null,    // When the activity was deleted 
         public ?\DateTime $editedAt = null,    // When the activity was last edited 
         public ?\DateTime $expiresAt = null,    // When the activity will expire 
-        public ?bool $hidden = null,
+        public ?bool $hidden = null,    // If this activity is hidden for this user. For premium content where you want to show a preview 
         public ?string $text = null,    // Text content of the activity 
         public ?string $visibilityTag = null,    // If visibility is 'tag', this is the tag name 
         public ?FeedResponse $currentFeed = null,

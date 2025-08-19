@@ -26,6 +26,8 @@ class Channel extends BaseModel
         public ?string $lastCampaigns = null,
         public ?\DateTime $lastMessageAt = null,
         public ?int $memberCount = null,
+        public ?int $messageCount = null,
+        public ?\DateTime $messageCountUpdatedAt = null,
         public ?string $team = null,
         public ?array $activeLiveLocations = null,
         public ?array $invites = null,

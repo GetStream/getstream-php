@@ -35,6 +35,7 @@ class Message extends BaseModel
         public ?bool $beforeMessageSendFailed = null,
         public ?string $command = null,
         public ?\DateTime $deletedAt = null,
+        public ?bool $deletedForMe = null,
         public ?\DateTime $messageTextUpdatedAt = null,
         public ?string $mml = null,
         public ?string $parentID = null,

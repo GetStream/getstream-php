@@ -29,6 +29,7 @@ class ChannelMember extends BaseModel
         public ?string $role = null,    // Permission level of the member in the channel (DEPRECATED: use channel_role instead) 
         public ?string $status = null,
         public ?string $userID = null,
+        public ?array $deletedMessages = null,
         public ?UserResponse $user = null,
     ) {}
 

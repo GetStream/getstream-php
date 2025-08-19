@@ -28,6 +28,7 @@ class ChannelResponse extends BaseModel
         public ?\DateTime $hideMessagesBefore = null,    // Date since when the message history is accessible 
         public ?\DateTime $lastMessageAt = null,    // Date of the last message sent 
         public ?int $memberCount = null,    // Number of members in the channel 
+        public ?int $messageCount = null,    // Number of messages in the channel 
         public ?\DateTime $muteExpiresAt = null,    // Date of mute expiration 
         public ?bool $muted = null,    // Whether this channel is muted or not 
         public ?string $team = null,    // Team the channel belongs to (multi-tenant only) 

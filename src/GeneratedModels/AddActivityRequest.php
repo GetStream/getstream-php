@@ -11,8 +11,7 @@ use JsonSerializable;
 class AddActivityRequest extends BaseModel
 {
     public function __construct(
-        public ?string $type = null,    // Type of activity
-        #[JsonKey('fids')]
+        public ?string $type = null,    // Type of activity 
         public ?array $feeds = null,    // List of feed IDs to add the activity to 
         public ?string $expiresAt = null,    // Expiration time for the activity 
         public ?string $id = null,    // Optional ID for the activity 
@@ -32,5 +31,5 @@ class AddActivityRequest extends BaseModel
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
-    // Use #[JsonKey('fids')] to override field names if needed.
+    // Use #[JsonKey('user_id')] to override field names if needed.
 }

@@ -12,7 +12,7 @@ class UpdateFeedGroupRequest extends BaseModel
 {
     public function __construct(
         public ?array $activityProcessors = null,    // Configuration for activity processors (max 10) 
-        public ?array $activitySelectors = null,    // Configuration for activity selectors 
+        public ?array $activitySelectors = null,    // Configuration for activity selectors (max 10) 
         public ?AggregationConfig $aggregation = null,
         public ?object $custom = null,    // Custom data for the feed group 
         public ?NotificationConfig $notification = null,

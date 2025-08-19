@@ -15,6 +15,7 @@ class ConfigOverrides extends BaseModel
         public ?array $grants = null,
         public ?string $blocklist = null,
         public ?string $blocklistBehavior = null,
+        public ?bool $countMessages = null,
         public ?int $maxMessageLength = null,
         public ?bool $quotes = null,
         public ?bool $reactions = null,

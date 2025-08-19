@@ -1196,6 +1196,69 @@ trait FeedsClient
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\UnfollowResponse::class);
     }
     /**
+     * Create a new membership level with tag-based access controls
+     * 
+     *
+     * @param GeneratedModels\CreateMembershipLevelRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateMembershipLevelResponse>
+     * @throws StreamException
+     */
+    public function createMembershipLevel(GeneratedModels\CreateMembershipLevelRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/membership_levels';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateMembershipLevelResponse::class);
+    }
+    /**
+     * Query membership levels with filter query
+     * 
+     *
+     * @param GeneratedModels\QueryMembershipLevelsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryMembershipLevelsResponse>
+     * @throws StreamException
+     */
+    public function queryMembershipLevels(GeneratedModels\QueryMembershipLevelsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/membership_levels/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryMembershipLevelsResponse::class);
+    }
+    /**
+     * Delete a membership level by its UUID. This operation is irreversible.
+     * 
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function deleteMembershipLevel(string $id): StreamResponse {
+        $path = '/api/v2/feeds/membership_levels/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
+     * Update a membership level with partial updates. Only specified fields will be updated.
+     * 
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateMembershipLevelRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateMembershipLevelResponse>
+     * @throws StreamException
+     */
+    public function updateMembershipLevel(string $id, GeneratedModels\UpdateMembershipLevelRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/membership_levels/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMembershipLevelResponse::class);
+    }
+    /**
      * Removes multiple follows at once and broadcasts FollowRemovedEvent for each one
      * 
      *

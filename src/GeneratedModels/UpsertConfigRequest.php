@@ -25,6 +25,7 @@ class UpsertConfigRequest extends BaseModel
         public ?BlockListConfig $blockListConfig = null,
         public ?AITextConfig $bodyguardConfig = null,
         public ?GoogleVisionConfig $googleVisionConfig = null,
+        public ?LLMConfig $llmConfig = null,
         public ?RuleBuilderConfig $ruleBuilderConfig = null,
         public ?UserRequest $user = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,

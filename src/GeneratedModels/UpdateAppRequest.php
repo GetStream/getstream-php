@@ -24,6 +24,7 @@ class UpdateAppRequest extends BaseModel
         public ?string $feedsV2Region = null,
         public ?bool $guestUserCreationDisabled = null,
         public ?bool $imageModerationEnabled = null,
+        public ?int $maxAggregatedActivitiesLength = null,
         public ?bool $migratePermissionsToV2 = null,
         public ?bool $moderationEnabled = null,
         public ?string $moderationWebhookUrl = null,

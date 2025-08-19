@@ -23,6 +23,7 @@ class ConfigResponse extends BaseModel
         public ?AutomodSemanticFiltersConfig $automodSemanticFiltersConfig = null,
         public ?AutomodToxicityConfig $automodToxicityConfig = null,
         public ?BlockListConfig $blockListConfig = null,
+        public ?LLMConfig $llmConfig = null,
         public ?RuleBuilderConfig $ruleBuilderConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
