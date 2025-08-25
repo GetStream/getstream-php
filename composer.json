@@ -1,6 +1,7 @@
 {
     "name": "getstream/stream-php",
     "description": "PHP SDK for GetStream API",
+    "version": "v0.0.1",
     "type": "library",
     "license": "MIT",
     "authors": [
