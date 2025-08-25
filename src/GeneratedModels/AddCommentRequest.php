@@ -16,6 +16,7 @@ class AddCommentRequest extends BaseModel
         public ?string $objectType = null,    // Type of the object to comment on 
         public ?bool $createNotificationActivity = null,    // Whether to create a notification activity for this comment 
         public ?string $parentID = null,    // ID of parent comment for replies 
+        public ?bool $skipPush = null,
         public ?string $userID = null,
         public ?array $attachments = null,    // Media attachments for the reply 
         public ?array $mentionedUserIds = null,    // List of users mentioned in the reply 

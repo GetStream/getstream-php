@@ -24,6 +24,7 @@ class FeedGroup extends BaseModel
         public ?\DateTime $lastFeedGetAt = null,
         public ?AggregationConfig $aggregation = null,
         public ?NotificationConfig $notification = null,
+        public ?PushNotificationConfig $pushNotification = null,
         public ?RankingConfig $ranking = null,
         public ?StoriesConfig $stories = null,
     ) {}

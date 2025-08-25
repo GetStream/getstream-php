@@ -15,6 +15,7 @@ class FollowRequest extends BaseModel
         public ?string $target = null,    // Fully qualified ID of the target feed 
         public ?bool $createNotificationActivity = null,    // Whether to create a notification activity for this follow 
         public ?string $pushPreference = null,    // Push preference for the follow relationship 
+        public ?bool $skipPush = null,
         public ?object $custom = null,    // Custom data for the follow relationship 
     ) {}
 

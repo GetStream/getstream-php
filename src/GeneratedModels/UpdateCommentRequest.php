@@ -12,6 +12,7 @@ class UpdateCommentRequest extends BaseModel
 {
     public function __construct(
         public ?string $comment = null,    // Updated text content of the comment 
+        public ?bool $skipPush = null,
         public ?object $custom = null,    // Updated custom data for the comment 
     ) {}
 

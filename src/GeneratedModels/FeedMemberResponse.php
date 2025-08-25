@@ -19,6 +19,7 @@ class FeedMemberResponse extends BaseModel
         public ?\DateTime $inviteAcceptedAt = null,    // When the invite was accepted 
         public ?\DateTime $inviteRejectedAt = null,    // When the invite was rejected 
         public ?object $custom = null,    // Custom data for the membership 
+        public ?MembershipLevelResponse $membershipLevel = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

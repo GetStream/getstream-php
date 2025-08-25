@@ -12,7 +12,6 @@ class UserMessagesDeletedEvent extends BaseModel
 {
     public function __construct(
         public ?\DateTime $createdAt = null,    // Date/time of creation 
-        public ?bool $softDelete = null,    // Whether Messages were soft deleted 
         public ?object $custom = null,
         public ?UserResponseCommonFields $user = null,
         public ?string $type = null,    // The type of event: "user.messages.deleted" in this case 

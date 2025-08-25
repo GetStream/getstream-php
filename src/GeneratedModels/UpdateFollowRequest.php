@@ -16,6 +16,7 @@ class UpdateFollowRequest extends BaseModel
         public ?bool $createNotificationActivity = null,    // Whether to create a notification activity for this follow 
         public ?string $followerRole = null,
         public ?string $pushPreference = null,    // Push preference for the follow relationship 
+        public ?bool $skipPush = null,
         public ?object $custom = null,    // Custom data for the follow relationship 
     ) {}
 

@@ -47,11 +47,11 @@ trait CommonClient
      * Returns all available block lists
      * 
      *
-     * @param string|null $team
+     * @param string $team
      * @return StreamResponse<GeneratedModels\ListBlockListResponse>
      * @throws StreamException
      */
-    public function listBlockLists(?string $team = null): StreamResponse {
+    public function listBlockLists(string $team): StreamResponse {
         $path = '/api/v2/blocklists';
 
         $queryParams = [];
@@ -81,11 +81,11 @@ trait CommonClient
      * 
      *
      * @param string $name
-     * @param string|null $team
+     * @param string $team
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteBlockList(string $name, ?string $team = null): StreamResponse {
+    public function deleteBlockList(string $name, string $team): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
@@ -101,11 +101,11 @@ trait CommonClient
      * 
      *
      * @param string $name
-     * @param string|null $team
+     * @param string $team
      * @return StreamResponse<GeneratedModels\GetBlockListResponse>
      * @throws StreamException
      */
-    public function getBlockList(string $name, ?string $team = null): StreamResponse {
+    public function getBlockList(string $name, string $team): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
@@ -182,12 +182,12 @@ trait CommonClient
      * Deletes one device
      * 
      *
-     * @param string|null $id
-     * @param string|null $userID
+     * @param string $id
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteDevice(?string $id = null, ?string $userID = null): StreamResponse {
+    public function deleteDevice(string $id, string $userID): StreamResponse {
         $path = '/api/v2/devices';
 
         $queryParams = [];
@@ -204,11 +204,11 @@ trait CommonClient
      * Returns all available devices
      * 
      *
-     * @param string|null $userID
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\ListDevicesResponse>
      * @throws StreamException
      */
-    public function listDevices(?string $userID = null): StreamResponse {
+    public function listDevices(string $userID): StreamResponse {
         $path = '/api/v2/devices';
 
         $queryParams = [];
@@ -405,11 +405,11 @@ trait CommonClient
      * Get an OpenGraph attachment for a link
      * 
      *
-     * @param string|null $url
+     * @param string $url
      * @return StreamResponse<GeneratedModels\GetOGResponse>
      * @throws StreamException
      */
-    public function getOG(?string $url = null): StreamResponse {
+    public function getOG(string $url): StreamResponse {
         $path = '/api/v2/og';
 
         $queryParams = [];
@@ -489,12 +489,12 @@ trait CommonClient
      * Queries polls
      * 
      *
-     * @param string|null $userID
+     * @param string $userID
      * @param GeneratedModels\QueryPollsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryPollsResponse>
      * @throws StreamException
      */
-    public function queryPolls(?string $userID = null, GeneratedModels\QueryPollsRequest $requestData): StreamResponse {
+    public function queryPolls(string $userID, GeneratedModels\QueryPollsRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/query';
 
         $queryParams = [];
@@ -513,11 +513,11 @@ trait CommonClient
      * 
      *
      * @param string $pollID
-     * @param string|null $userID
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deletePoll(string $pollID, ?string $userID = null): StreamResponse {
+    public function deletePoll(string $pollID, string $userID): StreamResponse {
         $path = '/api/v2/polls/{poll_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -533,11 +533,11 @@ trait CommonClient
      * 
      *
      * @param string $pollID
-     * @param string|null $userID
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\PollResponse>
      * @throws StreamException
      */
-    public function getPoll(string $pollID, ?string $userID = null): StreamResponse {
+    public function getPoll(string $pollID, string $userID): StreamResponse {
         $path = '/api/v2/polls/{poll_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -623,11 +623,11 @@ trait CommonClient
      *
      * @param string $pollID
      * @param string $optionID
-     * @param string|null $userID
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deletePollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
+    public function deletePollOption(string $pollID, string $optionID, string $userID): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
@@ -645,11 +645,11 @@ trait CommonClient
      *
      * @param string $pollID
      * @param string $optionID
-     * @param string|null $userID
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
-    public function getPollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
+    public function getPollOption(string $pollID, string $optionID, string $userID): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
@@ -666,12 +666,12 @@ trait CommonClient
      * 
      *
      * @param string $pollID
-     * @param string|null $userID
+     * @param string $userID
      * @param GeneratedModels\QueryPollVotesRequest $requestData
      * @return StreamResponse<GeneratedModels\PollVotesResponse>
      * @throws StreamException
      */
-    public function queryPollVotes(string $pollID, ?string $userID = null, GeneratedModels\QueryPollVotesRequest $requestData): StreamResponse {
+    public function queryPollVotes(string $pollID, string $userID, GeneratedModels\QueryPollVotesRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/votes';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -733,15 +733,15 @@ trait CommonClient
      * Get rate limits usage and quotas
      * 
      *
-     * @param bool|null $serverSide
-     * @param bool|null $android
-     * @param bool|null $ios
-     * @param bool|null $web
-     * @param string|null $endpoints
+     * @param bool $serverSide
+     * @param bool $android
+     * @param bool $ios
+     * @param bool $web
+     * @param string $endpoints
      * @return StreamResponse<GeneratedModels\GetRateLimitsResponse>
      * @throws StreamException
      */
-    public function getRateLimits(?bool $serverSide = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?string $endpoints = null): StreamResponse {
+    public function getRateLimits(bool $serverSide, bool $android, bool $ios, bool $web, string $endpoints): StreamResponse {
         $path = '/api/v2/rate_limits';
 
         $queryParams = [];
@@ -828,11 +828,11 @@ trait CommonClient
      * Deletes previously uploaded file
      * 
      *
-     * @param string|null $url
+     * @param string $url
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteFileGlobal(?string $url = null): StreamResponse {
+    public function deleteFileGlobal(string $url): StreamResponse {
         $path = '/api/v2/uploads/file';
 
         $queryParams = [];
@@ -861,11 +861,11 @@ trait CommonClient
      * Deletes previously uploaded image
      * 
      *
-     * @param string|null $url
+     * @param string $url
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteImageGlobal(?string $url = null): StreamResponse {
+    public function deleteImageGlobal(string $url): StreamResponse {
         $path = '/api/v2/uploads/image';
 
         $queryParams = [];
@@ -894,11 +894,11 @@ trait CommonClient
      * Find and filter users
      * 
      *
-     * @param QueryUsersPayload|null $payload
+     * @param GeneratedModels\QueryUsersPayload $payload
      * @return StreamResponse<GeneratedModels\QueryUsersResponse>
      * @throws StreamException
      */
-    public function queryUsers(?QueryUsersPayload $payload = null): StreamResponse {
+    public function queryUsers(GeneratedModels\QueryUsersPayload $payload): StreamResponse {
         $path = '/api/v2/users';
 
         $queryParams = [];
@@ -950,11 +950,11 @@ trait CommonClient
      * Get list of blocked Users
      * 
      *
-     * @param string|null $userID
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\GetBlockedUsersResponse>
      * @throws StreamException
      */
-    public function getBlockedUsers(?string $userID = null): StreamResponse {
+    public function getBlockedUsers(string $userID): StreamResponse {
         $path = '/api/v2/users/block';
 
         $queryParams = [];
@@ -1020,11 +1020,11 @@ trait CommonClient
      * Retrieves all active live locations for a user
      * 
      *
-     * @param string|null $userID
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\SharedLocationsResponse>
      * @throws StreamException
      */
-    public function getUserLiveLocations(?string $userID = null): StreamResponse {
+    public function getUserLiveLocations(string $userID): StreamResponse {
         $path = '/api/v2/users/live_locations';
 
         $queryParams = [];
@@ -1038,12 +1038,12 @@ trait CommonClient
      * Updates an existing live location with new coordinates or expiration time
      * 
      *
-     * @param string|null $userID
+     * @param string $userID
      * @param GeneratedModels\UpdateLiveLocationRequest $requestData
      * @return StreamResponse<GeneratedModels\SharedLocationResponse>
      * @throws StreamException
      */
-    public function updateLiveLocation(?string $userID = null, GeneratedModels\UpdateLiveLocationRequest $requestData): StreamResponse {
+    public function updateLiveLocation(string $userID, GeneratedModels\UpdateLiveLocationRequest $requestData): StreamResponse {
         $path = '/api/v2/users/live_locations';
 
         $queryParams = [];

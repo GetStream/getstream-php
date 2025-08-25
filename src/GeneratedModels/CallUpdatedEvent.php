@@ -16,7 +16,7 @@ class CallUpdatedEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?CallResponse $call = null,
         public ?array $capabilitiesByRole = null,    // The capabilities by role for this call 
-        public ?string $type = null,    // The type of event: "call.ended" in this case 
+        public ?string $type = null,    // The type of event: "call.updated" in this case 
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

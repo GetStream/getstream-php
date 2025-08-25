@@ -11,11 +11,11 @@ use JsonSerializable;
 class ModerationFlagResponse extends BaseModel
 {
     public function __construct(
-        public ?string $createdAt = null,
+        public ?\DateTime $createdAt = null,
         public ?string $entityID = null,
         public ?string $entityType = null,
         public ?string $type = null,
-        public ?string $updatedAt = null,
+        public ?\DateTime $updatedAt = null,
         public ?string $userID = null,
         public ?array $result = null,
         public ?string $entityCreatorID = null,

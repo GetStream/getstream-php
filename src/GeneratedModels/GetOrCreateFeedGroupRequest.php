@@ -17,6 +17,7 @@ class GetOrCreateFeedGroupRequest extends BaseModel
         public ?AggregationConfig $aggregation = null,
         public ?object $custom = null,    // Custom data for the feed group 
         public ?NotificationConfig $notification = null,
+        public ?PushNotificationConfig $pushNotification = null,
         public ?RankingConfig $ranking = null,
     ) {}
 

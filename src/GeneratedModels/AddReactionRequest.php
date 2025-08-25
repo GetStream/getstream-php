@@ -13,6 +13,7 @@ class AddReactionRequest extends BaseModel
     public function __construct(
         public ?string $type = null,    // Type of reaction 
         public ?bool $createNotificationActivity = null,    // Whether to create a notification activity for this reaction 
+        public ?bool $skipPush = null,
         public ?string $userID = null,
         public ?object $custom = null,    // Custom data for the reaction 
         public ?UserRequest $user = null,
