@@ -110,7 +110,7 @@ class ClientBuilderTest extends TestCase
         unset($_ENV['STREAM_API_SECRET'], $_SERVER['STREAM_API_SECRET']);
         
         $this->expectException(StreamException::class);
-        $this->expectExceptionMessage('API key not provided');
+        $this->expectExceptionMessage('API key not provided. Set STREAM_API_KEY environment variable or call apiKey() method.');
 
         try {
             (new ClientBuilder())
@@ -133,7 +133,7 @@ class ClientBuilderTest extends TestCase
         unset($_ENV['STREAM_API_SECRET'], $_SERVER['STREAM_API_SECRET']);
         
         $this->expectException(StreamException::class);
-        $this->expectExceptionMessage('API secret not provided');
+        $this->expectExceptionMessage('API secret not provided. Set STREAM_API_SECRET environment variable or call apiSecret() method.');
 
         try {
             (new ClientBuilder())
