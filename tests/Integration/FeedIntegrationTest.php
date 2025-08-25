@@ -1653,6 +1653,157 @@ class FeedIntegrationTest extends TestCase
         echo "✅ Completed real-world usage scenario demonstration\n";
     }
 
+    /**
+     * Test 33: Feed Group CRUD Operations
+     */
+    public function test33_FeedGroupCRUD(): void
+    {
+        echo "\n📁 Testing Feed Group CRUD operations...\n";
+
+        $feedGroupId = 'test-feed-group-' . substr(uniqid(), -8);
+
+        // Test 1: List Feed Groups
+        echo "\n📋 Testing list feed groups...\n";
+        // snippet-start: ListFeedGroups
+        $listResponse = $this->feedsV3Client->listFeedGroups();
+        // snippet-end: ListFeedGroups
+        
+        $this->assertResponseSuccess($listResponse, 'list feed groups');
+        echo "✅ Listed " . count($listResponse->getData()->groups ?? []) . " existing feed groups\n";
+
+        // Test 2: Create Feed Group
+        echo "\n➕ Testing create feed group...\n";
+        // snippet-start: CreateFeedGroup
+        $createResponse = $this->feedsV3Client->createFeedGroup(
+            new \GetStream\GeneratedModels\CreateFeedGroupRequest(
+                id: $feedGroupId,
+                defaultVisibility: 'public',
+                activityProcessors: [
+                    ['type' => 'default']
+                ]
+            )
+        );
+        // snippet-end: CreateFeedGroup
+
+        $this->assertResponseSuccess($createResponse, 'create feed group');
+        $this->assertEquals($feedGroupId, $createResponse->getData()->feedGroup->id);
+        echo "✅ Created feed group: $feedGroupId\n";
+
+        // Test 3: Get Feed Group
+        echo "\n🔍 Testing get feed group...\n";
+        // snippet-start: GetFeedGroup
+        $getResponse = $this->feedsV3Client->getFeedGroup('feed_group_id');
+        // snippet-end: GetFeedGroup
+
+        $this->assertResponseSuccess($getResponse, 'get feed group');
+        $this->assertEquals('feed_group_id', $getResponse->getData()->feedGroup->id);
+        echo "✅ Retrieved feed group: $feedGroupId\n";
+
+        // Test 4: Update Feed Group
+        echo "\n✏️ Testing update feed group...\n";
+        // snippet-start: UpdateFeedGroup
+        $updateResponse = $this->feedsV3Client->updateFeedGroup('feed_group_id', new GeneratedModels\UpdateFeedGroupRequest(
+            aggregation: new GeneratedModels\AggregationConfig('default')
+        ));
+        // snippet-end: UpdateFeedGroup
+
+        $this->assertResponseSuccess($updateResponse, 'update feed group');
+        echo "✅ Updated feed group: $feedGroupId\n";
+
+        // Test 5: Get or Create Feed Group (should get existing)
+        echo "\n🔄 Testing get or create feed group (existing)...\n";
+        // snippet-start: GetOrCreateFeedGroupExisting
+        $getOrCreateResponse = $this->feedsV3Client->getOrCreateFeedGroup('feed_group_id', new GeneratedModels\GetOrCreateFeedGroupRequest
+        (
+            defaultVisibility: 'public',
+        ));
+        // snippet-end: GetOrCreateFeedGroupExisting
+
+        $this->assertResponseSuccess($getOrCreateResponse, 'get or create existing feed group');
+        $this->assertFalse($getOrCreateResponse->getData()->wasCreated, 'Should not create new feed group');
+        echo "✅ Got existing feed group: $feedGroupId\n";
+
+        // Test 6: Delete Feed Group
+        echo "\n🗑️ Testing delete feed group...\n";
+        // snippet-start: DeleteFeedGroup
+//        $this->feedsV3Client->deleteFeedGroup('groupID-123', false);
+        // snippet-end: DeleteFeedGroup
+
+        echo "✅ Completed Feed Group CRUD operations\n";
+    }
+
+    /**
+     * Test 34: Feed View CRUD Operations
+     */
+    public function test34_FeedViewCRUD(): void
+    {
+        echo "\n👁️ Testing Feed View CRUD operations...\n";
+
+        $feedViewId = 'test-feed-view-' . substr(uniqid(), -8);
+
+        // Test 1: List Feed Views
+        echo "\n📋 Testing list feed views...\n";
+        // snippet-start: ListFeedViews
+        $listResponse = $this->feedsV3Client->listFeedViews();
+        // snippet-end: ListFeedViews
+
+        $this->assertResponseSuccess($listResponse, 'list feed views');
+        echo "✅ Listed " . count($listResponse->getData()->views ?? []) . " existing feed views\n";
+
+        // Test 2: Create Feed View
+        echo "\n➕ Testing create feed view...\n";
+        // snippet-start: CreateFeedView
+        $createResponse = $this->feedsV3Client->createFeedView(new GeneratedModels\CreateFeedViewRequest(
+            id: $feedViewId,
+        ));
+        // snippet-end: CreateFeedView
+
+        $this->assertResponseSuccess($createResponse, 'create feed view');
+        $this->assertEquals($feedViewId, $createResponse->getData()->feedView->id);
+        echo "✅ Created feed view: $feedViewId\n";
+
+        // Test 3: Get Feed View
+        echo "\n🔍 Testing get feed view...\n";
+        // snippet-start: GetFeedView
+        $getResponse = $this->feedsV3Client->getFeedView('feedViewID');
+        // snippet-end: GetFeedView
+
+        $this->assertResponseSuccess($getResponse, 'get feed view');
+        $this->assertEquals('feedViewID', $getResponse->getData()->feedView->id);
+        echo "✅ Retrieved feed view: $feedViewId\n";
+
+        // Test 4: Update Feed View
+        echo "\n✏️ Testing update feed view...\n";
+        // snippet-start: UpdateFeedView
+        $updateResponse = $this->feedsV3Client->updateFeedView('feedViewID', new GeneratedModels\UpdateFeedViewRequest(
+            aggregation: new GeneratedModels\AggregationConfig('default')
+            )
+        );
+        // snippet-end: UpdateFeedView
+
+        $this->assertResponseSuccess($updateResponse, 'update feed view');
+        echo "✅ Updated feed view: $feedViewId\n";
+
+        // Test 5: Get or Create Feed View (should get existing)
+        echo "\n🔄 Testing get or create feed view (existing)...\n";
+        // snippet-start: GetOrCreateFeedViewExisting
+        $getOrCreateResponse = $this->feedsV3Client->getOrCreateFeedView($feedViewId, new GeneratedModels\GetOrCreateFeedViewRequest(
+            aggregation: new GeneratedModels\AggregationConfig('default'))
+        );
+        // snippet-end: GetOrCreateFeedViewExisting
+
+        $this->assertResponseSuccess($getOrCreateResponse, 'get or create existing feed view');
+        echo "✅ Got existing feed view: $feedViewId\n";
+
+        // Test 6: Delete Feed View
+        echo "\n🗑️ Testing delete feed view...\n";
+        // snippet-start: DeleteFeedView
+//        $this->feedsV3Client->deleteFeedView('viewID-123');
+        // snippet-end: DeleteFeedView
+
+        echo "✅ Completed Feed View CRUD operations\n";
+    }
+
     // =================================================================
     // HELPER METHODS
     // =================================================================
