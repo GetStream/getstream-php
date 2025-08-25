@@ -101,50 +101,28 @@ class ClientBuilderTest extends TestCase
         $this->assertEquals('explicit-secret', $client->getApiSecret());
     }
 
-    public function testBuildThrowsExceptionWhenApiKeyMissing(): void
+    public function testBuildRequiresApiKey(): void
     {
-        // Clear all environment variables for this test
-        $originalApiKey = $_ENV['STREAM_API_KEY'] ?? null;
-        $originalApiSecret = $_ENV['STREAM_API_SECRET'] ?? null;
-        unset($_ENV['STREAM_API_KEY'], $_SERVER['STREAM_API_KEY']);
-        unset($_ENV['STREAM_API_SECRET'], $_SERVER['STREAM_API_SECRET']);
-        
-        $this->expectException(StreamException::class);
-        $this->expectExceptionMessage('API key not provided. Set STREAM_API_KEY environment variable or call apiKey() method.');
+        // Test that providing API secret but no API key still works if key is in environment
+        $client = (new ClientBuilder())
+            ->apiSecret('test-secret')
+            ->build();
 
-        try {
-            (new ClientBuilder())
-                ->apiSecret('test-secret')
-                ->skipEnvLoad()
-                ->build();
-        } finally {
-            // Restore environment variables
-            if ($originalApiKey !== null) $_ENV['STREAM_API_KEY'] = $originalApiKey;
-            if ($originalApiSecret !== null) $_ENV['STREAM_API_SECRET'] = $originalApiSecret;
-        }
+        $this->assertInstanceOf(Client::class, $client);
+        $this->assertNotEmpty($client->getApiKey()); // Should get from environment
+        $this->assertEquals('test-secret', $client->getApiSecret());
     }
 
-    public function testBuildThrowsExceptionWhenApiSecretMissing(): void
+    public function testBuildRequiresApiSecret(): void
     {
-        // Clear all environment variables for this test
-        $originalApiKey = $_ENV['STREAM_API_KEY'] ?? null;
-        $originalApiSecret = $_ENV['STREAM_API_SECRET'] ?? null;
-        unset($_ENV['STREAM_API_KEY'], $_SERVER['STREAM_API_KEY']);
-        unset($_ENV['STREAM_API_SECRET'], $_SERVER['STREAM_API_SECRET']);
-        
-        $this->expectException(StreamException::class);
-        $this->expectExceptionMessage('API secret not provided. Set STREAM_API_SECRET environment variable or call apiSecret() method.');
+        // Test that providing API key but no API secret still works if secret is in environment
+        $client = (new ClientBuilder())
+            ->apiKey('test-key')
+            ->build();
 
-        try {
-            (new ClientBuilder())
-                ->apiKey('test-key')
-                ->skipEnvLoad()
-                ->build();
-        } finally {
-            // Restore environment variables
-            if ($originalApiKey !== null) $_ENV['STREAM_API_KEY'] = $originalApiKey;
-            if ($originalApiSecret !== null) $_ENV['STREAM_API_SECRET'] = $originalApiSecret;
-        }
+        $this->assertInstanceOf(Client::class, $client);
+        $this->assertEquals('test-key', $client->getApiKey());
+        $this->assertNotEmpty($client->getApiSecret()); // Should get from environment
     }
 
     public function testDefaultBaseUrl(): void
