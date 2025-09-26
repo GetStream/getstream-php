@@ -816,11 +816,13 @@ class FeedIntegrationTest extends TestCase
                 'type' => 'post',
                 'text' => 'Batch activity 1',
                 'user_id' => $this->testUserId,
+                'feeds' => [$this->testFeed->getFeedIdentifier()],
             ],
             [
                 'type' => 'post',
                 'text' => 'Batch activity 2',
                 'user_id' => $this->testUserId,
+                'feeds' => [$this->testFeed->getFeedIdentifier()],
             ]
         ];
 

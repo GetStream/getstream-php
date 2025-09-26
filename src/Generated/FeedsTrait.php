@@ -12,7 +12,7 @@ use GetStream\GeneratedModels;
  * This trait contains auto-generated methods from the OpenAPI specification.
  * Include this trait in your Client class to add these methods.
  */
-trait FeedsClient
+trait FeedsTrait
 {
     /**
      * Create a new activity or update an existing one
