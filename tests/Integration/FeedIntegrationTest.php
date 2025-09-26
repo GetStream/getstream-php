@@ -1657,7 +1657,7 @@ class FeedIntegrationTest extends TestCase
                 id: $feedGroupId,
                 defaultVisibility: 'public',
                 activityProcessors: [
-                    ['type' => 'default']
+                    ['type' => 'dummy']
                 ]
             )
         );
@@ -1719,7 +1719,7 @@ class FeedIntegrationTest extends TestCase
                 id: $group,
                 defaultVisibility: 'public',
                 activityProcessors: [
-                    ['type' => 'default']
+                    ['type' => 'dummy']
                 ],
                 aggregation: new GeneratedModels\AggregationConfig('{{ type }}-{{ time.strftime("%Y-%m-%d") }}')
             )
@@ -1736,7 +1736,7 @@ class FeedIntegrationTest extends TestCase
                 id: $ranked_group,
                 defaultVisibility: 'public',
                 ranking: new GeneratedModels\RankingConfig(
-                    type: 'default',
+                    type: 'recency',
                     score: 'decay_linear(time) * popularity'
                 )
             )
