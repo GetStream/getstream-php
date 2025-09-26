@@ -11,9 +11,11 @@ use JsonSerializable;
 class TranscriptionSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null,
         public ?string $closedCaptionMode = null,
         public ?string $language = null,
+        public ?string $mode = null,
+        public ?SpeechSegmentConfig $speechSegmentConfig = null,
+        public ?TranslationSettings $translation = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

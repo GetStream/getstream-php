@@ -9,6 +9,7 @@ use GetStream\Http\HttpClientInterface;
 use GetStream\Http\GuzzleHttpClient;
 use GetStream\Auth\JWTGenerator;
 use GetStream\Generated\CommonClient;
+use GetStream\Generated\ModerationClient;
 
 /**
  * Main GetStream client for interacting with the API

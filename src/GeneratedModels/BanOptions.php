@@ -11,6 +11,7 @@ use JsonSerializable;
 class BanOptions extends BaseModel
 {
     public function __construct(
+        public ?string $deleteMessages = null,
         public ?int $duration = null,
         public ?bool $ipBan = null,
         public ?string $reason = null,

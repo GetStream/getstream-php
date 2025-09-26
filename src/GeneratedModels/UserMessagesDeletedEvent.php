@@ -17,6 +17,7 @@ class UserMessagesDeletedEvent extends BaseModel
         public ?string $type = null,    // The type of event: "user.messages.deleted" in this case 
         public ?string $channelID = null,    // The ID of the channel where the target user's messages were deleted 
         public ?int $channelMemberCount = null,
+        public ?int $channelMessageCount = null,
         public ?string $channelType = null,    // The type of the channel where the target user's messages were deleted 
         public ?string $cid = null,    // The CID of the channel where the target user's messages were deleted 
         public ?bool $hardDelete = null,    // Whether Messages were hard deleted 

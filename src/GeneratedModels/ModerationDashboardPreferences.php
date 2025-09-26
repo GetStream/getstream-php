@@ -11,6 +11,7 @@ use JsonSerializable;
 class ModerationDashboardPreferences extends BaseModel
 {
     public function __construct(
+        public ?bool $disableFlaggingReviewedEntity = null,
         public ?bool $flagUserOnFlaggedContent = null,
         public ?bool $mediaQueueBlurEnabled = null,
     ) {}

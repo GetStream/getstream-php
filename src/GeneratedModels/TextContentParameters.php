@@ -15,6 +15,7 @@ class TextContentParameters extends BaseModel
         public ?string $severity = null,
         public ?array $blocklistMatch = null,
         public ?array $harmLabels = null,
+        public ?array $llmHarmLabels = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

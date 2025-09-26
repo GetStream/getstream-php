@@ -13,9 +13,7 @@ class RuleBuilderAction extends BaseModel
     public function __construct(
         public ?string $type = null,
         public ?BanOptions $banOptions = null,
-        public ?FlagContentOptions $flagContentOptions = null,
         public ?FlagUserOptions $flagUserOptions = null,
-        public ?BlockContentOptions $removeContentOptions = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

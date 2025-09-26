@@ -1254,8 +1254,8 @@ class FeedIntegrationTest extends TestCase
             $moderationResponse = $this->feedsV3Client->activityFeedback(
                 $activityId,
                 new GeneratedModels\ActivityFeedbackRequest(
-                    report: true,
                     reason: 'inappropriate_content',
+                    report: true,
                     userID: $this->testUserId2 // Different user reporting
                 )
             );
@@ -1275,7 +1275,7 @@ class FeedIntegrationTest extends TestCase
     public function test27_DeviceManagement(): void
     {
         //skip this test
-        $this->markTestSkipped("fix me")
+        $this->markTestSkipped("fix me");
         echo "\n📱 Testing device management...\n";
 
         $deviceToken = 'test-device-token-' . uniqid();

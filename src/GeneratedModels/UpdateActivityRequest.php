@@ -17,6 +17,7 @@ class UpdateActivityRequest extends BaseModel
         public ?string $userID = null,
         public ?string $visibility = null,    // Visibility setting for the activity 
         public ?array $attachments = null,    // List of attachments for the activity 
+        public ?array $feeds = null,    // List of feeds the activity is present in 
         public ?array $filterTags = null,    // Tags used for filtering the activity 
         public ?array $interestTags = null,    // Tags indicating interest categories 
         public ?object $custom = null,    // Custom data for the activity 

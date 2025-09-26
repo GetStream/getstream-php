@@ -11,12 +11,10 @@ use JsonSerializable;
 class RuleBuilderRule extends BaseModel
 {
     public function __construct(
-        public ?bool $enabled = null,
-        public ?string $id = null,
-        public ?string $name = null,
         public ?string $ruleType = null,
         public ?RuleBuilderAction $action = null,
         public ?string $cooldownPeriod = null,
+        public ?string $id = null,
         public ?string $logic = null,
         public ?array $conditions = null,
         public ?array $groups = null,

@@ -44,7 +44,7 @@ class ActivityResponse extends BaseModel
         public ?FeedResponse $currentFeed = null,
         public ?ActivityLocation $location = null,
         public ?ModerationV2Response $moderation = null,
-        public ?object $notificationContext = null,    // Notification context data for the activity (if this is a reaction, comment, follow, etc.) 
+        public ?NotificationContext $notificationContext = null,
         public ?ActivityResponse $parent = null,
         public ?PollResponseData $poll = null,
     ) {}

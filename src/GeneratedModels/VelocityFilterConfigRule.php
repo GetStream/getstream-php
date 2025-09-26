@@ -21,10 +21,10 @@ class VelocityFilterConfigRule extends BaseModel
         public ?bool $ipBan = null,
         public ?int $probationPeriod = null,
         public ?bool $shadowBan = null,
+        public ?int $slowSpamBanDuration = null,
         public ?int $slowSpamThreshold = null,
         public ?int $slowSpamTtl = null,
         public ?bool $urlOnly = null,
-        public ?int $slowSpamBanDuration = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

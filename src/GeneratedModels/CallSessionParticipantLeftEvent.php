@@ -17,6 +17,7 @@ class CallSessionParticipantLeftEvent extends BaseModel
         public ?string $sessionID = null,    // Call session ID 
         public ?CallParticipantResponse $participant = null,
         public ?string $type = null,    // The type of event: "call.session_participant_left" in this case 
+        public ?string $reason = null,    // The reason why the participant left the session 
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

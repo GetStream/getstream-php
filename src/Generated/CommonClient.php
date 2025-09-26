@@ -683,6 +683,21 @@ trait CommonClient
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PollVotesResponse::class);
     }
     /**
+     * Upserts the push preferences for a user and or channel member. Set to all, mentions or none
+     * 
+     *
+     * @param GeneratedModels\UpsertPushPreferencesRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertPushPreferencesResponse>
+     * @throws StreamException
+     */
+    public function updatePushNotificationPreferences(GeneratedModels\UpsertPushPreferencesRequest $requestData): StreamResponse {
+        $path = '/api/v2/push_preferences';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertPushPreferencesResponse::class);
+    }
+    /**
      * List details of all push providers.
      * 
      *
@@ -728,6 +743,43 @@ trait CommonClient
         $queryParams = [];
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
+     * Retrieve push notification templates for Chat.
+     * 
+     *
+     * @param string $pushProviderType
+     * @param string $pushProviderName
+     * @return StreamResponse<GeneratedModels\GetPushTemplatesResponse>
+     * @throws StreamException
+     */
+    public function getPushTemplates(string $pushProviderType, string $pushProviderName): StreamResponse {
+        $path = '/api/v2/push_templates';
+
+        $queryParams = [];
+        if ($pushProviderType !== null) {
+            $queryParams['push_provider_type'] = $pushProviderType;
+        }
+        if ($pushProviderName !== null) {
+            $queryParams['push_provider_name'] = $pushProviderName;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetPushTemplatesResponse::class);
+    }
+    /**
+     * Create or update a push notification template for a specific event type and push provider
+     * 
+     *
+     * @param GeneratedModels\UpsertPushTemplateRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertPushTemplateResponse>
+     * @throws StreamException
+     */
+    public function upsertPushTemplate(GeneratedModels\UpsertPushTemplateRequest $requestData): StreamResponse {
+        $path = '/api/v2/push_templates';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertPushTemplateResponse::class);
     }
     /**
      * Get rate limits usage and quotas

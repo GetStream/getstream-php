@@ -14,6 +14,8 @@ class TranscriptionSettings extends BaseModel
         public ?string $closedCaptionMode = null,
         public ?string $language = null,    // The language used in this call as a two letter code 
         public ?string $mode = null,
+        public ?SpeechSegmentConfig $speechSegmentConfig = null,
+        public ?TranslationSettings $translation = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

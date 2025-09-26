@@ -48,6 +48,7 @@ class SearchResultMessage extends BaseModel
         public ?DraftResponse $draft = null,
         public ?array $i18n = null,
         public ?array $imageLabels = null,
+        public ?ChannelMemberResponse $member = null,
         public ?ModerationV2Response $moderation = null,
         public ?UserResponse $pinnedBy = null,
         public ?PollResponseData $poll = null,

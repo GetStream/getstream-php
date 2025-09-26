@@ -16,6 +16,7 @@ class GetCallReportResponse extends BaseModel
         public ?ReportResponse $report = null,
         public ?array $videoReactions = null,
         public ?ChatActivityStatsResponse $chatActivity = null,
+        public ?CallSessionResponse $session = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

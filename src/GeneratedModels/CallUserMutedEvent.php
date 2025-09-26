@@ -14,6 +14,7 @@ class CallUserMutedEvent extends BaseModel
         public ?string $callCid = null,
         public ?\DateTime $createdAt = null,
         public ?string $fromUserID = null,
+        public ?string $reason = null,
         public ?array $mutedUserIds = null,
         public ?string $type = null,    // The type of event: "call.user_muted" in this case 
     ) {}
