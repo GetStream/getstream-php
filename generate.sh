@@ -27,7 +27,7 @@ echo "Applying PHP-specific fixes..."
 sed -i '' '/public ?string $role = null,/{N;s/public ?string $role = null,\n        public ?string $role = null,/public ?string $role = null,/;}' src/GeneratedModels/CallParticipant.php
 
 # Fix queryUsers method to use proper namespace and required parameter
-sed -i '' 's/QueryUsersPayload \$payload/GeneratedModels\\QueryUsersPayload \$payload/' src/Generated/CommonClient.php
+sed -i '' 's/QueryUsersPayload \$payload/GeneratedModels\\QueryUsersPayload \$payload/' src/Generated/CommonTrait.php
 
 # Run PHP CS Fixer to ensure code style compliance
 if [ -f ".php-cs-fixer.php" ]; then
