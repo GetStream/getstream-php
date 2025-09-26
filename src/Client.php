@@ -8,15 +8,14 @@ use GetStream\Exceptions\StreamException;
 use GetStream\Http\HttpClientInterface;
 use GetStream\Http\GuzzleHttpClient;
 use GetStream\Auth\JWTGenerator;
-use GetStream\Generated\CommonClient;
-use GetStream\Generated\ModerationClient;
+use GetStream\Generated\CommonTrait;
 
 /**
  * Main GetStream client for interacting with the API
  */
 class Client
 {
-    use CommonClient;
+    use CommonTrait;
     private string $apiKey;
     private string $apiSecret;
     private string $baseUrl;
