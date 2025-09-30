@@ -1670,17 +1670,17 @@ class FeedIntegrationTest extends TestCase
         // Test 3: Get Feed Group
         echo "\n🔍 Testing get feed group...\n";
         // snippet-start: GetFeedGroup
-        $getResponse = $this->feedsV3Client->getFeedGroup('feed_group_id');
+        $getResponse = $this->feedsV3Client->getFeedGroup('foryou');
         // snippet-end: GetFeedGroup
 
         $this->assertResponseSuccess($getResponse, 'get feed group');
-        $this->assertEquals('feed_group_id', $getResponse->getData()->feedGroup->id);
+        $this->assertEquals('foryou', $getResponse->getData()->feedGroup->id);
         echo "✅ Retrieved feed group: $feedGroupId\n";
 
         // Test 4: Update Feed Group
         echo "\n✏️ Testing update feed group...\n";
         // snippet-start: UpdateFeedGroup
-        $updateResponse = $this->feedsV3Client->updateFeedGroup('feed_group_id', new GeneratedModels\UpdateFeedGroupRequest(
+        $updateResponse = $this->feedsV3Client->updateFeedGroup('foryou', new GeneratedModels\UpdateFeedGroupRequest(
             aggregation: new GeneratedModels\AggregationConfig('default')
         ));
         // snippet-end: UpdateFeedGroup
@@ -1691,7 +1691,7 @@ class FeedIntegrationTest extends TestCase
         // Test 5: Get or Create Feed Group (should get existing)
         echo "\n🔄 Testing get or create feed group (existing)...\n";
         // snippet-start: GetOrCreateFeedGroupExisting
-        $getOrCreateResponse = $this->feedsV3Client->getOrCreateFeedGroup('feed_group_id', new GeneratedModels\GetOrCreateFeedGroupRequest
+        $getOrCreateResponse = $this->feedsV3Client->getOrCreateFeedGroup('foryou', new GeneratedModels\GetOrCreateFeedGroupRequest
         (
             defaultVisibility: 'public',
         ));
@@ -1749,6 +1749,8 @@ class FeedIntegrationTest extends TestCase
      */
     public function test34_FeedViewCRUD(): void
     {
+        $this->markTestSkipped('Backend issue FEEDS-799');
+
         echo "\n👁️ Testing Feed View CRUD operations...\n";
 
         $feedViewId = 'test-feed-view-' . substr(uniqid(), -8);
