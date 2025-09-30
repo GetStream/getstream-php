@@ -16,6 +16,7 @@ class ConfigResponse extends BaseModel
         public ?string $key = null,    // Unique identifier for the moderation configuration 
         public ?string $team = null,    // Team associated with the configuration 
         public ?\DateTime $updatedAt = null,    // When the configuration was last updated 
+        public ?array $supportedVideoCallHarmTypes = null,
         public ?AIImageConfig $aiImageConfig = null,
         public ?AITextConfig $aiTextConfig = null,
         public ?AIVideoConfig $aiVideoConfig = null,
@@ -24,7 +25,6 @@ class ConfigResponse extends BaseModel
         public ?AutomodToxicityConfig $automodToxicityConfig = null,
         public ?BlockListConfig $blockListConfig = null,
         public ?LLMConfig $llmConfig = null,
-        public ?RuleBuilderConfig $ruleBuilderConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
     ) {}

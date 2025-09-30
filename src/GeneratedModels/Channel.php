@@ -35,6 +35,7 @@ class Channel extends BaseModel
         public ?ChannelConfig $config = null,
         public ?ConfigOverrides $configOverrides = null,
         public ?User $createdBy = null,
+        public ?array $membersLookup = null,
         public ?User $truncatedBy = null,
     ) {}
 

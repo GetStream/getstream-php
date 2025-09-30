@@ -11,8 +11,8 @@ use JsonSerializable;
 class BodyguardRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $label = null,
+        public ?string $action = null,
         public ?array $severityRules = null,
     ) {}
 

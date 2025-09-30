@@ -816,11 +816,13 @@ class FeedIntegrationTest extends TestCase
                 'type' => 'post',
                 'text' => 'Batch activity 1',
                 'user_id' => $this->testUserId,
+                'feeds' => [$this->testFeed->getFeedIdentifier()],
             ],
             [
                 'type' => 'post',
                 'text' => 'Batch activity 2',
                 'user_id' => $this->testUserId,
+                'feeds' => [$this->testFeed->getFeedIdentifier()],
             ]
         ];
 
@@ -1254,8 +1256,8 @@ class FeedIntegrationTest extends TestCase
             $moderationResponse = $this->feedsV3Client->activityFeedback(
                 $activityId,
                 new GeneratedModels\ActivityFeedbackRequest(
-                    report: true,
                     reason: 'inappropriate_content',
+                    report: true,
                     userID: $this->testUserId2 // Different user reporting
                 )
             );
@@ -1275,7 +1277,7 @@ class FeedIntegrationTest extends TestCase
     public function test27_DeviceManagement(): void
     {
         //skip this test
-        $this->markTestSkipped("fix me")
+        $this->markTestSkipped("fix me");
         echo "\n📱 Testing device management...\n";
 
         $deviceToken = 'test-device-token-' . uniqid();
@@ -1655,7 +1657,7 @@ class FeedIntegrationTest extends TestCase
                 id: $feedGroupId,
                 defaultVisibility: 'public',
                 activityProcessors: [
-                    ['type' => 'default']
+                    ['type' => 'dummy']
                 ]
             )
         );
@@ -1668,17 +1670,17 @@ class FeedIntegrationTest extends TestCase
         // Test 3: Get Feed Group
         echo "\n🔍 Testing get feed group...\n";
         // snippet-start: GetFeedGroup
-        $getResponse = $this->feedsV3Client->getFeedGroup('feed_group_id');
+        $getResponse = $this->feedsV3Client->getFeedGroup('foryou');
         // snippet-end: GetFeedGroup
 
         $this->assertResponseSuccess($getResponse, 'get feed group');
-        $this->assertEquals('feed_group_id', $getResponse->getData()->feedGroup->id);
+        $this->assertEquals('foryou', $getResponse->getData()->feedGroup->id);
         echo "✅ Retrieved feed group: $feedGroupId\n";
 
         // Test 4: Update Feed Group
         echo "\n✏️ Testing update feed group...\n";
         // snippet-start: UpdateFeedGroup
-        $updateResponse = $this->feedsV3Client->updateFeedGroup('feed_group_id', new GeneratedModels\UpdateFeedGroupRequest(
+        $updateResponse = $this->feedsV3Client->updateFeedGroup('foryou', new GeneratedModels\UpdateFeedGroupRequest(
             aggregation: new GeneratedModels\AggregationConfig('default')
         ));
         // snippet-end: UpdateFeedGroup
@@ -1689,7 +1691,7 @@ class FeedIntegrationTest extends TestCase
         // Test 5: Get or Create Feed Group (should get existing)
         echo "\n🔄 Testing get or create feed group (existing)...\n";
         // snippet-start: GetOrCreateFeedGroupExisting
-        $getOrCreateResponse = $this->feedsV3Client->getOrCreateFeedGroup('feed_group_id', new GeneratedModels\GetOrCreateFeedGroupRequest
+        $getOrCreateResponse = $this->feedsV3Client->getOrCreateFeedGroup('foryou', new GeneratedModels\GetOrCreateFeedGroupRequest
         (
             defaultVisibility: 'public',
         ));
@@ -1717,7 +1719,7 @@ class FeedIntegrationTest extends TestCase
                 id: $group,
                 defaultVisibility: 'public',
                 activityProcessors: [
-                    ['type' => 'default']
+                    ['type' => 'dummy']
                 ],
                 aggregation: new GeneratedModels\AggregationConfig('{{ type }}-{{ time.strftime("%Y-%m-%d") }}')
             )
@@ -1734,7 +1736,7 @@ class FeedIntegrationTest extends TestCase
                 id: $ranked_group,
                 defaultVisibility: 'public',
                 ranking: new GeneratedModels\RankingConfig(
-                    type: 'default',
+                    type: 'recency',
                     score: 'decay_linear(time) * popularity'
                 )
             )
@@ -1747,6 +1749,8 @@ class FeedIntegrationTest extends TestCase
      */
     public function test34_FeedViewCRUD(): void
     {
+        $this->markTestSkipped('Backend issue FEEDS-799');
+
         echo "\n👁️ Testing Feed View CRUD operations...\n";
 
         $feedViewId = 'test-feed-view-' . substr(uniqid(), -8);

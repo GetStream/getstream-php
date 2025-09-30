@@ -17,6 +17,7 @@ class MessageDeletedEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?bool $hardDelete = null,
         public ?string $type = null,
+        public ?bool $deletedForMe = null,
         public ?string $team = null,
         public ?array $threadParticipants = null,
         public ?Message $message = null,

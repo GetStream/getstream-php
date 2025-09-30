@@ -11,11 +11,11 @@ use JsonSerializable;
 class AITextConfig extends BaseModel
 {
     public function __construct(
+        public ?bool $async = null,
         public ?bool $enabled = null,
         public ?string $profile = null,
         public ?array $rules = null,
         public ?array $severityRules = null,
-        public ?bool $async = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

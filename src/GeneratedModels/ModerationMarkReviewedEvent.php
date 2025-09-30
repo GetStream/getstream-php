@@ -6,16 +6,17 @@ namespace GetStream\GeneratedModels;
 
 use JsonSerializable;
 /**
- * 
+ * This event is sent when a moderation item is marked as reviewed
  */
 class ModerationMarkReviewedEvent extends BaseModel
 {
     public function __construct(
         public ?\DateTime $createdAt = null,
+        public ?object $custom = null,
+        public ?ReviewQueueItemResponse $item = null,
         public ?string $type = null,
-        public ?ReviewQueueItem $item = null,
-        public ?Message $message = null,
-        public ?User $user = null,
+        public ?\DateTime $receivedAt = null,
+        public ?MessageResponse $message = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

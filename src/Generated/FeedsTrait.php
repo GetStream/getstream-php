@@ -12,7 +12,7 @@ use GetStream\GeneratedModels;
  * This trait contains auto-generated methods from the OpenAPI specification.
  * Include this trait in your Client class to add these methods.
  */
-trait FeedsClient
+trait FeedsTrait
 {
     /**
      * Create a new activity or update an existing one
@@ -1058,6 +1058,36 @@ trait FeedsClient
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedViewResponse::class);
     }
     /**
+     * Gets all available feed visibility configurations and their permissions
+     * 
+     *
+     * @return StreamResponse<GeneratedModels\ListFeedVisibilitiesResponse>
+     * @throws StreamException
+     */
+    public function listFeedVisibilities(): StreamResponse {
+        $path = '/api/v2/feeds/feed_visibilities';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListFeedVisibilitiesResponse::class);
+    }
+    /**
+     * Gets feed visibility configuration and permissions
+     * 
+     *
+     * @param string $name
+     * @return StreamResponse<GeneratedModels\GetFeedVisibilityResponse>
+     * @throws StreamException
+     */
+    public function getFeedVisibility(string $name): StreamResponse {
+        $path = '/api/v2/feeds/feed_visibilities/{name}';
+        $path = str_replace('{name}', (string) $name, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFeedVisibilityResponse::class);
+    }
+    /**
      * Create multiple feeds at once for a given feed group
      * 
      *
@@ -1088,7 +1118,7 @@ trait FeedsClient
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsResponse::class);
     }
     /**
-     * Updates a follow's custom data, push preference, and follower role. Source owner can update custom data and push preference. Target owner can update follower role.
+     * Updates a follow's custom data, push preference, and follower role. Source owner can update custom data and push preference. Follower role can only be updated via server-side requests.
      * 
      *
      * @param GeneratedModels\UpdateFollowRequest $requestData

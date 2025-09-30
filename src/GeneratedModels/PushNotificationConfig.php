@@ -11,8 +11,8 @@ use JsonSerializable;
 class PushNotificationConfig extends BaseModel
 {
     public function __construct(
-        public ?bool $enabled = null,
-        public ?array $activityTypes = null,
+        public ?bool $enablePush = null,    // Whether push notifications are enabled for this feed group 
+        public ?array $pushTypes = null,    // List of notification types that should trigger push notifications (e.g., follow, comment, reaction, comment_reaction, mention) 
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

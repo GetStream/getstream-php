@@ -48,6 +48,7 @@ class MessageWithChannelResponse extends BaseModel
         public ?DraftResponse $draft = null,
         public ?array $i18n = null,    // Object with translations. Key `language` contains the original language key. Other keys contain translations 
         public ?array $imageLabels = null,    // Contains image moderation information 
+        public ?ChannelMemberResponse $member = null,
         public ?ModerationV2Response $moderation = null,
         public ?UserResponse $pinnedBy = null,
         public ?PollResponseData $poll = null,

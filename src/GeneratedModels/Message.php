@@ -47,6 +47,7 @@ class Message extends BaseModel
         public ?array $threadParticipants = null,
         public ?array $i18n = null,
         public ?array $imageLabels = null,
+        public ?ChannelMember $member = null,
         public ?ModerationV2Response $moderation = null,
         public ?User $pinnedBy = null,
         public ?Poll $poll = null,

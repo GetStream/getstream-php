@@ -19,6 +19,7 @@ class CallResponse extends BaseModel
         public ?string $id = null,    // Call ID 
         public ?bool $recording = null,
         public ?bool $transcribing = null,
+        public ?bool $translating = null,
         public ?string $type = null,    // The type of call 
         public ?\DateTime $updatedAt = null,    // Date/time of the last update 
         public ?array $blockedUserIds = null,

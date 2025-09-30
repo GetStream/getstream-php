@@ -11,9 +11,9 @@ use JsonSerializable;
 class AutomodPlatformCircumventionConfig extends BaseModel
 {
     public function __construct(
+        public ?bool $async = null,
         public ?bool $enabled = null,
         public ?array $rules = null,
-        public ?bool $async = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

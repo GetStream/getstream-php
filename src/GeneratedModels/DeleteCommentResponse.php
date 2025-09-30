@@ -12,6 +12,8 @@ class DeleteCommentResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
+        public ?ActivityResponse $activity = null,
+        public ?CommentResponse $comment = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

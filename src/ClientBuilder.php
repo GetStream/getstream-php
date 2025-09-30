@@ -104,6 +104,15 @@ class ClientBuilder
         return new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
     }
 
+/**
+     * @throws StreamException
+     */
+    public function buildModerationClient(): ModerationClient{
+        $this->loadCreds();
+        return new ModerationClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+    }
+
+
     public function loadCreds(): void
     {
         // Load environment variables if enabled

@@ -17,6 +17,7 @@ class AggregatedActivityResponse extends BaseModel
         public ?int $score = null,    // Ranking score for this aggregation 
         public ?\DateTime $updatedAt = null,    // When the aggregation was last updated 
         public ?int $userCount = null,    // Number of unique users in this aggregation 
+        public ?bool $userCountTruncated = null,    // Whether this activity group has been truncated due to exceeding the group size limit 
         public ?array $activities = null,    // List of activities in this aggregation 
     ) {}
 

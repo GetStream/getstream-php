@@ -18,7 +18,7 @@ class PushPreferenceInput extends BaseModel
         public ?string $feedsLevel = null,    // Set the level of feeds push notifications for the user. One of all, none, default 
         public ?bool $removeDisable = null,    // Remove the disabled until time. (IE stop snoozing notifications) 
         public ?string $userID = null,    // The user id for which to set the push preferences. Required when using server side auths, defaults to current user with client side auth. 
-        public ?FeedsEventPreferencesInput $feedsEvents = null,
+        public ?FeedsPreferences $feedsPreferences = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

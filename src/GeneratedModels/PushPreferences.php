@@ -15,7 +15,7 @@ class PushPreferences extends BaseModel
         public ?string $chatLevel = null,
         public ?\DateTime $disabledUntil = null,
         public ?string $feedsLevel = null,
-        public ?FeedsEventPreferences $feedsEvents = null,
+        public ?FeedsPreferences $feedsPreferences = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

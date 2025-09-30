@@ -11,9 +11,10 @@ use JsonSerializable;
 class LLMConfig extends BaseModel
 {
     public function __construct(
+        public ?string $appContext = null,
+        public ?bool $async = null,
         public ?bool $enabled = null,
         public ?array $rules = null,
-        public ?bool $async = null,
         public ?array $severityDescriptions = null,
     ) {}
 

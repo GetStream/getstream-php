@@ -19,6 +19,7 @@ class MessageReadEvent extends BaseModel
         public ?\DateTime $channelLastMessageAt = null,
         public ?string $lastReadMessageID = null,
         public ?string $team = null,
+        public ?ChannelResponse $channel = null,
         public ?ThreadResponse $thread = null,
         public ?UserResponseCommonFields $user = null,
     ) {}
