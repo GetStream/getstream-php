@@ -32,7 +32,7 @@ class UpdateAppRequest extends BaseModel
         public ?string $permissionVersion = null,
         public ?int $remindersInterval = null,
         public ?int $remindersMaxMembers = null,
-        public ?\DateTime $revokeTokensIssuedBefore = null,
+        public ?string $revokeTokensIssuedBefore = null,
         public ?string $snsKey = null,
         public ?string $snsSecret = null,
         public ?string $snsTopicArn = null,

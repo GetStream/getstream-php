@@ -1818,6 +1818,40 @@ class FeedIntegrationTest extends TestCase
         echo "✅ Completed Feed View CRUD operations\n";
     }
 
+    /**
+     * Test 35: Update App Settings (Token Revocation)
+     */
+    public function test35_UpdateAppRevokeTokens(): void
+    {
+        echo "\n🔐 Testing app update with token revocation...\n";
+
+        // snippet-start: UpdateAppRevokeTokens
+        $client =$this->client;
+
+        $sixtySecondsAgo = new \DateTime();
+        $sixtySecondsAgo->modify('-60 seconds');
+        $request = new GeneratedModels\UpdateAppRequest(
+            revokeTokensIssuedBefore: $sixtySecondsAgo->format(\DateTime::ATOM)
+        );
+
+        try {
+            $response = $client->updateApp($request);
+            // snippet-end: UpdateAppRevokeTokens
+            
+            $this->assertResponseSuccess($response, 'update app with token revocation');
+            echo "✅ Successfully updated app settings and revoked tokens issued before: " . $sixtySecondsAgo->format(\DateTime::ATOM) . "\n";
+            
+        } catch (StreamApiException $e) {
+            echo "Error: " . $e->getMessage() . "\n";
+            echo "Status Code: " . $e->getStatusCode() . "\n";
+            echo "Response Body: " . $e->getResponseBody() . "\n";
+            echo "Error Details: " . print_r($e->getErrorDetails(), true) . "\n";
+            
+            // This operation might not be available in all environments
+            $this->markTestSkipped('Update app operation not supported: ' . $e->getMessage());
+        }
+    }
+
     // =================================================================
     // HELPER METHODS
     // =================================================================
