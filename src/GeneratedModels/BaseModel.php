@@ -189,7 +189,9 @@ abstract class BaseModel implements JsonSerializable
      */
     public function toArray(): array
     {
-        return $this->jsonSerialize();
+        $result = $this->jsonSerialize();
+        // If jsonSerialize returns an empty object (for empty models), convert to empty array
+        return is_array($result) ? $result : [];
     }
     
     /**
