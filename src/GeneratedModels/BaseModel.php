@@ -125,14 +125,14 @@ abstract class BaseModel implements JsonSerializable
     /**
      * Automatic JSON serialization using reflection and property types
      */
-    public function jsonSerialize(): array
+    public function jsonSerialize(): array|object
     {
         $result = [];
         $reflection = new \ReflectionClass($this);
         $constructor = $reflection->getConstructor();
         
         if (!$constructor) {
-            return [];
+            return (object)[];
         }
 
         foreach ($constructor->getParameters() as $param) {
@@ -147,7 +147,8 @@ abstract class BaseModel implements JsonSerializable
             $result[$jsonKey] = $this->serializeValue($value);
         }
 
-        return $result;
+        // Force empty arrays to be encoded as objects {} instead of arrays []
+        return empty($result) ? (object)[] : $result;
     }
 
     /**
