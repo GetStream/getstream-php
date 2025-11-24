@@ -13,6 +13,7 @@ class ChannelMemberLookup extends BaseModel
     public function __construct(
         public ?bool $archived = null,
         public ?bool $banned = null,
+        public ?bool $blocked = null,
         public ?bool $hidden = null,
         public ?bool $pinned = null,
         public ?\DateTime $archivedAt = null,

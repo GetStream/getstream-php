@@ -26,8 +26,10 @@ class FeedResponse extends BaseModel
         public ?\DateTime $deletedAt = null,    // When the feed was deleted 
         public ?string $visibility = null,    // Visibility setting for the feed 
         public ?array $filterTags = null,    // Tags used for filtering feeds 
+        public ?array $ownCapabilities = null,    // Capabilities the current user has for this feed 
         public ?array $ownFollows = null,    // Follow relationships where the current user's feeds are following this feed 
         public ?object $custom = null,    // Custom data for the feed 
+        public ?FeedMemberResponse $ownMembership = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

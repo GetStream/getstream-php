@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Live integration tests - these make real API calls
- * Run with: ./vendor/bin/phpunit tests/Integration/LiveIntegrationTest.php --testdox
+ * Run with: ./vendor/bin/phpunit tests/Integration/LiveIntegrationTest.php --testdox.
  */
 class LiveIntegrationTest extends TestCase
 {
@@ -23,33 +23,38 @@ class LiveIntegrationTest extends TestCase
         $this->testUserId = 'live-test-' . uniqid();
     }
 
-    public function testTokenGenerationWorks(): void
+    /**
+     * @test
+     */
+    public function tokenGenerationWorks(): void
     {
         // This doesn't make API calls, just tests token generation
         $token = $this->client->createUserToken($this->testUserId);
-        
-        $this->assertIsString($token);
-        $this->assertNotEmpty($token);
-        
+
+        self::assertIsString($token);
+        self::assertNotEmpty($token);
+
         // Verify JWT structure
         $parts = explode('.', $token);
-        $this->assertCount(3, $parts);
-        
-        $payload = json_decode(base64_decode($parts[1]), true);
-        $this->assertEquals($this->testUserId, $payload['user_id']);
-        
+        self::assertCount(3, $parts);
+
+        $payload = json_decode(base64_decode($parts[1], true), true);
+        self::assertSame($this->testUserId, $payload['user_id']);
+
         echo "✅ Token generated for user: {$this->testUserId}\n";
     }
 
     /**
      * @group live-api
+     *
+     * @test
      */
-    public function testAddActivityToRealAPI(): void
+    public function addActivityToRealAPI(): void
     {
-        $this->markTestIncomplete('Enable this test only when you want to make real API calls');
-        
+        self::markTestIncomplete('Enable this test only when you want to make real API calls');
+
         $feed = $this->client->feed('user', $this->testUserId);
-        
+
         $activity = [
             'actor' => 'user:' . $this->testUserId,
             'verb' => 'post',
@@ -60,42 +65,41 @@ class LiveIntegrationTest extends TestCase
 
         try {
             $response = $feed->addActivity($activity);
-            
-            $this->assertTrue($response->isSuccessful());
+
+            self::assertTrue($response->isSuccessful());
             $data = $response->getData();
-            $this->assertArrayHasKey('id', $data);
-            
+            self::assertArrayHasKey('id', $data);
+
             echo "✅ Activity added with ID: {$data['id']}\n";
-            
         } catch (StreamApiException $e) {
             echo "❌ API Error: {$e->getMessage()} (Status: {$e->getStatusCode()})\n";
             echo "Response: {$e->getResponseBody()}\n";
-            $this->fail("API call failed");
+            self::fail('API call failed');
         }
     }
 
     /**
      * @group live-api
+     *
+     * @test
      */
-    public function testGetActivitiesFromRealAPI(): void
+    public function getActivitiesFromRealAPI(): void
     {
-        $this->markTestIncomplete('Enable this test only when you want to make real API calls');
-        
+        self::markTestIncomplete('Enable this test only when you want to make real API calls');
+
         $feed = $this->client->feed('user', $this->testUserId);
-        
+
         try {
             $response = $feed->getActivities(['limit' => 5]);
-            
-            $this->assertTrue($response->isSuccessful());
+
+            self::assertTrue($response->isSuccessful());
             $data = $response->getData();
-            $this->assertArrayHasKey('results', $data);
-            
-            echo "✅ Retrieved " . count($data['results']) . " activities\n";
-            
+            self::assertArrayHasKey('results', $data);
+
+            echo '✅ Retrieved ' . count($data['results']) . " activities\n";
         } catch (StreamApiException $e) {
             echo "❌ API Error: {$e->getMessage()} (Status: {$e->getStatusCode()})\n";
-            $this->fail("API call failed");
+            self::fail('API call failed');
         }
     }
 }
-

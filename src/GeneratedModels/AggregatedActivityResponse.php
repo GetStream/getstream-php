@@ -19,6 +19,7 @@ class AggregatedActivityResponse extends BaseModel
         public ?int $userCount = null,    // Number of unique users in this aggregation 
         public ?bool $userCountTruncated = null,    // Whether this activity group has been truncated due to exceeding the group size limit 
         public ?array $activities = null,    // List of activities in this aggregation 
+        public ?bool $isWatched = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

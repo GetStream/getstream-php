@@ -12,6 +12,7 @@ class IngressVideoEncodingOptions extends BaseModel
 {
     public function __construct(
         public ?array $layers = null,
+        public ?IngressSource $source = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

@@ -14,6 +14,8 @@ class ModerationDashboardPreferences extends BaseModel
         public ?bool $disableFlaggingReviewedEntity = null,
         public ?bool $flagUserOnFlaggedContent = null,
         public ?bool $mediaQueueBlurEnabled = null,
+        public ?array $allowedModerationActionReasons = null,
+        public ?OverviewDashboardConfig $overviewDashboard = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

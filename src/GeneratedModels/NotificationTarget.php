@@ -17,6 +17,7 @@ class NotificationTarget extends BaseModel
         public ?string $type = null,    // The type of the target activity (for activity targets) 
         public ?string $userID = null,    // The ID of the user who created the target activity (for activity targets) 
         public ?array $attachments = null,    // Attachments on the target activity (for activity targets) 
+        public ?NotificationComment $comment = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

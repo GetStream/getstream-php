@@ -11,7 +11,6 @@ use JsonSerializable;
 class UpdateFeedViewRequest extends BaseModel
 {
     public function __construct(
-        public ?array $activityProcessors = null,    // Updated activity processors 
         public ?array $activitySelectors = null,    // Updated configuration for selecting activities 
         public ?AggregationConfig $aggregation = null,
         public ?RankingConfig $ranking = null,

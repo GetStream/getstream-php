@@ -12,10 +12,12 @@ class AddCommentRequest extends BaseModel
 {
     public function __construct(
         public ?string $comment = null,    // Text content of the comment 
-        public ?string $objectID = null,    // ID of the object to comment on 
-        public ?string $objectType = null,    // Type of the object to comment on 
         public ?bool $createNotificationActivity = null,    // Whether to create a notification activity for this comment 
-        public ?string $parentID = null,    // ID of parent comment for replies 
+        public ?string $id = null,    // Optional custom ID for the comment (max 255 characters). If not provided, a UUID will be generated. 
+        public ?string $objectID = null,    // ID of the object to comment on. Required for root comments 
+        public ?string $objectType = null,    // Type of the object to comment on. Required for root comments 
+        public ?string $parentID = null,    // ID of parent comment for replies. When provided, object_id and object_type are automatically inherited from the parent comment. 
+        public ?bool $skipEnrichUrl = null,    // Whether to skip URL enrichment for this comment 
         public ?bool $skipPush = null,
         public ?string $userID = null,
         public ?array $attachments = null,    // Media attachments for the reply 

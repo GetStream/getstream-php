@@ -17,6 +17,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?string $entityType = null,    // Type of entity being reviewed 
         public ?int $flagsCount = null,
         public ?string $id = null,    // Unique identifier of the review queue item 
+        public ?string $latestModeratorAction = null,
         public ?string $recommendedAction = null,    // Suggested moderation action 
         public ?string $reviewedBy = null,    // ID of the moderator who reviewed the item 
         public ?int $severity = null,    // Severity level of the content 
@@ -37,6 +38,8 @@ class ReviewQueueItemResponse extends BaseModel
         public ?EntityCreatorResponse $entityCreator = null,
         public ?EnrichedActivity $feedsV2Activity = null,
         public ?Reaction $feedsV2Reaction = null,
+        public ?ActivityResponse $feedsV3Activity = null,
+        public ?CommentResponse $feedsV3Comment = null,
         public ?MessageResponse $message = null,
         public ?ModerationPayload $moderationPayload = null,
         public ?Reaction $reaction = null,

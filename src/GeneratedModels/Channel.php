@@ -30,6 +30,7 @@ class Channel extends BaseModel
         public ?\DateTime $messageCountUpdatedAt = null,
         public ?string $team = null,
         public ?array $activeLiveLocations = null,
+        public ?array $filterTags = null,
         public ?array $invites = null,
         public ?array $members = null,
         public ?ChannelConfig $config = null,

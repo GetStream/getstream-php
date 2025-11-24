@@ -13,6 +13,7 @@ class GetFollowSuggestionsResponse extends BaseModel
     public function __construct(
         public ?string $duration = null,
         public ?array $suggestions = null,    // List of suggested feeds to follow 
+        public ?string $algorithmUsed = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

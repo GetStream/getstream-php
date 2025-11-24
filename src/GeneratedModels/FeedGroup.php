@@ -12,10 +12,10 @@ class FeedGroup extends BaseModel
 {
     public function __construct(
         public ?int $aggregationVersion = null,
-        public ?int $appPK = null,
+        public ?int $appPk = null,
         public ?\DateTime $createdAt = null,
         public ?string $defaultVisibility = null,
-        public ?string $iD = null,
+        public ?string $groupID = null,
         public ?\DateTime $updatedAt = null,
         public ?array $activityProcessors = null,
         public ?array $activitySelectors = null,

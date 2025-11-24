@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace GetStream\Http;
 
-use GetStream\StreamResponse;
-use GetStream\Exceptions\StreamException;
 use GetStream\Exceptions\StreamApiException;
+use GetStream\Exceptions\StreamException;
+use GetStream\StreamResponse;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Guzzle HTTP client implementation
+ * Guzzle HTTP client implementation.
  */
 class GuzzleHttpClient implements HttpClientInterface
 {
     private GuzzleClient $client;
 
     /**
-     * Create a new GuzzleHttpClient
+     * Create a new GuzzleHttpClient.
      *
      * @param array $config Guzzle client configuration
      */
@@ -37,13 +37,15 @@ class GuzzleHttpClient implements HttpClientInterface
     }
 
     /**
-     * Make an HTTP request
+     * Make an HTTP request.
      *
-     * @param string $method HTTP method
-     * @param string $url Full URL to request
-     * @param array $headers Request headers
-     * @param mixed $body Request body
+     * @param string $method  HTTP method
+     * @param string $url     Full URL to request
+     * @param array  $headers Request headers
+     * @param mixed  $body    Request body
+     *
      * @return StreamResponse<mixed>
+     *
      * @throws StreamException
      */
     public function request(string $method, string $url, array $headers = [], mixed $body = null): StreamResponse
@@ -68,6 +70,7 @@ class GuzzleHttpClient implements HttpClientInterface
         } catch (ClientException|ServerException $e) {
             $response = $e->getResponse();
             $streamResponse = $this->createStreamResponse($response);
+
             throw new StreamApiException(
                 $e->getMessage(),
                 $response->getStatusCode(),
@@ -76,19 +79,21 @@ class GuzzleHttpClient implements HttpClientInterface
             );
         } catch (GuzzleException $e) {
             echo 'HTTP Error: ' . $e->getMessage();
+
             throw new StreamException('HTTP request failed: ' . $e->getMessage(), $e->getCode());
         }
     }
 
     /**
-     * Create a StreamResponse from a Guzzle response
+     * Create a StreamResponse from a Guzzle response.
+     *
      * @return StreamResponse<mixed>
      */
     private function createStreamResponse(ResponseInterface $response): StreamResponse
     {
         $statusCode = $response->getStatusCode();
         $rawBody = $response->getBody()->getContents();
-        
+
         // Convert headers to lowercase keys
         $headers = [];
         foreach ($response->getHeaders() as $name => $values) {
@@ -115,7 +120,7 @@ class GuzzleHttpClient implements HttpClientInterface
         if (!$streamResponse->isSuccessful()) {
             $message = 'API request failed';
             $errorDetails = [];
-            
+
             if (is_array($data)) {
                 $message = $data['message'] ?? $data['error'] ?? $message;
                 $errorDetails = $data;

@@ -11,6 +11,7 @@ use JsonSerializable;
 class PrivacySettings extends BaseModel
 {
     public function __construct(
+        public ?DeliveryReceipts $deliveryReceipts = null,
         public ?ReadReceipts $readReceipts = null,
         public ?TypingIndicators $typingIndicators = null,
     ) {}

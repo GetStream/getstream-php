@@ -7,9 +7,8 @@ namespace GetStream\Tests;
 use GetStream\Client;
 use GetStream\ClientBuilder;
 use GetStream\Http\HttpClientInterface;
-use GetStream\Exceptions\StreamException;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 class ClientBuilderTest extends TestCase
 {
@@ -18,14 +17,15 @@ class ClientBuilderTest extends TestCase
     protected function setUp(): void
     {
         $this->mockHttpClient = $this->createMock(HttpClientInterface::class);
-        
+
         // Clear environment variables
-        unset($_ENV['STREAM_API_KEY']);
-        unset($_ENV['STREAM_API_SECRET']);
-        unset($_ENV['STREAM_BASE_URL']);
+        unset($_ENV['STREAM_API_KEY'], $_ENV['STREAM_API_SECRET'], $_ENV['STREAM_BASE_URL']);
     }
 
-    public function testBuildWithExplicitCredentials(): void
+    /**
+     * @test
+     */
+    public function buildWithExplicitCredentials(): void
     {
         // Arrange & Act
         $client = (new ClientBuilder())
@@ -37,14 +37,17 @@ class ClientBuilderTest extends TestCase
             ->build();
 
         // Assert
-        $this->assertInstanceOf(Client::class, $client);
-        $this->assertEquals('test-key', $client->getApiKey());
-        $this->assertEquals('test-secret', $client->getApiSecret());
-        $this->assertEquals('https://custom.api.com', $client->getBaseUrl());
-        $this->assertSame($this->mockHttpClient, $client->getHttpClient());
+        self::assertInstanceOf(Client::class, $client);
+        self::assertSame('test-key', $client->getApiKey());
+        self::assertSame('test-secret', $client->getApiSecret());
+        self::assertSame('https://custom.api.com', $client->getBaseUrl());
+        self::assertSame($this->mockHttpClient, $client->getHttpClient());
     }
 
-    public function testBuildWithEnvironmentVariables(): void
+    /**
+     * @test
+     */
+    public function buildWithEnvironmentVariables(): void
     {
         // Arrange
         $_ENV['STREAM_API_KEY'] = 'env-key';
@@ -58,13 +61,16 @@ class ClientBuilderTest extends TestCase
             ->build();
 
         // Assert
-        $this->assertInstanceOf(Client::class, $client);
-        $this->assertEquals('env-key', $client->getApiKey());
-        $this->assertEquals('env-secret', $client->getApiSecret());
-        $this->assertEquals('https://env.api.com', $client->getBaseUrl());
+        self::assertInstanceOf(Client::class, $client);
+        self::assertSame('env-key', $client->getApiKey());
+        self::assertSame('env-secret', $client->getApiSecret());
+        self::assertSame('https://env.api.com', $client->getBaseUrl());
     }
 
-    public function testFromEnvStaticMethod(): void
+    /**
+     * @test
+     */
+    public function fromEnvStaticMethod(): void
     {
         // Arrange
         $_ENV['STREAM_API_KEY'] = 'static-key';
@@ -77,12 +83,15 @@ class ClientBuilderTest extends TestCase
             ->build();
 
         // Assert
-        $this->assertInstanceOf(Client::class, $client);
-        $this->assertEquals('static-key', $client->getApiKey());
-        $this->assertEquals('static-secret', $client->getApiSecret());
+        self::assertInstanceOf(Client::class, $client);
+        self::assertSame('static-key', $client->getApiKey());
+        self::assertSame('static-secret', $client->getApiSecret());
     }
 
-    public function testExplicitCredentialsOverrideEnvironment(): void
+    /**
+     * @test
+     */
+    public function explicitCredentialsOverrideEnvironment(): void
     {
         // Arrange
         $_ENV['STREAM_API_KEY'] = 'env-key';
@@ -97,35 +106,44 @@ class ClientBuilderTest extends TestCase
             ->build();
 
         // Assert
-        $this->assertEquals('explicit-key', $client->getApiKey());
-        $this->assertEquals('explicit-secret', $client->getApiSecret());
+        self::assertSame('explicit-key', $client->getApiKey());
+        self::assertSame('explicit-secret', $client->getApiSecret());
     }
 
-    public function testBuildRequiresApiKey(): void
+    /**
+     * @test
+     */
+    public function buildRequiresApiKey(): void
     {
         // Test that providing API secret but no API key still works if key is in environment
         $client = (new ClientBuilder())
             ->apiSecret('test-secret')
             ->build();
 
-        $this->assertInstanceOf(Client::class, $client);
-        $this->assertNotEmpty($client->getApiKey()); // Should get from environment
-        $this->assertEquals('test-secret', $client->getApiSecret());
+        self::assertInstanceOf(Client::class, $client);
+        self::assertNotEmpty($client->getApiKey()); // Should get from environment
+        self::assertSame('test-secret', $client->getApiSecret());
     }
 
-    public function testBuildRequiresApiSecret(): void
+    /**
+     * @test
+     */
+    public function buildRequiresApiSecret(): void
     {
         // Test that providing API key but no API secret still works if secret is in environment
         $client = (new ClientBuilder())
             ->apiKey('test-key')
             ->build();
 
-        $this->assertInstanceOf(Client::class, $client);
-        $this->assertEquals('test-key', $client->getApiKey());
-        $this->assertNotEmpty($client->getApiSecret()); // Should get from environment
+        self::assertInstanceOf(Client::class, $client);
+        self::assertSame('test-key', $client->getApiKey());
+        self::assertNotEmpty($client->getApiSecret()); // Should get from environment
     }
 
-    public function testDefaultBaseUrl(): void
+    /**
+     * @test
+     */
+    public function defaultBaseUrl(): void
     {
         // Arrange & Act
         $client = (new ClientBuilder())
@@ -135,10 +153,13 @@ class ClientBuilderTest extends TestCase
             ->build();
 
         // Assert
-        $this->assertEquals('https://chat.stream-io-api.com', $client->getBaseUrl());
+        self::assertSame('https://chat.stream-io-api.com', $client->getBaseUrl());
     }
 
-    public function testEnvironmentBaseUrlOverridesDefault(): void
+    /**
+     * @test
+     */
+    public function environmentBaseUrlOverridesDefault(): void
     {
         // Arrange
         $_ENV['STREAM_API_KEY'] = 'env-key';
@@ -151,14 +172,17 @@ class ClientBuilderTest extends TestCase
             ->build();
 
         // Assert
-        $this->assertEquals('https://custom-env.api.com', $client->getBaseUrl());
+        self::assertSame('https://custom-env.api.com', $client->getBaseUrl());
     }
 
-    public function testFluentInterface(): void
+    /**
+     * @test
+     */
+    public function fluentInterface(): void
     {
         // Test that all methods return the builder instance for chaining
         $builder = new ClientBuilder();
-        
+
         $result = $builder
             ->apiKey('test')
             ->apiSecret('test')
@@ -167,6 +191,6 @@ class ClientBuilderTest extends TestCase
             ->skipEnvLoad()
             ->envPath('/test/path');
 
-        $this->assertSame($builder, $result);
+        self::assertSame($builder, $result);
     }
 }

@@ -18,8 +18,8 @@ class ReminderResponseData extends BaseModel
         public ?string $userID = null,
         public ?\DateTime $remindAt = null,
         public ?ChannelResponse $channel = null,
-        public ?Message $message = null,
-        public ?User $user = null,
+        public ?MessageResponse $message = null,
+        public ?UserResponse $user = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

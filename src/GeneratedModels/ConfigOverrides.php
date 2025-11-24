@@ -11,8 +11,6 @@ use JsonSerializable;
 class ConfigOverrides extends BaseModel
 {
     public function __construct(
-        public ?array $commands = null,
-        public ?array $grants = null,
         public ?string $blocklist = null,
         public ?string $blocklistBehavior = null,
         public ?bool $countMessages = null,
@@ -25,6 +23,8 @@ class ConfigOverrides extends BaseModel
         public ?bool $uploads = null,
         public ?bool $urlEnrichment = null,
         public ?bool $userMessageReminders = null,
+        public ?array $commands = null,
+        public ?array $grants = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

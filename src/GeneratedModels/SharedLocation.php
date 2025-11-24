@@ -11,17 +11,10 @@ use JsonSerializable;
 class SharedLocation extends BaseModel
 {
     public function __construct(
-        public ?string $channelCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $createdByDeviceID = null,
-        public ?string $messageID = null,
-        public ?\DateTime $updatedAt = null,
-        public ?string $userID = null,
-        public ?\DateTime $endAt = null,
         public ?int $latitude = null,
         public ?int $longitude = null,
-        public ?Channel $channel = null,
-        public ?Message $message = null,
+        public ?string $createdByDeviceID = null,
+        public ?\DateTime $endAt = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

@@ -19,6 +19,7 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?bool $connectEvents = null,
         public ?bool $countMessages = null,
         public ?bool $customEvents = null,
+        public ?bool $deliveryEvents = null,
         public ?bool $markMessagesPending = null,
         public ?bool $mutes = null,
         public ?int $partitionSize = null,

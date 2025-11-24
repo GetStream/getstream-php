@@ -35,6 +35,7 @@ class PushProvider extends BaseModel
         public ?string $firebaseServerKey = null,
         public ?string $huaweiAppID = null,
         public ?string $huaweiAppSecret = null,
+        public ?string $huaweiHost = null,
         public ?string $xiaomiAppSecret = null,
         public ?string $xiaomiPackageName = null,
         public ?array $pushTemplates = null,

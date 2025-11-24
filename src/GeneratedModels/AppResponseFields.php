@@ -11,6 +11,7 @@ use JsonSerializable;
 class AppResponseFields extends BaseModel
 {
     public function __construct(
+        public ?bool $allowMultiUserDevices = null,
         public ?bool $asyncUrlEnrichEnabled = null,
         public ?bool $autoTranslationEnabled = null,
         public ?bool $campaignEnabled = null,
@@ -20,7 +21,9 @@ class AppResponseFields extends BaseModel
         public ?bool $disablePermissionsChecks = null,
         public ?string $enforceUniqueUsernames = null,
         public ?bool $guestUserCreationDisabled = null,
+        public ?int $id = null,
         public ?bool $imageModerationEnabled = null,
+        public ?int $maxAggregatedActivitiesLength = null,
         public ?bool $moderationBulkSubmitActionEnabled = null,
         public ?bool $moderationEnabled = null,
         public ?bool $moderationLlmConfigurabilityEnabled = null,
@@ -30,6 +33,7 @@ class AppResponseFields extends BaseModel
         public ?string $name = null,
         public ?string $organization = null,
         public ?string $permissionVersion = null,
+        public ?string $placement = null,
         public ?int $remindersInterval = null,
         public ?string $snsKey = null,
         public ?string $snsSecret = null,

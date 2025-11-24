@@ -17,6 +17,7 @@ class QueryReviewQueueResponse extends BaseModel
         public ?object $stats = null,    // Statistics about the review queue 
         public ?string $next = null,
         public ?string $prev = null,
+        public ?FilterConfigResponse $filterConfig = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

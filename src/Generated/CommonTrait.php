@@ -884,7 +884,7 @@ trait CommonTrait
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteFileGlobal(string $url): StreamResponse {
+    public function deleteFile(string $url): StreamResponse {
         $path = '/api/v2/uploads/file';
 
         $queryParams = [];
@@ -902,7 +902,7 @@ trait CommonTrait
      * @return StreamResponse<GeneratedModels\FileUploadResponse>
      * @throws StreamException
      */
-    public function uploadFileGlobal(GeneratedModels\FileUploadRequest $requestData): StreamResponse {
+    public function uploadFile(GeneratedModels\FileUploadRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/file';
 
         $queryParams = [];
@@ -917,7 +917,7 @@ trait CommonTrait
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteImageGlobal(string $url): StreamResponse {
+    public function deleteImage(string $url): StreamResponse {
         $path = '/api/v2/uploads/image';
 
         $queryParams = [];
@@ -935,7 +935,7 @@ trait CommonTrait
      * @return StreamResponse<GeneratedModels\ImageUploadResponse>
      * @throws StreamException
      */
-    public function uploadImageGlobal(GeneratedModels\ImageUploadRequest $requestData): StreamResponse {
+    public function uploadImage(GeneratedModels\ImageUploadRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/image';
 
         $queryParams = [];

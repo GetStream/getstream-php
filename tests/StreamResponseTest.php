@@ -9,7 +9,10 @@ use PHPUnit\Framework\TestCase;
 
 class StreamResponseTest extends TestCase
 {
-    public function testStreamResponseConstruction(): void
+    /**
+     * @test
+     */
+    public function streamResponseConstruction(): void
     {
         // Arrange
         $statusCode = 200;
@@ -21,40 +24,49 @@ class StreamResponseTest extends TestCase
         $response = new StreamResponse($statusCode, $headers, $data, $rawBody);
 
         // Assert
-        $this->assertEquals($statusCode, $response->getStatusCode());
-        $this->assertEquals($headers, $response->getHeaders());
-        $this->assertEquals($data, $response->getData());
-        $this->assertEquals($rawBody, $response->getRawBody());
+        self::assertSame($statusCode, $response->getStatusCode());
+        self::assertSame($headers, $response->getHeaders());
+        self::assertSame($data, $response->getData());
+        self::assertSame($rawBody, $response->getRawBody());
     }
 
-    public function testGetHeader(): void
+    /**
+     * @test
+     */
+    public function getHeader(): void
     {
         // Arrange
         $headers = ['content-type' => 'application/json', 'x-custom' => 'test'];
         $response = new StreamResponse(200, $headers, []);
 
         // Act & Assert
-        $this->assertEquals('application/json', $response->getHeader('content-type'));
-        $this->assertEquals('test', $response->getHeader('x-custom'));
-        $this->assertNull($response->getHeader('non-existent'));
+        self::assertSame('application/json', $response->getHeader('content-type'));
+        self::assertSame('test', $response->getHeader('x-custom'));
+        self::assertNull($response->getHeader('non-existent'));
     }
 
-    public function testIsSuccessful(): void
+    /**
+     * @test
+     */
+    public function isSuccessful(): void
     {
         // Test successful responses
-        $this->assertTrue((new StreamResponse(200, [], []))->isSuccessful());
-        $this->assertTrue((new StreamResponse(201, [], []))->isSuccessful());
-        $this->assertTrue((new StreamResponse(299, [], []))->isSuccessful());
+        self::assertTrue((new StreamResponse(200, [], []))->isSuccessful());
+        self::assertTrue((new StreamResponse(201, [], []))->isSuccessful());
+        self::assertTrue((new StreamResponse(299, [], []))->isSuccessful());
 
         // Test non-successful responses
-        $this->assertFalse((new StreamResponse(199, [], []))->isSuccessful());
-        $this->assertFalse((new StreamResponse(300, [], []))->isSuccessful());
-        $this->assertFalse((new StreamResponse(400, [], []))->isSuccessful());
-        $this->assertFalse((new StreamResponse(404, [], []))->isSuccessful());
-        $this->assertFalse((new StreamResponse(500, [], []))->isSuccessful());
+        self::assertFalse((new StreamResponse(199, [], []))->isSuccessful());
+        self::assertFalse((new StreamResponse(300, [], []))->isSuccessful());
+        self::assertFalse((new StreamResponse(400, [], []))->isSuccessful());
+        self::assertFalse((new StreamResponse(404, [], []))->isSuccessful());
+        self::assertFalse((new StreamResponse(500, [], []))->isSuccessful());
     }
 
-    public function testToArray(): void
+    /**
+     * @test
+     */
+    public function toArray(): void
     {
         // Arrange
         $statusCode = 201;
@@ -71,17 +83,19 @@ class StreamResponseTest extends TestCase
             'headers' => ['content-type' => 'application/json'],
             'data' => ['created' => true],
         ];
-        $this->assertEquals($expected, $array);
+        self::assertSame($expected, $array);
     }
 
-    public function testWithNullRawBody(): void
+    /**
+     * @test
+     */
+    public function withNullRawBody(): void
     {
         // Arrange & Act
         $response = new StreamResponse(204, [], null);
 
         // Assert
-        $this->assertNull($response->getRawBody());
-        $this->assertNull($response->getData());
+        self::assertNull($response->getRawBody());
+        self::assertNull($response->getData());
     }
 }
-

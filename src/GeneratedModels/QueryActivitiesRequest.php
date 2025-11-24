@@ -11,11 +11,14 @@ use JsonSerializable;
 class QueryActivitiesRequest extends BaseModel
 {
     public function __construct(
+        public ?bool $includePrivateActivities = null,
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
+        public ?string $userID = null,
         public ?array $sort = null,    // Sorting parameters for the query 
         public ?object $filter = null,    // Filters to apply to the query. Supports location-based queries with 'near' and 'within_bounds' operators. 
+        public ?UserRequest $user = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

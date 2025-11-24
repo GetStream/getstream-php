@@ -13,6 +13,7 @@ class AudioSettingsResponse extends BaseModel
     public function __construct(
         public ?bool $accessRequestEnabled = null,
         public ?string $defaultDevice = null,
+        public ?bool $hifiAudioEnabled = null,
         public ?bool $micDefaultOn = null,
         public ?bool $opusDtxEnabled = null,
         public ?bool $redundantCodingEnabled = null,

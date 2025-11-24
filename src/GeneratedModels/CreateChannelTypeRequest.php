@@ -18,7 +18,9 @@ class CreateChannelTypeRequest extends BaseModel
         public ?string $blocklist = null,    // Blocklist 
         public ?string $blocklistBehavior = null,    // Blocklist behavior 
         public ?bool $connectEvents = null,    // Connect events 
+        public ?bool $countMessages = null,    // Count messages in channel. 
         public ?bool $customEvents = null,    // Custom events 
+        public ?bool $deliveryEvents = null,
         public ?bool $markMessagesPending = null,    // Mark messages pending 
         public ?string $messageRetention = null,    // Message retention 
         public ?bool $mutes = null,    // Mutes 

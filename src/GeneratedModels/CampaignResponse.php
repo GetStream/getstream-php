@@ -18,6 +18,7 @@ class CampaignResponse extends BaseModel
         public ?string $name = null,
         public ?string $senderID = null,
         public ?string $senderMode = null,
+        public ?string $senderVisibility = null,
         public ?bool $showChannels = null,
         public ?bool $skipPush = null,
         public ?bool $skipWebhook = null,

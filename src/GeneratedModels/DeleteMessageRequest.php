@@ -12,6 +12,7 @@ class DeleteMessageRequest extends BaseModel
 {
     public function __construct(
         public ?bool $hardDelete = null,
+        public ?string $reason = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
