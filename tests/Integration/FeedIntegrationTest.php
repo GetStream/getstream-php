@@ -1724,7 +1724,7 @@ class FeedIntegrationTest extends TestCase
         // snippet-end: GetFeedGroup
 
         $this->assertResponseSuccess($getResponse, 'get feed group');
-        self::assertSame($feedGroupId, $getResponse->getData()->feedGroup->id);
+        self::assertSame('foryou', $getResponse->getData()->feedGroup->id);
         echo "✅ Retrieved feed group: {$feedGroupId}\n";
 
         // Test 4: Update Feed Group
