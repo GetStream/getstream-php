@@ -1708,10 +1708,7 @@ class FeedIntegrationTest extends TestCase
         $createResponse = $this->feedsV3Client->createFeedGroup(
             new CreateFeedGroupRequest(
                 id: $feedGroupId,
-                defaultVisibility: 'public',
-                activityProcessors: [
-                    ['type' => 'dummy'],
-                ]
+                defaultVisibility: 'public'
             )
         );
         // snippet-end: CreateFeedGroup
@@ -1723,11 +1720,11 @@ class FeedIntegrationTest extends TestCase
         // Test 3: Get Feed Group
         echo "\n🔍 Testing get feed group...\n";
         // snippet-start: GetFeedGroup
-        $getResponse = $this->feedsV3Client->getFeedGroup('foryou', false);
+        $getResponse = $this->feedsV3Client->getFeedGroup($feedGroupId, false);
         // snippet-end: GetFeedGroup
 
         $this->assertResponseSuccess($getResponse, 'get feed group');
-        self::assertSame('foryou', $getResponse->getData()->feedGroup->id);
+        self::assertSame($feedGroupId, $getResponse->getData()->feedGroup->id);
         echo "✅ Retrieved feed group: {$feedGroupId}\n";
 
         // Test 4: Update Feed Group
@@ -1761,12 +1758,12 @@ class FeedIntegrationTest extends TestCase
 
         echo "✅ Completed Feed Group CRUD operations\n";
 
+        // Additional Feed Group Creation Examples
         $group = 'test-feed-group-' . substr(uniqid(), -8);
 
-        // Additional Feed Group Creation Examples
         echo "\n📊 Testing create feed group with aggregation...\n";
         // snippet-start: CreateFeedGroupWithAggregation
-        $this->feedsV3Client->createFeedGroup(
+        $aggResponse = $this->feedsV3Client->createFeedGroup(
             new CreateFeedGroupRequest(
                 id: $group,
                 defaultVisibility: 'public',
@@ -1777,13 +1774,15 @@ class FeedIntegrationTest extends TestCase
             )
         );
         // snippet-end: CreateFeedGroupWithAggregation
+        $this->assertResponseSuccess($aggResponse, 'create feed group with aggregation');
+        echo "✅ Created feed group with aggregation\n";
 
         echo "\n🏆 Testing create feed group with ranking...\n";
 
         $ranked_group = 'test-feed-group-' . substr(uniqid(), -8);
 
         // snippet-start: CreateFeedGroupWithRanking
-        $this->feedsV3Client->createFeedGroup(
+        $rankResponse = $this->feedsV3Client->createFeedGroup(
             new CreateFeedGroupRequest(
                 id: $ranked_group,
                 defaultVisibility: 'public',
@@ -1794,7 +1793,10 @@ class FeedIntegrationTest extends TestCase
             )
         );
         // snippet-end: CreateFeedGroupWithRanking
+        $this->assertResponseSuccess($rankResponse, 'create feed group with ranking');
+        echo "✅ Created feed group with ranking\n";
     }
+
 
     /**
      * Test 34: Feed View CRUD Operations.
