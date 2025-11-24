@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GetStream;
 
+use Dotenv\Dotenv;
 use GetStream\Exceptions\StreamException;
 use GetStream\Http\HttpClientInterface;
-use Dotenv\Dotenv;
 
 /**
- * Builder class for creating GetStream clients with environment variable support
+ * Builder class for creating GetStream clients with environment variable support.
  */
 class ClientBuilder
 {
@@ -21,61 +21,67 @@ class ClientBuilder
     private ?string $envPath = null;
 
     /**
-     * Set the API key
+     * Set the API key.
      */
     public function apiKey(string $apiKey): self
     {
         $this->apiKey = $apiKey;
+
         return $this;
     }
 
     /**
-     * Set the API secret
+     * Set the API secret.
      */
     public function apiSecret(string $apiSecret): self
     {
         $this->apiSecret = $apiSecret;
+
         return $this;
     }
 
     /**
-     * Set the base URL
+     * Set the base URL.
      */
     public function baseUrl(string $baseUrl): self
     {
         $this->baseUrl = $baseUrl;
+
         return $this;
     }
 
     /**
-     * Set the HTTP client
+     * Set the HTTP client.
      */
     public function httpClient(HttpClientInterface $httpClient): self
     {
         $this->httpClient = $httpClient;
+
         return $this;
     }
 
     /**
-     * Disable loading from environment variables
+     * Disable loading from environment variables.
      */
     public function skipEnvLoad(): self
     {
         $this->loadEnv = false;
+
         return $this;
     }
 
     /**
-     * Set custom path for .env file (default is current directory)
+     * Set custom path for .env file (default is current directory).
      */
     public function envPath(string $path): self
     {
         $this->envPath = $path;
+
         return $this;
     }
 
     /**
-     * Create a client from environment variables
+     * Create a client from environment variables.
      */
     public static function fromEnv(?string $envPath = null): self
     {
@@ -83,35 +89,41 @@ class ClientBuilder
         if ($envPath !== null) {
             $builder->envPath($envPath);
         }
+
         return $builder;
     }
 
     /**
-     * Build the client
+     * Build the client.
+     *
      * @throws StreamException
      */
     public function build(): Client
     {
         $this->loadCreds();
+
         return new Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
     }
 
     /**
      * @throws StreamException
      */
-    public function buildFeedsClient(): FeedsV3Client{
+    public function buildFeedsClient(): FeedsV3Client
+    {
         $this->loadCreds();
+
         return new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
     }
 
-/**
+    /**
      * @throws StreamException
      */
-    public function buildModerationClient(): ModerationClient{
+    public function buildModerationClient(): ModerationClient
+    {
         $this->loadCreds();
+
         return new ModerationClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
     }
-
 
     public function loadCreds(): void
     {
@@ -150,8 +162,8 @@ class ClientBuilder
         $this->baseUrl = $baseUrl;
     }
 
-        /**
-     * Load environment variables from .env file
+    /**
+     * Load environment variables from .env file.
      */
     private function loadEnvironmentVariables(): void
     {
@@ -169,11 +181,12 @@ class ClientBuilder
     }
 
     /**
-     * Get environment variable value
+     * Get environment variable value.
      */
     private function getEnvVar(string $name): ?string
     {
         $value = $_ENV[$name] ?? $_SERVER[$name] ?? getenv($name);
+
         return $value !== false ? $value : null;
     }
 }

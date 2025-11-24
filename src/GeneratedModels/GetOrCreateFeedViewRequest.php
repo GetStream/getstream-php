@@ -11,7 +11,6 @@ use JsonSerializable;
 class GetOrCreateFeedViewRequest extends BaseModel
 {
     public function __construct(
-        public ?array $activityProcessors = null,    // Configured activity Processors 
         public ?array $activitySelectors = null,    // Configuration for selecting activities 
         public ?AggregationConfig $aggregation = null,
         public ?RankingConfig $ranking = null,

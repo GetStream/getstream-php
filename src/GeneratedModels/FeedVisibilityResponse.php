@@ -11,8 +11,8 @@ use JsonSerializable;
 class FeedVisibilityResponse extends BaseModel
 {
     public function __construct(
-        public ?string $description = null,    // Description of the feed visibility level 
         public ?string $name = null,    // Name of the feed visibility level 
+        public ?array $permissions = null,    // List of permission policies 
         public ?array $grants = null,    // Permission grants for each role 
     ) {}
 

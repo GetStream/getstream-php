@@ -30,7 +30,7 @@ class WSEvent extends BaseModel
         public ?ChannelResponse $channel = null,
         public ?UserResponse $createdBy = null,
         public ?OwnUserResponse $me = null,
-        public ?ChannelMember $member = null,
+        public ?ChannelMemberResponse $member = null,
         public ?MessageResponse $message = null,
         public ?MessageUpdate $messageUpdate = null,
         public ?PollResponseData $poll = null,

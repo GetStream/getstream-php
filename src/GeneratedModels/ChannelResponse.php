@@ -33,6 +33,7 @@ class ChannelResponse extends BaseModel
         public ?bool $muted = null,    // Whether this channel is muted or not 
         public ?string $team = null,    // Team the channel belongs to (multi-tenant only) 
         public ?\DateTime $truncatedAt = null,    // Date of the latest truncation of the channel 
+        public ?array $filterTags = null,    // List of filter tags associated with the channel 
         public ?array $members = null,    // List of channel members (max 100) 
         public ?array $ownCapabilities = null,    // List of channel capabilities of authenticated user 
         public ?ChannelConfigWithInfo $config = null,

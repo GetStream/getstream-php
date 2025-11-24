@@ -17,6 +17,7 @@ class ChannelConfigWithInfo extends BaseModel
         public ?bool $countMessages = null,
         public ?\DateTime $createdAt = null,
         public ?bool $customEvents = null,
+        public ?bool $deliveryEvents = null,
         public ?bool $markMessagesPending = null,
         public ?int $maxMessageLength = null,
         public ?bool $mutes = null,

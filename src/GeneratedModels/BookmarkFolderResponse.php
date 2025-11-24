@@ -15,6 +15,7 @@ class BookmarkFolderResponse extends BaseModel
         public ?string $id = null,    // Unique identifier for the folder 
         public ?string $name = null,    // Name of the folder 
         public ?\DateTime $updatedAt = null,    // When the folder was last updated 
+        public ?UserResponseCommonFields $user = null,
         public ?object $custom = null,    // Custom data for the folder 
     ) {}
 

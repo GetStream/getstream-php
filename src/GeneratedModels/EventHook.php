@@ -16,6 +16,7 @@ class EventHook extends BaseModel
         public ?string $hookType = null,
         public ?string $id = null,
         public ?string $product = null,
+        public ?bool $shouldSendCustomEvents = null,
         public ?string $snsAuthType = null,
         public ?string $snsKey = null,
         public ?string $snsRegion = null,

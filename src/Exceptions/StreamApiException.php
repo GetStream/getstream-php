@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GetStream\Exceptions;
 
 /**
- * Exception thrown when the GetStream API returns an error
+ * Exception thrown when the GetStream API returns an error.
  */
 class StreamApiException extends StreamException
 {
@@ -14,12 +14,12 @@ class StreamApiException extends StreamException
     private array $errorDetails;
 
     /**
-     * Create a new StreamApiException
+     * Create a new StreamApiException.
      *
-     * @param string $message The exception message
-     * @param int $statusCode HTTP status code
+     * @param string      $message      The exception message
+     * @param int         $statusCode   HTTP status code
      * @param string|null $responseBody Raw response body
-     * @param array $errorDetails Error details from the API
+     * @param array       $errorDetails Error details from the API
      */
     public function __construct(
         string $message,
@@ -34,7 +34,7 @@ class StreamApiException extends StreamException
     }
 
     /**
-     * Get the HTTP status code
+     * Get the HTTP status code.
      */
     public function getStatusCode(): int
     {
@@ -42,7 +42,7 @@ class StreamApiException extends StreamException
     }
 
     /**
-     * Get the raw response body
+     * Get the raw response body.
      */
     public function getResponseBody(): ?string
     {
@@ -50,11 +50,10 @@ class StreamApiException extends StreamException
     }
 
     /**
-     * Get the error details from the API
+     * Get the error details from the API.
      */
     public function getErrorDetails(): array
     {
         return $this->errorDetails;
     }
 }
-

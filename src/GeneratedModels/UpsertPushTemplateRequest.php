@@ -12,7 +12,7 @@ class UpsertPushTemplateRequest extends BaseModel
 {
     public function __construct(
         public ?string $eventType = null,    // Event type (message.new, message.updated, reaction.new) 
-        public ?string $pushProviderType = null,    // Push provider type (firebase, apn) 
+        public ?string $pushProviderType = null,    // Push provider type (firebase, apn, huawei, xiaomi) 
         public ?bool $enablePush = null,    // Whether to send push notification for this event 
         public ?string $pushProviderName = null,    // Push provider name 
         public ?string $template = null,    // Push template 

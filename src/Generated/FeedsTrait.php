@@ -213,7 +213,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\AddReactionResponse>
      * @throws StreamException
      */
-    public function addReaction(string $activityID, GeneratedModels\AddReactionRequest $requestData): StreamResponse {
+    public function addActivityReaction(string $activityID, GeneratedModels\AddReactionRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/reactions';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -297,7 +297,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActivityResponse::class);
     }
     /**
-     * Updates certain fields of the activity
+     * Updates certain fields of the activity. Use 'set' to update specific fields and 'unset' to remove fields. This allows you to update only the fields you need without replacing the entire activity. Useful for updating reply restrictions ('restrict_replies'), mentioned users, or custom data.
      * 
      * Sends events:
      * - feeds.activity.updated
@@ -317,7 +317,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateActivityPartialResponse::class);
     }
     /**
-     * Replaces an activity with the provided data
+     * Replaces an activity with the provided data. Use this to update text, attachments, reply restrictions ('restrict_replies'), mentioned users, and other activity fields. Note: This is a full update - any fields not provided will be cleared.
      * 
      * Sends events:
      * - feeds.activity.updated
@@ -398,6 +398,91 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryBookmarksResponse::class);
+    }
+    /**
+     * Delete collections in a batch operation. Users can only delete their own collections.
+     * 
+     *
+     * @param array $collectionRefs
+     * @return StreamResponse<GeneratedModels\DeleteCollectionsResponse>
+     * @throws StreamException
+     */
+    public function deleteCollections(array $collectionRefs): StreamResponse {
+        $path = '/api/v2/feeds/collections';
+
+        $queryParams = [];
+        if ($collectionRefs !== null) {
+            $queryParams['collection_refs'] = $collectionRefs;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCollectionsResponse::class);
+    }
+    /**
+     * Read collections with optional filtering by user ID and collection name. By default, users can only read their own collections.
+     * 
+     *
+     * @param array $collectionRefs
+     * @param string $userID
+     * @return StreamResponse<GeneratedModels\ReadCollectionsResponse>
+     * @throws StreamException
+     */
+    public function readCollections(array $collectionRefs, string $userID): StreamResponse {
+        $path = '/api/v2/feeds/collections';
+
+        $queryParams = [];
+        if ($collectionRefs !== null) {
+            $queryParams['collection_refs'] = $collectionRefs;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ReadCollectionsResponse::class);
+    }
+    /**
+     * Update existing collections in a batch operation. Only the custom data field is updatable. Users can only update their own collections.
+     * 
+     *
+     * @param GeneratedModels\UpdateCollectionsRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateCollectionsResponse>
+     * @throws StreamException
+     */
+    public function updateCollections(GeneratedModels\UpdateCollectionsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/collections';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCollectionsResponse::class);
+    }
+    /**
+     * Create new collections in a batch operation. Collections are data objects that can be attached to activities for managing shared data across multiple activities.
+     * 
+     *
+     * @param GeneratedModels\CreateCollectionsRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateCollectionsResponse>
+     * @throws StreamException
+     */
+    public function createCollections(GeneratedModels\CreateCollectionsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/collections';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateCollectionsResponse::class);
+    }
+    /**
+     * Insert new collections or update existing ones in a batch operation. Only the custom data field is updatable for existing collections.
+     * 
+     *
+     * @param GeneratedModels\UpsertCollectionsRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertCollectionsResponse>
+     * @throws StreamException
+     */
+    public function upsertCollections(GeneratedModels\UpsertCollectionsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/collections';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertCollectionsResponse::class);
     }
     /**
      * Retrieve a threaded list of comments for a specific object (e.g., activity), with configurable depth, sorting, and pagination
@@ -643,13 +728,17 @@ trait FeedsTrait
      * List all feed groups for the application
      * 
      *
+     * @param bool $includeSoftDeleted
      * @return StreamResponse<GeneratedModels\ListFeedGroupsResponse>
      * @throws StreamException
      */
-    public function listFeedGroups(): StreamResponse {
+    public function listFeedGroups(bool $includeSoftDeleted): StreamResponse {
         $path = '/api/v2/feeds/feed_groups';
 
         $queryParams = [];
+        if ($includeSoftDeleted !== null) {
+            $queryParams['include_soft_deleted'] = $includeSoftDeleted;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListFeedGroupsResponse::class);
     }
@@ -917,14 +1006,18 @@ trait FeedsTrait
      * 
      *
      * @param string $id
+     * @param bool $includeSoftDeleted
      * @return StreamResponse<GeneratedModels\GetFeedGroupResponse>
      * @throws StreamException
      */
-    public function getFeedGroup(string $id): StreamResponse {
+    public function getFeedGroup(string $id, bool $includeSoftDeleted): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($includeSoftDeleted !== null) {
+            $queryParams['include_soft_deleted'] = $includeSoftDeleted;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFeedGroupResponse::class);
     }
@@ -1088,6 +1181,23 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFeedVisibilityResponse::class);
     }
     /**
+     * Updates an existing predefined feed visibility configuration
+     * 
+     *
+     * @param string $name
+     * @param GeneratedModels\UpdateFeedVisibilityRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateFeedVisibilityResponse>
+     * @throws StreamException
+     */
+    public function updateFeedVisibility(string $name, GeneratedModels\UpdateFeedVisibilityRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/feed_visibilities/{name}';
+        $path = str_replace('{name}', (string) $name, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedVisibilityResponse::class);
+    }
+    /**
      * Create multiple feeds at once for a given feed group
      * 
      *
@@ -1103,6 +1213,21 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateFeedsBatchResponse::class);
     }
     /**
+     * Retrieves capabilities for multiple feeds in a single request. Useful for batch processing when activities are added to feeds.
+     * 
+     *
+     * @param GeneratedModels\OwnCapabilitiesBatchRequest $requestData
+     * @return StreamResponse<GeneratedModels\OwnCapabilitiesBatchResponse>
+     * @throws StreamException
+     */
+    public function ownCapabilitiesBatch(GeneratedModels\OwnCapabilitiesBatchRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/feeds/own_capabilities/batch';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\OwnCapabilitiesBatchResponse::class);
+    }
+    /**
      * Query feeds with filter query
      * 
      *
@@ -1116,6 +1241,41 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsResponse::class);
+    }
+    /**
+     * Retrieve current rate limit status for feeds operations.
+     * Returns information about limits, usage, and remaining quota for various feed operations.
+     * 
+     *
+     * @param string $endpoints
+     * @param bool $android
+     * @param bool $ios
+     * @param bool $web
+     * @param bool $serverSide
+     * @return StreamResponse<GeneratedModels\GetFeedsRateLimitsResponse>
+     * @throws StreamException
+     */
+    public function getFeedsRateLimits(string $endpoints, bool $android, bool $ios, bool $web, bool $serverSide): StreamResponse {
+        $path = '/api/v2/feeds/feeds/rate_limits';
+
+        $queryParams = [];
+        if ($endpoints !== null) {
+            $queryParams['endpoints'] = $endpoints;
+        }
+        if ($android !== null) {
+            $queryParams['android'] = $android;
+        }
+        if ($ios !== null) {
+            $queryParams['ios'] = $ios;
+        }
+        if ($web !== null) {
+            $queryParams['web'] = $web;
+        }
+        if ($serverSide !== null) {
+            $queryParams['server_side'] = $serverSide;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFeedsRateLimitsResponse::class);
     }
     /**
      * Updates a follow's custom data, push preference, and follower role. Source owner can update custom data and push preference. Follower role can only be updated via server-side requests.
@@ -1289,6 +1449,23 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMembershipLevelResponse::class);
     }
     /**
+     * Retrieve usage statistics for feeds including activity count, follow count, and API request count.
+     * Returns data aggregated by day with pagination support via from/to date parameters.
+     * This endpoint is server-side only.
+     * 
+     *
+     * @param GeneratedModels\QueryFeedsUsageStatsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryFeedsUsageStatsResponse>
+     * @throws StreamException
+     */
+    public function queryFeedsUsageStats(GeneratedModels\QueryFeedsUsageStatsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/stats/usage';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsUsageStatsResponse::class);
+    }
+    /**
      * Removes multiple follows at once and broadcasts FollowRemovedEvent for each one
      * 
      *
@@ -1320,7 +1497,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedUserDataResponse::class);
     }
     /**
-     * Export all activities, reactions, comments, and bookmarks for a user
+     * Export all feed data for a user including: user profile, feeds, activities, follows, comments, feed reactions, bookmark folders, bookmarks, and collections owned by the user
      * 
      *
      * @param string $userID

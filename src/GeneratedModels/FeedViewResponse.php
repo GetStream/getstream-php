@@ -13,7 +13,6 @@ class FeedViewResponse extends BaseModel
     public function __construct(
         public ?string $id = null,    // Unique identifier for the custom feed view 
         public ?\DateTime $lastUsedAt = null,    // When the feed view was last used 
-        public ?array $activityProcessors = null,    // Configured activity processors 
         public ?array $activitySelectors = null,    // Configured activity selectors 
         public ?AggregationConfig $aggregation = null,
         public ?RankingConfig $ranking = null,

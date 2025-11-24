@@ -16,6 +16,7 @@ class CampaignChannelTemplate extends BaseModel
         public ?string $id = null,
         public ?string $team = null,
         public ?array $members = null,
+        public ?array $membersTemplate = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

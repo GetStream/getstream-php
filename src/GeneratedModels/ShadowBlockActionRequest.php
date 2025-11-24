@@ -11,6 +11,7 @@ use JsonSerializable;
 class ShadowBlockActionRequest extends BaseModel
 {
     public function __construct(
+        public ?string $reason = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

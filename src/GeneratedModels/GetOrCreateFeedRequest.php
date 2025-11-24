@@ -17,7 +17,6 @@ class GetOrCreateFeedRequest extends BaseModel
         public ?string $userID = null,
         public ?string $view = null,
         public ?bool $watch = null,
-        public ?object $activitySelectorOptions = null,
         public ?FeedInput $data = null,
         public ?object $externalRanking = null,
         public ?object $filter = null,

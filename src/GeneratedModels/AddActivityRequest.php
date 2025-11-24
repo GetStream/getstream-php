@@ -17,11 +17,14 @@ class AddActivityRequest extends BaseModel
         public ?string $id = null,    // Optional ID for the activity 
         public ?string $parentID = null,    // ID of parent activity for replies/comments 
         public ?string $pollID = null,    // ID of a poll to attach to activity 
+        public ?string $restrictReplies = null,    // Controls who can add comments/replies to this activity. Options: 'everyone' (default - anyone can reply), 'people_i_follow' (only people the activity creator follows can reply), 'nobody' (no one can reply) 
+        public ?bool $skipEnrichUrl = null,    // Whether to skip URL enrichment for the activity 
         public ?string $text = null,    // Text content of the activity 
         public ?string $userID = null,    // ID of the user creating the activity 
         public ?string $visibility = null,    // Visibility setting for the activity 
         public ?string $visibilityTag = null,    // If visibility is 'tag', this is the tag name and is required 
         public ?array $attachments = null,    // List of attachments for the activity 
+        public ?array $collectionRefs = null,    // Collections that this activity references 
         public ?array $filterTags = null,    // Tags for filtering activities 
         public ?array $interestTags = null,    // Tags for indicating user interests 
         public ?array $mentionedUserIds = null,    // List of users mentioned in the activity 

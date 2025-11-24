@@ -20,14 +20,13 @@ class ChannelStateResponse extends BaseModel
         public ?\DateTime $hideMessagesBefore = null,
         public ?int $watcherCount = null,
         public ?array $activeLiveLocations = null,
-        public ?array $deletedMessages = null,
         public ?array $pendingMessages = null,
         public ?array $read = null,
         public ?array $watchers = null,
         public ?ChannelResponse $channel = null,
         public ?DraftResponse $draft = null,
-        public ?ChannelMember $membership = null,
-        public ?ChannelPushPreferences $pushPreferences = null,
+        public ?ChannelMemberResponse $membership = null,
+        public ?ChannelPushPreferencesResponse $pushPreferences = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

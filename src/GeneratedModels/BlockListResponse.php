@@ -11,6 +11,8 @@ use JsonSerializable;
 class BlockListResponse extends BaseModel
 {
     public function __construct(
+        public ?bool $isLeetCheckEnabled = null,
+        public ?bool $isPluralCheckEnabled = null,
         public ?string $name = null,    // Block list name 
         public ?string $type = null,    // Block list type. 
         public ?array $words = null,    // List of words to block 

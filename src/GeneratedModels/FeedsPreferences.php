@@ -13,6 +13,7 @@ class FeedsPreferences extends BaseModel
     public function __construct(
         public ?string $comment = null,    // Push notification preference for comments on user's activities 
         public ?string $commentReaction = null,    // Push notification preference for reactions on comments 
+        public ?string $commentReply = null,    // Push notification preference for replies to comments 
         public ?string $follow = null,    // Push notification preference for new followers 
         public ?string $mention = null,    // Push notification preference for mentions in activities or comments 
         public ?string $reaction = null,    // Push notification preference for reactions on user's activities or comments 

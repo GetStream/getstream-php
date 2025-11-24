@@ -17,6 +17,7 @@ class GetChannelTypeResponse extends BaseModel
         public ?bool $countMessages = null,
         public ?\DateTime $createdAt = null,
         public ?bool $customEvents = null,
+        public ?bool $deliveryEvents = null,
         public ?string $duration = null,    // Duration of the request in milliseconds 
         public ?bool $markMessagesPending = null,
         public ?int $maxMessageLength = null,

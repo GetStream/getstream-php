@@ -19,14 +19,13 @@ class ChannelStateResponseFields extends BaseModel
         public ?\DateTime $hideMessagesBefore = null,    // Messages before this date are hidden from the user 
         public ?int $watcherCount = null,    // Number of channel watchers 
         public ?array $activeLiveLocations = null,    // Active live locations in the channel 
-        public ?array $deletedMessages = null,
         public ?array $pendingMessages = null,    // Pending messages that this user has sent 
         public ?array $read = null,    // List of read states 
         public ?array $watchers = null,    // List of user who is watching the channel 
         public ?ChannelResponse $channel = null,
         public ?DraftResponse $draft = null,
-        public ?ChannelMember $membership = null,
-        public ?ChannelPushPreferences $pushPreferences = null,
+        public ?ChannelMemberResponse $membership = null,
+        public ?ChannelPushPreferencesResponse $pushPreferences = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

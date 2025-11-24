@@ -15,6 +15,7 @@ class FeedGroupResponse extends BaseModel
         public ?string $id = null,    // Identifier within the group 
         public ?\DateTime $updatedAt = null,    // When the feed group was last updated 
         public ?string $defaultVisibility = null,    // Default visibility for activities 
+        public ?\DateTime $deletedAt = null,
         public ?array $activityProcessors = null,    // Configuration for activity processors 
         public ?array $activitySelectors = null,    // Configuration for activity selectors 
         public ?AggregationConfig $aggregation = null,

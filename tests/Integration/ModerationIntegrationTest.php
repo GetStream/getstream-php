@@ -6,16 +6,16 @@ namespace GetStream\Tests\Integration;
 
 use GetStream\Client;
 use GetStream\ClientBuilder;
+use GetStream\Exceptions\StreamApiException;
+use GetStream\Exceptions\StreamException;
 use GetStream\GeneratedModels;
 use GetStream\ModerationClient;
 use GetStream\StreamResponse;
-use GetStream\Exceptions\StreamException;
-use GetStream\Exceptions\StreamApiException;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Comprehensive Integration tests for Moderation operations
- * These tests follow a logical flow: setup → create users → moderate → cleanup
+ * These tests follow a logical flow: setup → create users → moderate → cleanup.
  *
  * Test order:
  * 1. Environment Setup (users, channels)
@@ -76,69 +76,13 @@ class ModerationIntegrationTest extends TestCase
     }
 
     // =================================================================
-    // ENVIRONMENT SETUP (called in setUp for each test)
-    // =================================================================
-
-    private function setupEnvironment(): void
-    {
-        try {
-            // Create test users
-            // snippet-start: CreateModerationUsers
-            $response = $this->client->updateUsers(new GeneratedModels\UpdateUsersRequest(
-                users: [
-                    $this->testUserId => [
-                        'id' => $this->testUserId,
-                        'name' => 'Test User 1',
-                        'role' => 'user'
-                    ],
-                    $this->testUserId2 => [
-                        'id' => $this->testUserId2,
-                        'name' => 'Test User 2',
-                        'role' => 'user'
-                    ],
-                    $this->moderatorUserId => [
-                        'id' => $this->moderatorUserId,
-                        'name' => 'Moderator User',
-                        'role' => 'admin'
-                    ],
-                    $this->reporterUserId => [
-                        'id' => $this->reporterUserId,
-                        'name' => 'Reporter User',
-                        'role' => 'user'
-                    ]
-                ]
-            ));
-            // snippet-end: CreateModerationUsers
-
-            if (!$response->isSuccessful()) {
-                throw new StreamException('Failed to create users: ' . $response->getRawBody());
-            }
-
-            $this->createdUserIds = [$this->testUserId, $this->testUserId2, $this->moderatorUserId, $this->reporterUserId];
-
-            echo "✅ Created test users for moderation tests\n";
-            echo "   Target User: {$this->testUserId}\n";
-            echo "   Target User 2: {$this->testUserId2}\n";
-            echo "   Moderator: {$this->moderatorUserId}\n";
-            echo "   Reporter: {$this->reporterUserId}\n";
-
-        } catch (StreamApiException $e) {
-            echo "⚠️ Setup failed: " . $e->getMessage() . "\n";
-            echo "ResponseBody: " . $e->getResponseBody() . "\n";
-            echo "ErrorDetail: " . $e->getErrorDetails() . "\n";
-            throw $e;
-
-        } catch (\Exception $e) {
-            echo "⚠️ Setup failed: " . $e->getMessage() . "\n";
-            // Continue with tests even if setup partially fails
-        }
-    }
-
-    // =================================================================
     // 1. ENVIRONMENT SETUP TEST (demonstrates the setup process)
     // =================================================================
 
-    public function test01_SetupEnvironmentDemo(): void
+    /**
+     * @test
+     */
+    public function test01SetupEnvironmentDemo(): void
     {
         echo "\n🔧 Demonstrating moderation environment setup...\n";
         echo "✅ Users are automatically created in setUp()\n";
@@ -147,14 +91,17 @@ class ModerationIntegrationTest extends TestCase
         echo "   Moderator: {$this->moderatorUserId}\n";
         echo "   Reporter: {$this->reporterUserId}\n";
 
-        $this->assertTrue(true); // Just a demo test
+        self::assertTrue(true); // Just a demo test
     }
 
     // =================================================================
     // 2. BAN/UNBAN OPERATIONS
     // =================================================================
 
-    public function test02_BanUserWithReason(): void
+    /**
+     * @test
+     */
+    public function test02BanUserWithReason(): void
     {
         echo "\n🚫 Testing user ban with reason...\n";
 
@@ -171,17 +118,20 @@ class ModerationIntegrationTest extends TestCase
 
         $this->assertResponseSuccess($response, 'ban user with reason');
         $this->bannedUserIds[] = $this->testUserId;
-        
+
         echo "✅ Successfully banned user: {$this->testUserId}\n";
     }
 
-    public function test04_UnbanUser(): void
+    /**
+     * @test
+     */
+    public function test04UnbanUser(): void
     {
         echo "\n✅ Testing user unban...\n";
 
         // First ensure user is banned
-        if (!in_array($this->testUserId, $this->bannedUserIds)) {
-            $this->test02_BanUserWithReason();
+        if (!in_array($this->testUserId, $this->bannedUserIds, true)) {
+            $this->test02BanUserWithReason();
         }
 
         // snippet-start: UnbanUser
@@ -193,10 +143,10 @@ class ModerationIntegrationTest extends TestCase
         // snippet-stop: UnbanUser
 
         $this->assertResponseSuccess($response, 'unban user');
-        
+
         // Remove from banned list
         $this->bannedUserIds = array_diff($this->bannedUserIds, [$this->testUserId]);
-        
+
         echo "✅ Successfully unbanned user: {$this->testUserId}\n";
     }
 
@@ -204,7 +154,10 @@ class ModerationIntegrationTest extends TestCase
     // 3. MUTE/UNMUTE OPERATIONS
     // =================================================================
 
-    public function test05_MuteUser(): void
+    /**
+     * @test
+     */
+    public function test05MuteUser(): void
     {
         echo "\n🔇 Testing user mute...\n";
 
@@ -220,17 +173,20 @@ class ModerationIntegrationTest extends TestCase
 
         $this->assertResponseSuccess($response, 'mute user');
         $this->mutedUserIds[] = $this->testUserId2;
-        
+
         echo "✅ Successfully muted user: {$this->testUserId2}\n";
     }
 
-    public function test06_UnmuteUser(): void
+    /**
+     * @test
+     */
+    public function test06UnmuteUser(): void
     {
         echo "\n🔊 Testing user unmute...\n";
 
         // First ensure user is muted
-        if (!in_array($this->testUserId2, $this->mutedUserIds)) {
-            $this->test05_MuteUser();
+        if (!in_array($this->testUserId2, $this->mutedUserIds, true)) {
+            $this->test05MuteUser();
         }
 
         // snippet-start: UnmuteUser
@@ -243,10 +199,10 @@ class ModerationIntegrationTest extends TestCase
         // snippet-stop: UnmuteUser
 
         $this->assertResponseSuccess($response, 'unmute user');
-        
+
         // Remove from muted list
         $this->mutedUserIds = array_diff($this->mutedUserIds, [$this->testUserId2]);
-        
+
         echo "✅ Successfully unmuted user: {$this->testUserId2}\n";
     }
 
@@ -254,7 +210,10 @@ class ModerationIntegrationTest extends TestCase
     // 4. FLAG OPERATIONS
     // =================================================================
 
-    public function test07_FlagUser(): void
+    /**
+     * @test
+     */
+    public function test07FlagUser(): void
     {
         echo "\n🚩 Testing user flagging...\n";
 
@@ -271,13 +230,16 @@ class ModerationIntegrationTest extends TestCase
         // snippet-stop: FlagUser
 
         $this->assertResponseSuccess($response, 'flag user');
-        
+
         echo "✅ Successfully flagged user: {$this->testUserId}\n";
     }
 
-    public function test12_QueryReviewQueue(): void
+    /**
+     * @test
+     */
+    public function test12QueryReviewQueue(): void
     {
-        $this->markTestSkipped("backend issue");
+        self::markTestSkipped('backend issue');
 
         echo "\n📋 Testing review queue query...\n";
 
@@ -291,7 +253,7 @@ class ModerationIntegrationTest extends TestCase
         // snippet-stop: QueryReviewQueueWithFilter
 
         $this->assertResponseSuccess($response, 'query review queue');
-        
+
         echo "✅ Successfully queried review queue\n";
     }
 
@@ -299,16 +261,18 @@ class ModerationIntegrationTest extends TestCase
     // 8. QUERY OPERATIONS
     // =================================================================
 
-    public function test13_QueryModerationFlags(): void
+    /**
+     * @test
+     */
+    public function test13QueryModerationFlags(): void
     {
-
-        $this->markTestSkipped("backend issue");
+        self::markTestSkipped('backend issue');
 
         echo "\n🚩 Testing moderation flags query...\n";
 
         // snippet-start: QueryModerationFlags
         $request = new GeneratedModels\QueryModerationFlagsRequest(
-            filter:json_decode('{"has_text":"true"}'),
+            filter: json_decode('{"has_text":"true"}'),
             limit: 50
         );
 
@@ -316,13 +280,16 @@ class ModerationIntegrationTest extends TestCase
         // snippet-stop: QueryModerationFlags
 
         $this->assertResponseSuccess($response, 'query moderation flags');
-        
+
         echo "✅ Successfully queried moderation flags\n";
     }
 
-    public function test14_QueryModerationLogs(): void
+    /**
+     * @test
+     */
+    public function test14QueryModerationLogs(): void
     {
-        $this->markTestSkipped("backend issue");
+        self::markTestSkipped('backend issue');
         echo "\n📝 Testing moderation logs query...\n";
 
         // snippet-start: QueryModerationLogs
@@ -335,7 +302,7 @@ class ModerationIntegrationTest extends TestCase
         // snippet-stop: QueryModerationLogs
 
         $this->assertResponseSuccess($response, 'query moderation logs');
-        
+
         echo "✅ Successfully queried moderation logs\n";
     }
 
@@ -343,7 +310,10 @@ class ModerationIntegrationTest extends TestCase
     // 9. TEMPLATE OPERATIONS
     // =================================================================
 
-    public function test15_QueryTemplates(): void
+    /**
+     * @test
+     */
+    public function test15QueryTemplates(): void
     {
         echo "\n📄 Testing template query...\n";
 
@@ -352,8 +322,66 @@ class ModerationIntegrationTest extends TestCase
         // snippet-stop: V2QueryTemplates
 
         $this->assertResponseSuccess($response, 'query templates');
-        
+
         echo "✅ Successfully queried moderation templates\n";
+    }
+
+    // =================================================================
+    // ENVIRONMENT SETUP (called in setUp for each test)
+    // =================================================================
+
+    private function setupEnvironment(): void
+    {
+        try {
+            // Create test users
+            // snippet-start: CreateModerationUsers
+            $response = $this->client->updateUsers(new GeneratedModels\UpdateUsersRequest(
+                users: [
+                    $this->testUserId => [
+                        'id' => $this->testUserId,
+                        'name' => 'Test User 1',
+                        'role' => 'user',
+                    ],
+                    $this->testUserId2 => [
+                        'id' => $this->testUserId2,
+                        'name' => 'Test User 2',
+                        'role' => 'user',
+                    ],
+                    $this->moderatorUserId => [
+                        'id' => $this->moderatorUserId,
+                        'name' => 'Moderator User',
+                        'role' => 'admin',
+                    ],
+                    $this->reporterUserId => [
+                        'id' => $this->reporterUserId,
+                        'name' => 'Reporter User',
+                        'role' => 'user',
+                    ],
+                ]
+            ));
+            // snippet-end: CreateModerationUsers
+
+            if (!$response->isSuccessful()) {
+                throw new StreamException('Failed to create users: ' . $response->getRawBody());
+            }
+
+            $this->createdUserIds = [$this->testUserId, $this->testUserId2, $this->moderatorUserId, $this->reporterUserId];
+
+            echo "✅ Created test users for moderation tests\n";
+            echo "   Target User: {$this->testUserId}\n";
+            echo "   Target User 2: {$this->testUserId2}\n";
+            echo "   Moderator: {$this->moderatorUserId}\n";
+            echo "   Reporter: {$this->reporterUserId}\n";
+        } catch (StreamApiException $e) {
+            echo '⚠️ Setup failed: ' . $e->getMessage() . "\n";
+            echo 'ResponseBody: ' . $e->getResponseBody() . "\n";
+            echo 'ErrorDetail: ' . $e->getErrorDetails() . "\n";
+
+            throw $e;
+        } catch (\Exception $e) {
+            echo '⚠️ Setup failed: ' . $e->getMessage() . "\n";
+            // Continue with tests even if setup partially fails
+        }
     }
 
     // =================================================================
@@ -363,15 +391,15 @@ class ModerationIntegrationTest extends TestCase
     private function assertResponseSuccess(StreamResponse $response, string $operation): void
     {
         if (!$response->isSuccessful()) {
-            $this->fail("Failed to {$operation}: " . $response->getRawBody());
+            self::fail("Failed to {$operation}: " . $response->getRawBody());
         }
-        $this->assertTrue($response->isSuccessful(), "Response should be successful for {$operation}");
+        self::assertTrue($response->isSuccessful(), "Response should be successful for {$operation}");
     }
 
     private function cleanupResources(): void
     {
         echo "\n🧹 Cleaning up moderation test resources...\n";
-        
+
         // Unban any remaining banned users
         if (!empty($this->bannedUserIds)) {
             foreach ($this->bannedUserIds as $userId) {
@@ -386,7 +414,7 @@ class ModerationIntegrationTest extends TestCase
                 }
             }
         }
-        
+
         // Unmute any remaining muted users
         if (!empty($this->mutedUserIds)) {
             foreach ($this->mutedUserIds as $userId) {
@@ -402,7 +430,7 @@ class ModerationIntegrationTest extends TestCase
                 }
             }
         }
-        
+
         // Delete any created moderation configs
         if (!empty($this->createdConfigs)) {
             foreach ($this->createdConfigs as $configKey) {
@@ -414,7 +442,7 @@ class ModerationIntegrationTest extends TestCase
                 }
             }
         }
-        
+
         echo "🧹 Moderation cleanup completed\n";
     }
 }

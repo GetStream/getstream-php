@@ -18,17 +18,14 @@ class GetOrCreateFeedResponse extends BaseModel
         public ?array $followers = null,
         public ?array $following = null,
         public ?array $members = null,
-        public ?array $ownCapabilities = null,
         public ?array $pinnedActivities = null,
         public ?FeedResponse $feed = null,
         public ?string $next = null,
         public ?string $prev = null,
-        public ?array $ownFollows = null,
         public ?PagerResponse $followersPagination = null,
         public ?PagerResponse $followingPagination = null,
         public ?PagerResponse $memberPagination = null,
         public ?NotificationStatusResponse $notificationStatus = null,
-        public ?FeedMemberResponse $ownMembership = null,
     ) {}
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!

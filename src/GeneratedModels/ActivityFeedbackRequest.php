@@ -12,10 +12,8 @@ class ActivityFeedbackRequest extends BaseModel
 {
     public function __construct(
         public ?bool $hide = null,    // Whether to hide this activity 
-        public ?bool $muteUser = null,    // Whether to mute the user who created this activity 
-        public ?string $reason = null,    // Reason for the feedback (optional) 
-        public ?bool $report = null,    // Whether to report this activity 
         public ?bool $showLess = null,    // Whether to show less content like this 
+        public ?bool $showMore = null,    // Whether to show more content like this 
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {}

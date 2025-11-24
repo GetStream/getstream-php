@@ -11,11 +11,11 @@ use JsonSerializable;
 class CallType extends BaseModel
 {
     public function __construct(
-        public ?int $appPK = null,
+        public ?int $app = null,
         public ?\DateTime $createdAt = null,
-        public ?string $externalStorage = null,
+        public ?int $id = null,
         public ?string $name = null,
-        public ?int $pK = null,
+        public ?string $recordingExternalStorage = null,
         public ?\DateTime $updatedAt = null,
         public ?NotificationSettings $notificationSettings = null,
         public ?CallSettings $settings = null,

@@ -38,7 +38,7 @@ class OwnUserResponse extends BaseModel
         public ?array $blockedUserIds = null,
         public ?array $latestHiddenChannels = null,
         public ?PrivacySettingsResponse $privacySettings = null,
-        public ?PushPreferences $pushPreferences = null,
+        public ?PushPreferencesResponse $pushPreferences = null,
         public ?array $teamsRole = null,
         public ?array $totalUnreadCountByTeam = null,
     ) {}

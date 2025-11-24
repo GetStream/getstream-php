@@ -8,7 +8,7 @@ use GetStream\Exceptions\StreamException;
 use GetStream\Generated\FeedMethods;
 
 /**
- * Represents a GetStream feed
+ * Represents a GetStream feed.
  */
 class Feed
 {
@@ -19,18 +19,18 @@ class Feed
     private string $feedId;
 
     /**
-     * Create a new Feed instance
+     * Create a new Feed instance.
      *
      * @param FeedsV3Client $feedsV3Client The FeedsV3 client
-     * @param string $feedGroup The feed group
-     * @param string $feedId The feed ID
+     * @param string        $feedGroup     The feed group
+     * @param string        $feedId        The feed ID
      */
     public function __construct(FeedsV3Client $feedsV3Client, string $feedGroup, string $feedId)
     {
         if (empty($feedGroup)) {
             throw new StreamException('Feed group cannot be empty');
         }
-        
+
         if (empty($feedId)) {
             throw new StreamException('Feed ID cannot be empty');
         }
@@ -43,13 +43,13 @@ class Feed
     /**
      * @throws StreamException
      */
-    public function feed(string $feedGroup, string $feedId): Feed
+    public function feed(string $feedGroup, string $feedId): self
     {
-        return new Feed($this->feedsV3Client, $feedGroup, $feedId);
-    }//$$
+        return new self($this->feedsV3Client, $feedGroup, $feedId);
+    }// $$
 
     /**
-     * Get the feed group
+     * Get the feed group.
      */
     public function getFeedGroup(): string
     {
@@ -57,7 +57,7 @@ class Feed
     }
 
     /**
-     * Get the feed ID
+     * Get the feed ID.
      */
     public function getFeedId(): string
     {
@@ -65,7 +65,7 @@ class Feed
     }
 
     /**
-     * Get the full feed identifier (feedGroup:feedId)
+     * Get the full feed identifier (feedGroup:feedId).
      */
     public function getFeedIdentifier(): string
     {

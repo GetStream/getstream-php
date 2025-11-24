@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GetStream;
 
-use GetStream\Exceptions\StreamException;
-use GetStream\Http\HttpClientInterface;
-use GetStream\Http\GuzzleHttpClient;
 use GetStream\Auth\JWTGenerator;
+use GetStream\Exceptions\StreamException;
 use GetStream\Generated\CommonTrait;
+use GetStream\Http\GuzzleHttpClient;
+use GetStream\Http\HttpClientInterface;
 
 /**
- * Main GetStream client for interacting with the API
+ * Main GetStream client for interacting with the API.
  */
 class Client
 {
@@ -24,11 +24,11 @@ class Client
     private array $defaultHeaders;
 
     /**
-     * Create a new GetStream client
+     * Create a new GetStream client.
      *
-     * @param string $apiKey The API key
-     * @param string $apiSecret The API secret  
-     * @param string $baseUrl The base URL for the API
+     * @param string                   $apiKey     The API key
+     * @param string                   $apiSecret  The API secret
+     * @param string                   $baseUrl    The base URL for the API
      * @param HttpClientInterface|null $httpClient Optional HTTP client
      */
     public function __construct(
@@ -40,7 +40,7 @@ class Client
         if (empty($apiKey)) {
             throw new StreamException('API key cannot be empty');
         }
-        
+
         if (empty($apiSecret)) {
             throw new StreamException('API secret cannot be empty');
         }
@@ -50,7 +50,7 @@ class Client
         $this->baseUrl = rtrim($baseUrl, '/');
         $this->httpClient = $httpClient ?? new GuzzleHttpClient();
         $this->jwtGenerator = new JWTGenerator($apiSecret);
-        
+
         $this->defaultHeaders = [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
@@ -59,7 +59,7 @@ class Client
     }
 
     /**
-     * Get the API key
+     * Get the API key.
      */
     public function getApiKey(): string
     {
@@ -67,7 +67,7 @@ class Client
     }
 
     /**
-     * Get the API secret
+     * Get the API secret.
      */
     public function getApiSecret(): string
     {
@@ -75,7 +75,7 @@ class Client
     }
 
     /**
-     * Get the base URL
+     * Get the base URL.
      */
     public function getBaseUrl(): string
     {
@@ -83,7 +83,7 @@ class Client
     }
 
     /**
-     * Get the HTTP client
+     * Get the HTTP client.
      */
     public function getHttpClient(): HttpClientInterface
     {
@@ -91,7 +91,7 @@ class Client
     }
 
     /**
-     * Get the JWT generator
+     * Get the JWT generator.
      */
     public function getJWTGenerator(): JWTGenerator
     {
@@ -99,29 +99,32 @@ class Client
     }
 
     /**
-     * Create a feed instance
+     * Create a feed instance.
      *
      * @param string $feedGroup The feed group (e.g., 'user', 'timeline')
-     * @param string $feedId The feed ID (e.g., user ID)
-     * @return Feed
+     * @param string $feedId    The feed ID (e.g., user ID)
+     *
      * @throws StreamException
      */
     public function feed(string $feedGroup, string $feedId): Feed
     {
         // Create a FeedsV3Client instance using the same configuration
         $feedsV3Client = new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+
         return new Feed($feedsV3Client, $feedGroup, $feedId);
     }
 
     /**
-     * Make an authenticated HTTP request to the GetStream API
+     * Make an authenticated HTTP request to the GetStream API.
      *
-     * @param string $method HTTP method
-     * @param string $path API path
-     * @param array $queryParams Query parameters
-     * @param mixed $body Request body
-     * @param array $pathParams Path parameters for URL substitution
+     * @param string $method      HTTP method
+     * @param string $path        API path
+     * @param array  $queryParams Query parameters
+     * @param mixed  $body        Request body
+     * @param array  $pathParams  Path parameters for URL substitution
+     *
      * @return StreamResponse<mixed>
+     *
      * @throws StreamException
      */
     public function makeRequest(
@@ -133,21 +136,21 @@ class Client
     ): StreamResponse {
         // Replace path parameters
         foreach ($pathParams as $key => $value) {
-            $path = str_replace('{' . $key . '}', (string)$value, $path);
+            $path = str_replace('{' . $key . '}', (string) $value, $path);
         }
 
         // Build URL
         $url = $this->baseUrl . $path;
-        
+
         // Add API key to query parameters
         $queryParams['api_key'] = $this->apiKey;
-        
+
         // Add query parameters (there will always be at least api_key)
         $url .= '?' . http_build_query($queryParams);
 
         // Generate authentication token
         $token = $this->jwtGenerator->generateServerToken();
-        
+
         // Prepare headers
         $headers = array_merge($this->defaultHeaders, [
             'Authorization' => $token,
@@ -158,14 +161,13 @@ class Client
         return $this->httpClient->request($method, $url, $headers, $body);
     }
 
-
-
     /**
-     * Generate a user token for client-side authentication
+     * Generate a user token for client-side authentication.
      *
-     * @param string $userId The user ID
-     * @param array $claims Additional claims
+     * @param string   $userId     The user ID
+     * @param array    $claims     Additional claims
      * @param int|null $expiration Token expiration in seconds (null for no expiration)
+     *
      * @return string JWT token
      */
     public function createUserToken(string $userId, array $claims = [], ?int $expiration = null): string
@@ -174,17 +176,19 @@ class Client
     }
 
     /**
-     * Create or update users
+     * Create or update users.
      *
      * @param array $users Array of user data keyed by user ID
+     *
      * @return StreamResponse<mixed>
+     *
      * @throws StreamException
      */
     public function upsertUsers(array $users): StreamResponse
     {
         $path = '/api/v2/users';
         $requestData = ['users' => $users];
-        
+
         return $this->makeRequest('POST', $path, [], $requestData);
     }
 }

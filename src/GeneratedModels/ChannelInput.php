@@ -18,6 +18,7 @@ class ChannelInput extends BaseModel
         public ?bool $frozen = null,    // Freeze or unfreeze the channel 
         public ?string $team = null,    // Team the channel belongs to (if multi-tenant mode is enabled) 
         public ?string $truncatedByID = null,
+        public ?array $filterTags = null,
         public ?array $invites = null,
         public ?array $members = null,
         public ?ChannelConfig $configOverrides = null,

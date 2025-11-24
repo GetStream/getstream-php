@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GetStream\Auth;
 
-use GetStream\Exceptions\StreamException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use GetStream\Exceptions\StreamException;
 
 /**
- * JWT token generator for GetStream authentication
+ * JWT token generator for GetStream authentication.
  */
 class JWTGenerator
 {
@@ -17,9 +17,9 @@ class JWTGenerator
     private string $algorithm;
 
     /**
-     * Create a new JWTGenerator
+     * Create a new JWTGenerator.
      *
-     * @param string $secret The API secret
+     * @param string $secret    The API secret
      * @param string $algorithm JWT algorithm (default: HS256)
      */
     public function __construct(string $secret, string $algorithm = 'HS256')
@@ -33,16 +33,17 @@ class JWTGenerator
     }
 
     /**
-     * Generate a server-side token for API authentication
+     * Generate a server-side token for API authentication.
      *
-     * @param array $claims Additional claims to include
+     * @param array    $claims     Additional claims to include
      * @param int|null $expiration Token expiration in seconds (null for no expiration)
+     *
      * @return string JWT token
      */
     public function generateServerToken(array $claims = [], ?int $expiration = null): string
     {
         $now = time();
-        
+
         $payload = array_merge([
             'iat' => $now,
             'server' => true,
@@ -56,11 +57,12 @@ class JWTGenerator
     }
 
     /**
-     * Generate a user token for client-side authentication
+     * Generate a user token for client-side authentication.
      *
-     * @param string $userId The user ID
-     * @param array $claims Additional claims to include
+     * @param string   $userId     The user ID
+     * @param array    $claims     Additional claims to include
      * @param int|null $expiration Token expiration in seconds (null for no expiration)
+     *
      * @return string JWT token
      */
     public function generateUserToken(string $userId, array $claims = [], ?int $expiration = null): string
@@ -70,7 +72,7 @@ class JWTGenerator
         }
 
         $now = time();
-        
+
         $payload = array_merge([
             'user_id' => $userId,
             'iat' => $now,
@@ -84,16 +86,19 @@ class JWTGenerator
     }
 
     /**
-     * Verify and decode a JWT token
+     * Verify and decode a JWT token.
      *
      * @param string $token The JWT token to verify
+     *
      * @return array Decoded token payload
+     *
      * @throws StreamException
      */
     public function verifyToken(string $token): array
     {
         try {
             $decoded = JWT::decode($token, new Key($this->secret, $this->algorithm));
+
             return (array) $decoded;
         } catch (\Exception $e) {
             throw new StreamException('Invalid JWT token: ' . $e->getMessage(), 0, $e);
@@ -101,16 +106,17 @@ class JWTGenerator
     }
 
     /**
-     * Verify a webhook signature
+     * Verify a webhook signature.
      *
-     * @param string $body The request body
+     * @param string $body      The request body
      * @param string $signature The signature to verify
+     *
      * @return bool True if signature is valid
      */
     public function verifyWebhookSignature(string $body, string $signature): bool
     {
         $expectedSignature = hash_hmac('sha256', $body, $this->secret);
+
         return hash_equals($expectedSignature, $signature);
     }
 }
-
