@@ -1,5 +1,5 @@
 {
-    "name": "getstream/stream-php",
+    "name": "getstream/getstream-php",
     "description": "PHP SDK for GetStream API - Auto-generated components",
     "type": "library",
     "license": "MIT",

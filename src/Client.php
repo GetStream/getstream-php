@@ -54,7 +54,7 @@ class Client
         $this->defaultHeaders = [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-            'User-Agent' => 'stream-php-sdk/1.0.0',
+            'User-Agent' => 'getstream-php-sdk/1.0.0',
         ];
     }
 

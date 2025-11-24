@@ -32,4 +32,4 @@ jobs:
           body: |
             Release ${{ env.VERSION }}
             
-            Install with: `composer require getstream/stream-php:^${{ env.VERSION }}`
+            Install with: `composer require getstream/getstream-php:^${{ env.VERSION }}`
