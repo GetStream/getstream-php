@@ -1720,7 +1720,7 @@ class FeedIntegrationTest extends TestCase
         // Test 3: Get Feed Group
         echo "\n🔍 Testing get feed group...\n";
         // snippet-start: GetFeedGroup
-        $getResponse = $this->feedsV3Client->getFeedGroup($feedGroupId, false);
+        $getResponse = $this->feedsV3Client->getFeedGroup('foryou', false);
         // snippet-end: GetFeedGroup
 
         $this->assertResponseSuccess($getResponse, 'get feed group');
