@@ -131,7 +131,7 @@ class ModerationIntegrationTest extends TestCase
 
         // First ensure user is banned
         if (!in_array($this->testUserId, $this->bannedUserIds, true)) {
-            $this->test02_BanUserWithReason();
+            $this->test02BanUserWithReason();
         }
 
         // snippet-start: UnbanUser
@@ -186,7 +186,7 @@ class ModerationIntegrationTest extends TestCase
 
         // First ensure user is muted
         if (!in_array($this->testUserId2, $this->mutedUserIds, true)) {
-            $this->test05_MuteUser();
+            $this->test05MuteUser();
         }
 
         // snippet-start: UnmuteUser

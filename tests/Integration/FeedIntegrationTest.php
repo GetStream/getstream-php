@@ -424,7 +424,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // snippet-start: AddReaction
-        $response = $this->feedsV3Client->addReaction(
+        $response = $this->feedsV3Client->addActivityReaction(
             $activityId,
             new GeneratedModels\AddReactionRequest(
                 type: 'like',
@@ -460,7 +460,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // Add a reaction first
-        $reactionResponse = $this->feedsV3Client->addReaction(
+        $reactionResponse = $this->feedsV3Client->addActivityReaction(
             $activityId,
             new GeneratedModels\AddReactionRequest(
                 type: 'like',
@@ -991,7 +991,7 @@ class FeedIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // Add a reaction first
-        $reactionResponse = $this->feedsV3Client->addReaction(
+        $reactionResponse = $this->feedsV3Client->addActivityReaction(
             $activityId,
             new GeneratedModels\AddReactionRequest(
                 type: 'like',
@@ -1280,8 +1280,7 @@ class FeedIntegrationTest extends TestCase
             $moderationResponse = $this->feedsV3Client->activityFeedback(
                 $activityId,
                 new GeneratedModels\ActivityFeedbackRequest(
-                    reason: 'inappropriate_content',
-                    report: true,
+                    hide: true,
                     userID: $this->testUserId2 // Different user reporting
                 )
             );
@@ -1615,7 +1614,7 @@ class FeedIntegrationTest extends TestCase
         // 2. Other users react to the post
         $reactionTypes = ['like', 'love', 'wow'];
         foreach ($reactionTypes as $reactionType) {
-            $reactionResponse = $this->feedsV3Client->addReaction(
+            $reactionResponse = $this->feedsV3Client->addActivityReaction(
                 $postId,
                 new GeneratedModels\AddReactionRequest(
                     type: $reactionType,
@@ -1681,7 +1680,7 @@ class FeedIntegrationTest extends TestCase
         // Test 1: List Feed Groups
         echo "\n📋 Testing list feed groups...\n";
         // snippet-start: ListFeedGroups
-        $listResponse = $this->feedsV3Client->listFeedGroups();
+        $listResponse = $this->feedsV3Client->listFeedGroups(false);
         // snippet-end: ListFeedGroups
 
         $this->assertResponseSuccess($listResponse, 'list feed groups');
