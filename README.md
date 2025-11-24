@@ -7,7 +7,7 @@ A PHP SDK for the GetStream API.
 Install via Composer:
 
 ```bash
-composer require getstream/stream-php
+composer require getstream/getstream-php
 ```
 
 ## Configuration
