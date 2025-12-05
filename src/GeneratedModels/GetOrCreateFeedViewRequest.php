@@ -3,18 +3,23 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property array<ActivitySelectorConfig>|null $activitySelectors
+ * @property AggregationConfig|null $aggregation
+ * @property RankingConfig|null $ranking
  */
 class GetOrCreateFeedViewRequest extends BaseModel
 {
     public function __construct(
-        public ?array $activitySelectors = null,    // Configuration for selecting activities 
+        /** @var array<ActivitySelectorConfig>|null Configuration for selecting activities */
+        #[ArrayOf(ActivitySelectorConfig::class)]
+        public ?array $activitySelectors = null, // Configuration for selecting activities
         public ?AggregationConfig $aggregation = null,
         public ?RankingConfig $ranking = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property \DateTime $createdAt
+ * @property string $nextState
+ * @property string $prevState
  */
 class ImportTaskHistory extends BaseModel
 {
@@ -14,7 +16,8 @@ class ImportTaskHistory extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $nextState = null,
         public ?string $prevState = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

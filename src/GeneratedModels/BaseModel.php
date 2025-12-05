@@ -15,6 +15,15 @@ class JsonKey
 {
     public function __construct(public string $key) {}
 }
+
+/**
+ * Attribute to specify that an array contains model objects of a specific type
+ */
+#[\Attribute(\Attribute::TARGET_ALL)]
+class ArrayOf
+{
+    public function __construct(public string $modelClass) {}
+}
 /**
  * Base class for all generated models with automatic JSON parsing based on constructor types
  */
@@ -36,16 +45,32 @@ abstract class BaseModel implements JsonSerializable
             $json = json_decode($json, true);
         }
 
-        $reflection = new \ReflectionClass(static::class);
-        $constructor = $reflection->getConstructor();
+        $className = static::class;
         
-        if (!$constructor) {
+        // Use cached reflection data if available
+        if (!isset(self::$reflectionCache[$className])) {
+            $reflection = new \ReflectionClass($className);
+            $constructor = $reflection->getConstructor();
+            
+            if (!$constructor) {
+                self::$reflectionCache[$className] = ['constructor' => null, 'params' => []];
+            } else {
+                self::$reflectionCache[$className] = [
+                    'constructor' => $constructor,
+                    'params' => $constructor->getParameters()
+                ];
+            }
+        }
+        
+        $cache = self::$reflectionCache[$className];
+        
+        if ($cache['constructor'] === null) {
             /** @phpstan-ignore-next-line */
             return new static();
         }
 
         $args = [];
-        foreach ($constructor->getParameters() as $param) {
+        foreach ($cache['params'] as $param) {
             $paramName = $param->getName();
             
             // Check for custom JsonKey attribute
@@ -89,6 +114,11 @@ abstract class BaseModel implements JsonSerializable
             case 'float':
             case 'bool':
             case 'array':
+                // Check if array should be parsed as array of model objects
+                $arrayOfAttr = self::getArrayOfAttribute($param);
+                if ($arrayOfAttr !== null && is_array($value)) {
+                    return self::parseArrayOfModels($value, $arrayOfAttr);
+                }
                 return $value; // Primitive types, return as-is
             
             default:
@@ -114,6 +144,37 @@ abstract class BaseModel implements JsonSerializable
     }
 
     /**
+     * Get ArrayOf attribute for a parameter if it exists
+     */
+    private static function getArrayOfAttribute(\ReflectionParameter $param): ?string
+    {
+        $attributes = $param->getAttributes(ArrayOf::class);
+        if (!empty($attributes)) {
+            return $attributes[0]->newInstance()->modelClass;
+        }
+        return null;
+    }
+
+    /**
+     * Parse array of model objects
+     */
+    private static function parseArrayOfModels(mixed $value, string $modelClass): ?array
+    {
+        if ($value === null || !is_array($value)) {
+            return null;
+        }
+
+        if (!class_exists($modelClass) || !is_subclass_of($modelClass, BaseModel::class)) {
+            return $value; // Return as-is if class doesn't exist or isn't a BaseModel
+        }
+
+        return array_map(
+            fn($item) => is_array($item) ? $modelClass::fromJson($item) : $item,
+            $value
+        );
+    }
+
+    /**
      * Convert camelCase to snake_case for JSON key mapping
      */
     private static function camelToSnake(string $camelCase): string
@@ -128,14 +189,30 @@ abstract class BaseModel implements JsonSerializable
     public function jsonSerialize(): array|object
     {
         $result = [];
-        $reflection = new \ReflectionClass($this);
-        $constructor = $reflection->getConstructor();
+        $className = static::class;
         
-        if (!$constructor) {
+        // Use cached reflection data if available
+        if (!isset(self::$reflectionCache[$className])) {
+            $reflection = new \ReflectionClass($className);
+            $constructor = $reflection->getConstructor();
+            
+            if (!$constructor) {
+                self::$reflectionCache[$className] = ['constructor' => null, 'params' => []];
+            } else {
+                self::$reflectionCache[$className] = [
+                    'constructor' => $constructor,
+                    'params' => $constructor->getParameters()
+                ];
+            }
+        }
+        
+        $cache = self::$reflectionCache[$className];
+        
+        if ($cache['constructor'] === null) {
             return (object)[];
         }
 
-        foreach ($constructor->getParameters() as $param) {
+        foreach ($cache['params'] as $param) {
             $paramName = $param->getName();
             $value = $this->$paramName;
             
@@ -205,11 +282,19 @@ abstract class BaseModel implements JsonSerializable
         
         if (is_int($value)) {
             // Handle nanosecond timestamps from Stream API
-            return new \DateTime('@' . intval($value / 1000000000));
+            try {
+                return new \DateTime('@' . intval($value / 1000000000));
+            } catch (\Exception $e) {
+                return null;
+            }
         }
         
         if (is_string($value)) {
-            return new \DateTime($value);
+            try {
+                return new \DateTime($value);
+            } catch (\Exception $e) {
+                return null;
+            }
         }
         
         return null;

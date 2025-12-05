@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $bucket
+ * @property string $name
+ * @property string $path
+ * @property string $type
  */
 class ExternalStorageResponse extends BaseModel
 {
@@ -15,7 +18,8 @@ class ExternalStorageResponse extends BaseModel
         public ?string $name = null,
         public ?string $path = null,
         public ?string $type = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

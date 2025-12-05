@@ -3,10 +3,20 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $createdAt
+ * @property string|null $createdByID
+ * @property bool|null $disabled
+ * @property bool|null $frozen
+ * @property string|null $id
+ * @property string|null $lastMessageAt
+ * @property int|null $memberCount
+ * @property string|null $team
+ * @property string|null $type
+ * @property string|null $updatedAt
+ * @property object|null $custom
  */
 class DenormalizedChannelFields extends BaseModel
 {
@@ -22,7 +32,8 @@ class DenormalizedChannelFields extends BaseModel
         public ?string $type = null,
         public ?string $updatedAt = null,
         public ?object $custom = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

@@ -3,10 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $description
+ * @property string|null $name
+ * @property string|null $visibility
+ * @property array|null $filterTags
+ * @property array<FeedMemberRequest>|null $members
+ * @property object|null $custom
  */
 class FeedInput extends BaseModel
 {
@@ -15,9 +20,12 @@ class FeedInput extends BaseModel
         public ?string $name = null,
         public ?string $visibility = null,
         public ?array $filterTags = null,
+        /** @var array<FeedMemberRequest>|null */
+        #[ArrayOf(FeedMemberRequest::class)]
         public ?array $members = null,
         public ?object $custom = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

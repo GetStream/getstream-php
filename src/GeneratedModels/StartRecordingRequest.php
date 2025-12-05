@@ -3,16 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $recordingExternalStorage
  */
 class StartRecordingRequest extends BaseModel
 {
     public function __construct(
         public ?string $recordingExternalStorage = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

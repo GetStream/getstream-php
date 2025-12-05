@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int|null $accuracyRadiusMeters
+ * @property string|null $city
+ * @property string|null $continent
+ * @property string|null $country
+ * @property string|null $countryIsoCode
+ * @property int|null $latitude
+ * @property int|null $longitude
+ * @property string|null $subdivision
  */
 class CallStatsLocation extends BaseModel
 {
@@ -19,7 +26,8 @@ class CallStatsLocation extends BaseModel
         public ?int $latitude = null,
         public ?int $longitude = null,
         public ?string $subdivision = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

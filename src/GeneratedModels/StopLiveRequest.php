@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool|null $continueClosedCaption
+ * @property bool|null $continueHLS
+ * @property bool|null $continueRTMPBroadcasts
+ * @property bool|null $continueRecording
+ * @property bool|null $continueTranscription
  */
 class StopLiveRequest extends BaseModel
 {
@@ -16,7 +20,8 @@ class StopLiveRequest extends BaseModel
         public ?bool $continueRTMPBroadcasts = null,
         public ?bool $continueRecording = null,
         public ?bool $continueTranscription = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

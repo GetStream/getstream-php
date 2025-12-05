@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $action
+ * @property int $explicit
+ * @property int $spam
+ * @property int $toxic
  */
 class ModerationResponse extends BaseModel
 {
@@ -15,7 +18,8 @@ class ModerationResponse extends BaseModel
         public ?int $explicit = null,
         public ?int $spam = null,
         public ?int $toxic = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

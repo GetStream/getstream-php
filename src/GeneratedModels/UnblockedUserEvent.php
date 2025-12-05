@@ -3,11 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * This event is sent when a user is unblocked on a call,
  * this can be useful to notify the user that they can now join the call again
+ *
+ * @property string $callCid
+ * @property \DateTime $createdAt
+ * @property UserResponse $user
+ * @property string $type
  */
 class UnblockedUserEvent extends BaseModel
 {
@@ -15,8 +18,9 @@ class UnblockedUserEvent extends BaseModel
         public ?string $callCid = null,
         public ?\DateTime $createdAt = null,
         public ?UserResponse $user = null,
-        public ?string $type = null,    // The type of event: "call.unblocked_user" in this case 
-    ) {}
+        public ?string $type = null, // The type of event: "call.unblocked_user" in this case
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

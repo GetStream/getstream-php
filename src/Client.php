@@ -16,6 +16,7 @@ use GetStream\Http\HttpClientInterface;
 class Client
 {
     use CommonTrait;
+    
     private string $apiKey;
     private string $apiSecret;
     private string $baseUrl;
@@ -54,7 +55,8 @@ class Client
         $this->defaultHeaders = [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-            'User-Agent' => 'getstream-php-sdk/1.0.0',
+            'User-Agent' => 'getstream-php-sdk/' . Constant::VERSION,
+            'x-stream-client' => 'stream-php-client-' . Constant::VERSION,
         ];
     }
 

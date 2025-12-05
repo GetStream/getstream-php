@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $fps
+ * @property int $height
+ * @property int $width
  */
 class IngressSource extends BaseModel
 {
@@ -14,7 +16,8 @@ class IngressSource extends BaseModel
         public ?int $fps = null,
         public ?int $height = null,
         public ?int $width = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

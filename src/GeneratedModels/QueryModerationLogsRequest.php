@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int|null $limit
+ * @property string|null $next
+ * @property string|null $prev
+ * @property string|null $userID
+ * @property array<SortParamRequest>|null $sort
+ * @property object|null $filter
+ * @property UserRequest|null $user
  */
 class QueryModerationLogsRequest extends BaseModel
 {
@@ -15,10 +21,13 @@ class QueryModerationLogsRequest extends BaseModel
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $userID = null,
-        public ?array $sort = null,    // Sorting parameters for the results 
-        public ?object $filter = null,    // Filter conditions for moderation logs 
+        /** @var array<SortParamRequest>|null Sorting parameters for the results */
+        #[ArrayOf(SortParamRequest::class)]
+        public ?array $sort = null, // Sorting parameters for the results
+        public ?object $filter = null, // Filter conditions for moderation logs
         public ?UserRequest $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

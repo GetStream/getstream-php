@@ -3,18 +3,21 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $accessToken
+ * @property string $duration
+ * @property UserResponse $user
  */
 class CreateGuestResponse extends BaseModel
 {
     public function __construct(
-        public ?string $accessToken = null,    // the access token to authenticate the user 
-        public ?string $duration = null,    // Duration of the request in milliseconds 
+        public ?string $accessToken = null, // the access token to authenticate the user
+        public ?string $duration = null, // Duration of the request in milliseconds
         public ?UserResponse $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

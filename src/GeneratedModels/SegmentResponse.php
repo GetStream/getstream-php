@@ -3,10 +3,20 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $allSenderChannels
+ * @property bool $allUsers
+ * @property \DateTime $createdAt
+ * @property \DateTime $deletedAt
+ * @property string $description
+ * @property string $id
+ * @property string $name
+ * @property int $size
+ * @property string $type
+ * @property \DateTime $updatedAt
+ * @property object $filter
  */
 class SegmentResponse extends BaseModel
 {
@@ -22,7 +32,8 @@ class SegmentResponse extends BaseModel
         public ?string $type = null,
         public ?\DateTime $updatedAt = null,
         public ?object $filter = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

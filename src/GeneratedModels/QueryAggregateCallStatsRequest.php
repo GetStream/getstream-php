@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $from
+ * @property string|null $to
+ * @property array|null $reportTypes
  */
 class QueryAggregateCallStatsRequest extends BaseModel
 {
@@ -14,7 +16,8 @@ class QueryAggregateCallStatsRequest extends BaseModel
         public ?string $from = null,
         public ?string $to = null,
         public ?array $reportTypes = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

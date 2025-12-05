@@ -3,10 +3,23 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $action
+ * @property int|null $banDuration
+ * @property string|null $cascadingAction
+ * @property int|null $cascadingThreshold
+ * @property bool|null $checkMessageContext
+ * @property int|null $fastSpamThreshold
+ * @property int|null $fastSpamTtl
+ * @property bool|null $ipBan
+ * @property int|null $probationPeriod
+ * @property bool|null $shadowBan
+ * @property int|null $slowSpamBanDuration
+ * @property int|null $slowSpamThreshold
+ * @property int|null $slowSpamTtl
+ * @property bool|null $urlOnly
  */
 class VelocityFilterConfigRule extends BaseModel
 {
@@ -25,7 +38,8 @@ class VelocityFilterConfigRule extends BaseModel
         public ?int $slowSpamThreshold = null,
         public ?int $slowSpamTtl = null,
         public ?bool $urlOnly = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

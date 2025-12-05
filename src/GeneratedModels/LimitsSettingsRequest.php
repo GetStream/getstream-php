@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int|null $maxDurationSeconds
+ * @property int|null $maxParticipants
+ * @property bool|null $maxParticipantsExcludeOwner
+ * @property array|null $maxParticipantsExcludeRoles
  */
 class LimitsSettingsRequest extends BaseModel
 {
@@ -15,7 +18,8 @@ class LimitsSettingsRequest extends BaseModel
         public ?int $maxParticipants = null,
         public ?bool $maxParticipantsExcludeOwner = null,
         public ?array $maxParticipantsExcludeRoles = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

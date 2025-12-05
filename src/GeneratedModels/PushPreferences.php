@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $callLevel
+ * @property string|null $chatLevel
+ * @property \DateTime|null $disabledUntil
+ * @property string|null $feedsLevel
+ * @property FeedsPreferences|null $feedsPreferences
  */
 class PushPreferences extends BaseModel
 {
@@ -16,7 +20,8 @@ class PushPreferences extends BaseModel
         public ?\DateTime $disabledUntil = null,
         public ?string $feedsLevel = null,
         public ?FeedsPreferences $feedsPreferences = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

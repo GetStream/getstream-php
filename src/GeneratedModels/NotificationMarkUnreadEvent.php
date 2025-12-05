@@ -3,10 +3,27 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $channelID
+ * @property int $channelMemberCount
+ * @property string $channelType
+ * @property string $cid
+ * @property \DateTime $createdAt
+ * @property string $firstUnreadMessageID
+ * @property \DateTime $lastReadAt
+ * @property int $totalUnreadCount
+ * @property int $unreadChannels
+ * @property int $unreadCount
+ * @property int $unreadMessages
+ * @property int $unreadThreads
+ * @property string $type
+ * @property string|null $lastReadMessageID
+ * @property string|null $team
+ * @property string|null $threadID
+ * @property ChannelResponse|null $channel
+ * @property User|null $user
  */
 class NotificationMarkUnreadEvent extends BaseModel
 {
@@ -29,7 +46,8 @@ class NotificationMarkUnreadEvent extends BaseModel
         public ?string $threadID = null,
         public ?ChannelResponse $channel = null,
         public ?User $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

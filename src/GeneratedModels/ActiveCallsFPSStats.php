@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $p05
+ * @property int $p10
+ * @property int $p50
+ * @property int $p90
  */
 class ActiveCallsFPSStats extends BaseModel
 {
@@ -15,7 +18,8 @@ class ActiveCallsFPSStats extends BaseModel
         public ?int $p10 = null,
         public ?int $p50 = null,
         public ?int $p90 = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

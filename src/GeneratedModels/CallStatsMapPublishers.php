@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+/**
+ * 
+ *
+ * @property array<CallStatsMapPublisher> $publishers
+ */
+class CallStatsMapPublishers extends BaseModel
+{
+    public function __construct(
+        /** @var array<CallStatsMapPublisher>|null */
+        #[ArrayOf(CallStatsMapPublisher::class)]
+        public ?array $publishers = null,
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

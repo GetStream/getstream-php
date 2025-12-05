@@ -3,10 +3,23 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $blocklist
+ * @property string|null $blocklistBehavior
+ * @property bool|null $countMessages
+ * @property int|null $maxMessageLength
+ * @property bool|null $quotes
+ * @property bool|null $reactions
+ * @property bool|null $replies
+ * @property bool|null $sharedLocations
+ * @property bool|null $typingEvents
+ * @property bool|null $uploads
+ * @property bool|null $urlEnrichment
+ * @property bool|null $userMessageReminders
+ * @property array|null $commands
+ * @property array|null $grants
  */
 class ConfigOverrides extends BaseModel
 {
@@ -25,7 +38,8 @@ class ConfigOverrides extends BaseModel
         public ?bool $userMessageReminders = null,
         public ?array $commands = null,
         public ?array $grants = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

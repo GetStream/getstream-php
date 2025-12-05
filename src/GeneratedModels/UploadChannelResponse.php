@@ -3,20 +3,27 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $duration
+ * @property string|null $file
+ * @property string|null $moderationAction
+ * @property string|null $thumbUrl
+ * @property array<ImageSize>|null $uploadSizes
  */
 class UploadChannelResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,    // Duration of the request in milliseconds 
+        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $file = null,
         public ?string $moderationAction = null,
         public ?string $thumbUrl = null,
-        public ?array $uploadSizes = null,    // Array of image size configurations 
-    ) {}
+        /** @var array<ImageSize>|null Array of image size configurations */
+        #[ArrayOf(ImageSize::class)]
+        public ?array $uploadSizes = null, // Array of image size configurations
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

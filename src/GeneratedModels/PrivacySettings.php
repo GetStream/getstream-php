@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property DeliveryReceipts|null $deliveryReceipts
+ * @property ReadReceipts|null $readReceipts
+ * @property TypingIndicators|null $typingIndicators
  */
 class PrivacySettings extends BaseModel
 {
@@ -14,7 +16,8 @@ class PrivacySettings extends BaseModel
         public ?DeliveryReceipts $deliveryReceipts = null,
         public ?ReadReceipts $readReceipts = null,
         public ?TypingIndicators $typingIndicators = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

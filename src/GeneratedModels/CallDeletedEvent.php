@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * This event is sent when a call is deleted. Clients receiving this event should leave the call screen
+ *
+ * @property string $callCid
+ * @property \DateTime $createdAt
+ * @property CallResponse $call
+ * @property string $type
  */
 class CallDeletedEvent extends BaseModel
 {
@@ -14,8 +17,9 @@ class CallDeletedEvent extends BaseModel
         public ?string $callCid = null,
         public ?\DateTime $createdAt = null,
         public ?CallResponse $call = null,
-        public ?string $type = null,    // The type of event: "call.deleted" in this case 
-    ) {}
+        public ?string $type = null, // The type of event: "call.deleted" in this case
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

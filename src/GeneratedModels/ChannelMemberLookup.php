@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $archived
+ * @property bool $banned
+ * @property bool $blocked
+ * @property bool $hidden
+ * @property bool $pinned
+ * @property \DateTime|null $archivedAt
+ * @property \DateTime|null $banExpires
+ * @property \DateTime|null $pinnedAt
  */
 class ChannelMemberLookup extends BaseModel
 {
@@ -19,7 +26,8 @@ class ChannelMemberLookup extends BaseModel
         public ?\DateTime $archivedAt = null,
         public ?\DateTime $banExpires = null,
         public ?\DateTime $pinnedAt = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

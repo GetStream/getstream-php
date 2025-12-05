@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $app
+ * @property \DateTime $createdAt
+ * @property int $id
+ * @property string $name
+ * @property string $recordingExternalStorage
+ * @property \DateTime $updatedAt
+ * @property NotificationSettings|null $notificationSettings
+ * @property CallSettings|null $settings
  */
 class CallType extends BaseModel
 {
@@ -19,7 +26,8 @@ class CallType extends BaseModel
         public ?\DateTime $updatedAt = null,
         public ?NotificationSettings $notificationSettings = null,
         public ?CallSettings $settings = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $enabled
+ * @property string|null $packageName
+ * @property string|null $secret
  */
 class XiaomiConfigFields extends BaseModel
 {
@@ -14,7 +16,8 @@ class XiaomiConfigFields extends BaseModel
         public ?bool $enabled = null,
         public ?string $packageName = null,
         public ?string $secret = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

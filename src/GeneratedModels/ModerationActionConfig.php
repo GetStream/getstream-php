@@ -3,10 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $action
+ * @property string $description
+ * @property string $entityType
+ * @property string $icon
+ * @property int $order
+ * @property object $custom
  */
 class ModerationActionConfig extends BaseModel
 {
@@ -17,7 +22,8 @@ class ModerationActionConfig extends BaseModel
         public ?string $icon = null,
         public ?int $order = null,
         public ?object $custom = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

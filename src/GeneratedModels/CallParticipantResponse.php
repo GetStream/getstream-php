@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property \DateTime $joinedAt
+ * @property string $role
+ * @property string $userSessionID
+ * @property UserResponse $user
  */
 class CallParticipantResponse extends BaseModel
 {
@@ -15,7 +18,8 @@ class CallParticipantResponse extends BaseModel
         public ?string $role = null,
         public ?string $userSessionID = null,
         public ?UserResponse $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

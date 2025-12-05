@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool|null $disabled
+ * @property string|null $id
+ * @property string|null $secret
  */
 class HuaweiConfig extends BaseModel
 {
@@ -14,7 +16,8 @@ class HuaweiConfig extends BaseModel
         public ?bool $disabled = null,
         public ?string $id = null,
         public ?string $secret = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

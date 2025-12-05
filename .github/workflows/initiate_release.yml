@@ -17,15 +17,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Update composer.json and push release branch
+      - name: Update version in composer.json and Constant.php
         env:
           VERSION: ${{ github.event.inputs.version }}
         run: |
-          sed -i 's/"version": ".*"/"version": "'$VERSION'"/' composer.json
+          # Update composer.json
+          sed -i 's/"version": ".*"/"version": "v'$VERSION'"/' composer.json
+          # Update Constant.php (remove 'v' prefix for constant)
+          sed -i "s/const VERSION = '.*'/const VERSION = '$VERSION'/" src/Constant.php
           git config --global user.name 'github-actions' 
           git config --global user.email 'release@getstream.io'
           git checkout -q -b "release-$VERSION"
-          git add composer.json
+          git add composer.json src/Constant.php
           git commit -am "chore(release): $VERSION"
           git push -q -u origin "release-$VERSION"
 
@@ -40,4 +43,5 @@ jobs:
             Once this is merged, another job will kick off automatically and publish the package.
             
             ## Changes
-            - Updated version in composer.json to ${{ github.event.inputs.version }}"
+            - Updated version in composer.json to v${{ github.event.inputs.version }}
+            - Updated version in Constant.php to ${{ github.event.inputs.version }}"

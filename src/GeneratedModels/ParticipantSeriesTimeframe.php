@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $maxPoints
+ * @property \DateTime $since
+ * @property int $stepSeconds
+ * @property \DateTime $until
  */
 class ParticipantSeriesTimeframe extends BaseModel
 {
@@ -15,7 +18,8 @@ class ParticipantSeriesTimeframe extends BaseModel
         public ?\DateTime $since = null,
         public ?int $stepSeconds = null,
         public ?\DateTime $until = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

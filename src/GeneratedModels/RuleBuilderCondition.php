@@ -3,10 +3,23 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int|null $confidence
+ * @property string|null $type
+ * @property ContentCountRuleParameters|null $contentCountRuleParams
+ * @property FlagCountRuleParameters|null $contentFlagCountRuleParams
+ * @property ImageContentParameters|null $imageContentParams
+ * @property ImageRuleParameters|null $imageRuleParams
+ * @property TextContentParameters|null $textContentParams
+ * @property TextRuleParameters|null $textRuleParams
+ * @property UserCreatedWithinParameters|null $userCreatedWithinParams
+ * @property UserCustomPropertyParameters|null $userCustomPropertyParams
+ * @property FlagCountRuleParameters|null $userFlagCountRuleParams
+ * @property UserRuleParameters|null $userRuleParams
+ * @property VideoContentParameters|null $videoContentParams
+ * @property VideoRuleParameters|null $videoRuleParams
  */
 class RuleBuilderCondition extends BaseModel
 {
@@ -25,7 +38,8 @@ class RuleBuilderCondition extends BaseModel
         public ?UserRuleParameters $userRuleParams = null,
         public ?VideoContentParameters $videoContentParams = null,
         public ?VideoRuleParameters $videoRuleParams = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.
