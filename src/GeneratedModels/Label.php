@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $name
+ * @property array|null $harmLabels
+ * @property array|null $phraseListIds
  */
 class Label extends BaseModel
 {
@@ -14,7 +16,8 @@ class Label extends BaseModel
         public ?string $name = null,
         public ?array $harmLabels = null,
         public ?array $phraseListIds = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

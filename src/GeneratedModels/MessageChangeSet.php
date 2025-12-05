@@ -3,10 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $attachments
+ * @property bool $custom
+ * @property bool $html
+ * @property bool $mentionedUserIds
+ * @property bool $mml
+ * @property bool $pin
+ * @property bool $quotedMessageID
+ * @property bool $silent
+ * @property bool $text
  */
 class MessageChangeSet extends BaseModel
 {
@@ -20,7 +28,8 @@ class MessageChangeSet extends BaseModel
         public ?bool $quotedMessageID = null,
         public ?bool $silent = null,
         public ?bool $text = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

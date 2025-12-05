@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $originalText
+ * @property object $extra
+ * @property AutomodDetails|null $automod
  */
 class FlagDetails extends BaseModel
 {
@@ -14,7 +16,8 @@ class FlagDetails extends BaseModel
         public ?string $originalText = null,
         public ?object $extra = null,
         public ?AutomodDetails $automod = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

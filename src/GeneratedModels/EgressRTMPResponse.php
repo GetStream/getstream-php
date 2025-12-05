@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $name
+ * @property \DateTime $startedAt
+ * @property string|null $streamKey
+ * @property string|null $streamUrl
  */
 class EgressRTMPResponse extends BaseModel
 {
@@ -15,7 +18,8 @@ class EgressRTMPResponse extends BaseModel
         public ?\DateTime $startedAt = null,
         public ?string $streamKey = null,
         public ?string $streamUrl = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

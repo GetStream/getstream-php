@@ -14,6 +14,7 @@ use GetStream\GeneratedModels;
 use GetStream\GeneratedModels\AddCommentResponse;
 use GetStream\GeneratedModels\CreateFeedGroupRequest;
 use GetStream\GeneratedModels\GetActivityResponse;
+use GetStream\GeneratedModels\GetOrCreateFeedResponse;
 use GetStream\GeneratedModels\QueryActivitiesResponse;
 use GetStream\StreamResponse;
 use PHPUnit\Framework\TestCase;
@@ -616,7 +617,6 @@ class FeedIntegrationTest extends TestCase
 
         $commentResponseData = $commentResponse->getData();
         $commentId = $commentResponseData->comment->id ?? null;
-        
 
         // Add comment to cleanup list
         $this->createdCommentIds[] = $commentId;
@@ -633,15 +633,17 @@ class FeedIntegrationTest extends TestCase
 
             $this->assertResponseSuccess($response, 'update comment');
             echo "✅ Updated comment\n";
-        } catch (\GetStream\Exceptions\StreamApiException $e) {
+        } catch (StreamApiException $e) {
             // Comment update may fail due to API limitations or timing issues
             // Skip the test rather than failing, as this might be an API-side issue
             $statusCode = $e->getStatusCode();
-            $this->markTestSkipped("Comment update failed with status {$statusCode}: {$e->getMessage()}");
+            self::markTestSkipped("Comment update failed with status {$statusCode}: {$e->getMessage()}");
+
             return;
         } catch (\Exception $e) {
             // Catch any other exceptions and skip
-            $this->markTestSkipped("Comment update failed: {$e->getMessage()}");
+            self::markTestSkipped("Comment update failed: {$e->getMessage()}");
+
             return;
         }
     }
@@ -853,8 +855,8 @@ class FeedIntegrationTest extends TestCase
         $data = $response->getData();
         if (isset($data->activities)) {
             foreach ($data->activities as $activity) {
-                if (isset($activity['id'])) {
-                    $this->createdActivityIds[] = $activity['id'];
+                if ($activity->id !== null) {
+                    $this->createdActivityIds[] = $activity->id;
                 }
             }
         }
@@ -1244,7 +1246,7 @@ class FeedIntegrationTest extends TestCase
 
         if (!empty($pollOptions)) {
             // Use the first option ID from the poll creation response
-            $optionId = $pollOptions[0]['id'] ?? $pollOptions[0];
+            $optionId = $pollOptions[0]->id ?? null;
 
             // snippet-start: VotePoll
             $voteResponse = $this->feedsV3Client->castPollVote(
@@ -1796,7 +1798,6 @@ class FeedIntegrationTest extends TestCase
         $this->assertResponseSuccess($rankResponse, 'create feed group with ranking');
         echo "✅ Created feed group with ranking\n";
     }
-
 
     /**
      * Test 34: Feed View CRUD Operations.

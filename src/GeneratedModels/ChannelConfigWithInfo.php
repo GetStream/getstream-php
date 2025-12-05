@@ -3,10 +3,44 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $automod
+ * @property string $automodBehavior
+ * @property bool $connectEvents
+ * @property bool $countMessages
+ * @property \DateTime $createdAt
+ * @property bool $customEvents
+ * @property bool $deliveryEvents
+ * @property bool $markMessagesPending
+ * @property int $maxMessageLength
+ * @property bool $mutes
+ * @property string $name
+ * @property bool $polls
+ * @property bool $pushNotifications
+ * @property bool $quotes
+ * @property bool $reactions
+ * @property bool $readEvents
+ * @property bool $reminders
+ * @property bool $replies
+ * @property bool $search
+ * @property bool $sharedLocations
+ * @property bool $skipLastMsgUpdateForSystemMsgs
+ * @property bool $typingEvents
+ * @property \DateTime $updatedAt
+ * @property bool $uploads
+ * @property bool $urlEnrichment
+ * @property bool $userMessageReminders
+ * @property array<Command> $commands
+ * @property string|null $blocklist
+ * @property string|null $blocklistBehavior
+ * @property int|null $partitionSize
+ * @property string|null $partitionTtl
+ * @property array|null $allowedFlagReasons
+ * @property array<BlockListOptions>|null $blocklists
+ * @property Thresholds|null $automodThresholds
+ * @property array|null $grants
  */
 class ChannelConfigWithInfo extends BaseModel
 {
@@ -37,16 +71,21 @@ class ChannelConfigWithInfo extends BaseModel
         public ?bool $uploads = null,
         public ?bool $urlEnrichment = null,
         public ?bool $userMessageReminders = null,
+        /** @var array<Command>|null */
+        #[ArrayOf(Command::class)]
         public ?array $commands = null,
         public ?string $blocklist = null,
         public ?string $blocklistBehavior = null,
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
         public ?array $allowedFlagReasons = null,
+        /** @var array<BlockListOptions>|null */
+        #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
         public ?Thresholds $automodThresholds = null,
         public ?array $grants = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

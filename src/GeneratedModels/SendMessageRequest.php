@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property MessageRequest $message
+ * @property bool|null $forceModeration
+ * @property bool|null $keepChannelHidden
+ * @property bool|null $pending
+ * @property bool|null $skipEnrichUrl
+ * @property bool|null $skipPush
+ * @property array|null $pendingMessageMetadata
  */
 class SendMessageRequest extends BaseModel
 {
@@ -18,7 +24,8 @@ class SendMessageRequest extends BaseModel
         public ?bool $skipEnrichUrl = null,
         public ?bool $skipPush = null,
         public ?array $pendingMessageMetadata = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

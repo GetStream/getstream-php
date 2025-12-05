@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $accessRequestEnabled
+ * @property bool $cameraDefaultOn
+ * @property string $cameraFacing
+ * @property bool $enabled
+ * @property TargetResolution $targetResolution
  */
 class VideoSettings extends BaseModel
 {
@@ -16,7 +20,8 @@ class VideoSettings extends BaseModel
         public ?string $cameraFacing = null,
         public ?bool $enabled = null,
         public ?TargetResolution $targetResolution = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

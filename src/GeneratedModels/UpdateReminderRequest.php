@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property \DateTime|null $remindAt
+ * @property string|null $userID
+ * @property UserRequest|null $user
  */
 class UpdateReminderRequest extends BaseModel
 {
@@ -14,7 +16,8 @@ class UpdateReminderRequest extends BaseModel
         public ?\DateTime $remindAt = null,
         public ?string $userID = null,
         public ?UserRequest $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

@@ -3,10 +3,20 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $name
+ * @property string $ruleType
+ * @property RuleBuilderAction $action
+ * @property string|null $cooldownPeriod
+ * @property string|null $description
+ * @property bool|null $enabled
+ * @property string|null $logic
+ * @property string|null $team
+ * @property array<RuleBuilderCondition>|null $conditions
+ * @property array|null $configKeys
+ * @property array<RuleBuilderConditionGroup>|null $groups
  */
 class UpsertModerationRuleRequest extends BaseModel
 {
@@ -19,10 +29,15 @@ class UpsertModerationRuleRequest extends BaseModel
         public ?bool $enabled = null,
         public ?string $logic = null,
         public ?string $team = null,
+        /** @var array<RuleBuilderCondition>|null */
+        #[ArrayOf(RuleBuilderCondition::class)]
         public ?array $conditions = null,
         public ?array $configKeys = null,
+        /** @var array<RuleBuilderConditionGroup>|null */
+        #[ArrayOf(RuleBuilderConditionGroup::class)]
         public ?array $groups = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

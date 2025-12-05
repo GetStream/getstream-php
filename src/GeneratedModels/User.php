@@ -3,10 +3,20 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $id
+ * @property \DateTime|null $banExpires
+ * @property bool|null $banned
+ * @property bool|null $invisible
+ * @property string|null $language
+ * @property \DateTime|null $revokeTokensIssuedBefore
+ * @property string|null $role
+ * @property array|null $teams
+ * @property object|null $custom
+ * @property PrivacySettings|null $privacySettings
+ * @property array|null $teamsRole
  */
 class User extends BaseModel
 {
@@ -22,7 +32,8 @@ class User extends BaseModel
         public ?object $custom = null,
         public ?PrivacySettings $privacySettings = null,
         public ?array $teamsRole = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

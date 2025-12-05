@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $action
+ * @property \DateTime $createdAt
+ * @property string $name
+ * @property bool $owner
+ * @property int $priority
+ * @property \DateTime $updatedAt
+ * @property array $resources
+ * @property array $roles
  */
 class Policy extends BaseModel
 {
@@ -19,7 +26,8 @@ class Policy extends BaseModel
         public ?\DateTime $updatedAt = null,
         public ?array $resources = null,
         public ?array $roles = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

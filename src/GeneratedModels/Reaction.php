@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property \DateTime $createdAt
+ * @property string $messageID
+ * @property int $score
+ * @property string $type
+ * @property \DateTime $updatedAt
+ * @property object $custom
+ * @property string|null $userID
+ * @property User|null $user
  */
 class Reaction extends BaseModel
 {
@@ -19,7 +26,8 @@ class Reaction extends BaseModel
         public ?object $custom = null,
         public ?string $userID = null,
         public ?User $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

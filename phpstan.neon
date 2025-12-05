@@ -2,6 +2,7 @@ parameters:
     level: 8
     paths:
         - src
+    memoryLimitFile: 512M
     ignoreErrors:
         # Add any specific errors to ignore here
         -

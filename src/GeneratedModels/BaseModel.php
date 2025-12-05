@@ -15,6 +15,15 @@ class JsonKey
 {
     public function __construct(public string $key) {}
 }
+
+/**
+ * Attribute to specify that an array contains model objects of a specific type
+ */
+#[\Attribute(\Attribute::TARGET_ALL)]
+class ArrayOf
+{
+    public function __construct(public string $modelClass) {}
+}
 /**
  * Base class for all generated models with automatic JSON parsing based on constructor types
  */
@@ -89,6 +98,11 @@ abstract class BaseModel implements JsonSerializable
             case 'float':
             case 'bool':
             case 'array':
+                // Check if array should be parsed as array of model objects
+                $arrayOfAttr = self::getArrayOfAttribute($param);
+                if ($arrayOfAttr !== null && is_array($value)) {
+                    return self::parseArrayOfModels($value, $arrayOfAttr);
+                }
                 return $value; // Primitive types, return as-is
             
             default:
@@ -111,6 +125,37 @@ abstract class BaseModel implements JsonSerializable
         }
         
         return self::camelToSnake($param->getName());
+    }
+
+    /**
+     * Get ArrayOf attribute for a parameter if it exists
+     */
+    private static function getArrayOfAttribute(\ReflectionParameter $param): ?string
+    {
+        $attributes = $param->getAttributes(ArrayOf::class);
+        if (!empty($attributes)) {
+            return $attributes[0]->newInstance()->modelClass;
+        }
+        return null;
+    }
+
+    /**
+     * Parse array of model objects
+     */
+    private static function parseArrayOfModels(mixed $value, string $modelClass): ?array
+    {
+        if ($value === null || !is_array($value)) {
+            return null;
+        }
+
+        if (!class_exists($modelClass) || !is_subclass_of($modelClass, BaseModel::class)) {
+            return $value; // Return as-is if class doesn't exist or isn't a BaseModel
+        }
+
+        return array_map(
+            fn($item) => is_array($item) ? $modelClass::fromJson($item) : $item,
+            $value
+        );
     }
 
     /**

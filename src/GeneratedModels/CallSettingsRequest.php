@@ -3,10 +3,23 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property AudioSettingsRequest|null $audio
+ * @property BackstageSettingsRequest|null $backstage
+ * @property BroadcastSettingsRequest|null $broadcasting
+ * @property FrameRecordingSettingsRequest|null $frameRecording
+ * @property GeofenceSettingsRequest|null $geofencing
+ * @property IngressSettingsRequest|null $ingress
+ * @property LimitsSettingsRequest|null $limits
+ * @property RecordSettingsRequest|null $recording
+ * @property RingSettingsRequest|null $ring
+ * @property ScreensharingSettingsRequest|null $screensharing
+ * @property SessionSettingsRequest|null $session
+ * @property ThumbnailsSettingsRequest|null $thumbnails
+ * @property TranscriptionSettingsRequest|null $transcription
+ * @property VideoSettingsRequest|null $video
  */
 class CallSettingsRequest extends BaseModel
 {
@@ -25,7 +38,8 @@ class CallSettingsRequest extends BaseModel
         public ?ThumbnailsSettingsRequest $thumbnails = null,
         public ?TranscriptionSettingsRequest $transcription = null,
         public ?VideoSettingsRequest $video = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

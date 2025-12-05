@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $enabled
+ * @property string|null $qualityName
+ * @property LayoutSettings|null $layout
+ * @property RTMPLocation|null $location
  */
 class RTMPSettings extends BaseModel
 {
@@ -15,7 +18,8 @@ class RTMPSettings extends BaseModel
         public ?string $qualityName = null,
         public ?LayoutSettings $layout = null,
         public ?RTMPLocation $location = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

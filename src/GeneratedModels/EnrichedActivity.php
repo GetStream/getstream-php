@@ -3,10 +3,21 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $foreignID
+ * @property string|null $id
+ * @property int|null $score
+ * @property string|null $verb
+ * @property array|null $to
+ * @property Data|null $actor
+ * @property array|null $latestReactions
+ * @property Data|null $object
+ * @property Data|null $origin
+ * @property array|null $ownReactions
+ * @property array|null $reactionCounts
+ * @property Data|null $target
  */
 class EnrichedActivity extends BaseModel
 {
@@ -23,7 +34,8 @@ class EnrichedActivity extends BaseModel
         public ?array $ownReactions = null,
         public ?array $reactionCounts = null,
         public ?Data $target = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

@@ -3,10 +3,19 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * Basic response information
+ *
+ * @property string $callID
+ * @property string $callSessionID
+ * @property string $callType
+ * @property string $duration
+ * @property string $userID
+ * @property string $userSessionID
+ * @property ParticipantSeriesPublisherStats|null $publisher
+ * @property ParticipantSeriesSubscriberStats|null $subscriber
+ * @property ParticipantSeriesTimeframe|null $timeframe
+ * @property ParticipantSeriesUserStats|null $user
  */
 class GetCallSessionParticipantStatsDetailsResponse extends BaseModel
 {
@@ -14,14 +23,15 @@ class GetCallSessionParticipantStatsDetailsResponse extends BaseModel
         public ?string $callID = null,
         public ?string $callSessionID = null,
         public ?string $callType = null,
-        public ?string $duration = null,    // Duration of the request in milliseconds 
+        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $userID = null,
         public ?string $userSessionID = null,
         public ?ParticipantSeriesPublisherStats $publisher = null,
         public ?ParticipantSeriesSubscriberStats $subscriber = null,
         public ?ParticipantSeriesTimeframe $timeframe = null,
         public ?ParticipantSeriesUserStats $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

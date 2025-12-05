@@ -3,10 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $body
+ * @property string $title
+ * @property int|null $contentAvailable
+ * @property int|null $mutableContent
+ * @property string|null $sound
+ * @property object|null $data
  */
 class APNS extends BaseModel
 {
@@ -17,7 +22,8 @@ class APNS extends BaseModel
         public ?int $mutableContent = null,
         public ?string $sound = null,
         public ?object $data = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

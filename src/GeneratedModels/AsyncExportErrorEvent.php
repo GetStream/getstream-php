@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property \DateTime $createdAt
+ * @property string $error
+ * @property \DateTime $finishedAt
+ * @property \DateTime $startedAt
+ * @property string $taskID
+ * @property object $custom
+ * @property string $type
+ * @property \DateTime|null $receivedAt
  */
 class AsyncExportErrorEvent extends BaseModel
 {
@@ -19,7 +26,8 @@ class AsyncExportErrorEvent extends BaseModel
         public ?object $custom = null,
         public ?string $type = null,
         public ?\DateTime $receivedAt = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

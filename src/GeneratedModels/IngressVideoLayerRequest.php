@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $bitrate
+ * @property string $codec
+ * @property int $frameRateLimit
+ * @property int $maxDimension
+ * @property int $minDimension
  */
 class IngressVideoLayerRequest extends BaseModel
 {
@@ -16,7 +20,8 @@ class IngressVideoLayerRequest extends BaseModel
         public ?int $frameRateLimit = null,
         public ?int $maxDimension = null,
         public ?int $minDimension = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

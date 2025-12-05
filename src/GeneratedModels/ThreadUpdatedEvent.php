@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $channelID
+ * @property string $channelType
+ * @property string $cid
+ * @property \DateTime $createdAt
+ * @property string $type
+ * @property ThreadResponse|null $thread
+ * @property User|null $user
  */
 class ThreadUpdatedEvent extends BaseModel
 {
@@ -18,7 +24,8 @@ class ThreadUpdatedEvent extends BaseModel
         public ?string $type = null,
         public ?ThreadResponse $thread = null,
         public ?User $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

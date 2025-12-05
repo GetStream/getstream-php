@@ -3,10 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $cid
+ * @property int $rating
+ * @property string $reason
+ * @property string $sdk
+ * @property string $sdkVersion
+ * @property string $sessionID
+ * @property string $userID
+ * @property PlatformDataResponse $platform
+ * @property object|null $custom
  */
 class UserFeedbackResponse extends BaseModel
 {
@@ -20,7 +28,8 @@ class UserFeedbackResponse extends BaseModel
         public ?string $userID = null,
         public ?PlatformDataResponse $platform = null,
         public ?object $custom = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

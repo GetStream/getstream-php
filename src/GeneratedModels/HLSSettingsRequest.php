@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property array $qualityTracks
+ * @property bool|null $autoOn
+ * @property bool|null $enabled
+ * @property LayoutSettingsRequest|null $layout
  */
 class HLSSettingsRequest extends BaseModel
 {
@@ -15,7 +18,8 @@ class HLSSettingsRequest extends BaseModel
         public ?bool $autoOn = null,
         public ?bool $enabled = null,
         public ?LayoutSettingsRequest $layout = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

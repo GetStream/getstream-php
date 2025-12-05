@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $progress
+ * @property int $statsChannelsCreated
+ * @property \DateTime $statsCompletedAt
+ * @property int $statsMessagesSent
+ * @property \DateTime $statsStartedAt
+ * @property int $statsUsersRead
+ * @property int $statsUsersSent
  */
 class CampaignStatsResponse extends BaseModel
 {
@@ -18,7 +24,8 @@ class CampaignStatsResponse extends BaseModel
         public ?\DateTime $statsStartedAt = null,
         public ?int $statsUsersRead = null,
         public ?int $statsUsersSent = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

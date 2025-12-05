@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property \DateTime $createdAt
+ * @property string $id
+ * @property string $pushProvider
+ * @property string $userID
+ * @property bool|null $disabled
+ * @property string|null $disabledReason
+ * @property string|null $pushProviderName
+ * @property bool|null $voip
  */
 class Device extends BaseModel
 {
@@ -19,7 +26,8 @@ class Device extends BaseModel
         public ?string $disabledReason = null,
         public ?string $pushProviderName = null,
         public ?bool $voip = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

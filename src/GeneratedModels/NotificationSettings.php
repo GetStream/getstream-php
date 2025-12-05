@@ -3,10 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $enabled
+ * @property EventNotificationSettings $callLiveStarted
+ * @property EventNotificationSettings $callMissed
+ * @property EventNotificationSettings $callNotification
+ * @property EventNotificationSettings $callRing
+ * @property EventNotificationSettings $sessionStarted
  */
 class NotificationSettings extends BaseModel
 {
@@ -17,7 +22,8 @@ class NotificationSettings extends BaseModel
         public ?EventNotificationSettings $callNotification = null,
         public ?EventNotificationSettings $callRing = null,
         public ?EventNotificationSettings $sessionStarted = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

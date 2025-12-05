@@ -3,10 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $defaultDevice
+ * @property bool|null $accessRequestEnabled
+ * @property bool|null $hifiAudioEnabled
+ * @property bool|null $micDefaultOn
+ * @property bool|null $opusDtxEnabled
+ * @property bool|null $redundantCodingEnabled
+ * @property bool|null $speakerDefaultOn
+ * @property NoiseCancellationSettings|null $noiseCancellation
  */
 class AudioSettingsRequest extends BaseModel
 {
@@ -19,7 +26,8 @@ class AudioSettingsRequest extends BaseModel
         public ?bool $redundantCodingEnabled = null,
         public ?bool $speakerDefaultOn = null,
         public ?NoiseCancellationSettings $noiseCancellation = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

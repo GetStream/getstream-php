@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $duration
+ * @property DailyMetricStatsResponse $activities
+ * @property DailyMetricStatsResponse $apiRequests
+ * @property DailyMetricStatsResponse $follows
+ * @property DailyMetricStatsResponse $openaiRequests
  */
 class QueryFeedsUsageStatsResponse extends BaseModel
 {
@@ -16,7 +20,8 @@ class QueryFeedsUsageStatsResponse extends BaseModel
         public ?DailyMetricStatsResponse $apiRequests = null,
         public ?DailyMetricStatsResponse $follows = null,
         public ?DailyMetricStatsResponse $openaiRequests = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

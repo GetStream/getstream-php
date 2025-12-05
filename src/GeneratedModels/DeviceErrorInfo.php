@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $errorMessage
+ * @property string $provider
+ * @property string $providerName
  */
 class DeviceErrorInfo extends BaseModel
 {
@@ -14,7 +16,8 @@ class DeviceErrorInfo extends BaseModel
         public ?string $errorMessage = null,
         public ?string $provider = null,
         public ?string $providerName = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

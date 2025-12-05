@@ -3,10 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $channelID
+ * @property int $channelMemberCount
+ * @property string $channelType
+ * @property string $cid
+ * @property bool $clearHistory
+ * @property \DateTime $createdAt
+ * @property string $type
+ * @property ChannelResponse|null $channel
+ * @property User|null $user
  */
 class ChannelHiddenEvent extends BaseModel
 {
@@ -20,7 +28,8 @@ class ChannelHiddenEvent extends BaseModel
         public ?string $type = null,
         public ?ChannelResponse $channel = null,
         public ?User $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

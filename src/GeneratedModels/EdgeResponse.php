@@ -3,10 +3,19 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $continentCode
+ * @property string $countryIsoCode
+ * @property int $green
+ * @property string $id
+ * @property string $latencyTestUrl
+ * @property int $latitude
+ * @property int $longitude
+ * @property int $red
+ * @property string $subdivisionIsoCode
+ * @property int $yellow
  */
 class EdgeResponse extends BaseModel
 {
@@ -21,7 +30,8 @@ class EdgeResponse extends BaseModel
         public ?int $red = null,
         public ?string $subdivisionIsoCode = null,
         public ?int $yellow = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

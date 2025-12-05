@@ -24,7 +24,7 @@ test-specific: ## Run a specific test (usage: make test-specific TEST=TestClassN
 
 lint: ## Run all available code quality checks
 	@echo "🔍 Running PHPStan static analysis..."
-	./vendor/bin/phpstan analyse
+	./vendor/bin/phpstan analyse --memory-limit=512M
 	@echo "✅ PHPStan analysis complete"
 	@if [ -f "./vendor/bin/php-cs-fixer" ]; then \
 		echo ""; \
@@ -44,14 +44,14 @@ lint-fix: ## Run linting and fix issues automatically
 		echo ""; \
 	fi
 	@echo "🔍 Running PHPStan analysis..."
-	./vendor/bin/phpstan analyse
+	./vendor/bin/phpstan analyse --memory-limit=512M
 	@echo "✅ Linting complete"
 
 phpstan: ## Run PHPStan static analysis only
-	./vendor/bin/phpstan analyse
+	./vendor/bin/phpstan analyse --memory-limit=512M
 
 phpstan-baseline: ## Generate PHPStan baseline (ignore current errors)
-	./vendor/bin/phpstan analyse --generate-baseline
+	./vendor/bin/phpstan analyse --generate-baseline --memory-limit=512M
 
 phpstan-clear-cache: ## Clear PHPStan cache
 	./vendor/bin/phpstan clear-result-cache

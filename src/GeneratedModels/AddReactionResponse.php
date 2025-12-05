@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $duration
+ * @property ActivityResponse $activity
+ * @property FeedsReactionResponse $reaction
  */
 class AddReactionResponse extends BaseModel
 {
@@ -14,7 +16,8 @@ class AddReactionResponse extends BaseModel
         public ?string $duration = null,
         public ?ActivityResponse $activity = null,
         public ?FeedsReactionResponse $reaction = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

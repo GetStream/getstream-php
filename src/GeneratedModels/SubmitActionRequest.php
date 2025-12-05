@@ -3,16 +3,30 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $actionType
+ * @property string $itemID
+ * @property string|null $userID
+ * @property BanActionRequest|null $ban
+ * @property BlockActionRequest|null $block
+ * @property CustomActionRequest|null $custom
+ * @property DeleteActivityRequest|null $deleteActivity
+ * @property DeleteCommentRequest|null $deleteComment
+ * @property DeleteMessageRequest|null $deleteMessage
+ * @property DeleteReactionRequest|null $deleteReaction
+ * @property DeleteUserRequest|null $deleteUser
+ * @property MarkReviewedRequest|null $markReviewed
+ * @property ShadowBlockActionRequest|null $shadowBlock
+ * @property UnbanActionRequest|null $unban
+ * @property UserRequest|null $user
  */
 class SubmitActionRequest extends BaseModel
 {
     public function __construct(
-        public ?string $actionType = null,    // Type of moderation action to perform (mark_reviewed, delete_message, etc.) 
-        public ?string $itemID = null,    // UUID of the review queue item to act on 
+        public ?string $actionType = null, // Type of moderation action to perform (mark_reviewed, delete_message, etc.)
+        public ?string $itemID = null, // UUID of the review queue item to act on
         public ?string $userID = null,
         public ?BanActionRequest $ban = null,
         public ?BlockActionRequest $block = null,
@@ -26,7 +40,8 @@ class SubmitActionRequest extends BaseModel
         public ?ShadowBlockActionRequest $shadowBlock = null,
         public ?UnbanActionRequest $unban = null,
         public ?UserRequest $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

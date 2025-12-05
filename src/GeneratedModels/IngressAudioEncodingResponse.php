@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property int $bitrate
+ * @property int $channels
+ * @property bool $enableDtx
  */
 class IngressAudioEncodingResponse extends BaseModel
 {
@@ -14,7 +16,8 @@ class IngressAudioEncodingResponse extends BaseModel
         public ?int $bitrate = null,
         public ?int $channels = null,
         public ?bool $enableDtx = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

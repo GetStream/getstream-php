@@ -3,21 +3,27 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string|null $comment
+ * @property bool|null $skipEnrichUrl
+ * @property bool|null $skipPush
+ * @property string|null $userID
+ * @property object|null $custom
+ * @property UserRequest|null $user
  */
 class UpdateCommentRequest extends BaseModel
 {
     public function __construct(
-        public ?string $comment = null,    // Updated text content of the comment 
-        public ?bool $skipEnrichUrl = null,    // Whether to skip URL enrichment for this comment 
+        public ?string $comment = null, // Updated text content of the comment
+        public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for this comment
         public ?bool $skipPush = null,
         public ?string $userID = null,
-        public ?object $custom = null,    // Updated custom data for the comment 
+        public ?object $custom = null, // Updated custom data for the comment
         public ?UserRequest $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

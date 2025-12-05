@@ -1213,19 +1213,34 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateFeedsBatchResponse::class);
     }
     /**
-     * Retrieves capabilities for multiple feeds in a single request. Useful for batch processing when activities are added to feeds.
+     * Delete multiple feeds by their IDs. All feeds must exist. This endpoint is server-side only.
      * 
      *
-     * @param GeneratedModels\OwnCapabilitiesBatchRequest $requestData
-     * @return StreamResponse<GeneratedModels\OwnCapabilitiesBatchResponse>
+     * @param GeneratedModels\DeleteFeedsBatchRequest $requestData
+     * @return StreamResponse<GeneratedModels\DeleteFeedsBatchResponse>
      * @throws StreamException
      */
-    public function ownCapabilitiesBatch(GeneratedModels\OwnCapabilitiesBatchRequest $requestData): StreamResponse {
-        $path = '/api/v2/feeds/feeds/own_capabilities/batch';
+    public function deleteFeedsBatch(GeneratedModels\DeleteFeedsBatchRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/feeds/delete';
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\OwnCapabilitiesBatchResponse::class);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedsBatchResponse::class);
+    }
+    /**
+     * Retrieves own_follows, own_capabilities, and/or own_membership for multiple feeds in a single request. If fields are not specified, all three fields are returned.
+     * 
+     *
+     * @param GeneratedModels\OwnBatchRequest $requestData
+     * @return StreamResponse<GeneratedModels\OwnBatchResponse>
+     * @throws StreamException
+     */
+    public function ownBatch(GeneratedModels\OwnBatchRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/feeds/own/batch';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\OwnBatchResponse::class);
     }
     /**
      * Query feeds with filter query
@@ -1332,6 +1347,21 @@ trait FeedsTrait
      */
     public function followBatch(GeneratedModels\FollowBatchRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows/batch';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FollowBatchResponse::class);
+    }
+    /**
+     * Creates or updates multiple follows at once. Does not return an error if follows already exist. Broadcasts FollowAddedEvent only for newly created follows.
+     * 
+     *
+     * @param GeneratedModels\FollowBatchRequest $requestData
+     * @return StreamResponse<GeneratedModels\FollowBatchResponse>
+     * @throws StreamException
+     */
+    public function getOrCreateFollows(GeneratedModels\FollowBatchRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/follows/batch/upsert';
 
         $queryParams = [];
         // Use the provided request data array directly
@@ -1481,20 +1511,36 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnfollowBatchResponse::class);
     }
     /**
-     * Delete all activities, reactions, comments, and bookmarks for a user
+     * Removes multiple follows and broadcasts FollowRemovedEvent for each. Does not return an error if follows don't exist.
+     * 
+     *
+     * @param GeneratedModels\UnfollowBatchRequest $requestData
+     * @return StreamResponse<GeneratedModels\UnfollowBatchResponse>
+     * @throws StreamException
+     */
+    public function getOrCreateUnfollows(GeneratedModels\UnfollowBatchRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/unfollow/batch/upsert';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnfollowBatchResponse::class);
+    }
+    /**
+     * Delete all feed data for a user including: feeds, activities, follows, comments, feed reactions, bookmark folders, bookmarks, and collections owned by the user
      * 
      *
      * @param string $userID
+     * @param GeneratedModels\DeleteFeedUserDataRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteFeedUserDataResponse>
      * @throws StreamException
      */
-    public function deleteFeedUserData(string $userID): StreamResponse {
+    public function deleteFeedUserData(string $userID, GeneratedModels\DeleteFeedUserDataRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/users/{user_id}/delete';
         $path = str_replace('{user_id}', (string) $userID, $path);
 
         $queryParams = [];
-        $requestData = null;
-        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedUserDataResponse::class);
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedUserDataResponse::class);
     }
     /**
      * Export all feed data for a user including: user profile, feeds, activities, follows, comments, feed reactions, bookmark folders, bookmarks, and collections owned by the user

@@ -38,7 +38,7 @@ fi
 # Run PHPStan to check for any issues
 if [ -f "phpstan.neon" ]; then
     echo "Running PHPStan analysis..."
-    ./vendor/bin/phpstan analyse --no-progress || echo "PHPStan completed with warnings"
+    ./vendor/bin/phpstan analyse --no-progress --memory-limit=512M || echo "PHPStan completed with warnings"
 fi
 
 # Update composer autoloader for new classes

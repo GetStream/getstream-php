@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $category
+ * @property int $count
+ * @property int $sum
+ * @property Bound|null $lowerBound
+ * @property Bound|null $upperBound
  */
 class ReportByHistogramBucket extends BaseModel
 {
@@ -16,7 +20,8 @@ class ReportByHistogramBucket extends BaseModel
         public ?int $sum = null,
         public ?Bound $lowerBound = null,
         public ?Bound $upperBound = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $action
+ * @property string $label
+ * @property int $threshold
  */
 class AutomodRule extends BaseModel
 {
@@ -14,7 +16,8 @@ class AutomodRule extends BaseModel
         public ?string $action = null,
         public ?string $label = null,
         public ?int $threshold = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

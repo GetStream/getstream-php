@@ -3,10 +3,19 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property bool $development
+ * @property bool $enabled
+ * @property string|null $authKey
+ * @property string|null $authType
+ * @property string|null $bundleID
+ * @property string|null $host
+ * @property string|null $keyID
+ * @property string|null $notificationTemplate
+ * @property string|null $p12Cert
+ * @property string|null $teamID
  */
 class APNConfigFields extends BaseModel
 {
@@ -21,7 +30,8 @@ class APNConfigFields extends BaseModel
         public ?string $notificationTemplate = null,
         public ?string $p12Cert = null,
         public ?string $teamID = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

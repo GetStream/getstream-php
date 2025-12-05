@@ -3,10 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $frames
+ * @property string $height
+ * @property string $size
+ * @property string $url
+ * @property string $width
  */
 class ImageData extends BaseModel
 {
@@ -16,7 +20,8 @@ class ImageData extends BaseModel
         public ?string $size = null,
         public ?string $url = null,
         public ?string $width = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.

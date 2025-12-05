@@ -3,10 +3,19 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-
-use JsonSerializable;
 /**
  * 
+ *
+ * @property string $channelCid
+ * @property \DateTime $createdAt
+ * @property string $messageID
+ * @property string $taskID
+ * @property \DateTime $updatedAt
+ * @property string $userID
+ * @property \DateTime|null $remindAt
+ * @property Channel|null $channel
+ * @property Message|null $message
+ * @property User|null $user
  */
 class MessageReminder extends BaseModel
 {
@@ -21,7 +30,8 @@ class MessageReminder extends BaseModel
         public ?Channel $channel = null,
         public ?Message $message = null,
         public ?User $user = null,
-    ) {}
+    ) {
+    }
 
     // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
     // Use #[JsonKey('user_id')] to override field names if needed.
