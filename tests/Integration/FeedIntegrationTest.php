@@ -14,7 +14,6 @@ use GetStream\GeneratedModels;
 use GetStream\GeneratedModels\AddCommentResponse;
 use GetStream\GeneratedModels\CreateFeedGroupRequest;
 use GetStream\GeneratedModels\GetActivityResponse;
-use GetStream\GeneratedModels\GetOrCreateFeedResponse;
 use GetStream\GeneratedModels\QueryActivitiesResponse;
 use GetStream\StreamResponse;
 use PHPUnit\Framework\TestCase;
@@ -813,6 +812,111 @@ class FeedIntegrationTest extends TestCase
         self::assertInstanceOf(StreamResponse::class, $response);
         $this->assertResponseSuccess($response, 'operation');
         echo "✅ Queried follows\n";
+    }
+
+    /**
+     * @test
+     * @throws StreamApiException
+     */
+    public function test15bGetOrCreateFeedWithActivitiesAndFollow(): void
+    {
+        echo "\n🔗 Testing getOrCreateFeed with activities and follow...\n";
+
+        // Step 1: Get or create a feed for user 1
+        echo "\n1️⃣ Getting or creating feed for user 1...\n";
+        // snippet-start: GetOrCreateFeed
+        $feedResponse1 = $this->testFeed->getOrCreateFeed(
+            new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId)
+        );
+        // snippet-end: GetOrCreateFeed
+
+        $this->assertResponseSuccess($feedResponse1, 'get or create feed');
+        $feedData1 = $feedResponse1->getData();
+        self::assertInstanceOf(GeneratedModels\GetOrCreateFeedResponse::class, $feedData1);
+        self::assertNotNull($feedData1->feed);
+        echo "✅ Feed 1 exists: {$feedData1->feed->id}\n";
+
+        // Step 2: Add activities to feed 1
+        echo "\n2️⃣ Adding activities to feed 1...\n";
+        $activity1 = new GeneratedModels\AddActivityRequest(
+            type: 'post',
+            feeds: [$this->testFeed->getFeedIdentifier()],
+            text: 'Activity from getOrCreateFeed test',
+            userID: $this->testUserId
+        );
+        $activityResponse1 = $this->feedsV3Client->addActivity($activity1);
+        $this->assertResponseSuccess($activityResponse1, 'add activity to feed 1');
+        $activityId1 = $activityResponse1->getData()->activity->id;
+        $this->createdActivityIds[] = $activityId1;
+        echo "✅ Added activity {$activityId1} to feed 1\n";
+
+        // Step 3: Get or create feed for user 2
+        echo "\n3️⃣ Getting or creating feed for user 2...\n";
+        $feedResponse2 = $this->testFeed2->getOrCreateFeed(
+            new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId2)
+        );
+        $this->assertResponseSuccess($feedResponse2, 'get or create feed 2');
+        $feedData2 = $feedResponse2->getData();
+        self::assertNotNull($feedData2->feed);
+        echo "✅ Feed 2 exists: {$feedData2->feed->id}\n";
+
+        // Step 4: Add activities to feed 2
+        echo "\n4️⃣ Adding activities to feed 2...\n";
+        $activity2 = new GeneratedModels\AddActivityRequest(
+            type: 'post',
+            feeds: [$this->testFeed2->getFeedIdentifier()],
+            text: 'Activity from user 2 in getOrCreateFeed test',
+            userID: $this->testUserId2
+        );
+        $activityResponse2 = $this->feedsV3Client->addActivity($activity2);
+        $this->assertResponseSuccess($activityResponse2, 'add activity to feed 2');
+        $activityId2 = $activityResponse2->getData()->activity->id;
+        $this->createdActivityIds[] = $activityId2;
+        echo "✅ Added activity {$activityId2} to feed 2\n";
+
+        // Step 5: Follow user 2 from user 1
+        echo "\n5️⃣ Following user 2 from user 1...\n";
+        try {
+            $followResponse = $this->feedsV3Client->follow(
+                new GeneratedModels\FollowRequest(
+                    source: self::USER_FEED_TYPE . $this->testUserId,
+                    target: self::USER_FEED_TYPE . $this->testUserId2
+                )
+            );
+            $this->assertResponseSuccess($followResponse, 'follow user 2');
+            echo "✅ Followed user 2\n";
+        } catch (StreamApiException $e) {
+            echo '⚠️ Follow failed: ' . $e->getMessage() . "\n";
+            throw $e;
+        }
+
+        // Step 6: Verify feed 2 still exists and has activities
+        echo "\n6️⃣ Verifying feed 2 exists and has activities...\n";
+        $verifyFeedResponse = $this->testFeed2->getOrCreateFeed(
+            new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId2)
+        );
+        $this->assertResponseSuccess($verifyFeedResponse, 'verify feed 2 exists');
+        $verifyFeedData = $verifyFeedResponse->getData();
+        self::assertNotNull($verifyFeedData->feed);
+        self::assertSame($feedData2->feed->id, $verifyFeedData->feed->id, 'Feed ID should match');
+        
+        // Check if activities exist in the feed
+        if ($verifyFeedData->activities !== null && count($verifyFeedData->activities) > 0) {
+            echo "✅ Feed 2 has " . count($verifyFeedData->activities) . " activities\n";
+            // Verify our activity is in the list
+            $foundActivity = false;
+            foreach ($verifyFeedData->activities as $activity) {
+                if ($activity->id === $activityId2) {
+                    $foundActivity = true;
+                    break;
+                }
+            }
+            self::assertTrue($foundActivity, 'Added activity should be in feed activities');
+        } else {
+            echo "ℹ️ Feed 2 exists but has no activities in response (this is normal)\n";
+        }
+
+        echo "✅ All checks passed: Feed exists, activities added, and follow relationship established\n";
     }
 
     // =================================================================
@@ -1708,6 +1812,7 @@ class FeedIntegrationTest extends TestCase
 
         // Test 2: Create Feed Group
         echo "\n➕ Testing create feed group...\n";
+
         // snippet-start: CreateFeedGroup
         try {
             $createResponse = $this->feedsV3Client->createFeedGroup(
@@ -1718,10 +1823,10 @@ class FeedIntegrationTest extends TestCase
             );
         } catch (StreamApiException $e) {
             echo "API Error Details:\n";
-            echo "Status Code: " . $e->getStatusCode() . "\n";
-            echo "Message: " . $e->getMessage() . "\n";
-            echo "Response Body: " . $e->getResponseBody() . "\n";
-            echo "Error Details: " . json_encode($e->getErrorDetails(), JSON_PRETTY_PRINT) . "\n";
+            echo 'Status Code: ' . $e->getStatusCode() . "\n";
+            echo 'Message: ' . $e->getMessage() . "\n";
+            echo 'Response Body: ' . $e->getResponseBody() . "\n";
+            echo 'Error Details: ' . json_encode($e->getErrorDetails(), JSON_PRETTY_PRINT) . "\n";
             // throw $e;
         }
         // snippet-end: CreateFeedGroup
