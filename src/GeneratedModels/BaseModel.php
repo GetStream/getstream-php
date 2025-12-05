@@ -45,16 +45,32 @@ abstract class BaseModel implements JsonSerializable
             $json = json_decode($json, true);
         }
 
-        $reflection = new \ReflectionClass(static::class);
-        $constructor = $reflection->getConstructor();
+        $className = static::class;
         
-        if (!$constructor) {
+        // Use cached reflection data if available
+        if (!isset(self::$reflectionCache[$className])) {
+            $reflection = new \ReflectionClass($className);
+            $constructor = $reflection->getConstructor();
+            
+            if (!$constructor) {
+                self::$reflectionCache[$className] = ['constructor' => null, 'params' => []];
+            } else {
+                self::$reflectionCache[$className] = [
+                    'constructor' => $constructor,
+                    'params' => $constructor->getParameters()
+                ];
+            }
+        }
+        
+        $cache = self::$reflectionCache[$className];
+        
+        if ($cache['constructor'] === null) {
             /** @phpstan-ignore-next-line */
             return new static();
         }
 
         $args = [];
-        foreach ($constructor->getParameters() as $param) {
+        foreach ($cache['params'] as $param) {
             $paramName = $param->getName();
             
             // Check for custom JsonKey attribute
@@ -173,14 +189,30 @@ abstract class BaseModel implements JsonSerializable
     public function jsonSerialize(): array|object
     {
         $result = [];
-        $reflection = new \ReflectionClass($this);
-        $constructor = $reflection->getConstructor();
+        $className = static::class;
         
-        if (!$constructor) {
+        // Use cached reflection data if available
+        if (!isset(self::$reflectionCache[$className])) {
+            $reflection = new \ReflectionClass($className);
+            $constructor = $reflection->getConstructor();
+            
+            if (!$constructor) {
+                self::$reflectionCache[$className] = ['constructor' => null, 'params' => []];
+            } else {
+                self::$reflectionCache[$className] = [
+                    'constructor' => $constructor,
+                    'params' => $constructor->getParameters()
+                ];
+            }
+        }
+        
+        $cache = self::$reflectionCache[$className];
+        
+        if ($cache['constructor'] === null) {
             return (object)[];
         }
 
-        foreach ($constructor->getParameters() as $param) {
+        foreach ($cache['params'] as $param) {
             $paramName = $param->getName();
             $value = $this->$paramName;
             
@@ -250,11 +282,19 @@ abstract class BaseModel implements JsonSerializable
         
         if (is_int($value)) {
             // Handle nanosecond timestamps from Stream API
-            return new \DateTime('@' . intval($value / 1000000000));
+            try {
+                return new \DateTime('@' . intval($value / 1000000000));
+            } catch (\Exception $e) {
+                return null;
+            }
         }
         
         if (is_string($value)) {
-            return new \DateTime($value);
+            try {
+                return new \DateTime($value);
+            } catch (\Exception $e) {
+                return null;
+            }
         }
         
         return null;
