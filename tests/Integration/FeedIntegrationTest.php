@@ -297,6 +297,121 @@ class FeedIntegrationTest extends TestCase
     }
 
     /**
+     * @throws StreamException
+     *
+     * @test
+     */
+    public function test02fUploadImageAndFile(): void
+    {
+        echo "\n📤 Testing file and image uploads...\n";
+
+        // Use the test image file in the same directory
+        $testImagePath = __DIR__ . '/testupload.png';
+        
+        if (!file_exists($testImagePath)) {
+            self::markTestSkipped("Test image file not found: {$testImagePath}");
+            return;
+        }
+
+        // Test 1: Upload Image from file path
+        echo "\n🖼️ Testing image upload from file...\n";
+        
+        // snippet-start: UploadImage
+        $imageUploadRequest = new GeneratedModels\ImageUploadRequest(
+            file: $testImagePath,
+            user: new GeneratedModels\OnlyUserID(id: $this->testUserId),
+            uploadSizes: [
+                [
+                    'width' => 100,
+                    'height' => 100,
+                    'resize' => 'scale',
+                    'crop' => 'center',
+                ],
+            ]
+        );
+        $imageResponse = $this->client->uploadImage($imageUploadRequest);
+        // snippet-end: UploadImage
+
+        $this->assertResponseSuccess($imageResponse, 'upload image');
+        
+        $imageData = $imageResponse->getData();
+        self::assertNotNull($imageData);
+        self::assertNotNull($imageData->file);
+        self::assertNotEmpty($imageData->file);
+        
+        $imageUrl = $imageData->file;
+        echo "✅ Image uploaded successfully: {$imageUrl}\n";
+
+        // Test 2: Upload Image with base64 (alternative method)
+        echo "\n🖼️ Testing image upload with base64...\n";
+        
+        // Read image and encode as base64
+        $imageContent = file_get_contents($testImagePath);
+        if ($imageContent === false) {
+            self::markTestSkipped("Could not read test image file: {$testImagePath}");
+            return;
+        }
+        
+        $base64Image = base64_encode($imageContent);
+        
+        $imageUploadRequest2 = new GeneratedModels\ImageUploadRequest(
+            file: $base64Image,
+            user: new GeneratedModels\OnlyUserID(id: $this->testUserId),
+            uploadSizes: [
+                [
+                    'width' => 200,
+                    'height' => 200,
+                    'resize' => 'fill',
+                    'crop' => 'center',
+                ],
+            ]
+        );
+        $imageResponse2 = $this->client->uploadImage($imageUploadRequest2);
+        
+        $this->assertResponseSuccess($imageResponse2, 'upload image with base64');
+        $imageData2 = $imageResponse2->getData();
+        self::assertNotNull($imageData2->file);
+        echo "✅ Image uploaded with base64: {$imageData2->file}\n";
+
+        // Test 3: Upload File
+        echo "\n📄 Testing file upload...\n";
+        
+        // Create a temporary text file
+        $tempFile = tmpfile();
+        if ($tempFile === false) {
+            self::markTestSkipped('Could not create temporary file');
+            return;
+        }
+        
+        $tempFilePath = stream_get_meta_data($tempFile)['uri'];
+        $testContent = "This is a test file content from PHP SDK integration test\nCreated at: " . date('Y-m-d H:i:s');
+        file_put_contents($tempFilePath, $testContent);
+        
+        // snippet-start: UploadFile
+        $fileUploadRequest = new GeneratedModels\FileUploadRequest(
+            file: $tempFilePath,
+            user: new GeneratedModels\OnlyUserID(id: $this->testUserId)
+        );
+        $fileResponse = $this->client->uploadFile($fileUploadRequest);
+        // snippet-end: UploadFile
+
+        $this->assertResponseSuccess($fileResponse, 'upload file');
+        
+        $fileData = $fileResponse->getData();
+        self::assertNotNull($fileData);
+        self::assertNotNull($fileData->file);
+        self::assertNotEmpty($fileData->file);
+        
+        $fileUrl = $fileData->file;
+        echo "✅ File uploaded successfully: {$fileUrl}\n";
+        
+        // Cleanup temp file
+        fclose($tempFile);
+
+        echo "✅ All file upload tests completed\n";
+    }
+
+    /**
      * @test
      */
     public function test03QueryActivities(): void
