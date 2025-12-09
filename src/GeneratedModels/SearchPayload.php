@@ -7,6 +7,7 @@ namespace GetStream\GeneratedModels;
  * 
  *
  * @property object $filterConditions
+ * @property bool|null $forceDefaultSearch
  * @property int|null $limit
  * @property string|null $next
  * @property int|null $offset
@@ -19,6 +20,7 @@ class SearchPayload extends BaseModel
 {
     public function __construct(
         public ?object $filterConditions = null, // Channel filter conditions
+        public ?bool $forceDefaultSearch = null,
         public ?int $limit = null, // Number of messages to return
         public ?string $next = null, // Pagination parameter. Cannot be used with non-zero offset.
         public ?int $offset = null, // Pagination offset. Cannot be used with sort or next.

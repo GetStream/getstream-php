@@ -6,6 +6,7 @@ namespace GetStream\GeneratedModels;
 /**
  * 
  *
+ * @property int $activityCount
  * @property \DateTime $createdAt
  * @property string $description
  * @property string $feed
@@ -32,6 +33,7 @@ namespace GetStream\GeneratedModels;
 class FeedSuggestionResponse extends BaseModel
 {
     public function __construct(
+        public ?int $activityCount = null,
         public ?\DateTime $createdAt = null, // When the feed was created
         public ?string $description = null, // Description of the feed
         public ?string $feed = null, // Fully qualified feed ID (group_id:id)
