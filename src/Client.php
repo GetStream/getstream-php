@@ -169,14 +169,16 @@ class Client
             
             // File field
             if ($body->file !== null) {
-                $fileContent = is_string($body->file) && !file_exists($body->file)
-                    ? base64_decode($body->file, true) ?: throw new StreamException('Failed to decode base64 file data')
-                    : file_get_contents($body->file);
+                // Check if it's a file path that exists, otherwise treat as base64
+                $filePath = (string) $body->file;
+                $fileContent = file_exists($filePath)
+                    ? file_get_contents($filePath)
+                    : (base64_decode($filePath, true) ?: throw new StreamException('Failed to decode base64 file data'));
                 
                 $multipart[] = [
                     'name' => 'file',
                     'contents' => $fileContent,
-                    'filename' => $isImage ? 'image.jpg' : basename($body->file ?? 'file.pdf')
+                    'filename' => $isImage ? 'image.jpg' : (file_exists($filePath) ? basename($filePath) : 'file.pdf')
                 ];
             }
             

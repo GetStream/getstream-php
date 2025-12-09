@@ -307,15 +307,16 @@ class FeedIntegrationTest extends TestCase
 
         // Use the test image file in the same directory
         $testImagePath = __DIR__ . '/testupload.png';
-        
+
         if (!file_exists($testImagePath)) {
             self::markTestSkipped("Test image file not found: {$testImagePath}");
+
             return;
         }
 
         // Test 1: Upload Image from file path
         echo "\n🖼️ Testing image upload from file...\n";
-        
+
         // snippet-start: UploadImage
         $imageUploadRequest = new GeneratedModels\ImageUploadRequest(
             file: $testImagePath,
@@ -333,27 +334,28 @@ class FeedIntegrationTest extends TestCase
         // snippet-end: UploadImage
 
         $this->assertResponseSuccess($imageResponse, 'upload image');
-        
+
         $imageData = $imageResponse->getData();
         self::assertNotNull($imageData);
         self::assertNotNull($imageData->file);
         self::assertNotEmpty($imageData->file);
-        
+
         $imageUrl = $imageData->file;
         echo "✅ Image uploaded successfully: {$imageUrl}\n";
 
         // Test 2: Upload Image with base64 (alternative method)
         echo "\n🖼️ Testing image upload with base64...\n";
-        
+
         // Read image and encode as base64
         $imageContent = file_get_contents($testImagePath);
         if ($imageContent === false) {
             self::markTestSkipped("Could not read test image file: {$testImagePath}");
+
             return;
         }
-        
+
         $base64Image = base64_encode($imageContent);
-        
+
         $imageUploadRequest2 = new GeneratedModels\ImageUploadRequest(
             file: $base64Image,
             user: new GeneratedModels\OnlyUserID(id: $this->testUserId),
@@ -367,7 +369,7 @@ class FeedIntegrationTest extends TestCase
             ]
         );
         $imageResponse2 = $this->client->uploadImage($imageUploadRequest2);
-        
+
         $this->assertResponseSuccess($imageResponse2, 'upload image with base64');
         $imageData2 = $imageResponse2->getData();
         self::assertNotNull($imageData2->file);
@@ -375,18 +377,19 @@ class FeedIntegrationTest extends TestCase
 
         // Test 3: Upload File
         echo "\n📄 Testing file upload...\n";
-        
+
         // Create a temporary text file
         $tempFile = tmpfile();
         if ($tempFile === false) {
             self::markTestSkipped('Could not create temporary file');
+
             return;
         }
-        
+
         $tempFilePath = stream_get_meta_data($tempFile)['uri'];
         $testContent = "This is a test file content from PHP SDK integration test\nCreated at: " . date('Y-m-d H:i:s');
         file_put_contents($tempFilePath, $testContent);
-        
+
         // snippet-start: UploadFile
         $fileUploadRequest = new GeneratedModels\FileUploadRequest(
             file: $tempFilePath,
@@ -396,15 +399,15 @@ class FeedIntegrationTest extends TestCase
         // snippet-end: UploadFile
 
         $this->assertResponseSuccess($fileResponse, 'upload file');
-        
+
         $fileData = $fileResponse->getData();
         self::assertNotNull($fileData);
         self::assertNotNull($fileData->file);
         self::assertNotEmpty($fileData->file);
-        
+
         $fileUrl = $fileData->file;
         echo "✅ File uploaded successfully: {$fileUrl}\n";
-        
+
         // Cleanup temp file
         fclose($tempFile);
 
@@ -931,6 +934,7 @@ class FeedIntegrationTest extends TestCase
 
     /**
      * @test
+     *
      * @throws StreamApiException
      */
     public function test15bGetOrCreateFeedWithActivitiesAndFollow(): void
@@ -991,6 +995,7 @@ class FeedIntegrationTest extends TestCase
 
         // Step 5: Follow user 2 from user 1
         echo "\n5️⃣ Following user 2 from user 1...\n";
+
         try {
             $followResponse = $this->feedsV3Client->follow(
                 new GeneratedModels\FollowRequest(
@@ -1002,6 +1007,7 @@ class FeedIntegrationTest extends TestCase
             echo "✅ Followed user 2\n";
         } catch (StreamApiException $e) {
             echo '⚠️ Follow failed: ' . $e->getMessage() . "\n";
+
             throw $e;
         }
 
@@ -1014,15 +1020,16 @@ class FeedIntegrationTest extends TestCase
         $verifyFeedData = $verifyFeedResponse->getData();
         self::assertNotNull($verifyFeedData->feed);
         self::assertSame($feedData2->feed->id, $verifyFeedData->feed->id, 'Feed ID should match');
-        
+
         // Check if activities exist in the feed
         if ($verifyFeedData->activities !== null && count($verifyFeedData->activities) > 0) {
-            echo "✅ Feed 2 has " . count($verifyFeedData->activities) . " activities\n";
+            echo '✅ Feed 2 has ' . count($verifyFeedData->activities) . " activities\n";
             // Verify our activity is in the list
             $foundActivity = false;
             foreach ($verifyFeedData->activities as $activity) {
                 if ($activity->id === $activityId2) {
                     $foundActivity = true;
+
                     break;
                 }
             }
