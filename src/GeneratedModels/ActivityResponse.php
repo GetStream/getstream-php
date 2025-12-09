@@ -68,9 +68,9 @@ class ActivityResponse extends BaseModel
         /** @var array<Attachment>|null Media attachments for the activity */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null, // Media attachments for the activity
-        /** @var array<CommentResponse>|null Comments on this activity */
+        /** @var array<CommentResponse>|null Latest 5 comments of this activity (comment replies excluded) */
         #[ArrayOf(CommentResponse::class)]
-        public ?array $comments = null, // Comments on this activity
+        public ?array $comments = null, // Latest 5 comments of this activity (comment replies excluded)
         public ?array $feeds = null, // List of feed IDs containing this activity
         public ?array $filterTags = null, // Tags for filtering
         public ?array $interestTags = null, // Tags for user interests
