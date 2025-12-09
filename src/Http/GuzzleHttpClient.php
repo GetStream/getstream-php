@@ -57,7 +57,11 @@ class GuzzleHttpClient implements HttpClientInterface
 
             // Add body if provided
             if ($body !== null) {
-                if (is_array($body) || is_object($body)) {
+                // Check if this is multipart form data (array of arrays with 'name' and 'contents')
+                if (is_array($body) && !empty($body) && isset($body[0]) && is_array($body[0]) && isset($body[0]['name'])) {
+                    // This is multipart form data
+                    $options['multipart'] = $body;
+                } elseif (is_array($body) || is_object($body)) {
                     $options['json'] = $body;
                 } else {
                     $options['body'] = $body;

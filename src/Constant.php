@@ -6,6 +6,5 @@ namespace GetStream;
 
 class Constant
 {
-    const VERSION = '2.0.2';
+    public const VERSION = '2.0.2';
 }
-
