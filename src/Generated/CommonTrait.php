@@ -904,9 +904,8 @@ trait CommonTrait
      */
     public function uploadFile(GeneratedModels\FileUploadRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/file';
-
         $queryParams = [];
-        // Use the provided request data array directly
+        // Upload requests use multipart/form-data (handled automatically in makeRequest)
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FileUploadResponse::class);
     }
     /**
@@ -937,9 +936,8 @@ trait CommonTrait
      */
     public function uploadImage(GeneratedModels\ImageUploadRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/image';
-
         $queryParams = [];
-        // Use the provided request data array directly
+        // Upload requests use multipart/form-data (handled automatically in makeRequest)
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ImageUploadResponse::class);
     }
     /**

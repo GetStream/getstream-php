@@ -7,6 +7,7 @@ namespace GetStream;
 use GetStream\Auth\JWTGenerator;
 use GetStream\Exceptions\StreamException;
 use GetStream\Generated\CommonTrait;
+use GetStream\GeneratedModels;
 use GetStream\Http\GuzzleHttpClient;
 use GetStream\Http\HttpClientInterface;
 
@@ -158,6 +159,39 @@ class Client
             'Authorization' => $token,
             'stream-auth-type' => 'jwt',
         ]);
+
+        // Check if this is an upload request (needs multipart/form-data) - like Go SDK
+        if ($body instanceof GeneratedModels\ImageUploadRequest || $body instanceof GeneratedModels\FileUploadRequest) {
+            unset($headers['Content-Type']); // Let Guzzle set multipart Content-Type
+            
+            $multipart = [];
+            $isImage = $body instanceof GeneratedModels\ImageUploadRequest;
+            
+            // File field
+            if ($body->file !== null) {
+                $fileContent = is_string($body->file) && !file_exists($body->file)
+                    ? base64_decode($body->file, true) ?: throw new StreamException('Failed to decode base64 file data')
+                    : file_get_contents($body->file);
+                
+                $multipart[] = [
+                    'name' => 'file',
+                    'contents' => $fileContent,
+                    'filename' => $isImage ? 'image.jpg' : basename($body->file ?? 'file.pdf')
+                ];
+            }
+            
+            // User field (JSON string)
+            if ($body->user !== null) {
+                $multipart[] = ['name' => 'user', 'contents' => json_encode($body->user)];
+            }
+            
+            // Upload sizes (images only, JSON string)
+            if ($isImage && $body->uploadSizes !== null && !empty($body->uploadSizes)) {
+                $multipart[] = ['name' => 'upload_sizes', 'contents' => json_encode($body->uploadSizes)];
+            }
+            
+            return $this->httpClient->request($method, $url, $headers, $multipart);
+        }
 
         // Make the request
         return $this->httpClient->request($method, $url, $headers, $body);
