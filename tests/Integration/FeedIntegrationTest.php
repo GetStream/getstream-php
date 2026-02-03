@@ -1245,7 +1245,7 @@ class FeedIntegrationTest extends TestCase
         $this->assertResponseSuccess($reactionResponse, 'add reaction for delete test');
 
         // snippet-start: DeleteActivityReaction
-        $response = $this->feedsV3Client->deleteActivityReaction($activityId, 'like', $this->testUserId);
+        $response = $this->feedsV3Client->deleteActivityReaction($activityId, 'like', false, $this->testUserId);
         // snippet-end: DeleteActivityReaction
 
         $this->assertResponseSuccess($response, 'delete reaction');
@@ -1289,7 +1289,7 @@ class FeedIntegrationTest extends TestCase
         $commentId = $commentResponseData->comment->id ?? 'comment-id';  // Fallback if ID not returned
 
         // snippet-start: DeleteComment
-        $response = $this->feedsV3Client->deleteComment($commentId, false); // soft delete
+        $response = $this->feedsV3Client->deleteComment($commentId, false, false); // soft delete, no notification deletion
         // snippet-end: DeleteComment
 
         $this->assertResponseSuccess($response, 'delete comment');
@@ -1316,7 +1316,8 @@ class FeedIntegrationTest extends TestCase
             // snippet-start: Unfollow
             $response = $this->feedsV3Client->unfollow(
                 self::USER_FEED_TYPE . $this->testUserId,
-                self::USER_FEED_TYPE . $this->testUserId2
+                self::USER_FEED_TYPE . $this->testUserId2,
+                false // deleteNotificationActivity
             );
             // snippet-end: Unfollow
 
@@ -1357,7 +1358,7 @@ class FeedIntegrationTest extends TestCase
 
         foreach ($activitiesToDelete as $activityId) {
             // snippet-start: DeleteActivity
-            $response = $this->feedsV3Client->deleteActivity($activityId, false); // soft delete
+            $response = $this->feedsV3Client->deleteActivity($activityId, false, false); // soft delete, no notification deletion
             // snippet-end: DeleteActivity
 
             $this->assertResponseSuccess($response, 'delete activity');
@@ -2188,7 +2189,7 @@ class FeedIntegrationTest extends TestCase
         if (!empty($this->createdActivityIds)) {
             foreach ($this->createdActivityIds as $activityId) {
                 try {
-                    $this->feedsV3Client->deleteActivity($activityId, true); // hard delete
+                    $this->feedsV3Client->deleteActivity($activityId, true, false); // hard delete, no notification deletion
                 } catch (StreamApiException $e) {
                     // Ignore cleanup errors
                     echo "Warning: Failed to cleanup activity {$activityId}: " . $e->getMessage() . "\n";
@@ -2200,7 +2201,7 @@ class FeedIntegrationTest extends TestCase
         if (!empty($this->createdCommentIds)) {
             foreach ($this->createdCommentIds as $commentId) {
                 try {
-                    $this->feedsV3Client->deleteComment($commentId, true); // hard delete
+                    $this->feedsV3Client->deleteComment($commentId, true, false); // hard delete, no notification deletion
                 } catch (StreamApiException $e) {
                     // Ignore cleanup errors
                     echo "Warning: Failed to cleanup comment {$commentId}: " . $e->getMessage() . "\n";
