@@ -11,6 +11,7 @@ namespace GetStream\GeneratedModels;
  * @property bool|null $createNotificationActivity
  * @property string|null $pushPreference
  * @property bool|null $skipPush
+ * @property string|null $status
  * @property object|null $custom
  */
 class FollowRequest extends BaseModel
@@ -20,7 +21,8 @@ class FollowRequest extends BaseModel
         public ?string $target = null, // Fully qualified ID of the target feed
         public ?bool $createNotificationActivity = null, // Whether to create a notification activity for this follow
         public ?string $pushPreference = null, // Push preference for the follow relationship
-        public ?bool $skipPush = null,
+        public ?bool $skipPush = null, // Whether to skip push for this follow
+        public ?string $status = null, // Status of the follow relationship
         public ?object $custom = null, // Custom data for the follow relationship
     ) {
     }

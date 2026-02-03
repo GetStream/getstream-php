@@ -386,6 +386,71 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateImportResponse::class);
     }
     /**
+     * Lists all import v2 tasks for the app
+     * 
+     *
+     * @param int $state
+     * @return StreamResponse<GeneratedModels\ListImportV2TasksResponse>
+     * @throws StreamException
+     */
+    public function listImportV2Tasks(int $state): StreamResponse {
+        $path = '/api/v2/imports/v2';
+
+        $queryParams = [];
+        if ($state !== null) {
+            $queryParams['state'] = $state;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListImportV2TasksResponse::class);
+    }
+    /**
+     * Creates a new import v2 task
+     * 
+     *
+     * @param GeneratedModels\CreateImportV2TaskRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateImportV2TaskResponse>
+     * @throws StreamException
+     */
+    public function createImportV2Task(GeneratedModels\CreateImportV2TaskRequest $requestData): StreamResponse {
+        $path = '/api/v2/imports/v2';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateImportV2TaskResponse::class);
+    }
+    /**
+     * Deletes an import v2 task. Can only delete tasks in queued state.
+     * 
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\DeleteImportV2TaskResponse>
+     * @throws StreamException
+     */
+    public function deleteImportV2Task(string $id): StreamResponse {
+        $path = '/api/v2/imports/v2/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteImportV2TaskResponse::class);
+    }
+    /**
+     * Gets a single import v2 task by ID
+     * 
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\GetImportV2TaskResponse>
+     * @throws StreamException
+     */
+    public function getImportV2Task(string $id): StreamResponse {
+        $path = '/api/v2/imports/v2/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetImportV2TaskResponse::class);
+    }
+    /**
      * Gets an import
      * 
      *

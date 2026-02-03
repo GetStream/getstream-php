@@ -12,6 +12,7 @@ namespace GetStream\GeneratedModels;
  * @property string|null $followerRole
  * @property string|null $pushPreference
  * @property bool|null $skipPush
+ * @property string|null $status
  * @property object|null $custom
  */
 class UpdateFollowRequest extends BaseModel
@@ -22,7 +23,8 @@ class UpdateFollowRequest extends BaseModel
         public ?bool $createNotificationActivity = null, // Whether to create a notification activity for this follow
         public ?string $followerRole = null,
         public ?string $pushPreference = null, // Push preference for the follow relationship
-        public ?bool $skipPush = null,
+        public ?bool $skipPush = null, // Whether to skip push for this follow
+        public ?string $status = null, // Status of the follow relationship
         public ?object $custom = null, // Custom data for the follow relationship
     ) {
     }

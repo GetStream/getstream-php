@@ -9,6 +9,7 @@ namespace GetStream\GeneratedModels;
  * @property string $callCid
  * @property \DateTime $createdAt
  * @property string $egressID
+ * @property string $recordingType
  * @property CallRecording $callRecording
  * @property string $type
  */
@@ -18,6 +19,7 @@ class CallRecordingReadyEvent extends BaseModel
         public ?string $callCid = null,
         public ?\DateTime $createdAt = null,
         public ?string $egressID = null,
+        public ?string $recordingType = null, // The type of recording
         public ?CallRecording $callRecording = null,
         public ?string $type = null, // The type of event: "call.recording_ready" in this case
     ) {

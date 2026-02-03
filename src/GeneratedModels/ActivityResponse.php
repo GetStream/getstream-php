@@ -39,6 +39,7 @@ namespace GetStream\GeneratedModels;
  * @property \DateTime|null $expiresAt
  * @property bool|null $isWatched
  * @property string|null $moderationAction
+ * @property string|null $selectorSource
  * @property string|null $text
  * @property string|null $visibilityTag
  * @property FeedResponse|null $currentFeed
@@ -96,6 +97,7 @@ class ActivityResponse extends BaseModel
         public ?\DateTime $expiresAt = null, // When the activity will expire
         public ?bool $isWatched = null,
         public ?string $moderationAction = null,
+        public ?string $selectorSource = null, // Which activity selector provided this activity (e.g., 'following', 'popular', 'interest'). Only set when using multiple activity selectors with ranking.
         public ?string $text = null, // Text content of the activity
         public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name
         public ?FeedResponse $currentFeed = null,

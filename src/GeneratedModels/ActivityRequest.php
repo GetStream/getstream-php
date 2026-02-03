@@ -8,12 +8,14 @@ namespace GetStream\GeneratedModels;
  *
  * @property string $type
  * @property array $feeds
+ * @property bool|null $createNotificationActivity
  * @property string|null $expiresAt
  * @property string|null $id
  * @property string|null $parentID
  * @property string|null $pollID
  * @property string|null $restrictReplies
  * @property bool|null $skipEnrichUrl
+ * @property bool|null $skipPush
  * @property string|null $text
  * @property string|null $userID
  * @property string|null $visibility
@@ -31,13 +33,15 @@ class ActivityRequest extends BaseModel
 {
     public function __construct(
         public ?string $type = null, // Type of activity
-        public ?array $feeds = null, // List of feed IDs to add the activity to
+        public ?array $feeds = null, // List of feeds to add the activity to with a default max limit of 25 feeds
+        public ?bool $createNotificationActivity = null, // Whether to create notification activities for mentioned users
         public ?string $expiresAt = null, // Expiration time for the activity
         public ?string $id = null, // Optional ID for the activity
         public ?string $parentID = null, // ID of parent activity for replies/comments
         public ?string $pollID = null, // ID of a poll to attach to activity
         public ?string $restrictReplies = null, // Controls who can add comments/replies to this activity. Options: 'everyone' (default - anyone can reply), 'people_i_follow' (only people the activity creator follows can reply), 'nobody' (no one can reply)
         public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for the activity
+        public ?bool $skipPush = null, // Whether to skip push notifications
         public ?string $text = null, // Text content of the activity
         public ?string $userID = null, // ID of the user creating the activity
         public ?string $visibility = null, // Visibility setting for the activity

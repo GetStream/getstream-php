@@ -12,6 +12,7 @@ namespace GetStream\GeneratedModels;
  * @property int $peakConcurrentUsers
  * @property int $publishers
  * @property int $sessions
+ * @property int|null $totalParticipantDuration
  */
 class CallStatsParticipantCounts extends BaseModel
 {
@@ -22,6 +23,7 @@ class CallStatsParticipantCounts extends BaseModel
         public ?int $peakConcurrentUsers = null,
         public ?int $publishers = null,
         public ?int $sessions = null,
+        public ?int $totalParticipantDuration = null,
     ) {
     }
 

@@ -23,6 +23,7 @@ namespace GetStream\GeneratedModels;
  * @property UserResponse $user
  * @property int|null $controversyScore
  * @property \DateTime|null $deletedAt
+ * @property \DateTime|null $editedAt
  * @property string|null $parentID
  * @property string|null $text
  * @property array<Attachment>|null $attachments
@@ -55,6 +56,7 @@ class CommentResponse extends BaseModel
         public ?UserResponse $user = null,
         public ?int $controversyScore = null, // Controversy score of the comment
         public ?\DateTime $deletedAt = null, // When the comment was deleted
+        public ?\DateTime $editedAt = null, // When the comment was last edited
         public ?string $parentID = null, // ID of parent comment for nested replies
         public ?string $text = null, // Text content of the comment
         /** @var array<Attachment>|null */

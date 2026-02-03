@@ -11,7 +11,9 @@ namespace GetStream\GeneratedModels;
  * @property BroadcastSettingsResponse $broadcasting
  * @property FrameRecordingSettingsResponse $frameRecording
  * @property GeofenceSettingsResponse $geofencing
+ * @property IndividualRecordingSettingsResponse $individualRecording
  * @property LimitsSettingsResponse $limits
+ * @property RawRecordingSettingsResponse $rawRecording
  * @property RecordSettingsResponse $recording
  * @property RingSettingsResponse $ring
  * @property ScreensharingSettingsResponse $screensharing
@@ -29,7 +31,9 @@ class CallSettingsResponse extends BaseModel
         public ?BroadcastSettingsResponse $broadcasting = null,
         public ?FrameRecordingSettingsResponse $frameRecording = null,
         public ?GeofenceSettingsResponse $geofencing = null,
+        public ?IndividualRecordingSettingsResponse $individualRecording = null,
         public ?LimitsSettingsResponse $limits = null,
+        public ?RawRecordingSettingsResponse $rawRecording = null,
         public ?RecordSettingsResponse $recording = null,
         public ?RingSettingsResponse $ring = null,
         public ?ScreensharingSettingsResponse $screensharing = null,
