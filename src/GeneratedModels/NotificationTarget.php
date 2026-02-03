@@ -13,6 +13,7 @@ namespace GetStream\GeneratedModels;
  * @property string|null $userID
  * @property array<Attachment>|null $attachments
  * @property NotificationComment|null $comment
+ * @property NotificationParentActivity|null $parentActivity
  */
 class NotificationTarget extends BaseModel
 {
@@ -26,6 +27,7 @@ class NotificationTarget extends BaseModel
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null, // Attachments on the target activity (for activity targets)
         public ?NotificationComment $comment = null,
+        public ?NotificationParentActivity $parentActivity = null,
     ) {
     }
 

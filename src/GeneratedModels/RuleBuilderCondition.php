@@ -17,6 +17,8 @@ namespace GetStream\GeneratedModels;
  * @property UserCreatedWithinParameters|null $userCreatedWithinParams
  * @property UserCustomPropertyParameters|null $userCustomPropertyParams
  * @property FlagCountRuleParameters|null $userFlagCountRuleParams
+ * @property UserIdenticalContentCountParameters|null $userIdenticalContentCountParams
+ * @property UserRoleParameters|null $userRoleParams
  * @property UserRuleParameters|null $userRuleParams
  * @property VideoContentParameters|null $videoContentParams
  * @property VideoRuleParameters|null $videoRuleParams
@@ -35,6 +37,8 @@ class RuleBuilderCondition extends BaseModel
         public ?UserCreatedWithinParameters $userCreatedWithinParams = null,
         public ?UserCustomPropertyParameters $userCustomPropertyParams = null,
         public ?FlagCountRuleParameters $userFlagCountRuleParams = null,
+        public ?UserIdenticalContentCountParameters $userIdenticalContentCountParams = null,
+        public ?UserRoleParameters $userRoleParams = null,
         public ?UserRuleParameters $userRuleParams = null,
         public ?VideoContentParameters $videoContentParams = null,
         public ?VideoRuleParameters $videoRuleParams = null,

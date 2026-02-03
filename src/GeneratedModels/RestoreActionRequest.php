@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
+ *
+ * @property string|null $decisionReason
  */
 class RestoreActionRequest extends BaseModel
 {
     public function __construct(
+        public ?string $decisionReason = null,
     ) {
     }
 

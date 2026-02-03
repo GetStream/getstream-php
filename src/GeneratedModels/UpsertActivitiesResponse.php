@@ -8,6 +8,7 @@ namespace GetStream\GeneratedModels;
  *
  * @property string $duration
  * @property array<ActivityResponse> $activities
+ * @property int|null $mentionNotificationsCreated
  */
 class UpsertActivitiesResponse extends BaseModel
 {
@@ -16,6 +17,7 @@ class UpsertActivitiesResponse extends BaseModel
         /** @var array<ActivityResponse>|null List of created or updated activities */
         #[ArrayOf(ActivityResponse::class)]
         public ?array $activities = null, // List of created or updated activities
+        public ?int $mentionNotificationsCreated = null, // Total number of mention notification activities created for mentioned users across all activities
     ) {
     }
 

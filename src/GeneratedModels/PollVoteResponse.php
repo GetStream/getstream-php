@@ -7,12 +7,14 @@ namespace GetStream\GeneratedModels;
  * 
  *
  * @property string $duration
+ * @property PollResponseData|null $poll
  * @property PollVoteResponseData|null $vote
  */
 class PollVoteResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null, // Duration of the request in milliseconds
+        public ?PollResponseData $poll = null,
         public ?PollVoteResponseData $vote = null,
     ) {
     }

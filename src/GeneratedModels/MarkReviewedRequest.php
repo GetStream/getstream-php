@@ -7,12 +7,14 @@ namespace GetStream\GeneratedModels;
  * 
  *
  * @property int|null $contentToMarkAsReviewedLimit
+ * @property string|null $decisionReason
  * @property bool|null $disableMarkingContentAsReviewed
  */
 class MarkReviewedRequest extends BaseModel
 {
     public function __construct(
         public ?int $contentToMarkAsReviewedLimit = null,
+        public ?string $decisionReason = null,
         public ?bool $disableMarkingContentAsReviewed = null,
     ) {
     }

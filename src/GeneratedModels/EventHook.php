@@ -13,6 +13,7 @@ namespace GetStream\GeneratedModels;
  * @property string|null $product
  * @property bool|null $shouldSendCustomEvents
  * @property string|null $snsAuthType
+ * @property bool|null $snsEventBasedMessageGroupIDEnabled
  * @property string|null $snsKey
  * @property string|null $snsRegion
  * @property string|null $snsRoleArn
@@ -40,6 +41,7 @@ class EventHook extends BaseModel
         public ?string $product = null,
         public ?bool $shouldSendCustomEvents = null,
         public ?string $snsAuthType = null,
+        public ?bool $snsEventBasedMessageGroupIDEnabled = null,
         public ?string $snsKey = null,
         public ?string $snsRegion = null,
         public ?string $snsRoleArn = null,

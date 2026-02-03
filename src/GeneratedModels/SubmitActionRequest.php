@@ -7,7 +7,8 @@ namespace GetStream\GeneratedModels;
  * 
  *
  * @property string $actionType
- * @property string $itemID
+ * @property string|null $appealID
+ * @property string|null $itemID
  * @property string|null $userID
  * @property BanActionRequest|null $ban
  * @property BlockActionRequest|null $block
@@ -18,14 +19,18 @@ namespace GetStream\GeneratedModels;
  * @property DeleteReactionRequest|null $deleteReaction
  * @property DeleteUserRequest|null $deleteUser
  * @property MarkReviewedRequest|null $markReviewed
+ * @property RejectAppealRequest|null $rejectAppeal
+ * @property RestoreActionRequest|null $restore
  * @property ShadowBlockActionRequest|null $shadowBlock
  * @property UnbanActionRequest|null $unban
+ * @property UnblockActionRequest|null $unblock
  * @property UserRequest|null $user
  */
 class SubmitActionRequest extends BaseModel
 {
     public function __construct(
         public ?string $actionType = null, // Type of moderation action to perform (mark_reviewed, delete_message, etc.)
+        public ?string $appealID = null, // UUID of the appeal to act on (required for reject_appeal, optional for other actions)
         public ?string $itemID = null, // UUID of the review queue item to act on
         public ?string $userID = null,
         public ?BanActionRequest $ban = null,
@@ -37,8 +42,11 @@ class SubmitActionRequest extends BaseModel
         public ?DeleteReactionRequest $deleteReaction = null,
         public ?DeleteUserRequest $deleteUser = null,
         public ?MarkReviewedRequest $markReviewed = null,
+        public ?RejectAppealRequest $rejectAppeal = null,
+        public ?RestoreActionRequest $restore = null,
         public ?ShadowBlockActionRequest $shadowBlock = null,
         public ?UnbanActionRequest $unban = null,
+        public ?UnblockActionRequest $unblock = null,
         public ?UserRequest $user = null,
     ) {
     }

@@ -8,6 +8,7 @@ namespace GetStream\GeneratedModels;
  *
  * @property string $duration
  * @property array<ChannelStateResponseFields> $channels
+ * @property ParsedPredefinedFilterResponse|null $predefinedFilter
  */
 class QueryChannelsResponse extends BaseModel
 {
@@ -16,6 +17,7 @@ class QueryChannelsResponse extends BaseModel
         /** @var array<ChannelStateResponseFields>|null List of channels */
         #[ArrayOf(ChannelStateResponseFields::class)]
         public ?array $channels = null, // List of channels
+        public ?ParsedPredefinedFilterResponse $predefinedFilter = null,
     ) {
     }
 

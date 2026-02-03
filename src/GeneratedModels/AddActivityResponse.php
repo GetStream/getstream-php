@@ -8,12 +8,14 @@ namespace GetStream\GeneratedModels;
  *
  * @property string $duration
  * @property ActivityResponse $activity
+ * @property int|null $mentionNotificationsCreated
  */
 class AddActivityResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
         public ?ActivityResponse $activity = null,
+        public ?int $mentionNotificationsCreated = null, // Number of mention notification activities created for mentioned users
     ) {
     }
 

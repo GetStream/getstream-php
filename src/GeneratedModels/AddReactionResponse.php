@@ -9,6 +9,7 @@ namespace GetStream\GeneratedModels;
  * @property string $duration
  * @property ActivityResponse $activity
  * @property FeedsReactionResponse $reaction
+ * @property bool|null $notificationCreated
  */
 class AddReactionResponse extends BaseModel
 {
@@ -16,6 +17,7 @@ class AddReactionResponse extends BaseModel
         public ?string $duration = null,
         public ?ActivityResponse $activity = null,
         public ?FeedsReactionResponse $reaction = null,
+        public ?bool $notificationCreated = null, // Whether a notification activity was successfully created
     ) {
     }
 

@@ -45,6 +45,24 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertActivitiesResponse::class);
     }
     /**
+     * Updates certain fields of multiple activities in a batch. Use 'set' to update specific fields and 'unset' to remove fields. Activities that fail due to not found, permission denied, or no changes detected are silently skipped and not included in the response. However, validation errors (e.g., updating reserved fields, invalid field values) will fail the entire batch request.
+     * 
+     * Sends events:
+     * - feeds.activity.updated
+     * 
+     *
+     * @param GeneratedModels\UpdateActivitiesPartialBatchRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateActivitiesPartialBatchResponse>
+     * @throws StreamException
+     */
+    public function updateActivitiesPartialBatch(GeneratedModels\UpdateActivitiesPartialBatchRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/activities/batch/partial';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateActivitiesPartialBatchResponse::class);
+    }
+    /**
      * Delete one or more activities by their IDs
      * 
      *
@@ -244,16 +262,20 @@ trait FeedsTrait
      *
      * @param string $activityID
      * @param string $type
+     * @param bool $deleteNotificationActivity
      * @param string $userID
      * @return StreamResponse<GeneratedModels\DeleteActivityReactionResponse>
      * @throws StreamException
      */
-    public function deleteActivityReaction(string $activityID, string $type, string $userID): StreamResponse {
+    public function deleteActivityReaction(string $activityID, string $type, bool $deleteNotificationActivity, string $userID): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/reactions/{type}';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
         $path = str_replace('{type}', (string) $type, $path);
 
         $queryParams = [];
+        if ($deleteNotificationActivity !== null) {
+            $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
+        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
@@ -266,16 +288,20 @@ trait FeedsTrait
      *
      * @param string $id
      * @param bool $hardDelete
+     * @param bool $deleteNotificationActivity
      * @return StreamResponse<GeneratedModels\DeleteActivityResponse>
      * @throws StreamException
      */
-    public function deleteActivity(string $id, bool $hardDelete): StreamResponse {
+    public function deleteActivity(string $id, bool $hardDelete, bool $deleteNotificationActivity): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
         if ($hardDelete !== null) {
             $queryParams['hard_delete'] = $hardDelete;
+        }
+        if ($deleteNotificationActivity !== null) {
+            $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteActivityResponse::class);
@@ -335,6 +361,23 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateActivityResponse::class);
+    }
+    /**
+     * Restores a soft-deleted activity by its ID. Only the activity owner can restore their own activities.
+     * 
+     *
+     * @param string $id
+     * @param GeneratedModels\RestoreActivityRequest $requestData
+     * @return StreamResponse<GeneratedModels\RestoreActivityResponse>
+     * @throws StreamException
+     */
+    public function restoreActivity(string $id, GeneratedModels\RestoreActivityRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/activities/{id}/restore';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreActivityResponse::class);
     }
     /**
      * Query bookmark folders with filter query
@@ -493,13 +536,14 @@ trait FeedsTrait
      * @param int $depth
      * @param string $sort
      * @param int $repliesLimit
+     * @param string $userID
      * @param int $limit
      * @param string $prev
      * @param string $next
      * @return StreamResponse<GeneratedModels\GetCommentsResponse>
      * @throws StreamException
      */
-    public function getComments(string $objectID, string $objectType, int $depth, string $sort, int $repliesLimit, int $limit, string $prev, string $next): StreamResponse {
+    public function getComments(string $objectID, string $objectType, int $depth, string $sort, int $repliesLimit, string $userID, int $limit, string $prev, string $next): StreamResponse {
         $path = '/api/v2/feeds/comments';
 
         $queryParams = [];
@@ -517,6 +561,9 @@ trait FeedsTrait
         }
         if ($repliesLimit !== null) {
             $queryParams['replies_limit'] = $repliesLimit;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
         }
         if ($limit !== null) {
             $queryParams['limit'] = $limit;
@@ -581,16 +628,20 @@ trait FeedsTrait
      *
      * @param string $id
      * @param bool $hardDelete
+     * @param bool $deleteNotificationActivity
      * @return StreamResponse<GeneratedModels\DeleteCommentResponse>
      * @throws StreamException
      */
-    public function deleteComment(string $id, bool $hardDelete): StreamResponse {
+    public function deleteComment(string $id, bool $hardDelete, bool $deleteNotificationActivity): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
         if ($hardDelete !== null) {
             $queryParams['hard_delete'] = $hardDelete;
+        }
+        if ($deleteNotificationActivity !== null) {
+            $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCommentResponse::class);
@@ -668,16 +719,20 @@ trait FeedsTrait
      *
      * @param string $id
      * @param string $type
+     * @param bool $deleteNotificationActivity
      * @param string $userID
      * @return StreamResponse<GeneratedModels\DeleteCommentReactionResponse>
      * @throws StreamException
      */
-    public function deleteCommentReaction(string $id, string $type, string $userID): StreamResponse {
+    public function deleteCommentReaction(string $id, string $type, bool $deleteNotificationActivity, string $userID): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/reactions/{type}';
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{type}', (string) $type, $path);
 
         $queryParams = [];
+        if ($deleteNotificationActivity !== null) {
+            $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
+        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
@@ -692,13 +747,14 @@ trait FeedsTrait
      * @param int $depth
      * @param string $sort
      * @param int $repliesLimit
+     * @param string $userID
      * @param int $limit
      * @param string $prev
      * @param string $next
      * @return StreamResponse<GeneratedModels\GetCommentRepliesResponse>
      * @throws StreamException
      */
-    public function getCommentReplies(string $id, int $depth, string $sort, int $repliesLimit, int $limit, string $prev, string $next): StreamResponse {
+    public function getCommentReplies(string $id, int $depth, string $sort, int $repliesLimit, string $userID, int $limit, string $prev, string $next): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/replies';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -711,6 +767,9 @@ trait FeedsTrait
         }
         if ($repliesLimit !== null) {
             $queryParams['replies_limit'] = $repliesLimit;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
         }
         if ($limit !== null) {
             $queryParams['limit'] = $limit;
@@ -1403,15 +1462,19 @@ trait FeedsTrait
      *
      * @param string $source
      * @param string $target
+     * @param bool $deleteNotificationActivity
      * @return StreamResponse<GeneratedModels\UnfollowResponse>
      * @throws StreamException
      */
-    public function unfollow(string $source, string $target): StreamResponse {
+    public function unfollow(string $source, string $target, bool $deleteNotificationActivity): StreamResponse {
         $path = '/api/v2/feeds/follows/{source}/{target}';
         $path = str_replace('{source}', (string) $source, $path);
         $path = str_replace('{target}', (string) $target, $path);
 
         $queryParams = [];
+        if ($deleteNotificationActivity !== null) {
+            $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\UnfollowResponse::class);
     }

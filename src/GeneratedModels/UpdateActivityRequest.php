@@ -7,17 +7,20 @@ namespace GetStream\GeneratedModels;
  * 
  *
  * @property \DateTime|null $expiresAt
+ * @property bool|null $handleMentionNotifications
  * @property string|null $pollID
  * @property string|null $restrictReplies
  * @property bool|null $skipEnrichUrl
  * @property string|null $text
  * @property string|null $userID
  * @property string|null $visibility
+ * @property string|null $visibilityTag
  * @property array<Attachment>|null $attachments
  * @property array|null $collectionRefs
  * @property array|null $feeds
  * @property array|null $filterTags
  * @property array|null $interestTags
+ * @property array|null $mentionedUserIds
  * @property object|null $custom
  * @property ActivityLocation|null $location
  * @property UserRequest|null $user
@@ -26,12 +29,14 @@ class UpdateActivityRequest extends BaseModel
 {
     public function __construct(
         public ?\DateTime $expiresAt = null, // Time when the activity will expire
+        public ?bool $handleMentionNotifications = null, // If true, creates notification activities for newly mentioned users and deletes notifications for users no longer mentioned
         public ?string $pollID = null, // Poll ID
         public ?string $restrictReplies = null, // Controls who can add comments/replies to this activity. Options: 'everyone' (default - anyone can reply), 'people_i_follow' (only people the activity creator follows can reply), 'nobody' (no one can reply)
         public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for the activity
         public ?string $text = null, // The text content of the activity
         public ?string $userID = null,
         public ?string $visibility = null, // Visibility setting for the activity
+        public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name and is required
         /** @var array<Attachment>|null List of attachments for the activity */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null, // List of attachments for the activity
@@ -39,6 +44,7 @@ class UpdateActivityRequest extends BaseModel
         public ?array $feeds = null, // List of feeds the activity is present in
         public ?array $filterTags = null, // Tags used for filtering the activity
         public ?array $interestTags = null, // Tags indicating interest categories
+        public ?array $mentionedUserIds = null, // List of user IDs mentioned in the activity
         public ?object $custom = null, // Custom data for the activity
         public ?ActivityLocation $location = null,
         public ?UserRequest $user = null,

@@ -26,6 +26,7 @@ namespace GetStream\GeneratedModels;
  * @property string|null $channelCid
  * @property \DateTime|null $endedAt
  * @property int|null $joinAheadTimeSeconds
+ * @property string|null $routingNumber
  * @property \DateTime|null $startsAt
  * @property string|null $team
  * @property CallSessionResponse|null $session
@@ -54,6 +55,7 @@ class CallResponse extends BaseModel
         public ?string $channelCid = null,
         public ?\DateTime $endedAt = null, // Date/time when the call ended
         public ?int $joinAheadTimeSeconds = null,
+        public ?string $routingNumber = null, // 10-digit routing number for SIP routing
         public ?\DateTime $startsAt = null, // Date/time when the call will start
         public ?string $team = null,
         public ?CallSessionResponse $session = null,

@@ -15,6 +15,52 @@ use GetStream\GeneratedModels;
 trait ModerationTrait
 {
     /**
+     * Appeal against the moderation decision
+     * 
+     *
+     * @param GeneratedModels\AppealRequest $requestData
+     * @return StreamResponse<GeneratedModels\AppealResponse>
+     * @throws StreamException
+     */
+    public function appeal(GeneratedModels\AppealRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/appeal';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AppealResponse::class);
+    }
+    /**
+     * Retrieve a specific appeal item by its ID
+     * 
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\GetAppealResponse>
+     * @throws StreamException
+     */
+    public function getAppeal(string $id): StreamResponse {
+        $path = '/api/v2/moderation/appeal/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetAppealResponse::class);
+    }
+    /**
+     * Query Appeals
+     * 
+     *
+     * @param GeneratedModels\QueryAppealsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryAppealsResponse>
+     * @throws StreamException
+     */
+    public function queryAppeals(GeneratedModels\QueryAppealsRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/appeals';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryAppealsResponse::class);
+    }
+    /**
      * Ban a user from a channel or the entire app
      * 
      *

@@ -8,12 +8,14 @@ namespace GetStream\GeneratedModels;
  *
  * @property string $duration
  * @property FollowResponse $follow
+ * @property bool|null $notificationCreated
  */
 class SingleFollowResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
         public ?FollowResponse $follow = null,
+        public ?bool $notificationCreated = null, // Whether a notification activity was successfully created
     ) {
     }
 

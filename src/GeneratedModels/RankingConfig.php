@@ -14,7 +14,7 @@ namespace GetStream\GeneratedModels;
 class RankingConfig extends BaseModel
 {
     public function __construct(
-        public ?string $type = null, // Type of ranking algorithm. Required. Must be one of: recency, expression, interest
+        public ?string $type = null, // Type of ranking algorithm. Required. Must be one of: expression, interest
         public ?string $score = null, // Scoring formula. Required when type is 'expression' or 'interest'
         public ?object $defaults = null, // Default values for ranking
         public ?array $functions = null, // Decay functions configuration

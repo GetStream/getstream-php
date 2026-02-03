@@ -23,6 +23,7 @@ namespace GetStream\GeneratedModels;
  * @property UserResponse $user
  * @property int|null $controversyScore
  * @property \DateTime|null $deletedAt
+ * @property \DateTime|null $editedAt
  * @property string|null $parentID
  * @property string|null $text
  * @property array<Attachment>|null $attachments
@@ -57,6 +58,7 @@ class ThreadedCommentResponse extends BaseModel
         public ?UserResponse $user = null,
         public ?int $controversyScore = null,
         public ?\DateTime $deletedAt = null,
+        public ?\DateTime $editedAt = null,
         public ?string $parentID = null,
         public ?string $text = null,
         /** @var array<Attachment>|null */

@@ -28,6 +28,7 @@ namespace GetStream\GeneratedModels;
  * @property \DateTime|null $reviewedAt
  * @property array|null $teams
  * @property EnrichedActivity|null $activity
+ * @property AppealItemResponse|null $appeal
  * @property UserResponse|null $assignedTo
  * @property CallResponse|null $call
  * @property EntityCreatorResponse|null $entityCreator
@@ -70,6 +71,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?\DateTime $reviewedAt = null, // When the item was reviewed
         public ?array $teams = null, // Teams associated with this item
         public ?EnrichedActivity $activity = null,
+        public ?AppealItemResponse $appeal = null,
         public ?UserResponse $assignedTo = null,
         public ?CallResponse $call = null,
         public ?EntityCreatorResponse $entityCreator = null,

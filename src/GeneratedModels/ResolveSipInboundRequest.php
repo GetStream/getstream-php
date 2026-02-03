@@ -9,6 +9,7 @@ namespace GetStream\GeneratedModels;
  * @property string $sipCallerNumber
  * @property string $sipTrunkNumber
  * @property SIPChallenge $challenge
+ * @property string|null $routingNumber
  * @property array|null $sipHeaders
  */
 class ResolveSipInboundRequest extends BaseModel
@@ -17,6 +18,7 @@ class ResolveSipInboundRequest extends BaseModel
         public ?string $sipCallerNumber = null, // SIP caller number
         public ?string $sipTrunkNumber = null, // SIP trunk number to resolve
         public ?SIPChallenge $challenge = null,
+        public ?string $routingNumber = null, // Optional routing number for routing number-based call routing (10 digits)
         public ?array $sipHeaders = null, // Optional SIP headers as key-value pairs
     ) {
     }
