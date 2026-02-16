@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property CampaignResponse|null $campaign
  */
 class CampaignStartedEvent extends BaseModel
 {

@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a moderation warning is issued to a user
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $message
- * @property string $userID
- * @property object $custom
- * @property string $type
  */
 class CallModerationWarningEvent extends BaseModel
 {

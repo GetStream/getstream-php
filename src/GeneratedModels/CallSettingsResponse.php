@@ -5,23 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property AudioSettingsResponse $audio
- * @property BackstageSettingsResponse $backstage
- * @property BroadcastSettingsResponse $broadcasting
- * @property FrameRecordingSettingsResponse $frameRecording
- * @property GeofenceSettingsResponse $geofencing
- * @property IndividualRecordingSettingsResponse $individualRecording
- * @property LimitsSettingsResponse $limits
- * @property RawRecordingSettingsResponse $rawRecording
- * @property RecordSettingsResponse $recording
- * @property RingSettingsResponse $ring
- * @property ScreensharingSettingsResponse $screensharing
- * @property SessionSettingsResponse $session
- * @property ThumbnailsSettingsResponse $thumbnails
- * @property TranscriptionSettingsResponse $transcription
- * @property VideoSettingsResponse $video
- * @property IngressSettingsResponse|null $ingress
  */
 class CallSettingsResponse extends BaseModel
 {

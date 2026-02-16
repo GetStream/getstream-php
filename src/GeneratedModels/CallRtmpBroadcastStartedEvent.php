@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when RTMP broadcast has started
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $name
- * @property string $type
  */
 class CallRtmpBroadcastStartedEvent extends BaseModel
 {

@@ -5,20 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $id
- * @property \DateTime $updatedAt
- * @property string|null $defaultVisibility
- * @property \DateTime|null $deletedAt
- * @property array<ActivityProcessorConfig>|null $activityProcessors
- * @property array<ActivitySelectorConfigResponse>|null $activitySelectors
- * @property AggregationConfig|null $aggregation
- * @property object|null $custom
- * @property NotificationConfig|null $notification
- * @property PushNotificationConfig|null $pushNotification
- * @property RankingConfig|null $ranking
- * @property StoriesConfig|null $stories
  */
 class FeedGroupResponse extends BaseModel
 {
@@ -26,12 +12,12 @@ class FeedGroupResponse extends BaseModel
         public ?\DateTime $createdAt = null, // When the feed group was created
         public ?string $id = null, // Identifier within the group
         public ?\DateTime $updatedAt = null, // When the feed group was last updated
-        public ?string $defaultVisibility = null, // Default visibility for activities
+        public ?string $defaultVisibility = null, // Default visibility for activities. One of: public, visible, followers, members, private
         public ?\DateTime $deletedAt = null,
-        /** @var array<ActivityProcessorConfig>|null Configuration for activity processors */
+        /** @var array<ActivityProcessorConfig>|null */
         #[ArrayOf(ActivityProcessorConfig::class)]
         public ?array $activityProcessors = null, // Configuration for activity processors
-        /** @var array<ActivitySelectorConfigResponse>|null Configuration for activity selectors */
+        /** @var array<ActivitySelectorConfigResponse>|null */
         #[ArrayOf(ActivitySelectorConfigResponse::class)]
         public ?array $activitySelectors = null, // Configuration for activity selectors
         public ?AggregationConfig $aggregation = null,

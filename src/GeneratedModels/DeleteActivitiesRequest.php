@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array $ids
- * @property bool|null $deleteNotificationActivity
- * @property bool|null $hardDelete
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class DeleteActivitiesRequest extends BaseModel
 {

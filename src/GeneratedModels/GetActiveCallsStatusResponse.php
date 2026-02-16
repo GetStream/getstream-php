@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response containing active calls status information
- *
- * @property string $duration
- * @property \DateTime $endTime
- * @property \DateTime $startTime
- * @property ActiveCallsMetrics|null $metrics
- * @property ActiveCallsSummary|null $summary
  */
 class GetActiveCallsStatusResponse extends BaseModel
 {

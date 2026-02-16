@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $architecture
- * @property string|null $name
- * @property string|null $version
  */
 class ClientOSDataResponse extends BaseModel
 {

@@ -5,23 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Client request
- *
- * @property string|null $idAround
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property string|null $userID
- * @property string|null $view
- * @property bool|null $watch
- * @property FeedInput|null $data
- * @property EnrichmentOptions|null $enrichmentOptions
- * @property object|null $externalRanking
- * @property object|null $filter
- * @property PagerRequest|null $followersPagination
- * @property PagerRequest|null $followingPagination
- * @property array|null $interestWeights
- * @property PagerRequest|null $memberPagination
- * @property UserRequest|null $user
  */
 class GetOrCreateFeedRequest extends BaseModel
 {
@@ -39,6 +22,7 @@ class GetOrCreateFeedRequest extends BaseModel
         public ?object $filter = null,
         public ?PagerRequest $followersPagination = null,
         public ?PagerRequest $followingPagination = null,
+        public ?FriendReactionsOptions $friendReactionsOptions = null,
         public ?array $interestWeights = null,
         public ?PagerRequest $memberPagination = null,
         public ?UserRequest $user = null,

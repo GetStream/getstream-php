@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Config for creating Azure Blob Storage storage
- *
- * @property string $absAccountName
- * @property string $absClientID
- * @property string $absClientSecret
- * @property string $absTenantID
  */
 class AzureRequest extends BaseModel
 {

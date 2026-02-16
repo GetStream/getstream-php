@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * UnpinRequest is the payload for unpinning a message.
- *
- * @property string $sessionID
- * @property string $userID
  */
 class UnpinRequest extends BaseModel
 {

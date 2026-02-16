@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $accuracyRadiusMeters
- * @property string|null $city
- * @property string|null $continent
- * @property string|null $country
- * @property string|null $countryIsoCode
- * @property int|null $latitude
- * @property int|null $longitude
- * @property string|null $subdivision
  */
 class CallStatsLocation extends BaseModel
 {

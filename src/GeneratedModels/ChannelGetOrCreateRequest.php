@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $hideForCreator
- * @property bool|null $state
- * @property bool|null $threadUnreadCounts
- * @property ChannelInput|null $data
- * @property PaginationParams|null $members
- * @property MessagePaginationParams|null $messages
- * @property PaginationParams|null $watchers
  */
 class ChannelGetOrCreateRequest extends BaseModel
 {

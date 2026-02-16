@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $unread
- * @property int $unseen
- * @property \DateTime|null $lastReadAt
- * @property \DateTime|null $lastSeenAt
- * @property array|null $readActivities
- * @property array|null $seenActivities
  */
 class NotificationStatusResponse extends BaseModel
 {

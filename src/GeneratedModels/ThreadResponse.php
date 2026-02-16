@@ -5,23 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $activeParticipantCount
- * @property string $channelCid
- * @property \DateTime $createdAt
- * @property string $createdByUserID
- * @property string $parentMessageID
- * @property int $participantCount
- * @property string $title
- * @property \DateTime $updatedAt
- * @property object $custom
- * @property \DateTime|null $deletedAt
- * @property \DateTime|null $lastMessageAt
- * @property int|null $replyCount
- * @property array<ThreadParticipant>|null $threadParticipants
- * @property ChannelResponse|null $channel
- * @property UserResponse|null $createdBy
- * @property MessageResponse|null $parentMessage
  */
 class ThreadResponse extends BaseModel
 {
@@ -38,7 +21,7 @@ class ThreadResponse extends BaseModel
         public ?\DateTime $deletedAt = null, // Deleted At
         public ?\DateTime $lastMessageAt = null, // Last Message At
         public ?int $replyCount = null, // Reply Count
-        /** @var array<ThreadParticipant>|null Thread Participants */
+        /** @var array<ThreadParticipant>|null */
         #[ArrayOf(ThreadParticipant::class)]
         public ?array $threadParticipants = null, // Thread Participants
         public ?ChannelResponse $channel = null,

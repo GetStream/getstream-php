@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property ActivityResponse $activity
- * @property FeedsReactionResponse $reaction
- * @property bool|null $notificationCreated
  */
 class AddReactionResponse extends BaseModel
 {

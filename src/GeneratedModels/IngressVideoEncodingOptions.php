@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array<IngressVideoLayer> $layers
- * @property IngressSource|null $source
  */
 class IngressVideoEncodingOptions extends BaseModel
 {

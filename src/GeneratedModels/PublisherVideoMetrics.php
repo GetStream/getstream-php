@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property ActiveCallsBitrateStats|null $bitrate
- * @property ActiveCallsFPSStats|null $fps30
- * @property ActiveCallsLatencyStats|null $frameEncodingTimeMs
- * @property ActiveCallsLatencyStats|null $jitterMs
- * @property ActiveCallsResolutionStats|null $resolution
  */
 class PublisherVideoMetrics extends BaseModel
 {

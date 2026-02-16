@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a call is mark as ended for all its participants. Clients receiving this event should leave the call screen
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property CallResponse $call
- * @property string $type
- * @property string|null $reason
- * @property UserResponse|null $user
  */
 class CallEndedEvent extends BaseModel
 {

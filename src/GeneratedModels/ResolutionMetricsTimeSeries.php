@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property MetricTimeSeries|null $height
- * @property MetricTimeSeries|null $width
  */
 class ResolutionMetricsTimeSeries extends BaseModel
 {

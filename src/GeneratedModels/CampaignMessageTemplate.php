@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $pollID
- * @property bool $searchable
- * @property string $text
- * @property array<Attachment> $attachments
- * @property object $custom
  */
 class CampaignMessageTemplate extends BaseModel
 {

@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a user bookmarks an activity.
- *
- * @property \DateTime $createdAt
- * @property BookmarkResponse $bookmark
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class BookmarkAddedEvent extends BaseModel
 {

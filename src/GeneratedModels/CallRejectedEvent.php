@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a user rejects a notification to join a call.
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property CallResponse $call
- * @property UserResponse $user
- * @property string $type
- * @property string|null $reason
  */
 class CallRejectedEvent extends BaseModel
 {

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Request to get own_follows, own_followings, own_capabilities, and/or own_membership for multiple feeds. If fields is not specified, all fields are returned.
- *
- * @property array $feeds
- * @property string|null $userID
- * @property array|null $fields
- * @property UserRequest|null $user
  */
 class OwnBatchRequest extends BaseModel
 {

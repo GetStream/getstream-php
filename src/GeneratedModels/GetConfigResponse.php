@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property ConfigResponse|null $config
  */
 class GetConfigResponse extends BaseModel
 {

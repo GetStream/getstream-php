@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property string $name
  */
 class DeleteCommandResponse extends BaseModel
 {

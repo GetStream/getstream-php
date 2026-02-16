@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * ReactionGroupResponse contains all information about a reaction of the same type.
- *
- * @property int $count
- * @property \DateTime $firstReactionAt
- * @property \DateTime $lastReactionAt
- * @property int $sumScores
  */
 class ReactionGroupResponse extends BaseModel
 {

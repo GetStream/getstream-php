@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property object|null $custom
  */
 class AddFolderRequest extends BaseModel
 {

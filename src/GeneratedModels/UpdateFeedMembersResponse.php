@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property array<FeedMemberResponse> $added
- * @property array $removedIds
- * @property array<FeedMemberResponse> $updated
  */
 class UpdateFeedMembersResponse extends BaseModel
 {

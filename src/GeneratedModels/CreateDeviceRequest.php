@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Create device request
- *
- * @property string $id
- * @property string $pushProvider
- * @property string|null $pushProviderName
- * @property string|null $userID
- * @property bool|null $voipToken
- * @property UserRequest|null $user
  */
 class CreateDeviceRequest extends BaseModel
 {

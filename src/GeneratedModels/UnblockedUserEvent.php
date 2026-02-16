@@ -6,11 +6,6 @@ namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a user is unblocked on a call,
  * this can be useful to notify the user that they can now join the call again
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property UserResponse $user
- * @property string $type
  */
 class UnblockedUserEvent extends BaseModel
 {

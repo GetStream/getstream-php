@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Configuration for SIP caller settings
- *
- * @property string $id
- * @property object|null $customData
  */
 class SIPCallerConfigsRequest extends BaseModel
 {

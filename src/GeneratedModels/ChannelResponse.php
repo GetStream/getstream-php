@@ -5,35 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Represents channel in chat
- *
- * @property string $cid
- * @property \DateTime $createdAt
- * @property bool $disabled
- * @property bool $frozen
- * @property string $id
- * @property string $type
- * @property \DateTime $updatedAt
- * @property object $custom
- * @property bool|null $autoTranslationEnabled
- * @property string|null $autoTranslationLanguage
- * @property bool|null $blocked
- * @property int|null $cooldown
- * @property \DateTime|null $deletedAt
- * @property bool|null $hidden
- * @property \DateTime|null $hideMessagesBefore
- * @property \DateTime|null $lastMessageAt
- * @property int|null $memberCount
- * @property int|null $messageCount
- * @property \DateTime|null $muteExpiresAt
- * @property bool|null $muted
- * @property string|null $team
- * @property \DateTime|null $truncatedAt
- * @property array|null $filterTags
- * @property array<ChannelMemberResponse>|null $members
- * @property array<ChannelOwnCapability>|null $ownCapabilities
- * @property ChannelConfigWithInfo|null $config
- * @property UserResponse|null $createdBy
- * @property UserResponse|null $truncatedBy
  */
 class ChannelResponse extends BaseModel
 {
@@ -61,10 +32,10 @@ class ChannelResponse extends BaseModel
         public ?string $team = null, // Team the channel belongs to (multi-tenant only)
         public ?\DateTime $truncatedAt = null, // Date of the latest truncation of the channel
         public ?array $filterTags = null, // List of filter tags associated with the channel
-        /** @var array<ChannelMemberResponse>|null List of channel members (max 100) */
+        /** @var array<ChannelMemberResponse>|null */
         #[ArrayOf(ChannelMemberResponse::class)]
         public ?array $members = null, // List of channel members (max 100)
-        /** @var array<ChannelOwnCapability>|null List of channel capabilities of authenticated user */
+        /** @var array<ChannelOwnCapability>|null */
         #[ArrayOf(ChannelOwnCapability::class)]
         public ?array $ownCapabilities = null, // List of channel capabilities of authenticated user
         public ?ChannelConfigWithInfo $config = null,

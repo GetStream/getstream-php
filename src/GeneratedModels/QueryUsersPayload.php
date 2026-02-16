@@ -4,16 +4,7 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property object $filterConditions
- * @property bool|null $includeDeactivatedUsers
- * @property int|null $limit
- * @property int|null $offset
- * @property bool|null $presence
- * @property string|null $userID
- * @property array<SortParamRequest>|null $sort
- * @property UserRequest|null $user
+ * Client request
  */
 class QueryUsersPayload extends BaseModel
 {

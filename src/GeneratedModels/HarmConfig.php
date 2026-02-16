@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $cooldownPeriod
- * @property int|null $severity
- * @property int|null $threshold
- * @property array<ActionSequence>|null $actionSequences
- * @property array|null $harmTypes
  */
 class HarmConfig extends BaseModel
 {

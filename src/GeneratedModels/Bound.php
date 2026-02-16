@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $inclusive
- * @property int $value
  */
 class Bound extends BaseModel
 {

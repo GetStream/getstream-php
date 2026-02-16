@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $action
- * @property string $label
- * @property int $threshold
  */
 class AutomodRule extends BaseModel
 {

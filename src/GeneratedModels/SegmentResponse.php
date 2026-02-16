@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $allSenderChannels
- * @property bool $allUsers
- * @property \DateTime $createdAt
- * @property \DateTime $deletedAt
- * @property string $description
- * @property string $id
- * @property string $name
- * @property int $size
- * @property string $type
- * @property \DateTime $updatedAt
- * @property object $filter
  */
 class SegmentResponse extends BaseModel
 {

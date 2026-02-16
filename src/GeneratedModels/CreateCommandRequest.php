@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Create a new command
- *
- * @property string $description
- * @property string $name
- * @property string|null $args
- * @property string|null $set
  */
 class CreateCommandRequest extends BaseModel
 {

@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property object $filterConditions
- * @property bool|null $excludeExpiredBans
- * @property int|null $limit
- * @property int|null $offset
- * @property string|null $userID
- * @property array<SortParamRequest>|null $sort
- * @property UserRequest|null $user
  */
 class QueryBannedUsersPayload extends BaseModel
 {
@@ -22,7 +14,7 @@ class QueryBannedUsersPayload extends BaseModel
         public ?int $limit = null, // Number of records to return
         public ?int $offset = null, // Number of records to offset
         public ?string $userID = null,
-        /** @var array<SortParamRequest>|null Array of sort parameters */
+        /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Array of sort parameters
         public ?UserRequest $user = null,

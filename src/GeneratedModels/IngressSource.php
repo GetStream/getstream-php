@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $fps
- * @property int $height
- * @property int $width
  */
 class IngressSource extends BaseModel
 {

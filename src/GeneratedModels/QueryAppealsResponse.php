@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<AppealItemResponse> $items
- * @property string|null $next
- * @property string|null $prev
  */
 class QueryAppealsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<AppealItemResponse>|null List of Appeal Items */
+        /** @var array<AppealItemResponse>|null */
         #[ArrayOf(AppealItemResponse::class)]
         public ?array $items = null, // List of Appeal Items
         public ?string $next = null,

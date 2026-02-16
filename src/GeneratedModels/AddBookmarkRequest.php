@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $folderID
- * @property string|null $userID
- * @property object|null $custom
- * @property AddFolderRequest|null $newFolder
- * @property UserRequest|null $user
  */
 class AddBookmarkRequest extends BaseModel
 {

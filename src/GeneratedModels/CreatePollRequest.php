@@ -5,20 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Contains all information needed to create a new poll
- *
- * @property string $name
- * @property bool|null $allowAnswers
- * @property bool|null $allowUserSuggestedOptions
- * @property string|null $description
- * @property bool|null $enforceUniqueVote
- * @property string|null $id
- * @property bool|null $isClosed
- * @property int|null $maxVotesAllowed
- * @property string|null $userID
- * @property string|null $votingVisibility
- * @property array<PollOptionInput>|null $options
- * @property object|null $custom
- * @property UserRequest|null $user
  */
 class CreatePollRequest extends BaseModel
 {

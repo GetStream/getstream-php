@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property bool $custom
- * @property string $name
- * @property \DateTime $updatedAt
- * @property array $scopes
  */
 class Role extends BaseModel
 {

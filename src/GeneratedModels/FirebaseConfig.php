@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $apnTemplate
- * @property string|null $credentialsJson
- * @property string|null $dataTemplate
- * @property bool|null $disabled
- * @property string|null $notificationTemplate
- * @property string|null $serverKey
  */
 class FirebaseConfig extends BaseModel
 {

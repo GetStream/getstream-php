@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array<UpdateUserPartialRequest> $users
  */
 class UpdateUsersPartialRequest extends BaseModel
 {

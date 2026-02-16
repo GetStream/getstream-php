@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when call transcription has started
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $egressID
- * @property string $type
  */
 class CallTranscriptionStartedEvent extends BaseModel
 {

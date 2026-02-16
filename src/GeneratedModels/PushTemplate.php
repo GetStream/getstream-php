@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property bool $enablePush
- * @property string $eventType
- * @property \DateTime $updatedAt
- * @property string|null $template
  */
 class PushTemplate extends BaseModel
 {

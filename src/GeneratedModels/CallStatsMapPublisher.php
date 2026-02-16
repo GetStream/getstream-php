@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $isLive
- * @property string $userID
- * @property string $userSessionID
- * @property PublishedTrackFlags $publishedTracks
- * @property string|null $name
- * @property string|null $publisherType
- * @property CallStatsLocation|null $location
  */
 class CallStatsMapPublisher extends BaseModel
 {

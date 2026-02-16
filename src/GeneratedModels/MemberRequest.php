@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * MemberRequest is the payload for adding a member to a call.
- *
- * @property string $userID
- * @property string|null $role
- * @property object|null $custom
  */
 class MemberRequest extends BaseModel
 {

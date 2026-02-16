@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property ChannelResponse|null $channel
- * @property MessageResponse|null $message
  */
 class TruncateChannelResponse extends BaseModel
 {

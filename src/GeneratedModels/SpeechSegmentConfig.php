@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $maxSpeechCaptionMs
- * @property int|null $silenceDurationMs
  */
 class SpeechSegmentConfig extends BaseModel
 {

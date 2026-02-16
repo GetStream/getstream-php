@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $markAllRead
- * @property bool|null $markAllSeen
- * @property string|null $userID
- * @property array|null $markRead
- * @property array|null $markSeen
- * @property array|null $markWatched
- * @property UserRequest|null $user
  */
 class MarkActivityRequest extends BaseModel
 {

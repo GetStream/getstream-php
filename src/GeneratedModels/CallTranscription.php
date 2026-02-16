@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * CallTranscription represents a transcription of a call.
- *
- * @property \DateTime $endTime
- * @property string $filename
- * @property string $sessionID
- * @property \DateTime $startTime
- * @property string $url
  */
 class CallTranscription extends BaseModel
 {

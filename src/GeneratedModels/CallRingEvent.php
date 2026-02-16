@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent to all call members to notify they are getting called
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $sessionID
- * @property bool $video
- * @property array<MemberResponse> $members
- * @property CallResponse $call
- * @property UserResponse $user
- * @property string $type
  */
 class CallRingEvent extends BaseModel
 {
@@ -22,7 +13,7 @@ class CallRingEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $sessionID = null, // Call session ID
         public ?bool $video = null,
-        /** @var array<MemberResponse>|null Call members */
+        /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null, // Call members
         public ?CallResponse $call = null,

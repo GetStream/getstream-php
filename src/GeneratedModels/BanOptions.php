@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $deleteMessages
- * @property int|null $duration
- * @property bool|null $ipBan
- * @property string|null $reason
- * @property bool|null $shadowBan
  */
 class BanOptions extends BaseModel
 {

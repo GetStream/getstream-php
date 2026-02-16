@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a bookmark folder is deleted.
- *
- * @property \DateTime $createdAt
- * @property BookmarkFolderResponse $bookmarkFolder
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class BookmarkFolderDeletedEvent extends BaseModel
 {

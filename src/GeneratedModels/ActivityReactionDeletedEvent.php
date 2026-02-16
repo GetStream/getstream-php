@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a reaction is deleted from an activity.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property ActivityResponse $activity
- * @property object $custom
- * @property FeedsReactionResponse $reaction
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class ActivityReactionDeletedEvent extends BaseModel
 {

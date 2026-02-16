@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Represents user reaction to a message
- *
- * @property string $type
- * @property \DateTime|null $createdAt
- * @property int|null $score
- * @property \DateTime|null $updatedAt
- * @property string|null $userID
- * @property object|null $custom
- * @property UserRequest|null $user
  */
 class ReactionRequest extends BaseModel
 {

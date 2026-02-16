@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $rating
- * @property string $sdk
- * @property string $sdkVersion
- * @property string|null $reason
- * @property string|null $userSessionID
- * @property object|null $custom
  */
 class CollectUserFeedbackRequest extends BaseModel
 {

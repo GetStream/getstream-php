@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $sum
- * @property int $unique
- * @property int|null $maxConcurrent
- * @property array<GroupedStatsResponse>|null $byBrowser
- * @property array<GroupedStatsResponse>|null $byCountry
- * @property array<GroupedStatsResponse>|null $byDevice
- * @property array<GroupedStatsResponse>|null $byOperatingSystem
- * @property ParticipantCountOverTimeResponse|null $countOverTime
- * @property PublisherStatsResponse|null $publishers
- * @property SubscriberStatsResponse|null $subscribers
  */
 class ParticipantReportResponse extends BaseModel
 {

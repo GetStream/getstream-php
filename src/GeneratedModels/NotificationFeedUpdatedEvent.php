@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when notification feed is updated.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property array<AggregatedActivityResponse>|null $aggregatedActivities
- * @property NotificationStatusResponse|null $notificationStatus
- * @property UserResponseCommonFields|null $user
  */
 class NotificationFeedUpdatedEvent extends BaseModel
 {
@@ -25,7 +15,7 @@ class NotificationFeedUpdatedEvent extends BaseModel
         public ?string $type = null, // The type of event: "feeds.notification_feed.updated" in this case
         public ?string $feedVisibility = null,
         public ?\DateTime $receivedAt = null,
-        /** @var array<AggregatedActivityResponse>|null Aggregated activities for notification feeds */
+        /** @var array<AggregatedActivityResponse>|null */
         #[ArrayOf(AggregatedActivityResponse::class)]
         public ?array $aggregatedActivities = null, // Aggregated activities for notification feeds
         public ?NotificationStatusResponse $notificationStatus = null,

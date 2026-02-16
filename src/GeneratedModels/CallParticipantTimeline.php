@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $severity
- * @property \DateTime $timestamp
- * @property string $type
- * @property object $data
  */
 class CallParticipantTimeline extends BaseModel
 {

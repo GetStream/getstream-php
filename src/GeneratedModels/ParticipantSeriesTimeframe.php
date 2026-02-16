@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $maxPoints
- * @property \DateTime $since
- * @property int $stepSeconds
- * @property \DateTime $until
  */
 class ParticipantSeriesTimeframe extends BaseModel
 {

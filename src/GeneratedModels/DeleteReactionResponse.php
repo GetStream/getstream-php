@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property MessageResponse $message
- * @property ReactionResponse $reaction
  */
 class DeleteReactionResponse extends BaseModel
 {

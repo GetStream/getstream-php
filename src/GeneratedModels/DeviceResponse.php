@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for Device
- *
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $pushProvider
- * @property string $userID
- * @property bool|null $disabled
- * @property string|null $disabledReason
- * @property string|null $pushProviderName
- * @property bool|null $voip
  */
 class DeviceResponse extends BaseModel
 {

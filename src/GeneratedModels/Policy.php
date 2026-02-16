@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $action
- * @property \DateTime $createdAt
- * @property string $name
- * @property bool $owner
- * @property int $priority
- * @property \DateTime $updatedAt
- * @property array $resources
- * @property array $roles
  */
 class Policy extends BaseModel
 {

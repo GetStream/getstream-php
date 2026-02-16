@@ -5,37 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $banned
- * @property \DateTime $createdAt
- * @property string $id
- * @property bool $invisible
- * @property string $language
- * @property bool $online
- * @property string $role
- * @property int $totalUnreadCount
- * @property int $unreadChannels
- * @property int $unreadCount
- * @property int $unreadThreads
- * @property \DateTime $updatedAt
- * @property array<ChannelMute> $channelMutes
- * @property array<DeviceResponse> $devices
- * @property array<UserMuteResponse> $mutes
- * @property array $teams
- * @property object $custom
- * @property int|null $avgResponseTime
- * @property \DateTime|null $deactivatedAt
- * @property \DateTime|null $deletedAt
- * @property string|null $image
- * @property \DateTime|null $lastActive
- * @property string|null $name
- * @property \DateTime|null $revokeTokensIssuedBefore
- * @property array|null $blockedUserIds
- * @property array|null $latestHiddenChannels
- * @property PrivacySettingsResponse|null $privacySettings
- * @property PushPreferencesResponse|null $pushPreferences
- * @property array|null $teamsRole
- * @property array|null $totalUnreadCountByTeam
  */
 class OwnUserResponse extends BaseModel
 {

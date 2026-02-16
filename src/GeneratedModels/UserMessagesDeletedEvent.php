@@ -5,20 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a user's message get deleted. The event contains information about the user whose messages got deleted.
- *
- * @property \DateTime $createdAt
- * @property object $custom
- * @property UserResponseCommonFields $user
- * @property string $type
- * @property string|null $channelID
- * @property int|null $channelMemberCount
- * @property int|null $channelMessageCount
- * @property string|null $channelType
- * @property string|null $cid
- * @property bool|null $hardDelete
- * @property \DateTime|null $receivedAt
- * @property string|null $team
- * @property object|null $channelCustom
  */
 class UserMessagesDeletedEvent extends BaseModel
 {

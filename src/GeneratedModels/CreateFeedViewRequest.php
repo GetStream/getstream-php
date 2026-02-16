@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $id
- * @property array<ActivitySelectorConfig>|null $activitySelectors
- * @property AggregationConfig|null $aggregation
- * @property RankingConfig|null $ranking
  */
 class CreateFeedViewRequest extends BaseModel
 {
     public function __construct(
         public ?string $id = null, // Unique identifier for the feed view
-        /** @var array<ActivitySelectorConfig>|null Configuration for selecting activities */
+        /** @var array<ActivitySelectorConfig>|null */
         #[ArrayOf(ActivitySelectorConfig::class)]
         public ?array $activitySelectors = null, // Configuration for selecting activities
         public ?AggregationConfig $aggregation = null,

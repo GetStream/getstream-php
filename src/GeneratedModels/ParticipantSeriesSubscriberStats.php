@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array|null $globalMetricsOrder
- * @property array<ParticipantSeriesSubscriptionTrackMetrics>|null $subscriptions
- * @property array|null $global
- * @property array|null $globalMeta
- * @property array|null $globalThresholds
  */
 class ParticipantSeriesSubscriberStats extends BaseModel
 {
@@ -20,6 +14,8 @@ class ParticipantSeriesSubscriberStats extends BaseModel
         #[ArrayOf(ParticipantSeriesSubscriptionTrackMetrics::class)]
         public ?array $subscriptions = null,
         public ?array $global = null,
+        /** @var array<MetricDescriptor>|null */
+        #[ArrayOf(MetricDescriptor::class)]
         public ?array $globalMeta = null,
         public ?array $globalThresholds = null,
     ) {

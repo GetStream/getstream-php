@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $callLevel
- * @property string|null $chatLevel
- * @property \DateTime|null $disabledUntil
- * @property string|null $feedsLevel
- * @property FeedsPreferencesResponse|null $feedsPreferences
  */
 class PushPreferencesResponse extends BaseModel
 {

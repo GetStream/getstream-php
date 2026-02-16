@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $appealReason
- * @property \DateTime $createdAt
- * @property string $entityID
- * @property string $entityType
- * @property string $id
- * @property string $status
- * @property \DateTime $updatedAt
- * @property string|null $decisionReason
- * @property array|null $attachments
- * @property ModerationPayload|null $entityContent
- * @property UserResponse|null $user
  */
 class AppealItemResponse extends BaseModel
 {

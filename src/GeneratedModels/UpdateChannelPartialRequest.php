@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $userID
- * @property array|null $unset
- * @property object|null $set
- * @property UserRequest|null $user
  */
 class UpdateChannelPartialRequest extends BaseModel
 {

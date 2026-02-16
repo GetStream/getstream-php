@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property DeliveryReceiptsResponse|null $deliveryReceipts
- * @property ReadReceiptsResponse|null $readReceipts
- * @property TypingIndicatorsResponse|null $typingIndicators
  */
 class PrivacySettingsResponse extends BaseModel
 {

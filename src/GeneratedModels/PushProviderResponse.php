@@ -5,35 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $name
- * @property string $type
- * @property \DateTime $updatedAt
- * @property string|null $apnAuthKey
- * @property string|null $apnAuthType
- * @property bool|null $apnDevelopment
- * @property string|null $apnHost
- * @property string|null $apnKeyID
- * @property string|null $apnP12Cert
- * @property bool|null $apnSandboxCertificate
- * @property bool|null $apnSupportsRemoteNotifications
- * @property bool|null $apnSupportsVoipNotifications
- * @property string|null $apnTeamID
- * @property string|null $apnTopic
- * @property string|null $description
- * @property \DateTime|null $disabledAt
- * @property string|null $disabledReason
- * @property string|null $firebaseApnTemplate
- * @property string|null $firebaseCredentials
- * @property string|null $firebaseDataTemplate
- * @property string|null $firebaseHost
- * @property string|null $firebaseNotificationTemplate
- * @property string|null $firebaseServerKey
- * @property string|null $huaweiAppID
- * @property string|null $huaweiAppSecret
- * @property string|null $xiaomiAppSecret
- * @property string|null $xiaomiPackageName
  */
 class PushProviderResponse extends BaseModel
 {

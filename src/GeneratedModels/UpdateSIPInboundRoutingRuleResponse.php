@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response containing the updated SIP Inbound Routing Rule
- *
- * @property string $duration
- * @property SIPInboundRoutingRuleResponse|null $sipInboundRoutingRule
  */
 class UpdateSIPInboundRoutingRuleResponse extends BaseModel
 {

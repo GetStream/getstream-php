@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for get block list
- *
- * @property string $duration
- * @property BlockListResponse|null $blocklist
  */
 class GetBlockListResponse extends BaseModel
 {

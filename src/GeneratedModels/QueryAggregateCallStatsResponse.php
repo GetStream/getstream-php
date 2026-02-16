@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property CallDurationReportResponse|null $callDurationReport
- * @property CallParticipantCountReportResponse|null $callParticipantCountReport
- * @property CallsPerDayReportResponse|null $callsPerDayReport
- * @property NetworkMetricsReportResponse|null $networkMetricsReport
- * @property QualityScoreReportResponse|null $qualityScoreReport
- * @property SDKUsageReportResponse|null $sdkUsageReport
- * @property UserFeedbackReportResponse|null $userFeedbackReport
  */
 class QueryAggregateCallStatsResponse extends BaseModel
 {

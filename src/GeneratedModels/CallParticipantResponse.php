@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $joinedAt
- * @property string $role
- * @property string $userSessionID
- * @property UserResponse $user
  */
 class CallParticipantResponse extends BaseModel
 {

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * DeleteTranscriptionResponse is the payload for deleting a transcription.
- *
- * @property string $duration
  */
 class DeleteTranscriptionResponse extends BaseModel
 {

@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for ListCallType
- *
- * @property string $duration
- * @property array $callTypes
  */
 class ListCallTypeResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
+        /** @var array<CallTypeResponse>|null */
+        #[ArrayOf(CallTypeResponse::class)]
         public ?array $callTypes = null,
     ) {
     }

@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $isDeleted
- * @property string $messageID
- * @property \DateTime $messageUpdatedAt
- * @property string $messageUpdatedByID
- * @property string $text
- * @property array<Attachment> $attachments
- * @property object $custom
  */
 class MessageHistoryEntryResponse extends BaseModel
 {

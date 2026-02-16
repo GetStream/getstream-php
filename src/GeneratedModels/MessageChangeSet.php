@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $attachments
- * @property bool $custom
- * @property bool $html
- * @property bool $mentionedUserIds
- * @property bool $mml
- * @property bool $pin
- * @property bool $quotedMessageID
- * @property bool $silent
- * @property bool $text
  */
 class MessageChangeSet extends BaseModel
 {

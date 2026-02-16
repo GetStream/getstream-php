@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $lastRead
- * @property int $unreadMessages
- * @property UserResponse $user
- * @property \DateTime|null $lastDeliveredAt
- * @property string|null $lastDeliveredMessageID
- * @property string|null $lastReadMessageID
  */
 class ReadStateResponse extends BaseModel
 {

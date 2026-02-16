@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $batchCreatedAt
- * @property \DateTime $createdAt
- * @property \DateTime $finishedAt
- * @property string $operation
- * @property string $status
- * @property int $successChannelsCount
- * @property string $taskID
- * @property array<FailedChannelUpdates> $failedChannels
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
  */
 class ChannelBatchCompletedEvent extends BaseModel
 {

@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $category
- * @property int $count
- * @property int $sum
- * @property Bound|null $lowerBound
- * @property Bound|null $upperBound
  */
 class ReportByHistogramBucket extends BaseModel
 {

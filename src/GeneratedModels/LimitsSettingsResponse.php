@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array $maxParticipantsExcludeRoles
- * @property int|null $maxDurationSeconds
- * @property int|null $maxParticipants
- * @property bool|null $maxParticipantsExcludeOwner
  */
 class LimitsSettingsResponse extends BaseModel
 {

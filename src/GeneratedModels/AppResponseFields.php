@@ -5,59 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $allowMultiUserDevices
- * @property bool $asyncUrlEnrichEnabled
- * @property bool $autoTranslationEnabled
- * @property bool $campaignEnabled
- * @property int $cdnExpirationSeconds
- * @property string $customActionHandlerUrl
- * @property bool $disableAuthChecks
- * @property bool $disablePermissionsChecks
- * @property string $enforceUniqueUsernames
- * @property bool $guestUserCreationDisabled
- * @property int $id
- * @property bool $imageModerationEnabled
- * @property int $maxAggregatedActivitiesLength
- * @property bool $moderationBulkSubmitActionEnabled
- * @property bool $moderationEnabled
- * @property bool $moderationLlmConfigurabilityEnabled
- * @property bool $moderationMultitenantBlocklistEnabled
- * @property string $moderationWebhookUrl
- * @property bool $multiTenantEnabled
- * @property string $name
- * @property string $organization
- * @property string $permissionVersion
- * @property string $placement
- * @property int $remindersInterval
- * @property string $snsKey
- * @property string $snsSecret
- * @property string $snsTopicArn
- * @property string $sqsKey
- * @property string $sqsSecret
- * @property string $sqsUrl
- * @property bool $suspended
- * @property string $suspendedExplanation
- * @property bool $useHookV2
- * @property bool $userResponseTimeEnabled
- * @property string $webhookUrl
- * @property array<EventHook> $eventHooks
- * @property array $userSearchDisallowedRoles
- * @property array $webhookEvents
- * @property array $callTypes
- * @property array $channelConfigs
- * @property FileUploadConfig $fileUploadConfig
- * @property array $grants
- * @property FileUploadConfig $imageUploadConfig
- * @property array $policies
- * @property PushNotificationFields $pushNotifications
- * @property string|null $beforeMessageSendHookUrl
- * @property \DateTime|null $revokeTokensIssuedBefore
- * @property array|null $allowedFlagReasons
- * @property array<GeofenceResponse>|null $geofences
- * @property array|null $imageModerationLabels
- * @property DataDogInfo|null $datadogInfo
- * @property ModerationDashboardPreferences|null $moderationDashboardPreferences
  */
 class AppResponseFields extends BaseModel
 {
@@ -75,7 +22,6 @@ class AppResponseFields extends BaseModel
         public ?int $id = null,
         public ?bool $imageModerationEnabled = null,
         public ?int $maxAggregatedActivitiesLength = null,
-        public ?bool $moderationBulkSubmitActionEnabled = null,
         public ?bool $moderationEnabled = null,
         public ?bool $moderationLlmConfigurabilityEnabled = null,
         public ?bool $moderationMultitenantBlocklistEnabled = null,
@@ -102,7 +48,11 @@ class AppResponseFields extends BaseModel
         public ?array $eventHooks = null,
         public ?array $userSearchDisallowedRoles = null,
         public ?array $webhookEvents = null,
+        /** @var array<CallType>|null */
+        #[ArrayOf(CallType::class)]
         public ?array $callTypes = null,
+        /** @var array<ChannelConfig>|null */
+        #[ArrayOf(ChannelConfig::class)]
         public ?array $channelConfigs = null,
         public ?FileUploadConfig $fileUploadConfig = null,
         public ?array $grants = null,

@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when an activity is removed from a feed.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property ActivityResponse $activity
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class ActivityRemovedFromFeedEvent extends BaseModel
 {

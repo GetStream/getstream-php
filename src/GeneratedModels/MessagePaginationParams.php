@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime|null $createdAtAfter
- * @property \DateTime|null $createdAtAfterOrEqual
- * @property \DateTime|null $createdAtAround
- * @property \DateTime|null $createdAtBefore
- * @property \DateTime|null $createdAtBeforeOrEqual
- * @property string|null $idAround
- * @property string|null $idGt
- * @property string|null $idGte
- * @property string|null $idLt
- * @property string|null $idLte
- * @property int|null $limit
  */
 class MessagePaginationParams extends BaseModel
 {

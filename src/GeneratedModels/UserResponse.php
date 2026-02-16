@@ -5,31 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * User response object
- *
- * @property bool $banned
- * @property \DateTime $createdAt
- * @property string $id
- * @property bool $invisible
- * @property string $language
- * @property bool $online
- * @property string $role
- * @property bool $shadowBanned
- * @property \DateTime $updatedAt
- * @property array $blockedUserIds
- * @property array $teams
- * @property object $custom
- * @property int|null $avgResponseTime
- * @property \DateTime|null $banExpires
- * @property \DateTime|null $deactivatedAt
- * @property \DateTime|null $deletedAt
- * @property string|null $image
- * @property \DateTime|null $lastActive
- * @property string|null $name
- * @property \DateTime|null $revokeTokensIssuedBefore
- * @property array<DeviceResponse>|null $devices
- * @property PrivacySettingsResponse|null $privacySettings
- * @property PushNotificationSettingsResponse|null $pushNotifications
- * @property array|null $teamsRole
  */
 class UserResponse extends BaseModel
 {
@@ -54,7 +29,7 @@ class UserResponse extends BaseModel
         public ?\DateTime $lastActive = null, // Date of last activity
         public ?string $name = null, // Optional name of user
         public ?\DateTime $revokeTokensIssuedBefore = null, // Revocation date for tokens
-        /** @var array<DeviceResponse>|null List of devices user is using */
+        /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null, // List of devices user is using
         public ?PrivacySettingsResponse $privacySettings = null,

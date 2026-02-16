@@ -5,23 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $aggregationVersion
- * @property int $appPk
- * @property \DateTime $createdAt
- * @property string $defaultVisibility
- * @property string $groupID
- * @property \DateTime $updatedAt
- * @property array<ActivityProcessorConfig> $activityProcessors
- * @property array<ActivitySelectorConfig> $activitySelectors
- * @property object $custom
- * @property \DateTime|null $deletedAt
- * @property \DateTime|null $lastFeedGetAt
- * @property AggregationConfig|null $aggregation
- * @property NotificationConfig|null $notification
- * @property PushNotificationConfig|null $pushNotification
- * @property RankingConfig|null $ranking
- * @property StoriesConfig|null $stories
  */
 class FeedGroup extends BaseModel
 {

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array|null $harmLabels
  */
 class VideoContentParameters extends BaseModel
 {

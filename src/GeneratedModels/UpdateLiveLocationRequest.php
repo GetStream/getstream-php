@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $messageID
- * @property \DateTime|null $endAt
- * @property int|null $latitude
- * @property int|null $longitude
  */
 class UpdateLiveLocationRequest extends BaseModel
 {

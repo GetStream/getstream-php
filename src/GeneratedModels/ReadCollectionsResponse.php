@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<CollectionResponse> $collections
  */
 class ReadCollectionsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<CollectionResponse>|null List of collections matching the query */
+        /** @var array<CollectionResponse>|null */
         #[ArrayOf(CollectionResponse::class)]
         public ?array $collections = null, // List of collections matching the query
     ) {

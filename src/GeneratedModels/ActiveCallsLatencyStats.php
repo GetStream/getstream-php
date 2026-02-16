@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $p50
- * @property int $p90
  */
 class ActiveCallsLatencyStats extends BaseModel
 {

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array<DailyAggregateCallsPerDayReportResponse> $daily
  */
 class CallsPerDayReportResponse extends BaseModel
 {

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array $targetIds
- * @property int|null $timeout
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class MuteRequest extends BaseModel
 {

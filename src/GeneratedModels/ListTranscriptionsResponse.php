@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<CallTranscription> $transcriptions
  */
 class ListTranscriptionsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<CallTranscription>|null List of transcriptions for the call */
+        /** @var array<CallTranscription>|null */
         #[ArrayOf(CallTranscription::class)]
         public ?array $transcriptions = null, // List of transcriptions for the call
     ) {

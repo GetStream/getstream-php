@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property bool|null $isPublisher
- * @property bool|null $isSubscriber
- * @property \DateTime|null $joinedAt
- * @property string|null $publisherType
- * @property string|null $userID
- * @property string|null $userSessionID
- * @property array<PublishedTrackMetrics>|null $publishedTracks
- * @property SessionClient|null $client
  */
 class GetCallParticipantSessionMetricsResponse extends BaseModel
 {

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for updating a call
- *
- * @property string $duration
- * @property array<MemberResponse> $members
- * @property array<OwnCapability> $ownCapabilities
- * @property CallResponse $call
  */
 class UpdateCallResponse extends BaseModel
 {

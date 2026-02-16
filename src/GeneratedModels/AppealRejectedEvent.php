@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when an appeal is rejected
- *
- * @property \DateTime $createdAt
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property AppealItemResponse|null $appeal
  */
 class AppealRejectedEvent extends BaseModel
 {

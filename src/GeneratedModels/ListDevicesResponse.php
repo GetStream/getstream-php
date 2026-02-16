@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * List devices response
- *
- * @property string $duration
- * @property array<DeviceResponse> $devices
  */
 class ListDevicesResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<DeviceResponse>|null List of devices */
+        /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null, // List of devices
     ) {

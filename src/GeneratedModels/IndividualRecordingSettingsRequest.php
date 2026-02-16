@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $mode
  */
 class IndividualRecordingSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null,
+        public ?string $mode = null, // Recording mode. One of: available, disabled, auto-on
     ) {
     }
 

@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a feed member is updated.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property FeedMemberResponse $member
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class FeedMemberUpdatedEvent extends BaseModel
 {

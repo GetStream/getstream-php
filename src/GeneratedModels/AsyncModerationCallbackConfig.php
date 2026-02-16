@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $mode
- * @property string|null $serverUrl
  */
 class AsyncModerationCallbackConfig extends BaseModel
 {

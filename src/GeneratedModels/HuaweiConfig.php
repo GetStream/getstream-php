@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $disabled
- * @property string|null $id
- * @property string|null $secret
  */
 class HuaweiConfig extends BaseModel
 {

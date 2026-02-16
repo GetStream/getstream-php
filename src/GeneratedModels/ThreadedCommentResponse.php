@@ -5,34 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * A comment with an optional, depth‑limited slice of nested replies.
- *
- * @property int $confidenceScore
- * @property \DateTime $createdAt
- * @property int $downvoteCount
- * @property string $id
- * @property string $objectID
- * @property string $objectType
- * @property int $reactionCount
- * @property int $replyCount
- * @property int $score
- * @property string $status
- * @property \DateTime $updatedAt
- * @property int $upvoteCount
- * @property array<UserResponse> $mentionedUsers
- * @property array<FeedsReactionResponse> $ownReactions
- * @property UserResponse $user
- * @property int|null $controversyScore
- * @property \DateTime|null $deletedAt
- * @property \DateTime|null $editedAt
- * @property string|null $parentID
- * @property string|null $text
- * @property array<Attachment>|null $attachments
- * @property array<FeedsReactionResponse>|null $latestReactions
- * @property array<ThreadedCommentResponse>|null $replies
- * @property object|null $custom
- * @property RepliesMeta|null $meta
- * @property ModerationV2Response|null $moderation
- * @property array|null $reactionGroups
  */
 class ThreadedCommentResponse extends BaseModel
 {
@@ -46,7 +18,7 @@ class ThreadedCommentResponse extends BaseModel
         public ?int $reactionCount = null,
         public ?int $replyCount = null,
         public ?int $score = null,
-        public ?string $status = null,
+        public ?string $status = null, // Status of the comment. One of: active, deleted, removed, hidden
         public ?\DateTime $updatedAt = null,
         public ?int $upvoteCount = null,
         /** @var array<UserResponse>|null */
@@ -67,12 +39,14 @@ class ThreadedCommentResponse extends BaseModel
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $latestReactions = null,
-        /** @var array<ThreadedCommentResponse>|null Slice of nested comments (may be empty). */
+        /** @var array<ThreadedCommentResponse>|null */
         #[ArrayOf(ThreadedCommentResponse::class)]
         public ?array $replies = null, // Slice of nested comments (may be empty).
         public ?object $custom = null,
         public ?RepliesMeta $meta = null,
         public ?ModerationV2Response $moderation = null,
+        /** @var array<FeedsReactionGroupResponse>|null */
+        #[ArrayOf(FeedsReactionGroupResponse::class)]
         public ?array $reactionGroups = null,
     ) {
     }

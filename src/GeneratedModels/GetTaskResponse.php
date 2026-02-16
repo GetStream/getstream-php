@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $duration
- * @property string $status
- * @property string $taskID
- * @property \DateTime $updatedAt
- * @property ErrorResult|null $error
- * @property object|null $result
  */
 class GetTaskResponse extends BaseModel
 {

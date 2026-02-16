@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $threshold
- * @property string|null $timeWindow
  */
 class ContentCountRuleParameters extends BaseModel
 {

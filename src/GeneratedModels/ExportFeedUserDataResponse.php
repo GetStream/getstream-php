@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for exporting feed user data
- *
- * @property string $duration
- * @property string $taskID
  */
 class ExportFeedUserDataResponse extends BaseModel
 {

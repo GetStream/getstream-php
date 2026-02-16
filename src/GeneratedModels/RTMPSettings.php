@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $enabled
- * @property string|null $qualityName
- * @property LayoutSettings|null $layout
- * @property RTMPLocation|null $location
  */
 class RTMPSettings extends BaseModel
 {

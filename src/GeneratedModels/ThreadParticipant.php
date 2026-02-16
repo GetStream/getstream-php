@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Represents a user that is participating in a thread.
- *
- * @property int $appPk
- * @property string $channelCid
- * @property \DateTime $createdAt
- * @property \DateTime $lastReadAt
- * @property object $custom
- * @property \DateTime|null $lastThreadMessageAt
- * @property \DateTime|null $leftThreadAt
- * @property string|null $threadID
- * @property string|null $userID
- * @property UserResponse|null $user
  */
 class ThreadParticipant extends BaseModel
 {

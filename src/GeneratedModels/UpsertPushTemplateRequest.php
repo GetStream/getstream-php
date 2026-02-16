@@ -5,18 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $eventType
- * @property string $pushProviderType
- * @property bool|null $enablePush
- * @property string|null $pushProviderName
- * @property string|null $template
  */
 class UpsertPushTemplateRequest extends BaseModel
 {
     public function __construct(
-        public ?string $eventType = null, // Event type (message.new, message.updated, reaction.new)
-        public ?string $pushProviderType = null, // Push provider type (firebase, apn, huawei, xiaomi)
+        public ?string $eventType = null, // Event type. One of: message.new, message.updated, reaction.new, notification.reminder_due, feeds.activity.added, feeds.comment.added, feeds.activity.reaction.added, feeds.comment.reaction.added, feeds.follow.created, feeds.notification_feed.updated
+        public ?string $pushProviderType = null, // Push provider type. One of: firebase, apn, huawei, xiaomi
         public ?bool $enablePush = null, // Whether to send push notification for this event
         public ?string $pushProviderName = null, // Push provider name
         public ?string $template = null, // Push template

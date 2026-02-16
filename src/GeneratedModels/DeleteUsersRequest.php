@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array $userIds
- * @property string|null $calls
- * @property string|null $conversations
- * @property bool|null $files
- * @property string|null $messages
- * @property string|null $newCallOwnerID
- * @property string|null $newChannelOwnerID
- * @property string|null $user
  */
 class DeleteUsersRequest extends BaseModel
 {

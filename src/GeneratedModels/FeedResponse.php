@@ -5,28 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $activityCount
- * @property \DateTime $createdAt
- * @property string $description
- * @property string $feed
- * @property int $followerCount
- * @property int $followingCount
- * @property string $groupID
- * @property string $id
- * @property int $memberCount
- * @property string $name
- * @property int $pinCount
- * @property \DateTime $updatedAt
- * @property UserResponse $createdBy
- * @property \DateTime|null $deletedAt
- * @property string|null $visibility
- * @property array|null $filterTags
- * @property array<FeedOwnCapability>|null $ownCapabilities
- * @property array<FollowResponse>|null $ownFollowings
- * @property array<FollowResponse>|null $ownFollows
- * @property object|null $custom
- * @property FeedMemberResponse|null $ownMembership
  */
 class FeedResponse extends BaseModel
 {
@@ -47,13 +25,13 @@ class FeedResponse extends BaseModel
         public ?\DateTime $deletedAt = null, // When the feed was deleted
         public ?string $visibility = null, // Visibility setting for the feed
         public ?array $filterTags = null, // Tags used for filtering feeds
-        /** @var array<FeedOwnCapability>|null Capabilities the current user has for this feed */
+        /** @var array<FeedOwnCapability>|null */
         #[ArrayOf(FeedOwnCapability::class)]
         public ?array $ownCapabilities = null, // Capabilities the current user has for this feed
-        /** @var array<FollowResponse>|null Follow relationships where the feed owner’s feeds are following the current user's feeds */
+        /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $ownFollowings = null, // Follow relationships where the feed owner’s feeds are following the current user's feeds
-        /** @var array<FollowResponse>|null Follow relationships where the current user's feeds are following this feed */
+        /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $ownFollows = null, // Follow relationships where the current user's feeds are following this feed
         public ?object $custom = null, // Custom data for the feed

@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $operator
- * @property string|null $role
  */
 class UserRoleParameters extends BaseModel
 {

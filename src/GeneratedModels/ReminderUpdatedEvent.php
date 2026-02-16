@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a reminder is updated.
- *
- * @property string $cid
- * @property \DateTime $createdAt
- * @property string $messageID
- * @property string $userID
- * @property object $custom
- * @property string $type
- * @property string|null $parentID
- * @property \DateTime|null $receivedAt
- * @property ReminderResponseData|null $reminder
  */
 class ReminderUpdatedEvent extends BaseModel
 {

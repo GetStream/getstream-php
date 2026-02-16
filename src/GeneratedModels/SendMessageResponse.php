@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property MessageResponse $message
- * @property array|null $pendingMessageMetadata
  */
 class SendMessageResponse extends BaseModel
 {

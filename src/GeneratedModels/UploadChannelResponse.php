@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property string|null $file
- * @property string|null $moderationAction
- * @property string|null $thumbUrl
- * @property array<ImageSize>|null $uploadSizes
  */
 class UploadChannelResponse extends BaseModel
 {
@@ -19,7 +13,7 @@ class UploadChannelResponse extends BaseModel
         public ?string $file = null,
         public ?string $moderationAction = null,
         public ?string $thumbUrl = null,
-        /** @var array<ImageSize>|null Array of image size configurations */
+        /** @var array<ImageSize>|null */
         #[ArrayOf(ImageSize::class)]
         public ?array $uploadSizes = null, // Array of image size configurations
     ) {

@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for deleting feed user data
- *
- * @property string $duration
- * @property string $taskID
  */
 class DeleteFeedUserDataResponse extends BaseModel
 {

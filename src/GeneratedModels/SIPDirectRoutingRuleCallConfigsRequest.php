@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Configuration for direct routing rule calls
- *
- * @property string $callID
- * @property string $callType
  */
 class SIPDirectRoutingRuleCallConfigsRequest extends BaseModel
 {

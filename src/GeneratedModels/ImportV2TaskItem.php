@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $appPk
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $product
- * @property int $state
- * @property \DateTime $updatedAt
- * @property ImportV2TaskSettings $settings
  */
 class ImportV2TaskItem extends BaseModel
 {

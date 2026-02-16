@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $entityCreatorID
- * @property string $entityID
- * @property string $entityType
- * @property string|null $configKey
- * @property string|null $configTeam
- * @property bool|null $testMode
- * @property string|null $userID
- * @property ModerationConfig|null $config
- * @property ModerationPayload|null $moderationPayload
- * @property object|null $options
- * @property UserRequest|null $user
  */
 class CheckRequest extends BaseModel
 {

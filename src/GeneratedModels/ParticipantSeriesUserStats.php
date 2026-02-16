@@ -5,17 +5,14 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array|null $metricsOrder
- * @property array|null $metrics
- * @property array|null $metricsMeta
- * @property array|null $thresholds
  */
 class ParticipantSeriesUserStats extends BaseModel
 {
     public function __construct(
         public ?array $metricsOrder = null,
         public ?array $metrics = null,
+        /** @var array<MetricDescriptor>|null */
+        #[ArrayOf(MetricDescriptor::class)]
         public ?array $metricsMeta = null,
         public ?array $thresholds = null,
     ) {

@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a moderation check is completed
- *
- * @property \DateTime $createdAt
- * @property string $entityID
- * @property string $entityType
- * @property string $recommendedAction
- * @property string $reviewQueueItemID
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
  */
 class ModerationCheckCompletedEvent extends BaseModel
 {

@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property string $text
- * @property string $type
- * @property string|null $style
- * @property string|null $value
  */
 class Action extends BaseModel
 {

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $averageConnectionTime
- * @property int|null $averageJitter
- * @property int|null $averageLatency
- * @property int|null $averageTimeToReconnect
  */
 class NetworkMetricsReportResponse extends BaseModel
 {

@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $feedGroupID
- * @property string $feedID
- * @property string|null $createdByID
- * @property string|null $description
- * @property string|null $name
- * @property string|null $visibility
- * @property array|null $filterTags
- * @property array<FeedMemberRequest>|null $members
- * @property object|null $custom
  */
 class FeedRequest extends BaseModel
 {
@@ -24,9 +14,9 @@ class FeedRequest extends BaseModel
         public ?string $createdByID = null, // ID of the feed creator
         public ?string $description = null, // Description of the feed
         public ?string $name = null, // Name of the feed
-        public ?string $visibility = null, // Visibility setting for the feed
+        public ?string $visibility = null, // Visibility setting for the feed. One of: public, visible, followers, members, private
         public ?array $filterTags = null, // Tags used for filtering feeds
-        /** @var array<FeedMemberRequest>|null Initial members for the feed */
+        /** @var array<FeedMemberRequest>|null */
         #[ArrayOf(FeedMemberRequest::class)]
         public ?array $members = null, // Initial members for the feed
         public ?object $custom = null, // Custom data for the feed

@@ -5,22 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property bool $created
- * @property string $duration
- * @property array<ActivityResponse> $activities
- * @property array<AggregatedActivityResponse> $aggregatedActivities
- * @property array<FollowResponse> $followers
- * @property array<FollowResponse> $following
- * @property array<FeedMemberResponse> $members
- * @property array<ActivityPinResponse> $pinnedActivities
- * @property FeedResponse $feed
- * @property string|null $next
- * @property string|null $prev
- * @property PagerResponse|null $followersPagination
- * @property PagerResponse|null $followingPagination
- * @property PagerResponse|null $memberPagination
- * @property NotificationStatusResponse|null $notificationStatus
  */
 class GetOrCreateFeedResponse extends BaseModel
 {

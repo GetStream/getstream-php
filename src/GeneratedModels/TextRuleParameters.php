@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $containsUrl
- * @property int|null $semanticFilterMinThreshold
- * @property string|null $severity
- * @property int|null $threshold
- * @property string|null $timeWindow
- * @property array|null $blocklistMatch
- * @property array|null $harmLabels
- * @property array|null $semanticFilterNames
- * @property array|null $llmHarmLabels
  */
 class TextRuleParameters extends BaseModel
 {

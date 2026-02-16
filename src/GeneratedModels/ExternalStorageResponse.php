@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $bucket
- * @property string $name
- * @property string $path
- * @property string $type
  */
 class ExternalStorageResponse extends BaseModel
 {

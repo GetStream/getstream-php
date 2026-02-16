@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Cursor & depth information for a comment's direct replies. Mirrors Reddit's 'load more replies' semantics.
- *
- * @property bool $depthTruncated
- * @property bool $hasMore
- * @property int $remaining
- * @property string|null $nextCursor
  */
 class RepliesMeta extends BaseModel
 {

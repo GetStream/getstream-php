@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * CallClosedCaption represents a closed caption of a call.
- *
- * @property \DateTime $endTime
- * @property string $id
- * @property string $language
- * @property string $speakerID
- * @property \DateTime $startTime
- * @property string $text
- * @property bool $translated
- * @property UserResponse $user
- * @property string|null $service
  */
 class CallClosedCaption extends BaseModel
 {

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a call is started. Clients receiving this event should start the call.
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property CallResponse $call
- * @property string $type
  */
 class CallLiveStartedEvent extends BaseModel
 {

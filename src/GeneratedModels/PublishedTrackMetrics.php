@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $codec
- * @property string|null $trackID
- * @property string|null $trackType
- * @property array<SessionWarningResponse>|null $warnings
- * @property MetricTimeSeries|null $bitrate
- * @property MetricTimeSeries|null $framerate
- * @property ResolutionMetricsTimeSeries|null $resolution
  */
 class PublishedTrackMetrics extends BaseModel
 {

@@ -5,20 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $activityID
- * @property string $kind
- * @property string $userID
- * @property string|null $id
- * @property string|null $parent
- * @property array|null $targetFeeds
- * @property array|null $childrenCounts
- * @property Time|null $createdAt
- * @property object|null $data
- * @property array|null $latestChildren
- * @property array|null $ownChildren
- * @property Time|null $updatedAt
- * @property Data|null $user
  */
 class EnrichedReaction extends BaseModel
 {

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property SearchResultMessage|null $message
  */
 class SearchResult extends BaseModel
 {

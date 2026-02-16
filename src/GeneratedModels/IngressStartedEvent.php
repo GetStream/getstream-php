@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a user begins streaming into a call
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $ingressStreamID
- * @property string $publisherType
- * @property string $userID
- * @property string $type
- * @property string|null $clientIp
- * @property string|null $clientName
- * @property string|null $version
  */
 class IngressStartedEvent extends BaseModel
 {

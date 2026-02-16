@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<BanResponse> $bans
  */
 class QueryBannedUsersResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null, // Duration of the request in milliseconds
-        /** @var array<BanResponse>|null List of found bans */
+        /** @var array<BanResponse>|null */
         #[ArrayOf(BanResponse::class)]
         public ?array $bans = null, // List of found bans
     ) {

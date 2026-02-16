@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property CallReportResponse $call
- * @property ParticipantReportResponse $participants
- * @property UserRatingReportResponse $userRatings
  */
 class ReportResponse extends BaseModel
 {

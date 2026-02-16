@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property bool|null $detectOrientation
- * @property string|null $externalAppUrl
- * @property string|null $externalCssUrl
- * @property object|null $options
  */
 class LayoutSettingsRequest extends BaseModel
 {

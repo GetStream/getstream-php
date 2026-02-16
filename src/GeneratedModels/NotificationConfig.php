@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $deduplicationWindow
- * @property bool|null $trackRead
- * @property bool|null $trackSeen
  */
 class NotificationConfig extends BaseModel
 {

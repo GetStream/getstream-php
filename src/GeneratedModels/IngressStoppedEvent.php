@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when streaming stops due to user action or call ended
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $ingressStreamID
- * @property string $userID
- * @property string $type
  */
 class IngressStoppedEvent extends BaseModel
 {

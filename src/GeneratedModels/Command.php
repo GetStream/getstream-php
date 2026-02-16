@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Represents custom chat command
- *
- * @property string $args
- * @property string $description
- * @property string $name
- * @property string $set
- * @property \DateTime|null $createdAt
- * @property \DateTime|null $updatedAt
  */
 class Command extends BaseModel
 {

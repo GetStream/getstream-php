@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property \DateTime $createdAt
- * @property array $channels
- * @property string $type
- * @property User|null $user
+ * Reminder events allow you to notify your users about unread messages. Reminders can be used to trigger an email, push notification or SMS to the user.
  */
 class UserUnreadReminderEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?array $channels = null,
-        public ?string $type = null,
-        public ?User $user = null,
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        /** @var array<ChannelMessagesResponse>|null */
+        #[ArrayOf(ChannelMessagesResponse::class)]
+        public ?array $channels = null, // The channels with unread messages
+        public ?object $custom = null,
+        public ?UserResponseCommonFields $user = null,
+        public ?string $type = null, // The type of event: "user.unread_message_reminder" in this case
+        public ?\DateTime $receivedAt = null,
     ) {
     }
 

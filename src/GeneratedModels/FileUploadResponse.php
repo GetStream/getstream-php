@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property string|null $file
- * @property string|null $thumbUrl
  */
 class FileUploadResponse extends BaseModel
 {

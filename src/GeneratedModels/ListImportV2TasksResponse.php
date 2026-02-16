@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property array<ImportV2TaskItem> $importTasks
- * @property string|null $next
- * @property string|null $prev
  */
 class ListImportV2TasksResponse extends BaseModel
 {

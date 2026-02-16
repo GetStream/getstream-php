@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Block list contains restricted words
- *
- * @property string $name
- * @property array $words
- * @property bool|null $isLeetCheckEnabled
- * @property bool|null $isPluralCheckEnabled
- * @property string|null $team
- * @property string|null $type
  */
 class CreateBlockListRequest extends BaseModel
 {
@@ -21,7 +14,7 @@ class CreateBlockListRequest extends BaseModel
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,
         public ?string $team = null,
-        public ?string $type = null, // Block list type.
+        public ?string $type = null, // Block list type. One of: regex, domain, domain_allowlist, email, email_allowlist, word
     ) {
     }
 

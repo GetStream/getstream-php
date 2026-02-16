@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $speakerID
- * @property string $text
- * @property \DateTime|null $endTime
- * @property string|null $language
- * @property string|null $service
- * @property \DateTime|null $startTime
- * @property bool|null $translated
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class SendClosedCaptionRequest extends BaseModel
 {

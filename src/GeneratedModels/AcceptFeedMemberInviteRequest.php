@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class AcceptFeedMemberInviteRequest extends BaseModel
 {

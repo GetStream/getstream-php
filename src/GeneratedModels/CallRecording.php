@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * CallRecording represents a recording of a call.
- *
- * @property \DateTime $endTime
- * @property string $filename
- * @property string $recordingType
- * @property string $sessionID
- * @property \DateTime $startTime
- * @property string $url
  */
 class CallRecording extends BaseModel
 {

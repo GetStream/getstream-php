@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $mode
- * @property string $path
- * @property string $state
- * @property \DateTime $updatedAt
- * @property array<ImportTaskHistory> $history
- * @property int|null $size
  */
 class ImportTask extends BaseModel
 {

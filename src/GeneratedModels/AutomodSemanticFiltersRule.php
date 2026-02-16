@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $action
- * @property string $name
- * @property int $threshold
  */
 class AutomodSemanticFiltersRule extends BaseModel
 {

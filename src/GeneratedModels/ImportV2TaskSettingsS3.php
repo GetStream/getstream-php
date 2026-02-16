@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $bucket
- * @property string|null $dir
- * @property string|null $region
  */
 class ImportV2TaskSettingsS3 extends BaseModel
 {

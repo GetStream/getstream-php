@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $type
- * @property BanOptions|null $banOptions
- * @property FlagUserOptions|null $flagUserOptions
  */
 class RuleBuilderAction extends BaseModel
 {

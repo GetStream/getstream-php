@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array<FollowPair> $follows
- * @property bool|null $deleteNotificationActivity
  */
 class UnfollowBatchRequest extends BaseModel
 {
     public function __construct(
-        /** @var array<FollowPair>|null List of follow relationships to remove */
+        /** @var array<FollowPair>|null */
         #[ArrayOf(FollowPair::class)]
         public ?array $follows = null, // List of follow relationships to remove
         public ?bool $deleteNotificationActivity = null, // Whether to delete the corresponding notification activity (default: false)

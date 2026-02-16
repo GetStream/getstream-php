@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $defaultDateRangeDays
- * @property array|null $visibleCharts
  */
 class OverviewDashboardConfig extends BaseModel
 {

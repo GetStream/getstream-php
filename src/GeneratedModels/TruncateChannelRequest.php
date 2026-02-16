@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $hardDelete
- * @property bool|null $skipPush
- * @property \DateTime|null $truncatedAt
- * @property string|null $userID
- * @property array|null $memberIds
- * @property MessageRequest|null $message
- * @property UserRequest|null $user
  */
 class TruncateChannelRequest extends BaseModel
 {

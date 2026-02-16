@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $level
- * @property string $operator
- * @property int $value
- * @property string|null $valueUnit
- * @property int|null $windowSeconds
  */
 class MetricThreshold extends BaseModel
 {

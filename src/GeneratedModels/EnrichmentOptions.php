@@ -5,25 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Options to skip specific enrichments to improve performance. Default is false (enrichments are included). Setting a field to true skips that enrichment.
- *
- * @property bool|null $enrichOwnFollowings
- * @property bool|null $skipActivity
- * @property bool|null $skipActivityCollections
- * @property bool|null $skipActivityComments
- * @property bool|null $skipActivityCurrentFeed
- * @property bool|null $skipActivityMentionedUsers
- * @property bool|null $skipActivityOwnBookmarks
- * @property bool|null $skipActivityParents
- * @property bool|null $skipActivityPoll
- * @property bool|null $skipActivityReactions
- * @property bool|null $skipActivityRefreshImageUrls
- * @property bool|null $skipAll
- * @property bool|null $skipFeedMemberUser
- * @property bool|null $skipFollowers
- * @property bool|null $skipFollowing
- * @property bool|null $skipOwnCapabilities
- * @property bool|null $skipOwnFollows
- * @property bool|null $skipPins
  */
 class EnrichmentOptions extends BaseModel
 {

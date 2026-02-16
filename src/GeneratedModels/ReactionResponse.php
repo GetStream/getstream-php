@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $messageID
- * @property int $score
- * @property string $type
- * @property \DateTime $updatedAt
- * @property string $userID
- * @property object $custom
- * @property UserResponse $user
  */
 class ReactionResponse extends BaseModel
 {

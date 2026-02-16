@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $sizeLimit
- * @property array|null $allowedFileExtensions
- * @property array|null $allowedMimeTypes
- * @property array|null $blockedFileExtensions
- * @property array|null $blockedMimeTypes
  */
 class FileUploadConfig extends BaseModel
 {

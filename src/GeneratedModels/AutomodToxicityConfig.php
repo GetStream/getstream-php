@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $async
- * @property bool|null $enabled
- * @property array<AutomodRule>|null $rules
  */
 class AutomodToxicityConfig extends BaseModel
 {

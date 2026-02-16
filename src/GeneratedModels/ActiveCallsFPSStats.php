@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $p05
- * @property int $p10
- * @property int $p50
- * @property int $p90
  */
 class ActiveCallsFPSStats extends BaseModel
 {

@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $enabled
- * @property HLSSettings|null $hls
- * @property RTMPSettings|null $rtmp
  */
 class BroadcastSettings extends BaseModel
 {

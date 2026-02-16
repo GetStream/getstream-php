@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<MessageHistoryEntryResponse> $messageHistory
- * @property string|null $next
- * @property string|null $prev
  */
 class QueryMessageHistoryResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null, // Duration of the request in milliseconds
-        /** @var array<MessageHistoryEntryResponse>|null Message history entries */
+        /** @var array<MessageHistoryEntryResponse>|null */
         #[ArrayOf(MessageHistoryEntryResponse::class)]
         public ?array $messageHistory = null, // Message history entries
         public ?string $next = null,

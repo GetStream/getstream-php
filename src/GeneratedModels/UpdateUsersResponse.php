@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property string $membershipDeletionTaskID
- * @property array $users
  */
 class UpdateUsersResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $membershipDeletionTaskID = null,
+        /** @var array<FullUserResponse>|null */
+        #[ArrayOf(FullUserResponse::class)]
         public ?array $users = null, // Object containing users
     ) {
     }

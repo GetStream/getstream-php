@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property object $filter
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property array<SortParamRequest>|null $sort
  */
 class QuerySegmentsRequest extends BaseModel
 {
@@ -19,7 +13,7 @@ class QuerySegmentsRequest extends BaseModel
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
-        /** @var array<SortParamRequest>|null Array of sort parameters */
+        /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Array of sort parameters
     ) {

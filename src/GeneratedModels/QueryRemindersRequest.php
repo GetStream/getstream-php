@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property string|null $userID
- * @property array<SortParamRequest>|null $sort
- * @property object|null $filter
- * @property UserRequest|null $user
  */
 class QueryRemindersRequest extends BaseModel
 {
@@ -21,7 +13,7 @@ class QueryRemindersRequest extends BaseModel
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $userID = null,
-        /** @var array<SortParamRequest>|null Array of sort parameters */
+        /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Array of sort parameters
         public ?object $filter = null, // Filter to apply to the query

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array|null $images
- * @property array|null $texts
- * @property array|null $videos
- * @property object|null $custom
  */
 class ModerationPayload extends BaseModel
 {

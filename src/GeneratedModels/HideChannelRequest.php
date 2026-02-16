@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $clearHistory
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class HideChannelRequest extends BaseModel
 {

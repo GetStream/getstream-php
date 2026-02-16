@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $durationSeconds
- * @property string $trackType
  */
 class TrackStatsResponse extends BaseModel
 {

@@ -5,23 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<ChannelMemberResponse> $members
- * @property array<MessageResponse> $messages
- * @property array<MessageResponse> $pinnedMessages
- * @property array<ThreadStateResponse> $threads
- * @property bool|null $hidden
- * @property \DateTime|null $hideMessagesBefore
- * @property int|null $watcherCount
- * @property array<SharedLocationResponseData>|null $activeLiveLocations
- * @property array<PendingMessageResponse>|null $pendingMessages
- * @property array<ReadStateResponse>|null $read
- * @property array<UserResponse>|null $watchers
- * @property ChannelResponse|null $channel
- * @property DraftResponse|null $draft
- * @property ChannelMemberResponse|null $membership
- * @property ChannelPushPreferencesResponse|null $pushPreferences
  */
 class ChannelStateResponse extends BaseModel
 {

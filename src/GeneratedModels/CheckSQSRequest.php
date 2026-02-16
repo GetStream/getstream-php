@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $sqsKey
- * @property string|null $sqsSecret
- * @property string|null $sqsUrl
  */
 class CheckSQSRequest extends BaseModel
 {

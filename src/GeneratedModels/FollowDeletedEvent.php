@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a feed unfollows another feed.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property FollowResponse $follow
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
  */
 class FollowDeletedEvent extends BaseModel
 {

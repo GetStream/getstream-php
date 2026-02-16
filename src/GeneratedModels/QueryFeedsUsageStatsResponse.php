@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property DailyMetricStatsResponse $activities
- * @property DailyMetricStatsResponse $apiRequests
- * @property DailyMetricStatsResponse $follows
- * @property DailyMetricStatsResponse $openaiRequests
  */
 class QueryFeedsUsageStatsResponse extends BaseModel
 {

@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $liveSessions
- * @property int $participants
- * @property int $peakConcurrentSessions
- * @property int $peakConcurrentUsers
- * @property int $publishers
- * @property int $sessions
- * @property int|null $totalParticipantDuration
  */
 class CallStatsParticipantCounts extends BaseModel
 {

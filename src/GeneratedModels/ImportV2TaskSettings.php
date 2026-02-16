@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $mode
- * @property string|null $path
- * @property bool|null $skipReferencesCheck
- * @property ImportV2TaskSettingsS3|null $s3
  */
 class ImportV2TaskSettings extends BaseModel
 {

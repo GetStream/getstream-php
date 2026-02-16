@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property PublisherAudioMetrics|null $audio
- * @property ActiveCallsLatencyStats|null $rttMs
- * @property PublisherVideoMetrics|null $video
  */
 class PublisherAllMetrics extends BaseModel
 {

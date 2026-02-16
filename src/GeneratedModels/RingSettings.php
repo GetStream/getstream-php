@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $autoCancelTimeoutMs
- * @property int $incomingCallTimeoutMs
- * @property int $missedCallTimeoutMs
  */
 class RingSettings extends BaseModel
 {

@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $channelCid
- * @property \DateTime $createdAt
- * @property string $createdByDeviceID
- * @property int $latitude
- * @property int $longitude
- * @property string $messageID
- * @property \DateTime $updatedAt
- * @property string $userID
- * @property \DateTime|null $endAt
- * @property ChannelResponse|null $channel
- * @property MessageResponse|null $message
  */
 class SharedLocationResponseData extends BaseModel
 {

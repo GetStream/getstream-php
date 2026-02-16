@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Reactivate users in batches
- *
- * @property array $userIds
- * @property string|null $createdByID
- * @property bool|null $restoreChannels
- * @property bool|null $restoreMessages
  */
 class ReactivateUsersRequest extends BaseModel
 {

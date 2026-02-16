@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $video
- * @property array|null $membersIds
  */
 class RingCallRequest extends BaseModel
 {

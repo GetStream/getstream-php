@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $disabled
- * @property string|null $packageName
- * @property string|null $secret
  */
 class XiaomiConfig extends BaseModel
 {

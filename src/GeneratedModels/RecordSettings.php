@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $mode
- * @property bool|null $audioOnly
- * @property string|null $quality
- * @property LayoutSettings|null $layout
  */
 class RecordSettings extends BaseModel
 {

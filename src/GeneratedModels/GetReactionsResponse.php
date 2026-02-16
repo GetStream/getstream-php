@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<ReactionResponse> $reactions
  */
 class GetReactionsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<ReactionResponse>|null List of reactions */
+        /** @var array<ReactionResponse>|null */
         #[ArrayOf(ReactionResponse::class)]
         public ?array $reactions = null, // List of reactions
     ) {

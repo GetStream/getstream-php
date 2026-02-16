@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $async
- * @property bool|null $enabled
- * @property array<BlockListRule>|null $rules
  */
 class BlockListConfig extends BaseModel
 {

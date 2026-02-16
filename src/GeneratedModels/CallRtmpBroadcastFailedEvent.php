@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a call RTMP broadcast has failed
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $name
- * @property string $type
  */
 class CallRtmpBroadcastFailedEvent extends BaseModel
 {

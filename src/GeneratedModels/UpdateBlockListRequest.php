@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $isLeetCheckEnabled
- * @property bool|null $isPluralCheckEnabled
- * @property string|null $team
- * @property array|null $words
  */
 class UpdateBlockListRequest extends BaseModel
 {

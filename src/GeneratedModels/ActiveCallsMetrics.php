@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property JoinCallAPIMetrics|null $joinCallAPI
- * @property PublishersMetrics|null $publishers
- * @property SubscribersMetrics|null $subscribers
  */
 class ActiveCallsMetrics extends BaseModel
 {

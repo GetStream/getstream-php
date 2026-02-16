@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $excludeExpiredBans
- * @property int|null $limit
- * @property int|null $offset
- * @property string|null $targetUserID
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class QueryFutureChannelBansPayload extends BaseModel
 {

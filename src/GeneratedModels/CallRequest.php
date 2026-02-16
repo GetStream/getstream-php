@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * CallRequest is the payload for creating a call.
- *
- * @property string|null $channelCid
- * @property string|null $createdByID
- * @property \DateTime|null $startsAt
- * @property string|null $team
- * @property bool|null $video
- * @property array<MemberRequest>|null $members
- * @property UserRequest|null $createdBy
- * @property object|null $custom
- * @property CallSettingsRequest|null $settingsOverride
  */
 class CallRequest extends BaseModel
 {

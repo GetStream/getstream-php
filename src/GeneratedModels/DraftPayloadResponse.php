@@ -4,42 +4,28 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property string $id
- * @property string $text
- * @property object $custom
- * @property string|null $html
- * @property string|null $mml
- * @property string|null $parentID
- * @property string|null $pollID
- * @property string|null $quotedMessageID
- * @property bool|null $showInChannel
- * @property bool|null $silent
- * @property string|null $type
- * @property array<Attachment>|null $attachments
- * @property array<UserResponse>|null $mentionedUsers
+ * Contains the draft message content
  */
 class DraftPayloadResponse extends BaseModel
 {
     public function __construct(
-        public ?string $id = null,
-        public ?string $text = null,
+        public ?string $id = null, // Message ID is unique string identifier of the message
+        public ?string $text = null, // Text of the message
         public ?object $custom = null,
-        public ?string $html = null,
-        public ?string $mml = null,
-        public ?string $parentID = null,
-        public ?string $pollID = null,
+        public ?string $html = null, // Contains HTML markup of the message
+        public ?string $mml = null, // MML content of the message
+        public ?string $parentID = null, // ID of parent message (thread)
+        public ?string $pollID = null, // Identifier of the poll to include in the message
         public ?string $quotedMessageID = null,
-        public ?bool $showInChannel = null,
-        public ?bool $silent = null,
-        public ?string $type = null,
+        public ?bool $showInChannel = null, // Whether thread reply should be shown in the channel as well
+        public ?bool $silent = null, // Whether message is silent or not
+        public ?string $type = null, // Contains type of the message. One of: regular, system
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
-        public ?array $attachments = null,
+        public ?array $attachments = null, // Array of message attachments
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
-        public ?array $mentionedUsers = null,
+        public ?array $mentionedUsers = null, // List of mentioned users
     ) {
     }
 

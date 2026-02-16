@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property int $totalParticipants
- * @property array<MemberResponse> $members
- * @property array<OwnCapability> $ownCapabilities
- * @property array<CallParticipantResponse> $participants
- * @property CallResponse $call
  */
 class QueryCallParticipantsResponse extends BaseModel
 {
@@ -24,7 +17,7 @@ class QueryCallParticipantsResponse extends BaseModel
         /** @var array<OwnCapability>|null */
         #[ArrayOf(OwnCapability::class)]
         public ?array $ownCapabilities = null,
-        /** @var array<CallParticipantResponse>|null List of call participants */
+        /** @var array<CallParticipantResponse>|null */
         #[ArrayOf(CallParticipantResponse::class)]
         public ?array $participants = null, // List of call participants
         public ?CallResponse $call = null,

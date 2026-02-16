@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $id
- * @property string|null $text
- * @property string|null $type
- * @property string|null $userID
- * @property array<Attachment>|null $attachments
  */
 class NotificationParentActivity extends BaseModel
 {

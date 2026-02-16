@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $block
- * @property int|null $flag
  */
 class LabelThresholds extends BaseModel
 {

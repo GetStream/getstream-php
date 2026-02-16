@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when frame recording has failed
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $egressID
- * @property CallResponse $call
- * @property string $type
  */
 class CallFrameRecordingFailedEvent extends BaseModel
 {

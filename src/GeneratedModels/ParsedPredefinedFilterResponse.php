@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property object $filter
- * @property array<SortParamRequest>|null $sort
  */
 class ParsedPredefinedFilterResponse extends BaseModel
 {

@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $activityCount
- * @property \DateTime $createdAt
- * @property string $group
- * @property int $score
- * @property \DateTime $updatedAt
- * @property int $userCount
- * @property bool $userCountTruncated
- * @property array<ActivityResponse> $activities
- * @property bool|null $isWatched
  */
 class AggregatedActivityResponse extends BaseModel
 {
@@ -26,7 +16,7 @@ class AggregatedActivityResponse extends BaseModel
         public ?\DateTime $updatedAt = null, // When the aggregation was last updated
         public ?int $userCount = null, // Number of unique users in this aggregation
         public ?bool $userCountTruncated = null, // Whether this activity group has been truncated due to exceeding the group size limit
-        /** @var array<ActivityResponse>|null List of activities in this aggregation */
+        /** @var array<ActivityResponse>|null */
         #[ArrayOf(ActivityResponse::class)]
         public ?array $activities = null, // List of activities in this aggregation
         public ?bool $isWatched = null,

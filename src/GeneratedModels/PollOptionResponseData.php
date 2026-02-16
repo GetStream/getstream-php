@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $id
- * @property string $text
- * @property object $custom
  */
 class PollOptionResponseData extends BaseModel
 {

@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when activity feedback is provided.
- *
- * @property \DateTime $createdAt
- * @property ActivityFeedbackEventPayload $activityFeedback
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class ActivityFeedbackEvent extends BaseModel
 {

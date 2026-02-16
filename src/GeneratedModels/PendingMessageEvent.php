@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Pending message event for async moderation
- *
- * @property \DateTime $createdAt
- * @property string $method
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property Channel|null $channel
- * @property Message|null $message
- * @property array|null $metadata
- * @property User|null $user
  */
 class PendingMessageEvent extends BaseModel
 {
@@ -24,10 +14,10 @@ class PendingMessageEvent extends BaseModel
         public ?object $custom = null,
         public ?string $type = null, // The type of event: "message.pending" in this case
         public ?\DateTime $receivedAt = null,
-        public ?Channel $channel = null,
-        public ?Message $message = null,
-        public ?array $metadata = null,
-        public ?User $user = null,
+        public ?ChannelResponse $channel = null,
+        public ?MessageResponse $message = null,
+        public ?array $metadata = null, // Metadata attached to the pending message
+        public ?UserResponse $user = null,
     ) {
     }
 

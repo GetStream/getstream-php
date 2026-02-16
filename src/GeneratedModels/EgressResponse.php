@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $broadcasting
- * @property array<EgressRTMPResponse> $rtmps
- * @property CompositeRecordingResponse|null $compositeRecording
- * @property FrameRecordingResponse|null $frameRecording
- * @property EgressHLSResponse|null $hls
- * @property IndividualRecordingResponse|null $individualRecording
- * @property RawRecordingResponse|null $rawRecording
  */
 class EgressResponse extends BaseModel
 {

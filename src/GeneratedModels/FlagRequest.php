@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $entityID
- * @property string $entityType
- * @property string|null $entityCreatorID
- * @property string|null $reason
- * @property string|null $userID
- * @property object|null $custom
- * @property ModerationPayload|null $moderationPayload
- * @property UserRequest|null $user
  */
 class FlagRequest extends BaseModel
 {

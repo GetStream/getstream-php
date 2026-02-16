@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $ip
- * @property string|null $name
- * @property string|null $networkType
- * @property string|null $version
- * @property CallStatsLocation|null $location
  */
 class SessionClient extends BaseModel
 {

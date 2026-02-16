@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $trackID
- * @property string|null $codec
- * @property string|null $label
- * @property string|null $rid
- * @property string|null $trackType
- * @property array|null $metricsOrder
- * @property array|null $metrics
- * @property array|null $metricsMeta
- * @property array|null $thresholds
  */
 class ParticipantSeriesTrackMetrics extends BaseModel
 {
@@ -26,6 +16,8 @@ class ParticipantSeriesTrackMetrics extends BaseModel
         public ?string $trackType = null,
         public ?array $metricsOrder = null,
         public ?array $metrics = null,
+        /** @var array<MetricDescriptor>|null */
+        #[ArrayOf(MetricDescriptor::class)]
         public ?array $metricsMeta = null,
         public ?array $thresholds = null,
     ) {

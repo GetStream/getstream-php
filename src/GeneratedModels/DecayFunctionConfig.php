@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $base
- * @property string|null $decay
- * @property string|null $direction
- * @property string|null $offset
- * @property string|null $origin
- * @property string|null $scale
  */
 class DecayFunctionConfig extends BaseModel
 {

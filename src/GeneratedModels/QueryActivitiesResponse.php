@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<ActivityResponse> $activities
- * @property string|null $next
- * @property string|null $prev
  */
 class QueryActivitiesResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<ActivityResponse>|null List of activities matching the query */
+        /** @var array<ActivityResponse>|null */
         #[ArrayOf(ActivityResponse::class)]
         public ?array $activities = null, // List of activities matching the query
         public ?string $next = null, // Cursor for next page

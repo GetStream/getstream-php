@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<MembershipLevelResponse> $membershipLevels
- * @property string|null $next
- * @property string|null $prev
  */
 class QueryMembershipLevelsResponse extends BaseModel
 {

@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime|null $remindAt
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class UpdateReminderRequest extends BaseModel
 {

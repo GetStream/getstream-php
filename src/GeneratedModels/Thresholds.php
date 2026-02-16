@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Sets thresholds for AI moderation
- *
- * @property LabelThresholds|null $explicit
- * @property LabelThresholds|null $spam
- * @property LabelThresholds|null $toxic
  */
 class Thresholds extends BaseModel
 {

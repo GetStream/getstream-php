@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a comment is updated.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property CommentResponse $comment
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class CommentUpdatedEvent extends BaseModel
 {

@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $accessToken
- * @property string $duration
- * @property UserResponse $user
  */
 class CreateGuestResponse extends BaseModel
 {

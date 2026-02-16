@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property \DateTime|null $expires
- * @property string|null $reason
- * @property bool|null $shadow
- * @property UserResponse|null $bannedBy
- * @property UserResponse|null $user
  */
 class FutureChannelBanResponse extends BaseModel
 {

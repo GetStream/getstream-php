@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $progress
- * @property int $statsChannelsCreated
- * @property \DateTime $statsCompletedAt
- * @property int $statsMessagesSent
- * @property \DateTime $statsStartedAt
- * @property int $statsUsersRead
- * @property int $statsUsersSent
  */
 class CampaignStatsResponse extends BaseModel
 {

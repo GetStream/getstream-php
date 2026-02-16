@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<FeedResponse> $feeds
  */
 class CreateFeedsBatchResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<FeedResponse>|null List of created feeds */
+        /** @var array<FeedResponse>|null */
         #[ArrayOf(FeedResponse::class)]
         public ?array $feeds = null, // List of created feeds
     ) {

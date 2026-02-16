@@ -5,34 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Represents an BaseEvent that happened in Stream Chat
- *
- * @property \DateTime $createdAt
- * @property string $type
- * @property object $custom
- * @property bool|null $automoderation
- * @property string|null $channelID
- * @property \DateTime|null $channelLastMessageAt
- * @property string|null $channelType
- * @property string|null $cid
- * @property string|null $connectionID
- * @property string|null $parentID
- * @property string|null $reason
- * @property string|null $team
- * @property string|null $threadID
- * @property string|null $userID
- * @property int|null $watcherCount
- * @property ModerationResponse|null $automoderationScores
- * @property ChannelResponse|null $channel
- * @property UserResponse|null $createdBy
- * @property OwnUserResponse|null $me
- * @property ChannelMemberResponse|null $member
- * @property MessageResponse|null $message
- * @property MessageUpdate|null $messageUpdate
- * @property PollResponseData|null $poll
- * @property PollVoteResponseData|null $pollVote
- * @property ReactionResponse|null $reaction
- * @property ThreadResponse|null $thread
- * @property UserResponse|null $user
  */
 class WSEvent extends BaseModel
 {

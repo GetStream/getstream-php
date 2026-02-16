@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array $data
  */
 class OwnBatchResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
+        /** @var array<FeedOwnData>|null */
+        #[ArrayOf(FeedOwnData::class)]
         public ?array $data = null, // Map of feed ID to own fields data
     ) {
     }

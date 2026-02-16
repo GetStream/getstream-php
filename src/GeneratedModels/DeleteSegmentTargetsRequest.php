@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array $targetIds
  */
 class DeleteSegmentTargetsRequest extends BaseModel
 {

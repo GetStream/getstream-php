@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property bool $wasCreated
- * @property FeedGroupResponse $feedGroup
  */
 class GetOrCreateFeedGroupResponse extends BaseModel
 {

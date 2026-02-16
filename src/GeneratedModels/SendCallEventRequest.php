@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Send a call event to the other user
- *
- * @property string|null $userID
- * @property object|null $custom
- * @property UserRequest|null $user
  */
 class SendCallEventRequest extends BaseModel
 {

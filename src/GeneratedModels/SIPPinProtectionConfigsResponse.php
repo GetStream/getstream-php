@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * PIN protection configuration response
- *
- * @property bool $enabled
- * @property string|null $defaultPin
- * @property int|null $maxAttempts
- * @property int|null $requiredPinDigits
  */
 class SIPPinProtectionConfigsResponse extends BaseModel
 {

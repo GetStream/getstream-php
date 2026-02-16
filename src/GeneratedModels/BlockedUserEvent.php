@@ -6,12 +6,6 @@ namespace GetStream\GeneratedModels;
 /**
  * This event is sent to call participants to notify when a user is blocked on a call, clients can use this event to show a notification.
  * If the user is the current user, the client should leave the call screen as well
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property UserResponse $user
- * @property string $type
- * @property UserResponse|null $blockedByUser
  */
 class BlockedUserEvent extends BaseModel
 {

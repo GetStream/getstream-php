@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when HLS broadcasting has stopped
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $type
  */
 class CallHLSBroadcastingStoppedEvent extends BaseModel
 {

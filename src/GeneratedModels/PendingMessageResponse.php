@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property ChannelResponse|null $channel
- * @property MessageResponse|null $message
- * @property array|null $metadata
- * @property UserResponse|null $user
  */
 class PendingMessageResponse extends BaseModel
 {

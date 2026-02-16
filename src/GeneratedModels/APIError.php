@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $code
- * @property string $duration
- * @property string $message
- * @property string $moreInfo
- * @property int $statusCode
- * @property array $details
- * @property bool|null $unrecoverable
- * @property array|null $exceptionFields
  */
 class APIError extends BaseModel
 {

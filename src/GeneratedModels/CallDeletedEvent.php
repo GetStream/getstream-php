@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a call is deleted. Clients receiving this event should leave the call screen
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property CallResponse $call
- * @property string $type
  */
 class CallDeletedEvent extends BaseModel
 {

@@ -6,12 +6,6 @@ namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a call is updated, clients should use this update the local state of the call.
  * This event also contains the capabilities by role for the call, clients should update the own_capability for the current.
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property CallResponse $call
- * @property array $capabilitiesByRole
- * @property string $type
  */
 class CallUpdatedEvent extends BaseModel
 {

@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $targetUserID
- * @property string|null $bannedByID
- * @property string|null $channelCid
- * @property string|null $deleteMessages
- * @property bool|null $ipBan
- * @property string|null $reason
- * @property bool|null $shadow
- * @property int|null $timeout
- * @property UserRequest|null $bannedBy
  */
 class BanRequest extends BaseModel
 {

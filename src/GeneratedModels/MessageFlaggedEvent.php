@@ -4,28 +4,29 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property string $cid
- * @property \DateTime $createdAt
- * @property string $type
- * @property array<User>|null $threadParticipants
- * @property Flag|null $flag
- * @property Message|null $message
- * @property User|null $user
+ * This event is sent when a message gets flagged. The event contains information about the message that was flagged.
  */
 class MessageFlaggedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
-        /** @var array<User>|null */
-        #[ArrayOf(User::class)]
-        public ?array $threadParticipants = null,
-        public ?Flag $flag = null,
-        public ?Message $message = null,
-        public ?User $user = null,
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?string $messageID = null,
+        public ?MessageResponse $message = null,
+        public ?string $type = null, // The type of event: "message.flagged" in this case
+        public ?string $channelID = null, // The ID of the channel where the message was sent
+        public ?int $channelMemberCount = null, // The number of members in the channel
+        public ?int $channelMessageCount = null, // The number of messages in the channel
+        public ?string $channelType = null, // The type of the channel where the message was sent
+        public ?string $cid = null, // The CID of the channel where the message was sent
+        public ?string $reason = null, // The reason for the flag
+        public ?\DateTime $receivedAt = null,
+        public ?string $team = null, // The team ID
+        public ?int $totalFlags = null, // The total number of flags for the user
+        public ?object $channelCustom = null,
+        public ?object $custom = null, // Custom data
+        public ?MessageModerationResult $details = null,
+        public ?FlagResponse $flag = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $id
- * @property string $type
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property array<SortParamRequest>|null $sort
- * @property object|null $filterConditions
  */
 class QueryCallMembersRequest extends BaseModel
 {

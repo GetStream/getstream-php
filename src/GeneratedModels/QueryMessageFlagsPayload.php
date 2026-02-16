@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $limit
- * @property int|null $offset
- * @property bool|null $showDeletedMessages
- * @property string|null $userID
- * @property array<SortParamRequest>|null $sort
- * @property object|null $filterConditions
- * @property UserRequest|null $user
  */
 class QueryMessageFlagsPayload extends BaseModel
 {

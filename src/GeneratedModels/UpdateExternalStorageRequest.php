@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * External storage
- *
- * @property string $bucket
- * @property string $storageType
- * @property string|null $gcsCredentials
- * @property string|null $path
- * @property S3Request|null $awsS3
- * @property AzureRequest|null $azureBlob
  */
 class UpdateExternalStorageRequest extends BaseModel
 {

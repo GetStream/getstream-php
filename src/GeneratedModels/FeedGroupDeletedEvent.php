@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a feed group is deleted.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property string $groupID
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
  */
 class FeedGroupDeletedEvent extends BaseModel
 {

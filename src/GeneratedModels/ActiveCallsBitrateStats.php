@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $p10
- * @property int $p50
  */
 class ActiveCallsBitrateStats extends BaseModel
 {

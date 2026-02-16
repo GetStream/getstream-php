@@ -5,19 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $limit
- * @property int|null $memberLimit
- * @property int|null $messageLimit
- * @property int|null $offset
- * @property string|null $predefinedFilter
- * @property bool|null $state
- * @property string|null $userID
- * @property array<SortParamRequest>|null $sort
- * @property object|null $filterConditions
- * @property object|null $filterValues
- * @property object|null $sortValues
- * @property UserRequest|null $user
  */
 class QueryChannelsRequest extends BaseModel
 {
@@ -29,7 +16,7 @@ class QueryChannelsRequest extends BaseModel
         public ?string $predefinedFilter = null, // ID of a predefined filter to use instead of filter_conditions
         public ?bool $state = null, // Whether to update channel state or not
         public ?string $userID = null,
-        /** @var array<SortParamRequest>|null List of sort parameters */
+        /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // List of sort parameters
         public ?object $filterConditions = null,

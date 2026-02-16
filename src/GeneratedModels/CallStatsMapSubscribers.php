@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array<CallStatsMapLocation> $locations
- * @property array<CallStatsMapSubscriber>|null $participants
  */
 class CallStatsMapSubscribers extends BaseModel
 {

@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $name
- * @property \DateTime $updatedAt
- * @property UserResponse $user
- * @property object|null $custom
  */
 class BookmarkFolderResponse extends BaseModel
 {

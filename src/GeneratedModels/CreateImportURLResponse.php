@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property string $path
- * @property string $uploadUrl
  */
 class CreateImportURLResponse extends BaseModel
 {

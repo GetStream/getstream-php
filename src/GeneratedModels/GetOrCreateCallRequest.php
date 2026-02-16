@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $membersLimit
- * @property bool|null $notify
- * @property bool|null $ring
- * @property bool|null $video
- * @property CallRequest|null $data
  */
 class GetOrCreateCallRequest extends BaseModel
 {

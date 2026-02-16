@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $createdByID
- * @property string|null $name
- * @property bool|null $restoreMessages
  */
 class ReactivateUserRequest extends BaseModel
 {

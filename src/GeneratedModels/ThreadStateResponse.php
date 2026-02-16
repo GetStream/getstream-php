@@ -5,26 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $activeParticipantCount
- * @property string $channelCid
- * @property \DateTime $createdAt
- * @property string $createdByUserID
- * @property string $parentMessageID
- * @property int $participantCount
- * @property string $title
- * @property \DateTime $updatedAt
- * @property array<MessageResponse> $latestReplies
- * @property object $custom
- * @property \DateTime|null $deletedAt
- * @property \DateTime|null $lastMessageAt
- * @property int|null $replyCount
- * @property array<ReadStateResponse>|null $read
- * @property array<ThreadParticipant>|null $threadParticipants
- * @property ChannelResponse|null $channel
- * @property UserResponse|null $createdBy
- * @property DraftResponse|null $draft
- * @property MessageResponse|null $parentMessage
  */
 class ThreadStateResponse extends BaseModel
 {
@@ -47,7 +27,7 @@ class ThreadStateResponse extends BaseModel
         /** @var array<ReadStateResponse>|null */
         #[ArrayOf(ReadStateResponse::class)]
         public ?array $read = null,
-        /** @var array<ThreadParticipant>|null Thread Participants */
+        /** @var array<ThreadParticipant>|null */
         #[ArrayOf(ThreadParticipant::class)]
         public ?array $threadParticipants = null, // Thread Participants
         public ?ChannelResponse $channel = null,

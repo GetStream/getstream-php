@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when the insights report is ready
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $sessionID
- * @property string $type
  */
 class CallStatsReportReadyEvent extends BaseModel
 {

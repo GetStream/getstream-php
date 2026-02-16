@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $latitude
- * @property int $longitude
- * @property string|null $createdByDeviceID
- * @property \DateTime|null $endAt
  */
 class SharedLocation extends BaseModel
 {

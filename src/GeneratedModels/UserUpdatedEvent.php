@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a user gets updated. The event contains information about the updated user.
- *
- * @property \DateTime $createdAt
- * @property object $custom
- * @property UserResponsePrivacyFields $user
- * @property string $type
- * @property \DateTime|null $receivedAt
  */
 class UserUpdatedEvent extends BaseModel
 {

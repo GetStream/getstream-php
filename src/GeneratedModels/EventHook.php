@@ -5,31 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime|null $createdAt
- * @property bool|null $enabled
- * @property string|null $hookType
- * @property string|null $id
- * @property string|null $product
- * @property bool|null $shouldSendCustomEvents
- * @property string|null $snsAuthType
- * @property bool|null $snsEventBasedMessageGroupIDEnabled
- * @property string|null $snsKey
- * @property string|null $snsRegion
- * @property string|null $snsRoleArn
- * @property string|null $snsSecret
- * @property string|null $snsTopicArn
- * @property string|null $sqsAuthType
- * @property string|null $sqsKey
- * @property string|null $sqsQueueUrl
- * @property string|null $sqsRegion
- * @property string|null $sqsRoleArn
- * @property string|null $sqsSecret
- * @property int|null $timeoutMs
- * @property \DateTime|null $updatedAt
- * @property string|null $webhookUrl
- * @property array|null $eventTypes
- * @property AsyncModerationCallbackConfig|null $callback
  */
 class EventHook extends BaseModel
 {

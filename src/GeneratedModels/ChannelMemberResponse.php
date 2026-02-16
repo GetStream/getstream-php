@@ -5,27 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $banned
- * @property string $channelRole
- * @property \DateTime $createdAt
- * @property bool $notificationsMuted
- * @property bool $shadowBanned
- * @property \DateTime $updatedAt
- * @property object $custom
- * @property \DateTime|null $archivedAt
- * @property \DateTime|null $banExpires
- * @property \DateTime|null $deletedAt
- * @property \DateTime|null $inviteAcceptedAt
- * @property \DateTime|null $inviteRejectedAt
- * @property bool|null $invited
- * @property bool|null $isModerator
- * @property \DateTime|null $pinnedAt
- * @property string|null $role
- * @property string|null $status
- * @property string|null $userID
- * @property array|null $deletedMessages
- * @property UserResponse|null $user
  */
 class ChannelMemberResponse extends BaseModel
 {
@@ -45,7 +24,7 @@ class ChannelMemberResponse extends BaseModel
         public ?bool $invited = null, // Whether member was invited or not
         public ?bool $isModerator = null, // Whether member is channel moderator or not
         public ?\DateTime $pinnedAt = null,
-        public ?string $role = null, // Permission level of the member in the channel (DEPRECATED: use channel_role instead)
+        public ?string $role = null, // Permission level of the member in the channel (DEPRECATED: use channel_role instead). One of: member, moderator, admin, owner
         public ?string $status = null,
         public ?string $userID = null,
         public ?array $deletedMessages = null,

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $userID
- * @property string|null $channelRole
- * @property object|null $custom
- * @property UserResponse|null $user
  */
 class ChannelMemberRequest extends BaseModel
 {

@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when one or more members are removed from a call
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property array $members
- * @property CallResponse $call
- * @property string $type
  */
 class CallMemberRemovedEvent extends BaseModel
 {

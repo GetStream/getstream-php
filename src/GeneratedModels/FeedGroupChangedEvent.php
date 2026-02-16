@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a feed group is changed.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property FeedGroup|null $feedGroup
- * @property UserResponseCommonFields|null $user
  */
 class FeedGroupChangedEvent extends BaseModel
 {

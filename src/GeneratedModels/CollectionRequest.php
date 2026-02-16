@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property object $custom
- * @property string|null $id
- * @property string|null $userID
  */
 class CollectionRequest extends BaseModel
 {

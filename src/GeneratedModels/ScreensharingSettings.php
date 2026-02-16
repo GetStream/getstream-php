@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $accessRequestEnabled
- * @property bool $enabled
- * @property TargetResolution|null $targetResolution
  */
 class ScreensharingSettings extends BaseModel
 {

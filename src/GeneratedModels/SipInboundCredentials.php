@@ -5,17 +5,11 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Credentials for SIP inbound call authentication
- *
- * @property string $callID
- * @property string $callType
- * @property string $token
- * @property string $userID
- * @property object $callCustomData
- * @property object $userCustomData
  */
 class SipInboundCredentials extends BaseModel
 {
     public function __construct(
+        public ?string $apiKey = null, // API key for the application
         public ?string $callID = null, // ID of the call
         public ?string $callType = null, // Type of the call
         public ?string $token = null, // Authentication token for the call

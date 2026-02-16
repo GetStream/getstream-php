@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $cid
- * @property string|null $id
- * @property \DateTime|null $messagesSince
- * @property \DateTime|null $messagesUntil
- * @property string|null $type
  */
 class ChannelExport extends BaseModel
 {

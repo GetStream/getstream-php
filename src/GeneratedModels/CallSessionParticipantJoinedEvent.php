@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a participant joins a call session
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $sessionID
- * @property CallParticipantResponse $participant
- * @property string $type
  */
 class CallSessionParticipantJoinedEvent extends BaseModel
 {

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $publisherUserID
- * @property string|null $publisherName
- * @property string|null $publisherUserSessionID
- * @property array|null $tracks
  */
 class ParticipantSeriesSubscriptionTrackMetrics extends BaseModel
 {

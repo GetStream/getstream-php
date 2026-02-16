@@ -5,32 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Represents a call
- *
- * @property bool $backstage
- * @property bool $captioning
- * @property string $cid
- * @property \DateTime $createdAt
- * @property string $currentSessionID
- * @property string $id
- * @property bool $recording
- * @property bool $transcribing
- * @property bool $translating
- * @property string $type
- * @property \DateTime $updatedAt
- * @property array $blockedUserIds
- * @property UserResponse $createdBy
- * @property object $custom
- * @property EgressResponse $egress
- * @property CallIngressResponse $ingress
- * @property CallSettingsResponse $settings
- * @property string|null $channelCid
- * @property \DateTime|null $endedAt
- * @property int|null $joinAheadTimeSeconds
- * @property string|null $routingNumber
- * @property \DateTime|null $startsAt
- * @property string|null $team
- * @property CallSessionResponse|null $session
- * @property ThumbnailResponse|null $thumbnails
  */
 class CallResponse extends BaseModel
 {

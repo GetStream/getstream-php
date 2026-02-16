@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * KickUserRequest is the payload for kicking a user from a call. Optionally block the user as well.
- *
- * @property string $userID
- * @property bool|null $block
- * @property string|null $kickedByID
- * @property UserRequest|null $kickedBy
  */
 class KickUserRequest extends BaseModel
 {

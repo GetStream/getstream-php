@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $name
- * @property int $priority
- * @property \DateTime $updatedAt
- * @property array $tags
- * @property string|null $description
- * @property object|null $custom
  */
 class MembershipLevelResponse extends BaseModel
 {

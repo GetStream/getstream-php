@@ -4,26 +4,19 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property string $cid
- * @property \DateTime $createdAt
- * @property string $type
- * @property array<User>|null $threadParticipants
- * @property Message|null $message
- * @property User|null $user
+ * Emitted when a message is unblocked.
  */
 class MessageUnblockedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
-        /** @var array<User>|null */
-        #[ArrayOf(User::class)]
-        public ?array $threadParticipants = null,
-        public ?Message $message = null,
-        public ?User $user = null,
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?string $messageID = null,
+        public ?object $custom = null,
+        public ?MessageResponse $message = null,
+        public ?string $type = null, // The type of event: "message.unblocked" in this case
+        public ?string $cid = null, // The CID of the channel where the message was unblocked
+        public ?\DateTime $receivedAt = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

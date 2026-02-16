@@ -5,28 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $allowAnswers
- * @property bool $allowUserSuggestedOptions
- * @property int $answersCount
- * @property \DateTime $createdAt
- * @property string $createdByID
- * @property string $description
- * @property bool $enforceUniqueVote
- * @property string $id
- * @property string $name
- * @property \DateTime $updatedAt
- * @property int $voteCount
- * @property string $votingVisibility
- * @property array<PollVoteResponseData> $latestAnswers
- * @property array<PollOptionResponseData> $options
- * @property array<PollVoteResponseData> $ownVotes
- * @property object $custom
- * @property array $latestVotesByOption
- * @property array $voteCountsByOption
- * @property bool|null $isClosed
- * @property int|null $maxVotesAllowed
- * @property UserResponse|null $createdBy
  */
 class PollResponseData extends BaseModel
 {

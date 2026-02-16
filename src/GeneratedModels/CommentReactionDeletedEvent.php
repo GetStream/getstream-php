@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a reaction is deleted from a comment.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property CommentResponse $comment
- * @property object $custom
- * @property FeedsReactionResponse $reaction
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
  */
 class CommentReactionDeletedEvent extends BaseModel
 {

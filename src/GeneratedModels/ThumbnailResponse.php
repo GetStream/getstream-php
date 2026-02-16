@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $imageUrl
  */
 class ThumbnailResponse extends BaseModel
 {

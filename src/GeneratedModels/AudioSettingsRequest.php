@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $defaultDevice
- * @property bool|null $accessRequestEnabled
- * @property bool|null $hifiAudioEnabled
- * @property bool|null $micDefaultOn
- * @property bool|null $opusDtxEnabled
- * @property bool|null $redundantCodingEnabled
- * @property bool|null $speakerDefaultOn
- * @property NoiseCancellationSettings|null $noiseCancellation
  */
 class AudioSettingsRequest extends BaseModel
 {

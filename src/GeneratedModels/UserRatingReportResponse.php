@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $average
- * @property int $count
  */
 class UserRatingReportResponse extends BaseModel
 {

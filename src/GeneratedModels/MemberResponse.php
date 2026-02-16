@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * MemberResponse is the payload for a member of a call.
- *
- * @property \DateTime $createdAt
- * @property \DateTime $updatedAt
- * @property string $userID
- * @property object $custom
- * @property UserResponse $user
- * @property \DateTime|null $deletedAt
- * @property string|null $role
  */
 class MemberResponse extends BaseModel
 {

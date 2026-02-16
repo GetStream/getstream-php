@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent asynchronously when a single DTMF digit is received from a SIP participant. The event is broadcast after the digit press ends. Use seq_number for ordering within a session and timestamp for the actual detection time.
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $digit
- * @property int $durationMs
- * @property int $seqNumber
- * @property \DateTime $timestamp
- * @property UserResponse $user
- * @property string $type
  */
 class CallDTMFEvent extends BaseModel
 {

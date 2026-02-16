@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property array<Permission> $permissions
- * @property array $grants
  */
 class FeedVisibilityResponse extends BaseModel
 {
     public function __construct(
         public ?string $name = null, // Name of the feed visibility level
-        /** @var array<Permission>|null List of permission policies */
+        /** @var array<Permission>|null */
         #[ArrayOf(Permission::class)]
         public ?array $permissions = null, // List of permission policies
         public ?array $grants = null, // Permission grants for each role

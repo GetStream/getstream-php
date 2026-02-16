@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property \DateTime $updatedAt
- * @property \DateTime|null $expires
- * @property ChannelResponse|null $channel
- * @property UserResponse|null $user
  */
 class ChannelMute extends BaseModel
 {

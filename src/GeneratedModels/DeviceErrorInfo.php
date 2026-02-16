@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $errorMessage
- * @property string $provider
- * @property string $providerName
  */
 class DeviceErrorInfo extends BaseModel
 {

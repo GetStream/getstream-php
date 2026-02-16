@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property string $feed
- * @property string $userID
- * @property ActivityResponse $activity
  */
 class UnpinActivityResponse extends BaseModel
 {

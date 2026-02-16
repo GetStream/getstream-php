@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array<DailyAggregateSDKUsageReportResponse> $daily
  */
 class SDKUsageReportResponse extends BaseModel
 {

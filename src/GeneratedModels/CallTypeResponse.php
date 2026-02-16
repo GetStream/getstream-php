@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * CallTypeResponse is the payload for a call type.
- *
- * @property \DateTime $createdAt
- * @property string $name
- * @property \DateTime $updatedAt
- * @property array $grants
- * @property NotificationSettings $notificationSettings
- * @property CallSettingsResponse $settings
- * @property string|null $externalStorage
  */
 class CallTypeResponse extends BaseModel
 {
@@ -21,7 +13,7 @@ class CallTypeResponse extends BaseModel
         public ?string $name = null, // the name of the call type
         public ?\DateTime $updatedAt = null, // the time the call type was last updated
         public ?array $grants = null, // the permissions granted to each role
-        public ?NotificationSettings $notificationSettings = null,
+        public ?NotificationSettingsResponse $notificationSettings = null,
         public ?CallSettingsResponse $settings = null,
         public ?string $externalStorage = null, // the external storage for the call type
     ) {

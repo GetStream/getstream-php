@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a custom moderation action is executed
- *
- * @property string $actionID
- * @property \DateTime $createdAt
- * @property object $custom
- * @property ReviewQueueItemResponse $reviewQueueItem
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property object|null $actionOptions
- * @property MessageResponse|null $message
  */
 class ModerationCustomActionEvent extends BaseModel
 {

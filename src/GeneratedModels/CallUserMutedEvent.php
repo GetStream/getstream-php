@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a call member is muted
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $fromUserID
- * @property string $reason
- * @property array $mutedUserIds
- * @property string $type
  */
 class CallUserMutedEvent extends BaseModel
 {

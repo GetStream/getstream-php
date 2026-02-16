@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when call closed captions has failed
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $type
  */
 class CallClosedCaptionsFailedEvent extends BaseModel
 {

@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $version
- * @property bool|null $offlineOnly
  */
 class PushConfig extends BaseModel
 {

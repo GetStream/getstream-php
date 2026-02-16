@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Result of the message moderation
- *
- * @property string $action
- * @property \DateTime $createdAt
- * @property string $messageID
- * @property \DateTime $updatedAt
- * @property bool $userBadKarma
- * @property int $userKarma
- * @property string|null $blockedWord
- * @property string|null $blocklistName
- * @property string|null $moderatedBy
- * @property ModerationResponse|null $aiModerationResponse
- * @property Thresholds|null $moderationThresholds
  */
 class MessageModerationResult extends BaseModel
 {

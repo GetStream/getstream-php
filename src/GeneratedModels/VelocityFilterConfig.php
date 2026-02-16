@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $advancedFilters
- * @property bool|null $async
- * @property bool|null $cascadingActions
- * @property int|null $cidsPerUser
- * @property bool|null $enabled
- * @property bool|null $firstMessageOnly
- * @property array<VelocityFilterConfigRule>|null $rules
  */
 class VelocityFilterConfig extends BaseModel
 {

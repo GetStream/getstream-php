@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $type
- * @property string|null $stacktrace
- * @property string|null $version
  */
 class ErrorResult extends BaseModel
 {

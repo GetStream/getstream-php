@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $createdByID
- * @property bool|null $markMessagesDeleted
  */
 class DeactivateUserRequest extends BaseModel
 {

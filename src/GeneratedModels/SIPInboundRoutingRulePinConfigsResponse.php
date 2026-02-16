@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * PIN routing rule call configuration response
- *
- * @property string|null $customWebhookUrl
- * @property string|null $pinFailedAttemptPrompt
- * @property string|null $pinHangupPrompt
- * @property string|null $pinPrompt
- * @property string|null $pinSuccessPrompt
  */
 class SIPInboundRoutingRulePinConfigsResponse extends BaseModel
 {

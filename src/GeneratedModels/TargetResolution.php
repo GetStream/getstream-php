@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $bitrate
- * @property int $height
- * @property int $width
  */
 class TargetResolution extends BaseModel
 {

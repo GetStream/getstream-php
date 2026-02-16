@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $async
- * @property array<RuleBuilderRule>|null $rules
  */
 class RuleBuilderConfig extends BaseModel
 {

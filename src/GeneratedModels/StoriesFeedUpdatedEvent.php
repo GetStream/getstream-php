@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when stories feed is updated.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property array<ActivityResponse>|null $activities
- * @property array<AggregatedActivityResponse>|null $aggregatedActivities
- * @property UserResponseCommonFields|null $user
  */
 class StoriesFeedUpdatedEvent extends BaseModel
 {
@@ -25,10 +15,10 @@ class StoriesFeedUpdatedEvent extends BaseModel
         public ?string $type = null, // The type of event: "feeds.stories_feed.updated" in this case
         public ?string $feedVisibility = null,
         public ?\DateTime $receivedAt = null,
-        /** @var array<ActivityResponse>|null Individual activities for stories feeds */
+        /** @var array<ActivityResponse>|null */
         #[ArrayOf(ActivityResponse::class)]
         public ?array $activities = null, // Individual activities for stories feeds
-        /** @var array<AggregatedActivityResponse>|null Aggregated activities for stories feeds */
+        /** @var array<AggregatedActivityResponse>|null */
         #[ArrayOf(AggregatedActivityResponse::class)]
         public ?array $aggregatedActivities = null, // Aggregated activities for stories feeds
         public ?UserResponseCommonFields $user = null,

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * KickUserResponse is the payload for kicking a user from a call.
- *
- * @property string $duration
  */
 class KickUserResponse extends BaseModel
 {

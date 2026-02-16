@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $enabled
- * @property EventNotificationSettings $callLiveStarted
- * @property EventNotificationSettings $callMissed
- * @property EventNotificationSettings $callNotification
- * @property EventNotificationSettings $callRing
- * @property EventNotificationSettings $sessionStarted
  */
 class NotificationSettings extends BaseModel
 {

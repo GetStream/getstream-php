@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property CommentResponse $comment
- * @property int|null $mentionNotificationsCreated
- * @property bool|null $notificationCreated
  */
 class AddCommentResponse extends BaseModel
 {

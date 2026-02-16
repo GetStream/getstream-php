@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $warningCode
- * @property string $warningDescription
- * @property int|null $channelSearchCount
- * @property array|null $channelSearchCids
  */
 class SearchWarning extends BaseModel
 {

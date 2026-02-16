@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * CallStateResponseFields is the payload for call state response
- *
- * @property array<MemberResponse> $members
- * @property array<OwnCapability> $ownCapabilities
- * @property CallResponse $call
  */
 class CallStateResponseFields extends BaseModel
 {
     public function __construct(
-        /** @var array<MemberResponse>|null List of call members */
+        /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null, // List of call members
         /** @var array<OwnCapability>|null */

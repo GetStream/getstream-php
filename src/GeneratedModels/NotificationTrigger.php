@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $text
- * @property string $type
- * @property NotificationComment|null $comment
  */
 class NotificationTrigger extends BaseModel
 {

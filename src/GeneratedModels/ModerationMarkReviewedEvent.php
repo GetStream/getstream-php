@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a moderation item is marked as reviewed
- *
- * @property \DateTime $createdAt
- * @property object $custom
- * @property ReviewQueueItemResponse $item
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property MessageResponse|null $message
  */
 class ModerationMarkReviewedEvent extends BaseModel
 {

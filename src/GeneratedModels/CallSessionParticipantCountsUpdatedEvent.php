@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when the participant counts in a call session are updated
- *
- * @property int $anonymousParticipantCount
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $sessionID
- * @property array $participantsCountByRole
- * @property string $type
  */
 class CallSessionParticipantCountsUpdatedEvent extends BaseModel
 {

@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when HLS broadcasting has failed
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $type
  */
 class CallHLSBroadcastingFailedEvent extends BaseModel
 {

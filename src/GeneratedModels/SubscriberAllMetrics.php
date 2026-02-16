@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property SubscriberAudioMetrics|null $audio
- * @property ActiveCallsLatencyStats|null $rttMs
- * @property SubscriberVideoMetrics|null $video
  */
 class SubscriberAllMetrics extends BaseModel
 {

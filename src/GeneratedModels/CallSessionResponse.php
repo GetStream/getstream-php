@@ -5,19 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $anonymousParticipantCount
- * @property string $id
- * @property array<CallParticipantResponse> $participants
- * @property array $acceptedBy
- * @property array $missedBy
- * @property array $participantsCountByRole
- * @property array $rejectedBy
- * @property \DateTime|null $endedAt
- * @property \DateTime|null $liveEndedAt
- * @property \DateTime|null $liveStartedAt
- * @property \DateTime|null $startedAt
- * @property \DateTime|null $timerEndsAt
  */
 class CallSessionResponse extends BaseModel
 {

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when closed captions are being sent in a call, clients should use this to show the closed captions in the call screen
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property CallClosedCaption $closedCaption
- * @property string $type
  */
 class ClosedCaptionEvent extends BaseModel
 {

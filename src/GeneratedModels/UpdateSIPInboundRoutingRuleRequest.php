@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Request to update a SIP Inbound Routing Rule
- *
- * @property string $name
- * @property array $calledNumbers
- * @property array $trunkIds
- * @property SIPCallerConfigsRequest $callerConfigs
- * @property array|null $callerNumbers
- * @property SIPCallConfigsRequest|null $callConfigs
- * @property SIPDirectRoutingRuleCallConfigsRequest|null $directRoutingConfigs
- * @property SIPPinProtectionConfigsRequest|null $pinProtectionConfigs
- * @property SIPInboundRoutingRulePinConfigsRequest|null $pinRoutingConfigs
  */
 class UpdateSIPInboundRoutingRuleRequest extends BaseModel
 {

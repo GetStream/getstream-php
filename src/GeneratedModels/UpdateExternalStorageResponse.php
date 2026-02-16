@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $bucket
- * @property string $duration
- * @property string $name
- * @property string $path
- * @property string $type
  */
 class UpdateExternalStorageResponse extends BaseModel
 {

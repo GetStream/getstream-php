@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for DeleteRecording
- *
- * @property string $duration
  */
 class DeleteRecordingResponse extends BaseModel
 {

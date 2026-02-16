@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for activity feedback submission
- *
- * @property string $activityID
- * @property string $duration
  */
 class ActivityFeedbackResponse extends BaseModel
 {

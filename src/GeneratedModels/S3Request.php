@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Config for creating Amazon S3 storage.
- *
- * @property string $s3Region
- * @property string|null $s3APIKey
- * @property string|null $s3CustomEndpointUrl
- * @property string|null $s3Secret
  */
 class S3Request extends BaseModel
 {

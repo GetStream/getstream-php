@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array $userChannelPreferences
- * @property array $userPreferences
  */
 class UpsertPushPreferencesResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null, // Duration of the request in milliseconds
         public ?array $userChannelPreferences = null, // The channel specific push notification preferences, only returned for channels you've edited.
+        /** @var array<PushPreferencesResponse>|null */
+        #[ArrayOf(PushPreferencesResponse::class)]
         public ?array $userPreferences = null, // The user preferences, always returned regardless if you edited it
     ) {
     }

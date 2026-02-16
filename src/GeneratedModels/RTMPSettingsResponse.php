@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * RTMPSettingsResponse is the payload for RTMP settings
- *
- * @property bool $enabled
- * @property string $quality
- * @property LayoutSettingsResponse $layout
  */
 class RTMPSettingsResponse extends BaseModel
 {

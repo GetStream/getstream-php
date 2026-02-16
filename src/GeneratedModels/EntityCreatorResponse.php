@@ -5,34 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $banCount
- * @property bool $banned
- * @property \DateTime $createdAt
- * @property int $deletedContentCount
- * @property int $flaggedCount
- * @property string $id
- * @property bool $invisible
- * @property string $language
- * @property bool $online
- * @property string $role
- * @property bool $shadowBanned
- * @property \DateTime $updatedAt
- * @property array $blockedUserIds
- * @property array $teams
- * @property object $custom
- * @property int|null $avgResponseTime
- * @property \DateTime|null $banExpires
- * @property \DateTime|null $deactivatedAt
- * @property \DateTime|null $deletedAt
- * @property string|null $image
- * @property \DateTime|null $lastActive
- * @property string|null $name
- * @property \DateTime|null $revokeTokensIssuedBefore
- * @property array<DeviceResponse>|null $devices
- * @property PrivacySettingsResponse|null $privacySettings
- * @property PushNotificationSettingsResponse|null $pushNotifications
- * @property array|null $teamsRole
  */
 class EntityCreatorResponse extends BaseModel
 {

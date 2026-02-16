@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $feed
- * @property \DateTime $updatedAt
- * @property ActivityResponse $activity
- * @property UserResponse $user
  */
 class ActivityPinResponse extends BaseModel
 {

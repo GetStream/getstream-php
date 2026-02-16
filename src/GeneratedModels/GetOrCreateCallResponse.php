@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $created
- * @property string $duration
- * @property array<MemberResponse> $members
- * @property array<OwnCapability> $ownCapabilities
- * @property CallResponse $call
  */
 class GetOrCreateCallResponse extends BaseModel
 {

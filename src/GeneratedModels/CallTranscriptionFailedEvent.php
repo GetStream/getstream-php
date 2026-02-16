@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when call transcription has failed
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $egressID
- * @property string $type
- * @property string|null $error
  */
 class CallTranscriptionFailedEvent extends BaseModel
 {

@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $audio
- * @property bool|null $muteAllUsers
- * @property string|null $mutedByID
- * @property bool|null $screenshare
- * @property bool|null $screenshareAudio
- * @property bool|null $video
- * @property array|null $userIds
- * @property UserRequest|null $mutedBy
  */
 class MuteUsersRequest extends BaseModel
 {

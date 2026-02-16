@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<ThreadedCommentResponse> $comments
- * @property string|null $next
- * @property string|null $prev
  */
 class GetCommentsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<ThreadedCommentResponse>|null Threaded listing for the activity */
+        /** @var array<ThreadedCommentResponse>|null */
         #[ArrayOf(ThreadedCommentResponse::class)]
         public ?array $comments = null, // Threaded listing for the activity
         public ?string $next = null,

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $action
- * @property int $explicit
- * @property int $spam
- * @property int $toxic
  */
 class ModerationResponse extends BaseModel
 {

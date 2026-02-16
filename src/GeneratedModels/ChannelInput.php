@@ -5,20 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $autoTranslationEnabled
- * @property string|null $autoTranslationLanguage
- * @property string|null $createdByID
- * @property bool|null $disabled
- * @property bool|null $frozen
- * @property string|null $team
- * @property string|null $truncatedByID
- * @property array|null $filterTags
- * @property array<ChannelMemberRequest>|null $invites
- * @property array<ChannelMemberRequest>|null $members
- * @property ChannelConfig|null $configOverrides
- * @property UserRequest|null $createdBy
- * @property object|null $custom
  */
 class ChannelInput extends BaseModel
 {

@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int|null $limit
- * @property int|null $memberLimit
- * @property string|null $next
- * @property int|null $participantLimit
- * @property string|null $prev
- * @property int|null $replyLimit
- * @property string|null $userID
- * @property array<SortParamRequest>|null $sort
- * @property object|null $filter
- * @property UserRequest|null $user
  */
 class QueryThreadsRequest extends BaseModel
 {
@@ -27,7 +16,7 @@ class QueryThreadsRequest extends BaseModel
         public ?string $prev = null,
         public ?int $replyLimit = null, // Limit the number of replies returned per each thread
         public ?string $userID = null,
-        /** @var array<SortParamRequest>|null Sort conditions to apply to threads */
+        /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Sort conditions to apply to threads
         public ?object $filter = null, // Filter conditions to apply to threads

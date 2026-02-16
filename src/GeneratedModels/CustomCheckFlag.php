@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $type
- * @property string|null $reason
- * @property array|null $labels
- * @property object|null $custom
  */
 class CustomCheckFlag extends BaseModel
 {

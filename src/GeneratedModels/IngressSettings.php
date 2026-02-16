@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $enabled
- * @property IngressAudioEncodingOptions|null $audioEncodingOptions
- * @property array|null $videoEncodingOptions
  */
 class IngressSettings extends BaseModel
 {
     public function __construct(
         public ?bool $enabled = null,
         public ?IngressAudioEncodingOptions $audioEncodingOptions = null,
+        /** @var array<IngressVideoEncodingOptions>|null */
+        #[ArrayOf(IngressVideoEncodingOptions::class)]
         public ?array $videoEncodingOptions = null,
     ) {
     }

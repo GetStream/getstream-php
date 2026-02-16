@@ -5,48 +5,29 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $actionType
- * @property string|null $appealID
- * @property string|null $itemID
- * @property string|null $userID
- * @property BanActionRequest|null $ban
- * @property BlockActionRequest|null $block
- * @property CustomActionRequest|null $custom
- * @property DeleteActivityRequest|null $deleteActivity
- * @property DeleteCommentRequest|null $deleteComment
- * @property DeleteMessageRequest|null $deleteMessage
- * @property DeleteReactionRequest|null $deleteReaction
- * @property DeleteUserRequest|null $deleteUser
- * @property MarkReviewedRequest|null $markReviewed
- * @property RejectAppealRequest|null $rejectAppeal
- * @property RestoreActionRequest|null $restore
- * @property ShadowBlockActionRequest|null $shadowBlock
- * @property UnbanActionRequest|null $unban
- * @property UnblockActionRequest|null $unblock
- * @property UserRequest|null $user
  */
 class SubmitActionRequest extends BaseModel
 {
     public function __construct(
-        public ?string $actionType = null, // Type of moderation action to perform (mark_reviewed, delete_message, etc.)
+        public ?string $actionType = null, // Type of moderation action to perform. One of: mark_reviewed, delete_message, delete_activity, delete_comment, delete_reaction, ban, custom, unban, restore, delete_user, unblock, block, shadow_block, unmask, kick_user, end_call
         public ?string $appealID = null, // UUID of the appeal to act on (required for reject_appeal, optional for other actions)
         public ?string $itemID = null, // UUID of the review queue item to act on
         public ?string $userID = null,
-        public ?BanActionRequest $ban = null,
-        public ?BlockActionRequest $block = null,
-        public ?CustomActionRequest $custom = null,
-        public ?DeleteActivityRequest $deleteActivity = null,
-        public ?DeleteCommentRequest $deleteComment = null,
-        public ?DeleteMessageRequest $deleteMessage = null,
-        public ?DeleteReactionRequest $deleteReaction = null,
-        public ?DeleteUserRequest $deleteUser = null,
-        public ?MarkReviewedRequest $markReviewed = null,
-        public ?RejectAppealRequest $rejectAppeal = null,
-        public ?RestoreActionRequest $restore = null,
-        public ?ShadowBlockActionRequest $shadowBlock = null,
-        public ?UnbanActionRequest $unban = null,
-        public ?UnblockActionRequest $unblock = null,
+        public ?BanActionRequestPayload $ban = null,
+        public ?BlockActionRequestPayload $block = null,
+        public ?CustomActionRequestPayload $custom = null,
+        public ?DeleteActivityRequestPayload $deleteActivity = null,
+        public ?DeleteCommentRequestPayload $deleteComment = null,
+        public ?DeleteMessageRequestPayload $deleteMessage = null,
+        public ?DeleteReactionRequestPayload $deleteReaction = null,
+        public ?DeleteUserRequestPayload $deleteUser = null,
+        public ?FlagRequest $flag = null,
+        public ?MarkReviewedRequestPayload $markReviewed = null,
+        public ?RejectAppealRequestPayload $rejectAppeal = null,
+        public ?RestoreActionRequestPayload $restore = null,
+        public ?ShadowBlockActionRequestPayload $shadowBlock = null,
+        public ?UnbanActionRequestPayload $unban = null,
+        public ?UnblockActionRequestPayload $unblock = null,
         public ?UserRequest $user = null,
     ) {
     }

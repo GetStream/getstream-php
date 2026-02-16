@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $error
- * @property \DateTime $finishedAt
- * @property \DateTime $startedAt
- * @property string $taskID
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
  */
 class AsyncExportErrorEvent extends BaseModel
 {

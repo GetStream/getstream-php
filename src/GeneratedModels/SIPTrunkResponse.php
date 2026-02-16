@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * SIP trunk information
- *
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $name
- * @property string $password
- * @property \DateTime $updatedAt
- * @property string $uri
- * @property string $username
- * @property array $numbers
  */
 class SIPTrunkResponse extends BaseModel
 {

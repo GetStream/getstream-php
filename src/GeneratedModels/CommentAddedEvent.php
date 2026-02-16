@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a comment is added to an activity.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property ActivityResponse $activity
- * @property CommentResponse $comment
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class CommentAddedEvent extends BaseModel
 {

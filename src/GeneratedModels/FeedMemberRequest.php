@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $userID
- * @property bool|null $invite
- * @property string|null $membershipLevel
- * @property string|null $role
- * @property object|null $custom
  */
 class FeedMemberRequest extends BaseModel
 {

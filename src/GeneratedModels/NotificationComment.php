@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $comment
- * @property string $id
- * @property string $userID
- * @property array<Attachment>|null $attachments
  */
 class NotificationComment extends BaseModel
 {

@@ -5,20 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<ReviewQueueItemResponse> $items
- * @property array $actionConfig
- * @property object $stats
- * @property string|null $next
- * @property string|null $prev
- * @property FilterConfigResponse|null $filterConfig
  */
 class QueryReviewQueueResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<ReviewQueueItemResponse>|null List of review queue items */
+        /** @var array<ReviewQueueItemResponse>|null */
         #[ArrayOf(ReviewQueueItemResponse::class)]
         public ?array $items = null, // List of review queue items
         public ?array $actionConfig = null, // Configuration for moderation actions

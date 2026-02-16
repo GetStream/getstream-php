@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property MessageRequest $message
- * @property bool|null $skipEnrichUrl
- * @property bool|null $skipPush
  */
 class UpdateMessageRequest extends BaseModel
 {

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * UnpinResponse is the payload for unpinning a message.
- *
- * @property string $duration
  */
 class UnpinResponse extends BaseModel
 {

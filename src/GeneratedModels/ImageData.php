@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $frames
- * @property string $height
- * @property string $size
- * @property string $url
- * @property string $width
  */
 class ImageData extends BaseModel
 {

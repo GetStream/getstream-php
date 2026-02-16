@@ -5,54 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $asyncUrlEnrichEnabled
- * @property bool|null $autoTranslationEnabled
- * @property string|null $beforeMessageSendHookUrl
- * @property int|null $cdnExpirationSeconds
- * @property bool|null $channelHideMembersOnly
- * @property string|null $customActionHandlerUrl
- * @property bool|null $disableAuthChecks
- * @property bool|null $disablePermissionsChecks
- * @property string|null $enforceUniqueUsernames
- * @property bool|null $feedsModerationEnabled
- * @property string|null $feedsV2Region
- * @property bool|null $guestUserCreationDisabled
- * @property bool|null $imageModerationEnabled
- * @property int|null $maxAggregatedActivitiesLength
- * @property bool|null $migratePermissionsToV2
- * @property bool|null $moderationEnabled
- * @property string|null $moderationWebhookUrl
- * @property bool|null $multiTenantEnabled
- * @property string|null $permissionVersion
- * @property int|null $remindersInterval
- * @property int|null $remindersMaxMembers
- * @property \DateTime|null $revokeTokensIssuedBefore
- * @property string|null $snsKey
- * @property string|null $snsSecret
- * @property string|null $snsTopicArn
- * @property string|null $sqsKey
- * @property string|null $sqsSecret
- * @property string|null $sqsUrl
- * @property bool|null $userResponseTimeEnabled
- * @property string|null $webhookUrl
- * @property array|null $allowedFlagReasons
- * @property array<EventHook>|null $eventHooks
- * @property array|null $imageModerationBlockLabels
- * @property array|null $imageModerationLabels
- * @property array|null $userSearchDisallowedRoles
- * @property array|null $webhookEvents
- * @property APNConfig|null $apnConfig
- * @property AsyncModerationConfiguration|null $asyncModerationConfig
- * @property DataDogInfo|null $datadogInfo
- * @property FileUploadConfig|null $fileUploadConfig
- * @property FirebaseConfig|null $firebaseConfig
- * @property array|null $grants
- * @property HuaweiConfig|null $huaweiConfig
- * @property FileUploadConfig|null $imageUploadConfig
- * @property ModerationDashboardPreferences|null $moderationDashboardPreferences
- * @property PushConfig|null $pushConfig
- * @property XiaomiConfig|null $xiaomiConfig
  */
 class UpdateAppRequest extends BaseModel
 {

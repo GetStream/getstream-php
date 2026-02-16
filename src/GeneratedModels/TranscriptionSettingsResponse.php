@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $closedCaptionMode
- * @property string $language
- * @property string $mode
- * @property SpeechSegmentConfig|null $speechSegmentConfig
- * @property TranslationSettings|null $translation
  */
 class TranscriptionSettingsResponse extends BaseModel
 {

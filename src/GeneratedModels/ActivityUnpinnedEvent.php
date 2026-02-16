@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when an activity is unpinned.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property PinActivityResponse $pinnedActivity
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class ActivityUnpinnedEvent extends BaseModel
 {

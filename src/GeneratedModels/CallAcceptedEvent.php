@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a user accepts a notification to join a call.
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property CallResponse $call
- * @property UserResponse $user
- * @property string $type
  */
 class CallAcceptedEvent extends BaseModel
 {

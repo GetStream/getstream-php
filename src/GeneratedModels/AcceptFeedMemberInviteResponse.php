@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property FeedMemberResponse $member
  */
 class AcceptFeedMemberInviteResponse extends BaseModel
 {

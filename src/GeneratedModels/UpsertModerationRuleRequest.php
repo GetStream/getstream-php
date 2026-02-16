@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property string $ruleType
- * @property RuleBuilderAction $action
- * @property string|null $cooldownPeriod
- * @property string|null $description
- * @property bool|null $enabled
- * @property string|null $logic
- * @property string|null $team
- * @property array<RuleBuilderCondition>|null $conditions
- * @property array|null $configKeys
- * @property array<RuleBuilderConditionGroup>|null $groups
  */
 class UpsertModerationRuleRequest extends BaseModel
 {

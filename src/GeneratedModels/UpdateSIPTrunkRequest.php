@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Request to update a SIP trunk
- *
- * @property string $name
- * @property array $numbers
  */
 class UpdateSIPTrunkRequest extends BaseModel
 {

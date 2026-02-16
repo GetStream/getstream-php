@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property int $appPk
- * @property \DateTime $createdAt
- * @property string $duration
- * @property string $id
- * @property string $product
- * @property int $state
- * @property \DateTime $updatedAt
- * @property ImportV2TaskSettings $settings
  */
 class GetImportV2TaskResponse extends BaseModel
 {

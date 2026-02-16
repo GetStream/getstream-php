@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property string $recommendedAction
- * @property string $status
- * @property string|null $taskID
- * @property ReviewQueueItemResponse|null $item
  */
 class CheckResponse extends BaseModel
 {

@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a user submits feedback for a call.
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property int $rating
- * @property string $sessionID
- * @property UserResponse $user
- * @property string $type
- * @property string|null $reason
- * @property string|null $sdk
- * @property string|null $sdkVersion
- * @property object|null $custom
  */
 class CallUserFeedbackSubmittedEvent extends BaseModel
 {

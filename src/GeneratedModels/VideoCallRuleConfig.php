@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $flagAllLabels
- * @property array|null $flaggedLabels
- * @property array<HarmConfig>|null $rules
  */
 class VideoCallRuleConfig extends BaseModel
 {

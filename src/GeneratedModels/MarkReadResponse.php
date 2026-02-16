@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property MessageReadEvent|null $event
  */
 class MarkReadResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null, // Duration of the request in milliseconds
-        public ?MessageReadEvent $event = null,
+        public ?MarkReadResponseEvent $event = null,
     ) {
     }
 

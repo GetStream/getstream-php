@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Partial update request for membership level fields. Only specified fields will be updated.
- *
- * @property string|null $description
- * @property string|null $name
- * @property int|null $priority
- * @property array|null $tags
- * @property object|null $custom
  */
 class UpdateMembershipLevelRequest extends BaseModel
 {

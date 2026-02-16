@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property int $totalUnreadCount
- * @property int $totalUnreadThreadsCount
- * @property array<UnreadCountsChannelType> $channelType
- * @property array<UnreadCountsChannel> $channels
- * @property array<UnreadCountsThread> $threads
- * @property array|null $totalUnreadCountByTeam
  */
 class WrappedUnreadCountsResponse extends BaseModel
 {

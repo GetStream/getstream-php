@@ -5,29 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * An attachment is a message object that represents a file uploaded by a user.
- *
- * @property object $custom
- * @property string|null $assetUrl
- * @property string|null $authorIcon
- * @property string|null $authorLink
- * @property string|null $authorName
- * @property string|null $color
- * @property string|null $fallback
- * @property string|null $footer
- * @property string|null $footerIcon
- * @property string|null $imageUrl
- * @property string|null $ogScrapeUrl
- * @property int|null $originalHeight
- * @property int|null $originalWidth
- * @property string|null $pretext
- * @property string|null $text
- * @property string|null $thumbUrl
- * @property string|null $title
- * @property string|null $titleLink
- * @property string|null $type
- * @property array<Action>|null $actions
- * @property array<Field>|null $fields
- * @property Images|null $giphy
  */
 class Attachment extends BaseModel
 {

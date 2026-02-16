@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property BrowserDataResponse $browser
- * @property DeviceDataResponse $device
- * @property ClientOSDataResponse $os
  */
 class PlatformDataResponse extends BaseModel
 {

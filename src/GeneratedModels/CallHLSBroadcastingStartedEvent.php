@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when HLS broadcasting has started
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $hlsPlaylistUrl
- * @property CallResponse $call
- * @property string $type
  */
 class CallHLSBroadcastingStartedEvent extends BaseModel
 {

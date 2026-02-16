@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property object $filter
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property string|null $sort
  */
 class QueryCommentsRequest extends BaseModel
 {
@@ -19,7 +13,7 @@ class QueryCommentsRequest extends BaseModel
         public ?int $limit = null, // Maximum number of comments to return
         public ?string $next = null,
         public ?string $prev = null,
-        public ?string $sort = null, // first (oldest), last (newest) or top
+        public ?string $sort = null, // first (oldest), last (newest) or top. One of: first, last, top, best, controversial
     ) {
     }
 

@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $appPk
- * @property \DateTime $createdAt
- * @property string $segmentID
- * @property string $targetID
  */
 class SegmentTargetResponse extends BaseModel
 {

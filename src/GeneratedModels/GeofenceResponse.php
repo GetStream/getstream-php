@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $name
- * @property string|null $description
- * @property string|null $type
- * @property array|null $countryCodes
  */
 class GeofenceResponse extends BaseModel
 {

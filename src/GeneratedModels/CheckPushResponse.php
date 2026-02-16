@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property string|null $eventType
- * @property string|null $renderedApnTemplate
- * @property string|null $renderedFirebaseTemplate
- * @property bool|null $skipDevices
- * @property array|null $generalErrors
- * @property array|null $deviceErrors
- * @property array|null $renderedMessage
  */
 class CheckPushResponse extends BaseModel
 {
@@ -24,6 +15,8 @@ class CheckPushResponse extends BaseModel
         public ?string $renderedFirebaseTemplate = null,
         public ?bool $skipDevices = null, // Don't require existing devices to render templates
         public ?array $generalErrors = null, // List of general errors
+        /** @var array<DeviceErrorInfo>|null */
+        #[ArrayOf(DeviceErrorInfo::class)]
         public ?array $deviceErrors = null, // Object with device errors
         public ?array $renderedMessage = null,
     ) {

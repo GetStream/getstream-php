@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $containsUrl
- * @property string|null $severity
- * @property array|null $blocklistMatch
- * @property array|null $harmLabels
- * @property array|null $llmHarmLabels
  */
 class TextContentParameters extends BaseModel
 {

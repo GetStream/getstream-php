@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $captureIntervalInSeconds
- * @property string $mode
- * @property string|null $quality
  */
 class FrameRecordSettings extends BaseModel
 {

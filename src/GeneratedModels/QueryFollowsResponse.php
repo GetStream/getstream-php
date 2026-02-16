@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property array<FollowResponse> $follows
- * @property string|null $next
- * @property string|null $prev
  */
 class QueryFollowsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<FollowResponse>|null List of follow relationships matching the query */
+        /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $follows = null, // List of follow relationships matching the query
         public ?string $next = null, // Cursor for next page

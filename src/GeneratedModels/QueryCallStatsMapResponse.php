@@ -5,21 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $callID
- * @property string $callSessionID
- * @property string $callType
- * @property string $duration
- * @property CallStatsParticipantCounts $counts
- * @property \DateTime|null $callEndedAt
- * @property \DateTime|null $callStartedAt
- * @property string|null $dataSource
- * @property \DateTime|null $endTime
- * @property \DateTime|null $generatedAt
- * @property \DateTime|null $startTime
- * @property CallStatsMapPublishers|null $publishers
- * @property CallStatsMapSFUs|null $sfus
- * @property CallStatsMapSubscribers|null $subscribers
  */
 class QueryCallStatsMapResponse extends BaseModel
 {

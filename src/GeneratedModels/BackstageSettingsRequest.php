@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $enabled
- * @property int|null $joinAheadTimeSeconds
  */
 class BackstageSettingsRequest extends BaseModel
 {

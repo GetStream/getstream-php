@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property array<ActivitySelectorConfig>|null $activitySelectors
- * @property AggregationConfig|null $aggregation
- * @property RankingConfig|null $ranking
  */
 class UpdateFeedViewRequest extends BaseModel
 {
     public function __construct(
-        /** @var array<ActivitySelectorConfig>|null Updated configuration for selecting activities */
+        /** @var array<ActivitySelectorConfig>|null */
         #[ArrayOf(ActivitySelectorConfig::class)]
         public ?array $activitySelectors = null, // Updated configuration for selecting activities
         public ?AggregationConfig $aggregation = null,

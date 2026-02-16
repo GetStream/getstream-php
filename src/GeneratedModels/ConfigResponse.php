@@ -5,23 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool $async
- * @property \DateTime $createdAt
- * @property string $key
- * @property string $team
- * @property \DateTime $updatedAt
- * @property array $supportedVideoCallHarmTypes
- * @property AIImageConfig|null $aiImageConfig
- * @property AITextConfig|null $aiTextConfig
- * @property AIVideoConfig|null $aiVideoConfig
- * @property AutomodPlatformCircumventionConfig|null $automodPlatformCircumventionConfig
- * @property AutomodSemanticFiltersConfig|null $automodSemanticFiltersConfig
- * @property AutomodToxicityConfig|null $automodToxicityConfig
- * @property BlockListConfig|null $blockListConfig
- * @property LLMConfig|null $llmConfig
- * @property VelocityFilterConfig|null $velocityFilterConfig
- * @property VideoCallRuleConfig|null $videoCallRuleConfig
  */
 class ConfigResponse extends BaseModel
 {

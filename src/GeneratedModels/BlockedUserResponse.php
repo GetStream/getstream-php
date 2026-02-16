@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $blockedUserID
- * @property \DateTime $createdAt
- * @property string $userID
- * @property UserResponse $blockedUser
- * @property UserResponse $user
  */
 class BlockedUserResponse extends BaseModel
 {

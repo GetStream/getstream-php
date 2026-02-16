@@ -5,20 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * SIP Inbound Routing Rule response
- *
- * @property \DateTime $createdAt
- * @property string $duration
- * @property string $id
- * @property string $name
- * @property \DateTime $updatedAt
- * @property array $calledNumbers
- * @property array $trunkIds
- * @property array|null $callerNumbers
- * @property SIPCallConfigsResponse|null $callConfigs
- * @property SIPCallerConfigsResponse|null $callerConfigs
- * @property SIPDirectRoutingRuleCallConfigsResponse|null $directRoutingConfigs
- * @property SIPPinProtectionConfigsResponse|null $pinProtectionConfigs
- * @property SIPInboundRoutingRulePinConfigsResponse|null $pinRoutingConfigs
  */
 class SIPInboundRoutingRuleResponse extends BaseModel
 {

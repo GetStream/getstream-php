@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property array<ModerationFlagResponse> $flags
- * @property string|null $next
- * @property string|null $prev
  */
 class QueryModerationFlagsResponse extends BaseModel
 {

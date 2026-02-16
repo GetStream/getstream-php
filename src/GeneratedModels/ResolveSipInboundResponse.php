@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response containing resolved SIP inbound routing information
- *
- * @property string $duration
- * @property SipInboundCredentials $credentials
- * @property SIPInboundRoutingRuleResponse|null $sipRoutingRule
- * @property SIPTrunkResponse|null $sipTrunk
  */
 class ResolveSipInboundResponse extends BaseModel
 {

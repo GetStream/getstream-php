@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property MessageRequest $message
- * @property bool|null $forceModeration
- * @property bool|null $keepChannelHidden
- * @property bool|null $pending
- * @property bool|null $skipEnrichUrl
- * @property bool|null $skipPush
- * @property array|null $pendingMessageMetadata
  */
 class SendMessageRequest extends BaseModel
 {

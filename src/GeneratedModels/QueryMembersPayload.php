@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Client request
- *
- * @property string $type
- * @property object $filterConditions
- * @property string|null $id
- * @property int|null $limit
- * @property int|null $offset
- * @property string|null $userID
- * @property array<ChannelMemberRequest>|null $members
- * @property array<SortParamRequest>|null $sort
- * @property UserRequest|null $user
  */
 class QueryMembersPayload extends BaseModel
 {

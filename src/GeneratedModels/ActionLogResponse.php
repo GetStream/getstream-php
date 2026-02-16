@@ -5,18 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $reason
- * @property string $targetUserID
- * @property string $type
- * @property string $userID
- * @property array $aiProviders
- * @property object $custom
- * @property ReviewQueueItemResponse|null $reviewQueueItem
- * @property UserResponse|null $targetUser
- * @property UserResponse|null $user
  */
 class ActionLogResponse extends BaseModel
 {

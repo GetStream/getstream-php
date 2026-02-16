@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $publisherType
- * @property string $userID
- * @property string $userSessionID
- * @property array $roles
- * @property int|null $durationInSeconds
- * @property \DateTime|null $joinedAt
- * @property \DateTime|null $leftAt
  */
 class ParticipantSessionDetails extends BaseModel
 {

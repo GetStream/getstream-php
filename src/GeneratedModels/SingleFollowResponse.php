@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $duration
- * @property FollowResponse $follow
- * @property bool|null $notificationCreated
  */
 class SingleFollowResponse extends BaseModel
 {

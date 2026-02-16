@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property int $bitrate
- * @property string $codec
- * @property int $frameRate
- * @property int $maxDimension
- * @property int $minDimension
  */
 class IngressVideoLayer extends BaseModel
 {

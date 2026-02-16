@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * UnblockUserResponse is the payload for unblocking a user.
- *
- * @property string $duration
  */
 class UnblockUserResponse extends BaseModel
 {

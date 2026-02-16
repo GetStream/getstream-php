@@ -5,19 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when activities are marked as read, seen, or watched.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property bool|null $markAllRead
- * @property bool|null $markAllSeen
- * @property \DateTime|null $receivedAt
- * @property array|null $markRead
- * @property array|null $markSeen
- * @property array|null $markWatched
- * @property UserResponseCommonFields|null $user
  */
 class ActivityMarkEvent extends BaseModel
 {

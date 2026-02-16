@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $activityID
- * @property \DateTime $createdAt
- * @property string $type
- * @property \DateTime $updatedAt
- * @property UserResponse $user
- * @property string|null $commentID
- * @property object|null $custom
  */
 class FeedsReactionResponse extends BaseModel
 {

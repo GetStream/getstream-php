@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a feed member is removed.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property string $memberID
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class FeedMemberRemovedEvent extends BaseModel
 {

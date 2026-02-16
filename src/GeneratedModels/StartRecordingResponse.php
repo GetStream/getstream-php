@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * StartRecordingResponse is the response payload for the start recording endpoint.
- *
- * @property string $duration
  */
 class StartRecordingResponse extends BaseModel
 {

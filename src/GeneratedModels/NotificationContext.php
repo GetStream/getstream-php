@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property NotificationTarget|null $target
- * @property NotificationTrigger|null $trigger
  */
 class NotificationContext extends BaseModel
 {

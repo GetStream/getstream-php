@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $behavior
- * @property string $blocklist
  */
 class BlockListOptions extends BaseModel
 {
     public function __construct(
-        public ?string $behavior = null, // Blocklist behavior
+        public ?string $behavior = null, // Blocklist behavior. One of: flag, block, shadow_block
         public ?string $blocklist = null, // Blocklist name
     ) {
     }

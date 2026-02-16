@@ -5,42 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $automod
- * @property string $automodBehavior
- * @property bool $connectEvents
- * @property bool $countMessages
- * @property \DateTime $createdAt
- * @property bool $customEvents
- * @property bool $deliveryEvents
- * @property bool $markMessagesPending
- * @property int $maxMessageLength
- * @property bool $mutes
- * @property string $name
- * @property bool $polls
- * @property bool $pushNotifications
- * @property bool $quotes
- * @property bool $reactions
- * @property bool $readEvents
- * @property bool $reminders
- * @property bool $replies
- * @property bool $search
- * @property bool $sharedLocations
- * @property bool $skipLastMsgUpdateForSystemMsgs
- * @property bool $typingEvents
- * @property \DateTime $updatedAt
- * @property bool $uploads
- * @property bool $urlEnrichment
- * @property bool $userMessageReminders
- * @property array<Command> $commands
- * @property string|null $blocklist
- * @property string|null $blocklistBehavior
- * @property int|null $partitionSize
- * @property string|null $partitionTtl
- * @property array|null $allowedFlagReasons
- * @property array<BlockListOptions>|null $blocklists
- * @property Thresholds|null $automodThresholds
- * @property array|null $grants
  */
 class ChannelConfigWithInfo extends BaseModel
 {
@@ -78,6 +42,7 @@ class ChannelConfigWithInfo extends BaseModel
         public ?string $blocklistBehavior = null,
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
+        public ?string $pushLevel = null,
         public ?array $allowedFlagReasons = null,
         /** @var array<BlockListOptions>|null */
         #[ArrayOf(BlockListOptions::class)]

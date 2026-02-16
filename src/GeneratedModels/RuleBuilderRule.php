@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $ruleType
- * @property RuleBuilderAction $action
- * @property string|null $cooldownPeriod
- * @property string|null $id
- * @property string|null $logic
- * @property array<RuleBuilderCondition>|null $conditions
- * @property array<RuleBuilderConditionGroup>|null $groups
  */
 class RuleBuilderRule extends BaseModel
 {

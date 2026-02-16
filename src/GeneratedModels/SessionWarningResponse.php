@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $code
- * @property string $warning
- * @property \DateTime|null $time
  */
 class SessionWarningResponse extends BaseModel
 {

@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property \DateTime $createdAt
- * @property string $messageID
- * @property int $score
- * @property string $type
- * @property \DateTime $updatedAt
- * @property object $custom
- * @property string|null $userID
- * @property User|null $user
  */
 class Reaction extends BaseModel
 {
     public function __construct(
+        public ?string $activityID = null,
         public ?\DateTime $createdAt = null,
-        public ?string $messageID = null,
-        public ?int $score = null,
-        public ?string $type = null,
+        public ?string $kind = null,
         public ?\DateTime $updatedAt = null,
-        public ?object $custom = null,
         public ?string $userID = null,
+        public ?\DateTime $deletedAt = null,
+        public ?string $id = null,
+        public ?string $parent = null,
+        public ?int $score = null,
+        public ?array $targetFeeds = null,
+        public ?object $childrenCounts = null,
+        public ?object $data = null,
+        public ?array $latestChildren = null,
+        public ?object $moderation = null,
+        public ?array $ownChildren = null,
+        public ?object $targetFeedsExtraData = null,
         public ?User $user = null,
     ) {
     }

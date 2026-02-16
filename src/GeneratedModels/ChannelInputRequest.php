@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $autoTranslationEnabled
- * @property string|null $autoTranslationLanguage
- * @property bool|null $disabled
- * @property bool|null $frozen
- * @property string|null $team
- * @property array<ChannelMember>|null $invites
- * @property array<ChannelMember>|null $members
- * @property ConfigOverrides|null $configOverrides
- * @property User|null $createdBy
- * @property object|null $custom
  */
 class ChannelInputRequest extends BaseModel
 {
@@ -25,14 +14,14 @@ class ChannelInputRequest extends BaseModel
         public ?bool $disabled = null,
         public ?bool $frozen = null,
         public ?string $team = null,
-        /** @var array<ChannelMember>|null */
-        #[ArrayOf(ChannelMember::class)]
+        /** @var array<ChannelMemberRequest>|null */
+        #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $invites = null,
-        /** @var array<ChannelMember>|null */
-        #[ArrayOf(ChannelMember::class)]
+        /** @var array<ChannelMemberRequest>|null */
+        #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $members = null,
-        public ?ConfigOverrides $configOverrides = null,
-        public ?User $createdBy = null,
+        public ?ConfigOverridesRequest $configOverrides = null,
+        public ?UserRequest $createdBy = null,
         public ?object $custom = null,
     ) {
     }

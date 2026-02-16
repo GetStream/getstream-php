@@ -5,16 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $recordingStorageName
- * @property bool|null $startClosedCaption
- * @property bool|null $startCompositeRecording
- * @property bool|null $startHLS
- * @property bool|null $startIndividualRecording
- * @property bool|null $startRawRecording
- * @property bool|null $startRecording
- * @property bool|null $startTranscription
- * @property string|null $transcriptionStorageName
  */
 class GoLiveRequest extends BaseModel
 {

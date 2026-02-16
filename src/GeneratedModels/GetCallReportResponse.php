@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property string $sessionID
- * @property ReportResponse $report
- * @property array<VideoReactionsResponse>|null $videoReactions
- * @property ChatActivityStatsResponse|null $chatActivity
- * @property CallSessionResponse|null $session
  */
 class GetCallReportResponse extends BaseModel
 {

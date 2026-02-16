@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a moderation blur action is applied to a user's video stream
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $userID
- * @property object $custom
- * @property string $type
  */
 class CallModerationBlurEvent extends BaseModel
 {

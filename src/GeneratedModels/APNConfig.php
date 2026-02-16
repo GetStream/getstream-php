@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $authKey
- * @property string|null $authType
- * @property string|null $bundleID
- * @property bool|null $development
- * @property bool|null $disabled
- * @property string|null $host
- * @property string|null $keyID
- * @property string|null $notificationTemplate
- * @property string|null $p12Cert
- * @property string|null $teamID
  */
 class APNConfig extends BaseModel
 {

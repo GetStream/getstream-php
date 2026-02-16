@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $action
- * @property bool|null $blur
- * @property int|null $cooldownPeriod
- * @property int|null $threshold
- * @property int|null $timeWindow
- * @property bool|null $warning
- * @property string|null $warningText
  */
 class ActionSequence extends BaseModel
 {

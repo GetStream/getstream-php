@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * RecordSettings is the payload for recording settings
- *
- * @property bool $audioOnly
- * @property string $mode
- * @property string $quality
- * @property LayoutSettingsResponse $layout
  */
 class RecordSettingsResponse extends BaseModel
 {

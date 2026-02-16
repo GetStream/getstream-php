@@ -5,15 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $continueClosedCaption
- * @property bool|null $continueCompositeRecording
- * @property bool|null $continueHLS
- * @property bool|null $continueIndividualRecording
- * @property bool|null $continueRTMPBroadcasts
- * @property bool|null $continueRawRecording
- * @property bool|null $continueRecording
- * @property bool|null $continueTranscription
  */
 class StopLiveRequest extends BaseModel
 {

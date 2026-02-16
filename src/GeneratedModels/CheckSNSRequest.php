@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $snsKey
- * @property string|null $snsSecret
- * @property string|null $snsTopicArn
  */
 class CheckSNSRequest extends BaseModel
 {

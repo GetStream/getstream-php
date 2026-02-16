@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $description
- * @property string|null $name
- * @property string|null $visibility
- * @property array|null $filterTags
- * @property array<FeedMemberRequest>|null $members
- * @property object|null $custom
  */
 class FeedInput extends BaseModel
 {

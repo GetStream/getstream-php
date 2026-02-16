@@ -5,17 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * User request object
- *
- * @property string $id
- * @property string|null $image
- * @property bool|null $invisible
- * @property string|null $language
- * @property string|null $name
- * @property string|null $role
- * @property array|null $teams
- * @property object|null $custom
- * @property PrivacySettingsResponse|null $privacySettings
- * @property array|null $teamsRole
  */
 class UserRequest extends BaseModel
 {

@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $accessRequestEnabled
- * @property bool|null $cameraDefaultOn
- * @property string|null $cameraFacing
- * @property bool|null $enabled
- * @property TargetResolution|null $targetResolution
  */
 class VideoSettingsRequest extends BaseModel
 {

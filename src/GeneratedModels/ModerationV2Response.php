@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $action
- * @property string $originalText
- * @property string|null $blocklistMatched
- * @property bool|null $platformCircumvented
- * @property string|null $semanticFilterMatched
- * @property array|null $imageHarms
- * @property array|null $textHarms
  */
 class ModerationV2Response extends BaseModel
 {
@@ -22,6 +14,7 @@ class ModerationV2Response extends BaseModel
         public ?string $blocklistMatched = null,
         public ?bool $platformCircumvented = null,
         public ?string $semanticFilterMatched = null,
+        public ?array $blocklistsMatched = null,
         public ?array $imageHarms = null,
         public ?array $textHarms = null,
     ) {

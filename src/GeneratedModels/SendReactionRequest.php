@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property ReactionRequest $reaction
- * @property bool|null $enforceUnique
- * @property bool|null $skipPush
  */
 class SendReactionRequest extends BaseModel
 {

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * StartRTMPBroadcastsResponse is the payload for starting an RTMP broadcast.
- *
- * @property string $duration
  */
 class StartRTMPBroadcastsResponse extends BaseModel
 {

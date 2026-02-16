@@ -5,12 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string $userID
- * @property array<CallStatsParticipantSession> $sessions
- * @property \DateTime|null $latestActivityAt
- * @property string|null $name
- * @property array|null $roles
  */
 class CallStatsParticipant extends BaseModel
 {

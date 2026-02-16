@@ -5,25 +5,15 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $defaultVisibility
- * @property array<ActivityProcessorConfig>|null $activityProcessors
- * @property array<ActivitySelectorConfig>|null $activitySelectors
- * @property AggregationConfig|null $aggregation
- * @property object|null $custom
- * @property NotificationConfig|null $notification
- * @property PushNotificationConfig|null $pushNotification
- * @property RankingConfig|null $ranking
- * @property StoriesConfig|null $stories
  */
 class GetOrCreateFeedGroupRequest extends BaseModel
 {
     public function __construct(
         public ?string $defaultVisibility = null, // Default visibility for the feed group, can be 'public', 'visible', 'followers', 'members', or 'private'. Defaults to 'visible' if not provided. 
-        /** @var array<ActivityProcessorConfig>|null Configuration for activity processors */
+        /** @var array<ActivityProcessorConfig>|null */
         #[ArrayOf(ActivityProcessorConfig::class)]
         public ?array $activityProcessors = null, // Configuration for activity processors
-        /** @var array<ActivitySelectorConfig>|null Configuration for activity selectors */
+        /** @var array<ActivitySelectorConfig>|null */
         #[ArrayOf(ActivitySelectorConfig::class)]
         public ?array $activitySelectors = null, // Configuration for activity selectors
         public ?AggregationConfig $aggregation = null,

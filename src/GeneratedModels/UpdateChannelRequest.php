@@ -5,25 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property bool|null $acceptInvite
- * @property int|null $cooldown
- * @property bool|null $hideHistory
- * @property \DateTime|null $hideHistoryBefore
- * @property bool|null $rejectInvite
- * @property bool|null $skipPush
- * @property string|null $userID
- * @property array|null $addFilterTags
- * @property array<ChannelMemberRequest>|null $addMembers
- * @property array|null $addModerators
- * @property array<ChannelMemberRequest>|null $assignRoles
- * @property array|null $demoteModerators
- * @property array<ChannelMemberRequest>|null $invites
- * @property array|null $removeFilterTags
- * @property array|null $removeMembers
- * @property ChannelInputRequest|null $data
- * @property MessageRequest|null $message
- * @property UserRequest|null $user
  */
 class UpdateChannelRequest extends BaseModel
 {
@@ -36,15 +17,15 @@ class UpdateChannelRequest extends BaseModel
         public ?bool $skipPush = null, // When `message` is set disables all push notifications for it
         public ?string $userID = null,
         public ?array $addFilterTags = null, // List of filter tags to add to the channel
-        /** @var array<ChannelMemberRequest>|null List of user IDs to add to the channel */
+        /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $addMembers = null, // List of user IDs to add to the channel
         public ?array $addModerators = null, // List of user IDs to make channel moderators
-        /** @var array<ChannelMemberRequest>|null List of channel member role assignments. If any specified user is not part of the channel, the request will fail */
+        /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $assignRoles = null, // List of channel member role assignments. If any specified user is not part of the channel, the request will fail
         public ?array $demoteModerators = null, // List of user IDs to take away moderators status from
-        /** @var array<ChannelMemberRequest>|null List of user IDs to invite to the channel */
+        /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $invites = null, // List of user IDs to invite to the channel
         public ?array $removeFilterTags = null, // List of filter tags to remove from the channel

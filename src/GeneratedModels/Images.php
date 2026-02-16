@@ -5,14 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property ImageData $fixedHeight
- * @property ImageData $fixedHeightDownsampled
- * @property ImageData $fixedHeightStill
- * @property ImageData $fixedWidth
- * @property ImageData $fixedWidthDownsampled
- * @property ImageData $fixedWidthStill
- * @property ImageData $original
  */
 class Images extends BaseModel
 {

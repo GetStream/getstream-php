@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * 
- *
- * @property string|null $apiKey
- * @property bool|null $enabled
- * @property string|null $site
  */
 class DataDogInfo extends BaseModel
 {

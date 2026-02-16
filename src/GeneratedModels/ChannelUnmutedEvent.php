@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property \DateTime $createdAt
- * @property string $type
+ * Emitted when a channel is successfully unmuted.
  */
 class ChannelUnmutedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?object $custom = null,
+        public ?string $type = null, // The type of event: "channel.unmuted" in this case
+        public ?\DateTime $receivedAt = null,
+        /** @var array<ChannelMute>|null */
+        #[ArrayOf(ChannelMute::class)]
+        public ?array $mutes = null, // The mute objects
+        public ?ChannelMute $mute = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

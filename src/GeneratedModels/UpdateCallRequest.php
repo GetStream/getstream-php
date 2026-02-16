@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Request for updating a call
- *
- * @property \DateTime|null $startsAt
- * @property object|null $custom
- * @property CallSettingsRequest|null $settingsOverride
  */
 class UpdateCallRequest extends BaseModel
 {
