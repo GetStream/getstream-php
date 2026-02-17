@@ -221,6 +221,7 @@ class WebhookTest extends TestCase
             'moderation.flagged' => ['moderation.flagged', 'ModerationFlaggedEvent'],
             'moderation.mark_reviewed' => ['moderation.mark_reviewed', 'ModerationMarkReviewedEvent'],
             'moderation_check.completed' => ['moderation_check.completed', 'ModerationCheckCompletedEvent'],
+            'moderation_rule.triggered' => ['moderation_rule.triggered', 'ModerationRulesTriggeredEvent'],
             'notification.mark_unread' => ['notification.mark_unread', 'NotificationMarkUnreadEvent'],
             'notification.reminder_due' => ['notification.reminder_due', 'ReminderNotificationEvent'],
             'notification.thread_message_new' => ['notification.thread_message_new', 'NotificationThreadMessageNewEvent'],

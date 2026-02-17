@@ -6,13 +6,12 @@ namespace GetStream\GeneratedModels;
 /**
  * 
  */
-class RuleBuilderAction extends BaseModel
+class KeyframeRuleParameters extends BaseModel
 {
     public function __construct(
-        public ?string $type = null,
-        public ?BanOptions $banOptions = null,
-        public ?CallActionOptions $callOptions = null,
-        public ?FlagUserOptions $flagUserOptions = null,
+        public ?int $minConfidence = null,
+        public ?int $threshold = null,
+        public ?array $harmLabels = null,
     ) {
     }
 

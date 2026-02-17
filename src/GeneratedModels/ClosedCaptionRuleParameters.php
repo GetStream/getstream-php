@@ -6,13 +6,12 @@ namespace GetStream\GeneratedModels;
 /**
  * 
  */
-class RuleBuilderAction extends BaseModel
+class ClosedCaptionRuleParameters extends BaseModel
 {
     public function __construct(
-        public ?string $type = null,
-        public ?BanOptions $banOptions = null,
-        public ?CallActionOptions $callOptions = null,
-        public ?FlagUserOptions $flagUserOptions = null,
+        public ?int $threshold = null,
+        public ?array $harmLabels = null,
+        public ?array $llmHarmLabels = null,
     ) {
     }
 

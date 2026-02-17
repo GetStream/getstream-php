@@ -9,6 +9,7 @@ namespace GetStream\GeneratedModels;
 class QueryActivitiesRequest extends BaseModel
 {
     public function __construct(
+        public ?bool $includeExpiredActivities = null, // When true, include both expired and non-expired activities in the result.
         public ?bool $includePrivateActivities = null,
         public ?int $limit = null,
         public ?string $next = null,

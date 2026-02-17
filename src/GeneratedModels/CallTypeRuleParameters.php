@@ -6,13 +6,10 @@ namespace GetStream\GeneratedModels;
 /**
  * 
  */
-class RuleBuilderAction extends BaseModel
+class CallTypeRuleParameters extends BaseModel
 {
     public function __construct(
-        public ?string $type = null,
-        public ?BanOptions $banOptions = null,
-        public ?CallActionOptions $callOptions = null,
-        public ?FlagUserOptions $flagUserOptions = null,
+        public ?string $callType = null,
     ) {
     }
 

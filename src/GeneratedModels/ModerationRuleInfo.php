@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 /**
  * 
  */
-class RuleBuilderAction extends BaseModel
+class ModerationRuleInfo extends BaseModel
 {
     public function __construct(
+        public ?string $description = null,
+        public ?string $id = null,
+        public ?string $name = null,
         public ?string $type = null,
-        public ?BanOptions $banOptions = null,
-        public ?CallActionOptions $callOptions = null,
-        public ?FlagUserOptions $flagUserOptions = null,
     ) {
     }
 
