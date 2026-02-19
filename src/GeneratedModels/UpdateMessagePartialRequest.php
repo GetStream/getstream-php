@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class UpdateMessagePartialRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?bool $skipEnrichUrl = null, // Skip enriching the URL in the message
         public ?bool $skipPush = null,
-        public ?string $userID = null,
-        public ?array $unset = null, // Array of field names to unset
         public ?object $set = null, // Sets new field values
-        public ?UserRequest $user = null,
+        public ?array $unset = null, // Array of field names to unset
+        public ?string $userID = null,
     ) {
     }
 

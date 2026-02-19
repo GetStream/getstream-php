@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class VoteData extends BaseModel
 {
     public function __construct(
-        public ?string $answerText = null,
         public ?string $optionID = null,
+        public ?string $answerText = null,
     ) {
     }
 

@@ -9,16 +9,16 @@ namespace GetStream\GeneratedModels;
 class CallRingEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $sessionID = null, // Call session ID
-        public ?bool $video = null,
-        /** @var array<MemberResponse>|null */
-        #[ArrayOf(MemberResponse::class)]
-        public ?array $members = null, // Call members
         public ?CallResponse $call = null,
         public ?UserResponse $user = null,
         public ?string $type = null, // The type of event: "call.notification" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
+        public ?string $sessionID = null, // Call session ID
+        /** @var array<MemberResponse>|null */
+        #[ArrayOf(MemberResponse::class)]
+        public ?array $members = null, // Call members
+        public ?bool $video = null,
     ) {
     }
 

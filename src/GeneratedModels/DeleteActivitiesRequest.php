@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class DeleteActivitiesRequest extends BaseModel
 {
     public function __construct(
-        public ?array $ids = null, // List of activity IDs to delete
-        public ?bool $deleteNotificationActivity = null, // Whether to also delete any notification activities created from mentions in these activities
-        public ?bool $hardDelete = null, // Whether to permanently delete the activities
-        public ?string $userID = null,
         public ?UserRequest $user = null,
+        public ?array $ids = null, // List of activity IDs to delete
+        public ?bool $hardDelete = null, // Whether to permanently delete the activities
+        public ?bool $deleteNotificationActivity = null, // Whether to also delete any notification activities created from mentions in these activities
+        public ?string $userID = null,
     ) {
     }
 

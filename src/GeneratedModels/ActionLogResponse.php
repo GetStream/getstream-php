@@ -6,17 +6,17 @@ namespace GetStream\GeneratedModels;
 class ActionLogResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Timestamp when the action was taken
-        public ?string $id = null, // Unique identifier of the action log
-        public ?string $reason = null, // Reason for the moderation action
-        public ?string $targetUserID = null, // ID of the user who was the target of the action
-        public ?string $type = null, // Type of moderation action
-        public ?string $userID = null, // ID of the user who performed the action
-        public ?array $aiProviders = null,
-        public ?object $custom = null, // Additional metadata about the action
         public ?ReviewQueueItemResponse $reviewQueueItem = null,
         public ?UserResponse $targetUser = null,
         public ?UserResponse $user = null,
+        public ?string $id = null, // Unique identifier of the action log
+        public ?\DateTime $createdAt = null, // Timestamp when the action was taken
+        public ?string $type = null, // Type of moderation action
+        public ?string $userID = null, // ID of the user who performed the action
+        public ?string $reason = null, // Reason for the moderation action
+        public ?object $custom = null, // Additional metadata about the action
+        public ?string $targetUserID = null, // ID of the user who was the target of the action
+        public ?array $aiProviders = null,
     ) {
     }
 

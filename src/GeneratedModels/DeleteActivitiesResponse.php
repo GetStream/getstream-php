@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DeleteActivitiesResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?array $deletedIds = null, // List of activity IDs that were successfully deleted
+        public ?string $duration = null,
     ) {
     }
 

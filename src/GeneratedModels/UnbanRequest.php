@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UnbanRequest extends BaseModel
 {
     public function __construct(
-        public ?string $unbannedByID = null, // ID of the user performing the unban
         public ?UserRequest $unbannedBy = null,
+        public ?string $unbannedByID = null, // ID of the user performing the unban
     ) {
     }
 

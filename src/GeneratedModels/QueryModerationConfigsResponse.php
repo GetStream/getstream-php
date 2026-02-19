@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class QueryModerationConfigsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<ConfigResponse>|null */
         #[ArrayOf(ConfigResponse::class)]
         public ?array $configs = null, // List of moderation configurations
         public ?string $next = null,
         public ?string $prev = null,
+        public ?string $duration = null,
     ) {
     }
 

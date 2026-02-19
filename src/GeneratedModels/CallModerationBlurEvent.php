@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class CallModerationBlurEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
+        public ?string $type = null, // The type of event: "call.moderation_blur" in this case
         public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
         public ?string $userID = null, // The user ID whose video stream is being blurred
         public ?object $custom = null, // Custom data associated with the moderation action
-        public ?string $type = null, // The type of event: "call.moderation_blur" in this case
     ) {
     }
 

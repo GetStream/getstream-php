@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class DeviceErrorInfo extends BaseModel
 {
     public function __construct(
-        public ?string $errorMessage = null,
         public ?string $provider = null,
         public ?string $providerName = null,
+        public ?string $errorMessage = null,
     ) {
     }
 

@@ -7,8 +7,8 @@ class ImportTaskHistory extends BaseModel
 {
     public function __construct(
         public ?\DateTime $createdAt = null,
-        public ?string $nextState = null,
         public ?string $prevState = null,
+        public ?string $nextState = null,
     ) {
     }
 

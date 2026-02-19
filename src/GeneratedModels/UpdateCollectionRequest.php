@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateCollectionRequest extends BaseModel
 {
     public function __construct(
-        public ?string $id = null, // Unique identifier for the collection within its name
         public ?string $name = null, // Name/type of the collection
+        public ?string $id = null, // Unique identifier for the collection within its name
         public ?object $custom = null, // Custom data for the collection (required, must contain at least one key)
     ) {
     }

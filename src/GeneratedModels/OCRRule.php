@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class OCRRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $label = null,
+        public ?string $action = null,
     ) {
     }
 

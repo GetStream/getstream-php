@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class IngressVideoLayerRequest extends BaseModel
 {
     public function __construct(
-        public ?int $bitrate = null,
         public ?string $codec = null,
-        public ?int $frameRateLimit = null,
-        public ?int $maxDimension = null,
+        public ?int $bitrate = null,
         public ?int $minDimension = null,
+        public ?int $maxDimension = null,
+        public ?int $frameRateLimit = null,
     ) {
     }
 

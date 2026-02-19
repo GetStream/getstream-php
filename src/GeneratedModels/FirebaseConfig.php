@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class FirebaseConfig extends BaseModel
 {
     public function __construct(
+        public ?bool $disabled = null,
+        public ?string $serverKey = null,
+        public ?string $notificationTemplate = null,
+        public ?string $dataTemplate = null,
         public ?string $apnTemplate = null,
         public ?string $credentialsJson = null,
-        public ?string $dataTemplate = null,
-        public ?bool $disabled = null,
-        public ?string $notificationTemplate = null,
-        public ?string $serverKey = null,
     ) {
     }
 

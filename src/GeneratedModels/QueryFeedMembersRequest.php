@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class QueryFeedMembersRequest extends BaseModel
 {
     public function __construct(
-        public ?int $limit = null,
-        public ?string $next = null,
-        public ?string $prev = null,
+        public ?object $filter = null, // Filter parameters for the query
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Sort parameters for the query
-        public ?object $filter = null, // Filter parameters for the query
+        public ?int $limit = null,
+        public ?string $next = null,
+        public ?string $prev = null,
     ) {
     }
 

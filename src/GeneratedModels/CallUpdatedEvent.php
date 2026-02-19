@@ -10,11 +10,11 @@ namespace GetStream\GeneratedModels;
 class CallUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
         public ?CallResponse $call = null,
-        public ?array $capabilitiesByRole = null, // The capabilities by role for this call
         public ?string $type = null, // The type of event: "call.updated" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
+        public ?array $capabilitiesByRole = null, // The capabilities by role for this call
     ) {
     }
 

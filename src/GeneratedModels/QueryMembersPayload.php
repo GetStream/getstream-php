@@ -9,19 +9,19 @@ namespace GetStream\GeneratedModels;
 class QueryMembersPayload extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?string $type = null,
-        public ?object $filterConditions = null,
         public ?string $id = null,
-        public ?int $limit = null,
-        public ?int $offset = null,
-        public ?string $userID = null,
         /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $members = null,
+        public ?object $filterConditions = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,
-        public ?UserRequest $user = null,
+        public ?int $limit = null,
+        public ?int $offset = null,
+        public ?string $userID = null,
     ) {
     }
 

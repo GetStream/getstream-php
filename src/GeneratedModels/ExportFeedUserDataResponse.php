@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class ExportFeedUserDataResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?string $taskID = null, // The task ID for the export task
+        public ?string $duration = null,
     ) {
     }
 

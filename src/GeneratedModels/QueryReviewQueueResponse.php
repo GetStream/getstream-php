@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class QueryReviewQueueResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
+        public ?FilterConfigResponse $filterConfig = null,
         /** @var array<ReviewQueueItemResponse>|null */
         #[ArrayOf(ReviewQueueItemResponse::class)]
         public ?array $items = null, // List of review queue items
@@ -14,7 +14,7 @@ class QueryReviewQueueResponse extends BaseModel
         public ?object $stats = null, // Statistics about the review queue
         public ?string $next = null,
         public ?string $prev = null,
-        public ?FilterConfigResponse $filterConfig = null,
+        public ?string $duration = null,
     ) {
     }
 

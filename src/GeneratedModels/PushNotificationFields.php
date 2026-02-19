@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class PushNotificationFields extends BaseModel
 {
     public function __construct(
-        public ?bool $offlineOnly = null,
-        public ?string $version = null,
         public ?APNConfigFields $apn = null,
         public ?FirebaseConfigFields $firebase = null,
         public ?HuaweiConfigFields $huawei = null,
         public ?XiaomiConfigFields $xiaomi = null,
+        public ?string $version = null,
+        public ?bool $offlineOnly = null,
         /** @var array<PushProvider>|null */
         #[ArrayOf(PushProvider::class)]
         public ?array $providers = null,

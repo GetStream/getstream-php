@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class QueryMembershipLevelsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<MembershipLevelResponse>|null */
         #[ArrayOf(MembershipLevelResponse::class)]
         public ?array $membershipLevels = null,
         public ?string $next = null, // Cursor for next page
         public ?string $prev = null, // Cursor for previous page
+        public ?string $duration = null,
     ) {
     }
 

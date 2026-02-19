@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class CampaignStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?int $progress = null,
-        public ?int $statsChannelsCreated = null,
+        public ?\DateTime $statsStartedAt = null,
         public ?\DateTime $statsCompletedAt = null,
         public ?int $statsMessagesSent = null,
-        public ?\DateTime $statsStartedAt = null,
-        public ?int $statsUsersRead = null,
+        public ?int $statsChannelsCreated = null,
+        public ?int $progress = null,
         public ?int $statsUsersSent = null,
+        public ?int $statsUsersRead = null,
     ) {
     }
 

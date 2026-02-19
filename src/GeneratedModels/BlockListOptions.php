@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class BlockListOptions extends BaseModel
 {
     public function __construct(
-        public ?string $behavior = null, // Blocklist behavior. One of: flag, block, shadow_block
         public ?string $blocklist = null, // Blocklist name
+        public ?string $behavior = null, // Blocklist behavior. One of: flag, block, shadow_block
     ) {
     }
 

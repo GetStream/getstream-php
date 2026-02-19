@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DeactivateUserResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?UserResponse $user = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

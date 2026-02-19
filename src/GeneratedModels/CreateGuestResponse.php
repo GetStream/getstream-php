@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class CreateGuestResponse extends BaseModel
 {
     public function __construct(
+        public ?UserResponse $user = null,
         public ?string $accessToken = null, // the access token to authenticate the user
         public ?string $duration = null, // Duration of the request in milliseconds
-        public ?UserResponse $user = null,
     ) {
     }
 

@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class CallStatsLocation extends BaseModel
 {
     public function __construct(
-        public ?int $accuracyRadiusMeters = null,
         public ?string $city = null,
-        public ?string $continent = null,
+        public ?string $subdivision = null,
         public ?string $country = null,
         public ?string $countryIsoCode = null,
+        public ?string $continent = null,
         public ?int $latitude = null,
         public ?int $longitude = null,
-        public ?string $subdivision = null,
+        public ?int $accuracyRadiusMeters = null,
     ) {
     }
 

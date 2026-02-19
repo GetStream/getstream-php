@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class ParticipantSeriesPublisherStats extends BaseModel
 {
     public function __construct(
-        public ?array $globalMetricsOrder = null,
         public ?array $global = null,
         /** @var array<string, MetricDescriptor>|null */
         #[MapOf(MetricDescriptor::class)]
         public ?array $globalMeta = null,
+        public ?array $globalMetricsOrder = null,
         public ?array $globalThresholds = null,
         public ?array $tracks = null,
     ) {

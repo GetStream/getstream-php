@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class MessageChangeSet extends BaseModel
 {
     public function __construct(
-        public ?bool $attachments = null,
         public ?bool $custom = null,
-        public ?bool $html = null,
-        public ?bool $mentionedUserIds = null,
+        public ?bool $text = null,
         public ?bool $mml = null,
-        public ?bool $pin = null,
+        public ?bool $html = null,
+        public ?bool $attachments = null,
+        public ?bool $mentionedUserIds = null,
         public ?bool $quotedMessageID = null,
         public ?bool $silent = null,
-        public ?bool $text = null,
+        public ?bool $pin = null,
     ) {
     }
 

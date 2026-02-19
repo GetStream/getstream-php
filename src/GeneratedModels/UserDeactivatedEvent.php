@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class UserDeactivatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?object $custom = null,
+        public ?UserResponseCommonFields $createdBy = null,
         public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "user.deactivated" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
-        public ?UserResponseCommonFields $createdBy = null,
+        public ?object $custom = null,
     ) {
     }
 

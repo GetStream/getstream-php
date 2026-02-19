@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class SendCallEventRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?string $userID = null,
         public ?object $custom = null,
-        public ?UserRequest $user = null,
     ) {
     }
 

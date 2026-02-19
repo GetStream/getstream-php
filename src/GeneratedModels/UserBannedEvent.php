@@ -9,23 +9,23 @@ namespace GetStream\GeneratedModels;
 class UserBannedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?object $custom = null,
+        public ?UserResponseCommonFields $createdBy = null,
         public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "user.banned" in this case
-        public ?string $channelID = null, // The ID of the channel where the target user was banned
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel where the target user was banned
+        public ?string $team = null, // The team of the channel where the target user was banned
         public ?int $channelMemberCount = null,
         public ?int $channelMessageCount = null,
-        public ?string $channelType = null, // The type of the channel where the target user was banned
-        public ?string $cid = null, // The CID of the channel where the target user was banned
-        public ?\DateTime $expiration = null, // The expiration date of the ban
-        public ?string $reason = null, // The reason for the ban
-        public ?\DateTime $receivedAt = null,
-        public ?bool $shadow = null, // Whether the user was shadow banned
-        public ?string $team = null, // The team of the channel where the target user was banned
-        public ?int $totalBans = null,
         public ?object $channelCustom = null,
-        public ?UserResponseCommonFields $createdBy = null,
+        public ?string $channelType = null, // The type of the channel where the target user was banned
+        public ?string $channelID = null, // The ID of the channel where the target user was banned
+        public ?string $reason = null, // The reason for the ban
+        public ?\DateTime $expiration = null, // The expiration date of the ban
+        public ?bool $shadow = null, // Whether the user was shadow banned
+        public ?int $totalBans = null,
     ) {
     }
 

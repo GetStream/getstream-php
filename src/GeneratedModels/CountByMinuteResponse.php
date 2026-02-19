@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class CountByMinuteResponse extends BaseModel
 {
     public function __construct(
-        public ?int $count = null,
         public ?\DateTime $startTs = null,
+        public ?int $count = null,
     ) {
     }
 

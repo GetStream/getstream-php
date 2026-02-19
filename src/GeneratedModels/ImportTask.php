@@ -6,16 +6,16 @@ namespace GetStream\GeneratedModels;
 class ImportTask extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
         public ?string $id = null,
-        public ?string $mode = null,
         public ?string $path = null,
+        public ?string $mode = null,
+        public ?int $size = null,
         public ?string $state = null,
-        public ?\DateTime $updatedAt = null,
         /** @var array<ImportTaskHistory>|null */
         #[ArrayOf(ImportTaskHistory::class)]
         public ?array $history = null,
-        public ?int $size = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

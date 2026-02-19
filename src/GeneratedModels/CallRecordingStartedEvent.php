@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class CallRecordingStartedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
         public ?string $egressID = null,
-        public ?string $recordingType = null, // The type of recording
         public ?string $type = null, // The type of event: "call.recording_started" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
+        public ?string $recordingType = null, // The type of recording
     ) {
     }
 

@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class BanOptions extends BaseModel
 {
     public function __construct(
-        public ?string $deleteMessages = null,
         public ?int $duration = null,
-        public ?bool $ipBan = null,
         public ?string $reason = null,
         public ?bool $shadowBan = null,
+        public ?bool $ipBan = null,
+        public ?string $deleteMessages = null,
     ) {
     }
 

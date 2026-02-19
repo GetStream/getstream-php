@@ -7,15 +7,15 @@ class ParticipantSeriesTrackMetrics extends BaseModel
 {
     public function __construct(
         public ?string $trackID = null,
-        public ?string $codec = null,
         public ?string $label = null,
-        public ?string $rid = null,
         public ?string $trackType = null,
-        public ?array $metricsOrder = null,
+        public ?string $codec = null,
+        public ?string $rid = null,
         public ?array $metrics = null,
         /** @var array<string, MetricDescriptor>|null */
         #[MapOf(MetricDescriptor::class)]
         public ?array $metricsMeta = null,
+        public ?array $metricsOrder = null,
         public ?array $thresholds = null,
     ) {
     }

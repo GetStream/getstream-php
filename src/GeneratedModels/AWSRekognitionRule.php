@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class AWSRekognitionRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $label = null,
+        public ?string $action = null,
         public ?int $minConfidence = null,
     ) {
     }

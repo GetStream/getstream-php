@@ -6,8 +6,6 @@ namespace GetStream\GeneratedModels;
 class RuleBuilderCondition extends BaseModel
 {
     public function __construct(
-        public ?int $confidence = null,
-        public ?string $type = null,
         public ?CallCustomPropertyParameters $callCustomPropertyParams = null,
         public ?CallTypeRuleParameters $callTypeRuleParams = null,
         public ?ClosedCaptionRuleParameters $closedCaptionRuleParams = null,
@@ -26,6 +24,8 @@ class RuleBuilderCondition extends BaseModel
         public ?UserRuleParameters $userRuleParams = null,
         public ?VideoContentParameters $videoContentParams = null,
         public ?VideoRuleParameters $videoRuleParams = null,
+        public ?string $type = null,
+        public ?int $confidence = null,
     ) {
     }
 

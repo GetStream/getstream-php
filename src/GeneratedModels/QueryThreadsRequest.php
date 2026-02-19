@@ -6,18 +6,18 @@ namespace GetStream\GeneratedModels;
 class QueryThreadsRequest extends BaseModel
 {
     public function __construct(
-        public ?int $limit = null,
-        public ?int $memberLimit = null,
-        public ?string $next = null,
-        public ?int $participantLimit = null, // Limit the number of participants returned per each thread
-        public ?string $prev = null,
+        public ?UserRequest $user = null,
         public ?int $replyLimit = null, // Limit the number of replies returned per each thread
-        public ?string $userID = null,
+        public ?int $participantLimit = null, // Limit the number of participants returned per each thread
+        public ?int $memberLimit = null,
+        public ?object $filter = null, // Filter conditions to apply to threads
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Sort conditions to apply to threads
-        public ?object $filter = null, // Filter conditions to apply to threads
-        public ?UserRequest $user = null,
+        public ?int $limit = null,
+        public ?string $next = null,
+        public ?string $prev = null,
+        public ?string $userID = null,
     ) {
     }
 

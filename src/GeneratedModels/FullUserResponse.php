@@ -6,42 +6,42 @@ namespace GetStream\GeneratedModels;
 class FullUserResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $banned = null,
-        public ?\DateTime $createdAt = null,
+        public ?PrivacySettingsResponse $privacySettings = null,
         public ?string $id = null,
-        public ?bool $invisible = null,
+        public ?string $name = null,
+        public ?string $image = null,
+        public ?object $custom = null,
         public ?string $language = null,
-        public ?bool $online = null,
         public ?string $role = null,
-        public ?bool $shadowBanned = null,
-        public ?int $totalUnreadCount = null,
-        public ?int $unreadChannels = null,
-        public ?int $unreadCount = null,
-        public ?int $unreadThreads = null,
+        public ?array $teams = null,
+        public ?array $teamsRole = null,
+        public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
-        public ?array $blockedUserIds = null,
-        /** @var array<ChannelMute>|null */
-        #[ArrayOf(ChannelMute::class)]
-        public ?array $channelMutes = null,
+        public ?\DateTime $deletedAt = null,
+        public ?bool $banned = null,
+        public ?bool $online = null,
+        public ?\DateTime $lastActive = null,
+        public ?\DateTime $revokeTokensIssuedBefore = null,
+        public ?\DateTime $deactivatedAt = null,
+        public ?int $avgResponseTime = null,
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null,
+        public ?bool $invisible = null,
         /** @var array<UserMuteResponse>|null */
         #[ArrayOf(UserMuteResponse::class)]
         public ?array $mutes = null,
-        public ?array $teams = null,
-        public ?object $custom = null,
-        public ?int $avgResponseTime = null,
-        public ?\DateTime $banExpires = null,
-        public ?\DateTime $deactivatedAt = null,
-        public ?\DateTime $deletedAt = null,
-        public ?string $image = null,
-        public ?\DateTime $lastActive = null,
-        public ?string $name = null,
-        public ?\DateTime $revokeTokensIssuedBefore = null,
+        /** @var array<ChannelMute>|null */
+        #[ArrayOf(ChannelMute::class)]
+        public ?array $channelMutes = null,
+        public ?int $unreadCount = null,
+        public ?int $totalUnreadCount = null,
+        public ?int $unreadChannels = null,
+        public ?int $unreadThreads = null,
         public ?array $latestHiddenChannels = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
-        public ?array $teamsRole = null,
+        public ?bool $shadowBanned = null,
+        public ?array $blockedUserIds = null,
+        public ?\DateTime $banExpires = null,
     ) {
     }
 

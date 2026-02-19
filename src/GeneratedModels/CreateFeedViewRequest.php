@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class CreateFeedViewRequest extends BaseModel
 {
     public function __construct(
+        public ?AggregationConfig $aggregation = null,
+        public ?RankingConfig $ranking = null,
         public ?string $id = null, // Unique identifier for the feed view
         /** @var array<ActivitySelectorConfig>|null */
         #[ArrayOf(ActivitySelectorConfig::class)]
         public ?array $activitySelectors = null, // Configuration for selecting activities
-        public ?AggregationConfig $aggregation = null,
-        public ?RankingConfig $ranking = null,
     ) {
     }
 

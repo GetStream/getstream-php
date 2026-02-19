@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class QueryBannedUsersPayload extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?object $filterConditions = null,
-        public ?bool $excludeExpiredBans = null, // Whether to exclude expired bans or not
-        public ?int $limit = null, // Number of records to return
-        public ?int $offset = null, // Number of records to offset
-        public ?string $userID = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Array of sort parameters
-        public ?UserRequest $user = null,
+        public ?int $limit = null, // Number of records to return
+        public ?int $offset = null, // Number of records to offset
+        public ?bool $excludeExpiredBans = null, // Whether to exclude expired bans or not
+        public ?string $userID = null,
     ) {
     }
 

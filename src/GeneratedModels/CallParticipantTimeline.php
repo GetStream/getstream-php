@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class CallParticipantTimeline extends BaseModel
 {
     public function __construct(
-        public ?string $severity = null,
         public ?\DateTime $timestamp = null,
         public ?string $type = null,
+        public ?string $severity = null,
         public ?object $data = null,
     ) {
     }

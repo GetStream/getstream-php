@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class TextContentParameters extends BaseModel
 {
     public function __construct(
+        public ?array $harmLabels = null,
+        public ?array $llmHarmLabels = null,
         public ?bool $containsUrl = null,
         public ?string $severity = null,
         public ?array $blocklistMatch = null,
-        public ?array $harmLabels = null,
-        public ?array $llmHarmLabels = null,
     ) {
     }
 

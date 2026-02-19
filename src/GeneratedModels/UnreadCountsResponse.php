@@ -8,16 +8,16 @@ class UnreadCountsResponse extends BaseModel
     public function __construct(
         public ?int $totalUnreadCount = null,
         public ?int $totalUnreadThreadsCount = null,
-        /** @var array<UnreadCountsChannelType>|null */
-        #[ArrayOf(UnreadCountsChannelType::class)]
-        public ?array $channelType = null,
+        public ?array $totalUnreadCountByTeam = null,
         /** @var array<UnreadCountsChannel>|null */
         #[ArrayOf(UnreadCountsChannel::class)]
         public ?array $channels = null,
+        /** @var array<UnreadCountsChannelType>|null */
+        #[ArrayOf(UnreadCountsChannelType::class)]
+        public ?array $channelType = null,
         /** @var array<UnreadCountsThread>|null */
         #[ArrayOf(UnreadCountsThread::class)]
         public ?array $threads = null,
-        public ?array $totalUnreadCountByTeam = null,
     ) {
     }
 

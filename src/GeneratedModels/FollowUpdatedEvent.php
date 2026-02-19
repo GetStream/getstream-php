@@ -9,13 +9,13 @@ namespace GetStream\GeneratedModels;
 class FollowUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $fid = null,
-        public ?object $custom = null,
         public ?FollowResponse $follow = null,
         public ?string $type = null, // The type of event: "feeds.follow.updated" in this case
-        public ?string $feedVisibility = null,
+        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $fid = null,
+        public ?string $feedVisibility = null,
     ) {
     }
 

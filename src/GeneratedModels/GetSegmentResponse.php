@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class GetSegmentResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?SegmentResponse $segment = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

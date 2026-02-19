@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class GetBlockedUsersResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         /** @var array<BlockedUserResponse>|null */
         #[ArrayOf(BlockedUserResponse::class)]
         public ?array $blocks = null, // Array of blocked user object
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class MarkChannelsReadRequest extends BaseModel
 {
     public function __construct(
-        public ?string $userID = null,
-        public ?array $readByChannel = null, // Map of channel ID to last read message ID
         public ?UserRequest $user = null,
+        public ?array $readByChannel = null, // Map of channel ID to last read message ID
+        public ?string $userID = null,
     ) {
     }
 

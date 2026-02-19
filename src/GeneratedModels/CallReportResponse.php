@@ -7,8 +7,8 @@ class CallReportResponse extends BaseModel
 {
     public function __construct(
         public ?int $score = null,
-        public ?\DateTime $endedAt = null,
         public ?\DateTime $startedAt = null,
+        public ?\DateTime $endedAt = null,
     ) {
     }
 

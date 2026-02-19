@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class Command extends BaseModel
 {
     public function __construct(
-        public ?string $args = null, // Arguments help text, shown in commands auto-completion
-        public ?string $description = null, // Description, shown in commands auto-completion
-        public ?string $name = null, // Unique command name
-        public ?string $set = null, // Set name used for grouping commands
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $updatedAt = null, // Date/time of the last update
+        public ?string $name = null, // Unique command name
+        public ?string $description = null, // Description, shown in commands auto-completion
+        public ?string $args = null, // Arguments help text, shown in commands auto-completion
+        public ?string $set = null, // Set name used for grouping commands
     ) {
     }
 

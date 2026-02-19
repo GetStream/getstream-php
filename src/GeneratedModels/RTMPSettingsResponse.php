@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class RTMPSettingsResponse extends BaseModel
 {
     public function __construct(
+        public ?LayoutSettingsResponse $layout = null,
         public ?bool $enabled = null,
         public ?string $quality = null,
-        public ?LayoutSettingsResponse $layout = null,
     ) {
     }
 

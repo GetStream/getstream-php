@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class CreateImportV2TaskRequest extends BaseModel
 {
     public function __construct(
-        public ?string $product = null,
         public ?ImportV2TaskSettings $settings = null,
-        public ?string $userID = null,
         public ?UserRequest $user = null,
+        public ?string $product = null,
+        public ?string $userID = null,
     ) {
     }
 

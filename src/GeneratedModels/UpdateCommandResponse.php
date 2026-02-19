@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateCommandResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?Command $command = null,
+        public ?string $duration = null,
     ) {
     }
 

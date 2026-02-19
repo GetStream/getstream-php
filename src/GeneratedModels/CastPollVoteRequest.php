@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class CastPollVoteRequest extends BaseModel
 {
     public function __construct(
-        public ?string $userID = null,
         public ?UserRequest $user = null,
         public ?VoteData $vote = null,
+        public ?string $userID = null,
     ) {
     }
 

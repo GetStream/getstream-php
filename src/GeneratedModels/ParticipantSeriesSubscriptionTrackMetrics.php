@@ -7,8 +7,8 @@ class ParticipantSeriesSubscriptionTrackMetrics extends BaseModel
 {
     public function __construct(
         public ?string $publisherUserID = null,
-        public ?string $publisherName = null,
         public ?string $publisherUserSessionID = null,
+        public ?string $publisherName = null,
         public ?array $tracks = null,
     ) {
     }

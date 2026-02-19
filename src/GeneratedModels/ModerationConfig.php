@@ -6,12 +6,6 @@ namespace GetStream\GeneratedModels;
 class ModerationConfig extends BaseModel
 {
     public function __construct(
-        public ?bool $async = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $key = null,
-        public ?string $team = null,
-        public ?\DateTime $updatedAt = null,
-        public ?array $supportedVideoCallHarmTypes = null,
         public ?AIImageConfig $aiImageConfig = null,
         public ?BodyguardImageAnalysisConfig $aiImageLiteConfig = null,
         public ?AITextConfig $aiTextConfig = null,
@@ -24,6 +18,12 @@ class ModerationConfig extends BaseModel
         public ?LLMConfig $llmConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
+        public ?string $key = null,
+        public ?string $team = null,
+        public ?bool $async = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
+        public ?array $supportedVideoCallHarmTypes = null,
     ) {
     }
 

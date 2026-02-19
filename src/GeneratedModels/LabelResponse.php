@@ -7,8 +7,8 @@ class LabelResponse extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?array $harmLabels = null,
         public ?array $phraseListIds = null,
+        public ?array $harmLabels = null,
     ) {
     }
 

@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class SubmitActionResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?AppealItemResponse $appealItem = null,
         public ?ReviewQueueItemResponse $item = null,
+        public ?string $duration = null,
     ) {
     }
 

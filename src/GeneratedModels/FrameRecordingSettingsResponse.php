@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class FrameRecordingSettingsResponse extends BaseModel
 {
     public function __construct(
-        public ?int $captureIntervalInSeconds = null,
         public ?string $mode = null,
         public ?string $quality = null,
+        public ?int $captureIntervalInSeconds = null,
     ) {
     }
 

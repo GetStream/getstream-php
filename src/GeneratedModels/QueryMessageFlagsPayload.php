@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class QueryMessageFlagsPayload extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
+        public ?object $filterConditions = null,
+        public ?bool $showDeletedMessages = null, // Whether to include deleted messages in the results
         public ?int $limit = null,
         public ?int $offset = null,
-        public ?bool $showDeletedMessages = null, // Whether to include deleted messages in the results
-        public ?string $userID = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,
-        public ?object $filterConditions = null,
-        public ?UserRequest $user = null,
+        public ?string $userID = null,
     ) {
     }
 

@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class QueryAggregateCallStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?CallDurationReportResponse $callDurationReport = null,
         public ?CallParticipantCountReportResponse $callParticipantCountReport = null,
         public ?CallsPerDayReportResponse $callsPerDayReport = null,
@@ -17,6 +16,7 @@ class QueryAggregateCallStatsResponse extends BaseModel
         public ?QualityScoreReportResponse $qualityScoreReport = null,
         public ?SDKUsageReportResponse $sdkUsageReport = null,
         public ?UserFeedbackReportResponse $userFeedbackReport = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

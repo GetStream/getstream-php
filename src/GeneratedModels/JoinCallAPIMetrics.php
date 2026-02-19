@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class JoinCallAPIMetrics extends BaseModel
 {
     public function __construct(
-        public ?int $failures = null,
-        public ?int $total = null,
         public ?ActiveCallsLatencyStats $latency = null,
+        public ?int $total = null,
+        public ?int $failures = null,
     ) {
     }
 

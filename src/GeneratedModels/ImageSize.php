@@ -7,8 +7,8 @@ class ImageSize extends BaseModel
 {
     public function __construct(
         public ?string $crop = null, // Crop mode. One of: top, bottom, left, right, center
-        public ?int $height = null, // Target image height
         public ?string $resize = null, // Resize method. One of: clip, crop, scale, fill
+        public ?int $height = null, // Target image height
         public ?int $width = null, // Target image width
     ) {
     }

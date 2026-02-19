@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class CallRejectedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
         public ?CallResponse $call = null,
         public ?UserResponse $user = null,
         public ?string $type = null, // The type of event: "call.rejected" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
         public ?string $reason = null, // Provides information about why the call was rejected. You can provide any value, but the Stream API and SDKs use these default values: rejected, cancel, timeout and busy
     ) {
     }

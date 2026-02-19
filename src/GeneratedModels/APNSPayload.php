@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class APNSPayload extends BaseModel
 {
     public function __construct(
+        public ?string $title = null,
         public ?string $body = null,
+        public ?string $sound = null,
         public ?int $contentAvailable = null,
         public ?int $mutableContent = null,
-        public ?string $sound = null,
-        public ?string $title = null,
         public ?object $data = null,
     ) {
     }

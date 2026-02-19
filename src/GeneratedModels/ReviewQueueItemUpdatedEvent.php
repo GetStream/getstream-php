@@ -9,15 +9,15 @@ namespace GetStream\GeneratedModels;
 class ReviewQueueItemUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?object $custom = null,
+        public ?ActionLogResponse $action = null,
+        public ?ReviewQueueItemResponse $reviewQueueItem = null,
         public ?string $type = null,
+        public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
         /** @var array<ModerationFlagResponse>|null */
         #[ArrayOf(ModerationFlagResponse::class)]
         public ?array $flags = null, // The flags associated with this review queue item
-        public ?ActionLogResponse $action = null,
-        public ?ReviewQueueItemResponse $reviewQueueItem = null,
     ) {
     }
 

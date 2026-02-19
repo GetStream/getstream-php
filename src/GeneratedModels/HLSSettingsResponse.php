@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class HLSSettingsResponse extends BaseModel
 {
     public function __construct(
+        public ?LayoutSettingsResponse $layout = null,
         public ?bool $autoOn = null,
         public ?bool $enabled = null,
         public ?array $qualityTracks = null,
-        public ?LayoutSettingsResponse $layout = null,
     ) {
     }
 

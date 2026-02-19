@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class Bound extends BaseModel
 {
     public function __construct(
-        public ?bool $inclusive = null,
         public ?int $value = null,
+        public ?bool $inclusive = null,
     ) {
     }
 

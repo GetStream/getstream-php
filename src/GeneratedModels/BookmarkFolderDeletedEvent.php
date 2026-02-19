@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class BookmarkFolderDeletedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?BookmarkFolderResponse $bookmarkFolder = null,
-        public ?object $custom = null,
-        public ?string $type = null, // The type of event: "feeds.bookmark_folder.deleted" in this case
-        public ?\DateTime $receivedAt = null,
         public ?UserResponseCommonFields $user = null,
+        public ?string $type = null, // The type of event: "feeds.bookmark_folder.deleted" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
     ) {
     }
 

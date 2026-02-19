@@ -7,8 +7,8 @@ class UpdateMessageRequest extends BaseModel
 {
     public function __construct(
         public ?MessageRequest $message = null,
-        public ?bool $skipEnrichUrl = null, // Skip enrich URL
         public ?bool $skipPush = null,
+        public ?bool $skipEnrichUrl = null, // Skip enrich URL
     ) {
     }
 

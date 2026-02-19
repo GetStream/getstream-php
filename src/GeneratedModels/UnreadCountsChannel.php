@@ -7,8 +7,8 @@ class UnreadCountsChannel extends BaseModel
 {
     public function __construct(
         public ?string $channelID = null,
-        public ?\DateTime $lastRead = null,
         public ?int $unreadCount = null,
+        public ?\DateTime $lastRead = null,
     ) {
     }
 

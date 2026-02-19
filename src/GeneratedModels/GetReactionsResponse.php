@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class GetReactionsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<ReactionResponse>|null */
         #[ArrayOf(ReactionResponse::class)]
         public ?array $reactions = null, // List of reactions
+        public ?string $duration = null,
     ) {
     }
 

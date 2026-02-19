@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class ImportV2TaskItem extends BaseModel
 {
     public function __construct(
-        public ?int $appPk = null,
-        public ?\DateTime $createdAt = null,
+        public ?ImportV2TaskSettings $settings = null,
         public ?string $id = null,
+        public ?int $appPk = null,
         public ?string $product = null,
         public ?int $state = null,
+        public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
-        public ?ImportV2TaskSettings $settings = null,
     ) {
     }
 

@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class ResolveSipInboundResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?SipInboundCredentials $credentials = null,
         public ?SIPInboundRoutingRuleResponse $sipRoutingRule = null,
         public ?SIPTrunkResponse $sipTrunk = null,
+        public ?string $duration = null,
     ) {
     }
 

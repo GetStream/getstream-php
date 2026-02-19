@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class HideChannelRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?bool $clearHistory = null, // Whether to clear message history of the channel or not
         public ?string $userID = null,
-        public ?UserRequest $user = null,
     ) {
     }
 

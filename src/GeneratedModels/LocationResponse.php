@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class LocationResponse extends BaseModel
 {
     public function __construct(
-        public ?string $continentCode = null, // Continent code
-        public ?string $countryIsoCode = null, // Country ISO code
         public ?string $subdivisionIsoCode = null, // Subdivision ISO code
+        public ?string $countryIsoCode = null, // Country ISO code
+        public ?string $continentCode = null, // Continent code
     ) {
     }
 

@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class SIPDirectRoutingRuleCallConfigsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $callID = null, // ID of the call
         public ?string $callType = null, // Type of the call
+        public ?string $callID = null, // ID of the call
     ) {
     }
 

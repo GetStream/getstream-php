@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DeleteFeedsBatchResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?string $taskID = null, // The ID of the async task that will handle feed cleanup and hard deletion
+        public ?string $duration = null,
     ) {
     }
 

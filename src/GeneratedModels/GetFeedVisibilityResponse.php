@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class GetFeedVisibilityResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?FeedVisibilityResponse $feedVisibility = null,
+        public ?string $duration = null,
     ) {
     }
 

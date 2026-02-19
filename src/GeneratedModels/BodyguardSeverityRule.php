@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class BodyguardSeverityRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $severity = null,
+        public ?string $action = null,
     ) {
     }
 

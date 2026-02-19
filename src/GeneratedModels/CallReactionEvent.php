@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class CallReactionEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
         public ?VideoReactionResponse $reaction = null,
         public ?string $type = null, // The type of event: "call.reaction_new" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
     ) {
     }
 

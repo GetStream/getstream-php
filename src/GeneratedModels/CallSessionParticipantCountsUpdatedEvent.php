@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class CallSessionParticipantCountsUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?int $anonymousParticipantCount = null,
-        public ?string $callCid = null,
+        public ?string $type = null, // The type of event: "call.session_participant_count_updated" in this case
         public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
         public ?string $sessionID = null, // Call session ID
         public ?array $participantsCountByRole = null,
-        public ?string $type = null, // The type of event: "call.session_participant_count_updated" in this case
+        public ?int $anonymousParticipantCount = null,
     ) {
     }
 

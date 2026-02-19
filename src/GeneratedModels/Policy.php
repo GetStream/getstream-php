@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class Policy extends BaseModel
 {
     public function __construct(
-        public ?int $action = null,
-        public ?\DateTime $createdAt = null,
         public ?string $name = null,
-        public ?bool $owner = null,
-        public ?int $priority = null,
-        public ?\DateTime $updatedAt = null,
         public ?array $resources = null,
         public ?array $roles = null,
+        public ?int $action = null,
+        public ?bool $owner = null,
+        public ?int $priority = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

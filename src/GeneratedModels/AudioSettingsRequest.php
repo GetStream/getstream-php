@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class AudioSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?string $defaultDevice = null,
+        public ?NoiseCancellationSettings $noiseCancellation = null,
         public ?bool $accessRequestEnabled = null,
-        public ?bool $hifiAudioEnabled = null,
-        public ?bool $micDefaultOn = null,
         public ?bool $opusDtxEnabled = null,
         public ?bool $redundantCodingEnabled = null,
+        public ?bool $micDefaultOn = null,
         public ?bool $speakerDefaultOn = null,
-        public ?NoiseCancellationSettings $noiseCancellation = null,
+        public ?string $defaultDevice = null,
+        public ?bool $hifiAudioEnabled = null,
     ) {
     }
 

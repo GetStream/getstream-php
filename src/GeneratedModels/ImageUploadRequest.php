@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class ImageUploadRequest extends BaseModel
 {
     public function __construct(
+        public ?OnlyUserID $user = null,
         public ?string $file = null,
         /** @var array<ImageSize>|null */
         #[ArrayOf(ImageSize::class)]
         public ?array $uploadSizes = null, // field with JSON-encoded array of image size configurations
-        public ?OnlyUserID $user = null,
     ) {
     }
 

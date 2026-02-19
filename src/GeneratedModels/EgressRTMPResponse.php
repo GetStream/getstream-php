@@ -7,9 +7,9 @@ class EgressRTMPResponse extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?\DateTime $startedAt = null,
-        public ?string $streamKey = null,
         public ?string $streamUrl = null,
+        public ?string $streamKey = null,
+        public ?\DateTime $startedAt = null,
     ) {
     }
 

@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class GetCallResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
+        public ?CallResponse $call = null,
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null,
         /** @var array<OwnCapability>|null */
         #[ArrayOf(OwnCapability::class)]
         public ?array $ownCapabilities = null,
-        public ?CallResponse $call = null,
+        public ?string $duration = null,
     ) {
     }
 

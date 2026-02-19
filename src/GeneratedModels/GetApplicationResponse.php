@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class GetApplicationResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?AppResponseFields $app = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

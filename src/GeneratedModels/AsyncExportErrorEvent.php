@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class AsyncExportErrorEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
         public ?string $error = null,
-        public ?\DateTime $finishedAt = null,
-        public ?\DateTime $startedAt = null,
         public ?string $taskID = null,
-        public ?object $custom = null,
+        public ?\DateTime $startedAt = null,
+        public ?\DateTime $finishedAt = null,
         public ?string $type = null,
+        public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
     ) {
     }
 

@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class ImageData extends BaseModel
 {
     public function __construct(
-        public ?string $frames = null,
-        public ?string $height = null,
-        public ?string $size = null,
         public ?string $url = null,
         public ?string $width = null,
+        public ?string $height = null,
+        public ?string $size = null,
+        public ?string $frames = null,
     ) {
     }
 

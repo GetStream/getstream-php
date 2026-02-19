@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class GetOrCreateFeedGroupResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
-        public ?bool $wasCreated = null, // Indicates whether the feed group was created (true) or already existed (false)
         public ?FeedGroupResponse $feedGroup = null,
+        public ?bool $wasCreated = null, // Indicates whether the feed group was created (true) or already existed (false)
+        public ?string $duration = null,
     ) {
     }
 

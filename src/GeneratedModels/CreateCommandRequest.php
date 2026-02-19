@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class CreateCommandRequest extends BaseModel
 {
     public function __construct(
-        public ?string $description = null, // Description, shown in commands auto-completion
         public ?string $name = null, // Unique command name
+        public ?string $description = null, // Description, shown in commands auto-completion
         public ?string $args = null, // Arguments help text, shown in commands auto-completion
         public ?string $set = null, // Set name used for grouping commands
     ) {

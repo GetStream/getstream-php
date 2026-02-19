@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class CallRuleActionSequence extends BaseModel
 {
     public function __construct(
+        public ?CallActionOptions $callOptions = null,
         public ?int $violationNumber = null,
         public ?array $actions = null,
-        public ?CallActionOptions $callOptions = null,
     ) {
     }
 

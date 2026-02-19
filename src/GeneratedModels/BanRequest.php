@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class BanRequest extends BaseModel
 {
     public function __construct(
-        public ?string $targetUserID = null, // ID of the user to ban
-        public ?string $bannedByID = null, // ID of the user performing the ban
-        public ?string $channelCid = null, // Channel where the ban applies
-        public ?string $deleteMessages = null,
-        public ?bool $ipBan = null, // Whether to ban the user's IP address
-        public ?string $reason = null, // Optional explanation for the ban
-        public ?bool $shadow = null, // Whether this is a shadow ban
-        public ?int $timeout = null, // Duration of the ban in minutes
         public ?UserRequest $bannedBy = null,
+        public ?string $targetUserID = null, // ID of the user to ban
+        public ?int $timeout = null, // Duration of the ban in minutes
+        public ?string $reason = null, // Optional explanation for the ban
+        public ?string $channelCid = null, // Channel where the ban applies
+        public ?bool $shadow = null, // Whether this is a shadow ban
+        public ?bool $ipBan = null, // Whether to ban the user's IP address
+        public ?string $bannedByID = null, // ID of the user performing the ban
+        public ?string $deleteMessages = null,
     ) {
     }
 

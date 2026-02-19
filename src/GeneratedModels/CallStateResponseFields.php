@@ -9,13 +9,13 @@ namespace GetStream\GeneratedModels;
 class CallStateResponseFields extends BaseModel
 {
     public function __construct(
+        public ?CallResponse $call = null,
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null, // List of call members
         /** @var array<OwnCapability>|null */
         #[ArrayOf(OwnCapability::class)]
         public ?array $ownCapabilities = null,
-        public ?CallResponse $call = null,
     ) {
     }
 

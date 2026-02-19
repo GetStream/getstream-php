@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class AutomodSemanticFiltersRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $name = null,
         public ?int $threshold = null,
+        public ?string $action = null,
     ) {
     }
 

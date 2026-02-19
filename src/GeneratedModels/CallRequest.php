@@ -9,17 +9,17 @@ namespace GetStream\GeneratedModels;
 class CallRequest extends BaseModel
 {
     public function __construct(
-        public ?string $channelCid = null,
-        public ?string $createdByID = null,
-        public ?\DateTime $startsAt = null,
+        public ?UserRequest $createdBy = null,
+        public ?CallSettingsRequest $settingsOverride = null,
         public ?string $team = null,
-        public ?bool $video = null,
+        public ?string $createdByID = null,
+        public ?object $custom = null,
         /** @var array<MemberRequest>|null */
         #[ArrayOf(MemberRequest::class)]
         public ?array $members = null,
-        public ?UserRequest $createdBy = null,
-        public ?object $custom = null,
-        public ?CallSettingsRequest $settingsOverride = null,
+        public ?\DateTime $startsAt = null,
+        public ?bool $video = null,
+        public ?string $channelCid = null,
     ) {
     }
 

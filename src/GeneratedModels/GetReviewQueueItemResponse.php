@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class GetReviewQueueItemResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?ReviewQueueItemResponse $item = null,
+        public ?string $duration = null,
     ) {
     }
 

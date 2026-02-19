@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class DraftResponse extends BaseModel
 {
     public function __construct(
-        public ?string $channelCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?DraftPayloadResponse $message = null,
-        public ?string $parentID = null,
         public ?ChannelResponse $channel = null,
+        public ?DraftPayloadResponse $message = null,
         public ?MessageResponse $parentMessage = null,
         public ?MessageResponse $quotedMessage = null,
+        public ?string $channelCid = null,
+        public ?string $parentID = null,
+        public ?\DateTime $createdAt = null,
     ) {
     }
 

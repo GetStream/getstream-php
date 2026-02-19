@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class ModerationActionConfigResponse extends BaseModel
 {
     public function __construct(
-        public ?string $action = null, // The action to take
-        public ?string $description = null, // Description of what this action does
         public ?string $entityType = null, // Type of entity this action applies to
-        public ?string $icon = null, // Icon for the dashboard
         public ?int $order = null, // Display order (lower numbers shown first)
+        public ?string $action = null, // The action to take
+        public ?string $icon = null, // Icon for the dashboard
+        public ?string $description = null, // Description of what this action does
         public ?object $custom = null, // Custom data for the action
     ) {
     }

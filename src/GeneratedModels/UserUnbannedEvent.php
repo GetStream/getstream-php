@@ -9,20 +9,20 @@ namespace GetStream\GeneratedModels;
 class UserUnbannedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?object $custom = null,
+        public ?UserResponseCommonFields $createdBy = null,
         public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "user.unbanned" in this case
-        public ?string $channelID = null, // The ID of the channel where the target user was unbanned
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel where the target user was unbanned
+        public ?string $team = null, // The team of the channel where the target user was unbanned
         public ?int $channelMemberCount = null,
         public ?int $channelMessageCount = null,
-        public ?string $channelType = null, // The type of the channel where the target user was unbanned
-        public ?string $cid = null, // The CID of the channel where the target user was unbanned
-        public ?\DateTime $receivedAt = null,
-        public ?bool $shadow = null, // Whether the target user was shadow unbanned
-        public ?string $team = null, // The team of the channel where the target user was unbanned
         public ?object $channelCustom = null,
-        public ?UserResponseCommonFields $createdBy = null,
+        public ?string $channelType = null, // The type of the channel where the target user was unbanned
+        public ?string $channelID = null, // The ID of the channel where the target user was unbanned
+        public ?bool $shadow = null, // Whether the target user was shadow unbanned
     ) {
     }
 

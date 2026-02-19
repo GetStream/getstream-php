@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class CollectionResponse extends BaseModel
 {
     public function __construct(
-        public ?string $id = null, // Unique identifier for the collection within its name
         public ?string $name = null, // Name/type of the collection
+        public ?string $id = null, // Unique identifier for the collection within its name
+        public ?object $custom = null, // Custom data for the collection
+        public ?string $userID = null, // ID of the user who owns this collection
         public ?\DateTime $createdAt = null, // When the collection was created
         public ?\DateTime $updatedAt = null, // When the collection was last updated
-        public ?string $userID = null, // ID of the user who owns this collection
-        public ?object $custom = null, // Custom data for the collection
     ) {
     }
 

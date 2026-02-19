@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class GetAppealResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?AppealItemResponse $item = null,
+        public ?string $duration = null,
     ) {
     }
 

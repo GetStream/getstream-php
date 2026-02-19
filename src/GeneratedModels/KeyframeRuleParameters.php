@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class KeyframeRuleParameters extends BaseModel
 {
     public function __construct(
-        public ?int $minConfidence = null,
-        public ?int $threshold = null,
         public ?array $harmLabels = null,
+        public ?int $threshold = null,
+        public ?int $minConfidence = null,
     ) {
     }
 

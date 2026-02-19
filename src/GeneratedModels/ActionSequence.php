@@ -7,10 +7,10 @@ class ActionSequence extends BaseModel
 {
     public function __construct(
         public ?string $action = null,
-        public ?bool $blur = null,
-        public ?int $cooldownPeriod = null,
         public ?int $threshold = null,
         public ?int $timeWindow = null,
+        public ?int $cooldownPeriod = null,
+        public ?bool $blur = null,
         public ?bool $warning = null,
         public ?string $warningText = null,
     ) {

@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class FeedInput extends BaseModel
 {
     public function __construct(
-        public ?string $description = null,
         public ?string $name = null,
+        public ?string $description = null,
         public ?string $visibility = null,
+        public ?object $custom = null,
         public ?array $filterTags = null,
         /** @var array<FeedMemberRequest>|null */
         #[ArrayOf(FeedMemberRequest::class)]
         public ?array $members = null,
-        public ?object $custom = null,
     ) {
     }
 

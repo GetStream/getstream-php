@@ -9,14 +9,14 @@ namespace GetStream\GeneratedModels;
 class FeedMemberUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $fid = null,
-        public ?object $custom = null,
         public ?FeedMemberResponse $member = null,
-        public ?string $type = null, // The type of event: "feeds.feed_member.updated" in this case
-        public ?string $feedVisibility = null,
-        public ?\DateTime $receivedAt = null,
         public ?UserResponseCommonFields $user = null,
+        public ?string $type = null, // The type of event: "feeds.feed_member.updated" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $fid = null,
+        public ?string $feedVisibility = null,
     ) {
     }
 

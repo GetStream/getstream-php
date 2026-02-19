@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class BookmarkFolderResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // When the folder was created
+        public ?UserResponse $user = null,
         public ?string $id = null, // Unique identifier for the folder
         public ?string $name = null, // Name of the folder
-        public ?\DateTime $updatedAt = null, // When the folder was last updated
-        public ?UserResponse $user = null,
         public ?object $custom = null, // Custom data for the folder
+        public ?\DateTime $createdAt = null, // When the folder was created
+        public ?\DateTime $updatedAt = null, // When the folder was last updated
     ) {
     }
 

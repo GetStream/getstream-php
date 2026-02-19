@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class UpdateSIPTrunkResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?SIPTrunkResponse $sipTrunk = null,
+        public ?string $duration = null,
     ) {
     }
 

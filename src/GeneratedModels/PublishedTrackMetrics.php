@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class PublishedTrackMetrics extends BaseModel
 {
     public function __construct(
-        public ?string $codec = null,
-        public ?string $trackID = null,
-        public ?string $trackType = null,
-        /** @var array<SessionWarningResponse>|null */
-        #[ArrayOf(SessionWarningResponse::class)]
-        public ?array $warnings = null,
         public ?MetricTimeSeries $bitrate = null,
         public ?MetricTimeSeries $framerate = null,
         public ?ResolutionMetricsTimeSeries $resolution = null,
+        public ?string $trackID = null,
+        public ?string $trackType = null,
+        public ?string $codec = null,
+        /** @var array<SessionWarningResponse>|null */
+        #[ArrayOf(SessionWarningResponse::class)]
+        public ?array $warnings = null,
     ) {
     }
 

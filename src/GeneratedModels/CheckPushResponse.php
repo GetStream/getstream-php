@@ -6,16 +6,16 @@ namespace GetStream\GeneratedModels;
 class CheckPushResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
-        public ?string $eventType = null, // The event type that was tested
-        public ?string $renderedApnTemplate = null,
-        public ?string $renderedFirebaseTemplate = null,
-        public ?bool $skipDevices = null, // Don't require existing devices to render templates
-        public ?array $generalErrors = null, // List of general errors
         /** @var array<string, DeviceErrorInfo>|null */
         #[MapOf(DeviceErrorInfo::class)]
         public ?array $deviceErrors = null, // Object with device errors
+        public ?array $generalErrors = null, // List of general errors
+        public ?bool $skipDevices = null, // Don't require existing devices to render templates
+        public ?string $eventType = null, // The event type that was tested
+        public ?string $renderedApnTemplate = null,
+        public ?string $renderedFirebaseTemplate = null,
         public ?array $renderedMessage = null,
+        public ?string $duration = null,
     ) {
     }
 

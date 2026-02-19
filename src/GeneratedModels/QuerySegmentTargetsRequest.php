@@ -9,10 +9,10 @@ class QuerySegmentTargetsRequest extends BaseModel
         public ?int $limit = null, // Limit
         public ?string $next = null, // Next
         public ?string $prev = null, // Prev
+        public ?object $filter = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,
-        public ?object $filter = null,
     ) {
     }
 

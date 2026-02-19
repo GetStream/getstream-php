@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class UpdateCollectionsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<CollectionResponse>|null */
         #[ArrayOf(CollectionResponse::class)]
         public ?array $collections = null, // List of updated collections
+        public ?string $duration = null,
     ) {
     }
 

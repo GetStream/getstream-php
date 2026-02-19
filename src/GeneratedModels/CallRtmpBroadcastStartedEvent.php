@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class CallRtmpBroadcastStartedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null, // The unique identifier for a call (<type>:<id>)
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $name = null, // Name of the given RTMP broadcast
         public ?string $type = null, // The type of event: "call.rtmp_broadcast_started" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?string $callCid = null, // The unique identifier for a call (<type>:<id>)
+        public ?string $name = null, // Name of the given RTMP broadcast
     ) {
     }
 

@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class MuteChannelResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
+        public ?ChannelMute $channelMute = null,
+        public ?OwnUserResponse $ownUser = null,
         /** @var array<ChannelMute>|null */
         #[ArrayOf(ChannelMute::class)]
         public ?array $channelMutes = null, // Object with mutes (if multiple channels were muted)
-        public ?ChannelMute $channelMute = null,
-        public ?OwnUserResponse $ownUser = null,
+        public ?string $duration = null,
     ) {
     }
 

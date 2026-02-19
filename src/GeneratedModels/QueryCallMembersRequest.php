@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class QueryCallMembersRequest extends BaseModel
 {
     public function __construct(
-        public ?string $id = null,
         public ?string $type = null,
-        public ?int $limit = null,
-        public ?string $next = null,
-        public ?string $prev = null,
+        public ?string $id = null,
+        public ?object $filterConditions = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,
-        public ?object $filterConditions = null,
+        public ?int $limit = null,
+        public ?string $next = null,
+        public ?string $prev = null,
     ) {
     }
 

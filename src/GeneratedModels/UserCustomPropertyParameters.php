@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UserCustomPropertyParameters extends BaseModel
 {
     public function __construct(
-        public ?string $operator = null,
         public ?string $propertyKey = null,
+        public ?string $operator = null,
     ) {
     }
 

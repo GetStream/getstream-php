@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class UnmuteRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?array $targetIds = null, // User IDs to unmute
         public ?string $userID = null,
-        public ?UserRequest $user = null,
     ) {
     }
 

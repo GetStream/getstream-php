@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class TrackStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?int $durationSeconds = null,
         public ?string $trackType = null,
+        public ?int $durationSeconds = null,
     ) {
     }
 

@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class ReactionResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $messageID = null, // Message ID
-        public ?int $score = null, // Score of the reaction
-        public ?string $type = null, // Type of reaction
-        public ?\DateTime $updatedAt = null, // Date/time of the last update
-        public ?string $userID = null, // User ID
-        public ?object $custom = null, // Custom data for this object
         public ?UserResponse $user = null,
+        public ?string $messageID = null, // Message ID
+        public ?string $userID = null, // User ID
+        public ?string $type = null, // Type of reaction
+        public ?int $score = null, // Score of the reaction
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $updatedAt = null, // Date/time of the last update
+        public ?object $custom = null, // Custom data for this object
     ) {
     }
 

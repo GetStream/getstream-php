@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class ModerationFlaggedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $contentType = null, // The type of content that was flagged
-        public ?\DateTime $createdAt = null,
-        public ?string $objectID = null, // The ID of the flagged content
-        public ?object $custom = null,
         public ?string $type = null,
+        public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $contentType = null, // The type of content that was flagged
+        public ?string $objectID = null, // The ID of the flagged content
     ) {
     }
 

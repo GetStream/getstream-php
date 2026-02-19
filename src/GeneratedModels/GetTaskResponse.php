@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class GetTaskResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?string $duration = null,
-        public ?string $status = null, // Current status of task
-        public ?string $taskID = null, // ID of task
-        public ?\DateTime $updatedAt = null,
         public ?ErrorResult $error = null,
+        public ?string $taskID = null, // ID of task
+        public ?string $status = null, // Current status of task
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
         public ?object $result = null, // Result produced by task after completion
+        public ?string $duration = null,
     ) {
     }
 

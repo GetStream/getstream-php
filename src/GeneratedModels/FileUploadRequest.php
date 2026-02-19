@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class FileUploadRequest extends BaseModel
 {
     public function __construct(
-        public ?string $file = null, // file field
         public ?OnlyUserID $user = null,
+        public ?string $file = null, // file field
     ) {
     }
 

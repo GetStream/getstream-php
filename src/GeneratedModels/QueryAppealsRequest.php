@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class QueryAppealsRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
+        public ?object $filter = null, // Filter conditions for appeals
+        /** @var array<SortParamRequest>|null */
+        #[ArrayOf(SortParamRequest::class)]
+        public ?array $sort = null, // Sorting parameters for appeals
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $userID = null,
-        /** @var array<SortParamRequest>|null */
-        #[ArrayOf(SortParamRequest::class)]
-        public ?array $sort = null, // Sorting parameters for appeals
-        public ?object $filter = null, // Filter conditions for appeals
-        public ?UserRequest $user = null,
     ) {
     }
 

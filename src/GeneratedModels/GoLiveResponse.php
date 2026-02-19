@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class GoLiveResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?CallResponse $call = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

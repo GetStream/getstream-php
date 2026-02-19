@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class IngressVideoEncodingOptionsRequest extends BaseModel
 {
     public function __construct(
+        public ?IngressSourceRequest $source = null,
         /** @var array<IngressVideoLayerRequest>|null */
         #[ArrayOf(IngressVideoLayerRequest::class)]
         public ?array $layers = null,
-        public ?IngressSourceRequest $source = null,
     ) {
     }
 

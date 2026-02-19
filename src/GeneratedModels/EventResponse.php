@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class EventResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?WSEvent $event = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class UnreadCountsThread extends BaseModel
 {
     public function __construct(
+        public ?int $unreadCount = null,
         public ?\DateTime $lastRead = null,
         public ?string $lastReadMessageID = null,
         public ?string $parentMessageID = null,
-        public ?int $unreadCount = null,
     ) {
     }
 

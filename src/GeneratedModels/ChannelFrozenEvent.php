@@ -9,13 +9,13 @@ namespace GetStream\GeneratedModels;
 class ChannelFrozenEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?object $custom = null,
         public ?string $type = null, // The type of event: "channel.frozen" in this case
-        public ?string $channelID = null, // The ID of the channel which was frozen
-        public ?string $channelType = null, // The type of the channel which was frozen
-        public ?string $cid = null, // The CID of the channel which was frozen
+        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel which was frozen
+        public ?string $channelType = null, // The type of the channel which was frozen
+        public ?string $channelID = null, // The ID of the channel which was frozen
     ) {
     }
 

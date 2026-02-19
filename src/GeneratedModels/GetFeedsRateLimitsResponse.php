@@ -15,10 +15,10 @@ class GetFeedsRateLimitsResponse extends BaseModel
         public ?array $ios = null, // Rate limits for iOS platform (endpoint name -> limit info)
         /** @var array<string, LimitInfoResponse>|null */
         #[MapOf(LimitInfoResponse::class)]
-        public ?array $serverSide = null, // Rate limits for server-side platform (endpoint name -> limit info)
+        public ?array $web = null, // Rate limits for Web platform (endpoint name -> limit info)
         /** @var array<string, LimitInfoResponse>|null */
         #[MapOf(LimitInfoResponse::class)]
-        public ?array $web = null, // Rate limits for Web platform (endpoint name -> limit info)
+        public ?array $serverSide = null, // Rate limits for server-side platform (endpoint name -> limit info)
     ) {
     }
 

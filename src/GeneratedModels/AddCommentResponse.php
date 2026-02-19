@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class AddCommentResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?CommentResponse $comment = null,
-        public ?int $mentionNotificationsCreated = null, // Number of mention notification activities created for mentioned users
         public ?bool $notificationCreated = null, // Whether a notification activity was successfully created
+        public ?int $mentionNotificationsCreated = null, // Number of mention notification activities created for mentioned users
+        public ?string $duration = null,
     ) {
     }
 

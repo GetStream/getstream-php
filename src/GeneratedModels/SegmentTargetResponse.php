@@ -7,9 +7,9 @@ class SegmentTargetResponse extends BaseModel
 {
     public function __construct(
         public ?int $appPk = null,
-        public ?\DateTime $createdAt = null,
         public ?string $segmentID = null,
         public ?string $targetID = null,
+        public ?\DateTime $createdAt = null,
     ) {
     }
 

@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class BulkImageModerationResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?string $taskID = null, // ID of the task for processing the bulk image moderation
+        public ?string $duration = null,
     ) {
     }
 

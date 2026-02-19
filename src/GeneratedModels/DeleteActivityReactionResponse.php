@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class DeleteActivityReactionResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?ActivityResponse $activity = null,
         public ?FeedsReactionResponse $reaction = null,
+        public ?string $duration = null,
     ) {
     }
 

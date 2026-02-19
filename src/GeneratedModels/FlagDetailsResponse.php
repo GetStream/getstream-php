@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class FlagDetailsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $originalText = null,
         public ?AutomodDetailsResponse $automod = null,
         public ?object $extra = null,
+        public ?string $originalText = null,
     ) {
     }
 

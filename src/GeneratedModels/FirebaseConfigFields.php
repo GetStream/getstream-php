@@ -7,11 +7,11 @@ class FirebaseConfigFields extends BaseModel
 {
     public function __construct(
         public ?bool $enabled = null,
-        public ?string $apnTemplate = null,
-        public ?string $credentialsJson = null,
-        public ?string $dataTemplate = null,
         public ?string $notificationTemplate = null,
+        public ?string $dataTemplate = null,
+        public ?string $apnTemplate = null,
         public ?string $serverKey = null,
+        public ?string $credentialsJson = null,
     ) {
     }
 

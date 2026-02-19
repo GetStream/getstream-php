@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class CustomCheckResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
+        public ?ReviewQueueItemResponse $item = null,
         public ?string $id = null, // Unique identifier of the custom check
         public ?string $status = null, // Status of the custom check
-        public ?ReviewQueueItemResponse $item = null,
+        public ?string $duration = null,
     ) {
     }
 

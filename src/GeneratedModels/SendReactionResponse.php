@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class SendReactionResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?MessageResponse $message = null,
         public ?ReactionResponse $reaction = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

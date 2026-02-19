@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DeleteCommandResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?string $name = null, // Command name
+        public ?string $duration = null,
     ) {
     }
 

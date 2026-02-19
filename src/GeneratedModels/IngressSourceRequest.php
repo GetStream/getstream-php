@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class IngressSourceRequest extends BaseModel
 {
     public function __construct(
-        public ?int $fps = null,
         public ?int $height = null,
         public ?int $width = null,
+        public ?int $fps = null,
     ) {
     }
 

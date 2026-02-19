@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class RingCallRequest extends BaseModel
 {
     public function __construct(
-        public ?bool $video = null, // Indicate if call should be video
         public ?array $membersIds = null, // Members that should receive the ring. If no ids are provided, all call members who are not already in the call will receive ring notifications.
+        public ?bool $video = null, // Indicate if call should be video
     ) {
     }
 

@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class OverviewDashboardConfig extends BaseModel
 {
     public function __construct(
-        public ?int $defaultDateRangeDays = null,
         public ?array $visibleCharts = null,
+        public ?int $defaultDateRangeDays = null,
     ) {
     }
 

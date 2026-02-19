@@ -7,12 +7,12 @@ class QueryMessageHistoryRequest extends BaseModel
 {
     public function __construct(
         public ?object $filter = null, // Filter to apply to the query
-        public ?int $limit = null,
-        public ?string $next = null,
-        public ?string $prev = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Array of sort parameters
+        public ?int $limit = null,
+        public ?string $next = null,
+        public ?string $prev = null,
     ) {
     }
 

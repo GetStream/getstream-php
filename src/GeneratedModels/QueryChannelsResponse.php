@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class QueryChannelsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
+        public ?ParsedPredefinedFilterResponse $predefinedFilter = null,
         /** @var array<ChannelStateResponseFields>|null */
         #[ArrayOf(ChannelStateResponseFields::class)]
         public ?array $channels = null, // List of channels
-        public ?ParsedPredefinedFilterResponse $predefinedFilter = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

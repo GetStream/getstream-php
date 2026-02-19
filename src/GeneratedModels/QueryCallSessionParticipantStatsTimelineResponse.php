@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class QueryCallSessionParticipantStatsTimelineResponse extends BaseModel
 {
     public function __construct(
+        public ?string $duration = null, // Duration of the request in milliseconds
+        public ?string $callType = null,
         public ?string $callID = null,
         public ?string $callSessionID = null,
-        public ?string $callType = null,
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $userID = null,
         public ?string $userSessionID = null,
         /** @var array<CallParticipantTimeline>|null */

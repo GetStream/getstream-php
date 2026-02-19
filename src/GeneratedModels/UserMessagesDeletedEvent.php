@@ -9,19 +9,19 @@ namespace GetStream\GeneratedModels;
 class UserMessagesDeletedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?object $custom = null,
         public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "user.messages.deleted" in this case
-        public ?string $channelID = null, // The ID of the channel where the target user's messages were deleted
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel where the target user's messages were deleted
+        public ?string $team = null, // The team of the channel where the target user's messages were deleted
         public ?int $channelMemberCount = null,
         public ?int $channelMessageCount = null,
-        public ?string $channelType = null, // The type of the channel where the target user's messages were deleted
-        public ?string $cid = null, // The CID of the channel where the target user's messages were deleted
-        public ?bool $hardDelete = null, // Whether Messages were hard deleted
-        public ?\DateTime $receivedAt = null,
-        public ?string $team = null, // The team of the channel where the target user's messages were deleted
         public ?object $channelCustom = null,
+        public ?string $channelType = null, // The type of the channel where the target user's messages were deleted
+        public ?string $channelID = null, // The ID of the channel where the target user's messages were deleted
+        public ?bool $hardDelete = null, // Whether Messages were hard deleted
     ) {
     }
 

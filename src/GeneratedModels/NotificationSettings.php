@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class NotificationSettings extends BaseModel
 {
     public function __construct(
-        public ?bool $enabled = null,
         public ?EventNotificationSettings $callLiveStarted = null,
         public ?EventNotificationSettings $callMissed = null,
         public ?EventNotificationSettings $callNotification = null,
         public ?EventNotificationSettings $callRing = null,
         public ?EventNotificationSettings $sessionStarted = null,
+        public ?bool $enabled = null,
     ) {
     }
 

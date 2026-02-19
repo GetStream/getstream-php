@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UserRatingReportResponse extends BaseModel
 {
     public function __construct(
-        public ?int $average = null,
         public ?int $count = null,
+        public ?int $average = null,
     ) {
     }
 

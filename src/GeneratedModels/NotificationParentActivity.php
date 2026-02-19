@@ -7,9 +7,9 @@ class NotificationParentActivity extends BaseModel
 {
     public function __construct(
         public ?string $id = null,
-        public ?string $text = null,
-        public ?string $type = null,
         public ?string $userID = null,
+        public ?string $type = null,
+        public ?string $text = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null,

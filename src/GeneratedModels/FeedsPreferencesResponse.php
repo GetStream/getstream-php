@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class FeedsPreferencesResponse extends BaseModel
 {
     public function __construct(
+        public ?string $follow = null,
         public ?string $comment = null,
+        public ?string $reaction = null,
         public ?string $commentReaction = null,
         public ?string $commentReply = null,
-        public ?string $follow = null,
         public ?string $mention = null,
-        public ?string $reaction = null,
         public ?array $customActivityTypes = null,
     ) {
     }

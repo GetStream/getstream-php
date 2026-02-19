@@ -10,8 +10,8 @@ class FriendReactionsOptions extends BaseModel
 {
     public function __construct(
         public ?bool $enabled = null, // Default: false. When true, fetches friend reactions for activities.
-        public ?int $limit = null, // Default: 3, Max: 10. The maximum number of friend reactions to return per activity.
         public ?string $type = null, // Default: 'following'. The type of friend relationship to use. 'following' = users you follow, 'mutual' = users with mutual follows. One of: following, mutual
+        public ?int $limit = null, // Default: 3, Max: 10. The maximum number of friend reactions to return per activity.
     ) {
     }
 

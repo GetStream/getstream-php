@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class FileUploadResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $file = null, // URL to the uploaded asset. Should be used to put to `asset_url` attachment field
         public ?string $thumbUrl = null, // URL of the file thumbnail for supported file formats. Should be put to `thumb_url` attachment field
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

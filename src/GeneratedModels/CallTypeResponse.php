@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class CallTypeResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // the time the call type was created
-        public ?string $name = null, // the name of the call type
-        public ?\DateTime $updatedAt = null, // the time the call type was last updated
-        public ?array $grants = null, // the permissions granted to each role
         public ?NotificationSettingsResponse $notificationSettings = null,
         public ?CallSettingsResponse $settings = null,
+        public ?string $name = null, // the name of the call type
+        public ?array $grants = null, // the permissions granted to each role
+        public ?\DateTime $createdAt = null, // the time the call type was created
+        public ?\DateTime $updatedAt = null, // the time the call type was last updated
         public ?string $externalStorage = null, // the external storage for the call type
     ) {
     }

@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class GetFollowSuggestionsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<FeedSuggestionResponse>|null */
         #[ArrayOf(FeedSuggestionResponse::class)]
         public ?array $suggestions = null, // List of suggested feeds to follow
         public ?string $algorithmUsed = null,
+        public ?string $duration = null,
     ) {
     }
 

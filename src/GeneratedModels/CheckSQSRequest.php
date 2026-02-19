@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class CheckSQSRequest extends BaseModel
 {
     public function __construct(
+        public ?string $sqsUrl = null, // AWS SQS endpoint URL
         public ?string $sqsKey = null, // AWS SQS access key
         public ?string $sqsSecret = null, // AWS SQS key secret
-        public ?string $sqsUrl = null, // AWS SQS endpoint URL
     ) {
     }
 

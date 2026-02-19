@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class QueryModerationLogsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<ActionLogResponse>|null */
         #[ArrayOf(ActionLogResponse::class)]
         public ?array $logs = null, // List of moderation action logs
         public ?string $next = null,
         public ?string $prev = null,
+        public ?string $duration = null,
     ) {
     }
 

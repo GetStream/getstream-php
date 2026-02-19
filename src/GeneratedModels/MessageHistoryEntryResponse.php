@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class MessageHistoryEntryResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $isDeleted = null,
         public ?string $messageID = null,
-        public ?\DateTime $messageUpdatedAt = null,
         public ?string $messageUpdatedByID = null,
+        public ?\DateTime $messageUpdatedAt = null,
+        public ?bool $isDeleted = null,
         public ?string $text = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]

@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class RepliesMeta extends BaseModel
 {
     public function __construct(
-        public ?bool $depthTruncated = null, // True if the subtree was cut because the requested depth was reached.
         public ?bool $hasMore = null, // True if more siblings exist in the database.
-        public ?int $remaining = null, // Number of unread siblings that match current filters.
         public ?string $nextCursor = null, // Opaque cursor to request the next page of siblings.
+        public ?int $remaining = null, // Number of unread siblings that match current filters.
+        public ?bool $depthTruncated = null, // True if the subtree was cut because the requested depth was reached.
     ) {
     }
 

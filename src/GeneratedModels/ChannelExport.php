@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class ChannelExport extends BaseModel
 {
     public function __construct(
-        public ?string $cid = null,
+        public ?string $type = null, // Channel type
         public ?string $id = null, // Channel ID
+        public ?string $cid = null,
         public ?\DateTime $messagesSince = null, // Date to export messages since
         public ?\DateTime $messagesUntil = null, // Date to export messages until
-        public ?string $type = null, // Channel type
     ) {
     }
 

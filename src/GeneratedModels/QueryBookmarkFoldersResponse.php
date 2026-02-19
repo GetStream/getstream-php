@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class QueryBookmarkFoldersResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<BookmarkFolderResponse>|null */
         #[ArrayOf(BookmarkFolderResponse::class)]
         public ?array $bookmarkFolders = null, // List of bookmark folders matching the query
         public ?string $next = null, // Cursor for next page
         public ?string $prev = null, // Cursor for previous page
+        public ?string $duration = null,
     ) {
     }
 

@@ -9,15 +9,15 @@ namespace GetStream\GeneratedModels;
 class BlockListResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $isLeetCheckEnabled = null,
-        public ?bool $isPluralCheckEnabled = null,
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $updatedAt = null, // Date/time of the last update
+        public ?string $id = null,
         public ?string $name = null, // Block list name
         public ?string $type = null, // Block list type. One of: regex, domain, domain_allowlist, email, email_allowlist, word
         public ?array $words = null, // List of words to block
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $id = null,
         public ?string $team = null,
-        public ?\DateTime $updatedAt = null, // Date/time of the last update
+        public ?bool $isLeetCheckEnabled = null,
+        public ?bool $isPluralCheckEnabled = null,
     ) {
     }
 

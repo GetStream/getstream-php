@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class GetModerationRuleResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?ModerationRuleV2Response $rule = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

@@ -7,8 +7,8 @@ class MetricDescriptor extends BaseModel
 {
     public function __construct(
         public ?string $label = null,
-        public ?string $description = null,
         public ?string $unit = null,
+        public ?string $description = null,
     ) {
     }
 

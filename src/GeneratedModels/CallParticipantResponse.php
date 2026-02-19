@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class CallParticipantResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $joinedAt = null,
-        public ?string $role = null,
-        public ?string $userSessionID = null,
         public ?UserResponse $user = null,
+        public ?string $userSessionID = null,
+        public ?string $role = null,
+        public ?\DateTime $joinedAt = null,
     ) {
     }
 

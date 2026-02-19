@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class ListCommandsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<Command>|null */
         #[ArrayOf(Command::class)]
         public ?array $commands = null, // List of commands
+        public ?string $duration = null,
     ) {
     }
 

@@ -9,21 +9,21 @@ namespace GetStream\GeneratedModels;
 class CreatePollRequest extends BaseModel
 {
     public function __construct(
-        public ?string $name = null, // The name of the poll
-        public ?bool $allowAnswers = null, // Indicates whether users can suggest user defined answers
-        public ?bool $allowUserSuggestedOptions = null,
-        public ?string $description = null, // A description of the poll
-        public ?bool $enforceUniqueVote = null, // Indicates whether users can cast multiple votes
+        public ?UserRequest $user = null,
         public ?string $id = null,
-        public ?bool $isClosed = null, // Indicates whether the poll is open for voting
-        public ?int $maxVotesAllowed = null, // Indicates the maximum amount of votes a user can cast
-        public ?string $userID = null,
-        public ?string $votingVisibility = null,
+        public ?string $name = null, // The name of the poll
+        public ?string $description = null, // A description of the poll
         /** @var array<PollOptionInput>|null */
         #[ArrayOf(PollOptionInput::class)]
         public ?array $options = null,
+        public ?string $votingVisibility = null,
+        public ?bool $enforceUniqueVote = null, // Indicates whether users can cast multiple votes
+        public ?int $maxVotesAllowed = null, // Indicates the maximum amount of votes a user can cast
+        public ?bool $allowUserSuggestedOptions = null,
+        public ?bool $allowAnswers = null, // Indicates whether users can suggest user defined answers
+        public ?bool $isClosed = null, // Indicates whether the poll is open for voting
         public ?object $custom = null,
-        public ?UserRequest $user = null,
+        public ?string $userID = null,
     ) {
     }
 

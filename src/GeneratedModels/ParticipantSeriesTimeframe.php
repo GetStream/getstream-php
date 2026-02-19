@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class ParticipantSeriesTimeframe extends BaseModel
 {
     public function __construct(
-        public ?int $maxPoints = null,
         public ?\DateTime $since = null,
-        public ?int $stepSeconds = null,
         public ?\DateTime $until = null,
+        public ?int $stepSeconds = null,
+        public ?int $maxPoints = null,
     ) {
     }
 

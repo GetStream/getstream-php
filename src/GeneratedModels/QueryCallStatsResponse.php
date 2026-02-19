@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class QueryCallStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         /** @var array<CallStatsReportSummaryResponse>|null */
         #[ArrayOf(CallStatsReportSummaryResponse::class)]
         public ?array $reports = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $next = null,
         public ?string $prev = null,
     ) {

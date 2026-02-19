@@ -6,10 +6,6 @@ namespace GetStream\GeneratedModels;
 class UpsertConfigRequest extends BaseModel
 {
     public function __construct(
-        public ?string $key = null, // Unique identifier for the moderation configuration
-        public ?bool $async = null, // Whether moderation should be performed asynchronously
-        public ?string $team = null, // Team associated with the configuration
-        public ?string $userID = null,
         public ?AIImageConfig $aiImageConfig = null,
         public ?AITextConfig $aiTextConfig = null,
         public ?AIVideoConfig $aiVideoConfig = null,
@@ -25,6 +21,10 @@ class UpsertConfigRequest extends BaseModel
         public ?UserRequest $user = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
+        public ?string $key = null, // Unique identifier for the moderation configuration
+        public ?string $team = null, // Team associated with the configuration
+        public ?bool $async = null, // Whether moderation should be performed asynchronously
+        public ?string $userID = null,
     ) {
     }
 

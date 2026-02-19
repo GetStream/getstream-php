@@ -10,11 +10,11 @@ namespace GetStream\GeneratedModels;
 class BlockedUserEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
+        public ?UserResponse $blockedByUser = null,
         public ?UserResponse $user = null,
         public ?string $type = null, // The type of event: "call.blocked_user" in this case
-        public ?UserResponse $blockedByUser = null,
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
     ) {
     }
 

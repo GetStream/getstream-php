@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class BlockListRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $name = null,
         public ?string $team = null,
+        public ?string $action = null,
     ) {
     }
 

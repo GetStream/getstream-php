@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class IngressSettingsResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $enabled = null,
         public ?IngressAudioEncodingResponse $audioEncodingOptions = null,
+        public ?bool $enabled = null,
         /** @var array<string, IngressVideoEncodingResponse>|null */
         #[MapOf(IngressVideoEncodingResponse::class)]
         public ?array $videoEncodingOptions = null,

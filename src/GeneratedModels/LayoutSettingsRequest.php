@@ -7,10 +7,10 @@ class LayoutSettingsRequest extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?bool $detectOrientation = null,
+        public ?object $options = null,
         public ?string $externalAppUrl = null,
         public ?string $externalCssUrl = null,
-        public ?object $options = null,
+        public ?bool $detectOrientation = null,
     ) {
     }
 

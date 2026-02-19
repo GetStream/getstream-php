@@ -9,17 +9,17 @@ namespace GetStream\GeneratedModels;
 class UserDeletedEvent extends BaseModel
 {
     public function __construct(
+        public ?UserResponseCommonFields $user = null,
+        public ?string $type = null, // The type of event: "user.deleted" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $deleteConversation = null, // The type of deletion that was used for the user's conversations. One of: hard, soft, pruning, (empty string)
-        public ?bool $deleteConversationChannels = null, // Whether the user's conversation channels were deleted
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
         public ?string $deleteMessages = null, // The type of deletion that was used for the user's messages. One of: hard, soft, pruning, (empty string)
+        public ?string $deleteConversation = null, // The type of deletion that was used for the user's conversations. One of: hard, soft, pruning, (empty string)
         public ?string $deleteUser = null, // The type of deletion that was used for the user. One of: hard, soft, pruning, (empty string)
         public ?bool $hardDelete = null, // Whether the user was hard deleted
         public ?bool $markMessagesDeleted = null, // Whether the user's messages were marked as deleted
-        public ?object $custom = null,
-        public ?UserResponseCommonFields $user = null,
-        public ?string $type = null, // The type of event: "user.deleted" in this case
-        public ?\DateTime $receivedAt = null,
+        public ?bool $deleteConversationChannels = null, // Whether the user's conversation channels were deleted
     ) {
     }
 

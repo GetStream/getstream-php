@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateMembershipLevelResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?MembershipLevelResponse $membershipLevel = null,
+        public ?string $duration = null,
     ) {
     }
 

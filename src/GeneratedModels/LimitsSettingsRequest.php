@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class LimitsSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?int $maxDurationSeconds = null,
         public ?int $maxParticipants = null,
-        public ?bool $maxParticipantsExcludeOwner = null,
         public ?array $maxParticipantsExcludeRoles = null,
+        public ?bool $maxParticipantsExcludeOwner = null,
+        public ?int $maxDurationSeconds = null,
     ) {
     }
 

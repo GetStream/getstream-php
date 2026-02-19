@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class QueryUserFeedbackResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         /** @var array<UserFeedbackResponse>|null */
         #[ArrayOf(UserFeedbackResponse::class)]
         public ?array $userFeedback = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $next = null,
         public ?string $prev = null,
     ) {

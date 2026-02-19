@@ -8,8 +8,8 @@ class Action extends BaseModel
     public function __construct(
         public ?string $name = null,
         public ?string $text = null,
-        public ?string $type = null,
         public ?string $style = null,
+        public ?string $type = null,
         public ?string $value = null,
     ) {
     }

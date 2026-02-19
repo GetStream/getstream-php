@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class IngressAudioEncodingOptionsRequest extends BaseModel
 {
     public function __construct(
-        public ?int $bitrate = null,
         public ?int $channels = null,
         public ?bool $enableDtx = null,
+        public ?int $bitrate = null,
     ) {
     }
 

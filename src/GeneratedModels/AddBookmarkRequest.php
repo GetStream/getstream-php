@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class AddBookmarkRequest extends BaseModel
 {
     public function __construct(
-        public ?string $folderID = null, // ID of the folder to add the bookmark to
-        public ?string $userID = null,
-        public ?object $custom = null, // Custom data for the bookmark
         public ?AddFolderRequest $newFolder = null,
         public ?UserRequest $user = null,
+        public ?string $folderID = null, // ID of the folder to add the bookmark to
+        public ?object $custom = null, // Custom data for the bookmark
+        public ?string $userID = null,
     ) {
     }
 

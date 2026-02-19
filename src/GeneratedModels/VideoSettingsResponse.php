@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class VideoSettingsResponse extends BaseModel
 {
     public function __construct(
+        public ?TargetResolution $targetResolution = null,
+        public ?bool $enabled = null,
         public ?bool $accessRequestEnabled = null,
         public ?bool $cameraDefaultOn = null,
         public ?string $cameraFacing = null,
-        public ?bool $enabled = null,
-        public ?TargetResolution $targetResolution = null,
     ) {
     }
 

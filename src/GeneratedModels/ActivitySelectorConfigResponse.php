@@ -7,13 +7,13 @@ class ActivitySelectorConfigResponse extends BaseModel
 {
     public function __construct(
         public ?string $type = null, // Type of selector
-        public ?\DateTime $cutoffTime = null, // Time threshold for activity selection (timestamp)
-        public ?string $cutoffWindow = null, // Flexible relative time window for activity selection (e.g., '1h', '3d', '1y')
-        public ?int $minPopularity = null, // Minimum popularity threshold
+        public ?object $filter = null, // Filter for activity selection
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Sort parameters for activity selection
-        public ?object $filter = null, // Filter for activity selection
+        public ?\DateTime $cutoffTime = null, // Time threshold for activity selection (timestamp)
+        public ?string $cutoffWindow = null, // Flexible relative time window for activity selection (e.g., '1h', '3d', '1y')
+        public ?int $minPopularity = null, // Minimum popularity threshold
         public ?object $params = null, // Generic params for selector-specific configuration
     ) {
     }

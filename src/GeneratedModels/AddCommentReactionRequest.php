@@ -6,14 +6,14 @@ namespace GetStream\GeneratedModels;
 class AddCommentReactionRequest extends BaseModel
 {
     public function __construct(
-        public ?string $type = null, // The type of reaction, eg upvote, like, ...
-        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true)
-        public ?bool $createNotificationActivity = null, // Whether to create a notification activity for this reaction
-        public ?bool $enforceUnique = null, // Whether to enforce unique reactions per user (remove other reaction types from the user when adding this one)
-        public ?bool $skipPush = null,
-        public ?string $userID = null,
-        public ?object $custom = null, // Optional custom data to add to the reaction
         public ?UserRequest $user = null,
+        public ?string $type = null, // The type of reaction, eg upvote, like, ...
+        public ?object $custom = null, // Optional custom data to add to the reaction
+        public ?bool $createNotificationActivity = null, // Whether to create a notification activity for this reaction
+        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true)
+        public ?bool $skipPush = null,
+        public ?bool $enforceUnique = null, // Whether to enforce unique reactions per user (remove other reaction types from the user when adding this one)
+        public ?string $userID = null,
     ) {
     }
 

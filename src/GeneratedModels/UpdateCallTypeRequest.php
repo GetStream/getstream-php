@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class UpdateCallTypeRequest extends BaseModel
 {
     public function __construct(
-        public ?string $externalStorage = null,
-        public ?array $grants = null,
         public ?NotificationSettingsRequest $notificationSettings = null,
         public ?CallSettingsRequest $settings = null,
+        public ?array $grants = null,
+        public ?string $externalStorage = null,
     ) {
     }
 

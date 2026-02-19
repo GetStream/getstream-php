@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateFollowResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?FollowResponse $follow = null,
+        public ?string $duration = null,
     ) {
     }
 

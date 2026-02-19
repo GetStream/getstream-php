@@ -7,8 +7,8 @@ class GeofenceResponse extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?string $description = null,
         public ?string $type = null,
+        public ?string $description = null,
         public ?array $countryCodes = null,
     ) {
     }

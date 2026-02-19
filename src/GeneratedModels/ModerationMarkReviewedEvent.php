@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class ModerationMarkReviewedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?object $custom = null,
         public ?ReviewQueueItemResponse $item = null,
-        public ?string $type = null,
-        public ?\DateTime $receivedAt = null,
         public ?MessageResponse $message = null,
+        public ?string $type = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
     ) {
     }
 

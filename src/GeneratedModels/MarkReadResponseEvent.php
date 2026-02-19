@@ -6,17 +6,17 @@ namespace GetStream\GeneratedModels;
 class MarkReadResponseEvent extends BaseModel
 {
     public function __construct(
-        public ?string $channelID = null,
-        public ?string $channelType = null,
-        public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
-        public ?\DateTime $channelLastMessageAt = null,
-        public ?string $lastReadMessageID = null,
-        public ?string $team = null,
         public ?ChannelResponse $channel = null,
         public ?ThreadResponse $thread = null,
         public ?UserResponseCommonFields $user = null,
+        public ?string $type = null,
+        public ?string $cid = null,
+        public ?string $channelID = null,
+        public ?string $channelType = null,
+        public ?\DateTime $channelLastMessageAt = null,
+        public ?string $team = null,
+        public ?\DateTime $createdAt = null,
+        public ?string $lastReadMessageID = null,
     ) {
     }
 

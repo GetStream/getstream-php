@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UnreadCountsChannelType extends BaseModel
 {
     public function __construct(
-        public ?int $channelCount = null,
         public ?string $channelType = null,
+        public ?int $channelCount = null,
         public ?int $unreadCount = null,
     ) {
     }

@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class GetConfigResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?ConfigResponse $config = null,
+        public ?string $duration = null,
     ) {
     }
 

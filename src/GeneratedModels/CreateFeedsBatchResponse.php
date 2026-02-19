@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class CreateFeedsBatchResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<FeedResponse>|null */
         #[ArrayOf(FeedResponse::class)]
         public ?array $feeds = null, // List of created feeds
+        public ?string $duration = null,
     ) {
     }
 

@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class DailyMetricStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?int $total = null, // Total value across all days in the date range
         /** @var array<DailyMetricResponse>|null */
         #[ArrayOf(DailyMetricResponse::class)]
         public ?array $daily = null, // Array of daily metric values
+        public ?int $total = null, // Total value across all days in the date range
     ) {
     }
 

@@ -9,18 +9,18 @@ namespace GetStream\GeneratedModels;
 class QueryCallParticipantSessionsResponse extends BaseModel
 {
     public function __construct(
+        public ?CallSessionResponse $session = null,
+        public ?string $next = null,
+        public ?string $prev = null,
+        public ?string $callType = null,
         public ?string $callID = null,
         public ?string $callSessionID = null,
-        public ?string $callType = null,
         public ?int $duration = null, // Duration of the request in milliseconds
-        public ?int $totalParticipantDuration = null,
         public ?int $totalParticipantSessions = null,
+        public ?int $totalParticipantDuration = null,
         /** @var array<ParticipantSessionDetails>|null */
         #[ArrayOf(ParticipantSessionDetails::class)]
         public ?array $participantsSessions = null,
-        public ?string $next = null,
-        public ?string $prev = null,
-        public ?CallSessionResponse $session = null,
     ) {
     }
 

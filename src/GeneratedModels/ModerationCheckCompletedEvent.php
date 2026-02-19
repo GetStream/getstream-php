@@ -9,14 +9,14 @@ namespace GetStream\GeneratedModels;
 class ModerationCheckCompletedEvent extends BaseModel
 {
     public function __construct(
+        public ?string $type = null,
         public ?\DateTime $createdAt = null,
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
         public ?string $entityID = null, // The ID of entity which was moderated
         public ?string $entityType = null, // The type of the entity which was moderated
         public ?string $recommendedAction = null, // The recommended action
         public ?string $reviewQueueItemID = null, // The review queue item ID
-        public ?object $custom = null,
-        public ?string $type = null,
-        public ?\DateTime $receivedAt = null,
     ) {
     }
 

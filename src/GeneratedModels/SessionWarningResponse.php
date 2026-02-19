@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class SessionWarningResponse extends BaseModel
 {
     public function __construct(
+        public ?\DateTime $time = null,
         public ?string $code = null,
         public ?string $warning = null,
-        public ?\DateTime $time = null,
     ) {
     }
 

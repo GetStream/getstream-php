@@ -6,17 +6,17 @@ namespace GetStream\GeneratedModels;
 class SharedLocationResponseData extends BaseModel
 {
     public function __construct(
-        public ?string $channelCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $createdByDeviceID = null,
-        public ?int $latitude = null,
-        public ?int $longitude = null,
-        public ?string $messageID = null,
-        public ?\DateTime $updatedAt = null,
-        public ?string $userID = null,
-        public ?\DateTime $endAt = null,
         public ?ChannelResponse $channel = null,
         public ?MessageResponse $message = null,
+        public ?string $channelCid = null,
+        public ?string $messageID = null,
+        public ?string $userID = null,
+        public ?int $latitude = null,
+        public ?int $longitude = null,
+        public ?string $createdByDeviceID = null,
+        public ?\DateTime $endAt = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

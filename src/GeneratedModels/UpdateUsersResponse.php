@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class UpdateUsersResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
-        public ?string $membershipDeletionTaskID = null,
         /** @var array<string, FullUserResponse>|null */
         #[MapOf(FullUserResponse::class)]
         public ?array $users = null, // Object containing users
+        public ?string $membershipDeletionTaskID = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

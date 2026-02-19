@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class SipInboundCredentials extends BaseModel
 {
     public function __construct(
-        public ?string $apiKey = null, // API key for the application
-        public ?string $callID = null, // ID of the call
         public ?string $callType = null, // Type of the call
-        public ?string $token = null, // Authentication token for the call
+        public ?string $callID = null, // ID of the call
         public ?string $userID = null, // User ID for the call
+        public ?string $token = null, // Authentication token for the call
+        public ?string $apiKey = null, // API key for the application
         public ?object $callCustomData = null, // Custom data associated with the call
         public ?object $userCustomData = null, // Custom data associated with the user
     ) {

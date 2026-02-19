@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateMemberPartialResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?ChannelMemberResponse $channelMember = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

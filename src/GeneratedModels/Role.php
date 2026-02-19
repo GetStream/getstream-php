@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class Role extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?bool $custom = null, // Whether this is a custom role or built-in
         public ?string $name = null, // Unique role name
-        public ?\DateTime $updatedAt = null, // Date/time of the last update
+        public ?bool $custom = null, // Whether this is a custom role or built-in
         public ?array $scopes = null, // List of scopes where this role is currently present. `.app` means that role is present in app-level grants
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $updatedAt = null, // Date/time of the last update
     ) {
     }
 

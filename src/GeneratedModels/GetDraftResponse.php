@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class GetDraftResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?DraftResponse $draft = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

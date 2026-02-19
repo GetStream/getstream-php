@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class AddActivityResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?ActivityResponse $activity = null,
         public ?int $mentionNotificationsCreated = null, // Number of mention notification activities created for mentioned users
+        public ?string $duration = null,
     ) {
     }
 

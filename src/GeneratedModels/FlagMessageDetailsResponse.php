@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class FlagMessageDetailsResponse extends BaseModel
 {
     public function __construct(
+        public ?string $updatedByID = null,
         public ?bool $pinChanged = null,
         public ?bool $shouldEnrich = null,
         public ?bool $skipPush = null,
-        public ?string $updatedByID = null,
     ) {
     }
 

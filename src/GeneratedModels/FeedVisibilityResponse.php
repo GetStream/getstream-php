@@ -7,10 +7,10 @@ class FeedVisibilityResponse extends BaseModel
 {
     public function __construct(
         public ?string $name = null, // Name of the feed visibility level
+        public ?array $grants = null, // Permission grants for each role
         /** @var array<Permission>|null */
         #[ArrayOf(Permission::class)]
         public ?array $permissions = null, // List of permission policies
-        public ?array $grants = null, // Permission grants for each role
     ) {
     }
 

@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class HarmConfig extends BaseModel
 {
     public function __construct(
-        public ?int $cooldownPeriod = null,
-        public ?int $severity = null,
-        public ?int $threshold = null,
         /** @var array<ActionSequence>|null */
         #[ArrayOf(ActionSequence::class)]
         public ?array $actionSequences = null,
+        public ?int $severity = null,
         public ?array $harmTypes = null,
+        public ?int $threshold = null,
+        public ?int $cooldownPeriod = null,
     ) {
     }
 

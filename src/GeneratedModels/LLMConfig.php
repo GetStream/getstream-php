@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class LLMConfig extends BaseModel
 {
     public function __construct(
-        public ?string $appContext = null,
         public ?bool $async = null,
         public ?bool $enabled = null,
         /** @var array<LLMRule>|null */
         #[ArrayOf(LLMRule::class)]
         public ?array $rules = null,
         public ?array $severityDescriptions = null,
+        public ?string $appContext = null,
     ) {
     }
 

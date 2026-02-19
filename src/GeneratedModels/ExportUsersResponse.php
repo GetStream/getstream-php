@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class ExportUsersResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $taskID = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

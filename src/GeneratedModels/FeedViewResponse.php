@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class FeedViewResponse extends BaseModel
 {
     public function __construct(
+        public ?AggregationConfig $aggregation = null,
+        public ?RankingConfig $ranking = null,
         public ?string $id = null, // Unique identifier for the custom feed view
-        public ?\DateTime $lastUsedAt = null, // When the feed view was last used
         /** @var array<ActivitySelectorConfigResponse>|null */
         #[ArrayOf(ActivitySelectorConfigResponse::class)]
         public ?array $activitySelectors = null, // Configured activity selectors
-        public ?AggregationConfig $aggregation = null,
-        public ?RankingConfig $ranking = null,
+        public ?\DateTime $lastUsedAt = null, // When the feed view was last used
     ) {
     }
 

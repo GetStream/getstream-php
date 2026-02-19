@@ -6,24 +6,24 @@ namespace GetStream\GeneratedModels;
 class CallStatsParticipantSession extends BaseModel
 {
     public function __construct(
-        public ?bool $isLive = null,
-        public ?string $userSessionID = null,
+        public ?CallStatsLocation $location = null,
         public ?PublishedTrackFlags $publishedTracks = null,
-        public ?string $browser = null,
-        public ?string $browserVersion = null,
-        public ?int $cqScore = null,
-        public ?string $currentIp = null,
-        public ?string $currentSfu = null,
-        public ?int $distanceToSfuKilometers = null,
+        public ?string $userSessionID = null,
+        public ?string $unifiedSessionID = null,
+        public ?\DateTime $startedAt = null,
         public ?\DateTime $endedAt = null,
-        public ?string $os = null,
+        public ?bool $isLive = null,
         public ?string $publisherType = null,
         public ?string $sdk = null,
         public ?string $sdkVersion = null,
-        public ?\DateTime $startedAt = null,
-        public ?string $unifiedSessionID = null,
         public ?string $webrtcVersion = null,
-        public ?CallStatsLocation $location = null,
+        public ?string $browser = null,
+        public ?string $browserVersion = null,
+        public ?string $currentIp = null,
+        public ?string $currentSfu = null,
+        public ?int $distanceToSfuKilometers = null,
+        public ?int $cqScore = null,
+        public ?string $os = null,
     ) {
     }
 

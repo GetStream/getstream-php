@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class PublishedTrackFlags extends BaseModel
 {
     public function __construct(
+        public ?bool $video = null,
         public ?bool $audio = null,
         public ?bool $screenshare = null,
         public ?bool $screenshareAudio = null,
-        public ?bool $video = null,
     ) {
     }
 

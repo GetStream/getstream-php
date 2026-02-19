@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class PushTemplate extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
         public ?bool $enablePush = null,
         public ?string $eventType = null,
-        public ?\DateTime $updatedAt = null,
         public ?string $template = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

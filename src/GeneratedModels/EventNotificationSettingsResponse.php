@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class EventNotificationSettingsResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $enabled = null,
         public ?APNSPayload $apns = null,
         public ?FCMPayload $fcm = null,
+        public ?bool $enabled = null,
     ) {
     }
 

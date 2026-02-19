@@ -9,21 +9,21 @@ namespace GetStream\GeneratedModels;
 class ChannelTruncatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?ChannelResponse $channel = null,
-        public ?object $custom = null,
-        public ?string $type = null, // The type of event: "channel.truncated" in this case
-        public ?string $channelID = null, // The ID of the channel which was truncated
-        public ?int $channelMemberCount = null, // The number of members in the channel
-        public ?int $channelMessageCount = null,
-        public ?string $channelType = null, // The type of the channel which was truncated
-        public ?string $cid = null, // The CID of the channel which was truncated
-        public ?string $messageID = null,
-        public ?\DateTime $receivedAt = null,
-        public ?string $team = null, // The team ID
-        public ?object $channelCustom = null,
         public ?MessageResponse $message = null,
         public ?UserResponseCommonFields $user = null,
+        public ?string $type = null, // The type of event: "channel.truncated" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel which was truncated
+        public ?string $team = null, // The team ID
+        public ?int $channelMemberCount = null, // The number of members in the channel
+        public ?int $channelMessageCount = null,
+        public ?object $channelCustom = null,
+        public ?string $channelType = null, // The type of the channel which was truncated
+        public ?string $channelID = null, // The ID of the channel which was truncated
+        public ?string $messageID = null,
     ) {
     }
 

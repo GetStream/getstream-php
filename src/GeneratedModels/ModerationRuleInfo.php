@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class ModerationRuleInfo extends BaseModel
 {
     public function __construct(
-        public ?string $description = null,
         public ?string $id = null,
         public ?string $name = null,
         public ?string $type = null,
+        public ?string $description = null,
     ) {
     }
 

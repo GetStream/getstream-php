@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class LLMRule extends BaseModel
 {
     public function __construct(
-        public ?string $description = null,
         public ?string $label = null,
+        public ?string $description = null,
         public ?string $action = null,
         /** @var array<BodyguardSeverityRule>|null */
         #[ArrayOf(BodyguardSeverityRule::class)]

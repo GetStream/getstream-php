@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class UpdateSIPInboundRoutingRuleResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?SIPInboundRoutingRuleResponse $sipInboundRoutingRule = null,
+        public ?string $duration = null,
     ) {
     }
 

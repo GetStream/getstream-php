@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class ListDevicesResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null, // List of devices
+        public ?string $duration = null,
     ) {
     }
 

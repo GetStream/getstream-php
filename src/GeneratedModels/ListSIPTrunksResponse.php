@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class ListSIPTrunksResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<SIPTrunkResponse>|null */
         #[ArrayOf(SIPTrunkResponse::class)]
         public ?array $sipTrunks = null, // List of SIP trunks for the application
+        public ?string $duration = null,
     ) {
     }
 

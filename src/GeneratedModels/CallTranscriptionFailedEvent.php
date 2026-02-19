@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class CallTranscriptionFailedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $egressID = null,
         public ?string $type = null, // The type of event: "call.transcription_failed" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
+        public ?string $egressID = null,
         public ?string $error = null, // The error message detailing why transcription failed.
     ) {
     }

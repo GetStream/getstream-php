@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class ChannelMessagesResponse extends BaseModel
 {
     public function __construct(
+        public ?ChannelResponse $channel = null,
         /** @var array<MessageResponse>|null */
         #[ArrayOf(MessageResponse::class)]
         public ?array $messages = null, // List of messages
-        public ?ChannelResponse $channel = null,
     ) {
     }
 

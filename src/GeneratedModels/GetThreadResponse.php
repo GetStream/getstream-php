@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class GetThreadResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?ThreadStateResponse $thread = null,
+        public ?string $duration = null,
     ) {
     }
 

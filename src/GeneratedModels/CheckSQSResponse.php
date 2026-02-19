@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class CheckSQSResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?string $status = null, // Validation result. One of: ok, error
         public ?string $error = null, // Error text
         public ?object $data = null, // Error data
+        public ?string $duration = null,
     ) {
     }
 

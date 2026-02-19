@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class ActivityPinResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // When the pin was created
-        public ?string $feed = null, // ID of the feed where activity is pinned
-        public ?\DateTime $updatedAt = null, // When the pin was last updated
         public ?ActivityResponse $activity = null,
         public ?UserResponse $user = null,
+        public ?string $feed = null, // ID of the feed where activity is pinned
+        public ?\DateTime $createdAt = null, // When the pin was created
+        public ?\DateTime $updatedAt = null, // When the pin was last updated
     ) {
     }
 

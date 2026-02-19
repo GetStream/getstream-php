@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class UpdateCollectionsRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         /** @var array<UpdateCollectionRequest>|null */
         #[ArrayOf(UpdateCollectionRequest::class)]
         public ?array $collections = null, // List of collections to update (only custom data is updatable)
         public ?string $userID = null,
-        public ?UserRequest $user = null,
     ) {
     }
 

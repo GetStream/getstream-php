@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class ListSIPInboundRoutingRuleResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<SIPInboundRoutingRuleResponse>|null */
         #[ArrayOf(SIPInboundRoutingRuleResponse::class)]
         public ?array $sipInboundRoutingRules = null, // List of SIP Inbound Routing Rules for the application
+        public ?string $duration = null,
     ) {
     }
 

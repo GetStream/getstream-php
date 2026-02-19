@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class CreateReminderRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?\DateTime $remindAt = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
     ) {
     }
 

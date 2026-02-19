@@ -9,31 +9,31 @@ namespace GetStream\GeneratedModels;
 class CallResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $backstage = null,
-        public ?bool $captioning = null,
-        public ?string $cid = null, // The unique identifier for a call (<type>:<id>)
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $currentSessionID = null,
-        public ?string $id = null, // Call ID
-        public ?bool $recording = null,
-        public ?bool $transcribing = null,
-        public ?bool $translating = null,
-        public ?string $type = null, // The type of call
-        public ?\DateTime $updatedAt = null, // Date/time of the last update
-        public ?array $blockedUserIds = null,
         public ?UserResponse $createdBy = null,
-        public ?object $custom = null, // Custom data for this object
         public ?EgressResponse $egress = null,
         public ?CallIngressResponse $ingress = null,
-        public ?CallSettingsResponse $settings = null,
-        public ?string $channelCid = null,
-        public ?\DateTime $endedAt = null, // Date/time when the call ended
-        public ?int $joinAheadTimeSeconds = null,
-        public ?string $routingNumber = null, // 10-digit routing number for SIP routing
-        public ?\DateTime $startsAt = null, // Date/time when the call will start
-        public ?string $team = null,
         public ?CallSessionResponse $session = null,
+        public ?CallSettingsResponse $settings = null,
         public ?ThumbnailResponse $thumbnails = null,
+        public ?string $type = null, // The type of call
+        public ?string $id = null, // Call ID
+        public ?string $cid = null, // The unique identifier for a call (<type>:<id>)
+        public ?string $currentSessionID = null,
+        public ?string $team = null,
+        public ?object $custom = null, // Custom data for this object
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $updatedAt = null, // Date/time of the last update
+        public ?bool $recording = null,
+        public ?bool $transcribing = null,
+        public ?bool $captioning = null,
+        public ?bool $translating = null,
+        public ?\DateTime $endedAt = null, // Date/time when the call ended
+        public ?\DateTime $startsAt = null, // Date/time when the call will start
+        public ?bool $backstage = null,
+        public ?array $blockedUserIds = null,
+        public ?int $joinAheadTimeSeconds = null,
+        public ?string $channelCid = null,
+        public ?string $routingNumber = null, // 10-digit routing number for SIP routing
     ) {
     }
 

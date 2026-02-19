@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class ReminderResponseData extends BaseModel
 {
     public function __construct(
-        public ?string $channelCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $messageID = null,
-        public ?\DateTime $updatedAt = null,
-        public ?string $userID = null,
-        public ?\DateTime $remindAt = null,
         public ?ChannelResponse $channel = null,
         public ?MessageResponse $message = null,
         public ?UserResponse $user = null,
+        public ?\DateTime $remindAt = null,
+        public ?string $channelCid = null,
+        public ?string $messageID = null,
+        public ?string $userID = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

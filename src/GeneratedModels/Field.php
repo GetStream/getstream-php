@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class Field extends BaseModel
 {
     public function __construct(
-        public ?bool $short = null,
         public ?string $title = null,
         public ?string $value = null,
+        public ?bool $short = null,
     ) {
     }
 

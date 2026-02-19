@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class ClosedCaptionRuleParameters extends BaseModel
 {
     public function __construct(
-        public ?int $threshold = null,
         public ?array $harmLabels = null,
         public ?array $llmHarmLabels = null,
+        public ?int $threshold = null,
     ) {
     }
 

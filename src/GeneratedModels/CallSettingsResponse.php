@@ -12,6 +12,7 @@ class CallSettingsResponse extends BaseModel
         public ?FrameRecordingSettingsResponse $frameRecording = null,
         public ?GeofenceSettingsResponse $geofencing = null,
         public ?IndividualRecordingSettingsResponse $individualRecording = null,
+        public ?IngressSettingsResponse $ingress = null,
         public ?LimitsSettingsResponse $limits = null,
         public ?RawRecordingSettingsResponse $rawRecording = null,
         public ?RecordSettingsResponse $recording = null,
@@ -21,7 +22,6 @@ class CallSettingsResponse extends BaseModel
         public ?ThumbnailsSettingsResponse $thumbnails = null,
         public ?TranscriptionSettingsResponse $transcription = null,
         public ?VideoSettingsResponse $video = null,
-        public ?IngressSettingsResponse $ingress = null,
     ) {
     }
 

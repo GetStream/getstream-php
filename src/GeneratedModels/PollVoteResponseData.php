@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class PollVoteResponseData extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
+        public ?UserResponse $user = null,
+        public ?string $pollID = null,
         public ?string $id = null,
         public ?string $optionID = null,
-        public ?string $pollID = null,
-        public ?\DateTime $updatedAt = null,
-        public ?string $answerText = null,
         public ?bool $isAnswer = null,
+        public ?string $answerText = null,
         public ?string $userID = null,
-        public ?UserResponse $user = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class GoLiveRequest extends BaseModel
 {
     public function __construct(
-        public ?string $recordingStorageName = null,
-        public ?bool $startClosedCaption = null,
-        public ?bool $startCompositeRecording = null,
         public ?bool $startHLS = null,
+        public ?bool $startRecording = null,
+        public ?bool $startCompositeRecording = null,
         public ?bool $startIndividualRecording = null,
         public ?bool $startRawRecording = null,
-        public ?bool $startRecording = null,
-        public ?bool $startTranscription = null,
+        public ?string $recordingStorageName = null,
         public ?string $transcriptionStorageName = null,
+        public ?bool $startTranscription = null,
+        public ?bool $startClosedCaption = null,
     ) {
     }
 

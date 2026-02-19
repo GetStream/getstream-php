@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class GetManyMessagesResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<MessageResponse>|null */
         #[ArrayOf(MessageResponse::class)]
         public ?array $messages = null, // List of messages
+        public ?string $duration = null,
     ) {
     }
 

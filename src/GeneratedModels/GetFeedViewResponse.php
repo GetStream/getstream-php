@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class GetFeedViewResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?FeedViewResponse $feedView = null,
+        public ?string $duration = null,
     ) {
     }
 

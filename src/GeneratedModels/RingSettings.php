@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class RingSettings extends BaseModel
 {
     public function __construct(
-        public ?int $autoCancelTimeoutMs = null,
         public ?int $incomingCallTimeoutMs = null,
+        public ?int $autoCancelTimeoutMs = null,
         public ?int $missedCallTimeoutMs = null,
     ) {
     }

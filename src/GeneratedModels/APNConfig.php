@@ -6,16 +6,16 @@ namespace GetStream\GeneratedModels;
 class APNConfig extends BaseModel
 {
     public function __construct(
-        public ?string $authKey = null,
         public ?string $authType = null,
-        public ?string $bundleID = null,
         public ?bool $development = null,
-        public ?bool $disabled = null,
         public ?string $host = null,
+        public ?string $bundleID = null,
+        public ?bool $disabled = null,
+        public ?string $authKey = null,
         public ?string $keyID = null,
-        public ?string $notificationTemplate = null,
-        public ?string $p12Cert = null,
         public ?string $teamID = null,
+        public ?string $p12Cert = null,
+        public ?string $notificationTemplate = null,
     ) {
     }
 

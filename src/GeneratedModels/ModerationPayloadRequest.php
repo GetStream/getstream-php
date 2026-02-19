@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class ModerationPayloadRequest extends BaseModel
 {
     public function __construct(
-        public ?array $images = null, // Image URLs to moderate (max 30)
         public ?array $texts = null, // Text content to moderate
+        public ?array $images = null, // Image URLs to moderate (max 30)
         public ?array $videos = null, // Video URLs to moderate
         public ?object $custom = null, // Custom data for moderation
     ) {

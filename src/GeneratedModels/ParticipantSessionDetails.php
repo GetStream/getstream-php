@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class ParticipantSessionDetails extends BaseModel
 {
     public function __construct(
-        public ?string $publisherType = null,
         public ?string $userID = null,
         public ?string $userSessionID = null,
-        public ?array $roles = null,
-        public ?int $durationInSeconds = null,
         public ?\DateTime $joinedAt = null,
         public ?\DateTime $leftAt = null,
+        public ?string $publisherType = null,
+        public ?array $roles = null,
+        public ?int $durationInSeconds = null,
     ) {
     }
 

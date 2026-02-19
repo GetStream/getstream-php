@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class MarkReadRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?string $messageID = null, // ID of the message that is considered last read by client
         public ?string $threadID = null, // Optional Thread ID to specifically mark a given thread as read
         public ?string $userID = null,
-        public ?UserRequest $user = null,
     ) {
     }
 

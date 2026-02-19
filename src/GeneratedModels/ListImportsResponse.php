@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class ListImportsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         /** @var array<ImportTask>|null */
         #[ArrayOf(ImportTask::class)]
         public ?array $importTasks = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

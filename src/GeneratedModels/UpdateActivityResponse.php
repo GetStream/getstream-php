@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateActivityResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?ActivityResponse $activity = null,
+        public ?string $duration = null,
     ) {
     }
 

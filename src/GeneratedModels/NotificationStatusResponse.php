@@ -8,10 +8,10 @@ class NotificationStatusResponse extends BaseModel
     public function __construct(
         public ?int $unread = null, // Number of unread notifications
         public ?int $unseen = null, // Number of unseen notifications
-        public ?\DateTime $lastReadAt = null,
-        public ?\DateTime $lastSeenAt = null, // When notifications were last seen
         public ?array $readActivities = null, // IDs of activities that have been read
         public ?array $seenActivities = null,
+        public ?\DateTime $lastSeenAt = null, // When notifications were last seen
+        public ?\DateTime $lastReadAt = null,
     ) {
     }
 

@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class ActivityFeedbackEventPayload extends BaseModel
 {
     public function __construct(
-        public ?string $action = null, // The type of feedback action. One of: hide, show_more, show_less
+        public ?UserResponse $user = null,
         public ?string $activityID = null, // The activity that received feedback
+        public ?string $action = null, // The type of feedback action. One of: hide, show_more, show_less
+        public ?string $value = null, // The feedback value (true/false)
         public ?\DateTime $createdAt = null, // When the feedback was created
         public ?\DateTime $updatedAt = null, // When the feedback was last updated
-        public ?string $value = null, // The feedback value (true/false)
-        public ?UserResponse $user = null,
     ) {
     }
 

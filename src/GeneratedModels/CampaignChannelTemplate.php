@@ -7,13 +7,13 @@ class CampaignChannelTemplate extends BaseModel
 {
     public function __construct(
         public ?string $type = null,
-        public ?object $custom = null,
         public ?string $id = null,
-        public ?string $team = null,
         public ?array $members = null,
         /** @var array<CampaignChannelMember>|null */
         #[ArrayOf(CampaignChannelMember::class)]
         public ?array $membersTemplate = null,
+        public ?string $team = null,
+        public ?object $custom = null,
     ) {
     }
 

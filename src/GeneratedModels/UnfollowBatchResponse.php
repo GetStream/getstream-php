@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class UnfollowBatchResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $follows = null, // List of follow relationships that were removed
+        public ?string $duration = null,
     ) {
     }
 

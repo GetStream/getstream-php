@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class DeleteCallResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?CallResponse $call = null,
         public ?string $taskID = null,
+        public ?string $duration = null,
     ) {
     }
 

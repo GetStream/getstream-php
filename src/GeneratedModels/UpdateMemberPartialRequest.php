@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateMemberPartialRequest extends BaseModel
 {
     public function __construct(
-        public ?array $unset = null,
         public ?object $set = null,
+        public ?array $unset = null,
     ) {
     }
 

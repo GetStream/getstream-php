@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class CheckSNSRequest extends BaseModel
 {
     public function __construct(
+        public ?string $snsTopicArn = null, // AWS SNS topic ARN
         public ?string $snsKey = null, // AWS SNS access key
         public ?string $snsSecret = null, // AWS SNS key secret
-        public ?string $snsTopicArn = null, // AWS SNS topic ARN
     ) {
     }
 

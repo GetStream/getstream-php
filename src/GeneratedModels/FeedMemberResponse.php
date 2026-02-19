@@ -6,15 +6,15 @@ namespace GetStream\GeneratedModels;
 class FeedMemberResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // When the membership was created
+        public ?MembershipLevelResponse $membershipLevel = null,
+        public ?UserResponse $user = null,
         public ?string $role = null, // Role of the member in the feed
         public ?string $status = null, // Status of the membership. One of: member, pending, rejected
-        public ?\DateTime $updatedAt = null, // When the membership was last updated
-        public ?UserResponse $user = null,
         public ?\DateTime $inviteAcceptedAt = null, // When the invite was accepted
         public ?\DateTime $inviteRejectedAt = null, // When the invite was rejected
         public ?object $custom = null, // Custom data for the membership
-        public ?MembershipLevelResponse $membershipLevel = null,
+        public ?\DateTime $createdAt = null, // When the membership was created
+        public ?\DateTime $updatedAt = null, // When the membership was last updated
     ) {
     }
 

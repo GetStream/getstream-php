@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class AutomodRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $label = null,
         public ?int $threshold = null,
+        public ?string $action = null,
     ) {
     }
 

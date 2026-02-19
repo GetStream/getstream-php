@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class UpdateExternalStorageResponse extends BaseModel
 {
     public function __construct(
-        public ?string $bucket = null,
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $name = null,
-        public ?string $path = null,
         public ?string $type = null,
+        public ?string $bucket = null,
+        public ?string $path = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

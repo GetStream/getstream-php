@@ -7,9 +7,9 @@ class UpdateLiveLocationRequest extends BaseModel
 {
     public function __construct(
         public ?string $messageID = null, // Live location ID
-        public ?\DateTime $endAt = null, // Time when the live location expires
         public ?int $latitude = null, // Latitude coordinate
         public ?int $longitude = null, // Longitude coordinate
+        public ?\DateTime $endAt = null, // Time when the live location expires
     ) {
     }
 

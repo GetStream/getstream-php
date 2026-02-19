@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UserFeedbackReport extends BaseModel
 {
     public function __construct(
-        public ?int $unreportedCount = null,
         public ?array $countByRating = null,
+        public ?int $unreportedCount = null,
     ) {
     }
 

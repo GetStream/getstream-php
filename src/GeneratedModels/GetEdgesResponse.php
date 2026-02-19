@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class GetEdgesResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         /** @var array<EdgeResponse>|null */
         #[ArrayOf(EdgeResponse::class)]
         public ?array $edges = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class RTMPSettings extends BaseModel
 {
     public function __construct(
-        public ?bool $enabled = null,
-        public ?string $qualityName = null,
         public ?LayoutSettings $layout = null,
         public ?RTMPLocation $location = null,
+        public ?bool $enabled = null,
+        public ?string $qualityName = null,
     ) {
     }
 

@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class ResolveSipInboundRequest extends BaseModel
 {
     public function __construct(
-        public ?string $sipCallerNumber = null, // SIP caller number
-        public ?string $sipTrunkNumber = null, // SIP trunk number to resolve
         public ?SIPChallengeRequest $challenge = null,
-        public ?string $routingNumber = null, // Optional routing number for routing number-based call routing (10 digits)
+        public ?string $sipTrunkNumber = null, // SIP trunk number to resolve
+        public ?string $sipCallerNumber = null, // SIP caller number
         public ?array $sipHeaders = null, // Optional SIP headers as key-value pairs
+        public ?string $routingNumber = null, // Optional routing number for routing number-based call routing (10 digits)
     ) {
     }
 

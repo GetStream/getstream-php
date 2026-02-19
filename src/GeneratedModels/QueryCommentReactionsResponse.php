@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class QueryCommentReactionsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $reactions = null,
         public ?string $next = null,
         public ?string $prev = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

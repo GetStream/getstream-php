@@ -9,21 +9,6 @@ namespace GetStream\GeneratedModels;
 class WSEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
-        public ?object $custom = null,
-        public ?bool $automoderation = null,
-        public ?string $channelID = null,
-        public ?\DateTime $channelLastMessageAt = null,
-        public ?string $channelType = null,
-        public ?string $cid = null,
-        public ?string $connectionID = null,
-        public ?string $parentID = null,
-        public ?string $reason = null,
-        public ?string $team = null,
-        public ?string $threadID = null,
-        public ?string $userID = null,
-        public ?int $watcherCount = null,
         public ?ModerationResponse $automoderationScores = null,
         public ?ChannelResponse $channel = null,
         public ?UserResponse $createdBy = null,
@@ -36,6 +21,21 @@ class WSEvent extends BaseModel
         public ?ReactionResponse $reaction = null,
         public ?ThreadResponse $thread = null,
         public ?UserResponse $user = null,
+        public ?string $type = null,
+        public ?string $connectionID = null,
+        public ?string $cid = null,
+        public ?string $channelID = null,
+        public ?string $channelType = null,
+        public ?\DateTime $channelLastMessageAt = null,
+        public ?string $threadID = null,
+        public ?string $userID = null,
+        public ?int $watcherCount = null,
+        public ?string $reason = null,
+        public ?bool $automoderation = null,
+        public ?string $parentID = null,
+        public ?string $team = null,
+        public ?object $custom = null,
+        public ?\DateTime $createdAt = null,
     ) {
     }
 

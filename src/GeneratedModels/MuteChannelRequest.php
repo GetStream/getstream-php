@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class MuteChannelRequest extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
+        public ?array $channelCids = null, // Channel CIDs to mute (if multiple channels)
         public ?int $expiration = null, // Duration of mute in milliseconds
         public ?string $userID = null,
-        public ?array $channelCids = null, // Channel CIDs to mute (if multiple channels)
-        public ?UserRequest $user = null,
     ) {
     }
 

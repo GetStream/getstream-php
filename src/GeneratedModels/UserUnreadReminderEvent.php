@@ -9,14 +9,14 @@ namespace GetStream\GeneratedModels;
 class UserUnreadReminderEvent extends BaseModel
 {
     public function __construct(
+        public ?UserResponseCommonFields $user = null,
+        public ?string $type = null, // The type of event: "user.unread_message_reminder" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
         /** @var array<string, ChannelMessagesResponse>|null */
         #[MapOf(ChannelMessagesResponse::class)]
         public ?array $channels = null, // The channels with unread messages
-        public ?object $custom = null,
-        public ?UserResponseCommonFields $user = null,
-        public ?string $type = null, // The type of event: "user.unread_message_reminder" in this case
-        public ?\DateTime $receivedAt = null,
     ) {
     }
 

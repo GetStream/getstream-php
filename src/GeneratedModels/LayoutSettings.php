@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class LayoutSettings extends BaseModel
 {
     public function __construct(
+        public ?string $name = null,
+        public ?object $options = null,
         public ?string $externalAppUrl = null,
         public ?string $externalCssUrl = null,
-        public ?string $name = null,
         public ?bool $detectOrientation = null,
-        public ?object $options = null,
     ) {
     }
 

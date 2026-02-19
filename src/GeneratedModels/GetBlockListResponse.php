@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class GetBlockListResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?BlockListResponse $blocklist = null,
+        public ?string $duration = null,
     ) {
     }
 

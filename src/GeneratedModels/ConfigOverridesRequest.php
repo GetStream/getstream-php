@@ -9,20 +9,20 @@ namespace GetStream\GeneratedModels;
 class ConfigOverridesRequest extends BaseModel
 {
     public function __construct(
-        public ?string $blocklist = null, // Blocklist name
-        public ?string $blocklistBehavior = null, // Blocklist behavior. One of: flag, block
-        public ?bool $countMessages = null, // Enable/disable message counting
-        public ?int $maxMessageLength = null, // Maximum message length
-        public ?bool $quotes = null, // Enable/disable quotes
+        public ?bool $typingEvents = null, // Enable/disable typing events
         public ?bool $reactions = null, // Enable/disable reactions
         public ?bool $replies = null, // Enable/disable replies
-        public ?bool $sharedLocations = null, // Enable/disable shared locations
-        public ?bool $typingEvents = null, // Enable/disable typing events
+        public ?bool $quotes = null, // Enable/disable quotes
         public ?bool $uploads = null, // Enable/disable uploads
         public ?bool $urlEnrichment = null, // Enable/disable URL enrichment
-        public ?bool $userMessageReminders = null, // Enable/disable user message reminders
-        public ?array $commands = null, // List of available commands
+        public ?int $maxMessageLength = null, // Maximum message length
+        public ?string $blocklist = null, // Blocklist name
+        public ?string $blocklistBehavior = null, // Blocklist behavior. One of: flag, block
         public ?array $grants = null, // Permission grants modifiers
+        public ?array $commands = null, // List of available commands
+        public ?bool $userMessageReminders = null, // Enable/disable user message reminders
+        public ?bool $sharedLocations = null, // Enable/disable shared locations
+        public ?bool $countMessages = null, // Enable/disable message counting
     ) {
     }
 

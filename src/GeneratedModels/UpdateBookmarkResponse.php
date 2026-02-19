@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateBookmarkResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?BookmarkResponse $bookmark = null,
+        public ?string $duration = null,
     ) {
     }
 

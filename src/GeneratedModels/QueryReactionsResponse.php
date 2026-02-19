@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class QueryReactionsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         /** @var array<ReactionResponse>|null */
         #[ArrayOf(ReactionResponse::class)]
         public ?array $reactions = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $next = null,
         public ?string $prev = null,
     ) {

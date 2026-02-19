@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpsertModerationTemplateRequest extends BaseModel
 {
     public function __construct(
-        public ?string $name = null, // Name of the moderation template
         public ?FeedsModerationTemplateConfigPayload $config = null,
+        public ?string $name = null, // Name of the moderation template
     ) {
     }
 

@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class CallModerationWarningEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $message = null, // The warning message
-        public ?string $userID = null, // The user ID who is receiving the warning
-        public ?object $custom = null, // Custom data associated with the moderation action
         public ?string $type = null, // The type of event: "call.moderation_warning" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
+        public ?string $userID = null, // The user ID who is receiving the warning
+        public ?string $message = null, // The warning message
+        public ?object $custom = null, // Custom data associated with the moderation action
     ) {
     }
 

@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class ClientOSDataResponse extends BaseModel
 {
     public function __construct(
-        public ?string $architecture = null,
         public ?string $name = null,
         public ?string $version = null,
+        public ?string $architecture = null,
     ) {
     }
 

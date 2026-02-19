@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class CreateImportURLResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $path = null,
         public ?string $uploadUrl = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

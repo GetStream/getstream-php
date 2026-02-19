@@ -9,19 +9,19 @@ namespace GetStream\GeneratedModels;
 class ChannelCreatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?ChannelResponse $channel = null,
-        public ?object $custom = null,
+        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "channel.created" in this case
-        public ?string $channelID = null, // The ID of the channel which was created
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel which was created
+        public ?string $team = null, // The team ID
         public ?int $channelMemberCount = null, // The number of members in the channel
         public ?int $channelMessageCount = null,
-        public ?string $channelType = null, // The type of the channel which was created
-        public ?string $cid = null, // The CID of the channel which was created
-        public ?\DateTime $receivedAt = null,
-        public ?string $team = null, // The team ID
         public ?object $channelCustom = null,
-        public ?UserResponseCommonFields $user = null,
+        public ?string $channelType = null, // The type of the channel which was created
+        public ?string $channelID = null, // The ID of the channel which was created
     ) {
     }
 

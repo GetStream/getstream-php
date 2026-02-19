@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class CallRecording extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $endTime = null,
         public ?string $filename = null,
-        public ?string $recordingType = null,
-        public ?string $sessionID = null,
-        public ?\DateTime $startTime = null,
         public ?string $url = null,
+        public ?\DateTime $startTime = null,
+        public ?\DateTime $endTime = null,
+        public ?string $sessionID = null,
+        public ?string $recordingType = null,
     ) {
     }
 

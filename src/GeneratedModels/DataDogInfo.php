@@ -7,8 +7,8 @@ class DataDogInfo extends BaseModel
 {
     public function __construct(
         public ?string $apiKey = null,
-        public ?bool $enabled = null,
         public ?string $site = null,
+        public ?bool $enabled = null,
     ) {
     }
 

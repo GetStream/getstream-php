@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class VideoReactionResponse extends BaseModel
 {
     public function __construct(
-        public ?string $type = null,
         public ?UserResponse $user = null,
+        public ?string $type = null,
         public ?string $emojiCode = null,
         public ?object $custom = null,
     ) {

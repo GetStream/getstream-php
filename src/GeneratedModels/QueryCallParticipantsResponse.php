@@ -6,8 +6,7 @@ namespace GetStream\GeneratedModels;
 class QueryCallParticipantsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
-        public ?int $totalParticipants = null,
+        public ?CallResponse $call = null,
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null,
@@ -17,7 +16,8 @@ class QueryCallParticipantsResponse extends BaseModel
         /** @var array<CallParticipantResponse>|null */
         #[ArrayOf(CallParticipantResponse::class)]
         public ?array $participants = null, // List of call participants
-        public ?CallResponse $call = null,
+        public ?int $totalParticipants = null,
+        public ?string $duration = null,
     ) {
     }
 

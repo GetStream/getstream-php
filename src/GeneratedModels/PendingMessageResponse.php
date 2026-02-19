@@ -8,8 +8,8 @@ class PendingMessageResponse extends BaseModel
     public function __construct(
         public ?ChannelResponse $channel = null,
         public ?MessageResponse $message = null,
-        public ?array $metadata = null,
         public ?UserResponse $user = null,
+        public ?array $metadata = null,
     ) {
     }
 

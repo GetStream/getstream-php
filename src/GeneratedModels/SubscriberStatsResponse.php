@@ -7,8 +7,8 @@ class SubscriberStatsResponse extends BaseModel
 {
     public function __construct(
         public ?int $total = null,
-        public ?int $totalSubscribedDurationSeconds = null,
         public ?int $unique = null,
+        public ?int $totalSubscribedDurationSeconds = null,
     ) {
     }
 

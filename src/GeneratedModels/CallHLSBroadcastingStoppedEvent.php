@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class CallHLSBroadcastingStoppedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
         public ?string $type = null, // The type of event: "call.hls_broadcasting_stopped" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
     ) {
     }
 

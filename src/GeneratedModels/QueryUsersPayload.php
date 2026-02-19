@@ -9,16 +9,16 @@ namespace GetStream\GeneratedModels;
 class QueryUsersPayload extends BaseModel
 {
     public function __construct(
+        public ?UserRequest $user = null,
         public ?object $filterConditions = null,
-        public ?bool $includeDeactivatedUsers = null,
-        public ?int $limit = null,
-        public ?int $offset = null,
-        public ?bool $presence = null,
-        public ?string $userID = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,
-        public ?UserRequest $user = null,
+        public ?bool $presence = null,
+        public ?bool $includeDeactivatedUsers = null,
+        public ?int $limit = null,
+        public ?int $offset = null,
+        public ?string $userID = null,
     ) {
     }
 
