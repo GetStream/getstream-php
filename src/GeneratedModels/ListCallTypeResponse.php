@@ -10,8 +10,8 @@ class ListCallTypeResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<CallTypeResponse>|null */
-        #[ArrayOf(CallTypeResponse::class)]
+        /** @var array<string, CallTypeResponse>|null */
+        #[MapOf(CallTypeResponse::class)]
         public ?array $callTypes = null,
     ) {
     }

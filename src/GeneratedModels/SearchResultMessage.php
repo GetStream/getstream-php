@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class SearchResultMessage extends BaseModel
 {
     public function __construct(
@@ -15,6 +12,7 @@ class SearchResultMessage extends BaseModel
         public ?string $html = null,
         public ?string $id = null,
         public ?bool $mentionedChannel = null,
+        public ?bool $mentionedHere = null,
         public ?bool $pinned = null,
         public ?int $replyCount = null,
         public ?bool $shadowed = null,
@@ -62,8 +60,8 @@ class SearchResultMessage extends BaseModel
         public ?UserResponse $pinnedBy = null,
         public ?PollResponseData $poll = null,
         public ?MessageResponse $quotedMessage = null,
-        /** @var array<ReactionGroupResponse>|null */
-        #[ArrayOf(ReactionGroupResponse::class)]
+        /** @var array<string, ReactionGroupResponse>|null */
+        #[MapOf(ReactionGroupResponse::class)]
         public ?array $reactionGroups = null,
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,

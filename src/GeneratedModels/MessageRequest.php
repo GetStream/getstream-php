@@ -12,6 +12,7 @@ class MessageRequest extends BaseModel
         public ?string $html = null, // Contains HTML markup of the message. Can only be set when using server-side API
         public ?string $id = null, // Message ID is unique string identifier of the message
         public ?bool $mentionedChannel = null,
+        public ?bool $mentionedHere = null,
         public ?string $mml = null, // Should be empty if `text` is provided. Can only be set when using server-side API
         public ?string $parentID = null, // ID of parent message (thread)
         public ?\DateTime $pinExpires = null, // Date when pinned message expires

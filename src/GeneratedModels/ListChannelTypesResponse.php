@@ -3,15 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class ListChannelTypesResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<ChannelTypeConfig>|null */
-        #[ArrayOf(ChannelTypeConfig::class)]
+        /** @var array<string, ChannelTypeConfig>|null */
+        #[MapOf(ChannelTypeConfig::class)]
         public ?array $channelTypes = null, // Object with all channel types
     ) {
     }

@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class ActivityResponse extends BaseModel
 {
     public function __construct(
@@ -44,12 +41,12 @@ class ActivityResponse extends BaseModel
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $ownReactions = null, // Current user's reactions to this activity
-        /** @var array<EnrichedCollectionResponse>|null */
-        #[ArrayOf(EnrichedCollectionResponse::class)]
+        /** @var array<string, EnrichedCollectionResponse>|null */
+        #[MapOf(EnrichedCollectionResponse::class)]
         public ?array $collections = null, // Enriched collection data referenced by this activity
         public ?object $custom = null, // Custom data for the activity
-        /** @var array<FeedsReactionGroupResponse>|null */
-        #[ArrayOf(FeedsReactionGroupResponse::class)]
+        /** @var array<string, FeedsReactionGroupResponse>|null */
+        #[MapOf(FeedsReactionGroupResponse::class)]
         public ?array $reactionGroups = null, // Grouped reactions by type
         public ?object $searchData = null, // Data for search indexing
         public ?UserResponse $user = null,

@@ -15,6 +15,7 @@ class MessageResponse extends BaseModel
         public ?string $html = null, // Contains HTML markup of the message. Can only be set when using server-side API
         public ?string $id = null, // Message ID is unique string identifier of the message
         public ?bool $mentionedChannel = null, // Whether the message mentioned the channel tag
+        public ?bool $mentionedHere = null, // Whether the message mentioned online users with @here tag
         public ?bool $pinned = null, // Whether message is pinned or not
         public ?int $replyCount = null, // Number of replies to this message
         public ?bool $shadowed = null, // Whether the message was shadowed or not
@@ -61,8 +62,8 @@ class MessageResponse extends BaseModel
         public ?UserResponse $pinnedBy = null,
         public ?PollResponseData $poll = null,
         public ?MessageResponse $quotedMessage = null,
-        /** @var array<ReactionGroupResponse>|null */
-        #[ArrayOf(ReactionGroupResponse::class)]
+        /** @var array<string, ReactionGroupResponse>|null */
+        #[MapOf(ReactionGroupResponse::class)]
         public ?array $reactionGroups = null,
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,

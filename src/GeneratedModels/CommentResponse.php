@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class CommentResponse extends BaseModel
 {
     public function __construct(
@@ -41,8 +38,8 @@ class CommentResponse extends BaseModel
         public ?array $latestReactions = null, // Recent reactions to the comment
         public ?object $custom = null, // Custom data for the comment
         public ?ModerationV2Response $moderation = null,
-        /** @var array<FeedsReactionGroupResponse>|null */
-        #[ArrayOf(FeedsReactionGroupResponse::class)]
+        /** @var array<string, FeedsReactionGroupResponse>|null */
+        #[MapOf(FeedsReactionGroupResponse::class)]
         public ?array $reactionGroups = null, // Grouped reactions by type
     ) {
     }

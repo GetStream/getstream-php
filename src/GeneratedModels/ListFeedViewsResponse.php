@@ -3,15 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class ListFeedViewsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<FeedViewResponse>|null */
-        #[ArrayOf(FeedViewResponse::class)]
+        /** @var array<string, FeedViewResponse>|null */
+        #[MapOf(FeedViewResponse::class)]
         public ?array $views = null, // Map of feed view ID to feed view
     ) {
     }

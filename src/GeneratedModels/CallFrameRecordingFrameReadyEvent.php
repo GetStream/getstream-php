@@ -16,8 +16,8 @@ class CallFrameRecordingFrameReadyEvent extends BaseModel
         public ?string $sessionID = null, // Call session ID
         public ?string $trackType = null, // The type of the track frame was captured from (TRACK_TYPE_VIDEO|TRACK_TYPE_SCREEN_SHARE)
         public ?string $url = null, // The URL of the frame
-        /** @var array<UserResponse>|null */
-        #[ArrayOf(UserResponse::class)]
+        /** @var array<string, UserResponse>|null */
+        #[MapOf(UserResponse::class)]
         public ?array $users = null, // The users in the frame
         public ?string $type = null, // The type of event: "call.frame_recording_ready" in this case
     ) {

@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class AppResponseFields extends BaseModel
 {
     public function __construct(
@@ -48,11 +45,11 @@ class AppResponseFields extends BaseModel
         public ?array $eventHooks = null,
         public ?array $userSearchDisallowedRoles = null,
         public ?array $webhookEvents = null,
-        /** @var array<CallType>|null */
-        #[ArrayOf(CallType::class)]
+        /** @var array<string, CallType>|null */
+        #[MapOf(CallType::class)]
         public ?array $callTypes = null,
-        /** @var array<ChannelConfig>|null */
-        #[ArrayOf(ChannelConfig::class)]
+        /** @var array<string, ChannelConfig>|null */
+        #[MapOf(ChannelConfig::class)]
         public ?array $channelConfigs = null,
         public ?FileUploadConfig $fileUploadConfig = null,
         public ?array $grants = null,

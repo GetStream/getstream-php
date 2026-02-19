@@ -45,8 +45,8 @@ class ThreadedCommentResponse extends BaseModel
         public ?object $custom = null,
         public ?RepliesMeta $meta = null,
         public ?ModerationV2Response $moderation = null,
-        /** @var array<FeedsReactionGroupResponse>|null */
-        #[ArrayOf(FeedsReactionGroupResponse::class)]
+        /** @var array<string, FeedsReactionGroupResponse>|null */
+        #[MapOf(FeedsReactionGroupResponse::class)]
         public ?array $reactionGroups = null,
     ) {
     }

@@ -16,7 +16,6 @@ trait FeedsTrait
 {
     /**
      * Create a new activity or update an existing one
-     * 
      *
      * @param GeneratedModels\AddActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\AddActivityResponse>
@@ -31,7 +30,6 @@ trait FeedsTrait
     }
     /**
      * Create new activities or update existing ones in a batch operation
-     * 
      *
      * @param GeneratedModels\UpsertActivitiesRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertActivitiesResponse>
@@ -46,10 +44,8 @@ trait FeedsTrait
     }
     /**
      * Updates certain fields of multiple activities in a batch. Use 'set' to update specific fields and 'unset' to remove fields. Activities that fail due to not found, permission denied, or no changes detected are silently skipped and not included in the response. However, validation errors (e.g., updating reserved fields, invalid field values) will fail the entire batch request.
-     * 
      * Sends events:
      * - feeds.activity.updated
-     * 
      *
      * @param GeneratedModels\UpdateActivitiesPartialBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateActivitiesPartialBatchResponse>
@@ -64,7 +60,6 @@ trait FeedsTrait
     }
     /**
      * Delete one or more activities by their IDs
-     * 
      *
      * @param GeneratedModels\DeleteActivitiesRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteActivitiesResponse>
@@ -79,7 +74,6 @@ trait FeedsTrait
     }
     /**
      * Query activities based on filters with pagination and sorting options
-     * 
      *
      * @param GeneratedModels\QueryActivitiesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryActivitiesResponse>
@@ -94,7 +88,6 @@ trait FeedsTrait
     }
     /**
      * Deletes a bookmark from an activity
-     * 
      *
      * @param string $activityID
      * @param string $folderID
@@ -118,7 +111,6 @@ trait FeedsTrait
     }
     /**
      * Updates a bookmark for an activity
-     * 
      *
      * @param string $activityID
      * @param GeneratedModels\UpdateBookmarkRequest $requestData
@@ -135,7 +127,6 @@ trait FeedsTrait
     }
     /**
      * Adds a bookmark to an activity
-     * 
      *
      * @param string $activityID
      * @param GeneratedModels\AddBookmarkRequest $requestData
@@ -152,7 +143,6 @@ trait FeedsTrait
     }
     /**
      * Submit feedback for an activity including options to show less, hide, report, or mute the user
-     * 
      *
      * @param string $activityID
      * @param GeneratedModels\ActivityFeedbackRequest $requestData
@@ -169,7 +159,6 @@ trait FeedsTrait
     }
     /**
      * Cast a vote on a poll
-     * 
      * Sends events:
      * - feeds.poll.vote_casted
      * - feeds.poll.vote_changed
@@ -177,7 +166,6 @@ trait FeedsTrait
      * - poll.vote_casted
      * - poll.vote_changed
      * - poll.vote_removed
-     * 
      *
      * @param string $activityID
      * @param string $pollID
@@ -196,11 +184,9 @@ trait FeedsTrait
     }
     /**
      * Delete a vote from a poll
-     * 
      * Sends events:
      * - feeds.poll.vote_removed
      * - poll.vote_removed
-     * 
      *
      * @param string $activityID
      * @param string $pollID
@@ -224,7 +210,6 @@ trait FeedsTrait
     }
     /**
      * Adds a reaction to an activity
-     * 
      *
      * @param string $activityID
      * @param GeneratedModels\AddReactionRequest $requestData
@@ -241,7 +226,6 @@ trait FeedsTrait
     }
     /**
      * Query activity reactions
-     * 
      *
      * @param string $activityID
      * @param GeneratedModels\QueryActivityReactionsRequest $requestData
@@ -258,7 +242,6 @@ trait FeedsTrait
     }
     /**
      * Removes a reaction from an activity
-     * 
      *
      * @param string $activityID
      * @param string $type
@@ -284,7 +267,6 @@ trait FeedsTrait
     }
     /**
      * Delete a single activity by its ID
-     * 
      *
      * @param string $id
      * @param bool $hardDelete
@@ -308,7 +290,6 @@ trait FeedsTrait
     }
     /**
      * Returns activity by ID
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
@@ -324,10 +305,8 @@ trait FeedsTrait
     }
     /**
      * Updates certain fields of the activity. Use 'set' to update specific fields and 'unset' to remove fields. This allows you to update only the fields you need without replacing the entire activity. Useful for updating reply restrictions ('restrict_replies'), mentioned users, or custom data.
-     * 
      * Sends events:
      * - feeds.activity.updated
-     * 
      *
      * @param string $id
      * @param GeneratedModels\UpdateActivityPartialRequest $requestData
@@ -344,10 +323,8 @@ trait FeedsTrait
     }
     /**
      * Replaces an activity with the provided data. Use this to update text, attachments, reply restrictions ('restrict_replies'), mentioned users, and other activity fields. Note: This is a full update - any fields not provided will be cleared.
-     * 
      * Sends events:
      * - feeds.activity.updated
-     * 
      *
      * @param string $id
      * @param GeneratedModels\UpdateActivityRequest $requestData
@@ -364,7 +341,6 @@ trait FeedsTrait
     }
     /**
      * Restores a soft-deleted activity by its ID. Only the activity owner can restore their own activities.
-     * 
      *
      * @param string $id
      * @param GeneratedModels\RestoreActivityRequest $requestData
@@ -381,7 +357,6 @@ trait FeedsTrait
     }
     /**
      * Query bookmark folders with filter query
-     * 
      *
      * @param GeneratedModels\QueryBookmarkFoldersRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryBookmarkFoldersResponse>
@@ -396,7 +371,6 @@ trait FeedsTrait
     }
     /**
      * Delete a bookmark folder by its ID
-     * 
      *
      * @param string $folderID
      * @return StreamResponse<GeneratedModels\DeleteBookmarkFolderResponse>
@@ -412,7 +386,6 @@ trait FeedsTrait
     }
     /**
      * Update a bookmark folder by its ID
-     * 
      *
      * @param string $folderID
      * @param GeneratedModels\UpdateBookmarkFolderRequest $requestData
@@ -429,7 +402,6 @@ trait FeedsTrait
     }
     /**
      * Query bookmarks with filter query
-     * 
      *
      * @param GeneratedModels\QueryBookmarksRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryBookmarksResponse>
@@ -444,7 +416,6 @@ trait FeedsTrait
     }
     /**
      * Delete collections in a batch operation. Users can only delete their own collections.
-     * 
      *
      * @param array $collectionRefs
      * @return StreamResponse<GeneratedModels\DeleteCollectionsResponse>
@@ -462,7 +433,6 @@ trait FeedsTrait
     }
     /**
      * Read collections with optional filtering by user ID and collection name. By default, users can only read their own collections.
-     * 
      *
      * @param array $collectionRefs
      * @param string $userID
@@ -484,7 +454,6 @@ trait FeedsTrait
     }
     /**
      * Update existing collections in a batch operation. Only the custom data field is updatable. Users can only update their own collections.
-     * 
      *
      * @param GeneratedModels\UpdateCollectionsRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateCollectionsResponse>
@@ -499,7 +468,6 @@ trait FeedsTrait
     }
     /**
      * Create new collections in a batch operation. Collections are data objects that can be attached to activities for managing shared data across multiple activities.
-     * 
      *
      * @param GeneratedModels\CreateCollectionsRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateCollectionsResponse>
@@ -514,7 +482,6 @@ trait FeedsTrait
     }
     /**
      * Insert new collections or update existing ones in a batch operation. Only the custom data field is updatable for existing collections.
-     * 
      *
      * @param GeneratedModels\UpsertCollectionsRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertCollectionsResponse>
@@ -529,7 +496,6 @@ trait FeedsTrait
     }
     /**
      * Retrieve a threaded list of comments for a specific object (e.g., activity), with configurable depth, sorting, and pagination
-     * 
      *
      * @param string $objectID
      * @param string $objectType
@@ -579,7 +545,6 @@ trait FeedsTrait
     }
     /**
      * Adds a comment to an object (e.g., activity) or a reply to an existing comment, and broadcasts appropriate events
-     * 
      *
      * @param GeneratedModels\AddCommentRequest $requestData
      * @return StreamResponse<GeneratedModels\AddCommentResponse>
@@ -594,7 +559,6 @@ trait FeedsTrait
     }
     /**
      * Adds multiple comments in a single request. Each comment must specify the object type and ID.
-     * 
      *
      * @param GeneratedModels\AddCommentsBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\AddCommentsBatchResponse>
@@ -609,7 +573,6 @@ trait FeedsTrait
     }
     /**
      * Query comments using MongoDB-style filters with pagination and sorting options
-     * 
      *
      * @param GeneratedModels\QueryCommentsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCommentsResponse>
@@ -624,7 +587,6 @@ trait FeedsTrait
     }
     /**
      * Deletes a comment from an object (e.g., activity) and broadcasts appropriate events
-     * 
      *
      * @param string $id
      * @param bool $hardDelete
@@ -648,7 +610,6 @@ trait FeedsTrait
     }
     /**
      * Get a comment by ID
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetCommentResponse>
@@ -664,7 +625,6 @@ trait FeedsTrait
     }
     /**
      * Updates a comment on an object (e.g., activity) and broadcasts appropriate events
-     * 
      *
      * @param string $id
      * @param GeneratedModels\UpdateCommentRequest $requestData
@@ -681,7 +641,6 @@ trait FeedsTrait
     }
     /**
      * Adds a reaction to a comment
-     * 
      *
      * @param string $id
      * @param GeneratedModels\AddCommentReactionRequest $requestData
@@ -698,7 +657,6 @@ trait FeedsTrait
     }
     /**
      * Query comment reactions
-     * 
      *
      * @param string $id
      * @param GeneratedModels\QueryCommentReactionsRequest $requestData
@@ -715,7 +673,6 @@ trait FeedsTrait
     }
     /**
      * Deletes a reaction from a comment
-     * 
      *
      * @param string $id
      * @param string $type
@@ -741,7 +698,6 @@ trait FeedsTrait
     }
     /**
      * Retrieve a threaded list of replies for a single comment, with configurable depth, sorting, and pagination
-     * 
      *
      * @param string $id
      * @param int $depth
@@ -785,7 +741,6 @@ trait FeedsTrait
     }
     /**
      * List all feed groups for the application
-     * 
      *
      * @param bool $includeSoftDeleted
      * @return StreamResponse<GeneratedModels\ListFeedGroupsResponse>
@@ -803,7 +758,6 @@ trait FeedsTrait
     }
     /**
      * Creates a new feed group with the specified configuration
-     * 
      *
      * @param GeneratedModels\CreateFeedGroupRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateFeedGroupResponse>
@@ -818,7 +772,6 @@ trait FeedsTrait
     }
     /**
      * Delete a single feed by its ID
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -840,7 +793,6 @@ trait FeedsTrait
     }
     /**
      * Create a single feed for a given feed group
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -859,7 +811,6 @@ trait FeedsTrait
     }
     /**
      * Update an existing feed
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -878,7 +829,6 @@ trait FeedsTrait
     }
     /**
      * Mark activities as read/seen/watched. Can mark by timestamp (seen), activity IDs (read), or all as read.
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -897,7 +847,6 @@ trait FeedsTrait
     }
     /**
      * Unpin an activity from a feed. This removes the pin, so the activity will no longer be displayed at the top of the feed.
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -921,7 +870,6 @@ trait FeedsTrait
     }
     /**
      * Pin an activity to a feed. Pinned activities are typically displayed at the top of a feed.
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -942,7 +890,6 @@ trait FeedsTrait
     }
     /**
      * Add, remove, or set members for a feed
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -961,7 +908,6 @@ trait FeedsTrait
     }
     /**
      * Accepts a pending feed member request
-     * 
      *
      * @param string $feedID
      * @param string $feedGroupID
@@ -980,7 +926,6 @@ trait FeedsTrait
     }
     /**
      * Query feed members based on filters with pagination and sorting options
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -999,7 +944,6 @@ trait FeedsTrait
     }
     /**
      * Rejects a pending feed member request
-     * 
      *
      * @param string $feedGroupID
      * @param string $feedID
@@ -1017,8 +961,25 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RejectFeedMemberInviteResponse::class);
     }
     /**
+     * Query pinned activities for a feed with filter query
+     *
+     * @param string $feedGroupID
+     * @param string $feedID
+     * @param GeneratedModels\QueryPinnedActivitiesRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryPinnedActivitiesResponse>
+     * @throws StreamException
+     */
+    public function queryPinnedActivities(string $feedGroupID, string $feedID, GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/pinned_activities/query';
+        $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
+        $path = str_replace('{feed_id}', (string) $feedID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryPinnedActivitiesResponse::class);
+    }
+    /**
      * Get follow suggestions for a feed group
-     * 
      *
      * @param string $feedGroupID
      * @param int $limit
@@ -1042,7 +1003,6 @@ trait FeedsTrait
     }
     /**
      * Delete a feed group by its ID. Can perform a soft delete (default) or hard delete.
-     * 
      *
      * @param string $id
      * @param bool $hardDelete
@@ -1062,7 +1022,6 @@ trait FeedsTrait
     }
     /**
      * Get a feed group by ID
-     * 
      *
      * @param string $id
      * @param bool $includeSoftDeleted
@@ -1082,7 +1041,6 @@ trait FeedsTrait
     }
     /**
      * Get an existing feed group or create a new one if it doesn't exist
-     * 
      *
      * @param string $id
      * @param GeneratedModels\GetOrCreateFeedGroupRequest $requestData
@@ -1099,7 +1057,6 @@ trait FeedsTrait
     }
     /**
      * Update a feed group by ID
-     * 
      *
      * @param string $id
      * @param GeneratedModels\UpdateFeedGroupRequest $requestData
@@ -1116,7 +1073,6 @@ trait FeedsTrait
     }
     /**
      * List all feed views for a feed group
-     * 
      *
      * @return StreamResponse<GeneratedModels\ListFeedViewsResponse>
      * @throws StreamException
@@ -1130,7 +1086,6 @@ trait FeedsTrait
     }
     /**
      * Create a custom view for a feed group with specific selectors, ranking, or aggregation options
-     * 
      *
      * @param GeneratedModels\CreateFeedViewRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateFeedViewResponse>
@@ -1145,7 +1100,6 @@ trait FeedsTrait
     }
     /**
      * Delete an existing custom feed view
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\DeleteFeedViewResponse>
@@ -1161,7 +1115,6 @@ trait FeedsTrait
     }
     /**
      * Get a feed view by its ID
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetFeedViewResponse>
@@ -1177,7 +1130,6 @@ trait FeedsTrait
     }
     /**
      * Get an existing feed view or create a new one if it doesn't exist
-     * 
      *
      * @param string $id
      * @param GeneratedModels\GetOrCreateFeedViewRequest $requestData
@@ -1194,7 +1146,6 @@ trait FeedsTrait
     }
     /**
      * Update an existing custom feed view with new selectors, ranking, or aggregation options
-     * 
      *
      * @param string $id
      * @param GeneratedModels\UpdateFeedViewRequest $requestData
@@ -1211,7 +1162,6 @@ trait FeedsTrait
     }
     /**
      * Gets all available feed visibility configurations and their permissions
-     * 
      *
      * @return StreamResponse<GeneratedModels\ListFeedVisibilitiesResponse>
      * @throws StreamException
@@ -1225,7 +1175,6 @@ trait FeedsTrait
     }
     /**
      * Gets feed visibility configuration and permissions
-     * 
      *
      * @param string $name
      * @return StreamResponse<GeneratedModels\GetFeedVisibilityResponse>
@@ -1241,7 +1190,6 @@ trait FeedsTrait
     }
     /**
      * Updates an existing predefined feed visibility configuration
-     * 
      *
      * @param string $name
      * @param GeneratedModels\UpdateFeedVisibilityRequest $requestData
@@ -1258,7 +1206,6 @@ trait FeedsTrait
     }
     /**
      * Create multiple feeds at once for a given feed group
-     * 
      *
      * @param GeneratedModels\CreateFeedsBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateFeedsBatchResponse>
@@ -1273,7 +1220,6 @@ trait FeedsTrait
     }
     /**
      * Delete multiple feeds by their IDs. All feeds must exist. This endpoint is server-side only.
-     * 
      *
      * @param GeneratedModels\DeleteFeedsBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteFeedsBatchResponse>
@@ -1288,7 +1234,6 @@ trait FeedsTrait
     }
     /**
      * Retrieves own_follows, own_capabilities, and/or own_membership for multiple feeds in a single request. If fields are not specified, all three fields are returned.
-     * 
      *
      * @param GeneratedModels\OwnBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\OwnBatchResponse>
@@ -1303,7 +1248,6 @@ trait FeedsTrait
     }
     /**
      * Query feeds with filter query
-     * 
      *
      * @param GeneratedModels\QueryFeedsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFeedsResponse>
@@ -1319,7 +1263,6 @@ trait FeedsTrait
     /**
      * Retrieve current rate limit status for feeds operations.
      * Returns information about limits, usage, and remaining quota for various feed operations.
-     * 
      *
      * @param string $endpoints
      * @param bool $android
@@ -1353,7 +1296,6 @@ trait FeedsTrait
     }
     /**
      * Updates a follow's custom data, push preference, and follower role. Source owner can update custom data and push preference. Follower role can only be updated via server-side requests.
-     * 
      *
      * @param GeneratedModels\UpdateFollowRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateFollowResponse>
@@ -1368,7 +1310,6 @@ trait FeedsTrait
     }
     /**
      * Creates a follow and broadcasts FollowAddedEvent
-     * 
      *
      * @param GeneratedModels\FollowRequest $requestData
      * @return StreamResponse<GeneratedModels\SingleFollowResponse>
@@ -1383,7 +1324,6 @@ trait FeedsTrait
     }
     /**
      * Accepts a pending follow request
-     * 
      *
      * @param GeneratedModels\AcceptFollowRequest $requestData
      * @return StreamResponse<GeneratedModels\AcceptFollowResponse>
@@ -1398,7 +1338,6 @@ trait FeedsTrait
     }
     /**
      * Creates multiple follows at once and broadcasts FollowAddedEvent for each follow
-     * 
      *
      * @param GeneratedModels\FollowBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\FollowBatchResponse>
@@ -1413,7 +1352,6 @@ trait FeedsTrait
     }
     /**
      * Creates or updates multiple follows at once. Does not return an error if follows already exist. Broadcasts FollowAddedEvent only for newly created follows.
-     * 
      *
      * @param GeneratedModels\FollowBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\FollowBatchResponse>
@@ -1428,7 +1366,6 @@ trait FeedsTrait
     }
     /**
      * Query follows based on filters with pagination and sorting options
-     * 
      *
      * @param GeneratedModels\QueryFollowsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFollowsResponse>
@@ -1443,7 +1380,6 @@ trait FeedsTrait
     }
     /**
      * Rejects a pending follow request
-     * 
      *
      * @param GeneratedModels\RejectFollowRequest $requestData
      * @return StreamResponse<GeneratedModels\RejectFollowResponse>
@@ -1458,7 +1394,6 @@ trait FeedsTrait
     }
     /**
      * Removes a follow and broadcasts FollowRemovedEvent
-     * 
      *
      * @param string $source
      * @param string $target
@@ -1480,7 +1415,6 @@ trait FeedsTrait
     }
     /**
      * Create a new membership level with tag-based access controls
-     * 
      *
      * @param GeneratedModels\CreateMembershipLevelRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateMembershipLevelResponse>
@@ -1495,7 +1429,6 @@ trait FeedsTrait
     }
     /**
      * Query membership levels with filter query
-     * 
      *
      * @param GeneratedModels\QueryMembershipLevelsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryMembershipLevelsResponse>
@@ -1510,7 +1443,6 @@ trait FeedsTrait
     }
     /**
      * Delete a membership level by its UUID. This operation is irreversible.
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\Response>
@@ -1526,7 +1458,6 @@ trait FeedsTrait
     }
     /**
      * Update a membership level with partial updates. Only specified fields will be updated.
-     * 
      *
      * @param string $id
      * @param GeneratedModels\UpdateMembershipLevelRequest $requestData
@@ -1545,7 +1476,6 @@ trait FeedsTrait
      * Retrieve usage statistics for feeds including activity count, follow count, and API request count.
      * Returns data aggregated by day with pagination support via from/to date parameters.
      * This endpoint is server-side only.
-     * 
      *
      * @param GeneratedModels\QueryFeedsUsageStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFeedsUsageStatsResponse>
@@ -1560,7 +1490,6 @@ trait FeedsTrait
     }
     /**
      * Removes multiple follows at once and broadcasts FollowRemovedEvent for each one
-     * 
      *
      * @param GeneratedModels\UnfollowBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\UnfollowBatchResponse>
@@ -1575,7 +1504,6 @@ trait FeedsTrait
     }
     /**
      * Removes multiple follows and broadcasts FollowRemovedEvent for each. Does not return an error if follows don't exist.
-     * 
      *
      * @param GeneratedModels\UnfollowBatchRequest $requestData
      * @return StreamResponse<GeneratedModels\UnfollowBatchResponse>
@@ -1590,7 +1518,6 @@ trait FeedsTrait
     }
     /**
      * Delete all feed data for a user including: feeds, activities, follows, comments, feed reactions, bookmark folders, bookmarks, and collections owned by the user
-     * 
      *
      * @param string $userID
      * @param GeneratedModels\DeleteFeedUserDataRequest $requestData
@@ -1607,7 +1534,6 @@ trait FeedsTrait
     }
     /**
      * Export all feed data for a user including: user profile, feeds, activities, follows, comments, feed reactions, bookmark folders, bookmarks, and collections owned by the user
-     * 
      *
      * @param string $userID
      * @return StreamResponse<GeneratedModels\ExportFeedUserDataResponse>

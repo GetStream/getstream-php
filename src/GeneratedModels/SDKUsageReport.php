@@ -3,14 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class SDKUsageReport extends BaseModel
 {
     public function __construct(
-        /** @var array<PerSDKUsageReport>|null */
-        #[ArrayOf(PerSDKUsageReport::class)]
+        /** @var array<string, PerSDKUsageReport>|null */
+        #[MapOf(PerSDKUsageReport::class)]
         public ?array $perSdkUsage = null,
     ) {
     }

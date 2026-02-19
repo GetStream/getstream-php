@@ -10,8 +10,8 @@ class UserUnreadReminderEvent extends BaseModel
 {
     public function __construct(
         public ?\DateTime $createdAt = null, // Date/time of creation
-        /** @var array<ChannelMessagesResponse>|null */
-        #[ArrayOf(ChannelMessagesResponse::class)]
+        /** @var array<string, ChannelMessagesResponse>|null */
+        #[MapOf(ChannelMessagesResponse::class)]
         public ?array $channels = null, // The channels with unread messages
         public ?object $custom = null,
         public ?UserResponseCommonFields $user = null,

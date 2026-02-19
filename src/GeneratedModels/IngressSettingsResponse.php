@@ -3,16 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class IngressSettingsResponse extends BaseModel
 {
     public function __construct(
         public ?bool $enabled = null,
         public ?IngressAudioEncodingResponse $audioEncodingOptions = null,
-        /** @var array<IngressVideoEncodingResponse>|null */
-        #[ArrayOf(IngressVideoEncodingResponse::class)]
+        /** @var array<string, IngressVideoEncodingResponse>|null */
+        #[MapOf(IngressVideoEncodingResponse::class)]
         public ?array $videoEncodingOptions = null,
     ) {
     }

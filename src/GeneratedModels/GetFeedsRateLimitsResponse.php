@@ -3,24 +3,21 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class GetFeedsRateLimitsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
-        /** @var array<LimitInfoResponse>|null */
-        #[ArrayOf(LimitInfoResponse::class)]
+        /** @var array<string, LimitInfoResponse>|null */
+        #[MapOf(LimitInfoResponse::class)]
         public ?array $android = null, // Rate limits for Android platform (endpoint name -> limit info)
-        /** @var array<LimitInfoResponse>|null */
-        #[ArrayOf(LimitInfoResponse::class)]
+        /** @var array<string, LimitInfoResponse>|null */
+        #[MapOf(LimitInfoResponse::class)]
         public ?array $ios = null, // Rate limits for iOS platform (endpoint name -> limit info)
-        /** @var array<LimitInfoResponse>|null */
-        #[ArrayOf(LimitInfoResponse::class)]
+        /** @var array<string, LimitInfoResponse>|null */
+        #[MapOf(LimitInfoResponse::class)]
         public ?array $serverSide = null, // Rate limits for server-side platform (endpoint name -> limit info)
-        /** @var array<LimitInfoResponse>|null */
-        #[ArrayOf(LimitInfoResponse::class)]
+        /** @var array<string, LimitInfoResponse>|null */
+        #[MapOf(LimitInfoResponse::class)]
         public ?array $web = null, // Rate limits for Web platform (endpoint name -> limit info)
     ) {
     }

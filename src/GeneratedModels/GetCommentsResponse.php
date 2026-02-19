@@ -3,13 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class GetCommentsResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null,
+        public ?string $sort = null, // Sort order used for the comments (first, last, top, best, controversial)
         /** @var array<ThreadedCommentResponse>|null */
         #[ArrayOf(ThreadedCommentResponse::class)]
         public ?array $comments = null, // Threaded listing for the activity

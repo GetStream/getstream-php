@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class UserRatingReportResponse extends BaseModel
 {
     public function __construct(
