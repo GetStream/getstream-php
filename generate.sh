@@ -16,7 +16,7 @@ then
   exit 1;
 fi
 
-set -ex
+set -e
 
 # cd in API repo, generate new spec and then generate code from it
 ( cd $SOURCE_PATH ; make openapi ; go run ./cmd/chat-manager openapi generate-client --language php --spec ./releases/v2/serverside-api.yaml --output $DST_PATH )
