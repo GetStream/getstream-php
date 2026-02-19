@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- */
 class CheckPushResponse extends BaseModel
 {
     public function __construct(
@@ -15,8 +12,8 @@ class CheckPushResponse extends BaseModel
         public ?string $renderedFirebaseTemplate = null,
         public ?bool $skipDevices = null, // Don't require existing devices to render templates
         public ?array $generalErrors = null, // List of general errors
-        /** @var array<DeviceErrorInfo>|null */
-        #[ArrayOf(DeviceErrorInfo::class)]
+        /** @var array<string, DeviceErrorInfo>|null */
+        #[MapOf(DeviceErrorInfo::class)]
         public ?array $deviceErrors = null, // Object with device errors
         public ?array $renderedMessage = null,
     ) {

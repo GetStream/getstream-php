@@ -24,6 +24,15 @@ class ArrayOf
 {
     public function __construct(public string $modelClass) {}
 }
+
+/**
+ * Attribute to specify that an array is a map (associative array) with string keys and model object values
+ */
+#[\Attribute(\Attribute::TARGET_ALL)]
+class MapOf
+{
+    public function __construct(public string $modelClass) {}
+}
 /**
  * Base class for all generated models with automatic JSON parsing based on constructor types
  */
@@ -114,6 +123,11 @@ abstract class BaseModel implements JsonSerializable
             case 'float':
             case 'bool':
             case 'array':
+                // Check if array should be parsed as map of model objects
+                $mapOfAttr = self::getMapOfAttribute($param);
+                if ($mapOfAttr !== null && is_array($value)) {
+                    return self::parseMapOfModels($value, $mapOfAttr);
+                }
                 // Check if array should be parsed as array of model objects
                 $arrayOfAttr = self::getArrayOfAttribute($param);
                 if ($arrayOfAttr !== null && is_array($value)) {
@@ -153,6 +167,34 @@ abstract class BaseModel implements JsonSerializable
             return $attributes[0]->newInstance()->modelClass;
         }
         return null;
+    }
+
+    /**
+     * Get MapOf attribute for a parameter if it exists
+     */
+    private static function getMapOfAttribute(\ReflectionParameter $param): ?string
+    {
+        $attributes = $param->getAttributes(MapOf::class);
+        if (!empty($attributes)) {
+            return $attributes[0]->newInstance()->modelClass;
+        }
+        return null;
+    }
+
+    /**
+     * Parse associative array (map) of model objects, preserving string keys
+     */
+    private static function parseMapOfModels(array $value, string $modelClass): array
+    {
+        if (!class_exists($modelClass) || !is_subclass_of($modelClass, BaseModel::class)) {
+            return $value;
+        }
+
+        $result = [];
+        foreach ($value as $key => $item) {
+            $result[$key] = is_array($item) ? $modelClass::fromJson($item) : $item;
+        }
+        return $result;
     }
 
     /**
