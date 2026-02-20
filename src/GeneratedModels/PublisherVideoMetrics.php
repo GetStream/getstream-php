@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class PublisherVideoMetrics extends BaseModel
 {
     public function __construct(
-        public ?ActiveCallsBitrateStats $bitrate = null,
+        public ?ActiveCallsLatencyStats $jitterMs = null,
         public ?ActiveCallsFPSStats $fps30 = null,
         public ?ActiveCallsLatencyStats $frameEncodingTimeMs = null,
-        public ?ActiveCallsLatencyStats $jitterMs = null,
         public ?ActiveCallsResolutionStats $resolution = null,
+        public ?ActiveCallsBitrateStats $bitrate = null,
     ) {
     }
 

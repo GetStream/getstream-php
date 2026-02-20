@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class PushPreferencesResponse extends BaseModel
 {
     public function __construct(
-        public ?FeedsPreferencesResponse $feedsPreferences = null,
         public ?string $chatLevel = null,
         public ?string $callLevel = null,
         public ?string $feedsLevel = null,
+        public ?FeedsPreferencesResponse $feedsPreferences = null,
         public ?\DateTime $disabledUntil = null,
     ) {
     }

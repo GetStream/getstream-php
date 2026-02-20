@@ -6,11 +6,10 @@ namespace GetStream\GeneratedModels;
 class CommentResponse extends BaseModel
 {
     public function __construct(
-        public ?ModerationV2Response $moderation = null,
-        public ?UserResponse $user = null,
         public ?string $id = null, // Unique identifier for the comment
         public ?string $objectID = null, // ID of the object this comment is associated with
         public ?string $objectType = null, // Type of the object this comment is associated with
+        public ?UserResponse $user = null,
         public ?string $text = null, // Text content of the comment
         public ?object $custom = null, // Custom data for the comment
         public ?string $parentID = null, // ID of parent comment for nested replies
@@ -32,6 +31,7 @@ class CommentResponse extends BaseModel
         public ?\DateTime $updatedAt = null, // When the comment was last updated
         public ?\DateTime $editedAt = null, // When the comment was last edited
         public ?\DateTime $deletedAt = null, // When the comment was deleted
+        public ?ModerationV2Response $moderation = null,
         public ?int $replyCount = null, // Number of replies to this comment
         public ?int $upvoteCount = null, // Number of upvotes for this comment
         public ?int $downvoteCount = null, // Number of downvotes for this comment

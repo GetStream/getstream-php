@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class ModerationDashboardPreferences extends BaseModel
 {
     public function __construct(
-        public ?OverviewDashboardConfig $overviewDashboard = null,
         public ?bool $mediaQueueBlurEnabled = null,
         public ?bool $flagUserOnFlaggedContent = null,
         public ?bool $disableFlaggingReviewedEntity = null,
         public ?array $allowedModerationActionReasons = null,
+        public ?OverviewDashboardConfig $overviewDashboard = null,
         public ?bool $asyncReviewQueueUpsert = null,
         public ?bool $disableAuditLogs = null,
     ) {

@@ -6,8 +6,6 @@ namespace GetStream\GeneratedModels;
 class EntityCreatorResponse extends BaseModel
 {
     public function __construct(
-        public ?PrivacySettingsResponse $privacySettings = null,
-        public ?PushNotificationSettingsResponse $pushNotifications = null,
         public ?string $id = null,
         public ?string $name = null,
         public ?string $image = null,
@@ -28,6 +26,8 @@ class EntityCreatorResponse extends BaseModel
         public ?int $avgResponseTime = null,
         public ?bool $shadowBanned = null,
         public ?\DateTime $banExpires = null,
+        public ?PushNotificationSettingsResponse $pushNotifications = null,
+        public ?PrivacySettingsResponse $privacySettings = null,
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null,

@@ -6,15 +6,11 @@ namespace GetStream\GeneratedModels;
 class AppResponseFields extends BaseModel
 {
     public function __construct(
-        public ?DataDogInfo $datadogInfo = null,
-        public ?FileUploadConfig $fileUploadConfig = null,
-        public ?FileUploadConfig $imageUploadConfig = null,
-        public ?ModerationDashboardPreferences $moderationDashboardPreferences = null,
-        public ?PushNotificationFields $pushNotifications = null,
         public ?int $id = null,
         public ?string $name = null,
         public ?string $organization = null,
         public ?string $placement = null,
+        public ?PushNotificationFields $pushNotifications = null,
         public ?string $webhookUrl = null,
         public ?string $moderationWebhookUrl = null,
         /** @var array<string, ChannelConfig>|null */
@@ -46,6 +42,8 @@ class AppResponseFields extends BaseModel
         public ?string $snsTopicArn = null,
         public ?string $snsKey = null,
         public ?string $snsSecret = null,
+        public ?FileUploadConfig $fileUploadConfig = null,
+        public ?FileUploadConfig $imageUploadConfig = null,
         public ?\DateTime $revokeTokensIssuedBefore = null,
         public ?array $grants = null,
         public ?bool $campaignEnabled = null,
@@ -55,9 +53,11 @@ class AppResponseFields extends BaseModel
         /** @var array<GeofenceResponse>|null */
         #[ArrayOf(GeofenceResponse::class)]
         public ?array $geofences = null,
+        public ?DataDogInfo $datadogInfo = null,
         public ?bool $moderationEnabled = null,
         public ?bool $moderationMultitenantBlocklistEnabled = null,
         public ?bool $guestUserCreationDisabled = null,
+        public ?ModerationDashboardPreferences $moderationDashboardPreferences = null,
         /** @var array<EventHook>|null */
         #[ArrayOf(EventHook::class)]
         public ?array $eventHooks = null,

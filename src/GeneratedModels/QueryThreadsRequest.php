@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class QueryThreadsRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?int $replyLimit = null, // Limit the number of replies returned per each thread
         public ?int $participantLimit = null, // Limit the number of participants returned per each thread
         public ?int $memberLimit = null,
@@ -18,6 +17,7 @@ class QueryThreadsRequest extends BaseModel
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

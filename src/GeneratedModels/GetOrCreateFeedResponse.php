@@ -10,10 +10,6 @@ class GetOrCreateFeedResponse extends BaseModel
 {
     public function __construct(
         public ?FeedResponse $feed = null,
-        public ?PagerResponse $followersPagination = null,
-        public ?PagerResponse $followingPagination = null,
-        public ?PagerResponse $memberPagination = null,
-        public ?NotificationStatusResponse $notificationStatus = null,
         /** @var array<ActivityResponse>|null */
         #[ArrayOf(ActivityResponse::class)]
         public ?array $activities = null,
@@ -32,6 +28,10 @@ class GetOrCreateFeedResponse extends BaseModel
         /** @var array<ActivityPinResponse>|null */
         #[ArrayOf(ActivityPinResponse::class)]
         public ?array $pinnedActivities = null,
+        public ?PagerResponse $memberPagination = null,
+        public ?PagerResponse $followersPagination = null,
+        public ?PagerResponse $followingPagination = null,
+        public ?NotificationStatusResponse $notificationStatus = null,
         public ?bool $created = null,
         public ?string $next = null,
         public ?string $prev = null,

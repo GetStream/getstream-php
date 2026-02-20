@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DailyAggregateQualityScoreReportResponse extends BaseModel
 {
     public function __construct(
-        public ?QualityScoreReport $report = null,
         public ?string $date = null,
+        public ?QualityScoreReport $report = null,
     ) {
     }
 

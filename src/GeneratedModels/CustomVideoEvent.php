@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class CustomVideoEvent extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
         public ?string $type = null, // The type of event, "custom" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
         public ?object $custom = null, // Custom data for this object
+        public ?UserResponse $user = null,
     ) {
     }
 

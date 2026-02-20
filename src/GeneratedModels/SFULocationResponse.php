@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class SFULocationResponse extends BaseModel
 {
     public function __construct(
-        public ?CoordinatesResponse $coordinates = null,
-        public ?LocationResponse $location = null,
         public ?string $id = null,
         public ?string $datacenter = null,
+        public ?LocationResponse $location = null,
+        public ?CoordinatesResponse $coordinates = null,
         public ?int $count = null,
     ) {
     }

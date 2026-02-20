@@ -9,9 +9,6 @@ namespace GetStream\GeneratedModels;
 class MessageReadEvent extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
-        public ?ThreadResponse $thread = null,
-        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "message.read" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
@@ -23,6 +20,9 @@ class MessageReadEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel where the message was read
         public ?string $channelID = null, // The ID of the channel where the message was read
+        public ?UserResponseCommonFields $user = null,
+        public ?ChannelResponse $channel = null,
+        public ?ThreadResponse $thread = null,
         public ?string $lastReadMessageID = null, // The ID of the last read message
     ) {
     }

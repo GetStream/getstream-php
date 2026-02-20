@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class ClosedCaptionEvent extends BaseModel
 {
     public function __construct(
-        public ?CallClosedCaption $closedCaption = null,
         public ?string $type = null, // The type of event: "call.closed_caption" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
+        public ?CallClosedCaption $closedCaption = null,
     ) {
     }
 

@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class CallTranscriptionReadyEvent extends BaseModel
 {
     public function __construct(
-        public ?CallTranscription $callTranscription = null,
         public ?string $type = null, // The type of event: "call.transcription_ready" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
+        public ?CallTranscription $callTranscription = null,
         public ?string $egressID = null,
     ) {
     }

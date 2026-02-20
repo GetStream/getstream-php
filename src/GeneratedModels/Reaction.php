@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class Reaction extends BaseModel
 {
     public function __construct(
-        public ?User $user = null,
         public ?string $id = null,
         public ?string $kind = null,
         public ?string $activityID = null,
@@ -15,6 +14,7 @@ class Reaction extends BaseModel
         public ?array $targetFeeds = null,
         public ?object $targetFeedsExtraData = null,
         public ?string $parent = null,
+        public ?User $user = null,
         public ?array $latestChildren = null,
         public ?array $ownChildren = null,
         public ?object $childrenCounts = null,

@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class RuleBuilderAction extends BaseModel
 {
     public function __construct(
-        public ?BanOptions $banOptions = null,
-        public ?CallActionOptions $callOptions = null,
-        public ?FlagUserOptions $flagUserOptions = null,
         public ?string $type = null,
+        public ?BanOptions $banOptions = null,
+        public ?FlagUserOptions $flagUserOptions = null,
+        public ?CallActionOptions $callOptions = null,
     ) {
     }
 

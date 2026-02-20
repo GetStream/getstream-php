@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class StoriesFeedUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?UserResponseCommonFields $user = null,
         /** @var array<AggregatedActivityResponse>|null */
         #[ArrayOf(AggregatedActivityResponse::class)]
         public ?array $aggregatedActivities = null, // Aggregated activities for stories feeds
@@ -22,6 +21,7 @@ class StoriesFeedUpdatedEvent extends BaseModel
         public ?object $custom = null,
         public ?string $fid = null, // The ID of the feed
         public ?string $feedVisibility = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

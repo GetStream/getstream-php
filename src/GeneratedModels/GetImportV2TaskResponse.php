@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class GetImportV2TaskResponse extends BaseModel
 {
     public function __construct(
-        public ?ImportV2TaskSettings $settings = null,
         public ?string $id = null,
         public ?int $appPk = null,
         public ?string $product = null,
         public ?int $state = null,
+        public ?ImportV2TaskSettings $settings = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?string $duration = null, // Duration of the request in milliseconds

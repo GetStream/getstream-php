@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class ChannelConfig extends BaseModel
 {
     public function __construct(
-        public ?Thresholds $automodThresholds = null,
         public ?string $name = null,
         public ?bool $typingEvents = null,
         public ?bool $readEvents = null,
@@ -36,6 +35,7 @@ class ChannelConfig extends BaseModel
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
         public ?array $allowedFlagReasons = null,
+        public ?Thresholds $automodThresholds = null,
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,

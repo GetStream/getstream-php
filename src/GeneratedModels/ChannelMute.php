@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class ChannelMute extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
         public ?UserResponse $user = null,
+        public ?ChannelResponse $channel = null,
         public ?\DateTime $expires = null, // Date/time of mute expiration
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $updatedAt = null, // Date/time of the last update

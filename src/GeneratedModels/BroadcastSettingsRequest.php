@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class BroadcastSettingsRequest extends BaseModel
 {
     public function __construct(
+        public ?bool $enabled = null,
         public ?HLSSettingsRequest $hls = null,
         public ?RTMPSettingsRequest $rtmp = null,
-        public ?bool $enabled = null,
     ) {
     }
 

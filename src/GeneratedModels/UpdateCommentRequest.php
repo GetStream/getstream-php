@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class UpdateCommentRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $comment = null, // Updated text content of the comment
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
@@ -18,6 +17,7 @@ class UpdateCommentRequest extends BaseModel
         public ?bool $handleMentionNotifications = null, // If true, creates notification activities for newly mentioned users and deletes notifications for users no longer mentioned
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications)
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

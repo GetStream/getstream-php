@@ -9,10 +9,6 @@ namespace GetStream\GeneratedModels;
 class QueryCallStatsMapResponse extends BaseModel
 {
     public function __construct(
-        public ?CallStatsParticipantCounts $counts = null,
-        public ?CallStatsMapPublishers $publishers = null,
-        public ?CallStatsMapSFUs $sfus = null,
-        public ?CallStatsMapSubscribers $subscribers = null,
         public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $callType = null,
         public ?string $callID = null,
@@ -23,6 +19,10 @@ class QueryCallStatsMapResponse extends BaseModel
         public ?\DateTime $endTime = null,
         public ?\DateTime $generatedAt = null,
         public ?string $dataSource = null,
+        public ?CallStatsParticipantCounts $counts = null,
+        public ?CallStatsMapSubscribers $subscribers = null,
+        public ?CallStatsMapPublishers $publishers = null,
+        public ?CallStatsMapSFUs $sfus = null,
     ) {
     }
 

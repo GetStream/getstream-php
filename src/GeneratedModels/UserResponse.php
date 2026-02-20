@@ -9,8 +9,6 @@ namespace GetStream\GeneratedModels;
 class UserResponse extends BaseModel
 {
     public function __construct(
-        public ?PrivacySettingsResponse $privacySettings = null,
-        public ?PushNotificationSettingsResponse $pushNotifications = null,
         public ?string $id = null, // Unique user identifier
         public ?string $name = null, // Optional name of user
         public ?string $image = null,
@@ -31,6 +29,8 @@ class UserResponse extends BaseModel
         public ?int $avgResponseTime = null,
         public ?bool $shadowBanned = null, // Whether a user is shadow banned
         public ?\DateTime $banExpires = null, // Date when ban expires
+        public ?PushNotificationSettingsResponse $pushNotifications = null,
+        public ?PrivacySettingsResponse $privacySettings = null,
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null, // List of devices user is using

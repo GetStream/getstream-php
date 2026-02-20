@@ -6,8 +6,6 @@ namespace GetStream\GeneratedModels;
 class CallStatsParticipantSession extends BaseModel
 {
     public function __construct(
-        public ?CallStatsLocation $location = null,
-        public ?PublishedTrackFlags $publishedTracks = null,
         public ?string $userSessionID = null,
         public ?string $unifiedSessionID = null,
         public ?\DateTime $startedAt = null,
@@ -22,6 +20,8 @@ class CallStatsParticipantSession extends BaseModel
         public ?string $currentIp = null,
         public ?string $currentSfu = null,
         public ?int $distanceToSfuKilometers = null,
+        public ?CallStatsLocation $location = null,
+        public ?PublishedTrackFlags $publishedTracks = null,
         public ?int $cqScore = null,
         public ?string $os = null,
     ) {

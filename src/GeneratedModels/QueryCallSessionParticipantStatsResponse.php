@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class QueryCallSessionParticipantStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?CallStatsParticipantCounts $counts = null,
         public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $next = null,
         public ?string $prev = null,
@@ -18,6 +17,7 @@ class QueryCallSessionParticipantStatsResponse extends BaseModel
         public ?string $callSessionID = null,
         public ?\DateTime $callStartedAt = null,
         public ?\DateTime $callEndedAt = null,
+        public ?CallStatsParticipantCounts $counts = null,
         /** @var array<CallStatsParticipant>|null */
         #[ArrayOf(CallStatsParticipant::class)]
         public ?array $participants = null,

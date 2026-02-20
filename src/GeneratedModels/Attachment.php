@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class Attachment extends BaseModel
 {
     public function __construct(
-        public ?Images $giphy = null,
         public ?string $type = null, // Attachment type (e.g. image, video, url)
         public ?string $fallback = null,
         public ?string $color = null,
@@ -32,6 +31,7 @@ class Attachment extends BaseModel
         public ?array $fields = null,
         public ?string $assetUrl = null,
         public ?object $custom = null,
+        public ?Images $giphy = null,
         public ?string $ogScrapeUrl = null,
         public ?int $originalWidth = null,
         public ?int $originalHeight = null,

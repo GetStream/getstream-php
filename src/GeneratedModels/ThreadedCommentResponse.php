@@ -9,12 +9,10 @@ namespace GetStream\GeneratedModels;
 class ThreadedCommentResponse extends BaseModel
 {
     public function __construct(
-        public ?RepliesMeta $meta = null,
-        public ?ModerationV2Response $moderation = null,
-        public ?UserResponse $user = null,
         public ?string $id = null,
         public ?string $objectID = null,
         public ?string $objectType = null,
+        public ?UserResponse $user = null,
         public ?string $text = null,
         public ?object $custom = null,
         public ?string $parentID = null,
@@ -36,6 +34,7 @@ class ThreadedCommentResponse extends BaseModel
         public ?\DateTime $updatedAt = null,
         public ?\DateTime $editedAt = null,
         public ?\DateTime $deletedAt = null,
+        public ?ModerationV2Response $moderation = null,
         public ?int $replyCount = null,
         public ?int $upvoteCount = null,
         public ?int $downvoteCount = null,
@@ -45,6 +44,7 @@ class ThreadedCommentResponse extends BaseModel
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $ownReactions = null,
+        public ?RepliesMeta $meta = null,
         /** @var array<ThreadedCommentResponse>|null */
         #[ArrayOf(ThreadedCommentResponse::class)]
         public ?array $replies = null, // Slice of nested comments (may be empty).

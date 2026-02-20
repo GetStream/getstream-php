@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DailyAggregateSDKUsageReportResponse extends BaseModel
 {
     public function __construct(
-        public ?SDKUsageReport $report = null,
         public ?string $date = null,
+        public ?SDKUsageReport $report = null,
     ) {
     }
 

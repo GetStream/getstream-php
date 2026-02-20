@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class RuleBuilderRule extends BaseModel
 {
     public function __construct(
-        public ?RuleBuilderAction $action = null,
         public ?string $id = null,
         public ?string $ruleType = null,
         /** @var array<RuleBuilderCondition>|null */
@@ -16,6 +15,7 @@ class RuleBuilderRule extends BaseModel
         /** @var array<RuleBuilderConditionGroup>|null */
         #[ArrayOf(RuleBuilderConditionGroup::class)]
         public ?array $groups = null,
+        public ?RuleBuilderAction $action = null,
         /** @var array<CallRuleActionSequence>|null */
         #[ArrayOf(CallRuleActionSequence::class)]
         public ?array $actionSequences = null,

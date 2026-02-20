@@ -9,9 +9,6 @@ namespace GetStream\GeneratedModels;
 class MessageUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?MessageResponse $message = null,
-        public ?MessageUpdate $messageUpdate = null,
-        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "message.updated" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
@@ -24,6 +21,9 @@ class MessageUpdatedEvent extends BaseModel
         public ?string $channelType = null, // The type of the channel where the message was sent
         public ?string $channelID = null, // The ID of the channel where the message was sent
         public ?string $messageID = null,
+        public ?MessageResponse $message = null,
+        public ?UserResponseCommonFields $user = null,
+        public ?MessageUpdate $messageUpdate = null,
     ) {
     }
 

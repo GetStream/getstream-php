@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class CallStatsMapSubscriber extends BaseModel
 {
     public function __construct(
-        public ?CallStatsLocation $location = null,
         public ?string $userID = null,
         public ?string $name = null,
         public ?string $userSessionID = null,
+        public ?CallStatsLocation $location = null,
         public ?bool $isLive = null,
     ) {
     }

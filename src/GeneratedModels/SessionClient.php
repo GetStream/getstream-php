@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class SessionClient extends BaseModel
 {
     public function __construct(
-        public ?CallStatsLocation $location = null,
         public ?string $name = null,
         public ?string $version = null,
         public ?string $ip = null,
         public ?string $networkType = null,
+        public ?CallStatsLocation $location = null,
     ) {
     }
 

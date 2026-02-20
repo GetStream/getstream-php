@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class QueryUsersPayload extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?object $filterConditions = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
@@ -19,6 +18,7 @@ class QueryUsersPayload extends BaseModel
         public ?int $limit = null,
         public ?int $offset = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

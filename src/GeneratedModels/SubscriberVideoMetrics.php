@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class SubscriberVideoMetrics extends BaseModel
 {
     public function __construct(
-        public ?ActiveCallsFPSStats $fps30 = null,
         public ?ActiveCallsLatencyStats $jitterMs = null,
+        public ?ActiveCallsFPSStats $fps30 = null,
         public ?ActiveCallsLatencyStats $packetsLostPct = null,
     ) {
     }

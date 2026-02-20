@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class PlatformDataResponse extends BaseModel
 {
     public function __construct(
-        public ?BrowserDataResponse $browser = null,
-        public ?DeviceDataResponse $device = null,
         public ?ClientOSDataResponse $os = null,
+        public ?DeviceDataResponse $device = null,
+        public ?BrowserDataResponse $browser = null,
     ) {
     }
 

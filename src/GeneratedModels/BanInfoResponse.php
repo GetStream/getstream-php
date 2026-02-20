@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class BanInfoResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $createdBy = null,
         public ?UserResponse $user = null,
         public ?\DateTime $expires = null, // When the ban expires
         public ?string $reason = null, // Reason for the ban
         public ?bool $shadow = null, // Whether this is a shadow ban
+        public ?UserResponse $createdBy = null,
         public ?\DateTime $createdAt = null, // When the ban was created
     ) {
     }

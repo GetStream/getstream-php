@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class VideoReactionsResponse extends BaseModel
 {
     public function __construct(
-        public ?VideoReactionOverTimeResponse $countOverTime = null,
         public ?string $reaction = null,
+        public ?VideoReactionOverTimeResponse $countOverTime = null,
     ) {
     }
 

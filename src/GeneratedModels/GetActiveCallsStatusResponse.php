@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class GetActiveCallsStatusResponse extends BaseModel
 {
     public function __construct(
-        public ?ActiveCallsMetrics $metrics = null,
-        public ?ActiveCallsSummary $summary = null,
         public ?string $duration = null,
         public ?\DateTime $startTime = null, // Start time of the status period
         public ?\DateTime $endTime = null, // End time of the status period
+        public ?ActiveCallsSummary $summary = null,
+        public ?ActiveCallsMetrics $metrics = null,
     ) {
     }
 

@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class FutureChannelBanResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $bannedBy = null,
         public ?UserResponse $user = null,
+        public ?UserResponse $bannedBy = null,
         public ?\DateTime $expires = null,
         public ?string $reason = null,
         public ?bool $shadow = null,

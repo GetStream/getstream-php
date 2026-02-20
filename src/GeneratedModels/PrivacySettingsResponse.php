@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class PrivacySettingsResponse extends BaseModel
 {
     public function __construct(
-        public ?DeliveryReceiptsResponse $deliveryReceipts = null,
-        public ?ReadReceiptsResponse $readReceipts = null,
         public ?TypingIndicatorsResponse $typingIndicators = null,
+        public ?ReadReceiptsResponse $readReceipts = null,
+        public ?DeliveryReceiptsResponse $deliveryReceipts = null,
     ) {
     }
 

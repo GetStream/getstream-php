@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class EventRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $type = null,
         public ?string $parentID = null,
         public ?object $custom = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

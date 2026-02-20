@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class GetCallReportResponse extends BaseModel
 {
     public function __construct(
-        public ?ChatActivityStatsResponse $chatActivity = null,
-        public ?ReportResponse $report = null,
-        public ?CallSessionResponse $session = null,
         public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $sessionID = null,
+        public ?CallSessionResponse $session = null,
+        public ?ReportResponse $report = null,
+        public ?ChatActivityStatsResponse $chatActivity = null,
         /** @var array<VideoReactionsResponse>|null */
         #[ArrayOf(VideoReactionsResponse::class)]
         public ?array $videoReactions = null,

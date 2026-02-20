@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DailyAggregateCallDurationReportResponse extends BaseModel
 {
     public function __construct(
-        public ?CallDurationReport $report = null,
         public ?string $date = null,
+        public ?CallDurationReport $report = null,
     ) {
     }
 

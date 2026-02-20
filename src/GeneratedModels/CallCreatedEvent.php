@@ -10,10 +10,10 @@ namespace GetStream\GeneratedModels;
 class CallCreatedEvent extends BaseModel
 {
     public function __construct(
-        public ?CallResponse $call = null,
         public ?string $type = null, // The type of event: "call.created" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
+        public ?CallResponse $call = null,
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null, // the members added to this call

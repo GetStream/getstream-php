@@ -6,8 +6,6 @@ namespace GetStream\GeneratedModels;
 class UpdateActivityRequest extends BaseModel
 {
     public function __construct(
-        public ?ActivityLocation $location = null,
-        public ?UserRequest $user = null,
         public ?string $text = null, // The text content of the activity
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
@@ -16,6 +14,7 @@ class UpdateActivityRequest extends BaseModel
         public ?string $visibility = null, // Visibility setting for the activity
         public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name and is required
         public ?string $restrictReplies = null, // Controls who can add comments/replies to this activity. One of: everyone, people_i_follow, nobody
+        public ?ActivityLocation $location = null,
         public ?\DateTime $expiresAt = null, // Time when the activity will expire
         public ?array $filterTags = null, // Tags used for filtering the activity
         public ?array $interestTags = null, // Tags indicating interest categories
@@ -29,6 +28,7 @@ class UpdateActivityRequest extends BaseModel
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications)
         public ?object $searchData = null, // Additional data for search indexing
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

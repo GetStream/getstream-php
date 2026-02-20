@@ -6,13 +6,12 @@ namespace GetStream\GeneratedModels;
 class ThreadStateResponse extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
-        public ?UserResponse $createdBy = null,
-        public ?DraftResponse $draft = null,
-        public ?MessageResponse $parentMessage = null,
         public ?string $channelCid = null, // Channel CID
+        public ?ChannelResponse $channel = null,
         public ?string $parentMessageID = null, // Parent Message ID
+        public ?MessageResponse $parentMessage = null,
         public ?string $createdByUserID = null, // Created By User ID
+        public ?UserResponse $createdBy = null,
         public ?int $replyCount = null, // Reply Count
         public ?int $participantCount = null, // Participant Count
         public ?int $activeParticipantCount = null, // Active Participant Count
@@ -31,6 +30,7 @@ class ThreadStateResponse extends BaseModel
         /** @var array<ReadStateResponse>|null */
         #[ArrayOf(ReadStateResponse::class)]
         public ?array $read = null,
+        public ?DraftResponse $draft = null,
     ) {
     }
 

@@ -6,23 +6,12 @@ namespace GetStream\GeneratedModels;
 class ReviewQueueItemResponse extends BaseModel
 {
     public function __construct(
-        public ?EnrichedActivity $activity = null,
-        public ?AppealItemResponse $appeal = null,
-        public ?UserResponse $assignedTo = null,
-        public ?CallResponse $call = null,
-        public ?EntityCreatorResponse $entityCreator = null,
-        public ?EnrichedActivity $feedsV2Activity = null,
-        public ?Reaction $feedsV2Reaction = null,
-        public ?ActivityResponse $feedsV3Activity = null,
-        public ?CommentResponse $feedsV3Comment = null,
-        public ?MessageResponse $message = null,
-        public ?ModerationPayloadResponse $moderationPayload = null,
-        public ?Reaction $reaction = null,
         public ?string $id = null, // Unique identifier of the review queue item
         public ?\DateTime $createdAt = null, // When the item was created
         public ?\DateTime $updatedAt = null, // When the item was last updated
         public ?string $entityType = null, // Type of entity being reviewed
         public ?string $entityID = null, // ID of the entity being reviewed
+        public ?ModerationPayloadResponse $moderationPayload = null,
         public ?string $status = null, // Current status of the review
         public ?string $recommendedAction = null, // Suggested moderation action
         public ?\DateTime $completedAt = null, // When the review was completed
@@ -32,7 +21,13 @@ class ReviewQueueItemResponse extends BaseModel
         public ?int $severity = null, // Severity level of the content
         public ?string $aiTextSeverity = null, // AI-determined text severity
         public ?string $latestModeratorAction = null,
+        public ?MessageResponse $message = null,
+        public ?EnrichedActivity $activity = null,
+        public ?Reaction $reaction = null,
+        public ?CallResponse $call = null,
+        public ?EntityCreatorResponse $entityCreator = null,
         public ?string $entityCreatorID = null, // ID of who created the entity
+        public ?UserResponse $assignedTo = null,
         /** @var array<BanInfoResponse>|null */
         #[ArrayOf(BanInfoResponse::class)]
         public ?array $bans = null, // Associated ban records
@@ -42,6 +37,11 @@ class ReviewQueueItemResponse extends BaseModel
         /** @var array<ActionLogResponse>|null */
         #[ArrayOf(ActionLogResponse::class)]
         public ?array $actions = null, // Moderation actions taken
+        public ?AppealItemResponse $appeal = null,
+        public ?EnrichedActivity $feedsV2Activity = null,
+        public ?Reaction $feedsV2Reaction = null,
+        public ?ActivityResponse $feedsV3Activity = null,
+        public ?CommentResponse $feedsV3Comment = null,
         public ?array $teams = null, // Teams associated with this item
         public ?string $configKey = null,
         public ?int $flagsCount = null,

@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class ReactionResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
         public ?string $messageID = null, // Message ID
         public ?string $userID = null, // User ID
+        public ?UserResponse $user = null,
         public ?string $type = null, // Type of reaction
         public ?int $score = null, // Score of the reaction
         public ?\DateTime $createdAt = null, // Date/time of creation

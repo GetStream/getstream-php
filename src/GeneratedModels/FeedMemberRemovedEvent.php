@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class FeedMemberRemovedEvent extends BaseModel
 {
     public function __construct(
-        public ?UserResponseCommonFields $user = null,
         public ?string $memberID = null,
+        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "feeds.feed_member.removed" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,

@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class CreateCallTypeRequest extends BaseModel
 {
     public function __construct(
-        public ?NotificationSettingsRequest $notificationSettings = null,
-        public ?CallSettingsRequest $settings = null,
         public ?string $name = null,
         public ?array $grants = null, // the permissions granted to each role
+        public ?NotificationSettingsRequest $notificationSettings = null,
+        public ?CallSettingsRequest $settings = null,
         public ?string $externalStorage = null, // the external storage for the call type
     ) {
     }

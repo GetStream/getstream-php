@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class EventHook extends BaseModel
 {
     public function __construct(
-        public ?AsyncModerationCallbackConfig $callback = null,
         public ?string $id = null,
         public ?string $hookType = null,
         public ?bool $enabled = null,
@@ -27,6 +26,7 @@ class EventHook extends BaseModel
         public ?string $product = null,
         public ?bool $shouldSendCustomEvents = null,
         public ?int $timeoutMs = null,
+        public ?AsyncModerationCallbackConfig $callback = null,
         public ?bool $snsEventBasedMessageGroupIDEnabled = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,

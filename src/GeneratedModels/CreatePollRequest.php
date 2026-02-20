@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class CreatePollRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $id = null,
         public ?string $name = null, // The name of the poll
         public ?string $description = null, // A description of the poll
@@ -24,6 +23,7 @@ class CreatePollRequest extends BaseModel
         public ?bool $isClosed = null, // Indicates whether the poll is open for voting
         public ?object $custom = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

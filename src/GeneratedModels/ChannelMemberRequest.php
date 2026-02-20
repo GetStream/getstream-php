@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class ChannelMemberRequest extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
         public ?string $userID = null,
+        public ?UserResponse $user = null,
         public ?object $custom = null,
         public ?string $channelRole = null, // Role of the member in the channel
     ) {

@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class UpdateBookmarkFolderRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $name = null, // Name of the folder
         public ?object $custom = null, // Custom data for the folder
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

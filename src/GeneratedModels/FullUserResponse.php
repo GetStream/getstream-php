@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class FullUserResponse extends BaseModel
 {
     public function __construct(
-        public ?PrivacySettingsResponse $privacySettings = null,
         public ?string $id = null,
         public ?string $name = null,
         public ?string $image = null,
@@ -24,6 +23,7 @@ class FullUserResponse extends BaseModel
         public ?\DateTime $revokeTokensIssuedBefore = null,
         public ?\DateTime $deactivatedAt = null,
         public ?int $avgResponseTime = null,
+        public ?PrivacySettingsResponse $privacySettings = null,
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null,

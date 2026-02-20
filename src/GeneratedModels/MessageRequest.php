@@ -9,8 +9,6 @@ namespace GetStream\GeneratedModels;
 class MessageRequest extends BaseModel
 {
     public function __construct(
-        public ?SharedLocation $sharedLocation = null,
-        public ?UserRequest $user = null,
         public ?string $id = null, // Message ID is unique string identifier of the message
         public ?string $text = null, // Text of the message. Should be empty if `mml` is provided
         public ?string $mml = null, // Should be empty if `text` is provided. Can only be set when using server-side API
@@ -32,7 +30,9 @@ class MessageRequest extends BaseModel
         public ?\DateTime $pinExpires = null, // Date when pinned message expires
         public ?array $restrictedVisibility = null, // A list of user ids that have restricted visibility to the message
         public ?string $userID = null,
+        public ?UserRequest $user = null,
         public ?string $pollID = null, // Identifier of the poll to include in the message
+        public ?SharedLocation $sharedLocation = null,
     ) {
     }
 

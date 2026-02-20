@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class BanResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $bannedBy = null,
         public ?ChannelResponse $channel = null,
         public ?UserResponse $user = null,
         public ?\DateTime $expires = null,
         public ?string $reason = null,
         public ?bool $shadow = null,
+        public ?UserResponse $bannedBy = null,
         public ?\DateTime $createdAt = null,
     ) {
     }

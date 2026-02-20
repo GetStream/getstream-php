@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class ChannelMemberResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
         public ?string $userID = null,
+        public ?UserResponse $user = null,
         public ?bool $isModerator = null, // Whether member is channel moderator or not
         public ?object $custom = null,
         public ?bool $invited = null, // Whether member was invited or not

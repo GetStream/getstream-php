@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class DeleteCommentResponse extends BaseModel
 {
     public function __construct(
-        public ?ActivityResponse $activity = null,
         public ?CommentResponse $comment = null,
+        public ?ActivityResponse $activity = null,
         public ?string $duration = null,
     ) {
     }

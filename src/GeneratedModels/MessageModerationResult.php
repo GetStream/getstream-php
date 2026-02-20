@@ -9,13 +9,13 @@ namespace GetStream\GeneratedModels;
 class MessageModerationResult extends BaseModel
 {
     public function __construct(
-        public ?ModerationResponse $aiModerationResponse = null,
-        public ?Thresholds $moderationThresholds = null,
         public ?string $messageID = null, // ID of the message
         public ?string $action = null, // Action taken by automod
         public ?string $moderatedBy = null, // User who moderated the message
         public ?string $blockedWord = null, // Word that was blocked
         public ?string $blocklistName = null, // Name of the blocklist
+        public ?Thresholds $moderationThresholds = null,
+        public ?ModerationResponse $aiModerationResponse = null,
         public ?int $userKarma = null, // Karma of the user
         public ?bool $userBadKarma = null, // Whether user has bad karma
         public ?\DateTime $createdAt = null, // Date/time of creation

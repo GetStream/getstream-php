@@ -9,16 +9,16 @@ namespace GetStream\GeneratedModels;
 class CommentReactionUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?ActivityResponse $activity = null,
         public ?CommentResponse $comment = null,
         public ?FeedsReactionResponse $reaction = null,
-        public ?UserResponseCommonFields $user = null,
+        public ?ActivityResponse $activity = null,
         public ?string $type = null, // The type of event: "feeds.comment.reaction.updated" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
         public ?string $fid = null,
         public ?string $feedVisibility = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

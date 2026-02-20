@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class QueryFeedsUsageStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?DailyMetricStatsResponse $activities = null,
-        public ?DailyMetricStatsResponse $apiRequests = null,
-        public ?DailyMetricStatsResponse $follows = null,
-        public ?DailyMetricStatsResponse $openaiRequests = null,
         public ?string $duration = null,
+        public ?DailyMetricStatsResponse $activities = null,
+        public ?DailyMetricStatsResponse $follows = null,
+        public ?DailyMetricStatsResponse $apiRequests = null,
+        public ?DailyMetricStatsResponse $openaiRequests = null,
     ) {
     }
 

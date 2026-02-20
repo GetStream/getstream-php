@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class UserFeedbackResponse extends BaseModel
 {
     public function __construct(
-        public ?PlatformDataResponse $platform = null,
         public ?string $cid = null,
         public ?string $sessionID = null,
         public ?string $userID = null,
@@ -14,6 +13,7 @@ class UserFeedbackResponse extends BaseModel
         public ?string $reason = null,
         public ?string $sdk = null,
         public ?string $sdkVersion = null,
+        public ?PlatformDataResponse $platform = null,
         public ?object $custom = null,
     ) {
     }

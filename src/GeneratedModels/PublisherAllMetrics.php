@@ -7,8 +7,8 @@ class PublisherAllMetrics extends BaseModel
 {
     public function __construct(
         public ?PublisherAudioMetrics $audio = null,
-        public ?ActiveCallsLatencyStats $rttMs = null,
         public ?PublisherVideoMetrics $video = null,
+        public ?ActiveCallsLatencyStats $rttMs = null,
     ) {
     }
 

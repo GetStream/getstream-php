@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class TranscriptionSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?SpeechSegmentConfig $speechSegmentConfig = null,
-        public ?TranslationSettings $translation = null,
         public ?string $mode = null,
         public ?string $closedCaptionMode = null,
         public ?string $language = null,
+        public ?TranslationSettings $translation = null,
+        public ?SpeechSegmentConfig $speechSegmentConfig = null,
     ) {
     }
 

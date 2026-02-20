@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class ShowChannelRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

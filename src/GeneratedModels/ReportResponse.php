@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class ReportResponse extends BaseModel
 {
     public function __construct(
-        public ?CallReportResponse $call = null,
         public ?ParticipantReportResponse $participants = null,
         public ?UserRatingReportResponse $userRatings = null,
+        public ?CallReportResponse $call = null,
     ) {
     }
 

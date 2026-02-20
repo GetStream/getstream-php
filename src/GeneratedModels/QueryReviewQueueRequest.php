@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class QueryReviewQueueRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?object $filter = null, // Filter conditions for review queue items
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
@@ -19,6 +18,7 @@ class QueryReviewQueueRequest extends BaseModel
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

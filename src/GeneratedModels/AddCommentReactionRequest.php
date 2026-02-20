@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class AddCommentReactionRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $type = null, // The type of reaction, eg upvote, like, ...
         public ?object $custom = null, // Optional custom data to add to the reaction
         public ?bool $createNotificationActivity = null, // Whether to create a notification activity for this reaction
@@ -14,6 +13,7 @@ class AddCommentReactionRequest extends BaseModel
         public ?bool $skipPush = null,
         public ?bool $enforceUnique = null, // Whether to enforce unique reactions per user (remove other reaction types from the user when adding this one)
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

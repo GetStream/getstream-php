@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class UpdatePollOptionRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $id = null, // Option ID
         public ?string $text = null, // Option text
         public ?object $custom = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

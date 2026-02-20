@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class UpsertPushTemplateResponse extends BaseModel
 {
     public function __construct(
-        public ?PushTemplateResponse $template = null,
         public ?string $duration = null, // Duration of the request in milliseconds
+        public ?PushTemplateResponse $template = null,
     ) {
     }
 

@@ -6,8 +6,6 @@ namespace GetStream\GeneratedModels;
 class FeedSuggestionResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $createdBy = null,
-        public ?FeedMemberResponse $ownMembership = null,
         public ?string $groupID = null, // Group this feed belongs to
         public ?string $id = null, // Unique identifier for the feed
         public ?string $feed = null, // Fully qualified feed ID (group_id:id)
@@ -16,6 +14,7 @@ class FeedSuggestionResponse extends BaseModel
         public ?object $custom = null, // Custom data for the feed
         public ?array $filterTags = null, // Tags used for filtering feeds
         public ?string $visibility = null, // Visibility setting for the feed
+        public ?UserResponse $createdBy = null,
         public ?int $memberCount = null, // Number of members in this feed
         public ?int $followerCount = null, // Number of followers of this feed
         public ?int $followingCount = null, // Number of feeds this feed follows
@@ -30,6 +29,7 @@ class FeedSuggestionResponse extends BaseModel
         /** @var array<FeedOwnCapability>|null */
         #[ArrayOf(FeedOwnCapability::class)]
         public ?array $ownCapabilities = null, // Capabilities the current user has for this feed
+        public ?FeedMemberResponse $ownMembership = null,
         public ?\DateTime $createdAt = null, // When the feed was created
         public ?\DateTime $updatedAt = null, // When the feed was last updated
         public ?\DateTime $deletedAt = null, // When the feed was deleted

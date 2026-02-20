@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class SubscriberAudioMetrics extends BaseModel
 {
     public function __construct(
-        public ?ActiveCallsLatencyStats $concealmentPct = null,
         public ?ActiveCallsLatencyStats $jitterMs = null,
         public ?ActiveCallsLatencyStats $packetsLostPct = null,
+        public ?ActiveCallsLatencyStats $concealmentPct = null,
     ) {
     }
 

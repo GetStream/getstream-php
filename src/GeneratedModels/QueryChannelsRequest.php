@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class QueryChannelsRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?object $filterConditions = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
@@ -20,6 +19,7 @@ class QueryChannelsRequest extends BaseModel
         public ?object $filterValues = null, // Values to interpolate into the predefined filter template
         public ?object $sortValues = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

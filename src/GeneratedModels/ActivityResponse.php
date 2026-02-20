@@ -6,15 +6,9 @@ namespace GetStream\GeneratedModels;
 class ActivityResponse extends BaseModel
 {
     public function __construct(
-        public ?FeedResponse $currentFeed = null,
-        public ?ActivityLocation $location = null,
-        public ?ModerationV2Response $moderation = null,
-        public ?NotificationContext $notificationContext = null,
-        public ?ActivityResponse $parent = null,
-        public ?PollResponseData $poll = null,
-        public ?UserResponse $user = null,
         public ?string $id = null, // Unique identifier for the activity
         public ?string $type = null, // Type of activity
+        public ?UserResponse $user = null,
         public ?array $feeds = null, // List of feed IDs containing this activity
         public ?string $visibility = null, // Visibility setting for the activity. One of: public, private, tag
         public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name
@@ -28,6 +22,7 @@ class ActivityResponse extends BaseModel
         #[ArrayOf(UserResponse::class)]
         public ?array $mentionedUsers = null, // Users mentioned in the activity
         public ?object $custom = null, // Custom data for the activity
+        public ?NotificationContext $notificationContext = null,
         public ?int $popularity = null, // Popularity score of the activity
         public ?int $score = null, // Ranking score for this activity
         public ?string $selectorSource = null, // Which activity selector provided this activity (e.g., 'following', 'popular', 'interest'). Only set when using multiple activity selectors with ranking.
@@ -35,12 +30,16 @@ class ActivityResponse extends BaseModel
         #[ArrayOf(CommentResponse::class)]
         public ?array $comments = null, // Latest 5 comments of this activity (comment replies excluded)
         public ?string $text = null, // Text content of the activity
+        public ?ActivityLocation $location = null,
+        public ?ActivityResponse $parent = null,
+        public ?PollResponseData $poll = null,
         public ?\DateTime $editedAt = null, // When the activity was last edited
         public ?\DateTime $deletedAt = null, // When the activity was deleted
         public ?\DateTime $expiresAt = null, // When the activity will expire
         public ?object $searchData = null, // Data for search indexing
         public ?array $filterTags = null, // Tags for filtering
         public ?array $interestTags = null, // Tags for user interests
+        public ?ModerationV2Response $moderation = null,
         public ?string $moderationAction = null,
         public ?int $commentCount = null, // Number of comments on the activity
         public ?int $bookmarkCount = null, // Number of bookmarks on the activity
@@ -65,6 +64,7 @@ class ActivityResponse extends BaseModel
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $friendReactions = null, // Reactions from users the current user follows or has mutual follows with
         public ?int $friendReactionCount = null, // Total count of reactions from friends on this activity
+        public ?FeedResponse $currentFeed = null,
         public ?bool $hidden = null, // If this activity is hidden by this user (using activity feedback)
         public ?bool $preview = null, // If this activity is obfuscated for this user. For premium content where you want to show a preview
         public ?bool $isWatched = null,

@@ -9,14 +9,14 @@ namespace GetStream\GeneratedModels;
 class ModerationCustomActionEvent extends BaseModel
 {
     public function __construct(
-        public ?MessageResponse $message = null,
-        public ?ReviewQueueItemResponse $reviewQueueItem = null,
         public ?string $type = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
         public ?string $actionID = null, // The ID of the custom action that was executed
         public ?object $actionOptions = null, // Additional options passed to the custom action
+        public ?ReviewQueueItemResponse $reviewQueueItem = null,
+        public ?MessageResponse $message = null,
     ) {
     }
 

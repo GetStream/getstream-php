@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class UpsertModerationRuleRequest extends BaseModel
 {
     public function __construct(
-        public ?RuleBuilderAction $action = null,
         public ?string $name = null,
         public ?string $description = null,
         public ?array $configKeys = null,
@@ -19,6 +18,7 @@ class UpsertModerationRuleRequest extends BaseModel
         /** @var array<RuleBuilderConditionGroup>|null */
         #[ArrayOf(RuleBuilderConditionGroup::class)]
         public ?array $groups = null,
+        public ?RuleBuilderAction $action = null,
         /** @var array<CallRuleActionSequence>|null */
         #[ArrayOf(CallRuleActionSequence::class)]
         public ?array $actionSequences = null,

@@ -6,12 +6,12 @@ namespace GetStream\GeneratedModels;
 class ThreadResponse extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
-        public ?UserResponse $createdBy = null,
-        public ?MessageResponse $parentMessage = null,
         public ?string $channelCid = null, // Channel CID
+        public ?ChannelResponse $channel = null,
         public ?string $parentMessageID = null, // Parent Message ID
+        public ?MessageResponse $parentMessage = null,
         public ?string $createdByUserID = null, // Created By User ID
+        public ?UserResponse $createdBy = null,
         public ?int $replyCount = null, // Reply Count
         public ?int $participantCount = null, // Participant Count
         public ?int $activeParticipantCount = null, // Active Participant Count

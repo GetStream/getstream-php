@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class ModerationRulesTriggeredEvent extends BaseModel
 {
     public function __construct(
-        public ?ModerationRuleInfo $rule = null,
         public ?string $type = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
+        public ?ModerationRuleInfo $rule = null,
         public ?int $violationNumber = null, // The violation number for call rules (optional)
         public ?string $entityID = null, // The ID of the entity that triggered the rule
         public ?string $entityType = null, // The type of the entity (call, user, message, etc.)

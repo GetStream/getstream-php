@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class AsyncModerationConfiguration extends BaseModel
 {
     public function __construct(
-        public ?AsyncModerationCallbackConfig $callback = null,
         public ?int $timeoutMs = null,
+        public ?AsyncModerationCallbackConfig $callback = null,
     ) {
     }
 

@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class ActivityMarkEvent extends BaseModel
 {
     public function __construct(
-        public ?UserResponseCommonFields $user = null,
         public ?array $markRead = null, // The IDs of activities marked as read
         public ?array $markSeen = null, // The IDs of activities marked as seen
         public ?array $markWatched = null, // The IDs of activities marked as watched
@@ -21,6 +20,7 @@ class ActivityMarkEvent extends BaseModel
         public ?object $custom = null,
         public ?string $fid = null,
         public ?string $feedVisibility = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

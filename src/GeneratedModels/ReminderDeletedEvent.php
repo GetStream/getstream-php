@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class ReminderDeletedEvent extends BaseModel
 {
     public function __construct(
-        public ?ReminderResponseData $reminder = null,
         public ?string $type = null, // The type of event: "reminder.deleted" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
@@ -18,6 +17,7 @@ class ReminderDeletedEvent extends BaseModel
         public ?string $userID = null, // The ID of the user for whom the reminder was created
         public ?string $cid = null, // The CID of the Channel for which the reminder was created
         public ?string $parentID = null, // The ID of the parent message, if the reminder is for a thread message
+        public ?ReminderResponseData $reminder = null,
     ) {
     }
 

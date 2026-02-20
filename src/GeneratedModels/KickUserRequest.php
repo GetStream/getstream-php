@@ -9,10 +9,10 @@ namespace GetStream\GeneratedModels;
 class KickUserRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $kickedBy = null,
         public ?string $userID = null, // The user to kick
         public ?bool $block = null, // If true, also block the user from rejoining the call
         public ?string $kickedByID = null, // Server-side: ID of the user performing the action
+        public ?UserRequest $kickedBy = null,
     ) {
     }
 

@@ -6,22 +6,14 @@ namespace GetStream\GeneratedModels;
 class SearchResultMessage extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
-        public ?DraftResponse $draft = null,
-        public ?ChannelMemberResponse $member = null,
-        public ?ModerationV2Response $moderation = null,
-        public ?UserResponse $pinnedBy = null,
-        public ?PollResponseData $poll = null,
-        public ?MessageResponse $quotedMessage = null,
-        public ?ReminderResponseData $reminder = null,
-        public ?SharedLocationResponseData $sharedLocation = null,
-        public ?UserResponse $user = null,
         public ?string $id = null,
         public ?string $text = null,
         public ?string $mml = null,
         public ?string $command = null,
         public ?string $html = null,
         public ?string $type = null,
+        public ?UserResponse $user = null,
+        public ?ChannelMemberResponse $member = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null,
@@ -41,6 +33,7 @@ class SearchResultMessage extends BaseModel
         public ?int $replyCount = null,
         public ?int $deletedReplyCount = null,
         public ?string $quotedMessageID = null,
+        public ?MessageResponse $quotedMessage = null,
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
         public ?array $threadParticipants = null,
@@ -60,11 +53,18 @@ class SearchResultMessage extends BaseModel
         public ?bool $silent = null,
         public ?bool $pinned = null,
         public ?\DateTime $pinnedAt = null,
+        public ?UserResponse $pinnedBy = null,
         public ?\DateTime $pinExpires = null,
         public ?\DateTime $messageTextUpdatedAt = null,
         public ?string $pollID = null,
+        public ?PollResponseData $poll = null,
+        public ?ModerationV2Response $moderation = null,
         public ?array $restrictedVisibility = null,
+        public ?DraftResponse $draft = null,
+        public ?ReminderResponseData $reminder = null,
+        public ?SharedLocationResponseData $sharedLocation = null,
         public ?bool $deletedForMe = null,
+        public ?ChannelResponse $channel = null,
     ) {
     }
 

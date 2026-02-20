@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class MuteUsersRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $mutedBy = null,
         public ?bool $muteAllUsers = null,
         public ?array $userIds = null,
         public ?bool $audio = null,
@@ -14,6 +13,7 @@ class MuteUsersRequest extends BaseModel
         public ?bool $screenshare = null,
         public ?bool $screenshareAudio = null,
         public ?string $mutedByID = null,
+        public ?UserRequest $mutedBy = null,
     ) {
     }
 

@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class RecordSettings extends BaseModel
 {
     public function __construct(
-        public ?LayoutSettings $layout = null,
         public ?bool $audioOnly = null,
         public ?string $mode = null,
         public ?string $quality = null,
+        public ?LayoutSettings $layout = null,
     ) {
     }
 

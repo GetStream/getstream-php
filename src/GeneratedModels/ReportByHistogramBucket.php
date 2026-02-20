@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class ReportByHistogramBucket extends BaseModel
 {
     public function __construct(
+        public ?string $category = null,
         public ?Bound $lowerBound = null,
         public ?Bound $upperBound = null,
-        public ?string $category = null,
         public ?int $sum = null,
         public ?int $count = null,
     ) {

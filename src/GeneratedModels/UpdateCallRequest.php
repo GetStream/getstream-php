@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class UpdateCallRequest extends BaseModel
 {
     public function __construct(
-        public ?CallSettingsRequest $settingsOverride = null,
         public ?object $custom = null, // Custom data for this object
+        public ?CallSettingsRequest $settingsOverride = null,
         public ?\DateTime $startsAt = null, // the time the call is scheduled to start
     ) {
     }

@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class CampaignCompletedEvent extends BaseModel
 {
     public function __construct(
-        public ?CampaignResponse $campaign = null,
         public ?string $type = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
+        public ?CampaignResponse $campaign = null,
     ) {
     }
 

@@ -9,17 +9,17 @@ namespace GetStream\GeneratedModels;
 class NotificationFeedUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?NotificationStatusResponse $notificationStatus = null,
-        public ?UserResponseCommonFields $user = null,
         /** @var array<AggregatedActivityResponse>|null */
         #[ArrayOf(AggregatedActivityResponse::class)]
         public ?array $aggregatedActivities = null, // Aggregated activities for notification feeds
+        public ?NotificationStatusResponse $notificationStatus = null,
         public ?string $type = null, // The type of event: "feeds.notification_feed.updated" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
         public ?string $fid = null, // The ID of the feed
         public ?string $feedVisibility = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

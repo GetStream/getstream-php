@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class CheckResponse extends BaseModel
 {
     public function __construct(
-        public ?ReviewQueueItemResponse $item = null,
         public ?string $status = null, // Status of the moderation check (completed or pending)
         public ?string $taskID = null, // ID of the running moderation task
         public ?string $recommendedAction = null, // Suggested action based on moderation results
+        public ?ReviewQueueItemResponse $item = null,
         public ?string $duration = null,
     ) {
     }

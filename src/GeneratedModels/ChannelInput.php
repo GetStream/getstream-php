@@ -6,12 +6,11 @@ namespace GetStream\GeneratedModels;
 class ChannelInput extends BaseModel
 {
     public function __construct(
-        public ?ChannelConfig $configOverrides = null,
-        public ?UserRequest $createdBy = null,
         public ?string $team = null, // Team the channel belongs to (if multi-tenant mode is enabled)
         public ?bool $autoTranslationEnabled = null, // Enable or disable auto translation
         public ?string $autoTranslationLanguage = null, // Switch auto translation language
         public ?string $createdByID = null,
+        public ?UserRequest $createdBy = null,
         public ?string $truncatedByID = null,
         public ?bool $frozen = null, // Freeze or unfreeze the channel
         public ?bool $disabled = null,
@@ -22,6 +21,7 @@ class ChannelInput extends BaseModel
         /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $members = null,
+        public ?ChannelConfig $configOverrides = null,
         public ?array $filterTags = null,
     ) {
     }

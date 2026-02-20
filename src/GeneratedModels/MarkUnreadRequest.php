@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class MarkUnreadRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $messageID = null, // ID of the message from where the channel is marked unread
         public ?string $threadID = null, // Mark a thread unread, specify one of the thread, message timestamp, or message id
         public ?\DateTime $messageTimestamp = null, // Timestamp of the message from where the channel is marked unread
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

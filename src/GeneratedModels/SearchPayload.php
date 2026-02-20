@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class SearchPayload extends BaseModel
 {
     public function __construct(
-        public ?MessageOptions $messageOptions = null,
         public ?string $query = null, // Search phrase
         public ?object $filterConditions = null, // Channel filter conditions
         public ?object $messageFilterConditions = null, // Message filter conditions
+        public ?MessageOptions $messageOptions = null,
         public ?int $limit = null, // Number of messages to return
         public ?int $offset = null, // Pagination offset. Cannot be used with sort or next.
         /** @var array<SortParamRequest>|null */

@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class AddCommentRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $id = null, // Optional custom ID for the comment (max 255 characters). If not provided, a UUID will be generated.
         public ?string $objectID = null, // ID of the object to comment on. Required for root comments
         public ?string $objectType = null, // Type of the object to comment on. Required for root comments
@@ -22,6 +21,7 @@ class AddCommentRequest extends BaseModel
         public ?bool $skipPush = null,
         public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for this comment
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

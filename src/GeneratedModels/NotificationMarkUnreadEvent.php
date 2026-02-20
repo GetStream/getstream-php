@@ -9,8 +9,6 @@ namespace GetStream\GeneratedModels;
 class NotificationMarkUnreadEvent extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
-        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "notification.mark_unread" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
@@ -22,7 +20,9 @@ class NotificationMarkUnreadEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel which was marked as unread
         public ?string $channelID = null, // The ID of the channel which was marked as unread
+        public ?ChannelResponse $channel = null,
         public ?string $threadID = null, // The ID of the thread which was marked as unread
+        public ?UserResponseCommonFields $user = null,
         public ?string $firstUnreadMessageID = null, // The ID of the first unread message
         public ?\DateTime $lastReadAt = null, // The time when the channel/thread was marked as unread
         public ?string $lastReadMessageID = null, // The ID of the last read message

@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class BlockUsersRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $blockedUserID = null, // User id to block
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

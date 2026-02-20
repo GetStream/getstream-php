@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class QueryMembersPayload extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $type = null,
         public ?string $id = null,
         /** @var array<ChannelMemberRequest>|null */
@@ -22,6 +21,7 @@ class QueryMembersPayload extends BaseModel
         public ?int $limit = null,
         public ?int $offset = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

@@ -9,8 +9,6 @@ namespace GetStream\GeneratedModels;
 class UserBannedEvent extends BaseModel
 {
     public function __construct(
-        public ?UserResponseCommonFields $createdBy = null,
-        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "user.banned" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
@@ -22,7 +20,9 @@ class UserBannedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel where the target user was banned
         public ?string $channelID = null, // The ID of the channel where the target user was banned
+        public ?UserResponseCommonFields $user = null,
         public ?string $reason = null, // The reason for the ban
+        public ?UserResponseCommonFields $createdBy = null,
         public ?\DateTime $expiration = null, // The expiration date of the ban
         public ?bool $shadow = null, // Whether the user was shadow banned
         public ?int $totalBans = null,

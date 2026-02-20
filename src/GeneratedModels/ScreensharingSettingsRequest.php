@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class ScreensharingSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?TargetResolution $targetResolution = null,
         public ?bool $enabled = null,
         public ?bool $accessRequestEnabled = null,
+        public ?TargetResolution $targetResolution = null,
     ) {
     }
 

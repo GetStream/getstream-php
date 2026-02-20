@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class FlagUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $createdBy = null,
-        public ?MessageResponse $message = null,
-        public ?UserResponse $user = null,
         public ?string $type = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
+        public ?MessageResponse $message = null,
+        public ?UserResponse $user = null,
+        public ?UserResponse $createdBy = null,
     ) {
     }
 

@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class CreateRoleResponse extends BaseModel
 {
     public function __construct(
-        public ?Role $role = null,
         public ?string $duration = null, // Duration of the request in milliseconds
+        public ?Role $role = null,
     ) {
     }
 

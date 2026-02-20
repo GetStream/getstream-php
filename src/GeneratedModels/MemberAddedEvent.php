@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class MemberAddedEvent extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
         public ?ChannelMemberResponse $member = null,
         public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "member.added" in this case
@@ -23,6 +22,7 @@ class MemberAddedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel to which the member was added
         public ?string $channelID = null, // The ID of the channel to which the member was added
+        public ?ChannelResponse $channel = null,
     ) {
     }
 

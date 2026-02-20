@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class UpdatePollRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $id = null, // Poll ID
         public ?string $name = null, // Poll name
         public ?string $description = null, // Poll description
@@ -21,6 +20,7 @@ class UpdatePollRequest extends BaseModel
         public ?bool $isClosed = null, // Is closed
         public ?object $custom = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

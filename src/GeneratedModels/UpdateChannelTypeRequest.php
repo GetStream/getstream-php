@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class UpdateChannelTypeRequest extends BaseModel
 {
     public function __construct(
-        public ?Thresholds $automodThresholds = null,
         /** @var array<PolicyRequest>|null */
         #[ArrayOf(PolicyRequest::class)]
         public ?array $permissions = null,
@@ -41,6 +40,7 @@ class UpdateChannelTypeRequest extends BaseModel
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
         public ?array $allowedFlagReasons = null,
+        public ?Thresholds $automodThresholds = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null,
         public ?array $commands = null, // List of commands that channel supports

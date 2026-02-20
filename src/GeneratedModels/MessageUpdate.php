@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class MessageUpdate extends BaseModel
 {
     public function __construct(
-        public ?MessageChangeSet $changeSet = null,
         public ?string $oldText = null,
+        public ?MessageChangeSet $changeSet = null,
     ) {
     }
 

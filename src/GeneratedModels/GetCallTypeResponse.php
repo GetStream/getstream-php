@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class GetCallTypeResponse extends BaseModel
 {
     public function __construct(
-        public ?NotificationSettingsResponse $notificationSettings = null,
-        public ?CallSettingsResponse $settings = null,
         public ?string $name = null,
         public ?array $grants = null,
+        public ?CallSettingsResponse $settings = null,
+        public ?NotificationSettingsResponse $notificationSettings = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?string $externalStorage = null,

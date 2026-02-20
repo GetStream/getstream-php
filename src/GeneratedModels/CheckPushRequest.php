@@ -9,7 +9,6 @@ namespace GetStream\GeneratedModels;
 class CheckPushRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?string $messageID = null, // Message ID to send push notification for
         public ?string $apnTemplate = null, // Push message template for APN
         public ?string $firebaseTemplate = null, // Push message template for Firebase
@@ -19,6 +18,7 @@ class CheckPushRequest extends BaseModel
         public ?string $pushProviderName = null, // Name of push provider
         public ?string $eventType = null, // Type of event for push templates (default: message.new). One of: message.new, message.updated, reaction.new, reaction.updated, notification.reminder_due
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

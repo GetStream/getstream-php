@@ -9,12 +9,12 @@ namespace GetStream\GeneratedModels;
 class CallClosedCaption extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
         public ?string $id = null,
         public ?string $text = null,
         public ?\DateTime $startTime = null,
         public ?\DateTime $endTime = null,
         public ?string $speakerID = null,
+        public ?UserResponse $user = null,
         public ?string $language = null,
         public ?string $service = null,
         public ?bool $translated = null,

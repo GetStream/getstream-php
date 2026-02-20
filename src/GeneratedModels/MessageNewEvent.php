@@ -9,9 +9,6 @@ namespace GetStream\GeneratedModels;
 class MessageNewEvent extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
-        public ?MessageResponse $message = null,
-        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "message.new" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
@@ -24,11 +21,14 @@ class MessageNewEvent extends BaseModel
         public ?string $channelType = null, // The type of the channel where the message was sent
         public ?string $channelID = null, // The ID of the channel where the message was sent
         public ?string $messageID = null,
+        public ?MessageResponse $message = null,
+        public ?UserResponseCommonFields $user = null,
         public ?int $watcherCount = null, // The number of watchers
         /** @var array<UserResponseCommonFields>|null */
         #[ArrayOf(UserResponseCommonFields::class)]
         public ?array $threadParticipants = null, // The participants of the thread
         public ?string $parentAuthor = null, // The author of the parent message
+        public ?ChannelResponse $channel = null,
         public ?int $unreadCount = null, // The number of unread messages
         public ?int $totalUnreadCount = null,
         public ?int $unreadChannels = null,

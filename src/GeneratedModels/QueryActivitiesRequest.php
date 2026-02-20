@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class QueryActivitiesRequest extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?object $filter = null, // Filters to apply to the query. Supports location-based queries with 'near' and 'within_bounds' operators.
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
@@ -17,6 +16,7 @@ class QueryActivitiesRequest extends BaseModel
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

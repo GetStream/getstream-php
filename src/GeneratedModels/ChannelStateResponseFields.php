@@ -7,9 +7,6 @@ class ChannelStateResponseFields extends BaseModel
 {
     public function __construct(
         public ?ChannelResponse $channel = null,
-        public ?DraftResponse $draft = null,
-        public ?ChannelMemberResponse $membership = null,
-        public ?ChannelPushPreferencesResponse $pushPreferences = null,
         /** @var array<MessageResponse>|null */
         #[ArrayOf(MessageResponse::class)]
         public ?array $messages = null, // List of channel messages
@@ -26,6 +23,8 @@ class ChannelStateResponseFields extends BaseModel
         /** @var array<ChannelMemberResponse>|null */
         #[ArrayOf(ChannelMemberResponse::class)]
         public ?array $members = null, // List of channel members
+        public ?ChannelMemberResponse $membership = null,
+        public ?ChannelPushPreferencesResponse $pushPreferences = null,
         /** @var array<ThreadStateResponse>|null */
         #[ArrayOf(ThreadStateResponse::class)]
         public ?array $threads = null,
@@ -34,6 +33,7 @@ class ChannelStateResponseFields extends BaseModel
         /** @var array<PendingMessageResponse>|null */
         #[ArrayOf(PendingMessageResponse::class)]
         public ?array $pendingMessages = null, // Pending messages that this user has sent
+        public ?DraftResponse $draft = null,
         /** @var array<SharedLocationResponseData>|null */
         #[ArrayOf(SharedLocationResponseData::class)]
         public ?array $activeLiveLocations = null, // Active live locations in the channel

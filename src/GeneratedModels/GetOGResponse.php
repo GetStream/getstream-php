@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class GetOGResponse extends BaseModel
 {
     public function __construct(
-        public ?Images $giphy = null,
         public ?string $type = null, // Attachment type, could be empty, image, audio or video
         public ?string $fallback = null,
         public ?string $color = null,
@@ -29,6 +28,7 @@ class GetOGResponse extends BaseModel
         public ?array $fields = null,
         public ?string $assetUrl = null, // URL of detected video or audio
         public ?object $custom = null,
+        public ?Images $giphy = null,
         public ?string $ogScrapeUrl = null, // extracted url from the text
         public ?int $originalWidth = null,
         public ?int $originalHeight = null,

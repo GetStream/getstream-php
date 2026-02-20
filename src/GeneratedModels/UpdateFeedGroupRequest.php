@@ -6,10 +6,8 @@ namespace GetStream\GeneratedModels;
 class UpdateFeedGroupRequest extends BaseModel
 {
     public function __construct(
-        public ?AggregationConfig $aggregation = null,
         public ?NotificationConfig $notification = null,
         public ?PushNotificationConfig $pushNotification = null,
-        public ?RankingConfig $ranking = null,
         public ?StoriesConfig $stories = null,
         public ?object $custom = null, // Custom data for the feed group
         public ?string $defaultVisibility = null,
@@ -19,6 +17,8 @@ class UpdateFeedGroupRequest extends BaseModel
         /** @var array<ActivitySelectorConfig>|null */
         #[ArrayOf(ActivitySelectorConfig::class)]
         public ?array $activitySelectors = null, // Configuration for activity selectors
+        public ?RankingConfig $ranking = null,
+        public ?AggregationConfig $aggregation = null,
     ) {
     }
 

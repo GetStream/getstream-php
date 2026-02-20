@@ -6,11 +6,11 @@ namespace GetStream\GeneratedModels;
 class AppealItemResponse extends BaseModel
 {
     public function __construct(
-        public ?ModerationPayload $entityContent = null,
-        public ?UserResponse $user = null,
         public ?string $id = null,
+        public ?UserResponse $user = null,
         public ?string $entityType = null, // Type of entity
         public ?string $entityID = null, // ID of the entity
+        public ?ModerationPayload $entityContent = null,
         public ?string $appealReason = null, // Reason Text of the Appeal Item
         public ?string $status = null, // Status of the Appeal Item
         public ?string $decisionReason = null, // Decision Reason of the Appeal Item

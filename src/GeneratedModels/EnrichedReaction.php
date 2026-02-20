@@ -6,9 +6,6 @@ namespace GetStream\GeneratedModels;
 class EnrichedReaction extends BaseModel
 {
     public function __construct(
-        public ?Time $createdAt = null,
-        public ?Time $updatedAt = null,
-        public ?Data $user = null,
         public ?string $id = null,
         public ?string $kind = null,
         public ?string $activityID = null,
@@ -19,6 +16,9 @@ class EnrichedReaction extends BaseModel
         public ?array $latestChildren = null,
         public ?array $ownChildren = null,
         public ?array $childrenCounts = null,
+        public ?Data $user = null,
+        public ?Time $createdAt = null,
+        public ?Time $updatedAt = null,
     ) {
     }
 

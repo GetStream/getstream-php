@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class QueryBannedUsersPayload extends BaseModel
 {
     public function __construct(
-        public ?UserRequest $user = null,
         public ?object $filterConditions = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
@@ -15,6 +14,7 @@ class QueryBannedUsersPayload extends BaseModel
         public ?int $offset = null, // Number of records to offset
         public ?bool $excludeExpiredBans = null, // Whether to exclude expired bans or not
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

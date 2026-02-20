@@ -6,9 +6,6 @@ namespace GetStream\GeneratedModels;
 class UpdateChannelRequest extends BaseModel
 {
     public function __construct(
-        public ?ChannelInputRequest $data = null,
-        public ?MessageRequest $message = null,
-        public ?UserRequest $user = null,
         /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $addMembers = null, // List of user IDs to add to the channel
@@ -24,12 +21,15 @@ class UpdateChannelRequest extends BaseModel
         public ?int $cooldown = null, // Sets cool down period for the channel in seconds
         public ?bool $acceptInvite = null, // Set to `true` to accept the invite
         public ?bool $rejectInvite = null, // Set to `true` to reject the invite
+        public ?MessageRequest $message = null,
         public ?bool $skipPush = null, // When `message` is set disables all push notifications for it
         public ?bool $hideHistory = null, // Set to `true` to hide channel's history when adding new members
         public ?\DateTime $hideHistoryBefore = null, // If set, hides channel's history before this time when adding new members. Takes precedence over `hide_history` when both are provided. Must be in RFC3339 format (e.g., "2024-01-01T10:00:00Z") and in the past.
         public ?array $addFilterTags = null, // List of filter tags to add to the channel
         public ?array $removeFilterTags = null, // List of filter tags to remove from the channel
+        public ?ChannelInputRequest $data = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

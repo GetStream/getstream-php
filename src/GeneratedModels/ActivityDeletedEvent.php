@@ -10,13 +10,13 @@ class ActivityDeletedEvent extends BaseModel
 {
     public function __construct(
         public ?ActivityResponse $activity = null,
-        public ?UserResponseCommonFields $user = null,
         public ?string $type = null, // The type of event: "feeds.activity.deleted" in this case
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
         public ?string $fid = null,
         public ?string $feedVisibility = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

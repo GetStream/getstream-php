@@ -10,7 +10,6 @@ class FeedCreatedEvent extends BaseModel
 {
     public function __construct(
         public ?FeedResponse $feed = null,
-        public ?UserResponseCommonFields $user = null,
         /** @var array<FeedMemberResponse>|null */
         #[ArrayOf(FeedMemberResponse::class)]
         public ?array $members = null,
@@ -20,6 +19,7 @@ class FeedCreatedEvent extends BaseModel
         public ?object $custom = null,
         public ?string $fid = null,
         public ?string $feedVisibility = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

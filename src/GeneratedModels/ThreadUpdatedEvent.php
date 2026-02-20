@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class ThreadUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?ThreadResponse $thread = null,
         public ?string $type = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
@@ -14,6 +13,7 @@ class ThreadUpdatedEvent extends BaseModel
         public ?string $cid = null,
         public ?string $channelType = null,
         public ?string $channelID = null,
+        public ?ThreadResponse $thread = null,
     ) {
     }
 

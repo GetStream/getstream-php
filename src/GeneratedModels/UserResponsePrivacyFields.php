@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class UserResponsePrivacyFields extends BaseModel
 {
     public function __construct(
-        public ?PrivacySettingsResponse $privacySettings = null,
         public ?string $id = null,
         public ?string $name = null,
         public ?string $image = null,
@@ -25,6 +24,7 @@ class UserResponsePrivacyFields extends BaseModel
         public ?\DateTime $deactivatedAt = null,
         public ?array $blockedUserIds = null,
         public ?int $avgResponseTime = null,
+        public ?PrivacySettingsResponse $privacySettings = null,
         public ?bool $invisible = null,
     ) {
     }

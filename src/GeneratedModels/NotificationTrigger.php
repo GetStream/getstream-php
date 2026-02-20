@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class NotificationTrigger extends BaseModel
 {
     public function __construct(
-        public ?NotificationComment $comment = null,
         public ?string $type = null, // The type of notification (mention, reaction, comment, follow, etc.)
         public ?string $text = null, // Human-readable text describing the notification
+        public ?NotificationComment $comment = null,
     ) {
     }
 

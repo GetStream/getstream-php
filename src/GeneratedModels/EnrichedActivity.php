@@ -6,13 +6,13 @@ namespace GetStream\GeneratedModels;
 class EnrichedActivity extends BaseModel
 {
     public function __construct(
-        public ?Data $actor = null,
-        public ?Data $object = null,
-        public ?Data $origin = null,
-        public ?Data $target = null,
         public ?string $id = null,
+        public ?Data $actor = null,
         public ?string $verb = null,
+        public ?Data $object = null,
         public ?string $foreignID = null,
+        public ?Data $target = null,
+        public ?Data $origin = null,
         public ?array $to = null,
         public ?int $score = null,
         public ?array $reactionCounts = null,

@@ -9,22 +9,14 @@ namespace GetStream\GeneratedModels;
 class MessageWithChannelResponse extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
-        public ?DraftResponse $draft = null,
-        public ?ChannelMemberResponse $member = null,
-        public ?ModerationV2Response $moderation = null,
-        public ?UserResponse $pinnedBy = null,
-        public ?PollResponseData $poll = null,
-        public ?MessageResponse $quotedMessage = null,
-        public ?ReminderResponseData $reminder = null,
-        public ?SharedLocationResponseData $sharedLocation = null,
-        public ?UserResponse $user = null,
         public ?string $id = null, // Message ID is unique string identifier of the message
         public ?string $text = null, // Text of the message. Should be empty if `mml` is provided
         public ?string $mml = null, // Should be empty if `text` is provided. Can only be set when using server-side API
         public ?string $command = null, // Contains provided slash command
         public ?string $html = null, // Contains HTML markup of the message. Can only be set when using server-side API
         public ?string $type = null, // Contains type of the message. One of: regular, ephemeral, error, reply, system, deleted
+        public ?UserResponse $user = null,
+        public ?ChannelMemberResponse $member = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null, // Array of message attachments
@@ -44,6 +36,7 @@ class MessageWithChannelResponse extends BaseModel
         public ?int $replyCount = null, // Number of replies to this message
         public ?int $deletedReplyCount = null,
         public ?string $quotedMessageID = null,
+        public ?MessageResponse $quotedMessage = null,
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
         public ?array $threadParticipants = null, // List of users who participate in thread
@@ -63,11 +56,18 @@ class MessageWithChannelResponse extends BaseModel
         public ?bool $silent = null, // Whether message is silent or not
         public ?bool $pinned = null, // Whether message is pinned or not
         public ?\DateTime $pinnedAt = null, // Date when message got pinned
+        public ?UserResponse $pinnedBy = null,
         public ?\DateTime $pinExpires = null, // Date when pinned message expires
         public ?\DateTime $messageTextUpdatedAt = null,
         public ?string $pollID = null, // Identifier of the poll to include in the message
+        public ?PollResponseData $poll = null,
+        public ?ModerationV2Response $moderation = null,
         public ?array $restrictedVisibility = null, // A list of user ids that have restricted visibility to the message, if the list is not empty, the message is only visible to the users in the list
+        public ?DraftResponse $draft = null,
+        public ?ReminderResponseData $reminder = null,
+        public ?SharedLocationResponseData $sharedLocation = null,
         public ?bool $deletedForMe = null,
+        public ?ChannelResponse $channel = null,
     ) {
     }
 

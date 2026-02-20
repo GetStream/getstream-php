@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class GetCallParticipantSessionMetricsResponse extends BaseModel
 {
     public function __construct(
-        public ?SessionClient $client = null,
         public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $userID = null,
         public ?string $userSessionID = null,
         public ?string $publisherType = null,
+        public ?SessionClient $client = null,
         public ?\DateTime $joinedAt = null,
         public ?bool $isPublisher = null,
         public ?bool $isSubscriber = null,

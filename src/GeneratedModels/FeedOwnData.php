@@ -6,7 +6,6 @@ namespace GetStream\GeneratedModels;
 class FeedOwnData extends BaseModel
 {
     public function __construct(
-        public ?FeedMemberResponse $ownMembership = null,
         /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $ownFollows = null, // Follow relationships where the current user's feeds are following this feed
@@ -16,6 +15,7 @@ class FeedOwnData extends BaseModel
         /** @var array<FeedOwnCapability>|null */
         #[ArrayOf(FeedOwnCapability::class)]
         public ?array $ownCapabilities = null, // Capabilities the current user has for this feed
+        public ?FeedMemberResponse $ownMembership = null,
     ) {
     }
 

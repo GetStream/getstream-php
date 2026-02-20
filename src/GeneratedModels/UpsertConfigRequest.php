@@ -6,25 +6,25 @@ namespace GetStream\GeneratedModels;
 class UpsertConfigRequest extends BaseModel
 {
     public function __construct(
-        public ?AIImageConfig $aiImageConfig = null,
-        public ?AITextConfig $aiTextConfig = null,
-        public ?AIVideoConfig $aiVideoConfig = null,
-        public ?AutomodPlatformCircumventionConfig $automodPlatformCircumventionConfig = null,
-        public ?AutomodSemanticFiltersConfig $automodSemanticFiltersConfig = null,
-        public ?AutomodToxicityConfig $automodToxicityConfig = null,
-        public ?AIImageConfig $awsRekognitionConfig = null,
-        public ?BlockListConfig $blockListConfig = null,
-        public ?AITextConfig $bodyguardConfig = null,
-        public ?GoogleVisionConfig $googleVisionConfig = null,
-        public ?LLMConfig $llmConfig = null,
-        public ?RuleBuilderConfig $ruleBuilderConfig = null,
-        public ?UserRequest $user = null,
-        public ?VelocityFilterConfig $velocityFilterConfig = null,
-        public ?VideoCallRuleConfig $videoCallRuleConfig = null,
         public ?string $key = null, // Unique identifier for the moderation configuration
         public ?string $team = null, // Team associated with the configuration
         public ?bool $async = null, // Whether moderation should be performed asynchronously
+        public ?AutomodToxicityConfig $automodToxicityConfig = null,
+        public ?AutomodPlatformCircumventionConfig $automodPlatformCircumventionConfig = null,
+        public ?AutomodSemanticFiltersConfig $automodSemanticFiltersConfig = null,
+        public ?BlockListConfig $blockListConfig = null,
+        public ?AITextConfig $aiTextConfig = null,
+        public ?LLMConfig $llmConfig = null,
+        public ?GoogleVisionConfig $googleVisionConfig = null,
+        public ?AIImageConfig $aiImageConfig = null,
+        public ?AIVideoConfig $aiVideoConfig = null,
+        public ?VelocityFilterConfig $velocityFilterConfig = null,
+        public ?RuleBuilderConfig $ruleBuilderConfig = null,
+        public ?AITextConfig $bodyguardConfig = null,
+        public ?AIImageConfig $awsRekognitionConfig = null,
+        public ?VideoCallRuleConfig $videoCallRuleConfig = null,
         public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

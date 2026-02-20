@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class MuteResponse extends BaseModel
 {
     public function __construct(
-        public ?OwnUserResponse $ownUser = null,
         /** @var array<UserMuteResponse>|null */
         #[ArrayOf(UserMuteResponse::class)]
         public ?array $mutes = null, // Object with mutes (if multiple users were muted)
+        public ?OwnUserResponse $ownUser = null,
         public ?array $nonExistingUsers = null, // A list of users that can't be found. Common cause for this is deleted users
         public ?string $duration = null,
     ) {

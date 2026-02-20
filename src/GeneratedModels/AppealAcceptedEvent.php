@@ -9,11 +9,11 @@ namespace GetStream\GeneratedModels;
 class AppealAcceptedEvent extends BaseModel
 {
     public function __construct(
-        public ?AppealItemResponse $appeal = null,
         public ?string $type = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
+        public ?AppealItemResponse $appeal = null,
     ) {
     }
 
