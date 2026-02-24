@@ -853,6 +853,33 @@ abstract class ChatTestCase extends TestCase
     }
 
     // =========================================================================
+    // Flag API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\FlagResponse>
+     */
+    protected function flagContent(GeneratedModels\FlagRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/moderation/flag', [], $request),
+            GeneratedModels\FlagResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryMessageFlagsResponse>
+     */
+    protected function queryMessageFlags(GeneratedModels\QueryMessageFlagsPayload $payload): StreamResponse
+    {
+        $queryParams = ['payload' => json_encode($payload->toArray())];
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/chat/moderation/flags/message', $queryParams),
+            GeneratedModels\QueryMessageFlagsResponse::class,
+        );
+    }
+
+    // =========================================================================
     // Export Channels API Wrapper
     // =========================================================================
 
