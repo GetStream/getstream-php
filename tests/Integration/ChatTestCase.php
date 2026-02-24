@@ -671,6 +671,322 @@ abstract class ChatTestCase extends TestCase
     }
 
     // =========================================================================
+    // Command API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\CreateCommandResponse>
+     */
+    protected function createCommand(GeneratedModels\CreateCommandRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/commands', [], $request),
+            GeneratedModels\CreateCommandResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetCommandResponse>
+     */
+    protected function getCommand(string $name): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/chat/commands/{$name}"),
+            GeneratedModels\GetCommandResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\ListCommandsResponse>
+     */
+    protected function listCommands(): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/chat/commands'),
+            GeneratedModels\ListCommandsResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateCommandResponse>
+     */
+    protected function updateCommand(string $name, GeneratedModels\UpdateCommandRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PUT', "/api/v2/chat/commands/{$name}", [], $request),
+            GeneratedModels\UpdateCommandResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\DeleteCommandResponse>
+     */
+    protected function deleteCommandApi(string $name): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/chat/commands/{$name}"),
+            GeneratedModels\DeleteCommandResponse::class,
+        );
+    }
+
+    // =========================================================================
+    // Channel Type API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\CreateChannelTypeResponse>
+     */
+    protected function createChannelType(GeneratedModels\CreateChannelTypeRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/channeltypes', [], $request),
+            GeneratedModels\CreateChannelTypeResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetChannelTypeResponse>
+     */
+    protected function getChannelType(string $name): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/chat/channeltypes/{$name}"),
+            GeneratedModels\GetChannelTypeResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\ListChannelTypesResponse>
+     */
+    protected function listChannelTypes(): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/chat/channeltypes'),
+            GeneratedModels\ListChannelTypesResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateChannelTypeResponse>
+     */
+    protected function updateChannelType(string $name, GeneratedModels\UpdateChannelTypeRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PUT', "/api/v2/chat/channeltypes/{$name}", [], $request),
+            GeneratedModels\UpdateChannelTypeResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function deleteChannelType(string $name): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/chat/channeltypes/{$name}"),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    // =========================================================================
+    // Ban / Mute API Wrappers (Moderation)
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\BanResponse>
+     */
+    protected function banUser(GeneratedModels\BanRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/moderation/ban', [], $request),
+            GeneratedModels\BanResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function unbanUser(string $targetUserID, string $channelCid = ''): StreamResponse
+    {
+        $queryParams = ['target_user_id' => $targetUserID];
+        if ($channelCid !== '') {
+            $queryParams['channel_cid'] = $channelCid;
+        }
+
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/moderation/unban', $queryParams, new GeneratedModels\UnbanRequest()),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryBannedUsersResponse>
+     */
+    protected function queryBannedUsers(GeneratedModels\QueryBannedUsersPayload $payload): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/chat/query_banned_users', ['payload' => json_encode($payload->toArray())]),
+            GeneratedModels\QueryBannedUsersResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\MuteResponse>
+     */
+    protected function muteUser(GeneratedModels\MuteRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/moderation/mute', [], $request),
+            GeneratedModels\MuteResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UnmuteResponse>
+     */
+    protected function unmuteUser(GeneratedModels\UnmuteRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/moderation/unmute', [], $request),
+            GeneratedModels\UnmuteResponse::class,
+        );
+    }
+
+    // =========================================================================
+    // Export Channels API Wrapper
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\ExportChannelsResponse>
+     */
+    protected function exportChannels(GeneratedModels\ExportChannelsRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/export_channels', [], $request),
+            GeneratedModels\ExportChannelsResponse::class,
+        );
+    }
+
+    // =========================================================================
+    // Threads API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryThreadsResponse>
+     */
+    protected function queryThreads(GeneratedModels\QueryThreadsRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/threads', [], $request),
+            GeneratedModels\QueryThreadsResponse::class,
+        );
+    }
+
+    // =========================================================================
+    // Unread Counts API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\WrappedUnreadCountsResponse>
+     */
+    protected function getUnreadCounts(string $userID): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/chat/unread', ['user_id' => $userID]),
+            GeneratedModels\WrappedUnreadCountsResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UnreadCountsBatchResponse>
+     */
+    protected function getUnreadCountsBatch(GeneratedModels\UnreadCountsBatchRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/unread_batch', [], $request),
+            GeneratedModels\UnreadCountsBatchResponse::class,
+        );
+    }
+
+    // =========================================================================
+    // Reminder API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\ReminderResponseData>
+     */
+    protected function createReminder(string $messageID, GeneratedModels\CreateReminderRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/messages/{$messageID}/reminders", [], $request),
+            GeneratedModels\ReminderResponseData::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateReminderResponse>
+     */
+    protected function updateReminder(string $messageID, GeneratedModels\UpdateReminderRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PATCH', "/api/v2/chat/messages/{$messageID}/reminders", [], $request),
+            GeneratedModels\UpdateReminderResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\DeleteReminderResponse>
+     */
+    protected function deleteReminderApi(string $messageID, string $userID): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/chat/messages/{$messageID}/reminders", ['user_id' => $userID]),
+            GeneratedModels\DeleteReminderResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryRemindersResponse>
+     */
+    protected function queryReminders(GeneratedModels\QueryRemindersRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/reminders/query', [], $request),
+            GeneratedModels\QueryRemindersResponse::class,
+        );
+    }
+
+    // =========================================================================
+    // Custom Event API Wrapper
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function sendUserCustomEvent(string $userID, GeneratedModels\SendUserCustomEventRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/users/{$userID}/event", [], $request),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    // =========================================================================
+    // Team Usage Stats API Wrapper
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryTeamUsageStatsResponse>
+     */
+    protected function queryTeamUsageStats(GeneratedModels\QueryTeamUsageStatsRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/stats/team_usage', [], $request),
+            GeneratedModels\QueryTeamUsageStatsResponse::class,
+        );
+    }
+
+    // =========================================================================
     // Assertion Helpers
     // =========================================================================
 
