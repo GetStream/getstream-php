@@ -268,6 +268,163 @@ abstract class ChatTestCase extends TestCase
         );
     }
 
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateChannelResponse>
+     */
+    protected function updateChannel(string $type, string $id, GeneratedModels\UpdateChannelRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/{$id}", [], $request),
+            GeneratedModels\UpdateChannelResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateChannelPartialResponse>
+     */
+    protected function updateChannelPartial(string $type, string $id, GeneratedModels\UpdateChannelPartialRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PATCH', "/api/v2/chat/channels/{$type}/{$id}", [], $request),
+            GeneratedModels\UpdateChannelPartialResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\DeleteChannelsResponse>
+     */
+    protected function deleteChannelsBatch(GeneratedModels\DeleteChannelsRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/channels/delete', [], $request),
+            GeneratedModels\DeleteChannelsResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\HideChannelResponse>
+     */
+    protected function hideChannel(string $type, string $id, GeneratedModels\HideChannelRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/{$id}/hide", [], $request),
+            GeneratedModels\HideChannelResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\ShowChannelResponse>
+     */
+    protected function showChannel(string $type, string $id, GeneratedModels\ShowChannelRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/{$id}/show", [], $request),
+            GeneratedModels\ShowChannelResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\TruncateChannelResponse>
+     */
+    protected function truncateChannel(string $type, string $id, GeneratedModels\TruncateChannelRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/{$id}/truncate", [], $request),
+            GeneratedModels\TruncateChannelResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\MarkReadResponse>
+     */
+    protected function markRead(string $type, string $id, GeneratedModels\MarkReadRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/{$id}/read", [], $request),
+            GeneratedModels\MarkReadResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function markUnread(string $type, string $id, GeneratedModels\MarkUnreadRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/{$id}/unread", [], $request),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\MuteChannelResponse>
+     */
+    protected function muteChannel(GeneratedModels\MuteChannelRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/moderation/mute/channel', [], $request),
+            GeneratedModels\MuteChannelResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UnmuteResponse>
+     */
+    protected function unmuteChannel(GeneratedModels\UnmuteChannelRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/moderation/unmute/channel', [], $request),
+            GeneratedModels\UnmuteResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateMemberPartialResponse>
+     */
+    protected function updateMemberPartial(string $type, string $id, string $userID, GeneratedModels\UpdateMemberPartialRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PATCH', "/api/v2/chat/channels/{$type}/{$id}/member", ['user_id' => $userID], $request),
+            GeneratedModels\UpdateMemberPartialResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\MembersResponse>
+     */
+    protected function queryMembers(GeneratedModels\QueryMembersPayload $payload): StreamResponse
+    {
+        $queryParams = ['payload' => json_encode($payload->toArray())];
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/chat/members', $queryParams),
+            GeneratedModels\MembersResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\EventResponse>
+     */
+    protected function sendEvent(string $type, string $id, GeneratedModels\SendEventRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/{$id}/event", [], $request),
+            GeneratedModels\EventResponse::class,
+        );
+    }
+
+    /**
+     * Create a distinct channel (without explicit ID).
+     *
+     * @return StreamResponse<GeneratedModels\ChannelStateResponse>
+     */
+    protected function getOrCreateDistinctChannel(string $type, GeneratedModels\ChannelGetOrCreateRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/channels/{$type}/query", [], $request),
+            GeneratedModels\ChannelStateResponse::class,
+        );
+    }
+
     // =========================================================================
     // Assertion Helpers
     // =========================================================================
