@@ -607,6 +607,70 @@ abstract class ChatTestCase extends TestCase
     }
 
     // =========================================================================
+    // Poll API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\PollResponse>
+     */
+    protected function createPoll(GeneratedModels\CreatePollRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/polls', [], $request),
+            GeneratedModels\PollResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\PollResponse>
+     */
+    protected function getPoll(string $pollID): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/polls/{$pollID}"),
+            GeneratedModels\PollResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryPollsResponse>
+     */
+    protected function queryPolls(GeneratedModels\QueryPollsRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/polls/query', [], $request),
+            GeneratedModels\QueryPollsResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function deletePoll(string $pollID, ?string $userID = null): StreamResponse
+    {
+        $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/polls/{$pollID}", $queryParams),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\PollVoteResponse>
+     */
+    protected function castPollVote(string $messageID, string $pollID, GeneratedModels\CastPollVoteRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/messages/{$messageID}/polls/{$pollID}/vote", [], $request),
+            GeneratedModels\PollVoteResponse::class,
+        );
+    }
+
+    // =========================================================================
     // Assertion Helpers
     // =========================================================================
 
