@@ -562,6 +562,51 @@ abstract class ChatTestCase extends TestCase
     }
 
     // =========================================================================
+    // Reaction API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\SendReactionResponse>
+     */
+    protected function sendReaction(string $messageID, GeneratedModels\SendReactionRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/messages/{$messageID}/reaction", [], $request),
+            GeneratedModels\SendReactionResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetReactionsResponse>
+     */
+    protected function getReactions(string $messageID, int $limit = 0, int $offset = 0): StreamResponse
+    {
+        $queryParams = [];
+        if ($limit > 0) {
+            $queryParams['limit'] = (string) $limit;
+        }
+        if ($offset > 0) {
+            $queryParams['offset'] = (string) $offset;
+        }
+
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/chat/messages/{$messageID}/reactions", $queryParams),
+            GeneratedModels\GetReactionsResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\DeleteReactionResponse>
+     */
+    protected function deleteReaction(string $messageID, string $reactionType, string $userID): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/chat/messages/{$messageID}/reaction/{$reactionType}", ['user_id' => $userID]),
+            GeneratedModels\DeleteReactionResponse::class,
+        );
+    }
+
+    // =========================================================================
     // Assertion Helpers
     // =========================================================================
 
