@@ -65,6 +65,8 @@ class AppResponseFields extends BaseModel
         public ?bool $userResponseTimeEnabled = null,
         public ?bool $moderationLlmConfigurabilityEnabled = null,
         public ?int $maxAggregatedActivitiesLength = null,
+        public ?bool $moderationVideoCallModerationEnabled = null,
+        public ?bool $moderationAudioCallModerationEnabled = null,
     ) {
     }
 

@@ -7,6 +7,7 @@ class IndividualRecordSettings extends BaseModel
 {
     public function __construct(
         public ?string $mode = null,
+        public ?array $outputTypes = null,
     ) {
     }
 

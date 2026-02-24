@@ -22,6 +22,7 @@ class ConfigResponse extends BaseModel
         public ?\DateTime $updatedAt = null, // When the configuration was last updated
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
         public ?array $supportedVideoCallHarmTypes = null,
+        public ?array $aiImageSubclassifications = null, // Available L2 subclassifications per L1 image moderation label, based on the active provider
     ) {
     }
 

@@ -3,13 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class AWSRekognitionRule extends BaseModel
+/**
+ * Basic response information
+ */
+class UndeleteMessageResponse extends BaseModel
 {
     public function __construct(
-        public ?string $label = null,
-        public ?string $action = null,
-        public ?int $minConfidence = null,
-        public ?array $subclassifications = null,
+        public ?MessageResponse $message = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

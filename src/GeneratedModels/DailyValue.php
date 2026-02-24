@@ -3,13 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class AWSRekognitionRule extends BaseModel
+/**
+ * Metric value for a specific date
+ */
+class DailyValue extends BaseModel
 {
     public function __construct(
-        public ?string $label = null,
-        public ?string $action = null,
-        public ?int $minConfidence = null,
-        public ?array $subclassifications = null,
+        public ?string $date = null, // Date in YYYY-MM-DD format
+        public ?int $value = null, // Metric value for this date
     ) {
     }
 

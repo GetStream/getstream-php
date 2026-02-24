@@ -3,13 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class AWSRekognitionRule extends BaseModel
+class UndeleteMessageRequest extends BaseModel
 {
     public function __construct(
-        public ?string $label = null,
-        public ?string $action = null,
-        public ?int $minConfidence = null,
-        public ?array $subclassifications = null,
+        public ?string $undeletedBy = null, // ID of the user who is undeleting the message
     ) {
     }
 

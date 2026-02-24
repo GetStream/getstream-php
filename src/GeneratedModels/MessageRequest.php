@@ -19,6 +19,7 @@ class MessageRequest extends BaseModel
         public ?bool $showInChannel = null, // Whether thread reply should be shown in the channel as well
         public ?object $custom = null,
         public ?array $mentionedUsers = null, // Array of user IDs to mention
+        public ?array $mentionedRoles = null,
         public ?bool $mentionedChannel = null,
         public ?bool $mentionedHere = null,
         public ?string $quotedMessageID = null,

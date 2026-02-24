@@ -15,6 +15,7 @@ class UpdateAppRequest extends BaseModel
         public ?PushConfig $pushConfig = null,
         public ?string $webhookUrl = null,
         public ?bool $moderationEnabled = null,
+        public ?bool $moderationAnalyticsEnabled = null,
         public ?string $moderationWebhookUrl = null,
         public ?string $permissionVersion = null,
         public ?array $userSearchDisallowedRoles = null,

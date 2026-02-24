@@ -26,6 +26,7 @@ class RuleBuilderCondition extends BaseModel
         public ?ClosedCaptionRuleParameters $closedCaptionRuleParams = null,
         public ?CallTypeRuleParameters $callTypeRuleParams = null,
         public ?CallCustomPropertyParameters $callCustomPropertyParams = null,
+        public ?CallViolationCountParameters $callViolationCountParams = null,
     ) {
     }
 

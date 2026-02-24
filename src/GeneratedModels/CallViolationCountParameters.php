@@ -3,13 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class AWSRekognitionRule extends BaseModel
+class CallViolationCountParameters extends BaseModel
 {
     public function __construct(
-        public ?string $label = null,
-        public ?string $action = null,
-        public ?int $minConfidence = null,
-        public ?array $subclassifications = null,
+        public ?int $threshold = null,
+        public ?string $timeWindow = null,
     ) {
     }
 
