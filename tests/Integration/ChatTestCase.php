@@ -426,6 +426,142 @@ abstract class ChatTestCase extends TestCase
     }
 
     // =========================================================================
+    // Message API Wrappers
+    // =========================================================================
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetMessageResponse>
+     */
+    protected function getMessage(string $messageID): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/chat/messages/{$messageID}"),
+            GeneratedModels\GetMessageResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetManyMessagesResponse>
+     */
+    protected function getManyMessages(string $type, string $id, array $messageIDs): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/chat/channels/{$type}/{$id}/messages", ['ids' => implode(',', $messageIDs)]),
+            GeneratedModels\GetManyMessagesResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateMessageResponse>
+     */
+    protected function updateMessage(string $messageID, GeneratedModels\UpdateMessageRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/messages/{$messageID}", [], $request),
+            GeneratedModels\UpdateMessageResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateMessagePartialResponse>
+     */
+    protected function updateMessagePartial(string $messageID, GeneratedModels\UpdateMessagePartialRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PUT', "/api/v2/chat/messages/{$messageID}", [], $request),
+            GeneratedModels\UpdateMessagePartialResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\DeleteMessageResponse>
+     */
+    protected function deleteMessageApi(string $messageID, bool $hard = false, ?string $deletedBy = null, bool $deleteForMe = false): StreamResponse
+    {
+        $queryParams = [];
+        if ($hard) {
+            $queryParams['hard'] = 'true';
+        }
+        if ($deletedBy !== null) {
+            $queryParams['deleted_by'] = $deletedBy;
+        }
+        if ($deleteForMe) {
+            $queryParams['delete_for_me'] = 'true';
+        }
+
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/chat/messages/{$messageID}", $queryParams),
+            GeneratedModels\DeleteMessageResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\MessageActionResponse>
+     */
+    protected function translateMessage(string $messageID, GeneratedModels\TranslateMessageRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/messages/{$messageID}/translate", [], $request),
+            GeneratedModels\MessageActionResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetRepliesResponse>
+     */
+    protected function getReplies(string $parentID, array $queryParams = []): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/chat/messages/{$parentID}/replies", $queryParams),
+            GeneratedModels\GetRepliesResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\SearchResponse>
+     */
+    protected function searchMessages(GeneratedModels\SearchPayload $payload): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/chat/search', ['payload' => json_encode($payload->toArray())]),
+            GeneratedModels\SearchResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\MessageActionResponse>
+     */
+    protected function commitMessage(string $messageID): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/messages/{$messageID}/commit", [], new GeneratedModels\CommitMessageRequest()),
+            GeneratedModels\MessageActionResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UndeleteMessageResponse>
+     */
+    protected function undeleteMessage(string $messageID, GeneratedModels\UndeleteMessageRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/chat/messages/{$messageID}/undelete", [], $request),
+            GeneratedModels\UndeleteMessageResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryMessageHistoryResponse>
+     */
+    protected function queryMessageHistory(GeneratedModels\QueryMessageHistoryRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/chat/messages/history', [], $request),
+            GeneratedModels\QueryMessageHistoryResponse::class,
+        );
+    }
+
+    // =========================================================================
     // Assertion Helpers
     // =========================================================================
 
