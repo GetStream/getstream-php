@@ -1014,6 +1014,272 @@ abstract class ChatTestCase extends TestCase
     }
 
     // =========================================================================
+    // Video API Wrappers
+    // =========================================================================
+
+    /** @var string[] Call type names created during the test, cleaned up in tearDown */
+    protected array $createdCallTypes = [];
+
+    /** @var array{type: string, id: string}[] Calls created during the test, cleaned up in tearDown */
+    protected array $createdCalls = [];
+
+    /** @var string[] External storage names created during the test, cleaned up in tearDown */
+    protected array $createdExternalStorages = [];
+
+    /**
+     * @return StreamResponse<GeneratedModels\CreateCallTypeResponse>
+     */
+    protected function createCallTypeVideo(GeneratedModels\CreateCallTypeRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/video/calltypes', [], $request),
+            GeneratedModels\CreateCallTypeResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetCallTypeResponse>
+     */
+    protected function getCallTypeVideo(string $name): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/video/calltypes/{$name}"),
+            GeneratedModels\GetCallTypeResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateCallTypeResponse>
+     */
+    protected function updateCallTypeVideo(string $name, GeneratedModels\UpdateCallTypeRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PUT', "/api/v2/video/calltypes/{$name}", [], $request),
+            GeneratedModels\UpdateCallTypeResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function deleteCallTypeVideo(string $name): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/video/calltypes/{$name}"),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\ListCallTypeResponse>
+     */
+    protected function listCallTypesVideo(): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', '/api/v2/video/calltypes'),
+            GeneratedModels\ListCallTypeResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetOrCreateCallResponse>
+     */
+    protected function getOrCreateCall(string $type, string $id, GeneratedModels\GetOrCreateCallRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}", [], $request),
+            GeneratedModels\GetOrCreateCallResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\GetCallResponse>
+     */
+    protected function getCall(string $type, string $id): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('GET', "/api/v2/video/call/{$type}/{$id}"),
+            GeneratedModels\GetCallResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateCallResponse>
+     */
+    protected function updateCall(string $type, string $id, GeneratedModels\UpdateCallRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('PATCH', "/api/v2/video/call/{$type}/{$id}", [], $request),
+            GeneratedModels\UpdateCallResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\DeleteCallResponse>
+     */
+    protected function deleteCall(string $type, string $id, GeneratedModels\DeleteCallRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}/delete", [], $request),
+            GeneratedModels\DeleteCallResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\BlockUserResponse>
+     */
+    protected function blockUserInCall(string $type, string $id, GeneratedModels\BlockUserRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}/block", [], $request),
+            GeneratedModels\BlockUserResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UnblockUserResponse>
+     */
+    protected function unblockUserInCall(string $type, string $id, GeneratedModels\UnblockUserRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}/unblock", [], $request),
+            GeneratedModels\UnblockUserResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\MuteUsersResponse>
+     */
+    protected function muteUsersInCall(string $type, string $id, GeneratedModels\MuteUsersRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}/mute_users", [], $request),
+            GeneratedModels\MuteUsersResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\SendCallEventResponse>
+     */
+    protected function sendCallEvent(string $type, string $id, GeneratedModels\SendCallEventRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}/event", [], $request),
+            GeneratedModels\SendCallEventResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateUserPermissionsResponse>
+     */
+    protected function updateUserPermissionsInCall(string $type, string $id, GeneratedModels\UpdateUserPermissionsRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}/user_permissions", [], $request),
+            GeneratedModels\UpdateUserPermissionsResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\UpdateCallMembersResponse>
+     */
+    protected function updateCallMembers(string $type, string $id, GeneratedModels\UpdateCallMembersRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', "/api/v2/video/call/{$type}/{$id}/members", [], $request),
+            GeneratedModels\UpdateCallMembersResponse::class,
+        );
+    }
+
+    /**
+     * @return StreamResponse<GeneratedModels\QueryCallsResponse>
+     */
+    protected function queryCalls(GeneratedModels\QueryCallsRequest $request): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('POST', '/api/v2/video/calls', [], $request),
+            GeneratedModels\QueryCallsResponse::class,
+        );
+    }
+
+    /**
+     * Delete a recording from a call session (expects error for non-existent recordings).
+     *
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function deleteRecording(string $type, string $id, string $session, string $filename): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/video/call/{$type}/{$id}/{$session}/recordings/{$filename}"),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    /**
+     * Delete a transcription from a call session (expects error for non-existent transcriptions).
+     *
+     * @return StreamResponse<GeneratedModels\Response>
+     */
+    protected function deleteTranscription(string $type, string $id, string $session, string $filename): StreamResponse
+    {
+        return StreamResponse::fromJson(
+            $this->client->makeRequest('DELETE', "/api/v2/video/call/{$type}/{$id}/{$session}/transcriptions/{$filename}"),
+            GeneratedModels\Response::class,
+        );
+    }
+
+    /**
+     * Clean up video resources (call types, calls, external storages).
+     * Call from tearDown in video tests.
+     */
+    protected function cleanupVideoResources(): void
+    {
+        // Delete calls first
+        foreach (array_reverse($this->createdCalls) as $call) {
+            try {
+                $this->deleteCall($call['type'], $call['id'], new GeneratedModels\DeleteCallRequest());
+            } catch (\Exception $e) {
+                // Ignore cleanup errors
+            }
+        }
+
+        // Delete call types (need small delay for eventual consistency)
+        foreach (array_reverse($this->createdCallTypes) as $name) {
+            try {
+                $this->deleteCallTypeVideo($name);
+            } catch (\Exception $e) {
+                // Ignore cleanup errors
+            }
+        }
+
+        // Delete external storages
+        foreach (array_reverse($this->createdExternalStorages) as $name) {
+            try {
+                $this->client->deleteExternalStorage($name);
+            } catch (\Exception $e) {
+                // Ignore cleanup errors
+            }
+        }
+    }
+
+    /**
+     * Create a call and track it for cleanup.
+     *
+     * @return GeneratedModels\GetOrCreateCallResponse
+     */
+    protected function createTrackedCall(string $type, string $id, string $creatorID): GeneratedModels\GetOrCreateCallResponse
+    {
+        $response = $this->getOrCreateCall($type, $id, new GeneratedModels\GetOrCreateCallRequest(
+            data: new GeneratedModels\CallRequest(
+                createdByID: $creatorID,
+            ),
+        ));
+        $this->assertResponseSuccess($response, 'create call');
+        $this->createdCalls[] = ['type' => $type, 'id' => $id];
+        return $response->getData();
+    }
+
+    // =========================================================================
     // Assertion Helpers
     // =========================================================================
 
