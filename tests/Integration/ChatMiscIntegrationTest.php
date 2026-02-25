@@ -202,10 +202,11 @@ class ChatMiscIntegrationTest extends ChatTestCase
             self::assertEquals($typeName, $getResp->getData()->name);
 
             // Update channel type (also needs retry for eventual consistency)
+            // Use 3000 (not 10000) since the test environment caps maxMessageLength at 5000
             $updateResp = $this->retryUntilSuccess(fn () => $this->updateChannelType($typeName, new GeneratedModels\UpdateChannelTypeRequest(
                 automod: 'disabled',
                 automodBehavior: 'flag',
-                maxMessageLength: 10000,
+                maxMessageLength: 3000,
                 typingEvents: false,
             )), maxAttempts: 5, sleepSeconds: 2);
             $this->assertResponseSuccess($updateResp, 'update channel type');
@@ -214,7 +215,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
             $this->retryUntilSuccess(function () use ($typeName) {
                 $resp = $this->getChannelType($typeName);
                 $this->assertResponseSuccess($resp, 'get updated channel type');
-                self::assertEquals(10000, $resp->getData()->maxMessageLength);
+                self::assertEquals(3000, $resp->getData()->maxMessageLength);
                 self::assertFalse($resp->getData()->typingEvents);
             }, maxAttempts: 10, sleepSeconds: 2);
 
