@@ -163,6 +163,30 @@ abstract class ChatTestCase extends TestCase
     }
 
     /**
+     * Retry a callable until it succeeds or max attempts exhausted.
+     * Useful for eventually consistent API operations.
+     *
+     * @template T
+     * @param callable(): T $fn
+     * @param int $maxAttempts
+     * @param int $sleepSeconds
+     * @return T
+     */
+    protected function retryUntilSuccess(callable $fn, int $maxAttempts = 5, int $sleepSeconds = 2): mixed
+    {
+        $lastException = new \RuntimeException('retryUntilSuccess: no attempts made');
+        for ($i = 0; $i < $maxAttempts; $i++) {
+            try {
+                return $fn();
+            } catch (\Exception $e) {
+                $lastException = $e;
+                sleep($sleepSeconds);
+            }
+        }
+        throw $lastException;
+    }
+
+    /**
      * Delete users with retry logic for rate limiting.
      * Follows the pattern from getstream-go's deleteUsersWithRetry.
      *

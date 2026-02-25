@@ -121,6 +121,9 @@ class VideoIntegrationTest extends ChatTestCase
         $this->assertTrue($data->notificationSettings->callNotification->enabled);
         $this->assertFalse($data->notificationSettings->sessionStarted->enabled);
 
+        // Call types are eventually consistent
+        sleep(6);
+
         // Update call type settings
         $updateResp = $this->updateCallTypeVideo($callTypeName, new GeneratedModels\UpdateCallTypeRequest(
             settings: new GeneratedModels\CallSettingsRequest(
@@ -202,10 +205,12 @@ class VideoIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($blockResp, 'block user');
 
-        // Verify blocked
+        // Verify blocked (eventually consistent)
+        sleep(2);
         $getResp = $this->getCall('default', $callID);
         $this->assertResponseSuccess($getResp, 'get call after block');
-        $this->assertContains($userIDs[1], $getResp->getData()->call->blockedUserIds);
+        $blockedIds = $getResp->getData()->call->blockedUserIds ?? [];
+        $this->assertContains($userIDs[1], $blockedIds, 'User should be in blocked list. Got: ' . json_encode($blockedIds));
 
         // Unblock user
         $unblockResp = $this->unblockUserInCall('default', $callID, new GeneratedModels\UnblockUserRequest(
@@ -594,6 +599,9 @@ class VideoIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($createResp, 'create external storage');
         $this->createdExternalStorages[] = $uniqueName;
+
+        // External storages are eventually consistent
+        sleep(2);
 
         // List external storages and verify our new one is in the list
         $listResp = $this->client->listExternalStorage();

@@ -83,6 +83,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
             ));
             $this->assertResponseSuccess($createResp, 'create blocklist');
 
+            // Blocklists are eventually consistent
+            sleep(2);
+
             // List blocklists and verify found
             $listResp = $this->client->listBlockLists('');
             $this->assertResponseSuccess($listResp, 'list blocklists');
@@ -137,6 +140,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
             self::assertEquals($cmdName, $getResp->getData()->name);
             self::assertEquals('A test command', $getResp->getData()->description);
 
+            // Commands are eventually consistent
+            sleep(2);
+
             // List commands and verify found
             $listResp = $this->listCommands();
             $this->assertResponseSuccess($listResp, 'list commands');
@@ -183,21 +189,21 @@ class ChatMiscIntegrationTest extends ChatTestCase
             self::assertEquals($typeName, $createResp->getData()->name);
             self::assertEquals(5000, $createResp->getData()->maxMessageLength);
 
-            // Channel types are eventually consistent - sleep 6s
-            sleep(6);
-
-            // Get channel type
-            $getResp = $this->getChannelType($typeName);
-            $this->assertResponseSuccess($getResp, 'get channel type');
+            // Channel types are eventually consistent - retry with delay
+            $getResp = $this->retryUntilSuccess(function () use ($typeName) {
+                $resp = $this->getChannelType($typeName);
+                $this->assertResponseSuccess($resp, 'get channel type');
+                return $resp;
+            }, maxAttempts: 10, sleepSeconds: 2);
             self::assertEquals($typeName, $getResp->getData()->name);
 
-            // Update channel type
-            $updateResp = $this->updateChannelType($typeName, new GeneratedModels\UpdateChannelTypeRequest(
+            // Update channel type (also needs retry for eventual consistency)
+            $updateResp = $this->retryUntilSuccess(fn () => $this->updateChannelType($typeName, new GeneratedModels\UpdateChannelTypeRequest(
                 automod: 'disabled',
                 automodBehavior: 'flag',
                 maxMessageLength: 10000,
                 typingEvents: false,
-            ));
+            )), maxAttempts: 5, sleepSeconds: 2);
             $this->assertResponseSuccess($updateResp, 'update channel type');
             self::assertEquals(10000, $updateResp->getData()->maxMessageLength);
             self::assertFalse($updateResp->getData()->typingEvents);
