@@ -123,9 +123,17 @@ class GuzzleHttpClient implements HttpClientInterface
             $message = 'API request failed';
             $errorDetails = [];
 
+            // Try parsed JSON data first
             if (is_array($data)) {
                 $message = $data['message'] ?? $data['error'] ?? $message;
                 $errorDetails = $data;
+            } elseif (!empty($rawBody)) {
+                // Fallback: try parsing raw body as JSON even if content-type wasn't application/json
+                $fallbackData = json_decode($rawBody, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($fallbackData)) {
+                    $message = $fallbackData['message'] ?? $fallbackData['error'] ?? $message;
+                    $errorDetails = $fallbackData;
+                }
             }
 
             throw new StreamApiException($message, $statusCode, $rawBody, $errorDetails);

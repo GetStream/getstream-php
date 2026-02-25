@@ -635,10 +635,15 @@ abstract class ChatTestCase extends TestCase
     /**
      * @return StreamResponse<GeneratedModels\QueryPollsResponse>
      */
-    protected function queryPolls(GeneratedModels\QueryPollsRequest $request): StreamResponse
+    protected function queryPolls(GeneratedModels\QueryPollsRequest $request, ?string $userID = null): StreamResponse
     {
+        $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+
         return StreamResponse::fromJson(
-            $this->client->makeRequest('POST', '/api/v2/polls/query', [], $request),
+            $this->client->makeRequest('POST', '/api/v2/polls/query', $queryParams, $request),
             GeneratedModels\QueryPollsResponse::class,
         );
     }
@@ -1285,8 +1290,9 @@ abstract class ChatTestCase extends TestCase
 
     protected function assertResponseSuccess(StreamResponse $response, string $operation): void
     {
-        if (!$response->isSuccessful()) {
-            self::fail("Failed to {$operation}. Status: {$response->getStatusCode()}, Body: {$response->getRawBody()}");
-        }
+        self::assertTrue(
+            $response->isSuccessful(),
+            "Failed to {$operation}. Status: {$response->getStatusCode()}, Body: {$response->getRawBody()}"
+        );
     }
 }

@@ -83,7 +83,7 @@ class ChatPollsIntegrationTest extends ChatTestCase
         // Query polls with filter by ID
         $queryResp = $this->queryPolls(new GeneratedModels\QueryPollsRequest(
             filter: (object) ['id' => $pollID],
-        ));
+        ), $userIDs[0]);
         $this->assertResponseSuccess($queryResp, 'query polls');
         $this->assertNotNull($queryResp->getData()->polls);
         $this->assertGreaterThanOrEqual(1, count($queryResp->getData()->polls));
@@ -138,13 +138,20 @@ class ChatPollsIntegrationTest extends ChatTestCase
         // Create a channel and send a message with the poll attached
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
 
-        $msgResp = $this->sendMessage($type, $id, new GeneratedModels\SendMessageRequest(
-            message: new GeneratedModels\MessageRequest(
-                text: 'Please vote!',
-                userID: $userIDs[0],
-                pollID: $pollID,
-            ),
-        ));
+        try {
+            $msgResp = $this->sendMessage($type, $id, new GeneratedModels\SendMessageRequest(
+                message: new GeneratedModels\MessageRequest(
+                    text: 'Please vote!',
+                    userID: $userIDs[0],
+                    pollID: $pollID,
+                ),
+            ));
+        } catch (\Exception $e) {
+            if (str_contains($e->getMessage(), 'polls not enabled') || str_contains($e->getMessage(), 'Polls are not enabled')) {
+                $this->markTestSkipped('Polls not enabled for this channel type');
+            }
+            throw $e;
+        }
         $this->assertResponseSuccess($msgResp, 'send message with poll');
         $msgID = $msgResp->getData()->message->id;
         $this->assertNotEmpty($msgID);

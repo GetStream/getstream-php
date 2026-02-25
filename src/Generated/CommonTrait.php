@@ -953,7 +953,7 @@ trait CommonTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = $payload;
+            $queryParams['payload'] = json_encode($payload);
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryUsersResponse::class);

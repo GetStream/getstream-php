@@ -221,7 +221,10 @@ abstract class BaseModel implements JsonSerializable
      */
     private static function camelToSnake(string $camelCase): string
     {
-        $result = preg_replace('/([a-z])([A-Z])/', '$1_$2', $camelCase);
+        // Handle consecutive uppercase followed by lowercase (e.g., APIKey → API_Key)
+        $result = preg_replace('/([A-Z]+)([A-Z][a-z])/', '$1_$2', $camelCase);
+        // Handle lowercase/digit followed by uppercase (e.g., s3Region → s3_Region, userId → user_Id)
+        $result = preg_replace('/([a-z0-9])([A-Z])/', '$1_$2', $result ?? $camelCase);
         return strtolower($result ?? $camelCase);
     }
 
@@ -280,8 +283,8 @@ abstract class BaseModel implements JsonSerializable
         }
 
         if ($value instanceof \DateTime) {
-            // Convert to nanosecond timestamp for Stream API compatibility
-            return (int)($value->getTimestamp() * 1000000000);
+            // Convert to RFC 3339 string for Stream API compatibility (matches Go SDK behavior)
+            return $value->format(\DateTimeInterface::RFC3339);
         }
 
         if ($value instanceof BaseModel) {

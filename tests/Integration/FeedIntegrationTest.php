@@ -387,12 +387,14 @@ class FeedIntegrationTest extends TestCase
         }
 
         $tempFilePath = stream_get_meta_data($tempFile)['uri'];
+        // Create a properly named temp file with extension (API requires a valid file extension)
+        $namedTempPath = $tempFilePath . '.txt';
         $testContent = "This is a test file content from PHP SDK integration test\nCreated at: " . date('Y-m-d H:i:s');
-        file_put_contents($tempFilePath, $testContent);
+        file_put_contents($namedTempPath, $testContent);
 
         // snippet-start: UploadFile
         $fileUploadRequest = new GeneratedModels\FileUploadRequest(
-            file: $tempFilePath,
+            file: $namedTempPath,
             user: new GeneratedModels\OnlyUserID(id: $this->testUserId)
         );
         $fileResponse = $this->client->uploadFile($fileUploadRequest);
@@ -408,7 +410,8 @@ class FeedIntegrationTest extends TestCase
         $fileUrl = $fileData->file;
         echo "✅ File uploaded successfully: {$fileUrl}\n";
 
-        // Cleanup temp file
+        // Cleanup temp files
+        @unlink($namedTempPath);
         fclose($tempFile);
 
         echo "✅ All file upload tests completed\n";
