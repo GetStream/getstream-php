@@ -209,8 +209,14 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 typingEvents: false,
             )), maxAttempts: 5, sleepSeconds: 2);
             $this->assertResponseSuccess($updateResp, 'update channel type');
-            self::assertEquals(10000, $updateResp->getData()->maxMessageLength);
-            self::assertFalse($updateResp->getData()->typingEvents);
+
+            // Verify the update propagated - use GET with retry since update response may be eventually consistent
+            $this->retryUntilSuccess(function () use ($typeName) {
+                $resp = $this->getChannelType($typeName);
+                $this->assertResponseSuccess($resp, 'get updated channel type');
+                self::assertEquals(10000, $resp->getData()->maxMessageLength);
+                self::assertFalse($resp->getData()->typingEvents);
+            }, maxAttempts: 10, sleepSeconds: 2);
 
             // Delete channel type (with retry due to eventual consistency)
             $deleteErr = null;
