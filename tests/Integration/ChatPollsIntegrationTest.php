@@ -21,6 +21,11 @@ class ChatPollsIntegrationTest extends ChatTestCase
     /** @var string|null User ID to use for poll cleanup */
     private ?string $pollCleanupUserID = null;
 
+    protected static function sharedUserCount(): int
+    {
+        return 2;
+    }
+
     protected function tearDown(): void
     {
         // Delete polls before users/channels
@@ -40,7 +45,7 @@ class ChatPollsIntegrationTest extends ChatTestCase
      */
     public function testCreateAndQueryPoll(): void
     {
-        $userIDs = $this->createTestUsers(1);
+        $userIDs = [$this->getSharedUserIDs()[0]];
         $this->pollCleanupUserID = $userIDs[0];
 
         // Create a poll
@@ -105,7 +110,7 @@ class ChatPollsIntegrationTest extends ChatTestCase
      */
     public function testCastPollVote(): void
     {
-        $userIDs = $this->createTestUsers(2);
+        $userIDs = $this->getSharedUserIDs();
         $this->pollCleanupUserID = $userIDs[0];
 
         // Create a poll with enforce_unique_vote

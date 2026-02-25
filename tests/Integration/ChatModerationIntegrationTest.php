@@ -19,13 +19,19 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('integration')]
 class ChatModerationIntegrationTest extends ChatTestCase
 {
+    protected static function sharedUserCount(): int
+    {
+        return 4;
+    }
+
     // =========================================================================
     // Ban / Unban
     // =========================================================================
 
     public function testBanUnbanUser(): void
     {
-        $userIDs = $this->createTestUsers(3);
+        $shared = $this->getSharedUserIDs();
+        $userIDs = [$shared[0], $shared[1], $shared[2]];
         $adminID = $userIDs[0];
         $targetID = $userIDs[1];
         $targetID2 = $userIDs[2];
@@ -96,7 +102,7 @@ class ChatModerationIntegrationTest extends ChatTestCase
 
     public function testMuteUnmuteUser(): void
     {
-        $userIDs = $this->createTestUsers(4);
+        $userIDs = $this->getSharedUserIDs();
         $muterID = $userIDs[0];
         $targetID = $userIDs[1];
         $targetID2 = $userIDs[2];
@@ -153,9 +159,9 @@ class ChatModerationIntegrationTest extends ChatTestCase
 
     public function testFlagMessageAndUser(): void
     {
-        $userIDs = $this->createTestUsers(2);
-        $userID = $userIDs[0];
-        $flaggerID = $userIDs[1];
+        $shared = $this->getSharedUserIDs();
+        $userID = $shared[0];
+        $flaggerID = $shared[1];
 
         [$channelType, $channelID] = $this->createTestChannelWithMembers($userID, [$userID, $flaggerID]);
         $msgID = $this->sendTestMessage($channelType, $channelID, $userID, 'Message to be flagged');

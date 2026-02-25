@@ -16,14 +16,18 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('integration')]
 class ChatMiscIntegrationTest extends ChatTestCase
 {
+    protected static function sharedUserCount(): int
+    {
+        return 2;
+    }
+
     // =========================================================================
     // Devices
     // =========================================================================
 
     public function testCreateListDeleteDevice(): void
     {
-        $userIDs = $this->createTestUsers(1);
-        $userID = $userIDs[0];
+        $userID = $this->getSharedUserIDs()[0];
         $deviceID = 'integration-test-device-' . $this->randomString(12);
 
         // Create device
@@ -277,9 +281,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testQueryBannedUsers(): void
     {
-        $userIDs = $this->createTestUsers(2);
-        $adminID = $userIDs[0];
-        $targetID = $userIDs[1];
+        $shared = $this->getSharedUserIDs();
+        $adminID = $shared[0];
+        $targetID = $shared[1];
 
         [$channelType, $channelID] = $this->createTestChannelWithMembers($adminID, [$adminID, $targetID]);
         $cid = "{$channelType}:{$channelID}";
@@ -318,9 +322,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testMuteUnmuteUser(): void
     {
-        $userIDs = $this->createTestUsers(2);
-        $muterID = $userIDs[0];
-        $targetID = $userIDs[1];
+        $shared = $this->getSharedUserIDs();
+        $muterID = $shared[0];
+        $targetID = $shared[1];
 
         // Mute user
         $muteResp = $this->muteUser(new GeneratedModels\MuteRequest(
@@ -361,8 +365,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testExportChannels(): void
     {
-        $userIDs = $this->createTestUsers(1);
-        $userID = $userIDs[0];
+        $userID = $this->getSharedUserIDs()[0];
 
         [$channelType, $channelID] = $this->createTestChannelWithMembers($userID, [$userID]);
         $this->sendTestMessage($channelType, $channelID, $userID, 'Message for export test');
@@ -386,9 +389,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testThreads(): void
     {
-        $userIDs = $this->createTestUsers(2);
-        $userID = $userIDs[0];
-        $userID2 = $userIDs[1];
+        $shared = $this->getSharedUserIDs();
+        $userID = $shared[0];
+        $userID2 = $shared[1];
 
         [$channelType, $channelID] = $this->createTestChannelWithMembers($userID, [$userID, $userID2]);
         $channelCID = "{$channelType}:{$channelID}";
@@ -440,9 +443,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testGetUnreadCounts(): void
     {
-        $userIDs = $this->createTestUsers(2);
-        $userID = $userIDs[0];
-        $userID2 = $userIDs[1];
+        $shared = $this->getSharedUserIDs();
+        $userID = $shared[0];
+        $userID2 = $shared[1];
 
         [$channelType, $channelID] = $this->createTestChannelWithMembers($userID, [$userID, $userID2]);
         $this->sendTestMessage($channelType, $channelID, $userID, 'Message for unread counts test');
@@ -454,9 +457,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testGetUnreadCountsBatch(): void
     {
-        $userIDs = $this->createTestUsers(2);
-        $userID = $userIDs[0];
-        $userID2 = $userIDs[1];
+        $shared = $this->getSharedUserIDs();
+        $userID = $shared[0];
+        $userID2 = $shared[1];
 
         [$channelType, $channelID] = $this->createTestChannelWithMembers($userID, [$userID, $userID2]);
         $this->sendTestMessage($channelType, $channelID, $userID, 'Message for unread batch test');
@@ -476,8 +479,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testReminders(): void
     {
-        $userIDs = $this->createTestUsers(1);
-        $userID = $userIDs[0];
+        $userID = $this->getSharedUserIDs()[0];
 
         [$channelType, $channelID] = $this->createTestChannelWithMembers($userID, [$userID]);
         $msgID = $this->sendTestMessage($channelType, $channelID, $userID, 'Message for reminder test');
@@ -531,8 +533,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
     public function testSendUserCustomEvent(): void
     {
-        $userIDs = $this->createTestUsers(1);
-        $userID = $userIDs[0];
+        $userID = $this->getSharedUserIDs()[0];
 
         $resp = $this->sendUserCustomEvent($userID, new GeneratedModels\SendUserCustomEventRequest(
             event: new GeneratedModels\UserCustomEventRequest(

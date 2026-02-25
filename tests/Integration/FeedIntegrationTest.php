@@ -54,21 +54,60 @@ class FeedIntegrationTest extends TestCase
     private string $testActivityId = '';
     private string $testCommentId = '';
 
+    // ------------------------------------------------------------------
+    // Class-level shared users (created once per test class)
+    // ------------------------------------------------------------------
+    private static ?Client $sharedClient = null;
+    private static ?FeedsV3Client $sharedFeedsClient = null;
+    private static string $sharedUserId = '';
+    private static string $sharedUserId2 = '';
+
+    public static function setUpBeforeClass(): void
+    {
+        $client = ClientBuilder::fromEnv()->build();
+        $feedsClient = ClientBuilder::fromEnv()->buildFeedsClient();
+
+        self::$sharedClient = $client;
+        self::$sharedFeedsClient = $feedsClient;
+        self::$sharedUserId = 'test-user-' . uniqid();
+        self::$sharedUserId2 = 'test-user-2-' . uniqid();
+
+        // Create shared users once
+        $client->updateUsers(new GeneratedModels\UpdateUsersRequest(
+            users: [
+                self::$sharedUserId => [
+                    'id' => self::$sharedUserId,
+                    'name' => 'Test User 1',
+                    'role' => 'user',
+                ],
+                self::$sharedUserId2 => [
+                    'id' => self::$sharedUserId2,
+                    'name' => 'Test User 2',
+                    'role' => 'user',
+                ],
+            ]
+        ));
+
+        // Create shared feeds once
+        $feedsClient->feed('user', self::$sharedUserId)->getOrCreateFeed(
+            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId)
+        );
+        $feedsClient->feed('user', self::$sharedUserId2)->getOrCreateFeed(
+            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId2)
+        );
+    }
+
     /**
      * @throws StreamException
      */
     protected function setUp(): void
     {
-        $this->client = ClientBuilder::fromEnv()->build();
-        $this->feedsV3Client = ClientBuilder::fromEnv()->buildFeedsClient();
-
-        $this->testUserId = 'test-user-' . uniqid();
-        $this->testUserId2 = 'test-user-2-' . uniqid();
+        $this->client = self::$sharedClient;
+        $this->feedsV3Client = self::$sharedFeedsClient;
+        $this->testUserId = self::$sharedUserId;
+        $this->testUserId2 = self::$sharedUserId2;
         $this->testFeed = $this->feedsV3Client->feed('user', $this->testUserId);
         $this->testFeed2 = $this->feedsV3Client->feed('user', $this->testUserId2);
-
-        // Setup environment for each test
-        $this->setupEnvironment();
     }
 
     protected function tearDown(): void
@@ -899,6 +938,17 @@ class FeedIntegrationTest extends TestCase
     {
         echo "\n👥 Testing follow operation...\n";
 
+        // Unfollow first to ensure a clean state (shared users may already have a follow)
+        try {
+            $this->feedsV3Client->unfollow(
+                self::USER_FEED_TYPE . $this->testUserId,
+                self::USER_FEED_TYPE . $this->testUserId2,
+                false
+            );
+        } catch (StreamApiException $e) {
+            // Ignore - may not exist yet
+        }
+
         try {
             // snippet-start: Follow
             $response = $this->feedsV3Client->follow(
@@ -1011,9 +1061,12 @@ class FeedIntegrationTest extends TestCase
             $this->assertResponseSuccess($followResponse, 'follow user 2');
             echo "✅ Followed user 2\n";
         } catch (StreamApiException $e) {
-            echo '⚠️ Follow failed: ' . $e->getMessage() . "\n";
-
-            throw $e;
+            // Follow may already exist from a prior test using shared users
+            if (str_contains($e->getMessage(), 'already exists')) {
+                echo "✅ Follow relationship already exists (OK)\n";
+            } else {
+                throw $e;
+            }
         }
 
         // Step 6: Verify feed 2 still exists and has activities
@@ -1309,14 +1362,19 @@ class FeedIntegrationTest extends TestCase
         echo "\n👥 Testing unfollow operation...\n";
 
         try {
-            // First establish a follow relationship
-            $followResponse = $this->feedsV3Client->follow(
-                new GeneratedModels\FollowRequest(
-                    source: self::USER_FEED_TYPE . $this->testUserId,
-                    target: self::USER_FEED_TYPE . $this->testUserId2
-                )
-            );
-            $this->assertResponseSuccess($followResponse, 'establish follow relationship for unfollow test');
+            // First establish a follow relationship (ignore "already exists" errors)
+            try {
+                $this->feedsV3Client->follow(
+                    new GeneratedModels\FollowRequest(
+                        source: self::USER_FEED_TYPE . $this->testUserId,
+                        target: self::USER_FEED_TYPE . $this->testUserId2
+                    )
+                );
+            } catch (StreamApiException $e) {
+                if (!str_contains($e->getMessage(), 'already exists')) {
+                    throw $e;
+                }
+            }
 
             // snippet-start: Unfollow
             $response = $this->feedsV3Client->unfollow(
@@ -2128,59 +2186,13 @@ class FeedIntegrationTest extends TestCase
     // ENVIRONMENT SETUP (called in setUp for each test)
     // =================================================================
 
-    private function setupEnvironment(): void
-    {
-        try {
-            // Create test users
-            // snippet-start: CreateUsers
-            $response = $this->client->updateUsers(new GeneratedModels\UpdateUsersRequest(
-                users: [
-                    $this->testUserId => [
-                        'id' => $this->testUserId,
-                        'name' => 'Test User 1',
-                        'role' => 'user',
-                    ],
-                    $this->testUserId2 => [
-                        'id' => $this->testUserId2,
-                        'name' => 'Test User 2',
-                        'role' => 'user',
-                    ],
-                ]
-            ));
-            // snippet-end: CreateUsers
+    // snippet-start: CreateUsers
+    // Users are created once in setUpBeforeClass() for all tests in this class.
+    // snippet-end: CreateUsers
 
-            if (!$response->isSuccessful()) {
-                throw new StreamException('Failed to create users: ' . $response->getRawBody());
-            }
-
-            // Create feeds
-            // snippet-start: GetOrCreateFeed
-
-            $feedResponse1 = $this->testFeed->getOrCreateFeed(
-                new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId)
-            );
-            $feedResponse2 = $this->testFeed2->getOrCreateFeed(
-                new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId2)
-            );
-            // snippet-end: GetOrCreateFeed
-
-            if (!$feedResponse1->isSuccessful()) {
-                throw new StreamException('Failed to create feed 1: ' . $feedResponse1->getRawBody());
-            }
-            if (!$feedResponse2->isSuccessful()) {
-                throw new StreamException('Failed to create feed 2: ' . $feedResponse2->getRawBody());
-            }
-        } catch (StreamApiException $e) {
-            echo '⚠️ Setup failed: ' . $e->getMessage() . "\n";
-            echo 'ResponseBody: ' . $e->getResponseBody() . "\n";
-            echo 'ErrorDetail: ' . $e->getErrorDetails() . "\n";
-
-            throw $e;
-        } catch (\Exception $e) {
-            echo '⚠️ Setup failed: ' . $e->getMessage() . "\n";
-            // Continue with tests even if setup partially fails
-        }
-    }
+    // snippet-start: GetOrCreateFeed
+    // Feeds are created once in setUpBeforeClass() for all tests in this class.
+    // snippet-end: GetOrCreateFeed
 
     // =================================================================
     // HELPER METHODS

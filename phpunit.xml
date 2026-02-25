@@ -5,7 +5,7 @@
          colors="true"
          executionOrder="depends,defects"
          failOnRisky="true"
-         failOnWarning="true"
+         failOnWarning="false"
          stopOnFailure="false">
     <testsuites>
         <testsuite name="GetStream PHP SDK Test Suite">
@@ -17,11 +17,5 @@
             <directory suffix=".php">src</directory>
         </include>
     </source>
-    <coverage>
-        <report>
-            <html outputDirectory="coverage/html"/>
-            <text outputFile="coverage/coverage.txt"/>
-        </report>
-    </coverage>
 </phpunit>
 

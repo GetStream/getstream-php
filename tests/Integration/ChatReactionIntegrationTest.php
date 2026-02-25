@@ -15,12 +15,17 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('integration')]
 class ChatReactionIntegrationTest extends ChatTestCase
 {
+    protected static function sharedUserCount(): int
+    {
+        return 2;
+    }
+
     /**
      * Test sending a reaction and retrieving reactions on a message.
      */
     public function testSendAndGetReactions(): void
     {
-        $userIDs = $this->createTestUsers(2);
+        $userIDs = $this->getSharedUserIDs();
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
         $msgID = $this->sendTestMessage($type, $id, $userIDs[0], 'Message with reactions');
 
@@ -58,7 +63,7 @@ class ChatReactionIntegrationTest extends ChatTestCase
      */
     public function testDeleteReaction(): void
     {
-        $userIDs = $this->createTestUsers(1);
+        $userIDs = [$this->getSharedUserIDs()[0]];
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
         $msgID = $this->sendTestMessage($type, $id, $userIDs[0], 'Message for reaction deletion');
 
@@ -92,7 +97,7 @@ class ChatReactionIntegrationTest extends ChatTestCase
      */
     public function testEnforceUniqueReaction(): void
     {
-        $userIDs = $this->createTestUsers(1);
+        $userIDs = [$this->getSharedUserIDs()[0]];
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
         $msgID = $this->sendTestMessage($type, $id, $userIDs[0], 'Message for unique reaction test');
 

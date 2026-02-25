@@ -20,12 +20,16 @@ class GuzzleHttpClient implements HttpClientInterface
 {
     private GuzzleClient $client;
 
+    /** Maximum number of retries for rate-limited (429) responses. */
+    private int $maxRetries;
+
     /**
      * Create a new GuzzleHttpClient.
      *
-     * @param array $config Guzzle client configuration
+     * @param array $config     Guzzle client configuration
+     * @param int   $maxRetries Maximum retries for 429 rate-limit responses (default 3)
      */
-    public function __construct(array $config = [])
+    public function __construct(array $config = [], int $maxRetries = 3)
     {
         $defaultConfig = [
             'timeout' => 30,
@@ -34,6 +38,7 @@ class GuzzleHttpClient implements HttpClientInterface
         ];
 
         $this->client = new GuzzleClient(array_merge($defaultConfig, $config));
+        $this->maxRetries = $maxRetries;
     }
 
     /**
@@ -68,9 +73,20 @@ class GuzzleHttpClient implements HttpClientInterface
                 }
             }
 
-            $response = $this->client->request($method, $url, $options);
+            // Retry loop for rate-limited responses
+            for ($attempt = 0;; $attempt++) {
+                $response = $this->client->request($method, $url, $options);
 
-            return $this->createStreamResponse($response);
+                if ($response->getStatusCode() !== 429 || $attempt >= $this->maxRetries) {
+                    return $this->createStreamResponse($response);
+                }
+
+                // Parse Retry-After header or use exponential backoff
+                $retryAfter = $response->getHeaderLine('Retry-After');
+                $sleepSeconds = $retryAfter !== '' ? (int) $retryAfter : ($attempt + 1);
+                $sleepSeconds = min($sleepSeconds, 10);
+                sleep($sleepSeconds);
+            }
         } catch (ClientException|ServerException $e) {
             $response = $e->getResponse();
             $streamResponse = $this->createStreamResponse($response);
@@ -135,6 +151,9 @@ class GuzzleHttpClient implements HttpClientInterface
                     $errorDetails = $fallbackData;
                 }
             }
+
+            // Include HTTP status code in error message for better diagnostics
+            $message = "Stream API error (HTTP {$statusCode}): {$message}";
 
             throw new StreamApiException($message, $statusCode, $rawBody, $errorDetails);
         }

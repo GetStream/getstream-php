@@ -193,14 +193,17 @@ class ChatUserIntegrationTest extends ChatTestCase
         }
         $this->client->updateUsers(new GeneratedModels\UpdateUsersRequest(users: $users));
 
-        // Delete users (async operation)
-        $response = $this->client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
-            userIds: $ids,
-            user: 'hard',
-            messages: 'hard',
-            conversations: 'hard',
-        ));
-        $this->assertResponseSuccess($response, 'delete users');
+        // Delete users (async operation, may be rate-limited after previous tests)
+        $response = $this->retryUntilSuccess(function () use ($ids) {
+            $resp = $this->client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
+                userIds: $ids,
+                user: 'hard',
+                messages: 'hard',
+                conversations: 'hard',
+            ));
+            $this->assertResponseSuccess($resp, 'delete users');
+            return $resp;
+        }, maxAttempts: 5, sleepSeconds: 3);
 
         $taskID = $response->getData()->taskID;
         self::assertNotEmpty($taskID, 'Task ID should not be empty');

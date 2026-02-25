@@ -14,17 +14,20 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('integration')]
 class ChatMessageIntegrationTest extends ChatTestCase
 {
-    /** @var string[] Shared test user IDs, created once in setUp */
-    private array $userIDs = [];
     private string $userID;
     private string $userID2;
+
+    protected static function sharedUserCount(): int
+    {
+        return 2;
+    }
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->userIDs = $this->createTestUsers(2);
-        $this->userID = $this->userIDs[0];
-        $this->userID2 = $this->userIDs[1];
+        $shared = $this->getSharedUserIDs();
+        $this->userID = $shared[0];
+        $this->userID2 = $shared[1];
     }
 
     // =========================================================================

@@ -17,6 +17,9 @@ use PHPUnit\Framework\TestCase;
  *
  * Provides helper methods for creating/cleaning up test users, channels, and messages.
  * Follows the patterns established in getstream-go's chat_test_helpers_test.go.
+ *
+ * Subclasses can override sharedUserCount() to create shared users once per class
+ * instead of per-test, dramatically reducing API calls and rate limiting.
  */
 #[Group('integration')]
 abstract class ChatTestCase extends TestCase
@@ -29,9 +32,94 @@ abstract class ChatTestCase extends TestCase
     /** @var array{type: string, id: string}[] Channels created during the test, cleaned up in tearDown */
     protected array $createdChannels = [];
 
+    // ------------------------------------------------------------------
+    // Class-level shared user management (created once per test class)
+    // ------------------------------------------------------------------
+
+    /** @var array<string, Client> Class-level shared client keyed by class name */
+    private static array $classClients = [];
+
+    /** @var array<string, string[]> Class-level shared user IDs keyed by class name */
+    private static array $classUserIDs = [];
+
+    /**
+     * Override to declare how many shared users this test class needs.
+     * Return 0 (default) to opt-out and create users per-test instead.
+     */
+    protected static function sharedUserCount(): int
+    {
+        return 0;
+    }
+
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+
+        $count = static::sharedUserCount();
+        if ($count <= 0) {
+            return;
+        }
+
+        $client = ClientBuilder::fromEnv()->build();
+        self::$classClients[static::class] = $client;
+
+        $users = [];
+        $ids = [];
+        for ($i = 0; $i < $count; $i++) {
+            $id = 'test-user-' . uniqid();
+            $ids[] = $id;
+            $users[$id] = new GeneratedModels\UserRequest(
+                id: $id,
+                name: 'Shared User ' . $i,
+                role: 'user',
+            );
+        }
+
+        $client->updateUsers(new GeneratedModels\UpdateUsersRequest(users: $users));
+        self::$classUserIDs[static::class] = $ids;
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        $class = static::class;
+        $ids = self::$classUserIDs[$class] ?? [];
+        $client = self::$classClients[$class] ?? null;
+
+        if (!empty($ids) && $client !== null) {
+            try {
+                $client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
+                    userIds: $ids,
+                    user: 'hard',
+                    messages: 'hard',
+                    conversations: 'hard',
+                ));
+            } catch (\Exception $e) {
+                // Ignore cleanup errors
+            }
+        }
+
+        unset(self::$classClients[$class], self::$classUserIDs[$class]);
+        parent::tearDownAfterClass();
+    }
+
+    /**
+     * Get the class-level shared user IDs.
+     *
+     * @return string[]
+     */
+    protected function getSharedUserIDs(): array
+    {
+        return self::$classUserIDs[static::class] ?? [];
+    }
+
+    // ------------------------------------------------------------------
+    // Per-test setup / teardown
+    // ------------------------------------------------------------------
+
     protected function setUp(): void
     {
-        $this->client = ClientBuilder::fromEnv()->build();
+        // Reuse class-level client if available, otherwise create a new one
+        $this->client = self::$classClients[static::class] ?? ClientBuilder::fromEnv()->build();
     }
 
     protected function tearDown(): void
@@ -45,7 +133,7 @@ abstract class ChatTestCase extends TestCase
             }
         }
 
-        // Hard-delete users with retry (rate limiting)
+        // Hard-delete per-test users (not shared ones)
         if (!empty($this->createdUserIDs)) {
             $this->deleteUsersWithRetry($this->createdUserIDs);
         }
@@ -189,12 +277,14 @@ abstract class ChatTestCase extends TestCase
     /**
      * Delete users with retry logic for rate limiting.
      * Follows the pattern from getstream-go's deleteUsersWithRetry.
+     * The HTTP client handles 429 retries automatically, so this only
+     * needs a few retries for persistent rate limiting.
      *
      * @param string[] $userIDs
      */
     protected function deleteUsersWithRetry(array $userIDs): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             try {
                 $this->client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
                     userIds: $userIDs,
@@ -207,7 +297,7 @@ abstract class ChatTestCase extends TestCase
                 if (strpos($e->getMessage(), 'Too many requests') === false) {
                     return;
                 }
-                sleep(($i + 1) * 3);
+                sleep(min($i + 1, 3));
             }
         }
     }
