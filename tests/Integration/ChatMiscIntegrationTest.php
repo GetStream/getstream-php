@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Chat Misc integration tests.
@@ -12,6 +13,7 @@ use GetStream\GeneratedModels;
  * Tests: devices, blocklists, commands, channel types, permissions, exports,
  * reminders, threads, unread counts, custom events, team usage stats, batch updates.
  */
+#[Group('integration')]
 class ChatMiscIntegrationTest extends ChatTestCase
 {
     // =========================================================================

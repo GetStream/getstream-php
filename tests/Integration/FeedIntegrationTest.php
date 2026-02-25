@@ -16,6 +16,7 @@ use GetStream\GeneratedModels\CreateFeedGroupRequest;
 use GetStream\GeneratedModels\GetActivityResponse;
 use GetStream\GeneratedModels\QueryActivitiesResponse;
 use GetStream\StreamResponse;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,6 +34,7 @@ use PHPUnit\Framework\TestCase;
  * 8. Advanced Operations (polls, pins, etc.)
  * 9. Cleanup
  */
+#[Group('integration')]
 class FeedIntegrationTest extends TestCase
 {
     private const USER_FEED_TYPE = 'user:';

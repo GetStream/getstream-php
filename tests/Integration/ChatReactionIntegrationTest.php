@@ -6,11 +6,13 @@ namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
 use GetStream\StreamResponse;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Integration tests for Chat Reactions.
  * Follows the patterns from getstream-go/chat_reaction_integration_test.go.
  */
+#[Group('integration')]
 class ChatReactionIntegrationTest extends ChatTestCase
 {
     /**

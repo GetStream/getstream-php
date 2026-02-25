@@ -6,11 +6,13 @@ namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
 use GetStream\StreamResponse;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Integration tests for Chat Polls.
  * Follows the patterns from getstream-go/chat_polls_integration_test.go.
  */
+#[Group('integration')]
 class ChatPollsIntegrationTest extends ChatTestCase
 {
     /** @var string[] Poll IDs created during the test, cleaned up in tearDown */

@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Integration tests for Chat Message operations.
  * Follows the pattern from getstream-go's chat_message_integration_test.go.
  */
+#[Group('integration')]
 class ChatMessageIntegrationTest extends ChatTestCase
 {
     /** @var string[] Shared test user IDs, created once in setUp */

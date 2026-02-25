@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Chat Moderation integration tests.
@@ -15,6 +16,7 @@ use GetStream\GeneratedModels;
  * Follows the patterns from getstream-go's TestChatBanIntegration,
  * TestChatMuteIntegration, and TestChatFlagIntegration.
  */
+#[Group('integration')]
 class ChatModerationIntegrationTest extends ChatTestCase
 {
     // =========================================================================

@@ -11,6 +11,7 @@ use GetStream\Exceptions\StreamException;
 use GetStream\GeneratedModels;
 use GetStream\ModerationClient;
 use GetStream\StreamResponse;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,6 +29,7 @@ use PHPUnit\Framework\TestCase;
  * 8. Rules and Templates
  * 9. Cleanup
  */
+#[Group('integration')]
 class ModerationIntegrationTest extends TestCase
 {
     private ModerationClient $moderationClient;

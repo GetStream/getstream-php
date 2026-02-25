@@ -9,6 +9,7 @@ use GetStream\ClientBuilder;
 use GetStream\Exceptions\StreamApiException;
 use GetStream\GeneratedModels;
 use GetStream\StreamResponse;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,6 +18,7 @@ use PHPUnit\Framework\TestCase;
  * Provides helper methods for creating/cleaning up test users, channels, and messages.
  * Follows the patterns established in getstream-go's chat_test_helpers_test.go.
  */
+#[Group('integration')]
 abstract class ChatTestCase extends TestCase
 {
     protected Client $client;

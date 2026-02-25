@@ -6,12 +6,14 @@ namespace GetStream\Tests\Integration;
 
 use GetStream\ClientBuilder;
 use GetStream\Exceptions\StreamApiException;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Live integration tests - these make real API calls
  * Run with: ./vendor/bin/phpunit tests/Integration/LiveIntegrationTest.php --testdox.
  */
+#[Group('integration')]
 class LiveIntegrationTest extends TestCase
 {
     private $client;

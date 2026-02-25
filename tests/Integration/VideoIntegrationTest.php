@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Video integration tests.
@@ -12,6 +13,7 @@ use GetStream\GeneratedModels;
  * Ports tests from getstream-go/client_test.go (video section).
  * All tests use makeRequest() wrappers since the PHP SDK lacks a VideoClient.
  */
+#[Group('integration')]
 class VideoIntegrationTest extends ChatTestCase
 {
     protected function tearDown(): void
