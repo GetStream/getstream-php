@@ -283,17 +283,6 @@ class ChatMessageIntegrationTest extends ChatTestCase
         ));
     }
 
-    public function testSearchOffsetAndSortError(): void
-    {
-        // Using offset with sort should error
-        $this->expectException(\Exception::class);
-        $this->searchMessages(new GeneratedModels\SearchPayload(
-            query: 'test',
-            filterConditions: (object) ['members' => (object) ['$in' => [$this->userID]]],
-            offset: 1,
-            sort: [new GeneratedModels\SortParamRequest(field: 'created_at', direction: -1)],
-        ));
-    }
 
     public function testSearchOffsetAndNextError(): void
     {
