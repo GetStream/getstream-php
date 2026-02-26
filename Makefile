@@ -16,8 +16,27 @@ test: test-unit test-integration ## Run all tests
 test-unit: ## Run unit tests only
 	./vendor/bin/phpunit tests --exclude-group integration
 
-test-integration: ## Run integration tests only
-	./vendor/bin/phpunit tests/Integration/
+test-integration: ## Run integration tests in parallel (one process per test file)
+	@tmpdir=$$(mktemp -d); \
+	pids=""; \
+	for f in tests/Integration/*IntegrationTest.php; do \
+		name=$$(basename "$$f" .php); \
+		./vendor/bin/phpunit --cache-result-file="$$tmpdir/$$name.cache" "$$f" > "$$tmpdir/$$name.out" 2>&1 & \
+		pids="$$pids $$!"; \
+	done; \
+	failed=0; \
+	for pid in $$pids; do \
+		wait $$pid || failed=1; \
+	done; \
+	for out in "$$tmpdir"/*.out; do \
+		echo ""; \
+		echo "══════════════════════════════════════════════"; \
+		echo " $$(basename $$out .out)"; \
+		echo "══════════════════════════════════════════════"; \
+		cat "$$out"; \
+	done; \
+	rm -rf "$$tmpdir"; \
+	exit $$failed
 
 test-specific: ## Run a specific test (usage: make test-specific TEST=TestClassName::testMethodName)
 	./vendor/bin/phpunit --filter $(TEST)
