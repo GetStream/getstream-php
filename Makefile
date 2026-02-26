@@ -16,27 +16,8 @@ test: test-unit test-integration ## Run all tests
 test-unit: ## Run unit tests only
 	./vendor/bin/phpunit tests --exclude-group integration
 
-test-integration: ## Run integration tests in parallel (one process per test file)
-	@tmpdir=$$(mktemp -d); \
-	for f in tests/Integration/*IntegrationTest.php; do \
-		name=$$(basename "$$f" .php); \
-		(./vendor/bin/phpunit --cache-result-file="$$tmpdir/$$name.cache" "$$f" > "$$tmpdir/$$name.out" 2>&1; echo $$? > "$$tmpdir/$$name.exit") & \
-	done; \
-	wait; \
-	failed=0; \
-	for exit_file in "$$tmpdir"/*.exit; do \
-		code=$$(cat "$$exit_file"); \
-		[ "$$code" -eq 0 ] || failed=1; \
-	done; \
-	for out in "$$tmpdir"/*.out; do \
-		echo ""; \
-		echo "══════════════════════════════════════════════"; \
-		echo " $$(basename $$out .out)"; \
-		echo "══════════════════════════════════════════════"; \
-		cat "$$out"; \
-	done; \
-	rm -rf "$$tmpdir"; \
-	exit $$failed
+test-integration: ## Run integration tests in parallel (8 workers, method-level)
+	./vendor/bin/paratest --processes=8 --runner=WrapperRunner --colors tests/Integration/
 
 test-specific: ## Run a specific test (usage: make test-specific TEST=TestClassName::testMethodName)
 	./vendor/bin/phpunit --filter $(TEST)

@@ -257,10 +257,10 @@ abstract class ChatTestCase extends TestCase
      * @template T
      * @param callable(): T $fn
      * @param int $maxAttempts
-     * @param int $sleepSeconds
+     * @param int $sleepMs milliseconds to wait between attempts
      * @return T
      */
-    protected function retryUntilSuccess(callable $fn, int $maxAttempts = 5, int $sleepSeconds = 2): mixed
+    protected function retryUntilSuccess(callable $fn, int $maxAttempts = 5, int $sleepMs = 500): mixed
     {
         $lastException = new \RuntimeException('retryUntilSuccess: no attempts made');
         for ($i = 0; $i < $maxAttempts; $i++) {
@@ -268,7 +268,7 @@ abstract class ChatTestCase extends TestCase
                 return $fn();
             } catch (\Exception $e) {
                 $lastException = $e;
-                sleep($sleepSeconds);
+                usleep($sleepMs * 1000);
             }
         }
         throw $lastException;
@@ -304,7 +304,7 @@ abstract class ChatTestCase extends TestCase
 
     /**
      * Poll an async task until completed or failed.
-     * Uses a constant 1s polling interval for up to 60 attempts (60s max).
+     * Uses adaptive backoff: 100ms → 200ms → 400ms → 800ms → 1s (cap), up to 60 attempts (~60s max).
      */
     protected function waitForTask(string $taskID): GeneratedModels\GetTaskResponse
     {
@@ -318,7 +318,9 @@ abstract class ChatTestCase extends TestCase
                 return $data;
             }
 
-            sleep(1);
+            // Adaptive backoff: 100ms, 200ms, 400ms, 800ms, then cap at 1s
+            $sleepMs = min(100 << min($i, 10), 1000);
+            usleep($sleepMs * 1000);
         }
 
         self::fail("Task {$taskID} did not complete after {$maxAttempts} attempts");
