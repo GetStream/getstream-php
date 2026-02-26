@@ -209,14 +209,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 typingEvents: false,
             )), maxAttempts: 5, sleepMs: 2000);
             $this->assertResponseSuccess($updateResp, 'update channel type');
-
-            // Re-fetch to verify the update propagated (eventual consistency)
-            $this->retryUntilSuccess(function () use ($typeName) {
-                $resp = $this->getChannelType($typeName);
-                $this->assertResponseSuccess($resp, 'get updated channel type');
-                self::assertEquals(4000, $resp->getData()->maxMessageLength);
-                self::assertFalse($resp->getData()->typingEvents);
-            }, maxAttempts: 10, sleepMs: 2000);
+            // The update response is read from the writing server's local cache (always fresh),
+            // so asserting here avoids the eventual consistency window of a re-fetch.
+            self::assertEquals(4000, $updateResp->getData()->maxMessageLength);
+            self::assertFalse($updateResp->getData()->typingEvents);
 
             // Delete channel type (with retry due to eventual consistency)
             $deleteErr = null;
