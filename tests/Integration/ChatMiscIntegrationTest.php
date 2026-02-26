@@ -209,10 +209,19 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 typingEvents: false,
             )), maxAttempts: 5, sleepMs: 2000);
             $this->assertResponseSuccess($updateResp, 'update channel type');
-            // The update response is read from the writing server's local cache (always fresh),
-            // so asserting here avoids the eventual consistency window of a re-fetch.
-            self::assertEquals(4000, $updateResp->getData()->maxMessageLength);
-            self::assertFalse($updateResp->getData()->typingEvents);
+
+            // Re-fetch to verify the update propagated. The update response itself reads
+            // from the Ristretto local cache, which is populated asynchronously (ring buffer)
+            // and may return the old value immediately after a write. The GET with
+            // SkipLocalCache() reads from Redis, which is updated synchronously — but if that
+            // Redis write fails silently the polling cycle (~30s) is the recovery path.
+            // Allow 60s to comfortably outlast both scenarios.
+            $this->retryUntilSuccess(function () use ($typeName) {
+                $resp = $this->getChannelType($typeName);
+                $this->assertResponseSuccess($resp, 'get updated channel type');
+                self::assertEquals(4000, $resp->getData()->maxMessageLength);
+                self::assertFalse($resp->getData()->typingEvents);
+            }, maxAttempts: 20, sleepMs: 3000);
 
             // Delete channel type (with retry due to eventual consistency)
             $deleteErr = null;
