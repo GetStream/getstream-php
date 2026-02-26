@@ -121,11 +121,8 @@ class VideoIntegrationTest extends ChatTestCase
         $this->assertTrue($data->notificationSettings->callNotification->enabled);
         $this->assertFalse($data->notificationSettings->sessionStarted->enabled);
 
-        // Call types are eventually consistent
-        sleep(6);
-
-        // Update call type settings
-        $updateResp = $this->updateCallTypeVideo($callTypeName, new GeneratedModels\UpdateCallTypeRequest(
+        // Update call type settings (retry until eventual consistency settles)
+        $updateResp = $this->retryUntilSuccess(fn () => $this->updateCallTypeVideo($callTypeName, new GeneratedModels\UpdateCallTypeRequest(
             settings: new GeneratedModels\CallSettingsRequest(
                 audio: new GeneratedModels\AudioSettingsRequest(
                     defaultDevice: 'earpiece',
@@ -141,7 +138,7 @@ class VideoIntegrationTest extends ChatTestCase
             grants: [
                 'host' => ['join-backstage'],
             ],
-        ));
+        )), maxAttempts: 10, sleepSeconds: 1);
         $this->assertResponseSuccess($updateResp, 'update call type');
         $updated = $updateResp->getData();
         $this->assertFalse($updated->settings->audio->micDefaultOn);

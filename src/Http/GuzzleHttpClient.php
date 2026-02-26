@@ -81,11 +81,13 @@ class GuzzleHttpClient implements HttpClientInterface
                     return $this->createStreamResponse($response);
                 }
 
-                // Parse Retry-After header or use exponential backoff
+                // Parse Retry-After header or use exponential backoff with jitter
+                // Jitter desynchronizes parallel test processes to avoid stampedes
                 $retryAfter = $response->getHeaderLine('Retry-After');
                 $sleepSeconds = $retryAfter !== '' ? (int) $retryAfter : ($attempt + 1);
                 $sleepSeconds = min($sleepSeconds, 10);
-                sleep($sleepSeconds);
+                $jitter = random_int(0, max(1, (int) round($sleepSeconds * 0.3)));
+                sleep($sleepSeconds + $jitter);
             }
         } catch (ClientException|ServerException $e) {
             $response = $e->getResponse();

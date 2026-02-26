@@ -16,14 +16,11 @@ test: test-unit test-integration ## Run all tests
 test-unit: ## Run unit tests only
 	./vendor/bin/phpunit tests --exclude-group integration
 
-test-integration: ## Run integration tests (up to 4 parallel processes to stay within API rate limits)
+test-integration: ## Run integration tests in parallel (one process per test file)
 	@tmpdir=$$(mktemp -d); \
-	count=0; \
 	for f in tests/Integration/*IntegrationTest.php; do \
 		name=$$(basename "$$f" .php); \
 		(./vendor/bin/phpunit --cache-result-file="$$tmpdir/$$name.cache" "$$f" > "$$tmpdir/$$name.out" 2>&1; echo $$? > "$$tmpdir/$$name.exit") & \
-		count=$$((count + 1)); \
-		if [ $$((count % 4)) -eq 0 ]; then wait; fi; \
 	done; \
 	wait; \
 	failed=0; \

@@ -304,12 +304,11 @@ abstract class ChatTestCase extends TestCase
 
     /**
      * Poll an async task until completed or failed.
-     * Mirrors getstream-go's WaitForTask: progressive intervals starting at 1s,
-     * increasing by 1s per attempt up to a 5s cap, for up to 40 attempts (~3 min max).
+     * Uses a constant 1s polling interval for up to 60 attempts (60s max).
      */
     protected function waitForTask(string $taskID): GeneratedModels\GetTaskResponse
     {
-        $maxAttempts = 40;
+        $maxAttempts = 60;
         for ($i = 0; $i < $maxAttempts; $i++) {
             $response = $this->client->getTask($taskID);
             $this->assertResponseSuccess($response, 'get task status');
@@ -319,8 +318,7 @@ abstract class ChatTestCase extends TestCase
                 return $data;
             }
 
-            $interval = min($i + 1, 5);
-            sleep($interval);
+            sleep(1);
         }
 
         self::fail("Task {$taskID} did not complete after {$maxAttempts} attempts");
