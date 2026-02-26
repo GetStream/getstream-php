@@ -187,11 +187,11 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 name: $typeName,
                 automod: 'disabled',
                 automodBehavior: 'flag',
-                maxMessageLength: 5000,
+                maxMessageLength: 3000,
             ));
             $this->assertResponseSuccess($createResp, 'create channel type');
             self::assertEquals($typeName, $createResp->getData()->name);
-            self::assertEquals(5000, $createResp->getData()->maxMessageLength);
+            self::assertEquals(3000, $createResp->getData()->maxMessageLength);
 
             // Channel types are eventually consistent - retry with delay
             $getResp = $this->retryUntilSuccess(function () use ($typeName) {
@@ -205,7 +205,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
             $updateResp = $this->retryUntilSuccess(fn () => $this->updateChannelType($typeName, new GeneratedModels\UpdateChannelTypeRequest(
                 automod: 'disabled',
                 automodBehavior: 'flag',
-                maxMessageLength: 10000,
+                maxMessageLength: 4000,
                 typingEvents: false,
             )), maxAttempts: 5, sleepSeconds: 2);
             $this->assertResponseSuccess($updateResp, 'update channel type');
@@ -214,7 +214,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
             $this->retryUntilSuccess(function () use ($typeName) {
                 $resp = $this->getChannelType($typeName);
                 $this->assertResponseSuccess($resp, 'get updated channel type');
-                self::assertEquals(10000, $resp->getData()->maxMessageLength);
+                self::assertEquals(4000, $resp->getData()->maxMessageLength);
                 self::assertFalse($resp->getData()->typingEvents);
             }, maxAttempts: 10, sleepSeconds: 2);
 
