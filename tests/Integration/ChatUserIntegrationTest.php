@@ -203,7 +203,7 @@ class ChatUserIntegrationTest extends ChatTestCase
             ));
             $this->assertResponseSuccess($resp, 'delete users');
             return $resp;
-        }, maxAttempts: 5, sleepSeconds: 3);
+        }, maxAttempts: 5, sleepMs: 3000);
 
         $taskID = $response->getData()->taskID;
         self::assertNotEmpty($taskID, 'Task ID should not be empty');

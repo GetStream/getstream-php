@@ -198,7 +198,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 $resp = $this->getChannelType($typeName);
                 $this->assertResponseSuccess($resp, 'get channel type');
                 return $resp;
-            }, maxAttempts: 10, sleepSeconds: 2);
+            }, maxAttempts: 10, sleepMs: 2000);
             self::assertEquals($typeName, $getResp->getData()->name);
 
             // Update channel type
@@ -207,7 +207,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 automodBehavior: 'flag',
                 maxMessageLength: 4000,
                 typingEvents: false,
-            )), maxAttempts: 5, sleepSeconds: 2);
+            )), maxAttempts: 5, sleepMs: 2000);
             $this->assertResponseSuccess($updateResp, 'update channel type');
 
             // Re-fetch to verify the update propagated (eventual consistency)
@@ -216,7 +216,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 $this->assertResponseSuccess($resp, 'get updated channel type');
                 self::assertEquals(4000, $resp->getData()->maxMessageLength);
                 self::assertFalse($resp->getData()->typingEvents);
-            }, maxAttempts: 10, sleepSeconds: 2);
+            }, maxAttempts: 10, sleepMs: 2000);
 
             // Delete channel type (with retry due to eventual consistency)
             $deleteErr = null;

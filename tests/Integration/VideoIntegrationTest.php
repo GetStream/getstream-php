@@ -138,7 +138,7 @@ class VideoIntegrationTest extends ChatTestCase
             grants: [
                 'host' => ['join-backstage'],
             ],
-        )), maxAttempts: 10, sleepSeconds: 1);
+        )), maxAttempts: 10, sleepMs: 1000);
         $this->assertResponseSuccess($updateResp, 'update call type');
         $updated = $updateResp->getData();
         $this->assertFalse($updated->settings->audio->micDefaultOn);
@@ -615,9 +615,11 @@ class VideoIntegrationTest extends ChatTestCase
         }
         $this->assertTrue($found, 'Created external storage should be in the list');
 
-        // Delete
-        $delResp = $this->client->deleteExternalStorage($uniqueName);
-        $this->assertResponseSuccess($delResp, 'delete external storage');
+        // Delete with retry for eventual consistency
+        $this->retryUntilSuccess(function () use ($uniqueName) {
+            $delResp = $this->client->deleteExternalStorage($uniqueName);
+            $this->assertResponseSuccess($delResp, 'delete external storage');
+        }, maxAttempts: 5, sleepMs: 2000);
 
         // Remove from tracked list
         $this->createdExternalStorages = array_filter($this->createdExternalStorages, fn($n) => $n !== $uniqueName);

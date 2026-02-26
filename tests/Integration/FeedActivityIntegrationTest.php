@@ -347,9 +347,10 @@ class FeedActivityIntegrationTest extends TestCase
     private function assertResponseSuccess(mixed $response, string $operation): void
     {
         if ($response instanceof StreamResponse) {
-            if (!$response->isSuccessful()) {
-                self::fail("Failed to {$operation}. Status: " . $response->getStatusCode() . ', Body: ' . $response->getRawBody());
-            }
+            self::assertTrue(
+                $response->isSuccessful(),
+                "Failed to {$operation}. Status: " . $response->getStatusCode() . ', Body: ' . $response->getRawBody()
+            );
         } else {
             self::assertNotNull($response, "Failed to {$operation}. Response is null.");
         }
