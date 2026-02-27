@@ -1,11 +1,11 @@
 name: ci
 
-on: 
+on:
   pull_request:
   push:
     branches: [master, main]
 
-concurrency: 
+concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 
@@ -14,7 +14,7 @@ jobs:
     name: 🧪 Test & lint
     environment: ci
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         php-version: ['8.1', '8.2', '8.3']
@@ -29,13 +29,24 @@ jobs:
         extensions: curl, json
         tools: composer:v2
 
+    - name: Cache composer dependencies
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: composer-${{ matrix.php-version }}-${{ hashFiles('composer.lock') }}
+        restore-keys: composer-${{ matrix.php-version }}-
+
     - name: Install dependencies
       run: composer install --prefer-dist --no-interaction
 
-    - name: Test
+    - name: Lint & unit tests
+      run: |
+        make lint
+        make test-unit
+
+    - name: Integration tests
+      if: matrix.php-version == '8.1'
       env:
         STREAM_API_KEY: ${{ vars.STREAM_API_KEY }}
         STREAM_API_SECRET: ${{ secrets.STREAM_API_SECRET }}
-      run: |
-        make lint
-        make test
+      run: make test-integration
