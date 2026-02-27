@@ -40,6 +40,9 @@ jobs:
       run: composer install --prefer-dist --no-interaction
 
     - name: Lint & unit tests
+      env:
+        STREAM_API_KEY: ${{ vars.STREAM_API_KEY }}
+        STREAM_API_SECRET: ${{ secrets.STREAM_API_SECRET }}
       run: |
         make lint
         make test-unit
