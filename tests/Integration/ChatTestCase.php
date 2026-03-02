@@ -86,20 +86,45 @@ abstract class ChatTestCase extends TestCase
         $client = self::$classClients[$class] ?? null;
 
         if (!empty($ids) && $client !== null) {
-            try {
-                $client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
-                    userIds: $ids,
-                    user: 'hard',
-                    messages: 'hard',
-                    conversations: 'hard',
-                ));
-            } catch (\Exception $e) {
-                // Ignore cleanup errors
-            }
+            self::deleteUsersHardWithRetry($client, $ids);
         }
 
         unset(self::$classClients[$class], self::$classUserIDs[$class]);
         parent::tearDownAfterClass();
+    }
+
+    /**
+     * Delete users with retry and jitter to avoid the DeleteUsers rate limit (6/min).
+     * With 8 parallel paratest workers all tearing down at the same time, a burst
+     * of concurrent calls easily exceeds the limit. A random initial jitter spreads
+     * the calls across the minute window before any retry backoff kicks in.
+     *
+     * @param string[] $userIDs
+     */
+    private static function deleteUsersHardWithRetry(Client $client, array $userIDs): void
+    {
+        // Jitter 0-4s to spread concurrent teardown calls from parallel workers
+        usleep(random_int(0, 4000000));
+
+        for ($i = 0; $i < 8; $i++) {
+            try {
+                $client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
+                    userIds: $userIDs,
+                    user: 'hard',
+                    messages: 'hard',
+                    conversations: 'hard',
+                ));
+                return;
+            } catch (\Exception $e) {
+                if (strpos($e->getMessage(), 'Too many requests') === false &&
+                    strpos($e->getMessage(), '429') === false) {
+                    // Non-rate-limit error during cleanup — ignore it
+                    return;
+                }
+                // Exponential backoff: 2s, 4s, 8s, 16s … capped at 30s
+                sleep(min(2 ** ($i + 1), 30));
+            }
+        }
     }
 
     /**
@@ -276,30 +301,14 @@ abstract class ChatTestCase extends TestCase
 
     /**
      * Delete users with retry logic for rate limiting.
-     * Follows the pattern from getstream-go's deleteUsersWithRetry.
-     * The HTTP client handles 429 retries automatically, so this only
-     * needs a few retries for persistent rate limiting.
+     * Delegates to the shared static implementation so both per-test and
+     * class-level teardowns use the same jitter + backoff strategy.
      *
      * @param string[] $userIDs
      */
     protected function deleteUsersWithRetry(array $userIDs): void
     {
-        for ($i = 0; $i < 5; $i++) {
-            try {
-                $this->client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
-                    userIds: $userIDs,
-                    user: 'hard',
-                    messages: 'hard',
-                    conversations: 'hard',
-                ));
-                return;
-            } catch (\Exception $e) {
-                if (strpos($e->getMessage(), 'Too many requests') === false) {
-                    return;
-                }
-                sleep(min($i + 1, 3));
-            }
-        }
+        self::deleteUsersHardWithRetry($this->client, $userIDs);
     }
 
     /**
