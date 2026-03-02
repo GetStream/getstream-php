@@ -9,6 +9,7 @@ on:
 jobs:
   release:
     name: 🚀 Release
+    environment: ci
     if: github.event.pull_request.merged && startsWith(github.head_ref, 'release-')
     runs-on: ubuntu-latest
     steps:
