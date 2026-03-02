@@ -54,9 +54,9 @@ jobs:
           echo "🔄 Updating Packagist package..."
           response=$(curl -s -w "\n%{http_code}" -X POST \
             -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $PACKAGIST_TOKEN" \
+            -H "Authorization: Bearer $PACKAGIST_USERNAME:$PACKAGIST_TOKEN" \
             -d '{"repository":{"url":"https://github.com/GetStream/getstream-php"}}' \
-            "https://packagist.org/api/update-package?username=$PACKAGIST_USERNAME")
+            "https://packagist.org/api/update-package")
           
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
