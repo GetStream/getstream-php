@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class DeleteMessageRequest extends BaseModel
+class DeleteBookmarkFolderRequest extends BaseModel
 {
     public function __construct(
+        public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

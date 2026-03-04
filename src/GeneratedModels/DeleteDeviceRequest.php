@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class DeleteMessageRequest extends BaseModel
+/**
+ * Delete device request
+ */
+class DeleteDeviceRequest extends BaseModel
 {
     public function __construct(
     ) {

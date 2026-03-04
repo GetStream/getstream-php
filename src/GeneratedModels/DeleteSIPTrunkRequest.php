@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class DeleteMessageRequest extends BaseModel
+/**
+ * Request to delete a SIP trunk
+ */
+class DeleteSIPTrunkRequest extends BaseModel
 {
     public function __construct(
     ) {

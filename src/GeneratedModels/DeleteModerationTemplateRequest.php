@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class DeleteMessageRequest extends BaseModel
+class DeleteModerationTemplateRequest extends BaseModel
 {
     public function __construct(
+        public ?string $name = null, // Name of the moderation template to delete
     ) {
     }
 

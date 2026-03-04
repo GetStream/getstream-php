@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class DeleteMessageRequest extends BaseModel
+/**
+ * DeleteTranscriptionRequest is the payload for deleting a transcription.
+ */
+class DeleteTranscriptionRequest extends BaseModel
 {
     public function __construct(
     ) {

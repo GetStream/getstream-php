@@ -192,10 +192,11 @@ trait FeedsTrait
      * @param string $pollID
      * @param string $voteID
      * @param string $userID
+     * @param GeneratedModels\DeletePollVoteRequest $requestData
      * @return StreamResponse<GeneratedModels\PollVoteResponse>
      * @throws StreamException
      */
-    public function deletePollVote(string $activityID, string $pollID, string $voteID, string $userID): StreamResponse {
+    public function deletePollVote(string $activityID, string $pollID, string $voteID, string $userID, GeneratedModels\DeletePollVoteRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/polls/{poll_id}/vote/{vote_id}';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
         $path = str_replace('{poll_id}', (string) $pollID, $path);
@@ -205,7 +206,7 @@ trait FeedsTrait
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\PollVoteResponse::class);
     }
     /**
@@ -247,10 +248,11 @@ trait FeedsTrait
      * @param string $type
      * @param bool $deleteNotificationActivity
      * @param string $userID
+     * @param GeneratedModels\DeleteActivityReactionRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteActivityReactionResponse>
      * @throws StreamException
      */
-    public function deleteActivityReaction(string $activityID, string $type, bool $deleteNotificationActivity, string $userID): StreamResponse {
+    public function deleteActivityReaction(string $activityID, string $type, bool $deleteNotificationActivity, string $userID, GeneratedModels\DeleteActivityReactionRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/reactions/{type}';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
         $path = str_replace('{type}', (string) $type, $path);
@@ -262,7 +264,7 @@ trait FeedsTrait
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteActivityReactionResponse::class);
     }
     /**
@@ -271,10 +273,11 @@ trait FeedsTrait
      * @param string $id
      * @param bool $hardDelete
      * @param bool $deleteNotificationActivity
+     * @param GeneratedModels\DeleteActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteActivityResponse>
      * @throws StreamException
      */
-    public function deleteActivity(string $id, bool $hardDelete, bool $deleteNotificationActivity): StreamResponse {
+    public function deleteActivity(string $id, bool $hardDelete, bool $deleteNotificationActivity, GeneratedModels\DeleteActivityRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -285,7 +288,7 @@ trait FeedsTrait
         if ($deleteNotificationActivity !== null) {
             $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteActivityResponse::class);
     }
     /**
@@ -373,15 +376,16 @@ trait FeedsTrait
      * Delete a bookmark folder by its ID
      *
      * @param string $folderID
+     * @param GeneratedModels\DeleteBookmarkFolderRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteBookmarkFolderResponse>
      * @throws StreamException
      */
-    public function deleteBookmarkFolder(string $folderID): StreamResponse {
+    public function deleteBookmarkFolder(string $folderID, GeneratedModels\DeleteBookmarkFolderRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/bookmark_folders/{folder_id}';
         $path = str_replace('{folder_id}', (string) $folderID, $path);
 
         $queryParams = [];
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteBookmarkFolderResponse::class);
     }
     /**
@@ -418,17 +422,18 @@ trait FeedsTrait
      * Delete collections in a batch operation. Users can only delete their own collections.
      *
      * @param array $collectionRefs
+     * @param GeneratedModels\DeleteCollectionsRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteCollectionsResponse>
      * @throws StreamException
      */
-    public function deleteCollections(array $collectionRefs): StreamResponse {
+    public function deleteCollections(array $collectionRefs, GeneratedModels\DeleteCollectionsRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
         if ($collectionRefs !== null) {
             $queryParams['collection_refs'] = $collectionRefs;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCollectionsResponse::class);
     }
     /**
@@ -591,10 +596,11 @@ trait FeedsTrait
      * @param string $id
      * @param bool $hardDelete
      * @param bool $deleteNotificationActivity
+     * @param GeneratedModels\DeleteCommentRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteCommentResponse>
      * @throws StreamException
      */
-    public function deleteComment(string $id, bool $hardDelete, bool $deleteNotificationActivity): StreamResponse {
+    public function deleteComment(string $id, bool $hardDelete, bool $deleteNotificationActivity, GeneratedModels\DeleteCommentRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -605,7 +611,7 @@ trait FeedsTrait
         if ($deleteNotificationActivity !== null) {
             $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCommentResponse::class);
     }
     /**
@@ -678,10 +684,11 @@ trait FeedsTrait
      * @param string $type
      * @param bool $deleteNotificationActivity
      * @param string $userID
+     * @param GeneratedModels\DeleteCommentReactionRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteCommentReactionResponse>
      * @throws StreamException
      */
-    public function deleteCommentReaction(string $id, string $type, bool $deleteNotificationActivity, string $userID): StreamResponse {
+    public function deleteCommentReaction(string $id, string $type, bool $deleteNotificationActivity, string $userID, GeneratedModels\DeleteCommentReactionRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/reactions/{type}';
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{type}', (string) $type, $path);
@@ -693,7 +700,7 @@ trait FeedsTrait
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCommentReactionResponse::class);
     }
     /**
@@ -776,10 +783,11 @@ trait FeedsTrait
      * @param string $feedGroupID
      * @param string $feedID
      * @param bool $hardDelete
+     * @param GeneratedModels\DeleteFeedRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteFeedResponse>
      * @throws StreamException
      */
-    public function deleteFeed(string $feedGroupID, string $feedID, bool $hardDelete): StreamResponse {
+    public function deleteFeed(string $feedGroupID, string $feedID, bool $hardDelete, GeneratedModels\DeleteFeedRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -788,7 +796,7 @@ trait FeedsTrait
         if ($hardDelete !== null) {
             $queryParams['hard_delete'] = $hardDelete;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedResponse::class);
     }
     /**
@@ -1021,10 +1029,11 @@ trait FeedsTrait
      *
      * @param string $id
      * @param bool $hardDelete
+     * @param GeneratedModels\DeleteFeedGroupRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteFeedGroupResponse>
      * @throws StreamException
      */
-    public function deleteFeedGroup(string $id, bool $hardDelete): StreamResponse {
+    public function deleteFeedGroup(string $id, bool $hardDelete, GeneratedModels\DeleteFeedGroupRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1032,7 +1041,7 @@ trait FeedsTrait
         if ($hardDelete !== null) {
             $queryParams['hard_delete'] = $hardDelete;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedGroupResponse::class);
     }
     /**
@@ -1413,10 +1422,11 @@ trait FeedsTrait
      * @param string $source
      * @param string $target
      * @param bool $deleteNotificationActivity
+     * @param GeneratedModels\UnfollowRequest $requestData
      * @return StreamResponse<GeneratedModels\UnfollowResponse>
      * @throws StreamException
      */
-    public function unfollow(string $source, string $target, bool $deleteNotificationActivity): StreamResponse {
+    public function unfollow(string $source, string $target, bool $deleteNotificationActivity, GeneratedModels\UnfollowRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/follows/{source}/{target}';
         $path = str_replace('{source}', (string) $source, $path);
         $path = str_replace('{target}', (string) $target, $path);
@@ -1425,7 +1435,7 @@ trait FeedsTrait
         if ($deleteNotificationActivity !== null) {
             $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\UnfollowResponse::class);
     }
     /**
@@ -1460,15 +1470,16 @@ trait FeedsTrait
      * Delete a membership level by its UUID. This operation is irreversible.
      *
      * @param string $id
+     * @param GeneratedModels\DeleteMembershipLevelRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteMembershipLevel(string $id): StreamResponse {
+    public function deleteMembershipLevel(string $id, GeneratedModels\DeleteMembershipLevelRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/membership_levels/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**

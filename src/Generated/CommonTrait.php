@@ -77,10 +77,11 @@ trait CommonTrait
      *
      * @param string $name
      * @param string $team
+     * @param GeneratedModels\DeleteBlockListRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteBlockList(string $name, string $team): StreamResponse {
+    public function deleteBlockList(string $name, string $team, GeneratedModels\DeleteBlockListRequest $requestData): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
@@ -88,7 +89,7 @@ trait CommonTrait
         if ($team !== null) {
             $queryParams['team'] = $team;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -265,15 +266,16 @@ trait CommonTrait
      * Deletes external storage
      *
      * @param string $name
+     * @param GeneratedModels\DeleteExternalStorageRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteExternalStorageResponse>
      * @throws StreamException
      */
-    public function deleteExternalStorage(string $name): StreamResponse {
+    public function deleteExternalStorage(string $name, GeneratedModels\DeleteExternalStorageRequest $requestData): StreamResponse {
         $path = '/api/v2/external_storage/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteExternalStorageResponse::class);
     }
     /**
@@ -539,10 +541,11 @@ trait CommonTrait
      *
      * @param string $pollID
      * @param string $userID
+     * @param GeneratedModels\DeletePollRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deletePoll(string $pollID, string $userID): StreamResponse {
+    public function deletePoll(string $pollID, string $userID, GeneratedModels\DeletePollRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/{poll_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -550,7 +553,7 @@ trait CommonTrait
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -640,10 +643,11 @@ trait CommonTrait
      * @param string $pollID
      * @param string $optionID
      * @param string $userID
+     * @param GeneratedModels\DeletePollOptionRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deletePollOption(string $pollID, string $optionID, string $userID): StreamResponse {
+    public function deletePollOption(string $pollID, string $optionID, string $userID, GeneratedModels\DeletePollOptionRequest $requestData): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
@@ -652,7 +656,7 @@ trait CommonTrait
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -853,15 +857,16 @@ trait CommonTrait
      * Deletes custom role
      *
      * @param string $name
+     * @param GeneratedModels\DeleteCustomRoleRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteRole(string $name): StreamResponse {
+    public function deleteRole(string $name, GeneratedModels\DeleteCustomRoleRequest $requestData): StreamResponse {
         $path = '/api/v2/roles/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -883,17 +888,18 @@ trait CommonTrait
      * Deletes previously uploaded file
      *
      * @param string $url
+     * @param GeneratedModels\FileDeleteRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteFile(string $url): StreamResponse {
+    public function deleteFile(string $url, GeneratedModels\FileDeleteRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/file';
 
         $queryParams = [];
         if ($url !== null) {
             $queryParams['url'] = $url;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -914,17 +920,18 @@ trait CommonTrait
      * Deletes previously uploaded image
      *
      * @param string $url
+     * @param GeneratedModels\FileDeleteRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteImage(string $url): StreamResponse {
+    public function deleteImage(string $url, GeneratedModels\FileDeleteRequest $requestData): StreamResponse {
         $path = '/api/v2/uploads/image';
 
         $queryParams = [];
         if ($url !== null) {
             $queryParams['url'] = $url;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -1022,10 +1029,11 @@ trait CommonTrait
      *
      * @param string $id
      * @param string $teamID
+     * @param GeneratedModels\DeleteUserGroupRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteUserGroup(string $id, string $teamID): StreamResponse {
+    public function deleteUserGroup(string $id, string $teamID, GeneratedModels\DeleteUserGroupRequest $requestData): StreamResponse {
         $path = '/api/v2/usergroups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1033,7 +1041,7 @@ trait CommonTrait
         if ($teamID !== null) {
             $queryParams['team_id'] = $teamID;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -1075,15 +1083,16 @@ trait CommonTrait
      * Removes members from a user group. Users already not in the group are silently ignored.
      *
      * @param string $id
+     * @param GeneratedModels\RemoveUserGroupMembersRequest $requestData
      * @return StreamResponse<GeneratedModels\RemoveUserGroupMembersResponse>
      * @throws StreamException
      */
-    public function removeUserGroupMembers(string $id): StreamResponse {
+    public function removeUserGroupMembers(string $id, GeneratedModels\RemoveUserGroupMembersRequest $requestData): StreamResponse {
         $path = '/api/v2/usergroups/{id}/members';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\RemoveUserGroupMembersResponse::class);
     }
     /**

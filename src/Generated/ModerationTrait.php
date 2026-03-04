@@ -132,10 +132,11 @@ trait ModerationTrait
      *
      * @param string $key
      * @param string $team
+     * @param GeneratedModels\DeleteModerationConfigRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteModerationConfigResponse>
      * @throws StreamException
      */
-    public function deleteConfig(string $key, string $team): StreamResponse {
+    public function deleteConfig(string $key, string $team, GeneratedModels\DeleteModerationConfigRequest $requestData): StreamResponse {
         $path = '/api/v2/moderation/config/{key}';
         $path = str_replace('{key}', (string) $key, $path);
 
@@ -143,7 +144,7 @@ trait ModerationTrait
         if ($team !== null) {
             $queryParams['team'] = $team;
         }
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationConfigResponse::class);
     }
     /**
@@ -196,14 +197,15 @@ trait ModerationTrait
     /**
      * Delete a specific moderation template by its name
      *
+     * @param GeneratedModels\DeleteModerationTemplateRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteModerationTemplateResponse>
      * @throws StreamException
      */
-    public function v2DeleteTemplate(): StreamResponse {
+    public function v2DeleteTemplate(GeneratedModels\DeleteModerationTemplateRequest $requestData): StreamResponse {
         $path = '/api/v2/moderation/feeds_moderation_template';
 
         $queryParams = [];
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationTemplateResponse::class);
     }
     /**

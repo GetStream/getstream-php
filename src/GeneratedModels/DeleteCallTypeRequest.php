@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class DeleteMessageRequest extends BaseModel
+/**
+ * DeleteCallTypeRequest is the payload for deleting a call type.
+ */
+class DeleteCallTypeRequest extends BaseModel
 {
     public function __construct(
     ) {

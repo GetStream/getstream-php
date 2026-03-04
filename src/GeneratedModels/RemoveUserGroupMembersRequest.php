@@ -3,9 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class DeleteMessageRequest extends BaseModel
+/**
+ * Request body for removing members from a user group
+ */
+class RemoveUserGroupMembersRequest extends BaseModel
 {
     public function __construct(
+        public ?array $memberIds = null, // List of user IDs to remove
+        public ?string $teamID = null,
     ) {
     }
 
