@@ -132,11 +132,10 @@ trait ModerationTrait
      *
      * @param string $key
      * @param string $team
-     * @param GeneratedModels\DeleteModerationConfigRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteModerationConfigResponse>
      * @throws StreamException
      */
-    public function deleteConfig(string $key, string $team, GeneratedModels\DeleteModerationConfigRequest $requestData): StreamResponse {
+    public function deleteConfig(string $key, string $team): StreamResponse {
         $path = '/api/v2/moderation/config/{key}';
         $path = str_replace('{key}', (string) $key, $path);
 
@@ -144,7 +143,7 @@ trait ModerationTrait
         if ($team !== null) {
             $queryParams['team'] = $team;
         }
-        // Use the provided request data array directly
+        $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationConfigResponse::class);
     }
     /**
