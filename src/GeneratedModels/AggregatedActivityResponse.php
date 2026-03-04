@@ -17,6 +17,8 @@ class AggregatedActivityResponse extends BaseModel
         public ?\DateTime $createdAt = null, // When the aggregation was created
         public ?\DateTime $updatedAt = null, // When the aggregation was last updated
         public ?bool $isWatched = null,
+        public ?bool $isSeen = null, // Whether this aggregated group has been seen. Only set for feed groups with notification config (track_seen/track_read enabled).
+        public ?bool $isRead = null, // Whether this aggregated group has been read. Only set for feed groups with notification config (track_seen/track_read enabled).
     ) {
     }
 

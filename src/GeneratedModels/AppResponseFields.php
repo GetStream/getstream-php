@@ -67,6 +67,7 @@ class AppResponseFields extends BaseModel
         public ?int $maxAggregatedActivitiesLength = null,
         public ?bool $moderationVideoCallModerationEnabled = null,
         public ?bool $moderationAudioCallModerationEnabled = null,
+        public ?string $moderationS3ImageAccessRoleArn = null,
     ) {
     }
 

@@ -942,6 +942,167 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ImageUploadResponse::class);
     }
     /**
+     * Lists user groups with cursor-based pagination
+     *
+     * @param int $limit
+     * @param string $idGt
+     * @param string $createdAtGt
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\ListUserGroupsResponse>
+     * @throws StreamException
+     */
+    public function listUserGroups(int $limit, string $idGt, string $createdAtGt, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups';
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($idGt !== null) {
+            $queryParams['id_gt'] = $idGt;
+        }
+        if ($createdAtGt !== null) {
+            $queryParams['created_at_gt'] = $createdAtGt;
+        }
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListUserGroupsResponse::class);
+    }
+    /**
+     * Creates a new user group, optionally with initial members
+     *
+     * @param GeneratedModels\CreateUserGroupRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateUserGroupResponse>
+     * @throws StreamException
+     */
+    public function createUserGroup(GeneratedModels\CreateUserGroupRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateUserGroupResponse::class);
+    }
+    /**
+     * Searches user groups by name prefix for autocomplete
+     *
+     * @param string $query
+     * @param int $limit
+     * @param string $nameGt
+     * @param string $idGt
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\SearchUserGroupsResponse>
+     * @throws StreamException
+     */
+    public function searchUserGroups(string $query, int $limit, string $nameGt, string $idGt, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups/search';
+
+        $queryParams = [];
+        if ($query !== null) {
+            $queryParams['query'] = $query;
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($nameGt !== null) {
+            $queryParams['name_gt'] = $nameGt;
+        }
+        if ($idGt !== null) {
+            $queryParams['id_gt'] = $idGt;
+        }
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\SearchUserGroupsResponse::class);
+    }
+    /**
+     * Deletes a user group and all its members
+     *
+     * @param string $id
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function deleteUserGroup(string $id, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
+     * Gets a user group by ID, including its members
+     *
+     * @param string $id
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\GetUserGroupResponse>
+     * @throws StreamException
+     */
+    public function getUserGroup(string $id, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetUserGroupResponse::class);
+    }
+    /**
+     * Updates a user group's name and/or description. team_id is immutable.
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateUserGroupRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateUserGroupResponse>
+     * @throws StreamException
+     */
+    public function updateUserGroup(string $id, GeneratedModels\UpdateUserGroupRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateUserGroupResponse::class);
+    }
+    /**
+     * Removes members from a user group. Users already not in the group are silently ignored.
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\RemoveUserGroupMembersResponse>
+     * @throws StreamException
+     */
+    public function removeUserGroupMembers(string $id): StreamResponse {
+        $path = '/api/v2/usergroups/{id}/members';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\RemoveUserGroupMembersResponse::class);
+    }
+    /**
+     * Adds members to a user group. All user IDs must exist. The operation is all-or-nothing.
+     *
+     * @param string $id
+     * @param GeneratedModels\AddUserGroupMembersRequest $requestData
+     * @return StreamResponse<GeneratedModels\AddUserGroupMembersResponse>
+     * @throws StreamException
+     */
+    public function addUserGroupMembers(string $id, GeneratedModels\AddUserGroupMembersRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups/{id}/members';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddUserGroupMembersResponse::class);
+    }
+    /**
      * Find and filter users
      *
      * @param GeneratedModels\QueryUsersPayload $payload
@@ -953,7 +1114,7 @@ trait CommonTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = json_encode($payload);
+            $queryParams['payload'] = $payload;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryUsersResponse::class);
@@ -963,7 +1124,6 @@ trait CommonTrait
      * Sends events:
      * - user.presence.changed
      * - user.updated
-     * - user.presence.changed
      *
      * @param GeneratedModels\UpdateUsersPartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateUsersResponse>
@@ -1094,7 +1254,6 @@ trait CommonTrait
     /**
      * Reactivate users in batches
      * Sends events:
-     * - user.reactivated
      * - user.reactivated
      *
      * @param GeneratedModels\ReactivateUsersRequest $requestData

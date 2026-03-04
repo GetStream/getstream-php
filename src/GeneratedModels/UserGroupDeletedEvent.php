@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * Emitted when a feed is updated.
+ * Emitted when a user group is deleted.
  */
-class FeedUpdatedEvent extends BaseModel
+class UserGroupDeletedEvent extends BaseModel
 {
     public function __construct(
-        public ?FeedResponse $feed = null,
-        public ?string $type = null, // The type of event: "feeds.feed.updated" in this case
-        public ?\DateTime $createdAt = null,
+        public ?string $type = null, // The type of event: "user_group.deleted" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
-        public ?string $fid = null,
-        public ?string $feedVisibility = null,
         public ?UserResponseCommonFields $user = null,
+        public ?UserGroup $userGroup = null,
     ) {
     }
 

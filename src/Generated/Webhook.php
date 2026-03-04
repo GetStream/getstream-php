@@ -102,6 +102,7 @@ use GetStream\GeneratedModels\FeedCreatedEvent;
 use GetStream\GeneratedModels\FeedDeletedEvent;
 use GetStream\GeneratedModels\FeedGroupChangedEvent;
 use GetStream\GeneratedModels\FeedGroupDeletedEvent;
+use GetStream\GeneratedModels\FeedGroupRestoredEvent;
 use GetStream\GeneratedModels\FeedMemberAddedEvent;
 use GetStream\GeneratedModels\FeedMemberRemovedEvent;
 use GetStream\GeneratedModels\FeedMemberUpdatedEvent;
@@ -152,6 +153,11 @@ use GetStream\GeneratedModels\UserBannedEvent;
 use GetStream\GeneratedModels\UserDeactivatedEvent;
 use GetStream\GeneratedModels\UserDeletedEvent;
 use GetStream\GeneratedModels\UserFlaggedEvent;
+use GetStream\GeneratedModels\UserGroupCreatedEvent;
+use GetStream\GeneratedModels\UserGroupDeletedEvent;
+use GetStream\GeneratedModels\UserGroupMemberAddedEvent;
+use GetStream\GeneratedModels\UserGroupMemberRemovedEvent;
+use GetStream\GeneratedModels\UserGroupUpdatedEvent;
 use GetStream\GeneratedModels\UserMessagesDeletedEvent;
 use GetStream\GeneratedModels\UserMutedEvent;
 use GetStream\GeneratedModels\UserReactivatedEvent;
@@ -275,6 +281,7 @@ class Webhook
     public const EVENT_TYPE_FEEDS_FEED_UPDATED = 'feeds.feed.updated';
     public const EVENT_TYPE_FEEDS_FEED_GROUP_CHANGED = 'feeds.feed_group.changed';
     public const EVENT_TYPE_FEEDS_FEED_GROUP_DELETED = 'feeds.feed_group.deleted';
+    public const EVENT_TYPE_FEEDS_FEED_GROUP_RESTORED = 'feeds.feed_group.restored';
     public const EVENT_TYPE_FEEDS_FEED_MEMBER_ADDED = 'feeds.feed_member.added';
     public const EVENT_TYPE_FEEDS_FEED_MEMBER_REMOVED = 'feeds.feed_member.removed';
     public const EVENT_TYPE_FEEDS_FEED_MEMBER_UPDATED = 'feeds.feed_member.updated';
@@ -326,6 +333,11 @@ class Webhook
     public const EVENT_TYPE_USER_UNMUTED = 'user.unmuted';
     public const EVENT_TYPE_USER_UNREAD_MESSAGE_REMINDER = 'user.unread_message_reminder';
     public const EVENT_TYPE_USER_UPDATED = 'user.updated';
+    public const EVENT_TYPE_USER_GROUP_CREATED = 'user_group.created';
+    public const EVENT_TYPE_USER_GROUP_DELETED = 'user_group.deleted';
+    public const EVENT_TYPE_USER_GROUP_MEMBER_ADDED = 'user_group.member_added';
+    public const EVENT_TYPE_USER_GROUP_MEMBER_REMOVED = 'user_group.member_removed';
+    public const EVENT_TYPE_USER_GROUP_UPDATED = 'user_group.updated';
 
     /**
      * Extract the event type from a raw webhook payload.
@@ -497,6 +509,7 @@ class Webhook
             'feeds.feed.updated' => FeedUpdatedEvent::class,
             'feeds.feed_group.changed' => FeedGroupChangedEvent::class,
             'feeds.feed_group.deleted' => FeedGroupDeletedEvent::class,
+            'feeds.feed_group.restored' => FeedGroupRestoredEvent::class,
             'feeds.feed_member.added' => FeedMemberAddedEvent::class,
             'feeds.feed_member.removed' => FeedMemberRemovedEvent::class,
             'feeds.feed_member.updated' => FeedMemberUpdatedEvent::class,
@@ -548,6 +561,11 @@ class Webhook
             'user.unmuted' => UserUnmutedEvent::class,
             'user.unread_message_reminder' => UserUnreadReminderEvent::class,
             'user.updated' => UserUpdatedEvent::class,
+            'user_group.created' => UserGroupCreatedEvent::class,
+            'user_group.deleted' => UserGroupDeletedEvent::class,
+            'user_group.member_added' => UserGroupMemberAddedEvent::class,
+            'user_group.member_removed' => UserGroupMemberRemovedEvent::class,
+            'user_group.updated' => UserGroupUpdatedEvent::class,
         ];
 
         return $eventClassMap[$eventType] ?? null;

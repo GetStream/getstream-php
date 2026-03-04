@@ -8,6 +8,7 @@ class CreateImportRequest extends BaseModel
     public function __construct(
         public ?string $path = null,
         public ?string $mode = null,
+        public ?bool $mergeCustom = null,
     ) {
     }
 

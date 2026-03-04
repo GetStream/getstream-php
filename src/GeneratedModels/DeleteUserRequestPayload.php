@@ -14,6 +14,8 @@ class DeleteUserRequestPayload extends BaseModel
         public ?bool $markMessagesDeleted = null, // Also delete all user messages
         public ?bool $deleteConversationChannels = null, // Also delete all user conversations
         public ?bool $deleteFeedsContent = null, // Delete flagged feeds content
+        public ?string $entityID = null, // ID of the user to delete (alternative to item_id)
+        public ?string $entityType = null, // Type of the entity
     ) {
     }
 

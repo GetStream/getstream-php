@@ -3,15 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class BlockListConfig extends BaseModel
+/**
+ * Response for getting a user group
+ */
+class GetUserGroupResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $async = null,
-        public ?bool $matchSubstring = null,
-        public ?bool $enabled = null,
-        /** @var array<BlockListRule>|null */
-        #[ArrayOf(BlockListRule::class)]
-        public ?array $rules = null,
+        public ?UserGroupResponse $userGroup = null,
+        public ?string $duration = null,
     ) {
     }
 

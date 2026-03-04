@@ -194,6 +194,7 @@ class WebhookTest extends TestCase
             'feeds.feed.updated' => ['feeds.feed.updated', 'FeedUpdatedEvent'],
             'feeds.feed_group.changed' => ['feeds.feed_group.changed', 'FeedGroupChangedEvent'],
             'feeds.feed_group.deleted' => ['feeds.feed_group.deleted', 'FeedGroupDeletedEvent'],
+            'feeds.feed_group.restored' => ['feeds.feed_group.restored', 'FeedGroupRestoredEvent'],
             'feeds.feed_member.added' => ['feeds.feed_member.added', 'FeedMemberAddedEvent'],
             'feeds.feed_member.removed' => ['feeds.feed_member.removed', 'FeedMemberRemovedEvent'],
             'feeds.feed_member.updated' => ['feeds.feed_member.updated', 'FeedMemberUpdatedEvent'],
@@ -245,6 +246,11 @@ class WebhookTest extends TestCase
             'user.unmuted' => ['user.unmuted', 'UserUnmutedEvent'],
             'user.unread_message_reminder' => ['user.unread_message_reminder', 'UserUnreadReminderEvent'],
             'user.updated' => ['user.updated', 'UserUpdatedEvent'],
+            'user_group.created' => ['user_group.created', 'UserGroupCreatedEvent'],
+            'user_group.deleted' => ['user_group.deleted', 'UserGroupDeletedEvent'],
+            'user_group.member_added' => ['user_group.member_added', 'UserGroupMemberAddedEvent'],
+            'user_group.member_removed' => ['user_group.member_removed', 'UserGroupMemberRemovedEvent'],
+            'user_group.updated' => ['user_group.updated', 'UserGroupUpdatedEvent'],
         ];
     }
 

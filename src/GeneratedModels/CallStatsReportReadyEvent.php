@@ -13,6 +13,10 @@ class CallStatsReportReadyEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
         public ?string $sessionID = null, // Call session ID
+        /** @var array<CallStatsParticipant>|null */
+        #[ArrayOf(CallStatsParticipant::class)]
+        public ?array $participantsOverview = null, // Top participant sessions overview
+        public ?bool $isTrimmed = null, // Whether participants_overview is truncated by the server-side limit
     ) {
     }
 

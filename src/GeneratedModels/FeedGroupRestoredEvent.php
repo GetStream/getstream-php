@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * Emitted when a feed is updated.
+ * Emitted when a feed group is restored.
  */
-class FeedUpdatedEvent extends BaseModel
+class FeedGroupRestoredEvent extends BaseModel
 {
     public function __construct(
-        public ?FeedResponse $feed = null,
-        public ?string $type = null, // The type of event: "feeds.feed.updated" in this case
-        public ?\DateTime $createdAt = null,
+        public ?string $groupID = null, // The ID of the feed group that was restored
+        public ?string $type = null, // The type of event: "feeds.feed_group.restored" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
         public ?string $fid = null,
         public ?string $feedVisibility = null,
-        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

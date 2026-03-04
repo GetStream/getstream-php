@@ -9,6 +9,8 @@ class ReadCollectionsResponse extends BaseModel
         /** @var array<CollectionResponse>|null */
         #[ArrayOf(CollectionResponse::class)]
         public ?array $collections = null, // List of collections matching the query
+        public ?string $next = null, // Cursor for next page (when listing without collection_refs)
+        public ?string $prev = null, // Cursor for previous page (when listing without collection_refs)
         public ?string $duration = null,
     ) {
     }

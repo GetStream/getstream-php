@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * Represents a feed capability value and enumerates all possible capability strings.
+ * Response for searching user groups
  */
-class FeedOwnCapability extends BaseModel
+class SearchUserGroupsResponse extends BaseModel
 {
     public function __construct(
+        /** @var array<UserGroupResponse>|null */
+        #[ArrayOf(UserGroupResponse::class)]
+        public ?array $userGroups = null, // List of matching user groups
+        public ?string $duration = null,
     ) {
     }
 

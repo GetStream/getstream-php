@@ -434,20 +434,20 @@ trait FeedsTrait
     /**
      * Read collections with optional filtering by user ID and collection name. By default, users can only read their own collections.
      *
-     * @param array $collectionRefs
      * @param string $userID
+     * @param array $collectionRefs
      * @return StreamResponse<GeneratedModels\ReadCollectionsResponse>
      * @throws StreamException
      */
-    public function readCollections(array $collectionRefs, string $userID): StreamResponse {
+    public function readCollections(string $userID, array $collectionRefs): StreamResponse {
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
-        if ($collectionRefs !== null) {
-            $queryParams['collection_refs'] = $collectionRefs;
-        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
+        }
+        if ($collectionRefs !== null) {
+            $queryParams['collection_refs'] = $collectionRefs;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ReadCollectionsResponse::class);
@@ -1000,6 +1000,21 @@ trait FeedsTrait
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFollowSuggestionsResponse::class);
+    }
+    /**
+     * Restores a soft-deleted feed group by its ID. Only clears DeletedAt in the database; no other fields are updated.
+     *
+     * @param string $feedGroupID
+     * @return StreamResponse<GeneratedModels\RestoreFeedGroupResponse>
+     * @throws StreamException
+     */
+    public function restoreFeedGroup(string $feedGroupID): StreamResponse {
+        $path = '/api/v2/feeds/feed_groups/{feed_group_id}/restore';
+        $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreFeedGroupResponse::class);
     }
     /**
      * Delete a feed group by its ID. Can perform a soft delete (default) or hard delete.

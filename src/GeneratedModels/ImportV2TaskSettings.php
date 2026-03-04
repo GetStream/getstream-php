@@ -10,6 +10,7 @@ class ImportV2TaskSettings extends BaseModel
         public ?string $mode = null,
         public ?string $path = null,
         public ?bool $skipReferencesCheck = null,
+        public ?bool $mergeCustom = null,
     ) {
     }
 

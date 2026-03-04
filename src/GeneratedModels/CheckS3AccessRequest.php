@@ -3,15 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class BlockListConfig extends BaseModel
+class CheckS3AccessRequest extends BaseModel
 {
     public function __construct(
-        public ?bool $async = null,
-        public ?bool $matchSubstring = null,
-        public ?bool $enabled = null,
-        /** @var array<BlockListRule>|null */
-        #[ArrayOf(BlockListRule::class)]
-        public ?array $rules = null,
+        public ?string $s3Url = null, // Optional stream+s3:// reference to test access against
     ) {
     }
 

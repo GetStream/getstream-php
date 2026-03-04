@@ -100,6 +100,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckResponse::class);
     }
     /**
+     * Verifies that the configured IAM role ARN can access private S3 images for moderation. Optionally accepts a stream+s3:// URL to check access to a specific object.
+     *
+     * @param GeneratedModels\CheckS3AccessRequest $requestData
+     * @return StreamResponse<GeneratedModels\CheckS3AccessResponse>
+     * @throws StreamException
+     */
+    public function checkS3Access(GeneratedModels\CheckS3AccessRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/check_s3_access';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckS3AccessResponse::class);
+    }
+    /**
      * Create a new moderation configuration or update an existing one. Configure settings for content filtering, AI analysis, toxicity detection, and other moderation features.
      *
      * @param GeneratedModels\UpsertConfigRequest $requestData

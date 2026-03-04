@@ -11,6 +11,8 @@ class DeleteCommentRequestPayload extends BaseModel
     public function __construct(
         public ?bool $hardDelete = null, // Whether to permanently delete the comment
         public ?string $reason = null, // Reason for deletion
+        public ?string $entityID = null, // ID of the comment to delete (alternative to item_id)
+        public ?string $entityType = null, // Type of the entity
     ) {
     }
 

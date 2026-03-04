@@ -68,6 +68,8 @@ class ActivityResponse extends BaseModel
         public ?bool $hidden = null, // If this activity is hidden by this user (using activity feedback)
         public ?bool $preview = null, // If this activity is obfuscated for this user. For premium content where you want to show a preview
         public ?bool $isWatched = null,
+        public ?bool $isSeen = null, // Whether this activity has been seen. Only set for feed groups with notification config (track_seen/track_read enabled).
+        public ?bool $isRead = null, // Whether this activity has been read. Only set for feed groups with notification config (track_seen/track_read enabled).
     ) {
     }
 
