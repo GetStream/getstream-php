@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ReadCollectionsResponse extends BaseModel
+class QueryCollectionsResponse extends BaseModel
 {
     public function __construct(
         /** @var array<CollectionResponse>|null */
         #[ArrayOf(CollectionResponse::class)]
-        public ?array $collections = null, // List of collections matching the references
+        public ?array $collections = null, // List of collections matching the query
+        public ?string $next = null, // Cursor for next page
+        public ?string $prev = null, // Cursor for previous page
         public ?string $duration = null,
     ) {
     }

@@ -450,7 +450,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCollectionsResponse::class);
     }
     /**
-     * Read collections with optional filtering by user ID and collection name. By default, users can only read their own collections.
+     * Read collections by their references. By default, users can only read their own collections.
      *
      * @param string $userID
      * @param array $collectionRefs
@@ -511,6 +511,20 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertCollectionsResponse::class);
+    }
+    /**
+     * Query collections with filter query
+     *
+     * @param GeneratedModels\QueryCollectionsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryCollectionsResponse>
+     * @throws StreamException
+     */
+    public function queryCollections(GeneratedModels\QueryCollectionsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/collections/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCollectionsResponse::class);
     }
     /**
      * Retrieve a threaded list of comments for a specific object (e.g., activity), with configurable depth, sorting, and pagination

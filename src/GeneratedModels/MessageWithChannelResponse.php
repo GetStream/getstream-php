@@ -51,6 +51,7 @@ class MessageWithChannelResponse extends BaseModel
         #[ArrayOf(UserResponse::class)]
         public ?array $mentionedUsers = null, // List of mentioned users
         public ?array $mentionedRoles = null, // List of roles mentioned in the message (e.g. admin, channel_moderator, custom roles). Members with matching roles will receive push notifications based on their push preferences. Max 10 roles
+        public ?array $mentionedGroupIds = null, // List of user group IDs mentioned in the message. Group members who are also channel members will receive push notifications based on their push preferences. Max 10 groups
         public ?bool $mentionedChannel = null, // Whether the message mentioned the channel tag
         public ?bool $mentionedHere = null, // Whether the message mentioned online users with @here tag
         public ?array $i18n = null, // Object with translations. Key `language` contains the original language key. Other keys contain translations

@@ -20,6 +20,7 @@ class MessageRequest extends BaseModel
         public ?object $custom = null,
         public ?array $mentionedUsers = null, // Array of user IDs to mention
         public ?array $mentionedRoles = null,
+        public ?array $mentionedGroupIds = null, // List of user group IDs to mention. Group members who are also channel members will receive push notifications. Max 10 groups
         public ?bool $mentionedChannel = null,
         public ?bool $mentionedHere = null,
         public ?string $quotedMessageID = null,

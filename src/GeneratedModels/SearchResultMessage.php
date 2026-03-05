@@ -48,6 +48,7 @@ class SearchResultMessage extends BaseModel
         #[ArrayOf(UserResponse::class)]
         public ?array $mentionedUsers = null,
         public ?array $mentionedRoles = null,
+        public ?array $mentionedGroupIds = null,
         public ?bool $mentionedChannel = null,
         public ?bool $mentionedHere = null,
         public ?array $i18n = null,
