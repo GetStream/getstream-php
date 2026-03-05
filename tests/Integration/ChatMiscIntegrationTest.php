@@ -201,18 +201,21 @@ class ChatMiscIntegrationTest extends ChatTestCase
             }, maxAttempts: 10, sleepMs: 2000);
             self::assertEquals($typeName, $getResp->getData()->name);
 
-            // Update channel type — assert on the update response directly: it is read
-            // from the writing server's local cache (always fresh) so we avoid the
-            // eventual consistency window that makes a re-fetch via GET flaky.
-            $updateResp = $this->retryUntilSuccess(fn () => $this->updateChannelType($typeName, new GeneratedModels\UpdateChannelTypeRequest(
-                automod: 'disabled',
-                automodBehavior: 'flag',
-                maxMessageLength: 4000,
-                typingEvents: false,
-            )), maxAttempts: 5, sleepMs: 2000);
-            $this->assertResponseSuccess($updateResp, 'update channel type');
-            self::assertEquals(4000, $updateResp->getData()->maxMessageLength);
-            self::assertFalse($updateResp->getData()->typingEvents);
+            // Update channel type — retry until the response reflects the updated
+            // value, because the backend may return stale data from its local
+            // cache right after persisting the change.
+            $updateResp = $this->retryUntilSuccess(function () use ($typeName) {
+                $resp = $this->updateChannelType($typeName, new GeneratedModels\UpdateChannelTypeRequest(
+                    automod: 'disabled',
+                    automodBehavior: 'flag',
+                    maxMessageLength: 4000,
+                    typingEvents: false,
+                ));
+                $this->assertResponseSuccess($resp, 'update channel type');
+                self::assertEquals(4000, $resp->getData()->maxMessageLength);
+                self::assertFalse($resp->getData()->typingEvents);
+                return $resp;
+            }, maxAttempts: 5, sleepMs: 2000);
 
             // Delete channel type (with retry due to eventual consistency)
             $deleteErr = null;
