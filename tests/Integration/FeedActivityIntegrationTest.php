@@ -254,18 +254,40 @@ class FeedActivityIntegrationTest extends TestCase
         ));
         $this->assertResponseSuccess($imageResponse2, 'upload image with base64');
 
-        // snippet-start: UploadFile
-        $namedTempPath = sys_get_temp_dir() . '/stream_test_' . uniqid() . '.txt';
-        file_put_contents($namedTempPath, 'test content from PHP SDK integration test');
-        $fileResponse = $this->client->uploadFile(new GeneratedModels\FileUploadRequest(
-            file: $namedTempPath,
-            user: new GeneratedModels\OnlyUserID(id: $this->testUserId)
-        ));
-        // snippet-end: UploadFile
+        // Clear file upload restrictions before uploading a .txt file
+        $appResponse = $this->client->getApp();
+        $originalFileConfig = $appResponse->getData()->app->fileUploadConfig;
 
-        $this->assertResponseSuccess($fileResponse, 'upload file');
-        self::assertNotEmpty($fileResponse->getData()->file);
-        @unlink($namedTempPath);
+        $this->client->updateApp(new GeneratedModels\UpdateAppRequest(
+            fileUploadConfig: new GeneratedModels\FileUploadConfig(
+                allowedFileExtensions: [],
+                blockedFileExtensions: [],
+                allowedMimeTypes: [],
+                blockedMimeTypes: [],
+            ),
+        ));
+        sleep(2);
+
+        try {
+            // snippet-start: UploadFile
+            $namedTempPath = sys_get_temp_dir() . '/stream_test_' . uniqid() . '.txt';
+            file_put_contents($namedTempPath, 'test content from PHP SDK integration test');
+            $fileResponse = $this->client->uploadFile(new GeneratedModels\FileUploadRequest(
+                file: $namedTempPath,
+                user: new GeneratedModels\OnlyUserID(id: $this->testUserId)
+            ));
+            // snippet-end: UploadFile
+
+            $this->assertResponseSuccess($fileResponse, 'upload file');
+            self::assertNotEmpty($fileResponse->getData()->file);
+            @unlink($namedTempPath);
+        } finally {
+            if ($originalFileConfig !== null) {
+                $this->client->updateApp(new GeneratedModels\UpdateAppRequest(
+                    fileUploadConfig: $originalFileConfig,
+                ));
+            }
+        }
     }
 
     /**

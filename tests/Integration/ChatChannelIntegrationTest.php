@@ -926,6 +926,20 @@ class ChatChannelIntegrationTest extends ChatTestCase
             [$this->creatorID],
         );
 
+        // Clear file upload restrictions before uploading a .txt file
+        $appResponse = $this->client->getApp();
+        $originalFileConfig = $appResponse->getData()->app->fileUploadConfig;
+
+        $this->client->updateApp(new GeneratedModels\UpdateAppRequest(
+            fileUploadConfig: new GeneratedModels\FileUploadConfig(
+                allowedFileExtensions: [],
+                blockedFileExtensions: [],
+                allowedMimeTypes: [],
+                blockedMimeTypes: [],
+            ),
+        ));
+        sleep(2);
+
         // Create a temp file
         $tmpFile = tempnam(sys_get_temp_dir(), 'chat-test-') . '.txt';
         file_put_contents($tmpFile, 'hello world test file content');
@@ -961,6 +975,11 @@ class ChatChannelIntegrationTest extends ChatTestCase
             $this->assertResponseSuccess($deleteResp, 'delete file');
         } finally {
             @unlink($tmpFile);
+            if ($originalFileConfig !== null) {
+                $this->client->updateApp(new GeneratedModels\UpdateAppRequest(
+                    fileUploadConfig: $originalFileConfig,
+                ));
+            }
         }
     }
 

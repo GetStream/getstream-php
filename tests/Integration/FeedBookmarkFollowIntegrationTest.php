@@ -188,6 +188,7 @@ class FeedBookmarkFollowIntegrationTest extends TestCase
             $this->feedsV3Client->unfollow(
                 self::USER_FEED_TYPE . $this->testUserId,
                 self::USER_FEED_TYPE . $this->testUserId2,
+                false,
                 false
             );
         } catch (StreamApiException $e) {
