@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $defaultDateRangeDays
- * @property array|null $visibleCharts
- */
 class OverviewDashboardConfig extends BaseModel
 {
     public function __construct(
-        public ?int $defaultDateRangeDays = null,
         public ?array $visibleCharts = null,
+        public ?int $defaultDateRangeDays = null,
     ) {
     }
 

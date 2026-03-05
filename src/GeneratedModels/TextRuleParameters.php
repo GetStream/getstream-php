@@ -3,31 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $containsUrl
- * @property int|null $semanticFilterMinThreshold
- * @property string|null $severity
- * @property int|null $threshold
- * @property string|null $timeWindow
- * @property array|null $blocklistMatch
- * @property array|null $harmLabels
- * @property array|null $semanticFilterNames
- * @property array|null $llmHarmLabels
- */
 class TextRuleParameters extends BaseModel
 {
     public function __construct(
-        public ?bool $containsUrl = null,
-        public ?int $semanticFilterMinThreshold = null,
-        public ?string $severity = null,
         public ?int $threshold = null,
         public ?string $timeWindow = null,
-        public ?array $blocklistMatch = null,
         public ?array $harmLabels = null,
-        public ?array $semanticFilterNames = null,
         public ?array $llmHarmLabels = null,
+        public ?bool $containsUrl = null,
+        public ?string $severity = null,
+        public ?array $blocklistMatch = null,
+        public ?array $semanticFilterNames = null,
+        public ?int $semanticFilterMinThreshold = null,
     ) {
     }
 

@@ -5,24 +5,16 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Emitted when a feed is deleted.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
  */
 class FeedDeletedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null, // Date/time of creation
-        public ?string $fid = null,
-        public ?object $custom = null,
         public ?string $type = null, // The type of event: "feeds.feed.deleted" in this case
-        public ?string $feedVisibility = null,
+        public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $fid = null,
+        public ?string $feedVisibility = null,
         public ?UserResponseCommonFields $user = null,
     ) {
     }

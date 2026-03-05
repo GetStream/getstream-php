@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array<DailyAggregateCallParticipantCountReportResponse> $daily
- */
 class CallParticipantCountReportResponse extends BaseModel
 {
     public function __construct(

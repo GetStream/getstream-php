@@ -3,21 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property ChannelResponse|null $channel
- * @property MessageResponse|null $message
- * @property array|null $metadata
- * @property UserResponse|null $user
- */
 class PendingMessageResponse extends BaseModel
 {
     public function __construct(
+        public ?UserResponse $user = null,
         public ?ChannelResponse $channel = null,
         public ?MessageResponse $message = null,
         public ?array $metadata = null,
-        public ?UserResponse $user = null,
     ) {
     }
 

@@ -16,8 +16,8 @@ test: test-unit test-integration ## Run all tests
 test-unit: ## Run unit tests only
 	./vendor/bin/phpunit tests --exclude-group integration
 
-test-integration: ## Run integration tests only
-	./vendor/bin/phpunit tests/Integration/
+test-integration: ## Run integration tests in parallel (8 workers, method-level)
+	./vendor/bin/paratest --processes=8 --runner=WrapperRunner --colors tests/Integration/
 
 test-specific: ## Run a specific test (usage: make test-specific TEST=TestClassName::testMethodName)
 	./vendor/bin/phpunit --filter $(TEST)

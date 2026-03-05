@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property ImportTask|null $importTask
  */
 class GetImportResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?ImportTask $importTask = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $userID
- * @property array|null $grantPermissions
- * @property array|null $revokePermissions
- */
 class UpdateUserPermissionsRequest extends BaseModel
 {
     public function __construct(

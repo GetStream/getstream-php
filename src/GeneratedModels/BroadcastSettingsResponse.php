@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * BroadcastSettingsResponse is the payload for broadcasting settings
- *
- * @property bool $enabled
- * @property HLSSettingsResponse $hls
- * @property RTMPSettingsResponse $rtmp
  */
 class BroadcastSettingsResponse extends BaseModel
 {

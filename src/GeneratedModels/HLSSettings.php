@@ -3,14 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool $autoOn
- * @property bool $enabled
- * @property array $qualityTracks
- * @property LayoutSettings|null $layout
- */
 class HLSSettings extends BaseModel
 {
     public function __construct(

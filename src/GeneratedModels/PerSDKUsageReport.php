@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $total
- * @property array $byVersion
- */
 class PerSDKUsageReport extends BaseModel
 {
     public function __construct(

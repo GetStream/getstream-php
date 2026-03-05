@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $reaction
- * @property VideoReactionOverTimeResponse|null $countOverTime
- */
 class VideoReactionsResponse extends BaseModel
 {
     public function __construct(

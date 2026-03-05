@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property string $taskID
- */
 class BulkImageModerationResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?string $taskID = null, // ID of the task for processing the bulk image moderation
+        public ?string $duration = null,
     ) {
     }
 

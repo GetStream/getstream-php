@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property \DateTime $createdAt
- * @property User $createdBy
- * @property string $type
- * @property User|null $user
+ * This event is sent when a user gets deactivated. The event contains information about the user that was deactivated.
  */
 class UserDeactivatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?User $createdBy = null,
-        public ?string $type = null,
-        public ?User $user = null,
+        public ?string $type = null, // The type of event: "user.deactivated" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?UserResponseCommonFields $user = null,
+        public ?UserResponseCommonFields $createdBy = null,
     ) {
     }
 

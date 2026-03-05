@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $channelID
- * @property \DateTime $lastRead
- * @property int $unreadCount
- */
 class UnreadCountsChannel extends BaseModel
 {
     public function __construct(
         public ?string $channelID = null,
-        public ?\DateTime $lastRead = null,
         public ?int $unreadCount = null,
+        public ?\DateTime $lastRead = null,
     ) {
     }
 

@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property FollowResponse $follow
- */
 class AcceptFollowResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?FollowResponse $follow = null,
+        public ?string $duration = null,
     ) {
     }
 

@@ -3,109 +3,74 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $bookmarkCount
- * @property int $commentCount
- * @property \DateTime $createdAt
- * @property bool $hidden
- * @property string $id
- * @property int $popularity
- * @property bool $preview
- * @property int $reactionCount
- * @property string $restrictReplies
- * @property int $score
- * @property int $shareCount
- * @property string $type
- * @property \DateTime $updatedAt
- * @property string $visibility
- * @property array<Attachment> $attachments
- * @property array<CommentResponse> $comments
- * @property array $feeds
- * @property array $filterTags
- * @property array $interestTags
- * @property array<FeedsReactionResponse> $latestReactions
- * @property array<UserResponse> $mentionedUsers
- * @property array<BookmarkResponse> $ownBookmarks
- * @property array<FeedsReactionResponse> $ownReactions
- * @property array $collections
- * @property object $custom
- * @property array $reactionGroups
- * @property object $searchData
- * @property UserResponse $user
- * @property \DateTime|null $deletedAt
- * @property \DateTime|null $editedAt
- * @property \DateTime|null $expiresAt
- * @property bool|null $isWatched
- * @property string|null $moderationAction
- * @property string|null $selectorSource
- * @property string|null $text
- * @property string|null $visibilityTag
- * @property FeedResponse|null $currentFeed
- * @property ActivityLocation|null $location
- * @property ModerationV2Response|null $moderation
- * @property NotificationContext|null $notificationContext
- * @property ActivityResponse|null $parent
- * @property PollResponseData|null $poll
- */
 class ActivityResponse extends BaseModel
 {
     public function __construct(
-        public ?int $bookmarkCount = null, // Number of bookmarks on the activity
-        public ?int $commentCount = null, // Number of comments on the activity
-        public ?\DateTime $createdAt = null, // When the activity was created
-        public ?bool $hidden = null, // If this activity is hidden by this user (using activity feedback)
         public ?string $id = null, // Unique identifier for the activity
-        public ?int $popularity = null, // Popularity score of the activity
-        public ?bool $preview = null, // If this activity is obfuscated for this user. For premium content where you want to show a preview
-        public ?int $reactionCount = null, // Number of reactions to the activity
-        public ?string $restrictReplies = null, // Controls who can reply to this activity. Values: everyone, people_i_follow, nobody
-        public ?int $score = null, // Ranking score for this activity
-        public ?int $shareCount = null, // Number of times the activity was shared
         public ?string $type = null, // Type of activity
+        public ?UserResponse $user = null,
+        public ?array $feeds = null, // List of feed IDs containing this activity
+        public ?string $visibility = null, // Visibility setting for the activity. One of: public, private, tag
+        public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name
+        public ?string $restrictReplies = null, // Controls who can add comments/replies to this activity. One of: everyone, people_i_follow, nobody
+        public ?\DateTime $createdAt = null, // When the activity was created
         public ?\DateTime $updatedAt = null, // When the activity was last updated
-        public ?string $visibility = null, // Visibility setting for the activity
-        /** @var array<Attachment>|null Media attachments for the activity */
+        /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null, // Media attachments for the activity
-        /** @var array<CommentResponse>|null Latest 5 comments of this activity (comment replies excluded) */
-        #[ArrayOf(CommentResponse::class)]
-        public ?array $comments = null, // Latest 5 comments of this activity (comment replies excluded)
-        public ?array $feeds = null, // List of feed IDs containing this activity
-        public ?array $filterTags = null, // Tags for filtering
-        public ?array $interestTags = null, // Tags for user interests
-        /** @var array<FeedsReactionResponse>|null Recent reactions to the activity */
-        #[ArrayOf(FeedsReactionResponse::class)]
-        public ?array $latestReactions = null, // Recent reactions to the activity
-        /** @var array<UserResponse>|null Users mentioned in the activity */
+        /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
         public ?array $mentionedUsers = null, // Users mentioned in the activity
-        /** @var array<BookmarkResponse>|null Current user's bookmarks for this activity */
-        #[ArrayOf(BookmarkResponse::class)]
-        public ?array $ownBookmarks = null, // Current user's bookmarks for this activity
-        /** @var array<FeedsReactionResponse>|null Current user's reactions to this activity */
-        #[ArrayOf(FeedsReactionResponse::class)]
-        public ?array $ownReactions = null, // Current user's reactions to this activity
-        public ?array $collections = null, // Enriched collection data referenced by this activity
         public ?object $custom = null, // Custom data for the activity
-        public ?array $reactionGroups = null, // Grouped reactions by type
-        public ?object $searchData = null, // Data for search indexing
-        public ?UserResponse $user = null,
-        public ?\DateTime $deletedAt = null, // When the activity was deleted
-        public ?\DateTime $editedAt = null, // When the activity was last edited
-        public ?\DateTime $expiresAt = null, // When the activity will expire
-        public ?bool $isWatched = null,
-        public ?string $moderationAction = null,
-        public ?string $selectorSource = null, // Which activity selector provided this activity (e.g., 'following', 'popular', 'interest'). Only set when using multiple activity selectors with ranking.
-        public ?string $text = null, // Text content of the activity
-        public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name
-        public ?FeedResponse $currentFeed = null,
-        public ?ActivityLocation $location = null,
-        public ?ModerationV2Response $moderation = null,
         public ?NotificationContext $notificationContext = null,
+        public ?int $popularity = null, // Popularity score of the activity
+        public ?int $score = null, // Ranking score for this activity
+        public ?string $selectorSource = null, // Which activity selector provided this activity (e.g., 'following', 'popular', 'interest'). Only set when using multiple activity selectors with ranking.
+        /** @var array<CommentResponse>|null */
+        #[ArrayOf(CommentResponse::class)]
+        public ?array $comments = null, // Latest 5 comments of this activity (comment replies excluded)
+        public ?string $text = null, // Text content of the activity
+        public ?ActivityLocation $location = null,
         public ?ActivityResponse $parent = null,
         public ?PollResponseData $poll = null,
+        public ?\DateTime $editedAt = null, // When the activity was last edited
+        public ?\DateTime $deletedAt = null, // When the activity was deleted
+        public ?\DateTime $expiresAt = null, // When the activity will expire
+        public ?object $searchData = null, // Data for search indexing
+        public ?array $filterTags = null, // Tags for filtering
+        public ?array $interestTags = null, // Tags for user interests
+        public ?ModerationV2Response $moderation = null,
+        public ?string $moderationAction = null,
+        public ?int $commentCount = null, // Number of comments on the activity
+        public ?int $bookmarkCount = null, // Number of bookmarks on the activity
+        public ?int $shareCount = null, // Number of times the activity was shared
+        public ?int $reactionCount = null, // Number of reactions to the activity
+        public ?array $metrics = null,
+        /** @var array<FeedsReactionResponse>|null */
+        #[ArrayOf(FeedsReactionResponse::class)]
+        public ?array $latestReactions = null, // Recent reactions to the activity
+        /** @var array<string, FeedsReactionGroupResponse>|null */
+        #[MapOf(FeedsReactionGroupResponse::class)]
+        public ?array $reactionGroups = null, // Grouped reactions by type
+        /** @var array<FeedsReactionResponse>|null */
+        #[ArrayOf(FeedsReactionResponse::class)]
+        public ?array $ownReactions = null, // Current user's reactions to this activity
+        /** @var array<BookmarkResponse>|null */
+        #[ArrayOf(BookmarkResponse::class)]
+        public ?array $ownBookmarks = null, // Current user's bookmarks for this activity
+        /** @var array<string, EnrichedCollectionResponse>|null */
+        #[MapOf(EnrichedCollectionResponse::class)]
+        public ?array $collections = null, // Enriched collection data referenced by this activity
+        /** @var array<FeedsReactionResponse>|null */
+        #[ArrayOf(FeedsReactionResponse::class)]
+        public ?array $friendReactions = null, // Reactions from users the current user follows or has mutual follows with
+        public ?int $friendReactionCount = null, // Total count of reactions from friends on this activity
+        public ?FeedResponse $currentFeed = null,
+        public ?bool $hidden = null, // If this activity is hidden by this user (using activity feedback)
+        public ?bool $preview = null, // If this activity is obfuscated for this user. For premium content where you want to show a preview
+        public ?bool $isWatched = null,
+        public ?bool $isSeen = null, // Whether this activity has been seen. Only set for feed groups with notification config (track_seen/track_read enabled).
+        public ?bool $isRead = null, // Whether this activity has been read. Only set for feed groups with notification config (track_seen/track_read enabled).
     ) {
     }
 

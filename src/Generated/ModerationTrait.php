@@ -16,7 +16,6 @@ trait ModerationTrait
 {
     /**
      * Appeal against the moderation decision
-     * 
      *
      * @param GeneratedModels\AppealRequest $requestData
      * @return StreamResponse<GeneratedModels\AppealResponse>
@@ -31,7 +30,6 @@ trait ModerationTrait
     }
     /**
      * Retrieve a specific appeal item by its ID
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetAppealResponse>
@@ -47,7 +45,6 @@ trait ModerationTrait
     }
     /**
      * Query Appeals
-     * 
      *
      * @param GeneratedModels\QueryAppealsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryAppealsResponse>
@@ -62,7 +59,6 @@ trait ModerationTrait
     }
     /**
      * Ban a user from a channel or the entire app
-     * 
      *
      * @param GeneratedModels\BanRequest $requestData
      * @return StreamResponse<GeneratedModels\BanResponse>
@@ -77,7 +73,6 @@ trait ModerationTrait
     }
     /**
      * Moderate multiple images in bulk using a CSV file
-     * 
      *
      * @param GeneratedModels\BulkImageModerationRequest $requestData
      * @return StreamResponse<GeneratedModels\BulkImageModerationResponse>
@@ -92,7 +87,6 @@ trait ModerationTrait
     }
     /**
      * Run moderation checks on the provided content
-     * 
      *
      * @param GeneratedModels\CheckRequest $requestData
      * @return StreamResponse<GeneratedModels\CheckResponse>
@@ -106,8 +100,21 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckResponse::class);
     }
     /**
+     * Verifies that the configured IAM role ARN can access private S3 images for moderation. Optionally accepts a stream+s3:// URL to check access to a specific object.
+     *
+     * @param GeneratedModels\CheckS3AccessRequest $requestData
+     * @return StreamResponse<GeneratedModels\CheckS3AccessResponse>
+     * @throws StreamException
+     */
+    public function checkS3Access(GeneratedModels\CheckS3AccessRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/check_s3_access';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckS3AccessResponse::class);
+    }
+    /**
      * Create a new moderation configuration or update an existing one. Configure settings for content filtering, AI analysis, toxicity detection, and other moderation features.
-     * 
      *
      * @param GeneratedModels\UpsertConfigRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertConfigResponse>
@@ -122,7 +129,6 @@ trait ModerationTrait
     }
     /**
      * Delete a specific moderation policy by its name
-     * 
      *
      * @param string $key
      * @param string $team
@@ -142,7 +148,6 @@ trait ModerationTrait
     }
     /**
      * Retrieve a specific moderation configuration by its key and team. This configuration contains settings for various moderation features like toxicity detection, AI analysis, and filtering rules.
-     * 
      *
      * @param string $key
      * @param string $team
@@ -162,7 +167,6 @@ trait ModerationTrait
     }
     /**
      * Search and filter moderation configurations across your application. This endpoint is designed for building moderation dashboards and managing multiple configuration sets.
-     * 
      *
      * @param GeneratedModels\QueryModerationConfigsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationConfigsResponse>
@@ -177,7 +181,6 @@ trait ModerationTrait
     }
     /**
      * Custom check, add your own AI model reports to the review queue
-     * 
      *
      * @param GeneratedModels\CustomCheckRequest $requestData
      * @return StreamResponse<GeneratedModels\CustomCheckResponse>
@@ -192,7 +195,6 @@ trait ModerationTrait
     }
     /**
      * Delete a specific moderation template by its name
-     * 
      *
      * @return StreamResponse<GeneratedModels\DeleteModerationTemplateResponse>
      * @throws StreamException
@@ -206,7 +208,6 @@ trait ModerationTrait
     }
     /**
      * Retrieve a list of feed moderation templates that define preset moderation rules and configurations. Limited to 100 templates per request.
-     * 
      *
      * @return StreamResponse<GeneratedModels\QueryFeedModerationTemplatesResponse>
      * @throws StreamException
@@ -220,7 +221,6 @@ trait ModerationTrait
     }
     /**
      * Upsert feeds template for moderation
-     * 
      *
      * @param GeneratedModels\UpsertModerationTemplateRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertModerationTemplateResponse>
@@ -235,7 +235,6 @@ trait ModerationTrait
     }
     /**
      * Flag any type of content (messages, users, channels, activities) for moderation review. Supports custom content types and additional metadata for flagged content.
-     * 
      *
      * @param GeneratedModels\FlagRequest $requestData
      * @return StreamResponse<GeneratedModels\FlagResponse>
@@ -250,7 +249,6 @@ trait ModerationTrait
     }
     /**
      * Query flags associated with moderation items. This is used for building a moderation dashboard.
-     * 
      *
      * @param GeneratedModels\QueryModerationFlagsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationFlagsResponse>
@@ -265,7 +263,6 @@ trait ModerationTrait
     }
     /**
      * Search and filter moderation action logs with support for pagination. View the history of moderation actions taken, including who performed them and when.
-     * 
      *
      * @param GeneratedModels\QueryModerationLogsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationLogsResponse>
@@ -280,7 +277,6 @@ trait ModerationTrait
     }
     /**
      * Create or update a moderation rule that can apply app-wide or to specific moderation configs
-     * 
      *
      * @param GeneratedModels\UpsertModerationRuleRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertModerationRuleResponse>
@@ -295,7 +291,6 @@ trait ModerationTrait
     }
     /**
      * Delete an existing moderation rule
-     * 
      *
      * @return StreamResponse<GeneratedModels\DeleteModerationRuleResponse>
      * @throws StreamException
@@ -309,7 +304,6 @@ trait ModerationTrait
     }
     /**
      * Get a specific moderation rule by ID
-     * 
      *
      * @return StreamResponse<GeneratedModels\GetModerationRuleResponse>
      * @throws StreamException
@@ -323,7 +317,6 @@ trait ModerationTrait
     }
     /**
      * Search and filter moderation rules across your application. This endpoint is designed for building moderation dashboards and managing multiple rule sets.
-     * 
      *
      * @param GeneratedModels\QueryModerationRulesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationRulesResponse>
@@ -338,7 +331,6 @@ trait ModerationTrait
     }
     /**
      * Mute a user. Mutes are generally not visible to the user you mute, while block is something you notice.
-     * 
      *
      * @param GeneratedModels\MuteRequest $requestData
      * @return StreamResponse<GeneratedModels\MuteResponse>
@@ -353,7 +345,6 @@ trait ModerationTrait
     }
     /**
      * Query review queue items allows you to filter the review queue items. This is used for building a moderation dashboard.
-     * 
      *
      * @param GeneratedModels\QueryReviewQueueRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryReviewQueueResponse>
@@ -368,7 +359,6 @@ trait ModerationTrait
     }
     /**
      * Retrieve a specific review queue item by its ID
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetReviewQueueItemResponse>
@@ -384,7 +374,6 @@ trait ModerationTrait
     }
     /**
      * Take action on flagged content, such as marking content as safe, deleting content, banning users, or executing custom moderation actions. Supports various action types with configurable parameters.
-     * 
      *
      * @param GeneratedModels\SubmitActionRequest $requestData
      * @return StreamResponse<GeneratedModels\SubmitActionResponse>
@@ -399,7 +388,6 @@ trait ModerationTrait
     }
     /**
      * Unban a user from a channel or globally.
-     * 
      *
      * @param string $targetUserID
      * @param string $channelCid
@@ -426,7 +414,6 @@ trait ModerationTrait
     }
     /**
      * Unmute a user
-     * 
      *
      * @param GeneratedModels\UnmuteRequest $requestData
      * @return StreamResponse<GeneratedModels\UnmuteResponse>

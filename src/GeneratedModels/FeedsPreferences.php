@@ -3,26 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $comment
- * @property string|null $commentReaction
- * @property string|null $commentReply
- * @property string|null $follow
- * @property string|null $mention
- * @property string|null $reaction
- * @property array|null $customActivityTypes
- */
 class FeedsPreferences extends BaseModel
 {
     public function __construct(
-        public ?string $comment = null, // Push notification preference for comments on user's activities
-        public ?string $commentReaction = null, // Push notification preference for reactions on comments
-        public ?string $commentReply = null, // Push notification preference for replies to comments
-        public ?string $follow = null, // Push notification preference for new followers
-        public ?string $mention = null, // Push notification preference for mentions in activities or comments
-        public ?string $reaction = null, // Push notification preference for reactions on user's activities or comments
+        public ?string $follow = null, // Push notification preference for new followers. One of: all, none
+        public ?string $comment = null, // Push notification preference for comments on user's activities. One of: all, none
+        public ?string $reaction = null, // Push notification preference for reactions on user's activities or comments. One of: all, none
+        public ?string $commentReaction = null, // Push notification preference for reactions on comments. One of: all, none
+        public ?string $commentReply = null, // Push notification preference for replies to comments. One of: all, none
+        public ?string $mention = null, // Push notification preference for mentions in activities or comments. One of: all, none
         public ?array $customActivityTypes = null, // Push notification preferences for custom activity types. Map of activity type to preference (all or none)
     ) {
     }

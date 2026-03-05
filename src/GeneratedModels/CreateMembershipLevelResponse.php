@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property MembershipLevelResponse $membershipLevel
- */
 class CreateMembershipLevelResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?MembershipLevelResponse $membershipLevel = null,
+        public ?string $duration = null,
     ) {
     }
 

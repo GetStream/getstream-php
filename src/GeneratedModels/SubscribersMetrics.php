@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property SubscriberAllMetrics|null $all
- */
 class SubscribersMetrics extends BaseModel
 {
     public function __construct(

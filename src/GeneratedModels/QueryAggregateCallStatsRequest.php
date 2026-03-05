@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $from
- * @property string|null $to
- * @property array|null $reportTypes
- */
 class QueryAggregateCallStatsRequest extends BaseModel
 {
     public function __construct(

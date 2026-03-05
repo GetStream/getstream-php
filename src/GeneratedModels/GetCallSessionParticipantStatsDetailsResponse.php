@@ -5,31 +5,20 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $callID
- * @property string $callSessionID
- * @property string $callType
- * @property string $duration
- * @property string $userID
- * @property string $userSessionID
- * @property ParticipantSeriesPublisherStats|null $publisher
- * @property ParticipantSeriesSubscriberStats|null $subscriber
- * @property ParticipantSeriesTimeframe|null $timeframe
- * @property ParticipantSeriesUserStats|null $user
  */
 class GetCallSessionParticipantStatsDetailsResponse extends BaseModel
 {
     public function __construct(
+        public ?string $duration = null, // Duration of the request in milliseconds
+        public ?string $callType = null,
         public ?string $callID = null,
         public ?string $callSessionID = null,
-        public ?string $callType = null,
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $userID = null,
         public ?string $userSessionID = null,
-        public ?ParticipantSeriesPublisherStats $publisher = null,
-        public ?ParticipantSeriesSubscriberStats $subscriber = null,
         public ?ParticipantSeriesTimeframe $timeframe = null,
         public ?ParticipantSeriesUserStats $user = null,
+        public ?ParticipantSeriesPublisherStats $publisher = null,
+        public ?ParticipantSeriesSubscriberStats $subscriber = null,
     ) {
     }
 

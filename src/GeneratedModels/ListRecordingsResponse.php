@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for listing recordings
- *
- * @property string $duration
- * @property array<CallRecording> $recordings
  */
 class ListRecordingsResponse extends BaseModel
 {

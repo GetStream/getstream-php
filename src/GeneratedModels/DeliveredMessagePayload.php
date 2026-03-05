@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $cid
- * @property string|null $id
- */
 class DeliveredMessagePayload extends BaseModel
 {
     public function __construct(

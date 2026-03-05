@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $maxAge
- */
 class UserCreatedWithinParameters extends BaseModel
 {
     public function __construct(

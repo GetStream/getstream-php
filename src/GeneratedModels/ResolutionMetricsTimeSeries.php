@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property MetricTimeSeries|null $height
- * @property MetricTimeSeries|null $width
- */
 class ResolutionMetricsTimeSeries extends BaseModel
 {
     public function __construct(
-        public ?MetricTimeSeries $height = null,
         public ?MetricTimeSeries $width = null,
+        public ?MetricTimeSeries $height = null,
     ) {
     }
 

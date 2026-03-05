@@ -3,27 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool $broadcasting
- * @property array<EgressRTMPResponse> $rtmps
- * @property CompositeRecordingResponse|null $compositeRecording
- * @property FrameRecordingResponse|null $frameRecording
- * @property EgressHLSResponse|null $hls
- * @property IndividualRecordingResponse|null $individualRecording
- * @property RawRecordingResponse|null $rawRecording
- */
 class EgressResponse extends BaseModel
 {
     public function __construct(
         public ?bool $broadcasting = null,
+        public ?EgressHLSResponse $hls = null,
         /** @var array<EgressRTMPResponse>|null */
         #[ArrayOf(EgressRTMPResponse::class)]
         public ?array $rtmps = null,
-        public ?CompositeRecordingResponse $compositeRecording = null,
         public ?FrameRecordingResponse $frameRecording = null,
-        public ?EgressHLSResponse $hls = null,
+        public ?CompositeRecordingResponse $compositeRecording = null,
         public ?IndividualRecordingResponse $individualRecording = null,
         public ?RawRecordingResponse $rawRecording = null,
     ) {

@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property BookmarkResponse $bookmark
- */
 class DeleteBookmarkResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?BookmarkResponse $bookmark = null,
+        public ?string $duration = null,
     ) {
     }
 

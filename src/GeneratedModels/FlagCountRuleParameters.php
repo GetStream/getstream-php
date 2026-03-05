@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $threshold
- */
 class FlagCountRuleParameters extends BaseModel
 {
     public function __construct(

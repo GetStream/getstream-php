@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property object|null $filterConditions
- */
 class QueryCallParticipantsRequest extends BaseModel
 {
     public function __construct(

@@ -4,54 +4,37 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property string|null $html
- * @property string|null $id
- * @property string|null $mml
- * @property string|null $parentID
- * @property \DateTime|null $pinExpires
- * @property bool|null $pinned
- * @property \DateTime|null $pinnedAt
- * @property string|null $pollID
- * @property string|null $quotedMessageID
- * @property bool|null $showInChannel
- * @property bool|null $silent
- * @property string|null $text
- * @property string|null $type
- * @property string|null $userID
- * @property array<Attachment>|null $attachments
- * @property array|null $mentionedUsers
- * @property array|null $restrictedVisibility
- * @property object|null $custom
- * @property SharedLocation|null $sharedLocation
- * @property UserRequest|null $user
+ * Message data for creating or updating a message
  */
 class MessageRequest extends BaseModel
 {
     public function __construct(
-        public ?string $html = null,
-        public ?string $id = null,
-        public ?string $mml = null,
-        public ?string $parentID = null,
-        public ?\DateTime $pinExpires = null,
-        public ?bool $pinned = null,
-        public ?\DateTime $pinnedAt = null,
-        public ?string $pollID = null,
-        public ?string $quotedMessageID = null,
-        public ?bool $showInChannel = null,
-        public ?bool $silent = null,
-        public ?string $text = null,
-        public ?string $type = null,
-        public ?string $userID = null,
+        public ?string $id = null, // Message ID is unique string identifier of the message
+        public ?string $text = null, // Text of the message. Should be empty if `mml` is provided
+        public ?string $mml = null, // Should be empty if `text` is provided. Can only be set when using server-side API
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
-        public ?array $attachments = null,
-        public ?array $mentionedUsers = null,
-        public ?array $restrictedVisibility = null,
+        public ?array $attachments = null, // Array of message attachments
+        public ?string $parentID = null, // ID of parent message (thread)
+        public ?bool $showInChannel = null, // Whether thread reply should be shown in the channel as well
         public ?object $custom = null,
-        public ?SharedLocation $sharedLocation = null,
+        public ?array $mentionedUsers = null, // Array of user IDs to mention
+        public ?array $mentionedRoles = null,
+        public ?array $mentionedGroupIds = null, // List of user group IDs to mention. Group members who are also channel members will receive push notifications. Max 10 groups
+        public ?bool $mentionedChannel = null,
+        public ?bool $mentionedHere = null,
+        public ?string $quotedMessageID = null,
+        public ?string $html = null, // Contains HTML markup of the message. Can only be set when using server-side API
+        public ?string $type = null, // Contains type of the message. One of: regular, system
+        public ?bool $silent = null, // Whether message is silent or not
+        public ?bool $pinned = null, // Whether message is pinned or not
+        public ?\DateTime $pinnedAt = null, // Date when message got pinned
+        public ?\DateTime $pinExpires = null, // Date when pinned message expires
+        public ?array $restrictedVisibility = null, // A list of user ids that have restricted visibility to the message
+        public ?string $userID = null,
         public ?UserRequest $user = null,
+        public ?string $pollID = null, // Identifier of the poll to include in the message
+        public ?SharedLocation $sharedLocation = null,
     ) {
     }
 

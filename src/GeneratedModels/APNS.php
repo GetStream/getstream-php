@@ -3,24 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $body
- * @property string $title
- * @property int|null $contentAvailable
- * @property int|null $mutableContent
- * @property string|null $sound
- * @property object|null $data
- */
 class APNS extends BaseModel
 {
     public function __construct(
-        public ?string $body = null,
         public ?string $title = null,
+        public ?string $body = null,
+        public ?string $sound = null,
         public ?int $contentAvailable = null,
         public ?int $mutableContent = null,
-        public ?string $sound = null,
         public ?object $data = null,
     ) {
     }

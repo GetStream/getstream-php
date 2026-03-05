@@ -4,16 +4,24 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property \DateTime $createdAt
- * @property string $type
+ * Emitted when a channel is successfully created.
  */
 class ChannelCreatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
+        public ?string $type = null, // The type of event: "channel.created" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel which was created
+        public ?string $team = null, // The team ID
+        public ?int $channelMemberCount = null, // The number of members in the channel
+        public ?int $channelMessageCount = null,
+        public ?object $channelCustom = null,
+        public ?string $channelType = null, // The type of the channel which was created
+        public ?string $channelID = null, // The ID of the channel which was created
+        public ?ChannelResponse $channel = null,
+        public ?UserResponseCommonFields $user = null,
     ) {
     }
 

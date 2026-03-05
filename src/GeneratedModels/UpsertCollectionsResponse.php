@@ -3,19 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property array<CollectionResponse> $collections
- */
 class UpsertCollectionsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
-        /** @var array<CollectionResponse>|null List of upserted collections */
+        /** @var array<CollectionResponse>|null */
         #[ArrayOf(CollectionResponse::class)]
         public ?array $collections = null, // List of upserted collections
+        public ?string $duration = null,
     ) {
     }
 

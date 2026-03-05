@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $logic
- * @property array<RuleBuilderCondition>|null $conditions
- */
 class RuleBuilderConditionGroup extends BaseModel
 {
     public function __construct(

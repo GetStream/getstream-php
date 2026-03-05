@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $chatLevel
- * @property \DateTime|null $disabledUntil
- */
 class ChannelPushPreferencesResponse extends BaseModel
 {
     public function __construct(

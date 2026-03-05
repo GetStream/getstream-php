@@ -11,6 +11,7 @@ use GetStream\Exceptions\StreamException;
 use GetStream\GeneratedModels;
 use GetStream\ModerationClient;
 use GetStream\StreamResponse;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,6 +29,7 @@ use PHPUnit\Framework\TestCase;
  * 8. Rules and Templates
  * 9. Cleanup
  */
+#[Group('integration')]
 class ModerationIntegrationTest extends TestCase
 {
     private ModerationClient $moderationClient;
@@ -50,23 +52,69 @@ class ModerationIntegrationTest extends TestCase
     private array $mutedUserIds = [];
     private array $createdConfigs = [];
 
+    // ------------------------------------------------------------------
+    // Class-level shared users (created once per test class)
+    // ------------------------------------------------------------------
+    private static ?Client $sharedClient = null;
+    private static ?ModerationClient $sharedModerationClient = null;
+    private static string $sharedUserId = '';
+    private static string $sharedUserId2 = '';
+    private static string $sharedModeratorUserId = '';
+    private static string $sharedReporterUserId = '';
+
+    public static function setUpBeforeClass(): void
+    {
+        $client = ClientBuilder::fromEnv()->build();
+        $moderationClient = ClientBuilder::fromEnv()->buildModerationClient();
+
+        self::$sharedClient = $client;
+        self::$sharedModerationClient = $moderationClient;
+        self::$sharedUserId = 'test-user-' . uniqid();
+        self::$sharedUserId2 = 'test-user-2-' . uniqid();
+        self::$sharedModeratorUserId = 'moderator-' . uniqid();
+        self::$sharedReporterUserId = 'reporter-' . uniqid();
+
+        // Create shared users once
+        $client->updateUsers(new GeneratedModels\UpdateUsersRequest(
+            users: [
+                self::$sharedUserId => [
+                    'id' => self::$sharedUserId,
+                    'name' => 'Test User ' . self::$sharedUserId,
+                    'role' => 'user',
+                ],
+                self::$sharedUserId2 => [
+                    'id' => self::$sharedUserId2,
+                    'name' => 'Test User ' . self::$sharedUserId2,
+                    'role' => 'user',
+                ],
+                self::$sharedModeratorUserId => [
+                    'id' => self::$sharedModeratorUserId,
+                    'name' => 'Moderator ' . self::$sharedModeratorUserId,
+                    'role' => 'admin',
+                ],
+                self::$sharedReporterUserId => [
+                    'id' => self::$sharedReporterUserId,
+                    'name' => 'Reporter ' . self::$sharedReporterUserId,
+                    'role' => 'user',
+                ],
+            ]
+        ));
+    }
+
     /**
      * @throws StreamException
      */
     protected function setUp(): void
     {
-        $this->client = ClientBuilder::fromEnv()->build();
-        $this->moderationClient = ClientBuilder::fromEnv()->buildModerationClient();
+        $this->client = self::$sharedClient;
+        $this->moderationClient = self::$sharedModerationClient;
 
-        $this->testUserId = 'test-user-' . uniqid();
-        $this->testUserId2 = 'test-user-2-' . uniqid();
-        $this->moderatorUserId = 'moderator-' . uniqid();
-        $this->reporterUserId = 'reporter-' . uniqid();
+        $this->testUserId = self::$sharedUserId;
+        $this->testUserId2 = self::$sharedUserId2;
+        $this->moderatorUserId = self::$sharedModeratorUserId;
+        $this->reporterUserId = self::$sharedReporterUserId;
         $this->testChannelId = 'test-channel-' . uniqid();
         $this->testChannelCid = 'messaging:' . $this->testChannelId;
-
-        // Setup environment for each test
-        $this->setupEnvironment();
     }
 
     protected function tearDown(): void
@@ -330,59 +378,9 @@ class ModerationIntegrationTest extends TestCase
     // ENVIRONMENT SETUP (called in setUp for each test)
     // =================================================================
 
-    private function setupEnvironment(): void
-    {
-        try {
-            // Create test users
-            // snippet-start: CreateModerationUsers
-            $response = $this->client->updateUsers(new GeneratedModels\UpdateUsersRequest(
-                users: [
-                    $this->testUserId => [
-                        'id' => $this->testUserId,
-                        'name' => 'Test User 1',
-                        'role' => 'user',
-                    ],
-                    $this->testUserId2 => [
-                        'id' => $this->testUserId2,
-                        'name' => 'Test User 2',
-                        'role' => 'user',
-                    ],
-                    $this->moderatorUserId => [
-                        'id' => $this->moderatorUserId,
-                        'name' => 'Moderator User',
-                        'role' => 'admin',
-                    ],
-                    $this->reporterUserId => [
-                        'id' => $this->reporterUserId,
-                        'name' => 'Reporter User',
-                        'role' => 'user',
-                    ],
-                ]
-            ));
-            // snippet-end: CreateModerationUsers
-
-            if (!$response->isSuccessful()) {
-                throw new StreamException('Failed to create users: ' . $response->getRawBody());
-            }
-
-            $this->createdUserIds = [$this->testUserId, $this->testUserId2, $this->moderatorUserId, $this->reporterUserId];
-
-            echo "✅ Created test users for moderation tests\n";
-            echo "   Target User: {$this->testUserId}\n";
-            echo "   Target User 2: {$this->testUserId2}\n";
-            echo "   Moderator: {$this->moderatorUserId}\n";
-            echo "   Reporter: {$this->reporterUserId}\n";
-        } catch (StreamApiException $e) {
-            echo '⚠️ Setup failed: ' . $e->getMessage() . "\n";
-            echo 'ResponseBody: ' . $e->getResponseBody() . "\n";
-            echo 'ErrorDetail: ' . $e->getErrorDetails() . "\n";
-
-            throw $e;
-        } catch (\Exception $e) {
-            echo '⚠️ Setup failed: ' . $e->getMessage() . "\n";
-            // Continue with tests even if setup partially fails
-        }
-    }
+    // snippet-start: CreateModerationUsers
+    // Users are created once in setUpBeforeClass() for all tests in this class.
+    // snippet-end: CreateModerationUsers
 
     // =================================================================
     // HELPER METHODS

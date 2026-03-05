@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property object|null $data
- */
 class FCM extends BaseModel
 {
     public function __construct(

@@ -3,25 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $unread
- * @property int $unseen
- * @property \DateTime|null $lastReadAt
- * @property \DateTime|null $lastSeenAt
- * @property array|null $readActivities
- * @property array|null $seenActivities
- */
 class NotificationStatusResponse extends BaseModel
 {
     public function __construct(
         public ?int $unread = null, // Number of unread notifications
         public ?int $unseen = null, // Number of unseen notifications
-        public ?\DateTime $lastReadAt = null,
+        public ?array $readActivities = null, // Deprecated: use is_read on each activity/group instead. IDs of activities that have been read. Capped at ~101 entries for aggregated feeds.
+        public ?array $seenActivities = null, // Deprecated: use is_seen on each activity/group instead. IDs of activities that have been seen. Capped at ~101 entries for aggregated feeds.
         public ?\DateTime $lastSeenAt = null, // When notifications were last seen
-        public ?array $readActivities = null, // IDs of activities that have been read
-        public ?array $seenActivities = null,
+        public ?\DateTime $lastReadAt = null, // When notifications were last read
     ) {
     }
 

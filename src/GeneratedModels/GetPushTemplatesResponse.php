@@ -5,16 +5,13 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property array<PushTemplate> $templates
  */
 class GetPushTemplatesResponse extends BaseModel
 {
     public function __construct(
         public ?string $duration = null, // Duration of the request in milliseconds
-        /** @var array<PushTemplate>|null */
-        #[ArrayOf(PushTemplate::class)]
+        /** @var array<PushTemplateResponse>|null */
+        #[ArrayOf(PushTemplateResponse::class)]
         public ?array $templates = null,
     ) {
     }

@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $answerText
- * @property string|null $optionID
- */
 class VoteData extends BaseModel
 {
     public function __construct(
-        public ?string $answerText = null,
         public ?string $optionID = null,
+        public ?string $answerText = null,
     ) {
     }
 

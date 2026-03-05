@@ -89,6 +89,9 @@ echo "Duration: " . $response->duration;
 
 ## Models
 
+> **Note:** When constructing models directly, always use **named arguments** (e.g. `new Message(text: 'hello')`).
+> Positional argument usage is not supported and may break across SDK updates as parameter order is not guaranteed.
+
 ### Automatic JSON Parsing
 
 Generated models automatically handle JSON parsing and serialization:

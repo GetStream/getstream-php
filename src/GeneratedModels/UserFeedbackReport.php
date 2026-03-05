@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $unreportedCount
- * @property array $countByRating
- */
 class UserFeedbackReport extends BaseModel
 {
     public function __construct(
-        public ?int $unreportedCount = null,
         public ?array $countByRating = null,
+        public ?int $unreportedCount = null,
     ) {
     }
 

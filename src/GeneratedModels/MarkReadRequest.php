@@ -3,14 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $messageID
- * @property string|null $threadID
- * @property string|null $userID
- * @property UserRequest|null $user
- */
 class MarkReadRequest extends BaseModel
 {
     public function __construct(

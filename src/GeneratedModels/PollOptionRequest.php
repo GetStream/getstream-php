@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $id
- * @property string|null $text
- * @property object|null $custom
- */
 class PollOptionRequest extends BaseModel
 {
     public function __construct(

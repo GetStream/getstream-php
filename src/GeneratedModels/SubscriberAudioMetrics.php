@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property ActiveCallsLatencyStats|null $concealmentPct
- * @property ActiveCallsLatencyStats|null $jitterMs
- * @property ActiveCallsLatencyStats|null $packetsLostPct
- */
 class SubscriberAudioMetrics extends BaseModel
 {
     public function __construct(
-        public ?ActiveCallsLatencyStats $concealmentPct = null,
         public ?ActiveCallsLatencyStats $jitterMs = null,
         public ?ActiveCallsLatencyStats $packetsLostPct = null,
+        public ?ActiveCallsLatencyStats $concealmentPct = null,
     ) {
     }
 

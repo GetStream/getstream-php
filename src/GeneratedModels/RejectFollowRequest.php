@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $source
- * @property string $target
- */
 class RejectFollowRequest extends BaseModel
 {
     public function __construct(

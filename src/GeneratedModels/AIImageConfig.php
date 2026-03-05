@@ -3,25 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $async
- * @property bool|null $enabled
- * @property array<OCRRule>|null $ocrRules
- * @property array<AWSRekognitionRule>|null $rules
- */
 class AIImageConfig extends BaseModel
 {
     public function __construct(
         public ?bool $async = null,
         public ?bool $enabled = null,
-        /** @var array<OCRRule>|null */
-        #[ArrayOf(OCRRule::class)]
-        public ?array $ocrRules = null,
         /** @var array<AWSRekognitionRule>|null */
         #[ArrayOf(AWSRekognitionRule::class)]
         public ?array $rules = null,
+        /** @var array<OCRRule>|null */
+        #[ArrayOf(OCRRule::class)]
+        public ?array $ocrRules = null,
     ) {
     }
 

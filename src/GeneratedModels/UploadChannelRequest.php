@@ -3,21 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $file
- * @property array<ImageSize>|null $uploadSizes
- * @property OnlyUserID|null $user
- */
 class UploadChannelRequest extends BaseModel
 {
     public function __construct(
         public ?string $file = null,
-        /** @var array<ImageSize>|null field with JSON-encoded array of image size configurations */
+        public ?OnlyUserID $user = null,
+        /** @var array<ImageSize>|null */
         #[ArrayOf(ImageSize::class)]
         public ?array $uploadSizes = null, // field with JSON-encoded array of image size configurations
-        public ?OnlyUserID $user = null,
     ) {
     }
 

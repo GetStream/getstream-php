@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response containing the created SIP trunk
- *
- * @property string $duration
- * @property SIPTrunkResponse|null $sipTrunk
  */
 class CreateSIPTrunkResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?SIPTrunkResponse $sipTrunk = null,
+        public ?string $duration = null,
     ) {
     }
 

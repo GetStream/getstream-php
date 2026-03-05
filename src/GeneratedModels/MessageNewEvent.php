@@ -4,34 +4,34 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property string $channelID
- * @property string $channelType
- * @property string $cid
- * @property \DateTime $createdAt
- * @property int $watcherCount
- * @property string $type
- * @property string|null $team
- * @property array<User>|null $threadParticipants
- * @property Message|null $message
- * @property User|null $user
+ * Emitted when a message was successfully sent or when a message became visible after command execution.
  */
 class MessageNewEvent extends BaseModel
 {
     public function __construct(
-        public ?string $channelID = null,
-        public ?string $channelType = null,
-        public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
-        public ?int $watcherCount = null,
-        public ?string $type = null,
-        public ?string $team = null,
-        /** @var array<User>|null */
-        #[ArrayOf(User::class)]
-        public ?array $threadParticipants = null,
-        public ?Message $message = null,
-        public ?User $user = null,
+        public ?string $type = null, // The type of event: "message.new" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel where the message was sent
+        public ?string $team = null, // The team ID
+        public ?int $channelMemberCount = null, // The number of members in the channel
+        public ?int $channelMessageCount = null, // The number of messages in the channel
+        public ?object $channelCustom = null,
+        public ?string $channelType = null, // The type of the channel where the message was sent
+        public ?string $channelID = null, // The ID of the channel where the message was sent
+        public ?string $messageID = null,
+        public ?MessageResponse $message = null,
+        public ?UserResponseCommonFields $user = null,
+        public ?int $watcherCount = null, // The number of watchers
+        /** @var array<UserResponseCommonFields>|null */
+        #[ArrayOf(UserResponseCommonFields::class)]
+        public ?array $threadParticipants = null, // The participants of the thread
+        public ?string $parentAuthor = null, // The author of the parent message
+        public ?ChannelResponse $channel = null,
+        public ?int $unreadCount = null, // The number of unread messages
+        public ?int $totalUnreadCount = null,
+        public ?int $unreadChannels = null,
     ) {
     }
 

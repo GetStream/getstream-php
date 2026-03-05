@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $filename
- */
 class CreateImportURLRequest extends BaseModel
 {
     public function __construct(

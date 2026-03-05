@@ -3,16 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $id
- * @property string $name
- * @property string|null $description
- * @property int|null $priority
- * @property array|null $tags
- * @property object|null $custom
- */
 class CreateMembershipLevelRequest extends BaseModel
 {
     public function __construct(

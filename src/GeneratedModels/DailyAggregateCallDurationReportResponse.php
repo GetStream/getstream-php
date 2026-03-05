@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $date
- * @property CallDurationReport $report
- */
 class DailyAggregateCallDurationReportResponse extends BaseModel
 {
     public function __construct(

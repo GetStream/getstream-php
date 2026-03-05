@@ -3,29 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property string|null $userID
- * @property array<SortParamRequest>|null $sort
- * @property object|null $filter
- * @property UserRequest|null $user
- */
 class QueryDraftsRequest extends BaseModel
 {
     public function __construct(
+        public ?object $filter = null, // Filter to apply to the query
+        /** @var array<SortParamRequest>|null */
+        #[ArrayOf(SortParamRequest::class)]
+        public ?array $sort = null, // Array of sort parameters
+        public ?string $userID = null,
+        public ?UserRequest $user = null,
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
-        public ?string $userID = null,
-        /** @var array<SortParamRequest>|null Array of sort parameters */
-        #[ArrayOf(SortParamRequest::class)]
-        public ?array $sort = null, // Array of sort parameters
-        public ?object $filter = null, // Filter to apply to the query
-        public ?UserRequest $user = null,
     ) {
     }
 

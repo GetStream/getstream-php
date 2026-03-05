@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $disabled
- * @property string|null $packageName
- * @property string|null $secret
- */
 class XiaomiConfig extends BaseModel
 {
     public function __construct(
-        public ?bool $disabled = null,
         public ?string $packageName = null,
         public ?string $secret = null,
+        public ?bool $disabled = null,
     ) {
     }
 

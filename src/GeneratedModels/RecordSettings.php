@@ -3,19 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $mode
- * @property bool|null $audioOnly
- * @property string|null $quality
- * @property LayoutSettings|null $layout
- */
 class RecordSettings extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null,
         public ?bool $audioOnly = null,
+        public ?string $mode = null,
         public ?string $quality = null,
         public ?LayoutSettings $layout = null,
     ) {

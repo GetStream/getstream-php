@@ -3,25 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property object $filter
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property array<SortParamRequest>|null $sort
- */
 class QueryMessageHistoryRequest extends BaseModel
 {
     public function __construct(
         public ?object $filter = null, // Filter to apply to the query
+        /** @var array<SortParamRequest>|null */
+        #[ArrayOf(SortParamRequest::class)]
+        public ?array $sort = null, // Array of sort parameters
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
-        /** @var array<SortParamRequest>|null Array of sort parameters */
-        #[ArrayOf(SortParamRequest::class)]
-        public ?array $sort = null, // Array of sort parameters
     ) {
     }
 

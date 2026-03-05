@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $name
- * @property string|null $version
- */
 class DeviceDataResponse extends BaseModel
 {
     public function __construct(

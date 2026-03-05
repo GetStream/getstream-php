@@ -3,15 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $mode
- */
 class IndividualRecordingSettingsResponse extends BaseModel
 {
     public function __construct(
         public ?string $mode = null,
+        public ?array $outputTypes = null,
     ) {
     }
 

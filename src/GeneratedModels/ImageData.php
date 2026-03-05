@@ -3,23 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $frames
- * @property string $height
- * @property string $size
- * @property string $url
- * @property string $width
- */
 class ImageData extends BaseModel
 {
     public function __construct(
-        public ?string $frames = null,
-        public ?string $height = null,
-        public ?string $size = null,
         public ?string $url = null,
         public ?string $width = null,
+        public ?string $height = null,
+        public ?string $size = null,
+        public ?string $frames = null,
     ) {
     }
 

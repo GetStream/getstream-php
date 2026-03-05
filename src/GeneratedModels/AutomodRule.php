@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $action
- * @property string $label
- * @property int $threshold
- */
 class AutomodRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $label = null,
         public ?int $threshold = null,
+        public ?string $action = null,
     ) {
     }
 

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * MuteUsersResponse is the response payload for the mute users endpoint.
- *
- * @property string $duration
  */
 class MuteUsersResponse extends BaseModel
 {

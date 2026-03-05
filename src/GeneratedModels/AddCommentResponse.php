@@ -3,21 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property CommentResponse $comment
- * @property int|null $mentionNotificationsCreated
- * @property bool|null $notificationCreated
- */
 class AddCommentResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?CommentResponse $comment = null,
-        public ?int $mentionNotificationsCreated = null, // Number of mention notification activities created for mentioned users
         public ?bool $notificationCreated = null, // Whether a notification activity was successfully created
+        public ?int $mentionNotificationsCreated = null, // Number of mention notification activities created for mentioned users
+        public ?string $duration = null,
     ) {
     }
 

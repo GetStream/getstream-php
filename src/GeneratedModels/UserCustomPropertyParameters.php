@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $operator
- * @property string|null $propertyKey
- */
 class UserCustomPropertyParameters extends BaseModel
 {
     public function __construct(
-        public ?string $operator = null,
         public ?string $propertyKey = null,
+        public ?string $operator = null,
     ) {
     }
 

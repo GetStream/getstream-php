@@ -3,20 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $expiration
- * @property string|null $userID
- * @property array|null $channelCids
- * @property UserRequest|null $user
- */
 class UnmuteChannelRequest extends BaseModel
 {
     public function __construct(
+        public ?array $channelCids = null, // Channel CIDs to mute (if multiple channels)
         public ?int $expiration = null, // Duration of mute in milliseconds
         public ?string $userID = null,
-        public ?array $channelCids = null, // Channel CIDs to mute (if multiple channels)
         public ?UserRequest $user = null,
     ) {
     }

@@ -3,22 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool $offlineOnly
- * @property string $version
- * @property APNConfigFields $apn
- * @property FirebaseConfigFields $firebase
- * @property HuaweiConfigFields $huawei
- * @property XiaomiConfigFields $xiaomi
- * @property array<PushProvider>|null $providers
- */
 class PushNotificationFields extends BaseModel
 {
     public function __construct(
-        public ?bool $offlineOnly = null,
         public ?string $version = null,
+        public ?bool $offlineOnly = null,
         public ?APNConfigFields $apn = null,
         public ?FirebaseConfigFields $firebase = null,
         public ?HuaweiConfigFields $huawei = null,

@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * PinRequest is the payload for pinning a message.
- *
- * @property string $sessionID
- * @property string $userID
  */
 class PinRequest extends BaseModel
 {
     public function __construct(
-        public ?string $sessionID = null, // the session ID of the user who pinned the message
         public ?string $userID = null, // the user ID of the user who pinned the message
+        public ?string $sessionID = null, // the session ID of the user who pinned the message
     ) {
     }
 

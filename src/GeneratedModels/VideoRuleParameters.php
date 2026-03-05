@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $threshold
- * @property string|null $timeWindow
- * @property array|null $harmLabels
- */
 class VideoRuleParameters extends BaseModel
 {
     public function __construct(

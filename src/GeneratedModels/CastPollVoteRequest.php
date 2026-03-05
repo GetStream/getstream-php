@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $userID
- * @property UserRequest|null $user
- * @property VoteData|null $vote
- */
 class CastPollVoteRequest extends BaseModel
 {
     public function __construct(
+        public ?VoteData $vote = null,
         public ?string $userID = null,
         public ?UserRequest $user = null,
-        public ?VoteData $vote = null,
     ) {
     }
 

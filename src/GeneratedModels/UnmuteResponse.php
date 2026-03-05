@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * Basic response information
- *
- * @property string $duration
- * @property array|null $nonExistingUsers
- */
 class UnmuteResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
-        public ?array $nonExistingUsers = null,
+        public ?array $nonExistingUsers = null, // A list of users that can't be found. Common cause for this is deleted users
+        public ?string $duration = null,
     ) {
     }
 

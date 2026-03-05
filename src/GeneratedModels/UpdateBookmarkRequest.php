@@ -3,24 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $folderID
- * @property string|null $newFolderID
- * @property string|null $userID
- * @property object|null $custom
- * @property AddFolderRequest|null $newFolder
- * @property UserRequest|null $user
- */
 class UpdateBookmarkRequest extends BaseModel
 {
     public function __construct(
         public ?string $folderID = null, // ID of the folder to move the bookmark to
         public ?string $newFolderID = null,
-        public ?string $userID = null,
-        public ?object $custom = null, // Custom data for the bookmark
         public ?AddFolderRequest $newFolder = null,
+        public ?object $custom = null, // Custom data for the bookmark
+        public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {
     }

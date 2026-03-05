@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array|null $unset
- * @property object|null $set
- */
 class UpdateMemberPartialRequest extends BaseModel
 {
     public function __construct(
-        public ?array $unset = null,
         public ?object $set = null,
+        public ?array $unset = null,
     ) {
     }
 

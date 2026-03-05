@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $enablePush
- * @property array|null $pushTypes
- */
 class PushNotificationConfig extends BaseModel
 {
     public function __construct(

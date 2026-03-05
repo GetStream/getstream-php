@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property FeedMemberResponse $member
- */
 class RejectFeedMemberInviteResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?FeedMemberResponse $member = null,
+        public ?string $duration = null,
     ) {
     }
 

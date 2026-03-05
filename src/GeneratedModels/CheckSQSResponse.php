@@ -3,21 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property string $status
- * @property string|null $error
- * @property object|null $data
- */
 class CheckSQSResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
-        public ?string $status = null, // Validation result
+        public ?string $status = null, // Validation result. One of: ok, error
         public ?string $error = null, // Error text
         public ?object $data = null, // Error data
+        public ?string $duration = null,
     ) {
     }
 

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
  */
 class DeleteImportV2TaskResponse extends BaseModel
 {

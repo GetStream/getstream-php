@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * All possibility of string to use
+ * Represents a feed capability value and enumerates all possible capability strings.
  */
 class FeedOwnCapability extends BaseModel
 {

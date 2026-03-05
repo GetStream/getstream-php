@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $name
- * @property string $streamKey
- * @property string $streamUrl
- */
 class RTMPLocation extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?string $streamKey = null,
         public ?string $streamUrl = null,
+        public ?string $streamKey = null,
     ) {
     }
 

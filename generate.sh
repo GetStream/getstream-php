@@ -16,7 +16,7 @@ then
   exit 1;
 fi
 
-set -ex
+set -e
 
 # cd in API repo, generate new spec and then generate code from it
 ( cd $SOURCE_PATH ; make openapi ; go run ./cmd/chat-manager openapi generate-client --language php --spec ./releases/v2/serverside-api.yaml --output $DST_PATH )
@@ -26,8 +26,6 @@ echo "Applying PHP-specific fixes..."
 
 sed -i '' '/public ?string $role = null,/{N;s/public ?string $role = null,\n        public ?string $role = null,/public ?string $role = null,/;}' src/GeneratedModels/CallParticipant.php
 
-# Fix queryUsers method to use proper namespace and required parameter
-sed -i '' 's/QueryUsersPayload \$payload/GeneratedModels\\QueryUsersPayload \$payload/' src/Generated/CommonTrait.php
 
 # Run PHP CS Fixer to ensure code style compliance
 if [ -f ".php-cs-fixer.php" ]; then

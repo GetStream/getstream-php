@@ -3,39 +3,27 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $name
- * @property string $ruleType
- * @property RuleBuilderAction $action
- * @property string|null $cooldownPeriod
- * @property string|null $description
- * @property bool|null $enabled
- * @property string|null $logic
- * @property string|null $team
- * @property array<RuleBuilderCondition>|null $conditions
- * @property array|null $configKeys
- * @property array<RuleBuilderConditionGroup>|null $groups
- */
 class UpsertModerationRuleRequest extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?string $ruleType = null,
-        public ?RuleBuilderAction $action = null,
-        public ?string $cooldownPeriod = null,
         public ?string $description = null,
-        public ?bool $enabled = null,
-        public ?string $logic = null,
+        public ?array $configKeys = null,
         public ?string $team = null,
+        public ?string $ruleType = null,
         /** @var array<RuleBuilderCondition>|null */
         #[ArrayOf(RuleBuilderCondition::class)]
         public ?array $conditions = null,
-        public ?array $configKeys = null,
+        public ?string $logic = null,
         /** @var array<RuleBuilderConditionGroup>|null */
         #[ArrayOf(RuleBuilderConditionGroup::class)]
         public ?array $groups = null,
+        public ?RuleBuilderAction $action = null,
+        /** @var array<CallRuleActionSequence>|null */
+        #[ArrayOf(CallRuleActionSequence::class)]
+        public ?array $actionSequences = null,
+        public ?string $cooldownPeriod = null,
+        public ?bool $enabled = null,
     ) {
     }
 

@@ -4,28 +4,25 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property string $channelID
- * @property string $channelType
- * @property string $cid
- * @property \DateTime $createdAt
- * @property string $type
- * @property string|null $team
- * @property ChannelMember|null $member
- * @property User|null $user
+ * Emitted when a member is added to a channel.
  */
 class MemberAddedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $channelID = null,
-        public ?string $channelType = null,
-        public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
-        public ?string $team = null,
-        public ?ChannelMember $member = null,
-        public ?User $user = null,
+        public ?ChannelMemberResponse $member = null,
+        public ?UserResponseCommonFields $user = null,
+        public ?string $type = null, // The type of event: "member.added" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel to which the member was added
+        public ?string $team = null, // The team ID
+        public ?int $channelMemberCount = null, // The number of members in the channel
+        public ?int $channelMessageCount = null, // The number of messages in the channel
+        public ?object $channelCustom = null,
+        public ?string $channelType = null, // The type of the channel to which the member was added
+        public ?string $channelID = null, // The ID of the channel to which the member was added
+        public ?ChannelResponse $channel = null,
     ) {
     }
 

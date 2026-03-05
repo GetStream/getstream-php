@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array $targetIds
- * @property string|null $userID
- * @property UserRequest|null $user
- */
 class UnmuteRequest extends BaseModel
 {
     public function __construct(

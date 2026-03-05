@@ -5,21 +5,15 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when call recording has stopped
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $egressID
- * @property string $recordingType
- * @property string $type
  */
 class CallRecordingStoppedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
-        public ?\DateTime $createdAt = null,
         public ?string $egressID = null,
-        public ?string $recordingType = null, // The type of recording
         public ?string $type = null, // The type of event: "call.recording_stopped" in this case
+        public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
+        public ?string $recordingType = null, // The type of recording
     ) {
     }
 

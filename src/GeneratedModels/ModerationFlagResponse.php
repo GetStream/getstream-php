@@ -3,43 +3,24 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property \DateTime $createdAt
- * @property string $entityID
- * @property string $entityType
- * @property string $type
- * @property \DateTime $updatedAt
- * @property string $userID
- * @property array<object> $result
- * @property string|null $entityCreatorID
- * @property string|null $reason
- * @property string|null $reviewQueueItemID
- * @property array|null $labels
- * @property object|null $custom
- * @property ModerationPayload|null $moderationPayload
- * @property ReviewQueueItemResponse|null $reviewQueueItem
- * @property UserResponse|null $user
- */
 class ModerationFlagResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?string $entityID = null,
-        public ?string $entityType = null,
         public ?string $type = null,
-        public ?\DateTime $updatedAt = null,
         public ?string $userID = null,
-        public ?array $result = null,
-        public ?string $entityCreatorID = null,
-        public ?string $reason = null,
-        public ?string $reviewQueueItemID = null,
-        public ?array $labels = null,
-        public ?object $custom = null,
-        public ?ModerationPayload $moderationPayload = null,
-        public ?ReviewQueueItemResponse $reviewQueueItem = null,
         public ?UserResponse $user = null,
+        public ?string $entityType = null,
+        public ?string $entityID = null,
+        public ?string $entityCreatorID = null,
+        public ?ModerationPayloadResponse $moderationPayload = null,
+        public ?string $reason = null,
+        public ?object $custom = null,
+        public ?array $labels = null,
+        public ?array $result = null,
+        public ?string $reviewQueueItemID = null,
+        public ?ReviewQueueItemResponse $reviewQueueItem = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

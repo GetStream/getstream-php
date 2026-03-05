@@ -3,25 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool $enabled
- * @property EventNotificationSettings $callLiveStarted
- * @property EventNotificationSettings $callMissed
- * @property EventNotificationSettings $callNotification
- * @property EventNotificationSettings $callRing
- * @property EventNotificationSettings $sessionStarted
- */
 class NotificationSettings extends BaseModel
 {
     public function __construct(
         public ?bool $enabled = null,
         public ?EventNotificationSettings $callLiveStarted = null,
-        public ?EventNotificationSettings $callMissed = null,
+        public ?EventNotificationSettings $sessionStarted = null,
         public ?EventNotificationSettings $callNotification = null,
         public ?EventNotificationSettings $callRing = null,
-        public ?EventNotificationSettings $sessionStarted = null,
+        public ?EventNotificationSettings $callMissed = null,
     ) {
     }
 

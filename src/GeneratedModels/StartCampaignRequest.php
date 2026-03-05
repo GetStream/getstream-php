@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property \DateTime|null $scheduledFor
- * @property \DateTime|null $stopAt
- */
 class StartCampaignRequest extends BaseModel
 {
     public function __construct(

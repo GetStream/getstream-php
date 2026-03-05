@@ -3,23 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property string $recommendedAction
- * @property string $status
- * @property string|null $taskID
- * @property ReviewQueueItemResponse|null $item
- */
 class CheckResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
-        public ?string $recommendedAction = null, // Suggested action based on moderation results
         public ?string $status = null, // Status of the moderation check (completed or pending)
         public ?string $taskID = null, // ID of the running moderation task
+        public ?string $recommendedAction = null, // Suggested action based on moderation results
         public ?ReviewQueueItemResponse $item = null,
+        public ?string $duration = null,
     ) {
     }
 

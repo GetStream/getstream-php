@@ -3,18 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $failures
- * @property int $total
- * @property ActiveCallsLatencyStats|null $latency
- */
 class JoinCallAPIMetrics extends BaseModel
 {
     public function __construct(
-        public ?int $failures = null,
         public ?int $total = null,
+        public ?int $failures = null,
         public ?ActiveCallsLatencyStats $latency = null,
     ) {
     }

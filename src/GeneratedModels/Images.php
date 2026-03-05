@@ -3,27 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property ImageData $fixedHeight
- * @property ImageData $fixedHeightDownsampled
- * @property ImageData $fixedHeightStill
- * @property ImageData $fixedWidth
- * @property ImageData $fixedWidthDownsampled
- * @property ImageData $fixedWidthStill
- * @property ImageData $original
- */
 class Images extends BaseModel
 {
     public function __construct(
-        public ?ImageData $fixedHeight = null,
-        public ?ImageData $fixedHeightDownsampled = null,
-        public ?ImageData $fixedHeightStill = null,
-        public ?ImageData $fixedWidth = null,
-        public ?ImageData $fixedWidthDownsampled = null,
-        public ?ImageData $fixedWidthStill = null,
         public ?ImageData $original = null,
+        public ?ImageData $fixedHeight = null,
+        public ?ImageData $fixedHeightStill = null,
+        public ?ImageData $fixedHeightDownsampled = null,
+        public ?ImageData $fixedWidth = null,
+        public ?ImageData $fixedWidthStill = null,
+        public ?ImageData $fixedWidthDownsampled = null,
     ) {
     }
 

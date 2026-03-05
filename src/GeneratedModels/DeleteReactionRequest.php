@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property bool|null $hardDelete
- * @property string|null $reason
+ * Delete reaction request
  */
 class DeleteReactionRequest extends BaseModel
 {
     public function __construct(
-        public ?bool $hardDelete = null,
-        public ?string $reason = null,
     ) {
     }
 

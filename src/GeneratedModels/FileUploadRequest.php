@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $file
- * @property OnlyUserID|null $user
- */
 class FileUploadRequest extends BaseModel
 {
     public function __construct(

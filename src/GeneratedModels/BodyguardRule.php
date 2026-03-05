@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $label
- * @property string|null $action
- * @property array<BodyguardSeverityRule>|null $severityRules
- */
 class BodyguardRule extends BaseModel
 {
     public function __construct(

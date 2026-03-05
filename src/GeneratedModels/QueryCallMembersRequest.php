@@ -3,29 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $id
- * @property string $type
- * @property int|null $limit
- * @property string|null $next
- * @property string|null $prev
- * @property array<SortParamRequest>|null $sort
- * @property object|null $filterConditions
- */
 class QueryCallMembersRequest extends BaseModel
 {
     public function __construct(
-        public ?string $id = null,
         public ?string $type = null,
-        public ?int $limit = null,
-        public ?string $next = null,
-        public ?string $prev = null,
+        public ?string $id = null,
+        public ?object $filterConditions = null,
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,
-        public ?object $filterConditions = null,
+        public ?int $limit = null,
+        public ?string $next = null,
+        public ?string $prev = null,
     ) {
     }
 

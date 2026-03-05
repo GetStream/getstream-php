@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $limit
- * @property int|null $offset
- */
 class PaginationParams extends BaseModel
 {
     public function __construct(

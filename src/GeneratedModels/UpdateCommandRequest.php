@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $description
- * @property string|null $args
- * @property string|null $set
- */
 class UpdateCommandRequest extends BaseModel
 {
     public function __construct(

@@ -3,21 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $maxDurationSeconds
- * @property int|null $maxParticipants
- * @property bool|null $maxParticipantsExcludeOwner
- * @property array|null $maxParticipantsExcludeRoles
- */
 class LimitsSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?int $maxDurationSeconds = null,
         public ?int $maxParticipants = null,
-        public ?bool $maxParticipantsExcludeOwner = null,
         public ?array $maxParticipantsExcludeRoles = null,
+        public ?bool $maxParticipantsExcludeOwner = null,
+        public ?int $maxDurationSeconds = null,
     ) {
     }
 

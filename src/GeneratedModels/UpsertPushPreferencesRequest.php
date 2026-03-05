@@ -3,15 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array<PushPreferenceInput> $preferences
- */
 class UpsertPushPreferencesRequest extends BaseModel
 {
     public function __construct(
-        /** @var array<PushPreferenceInput>|null A list of push preferences for channels, calls, or the user. */
+        /** @var array<PushPreferenceInput>|null */
         #[ArrayOf(PushPreferenceInput::class)]
         public ?array $preferences = null, // A list of push preferences for channels, calls, or the user.
     ) {

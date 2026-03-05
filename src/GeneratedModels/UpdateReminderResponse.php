@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property ReminderResponseData $reminder
  */
 class UpdateReminderResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?ReminderResponseData $reminder = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

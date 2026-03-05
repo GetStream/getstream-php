@@ -3,26 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array<FeedOwnCapability>|null $ownCapabilities
- * @property array<FollowResponse>|null $ownFollowings
- * @property array<FollowResponse>|null $ownFollows
- * @property FeedMemberResponse|null $ownMembership
- */
 class FeedOwnData extends BaseModel
 {
     public function __construct(
-        /** @var array<FeedOwnCapability>|null Capabilities the current user has for this feed */
-        #[ArrayOf(FeedOwnCapability::class)]
-        public ?array $ownCapabilities = null, // Capabilities the current user has for this feed
-        /** @var array<FollowResponse>|null Follow relationships where the feed owner's feeds are following the current user's feeds (up to 5 total) */
-        #[ArrayOf(FollowResponse::class)]
-        public ?array $ownFollowings = null, // Follow relationships where the feed owner's feeds are following the current user's feeds (up to 5 total)
-        /** @var array<FollowResponse>|null Follow relationships where the current user's feeds are following this feed */
+        /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $ownFollows = null, // Follow relationships where the current user's feeds are following this feed
+        /** @var array<FollowResponse>|null */
+        #[ArrayOf(FollowResponse::class)]
+        public ?array $ownFollowings = null, // Follow relationships where the feed owner's feeds are following the current user's feeds (up to 5 total)
+        /** @var array<FeedOwnCapability>|null */
+        #[ArrayOf(FeedOwnCapability::class)]
+        public ?array $ownCapabilities = null, // Capabilities the current user has for this feed
         public ?FeedMemberResponse $ownMembership = null,
     ) {
     }

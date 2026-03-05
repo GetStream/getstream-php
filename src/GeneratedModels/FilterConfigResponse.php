@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array $llmLabels
- * @property array|null $aiTextLabels
- */
 class FilterConfigResponse extends BaseModel
 {
     public function __construct(

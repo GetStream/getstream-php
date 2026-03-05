@@ -3,27 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $channelID
- * @property string $channelType
- * @property string $cid
- * @property \DateTime $createdAt
- * @property string $type
- * @property ThreadResponse|null $thread
- * @property User|null $user
- */
 class ThreadUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?string $channelID = null,
-        public ?string $channelType = null,
-        public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
         public ?string $type = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null,
+        public ?string $channelType = null,
+        public ?string $channelID = null,
         public ?ThreadResponse $thread = null,
-        public ?User $user = null,
     ) {
     }
 

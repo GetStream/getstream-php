@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $captureIntervalInSeconds
- * @property string $mode
- * @property string|null $quality
- */
 class FrameRecordingSettingsResponse extends BaseModel
 {
     public function __construct(
-        public ?int $captureIntervalInSeconds = null,
         public ?string $mode = null,
         public ?string $quality = null,
+        public ?int $captureIntervalInSeconds = null,
     ) {
     }
 

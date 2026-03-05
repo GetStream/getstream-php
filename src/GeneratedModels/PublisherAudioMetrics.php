@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property ActiveCallsLatencyStats|null $jitterMs
- */
 class PublisherAudioMetrics extends BaseModel
 {
     public function __construct(

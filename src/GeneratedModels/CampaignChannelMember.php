@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $userID
- * @property string|null $channelRole
- * @property object|null $custom
- */
 class CampaignChannelMember extends BaseModel
 {
     public function __construct(

@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $enabled
- */
 class DeliveryReceiptsResponse extends BaseModel
 {
     public function __construct(

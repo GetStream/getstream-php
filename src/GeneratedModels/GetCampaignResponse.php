@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property CampaignResponse|null $campaign
- * @property PagerResponse|null $users
  */
 class GetCampaignResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?CampaignResponse $campaign = null,
         public ?PagerResponse $users = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

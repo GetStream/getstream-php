@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array $feeds
- * @property bool|null $hardDelete
- */
 class DeleteFeedsBatchRequest extends BaseModel
 {
     public function __construct(

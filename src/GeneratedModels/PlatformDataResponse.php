@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property BrowserDataResponse $browser
- * @property DeviceDataResponse $device
- * @property ClientOSDataResponse $os
- */
 class PlatformDataResponse extends BaseModel
 {
     public function __construct(
-        public ?BrowserDataResponse $browser = null,
-        public ?DeviceDataResponse $device = null,
         public ?ClientOSDataResponse $os = null,
+        public ?DeviceDataResponse $device = null,
+        public ?BrowserDataResponse $browser = null,
     ) {
     }
 

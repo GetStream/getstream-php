@@ -3,15 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property PushProvider|null $pushProvider
- */
 class UpsertPushProviderRequest extends BaseModel
 {
     public function __construct(
-        public ?PushProvider $pushProvider = null,
+        public ?PushProviderRequest $pushProvider = null,
     ) {
     }
 

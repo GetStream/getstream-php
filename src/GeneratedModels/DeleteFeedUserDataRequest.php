@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Request for deleting feed user data
- *
- * @property bool|null $hardDelete
  */
 class DeleteFeedUserDataRequest extends BaseModel
 {

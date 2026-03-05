@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $lat
- * @property int $lng
- */
 class ActivityLocation extends BaseModel
 {
     public function __construct(

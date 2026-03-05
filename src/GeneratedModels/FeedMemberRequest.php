@@ -3,23 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $userID
- * @property bool|null $invite
- * @property string|null $membershipLevel
- * @property string|null $role
- * @property object|null $custom
- */
 class FeedMemberRequest extends BaseModel
 {
     public function __construct(
         public ?string $userID = null, // ID of the user to add as a member
-        public ?bool $invite = null, // Whether this is an invite to become a member
-        public ?string $membershipLevel = null, // ID of the membership level to assign to the member
         public ?string $role = null, // Role of the member in the feed
+        public ?string $membershipLevel = null, // ID of the membership level to assign to the member
         public ?object $custom = null, // Custom data for the member
+        public ?bool $invite = null, // Whether this is an invite to become a member
     ) {
     }
 

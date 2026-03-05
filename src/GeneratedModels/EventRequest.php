@@ -3,22 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $type
- * @property string|null $parentID
- * @property string|null $userID
- * @property object|null $custom
- * @property UserRequest|null $user
- */
 class EventRequest extends BaseModel
 {
     public function __construct(
         public ?string $type = null,
         public ?string $parentID = null,
-        public ?string $userID = null,
         public ?object $custom = null,
+        public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {
     }

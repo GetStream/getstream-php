@@ -3,23 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property \DateTime $createdAt
- * @property \DateTime $updatedAt
- * @property \DateTime|null $expires
- * @property ChannelResponse|null $channel
- * @property UserResponse|null $user
- */
 class ChannelMute extends BaseModel
 {
     public function __construct(
+        public ?UserResponse $user = null,
+        public ?ChannelResponse $channel = null,
+        public ?\DateTime $expires = null, // Date/time of mute expiration
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $updatedAt = null, // Date/time of the last update
-        public ?\DateTime $expires = null, // Date/time of mute expiration
-        public ?ChannelResponse $channel = null,
-        public ?UserResponse $user = null,
     ) {
     }
 

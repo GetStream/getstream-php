@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $async
- * @property bool|null $enabled
- * @property array<BlockListRule>|null $rules
- */
 class BlockListConfig extends BaseModel
 {
     public function __construct(
         public ?bool $async = null,
+        public ?bool $matchSubstring = null,
         public ?bool $enabled = null,
         /** @var array<BlockListRule>|null */
         #[ArrayOf(BlockListRule::class)]

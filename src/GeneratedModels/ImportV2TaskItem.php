@@ -3,27 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $appPk
- * @property \DateTime $createdAt
- * @property string $id
- * @property string $product
- * @property int $state
- * @property \DateTime $updatedAt
- * @property ImportV2TaskSettings $settings
- */
 class ImportV2TaskItem extends BaseModel
 {
     public function __construct(
-        public ?int $appPk = null,
-        public ?\DateTime $createdAt = null,
         public ?string $id = null,
+        public ?int $appPk = null,
         public ?string $product = null,
         public ?int $state = null,
-        public ?\DateTime $updatedAt = null,
         public ?ImportV2TaskSettings $settings = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

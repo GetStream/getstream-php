@@ -3,25 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property array<MemberResponse> $members
- * @property array<OwnCapability> $ownCapabilities
- * @property CallResponse $call
- */
 class GetCallResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
+        public ?CallResponse $call = null,
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null,
         /** @var array<OwnCapability>|null */
         #[ArrayOf(OwnCapability::class)]
         public ?array $ownCapabilities = null,
-        public ?CallResponse $call = null,
+        public ?string $duration = null,
     ) {
     }
 

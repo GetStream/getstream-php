@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $unbannedByID
- * @property UserRequest|null $unbannedBy
- */
 class UnbanRequest extends BaseModel
 {
     public function __construct(

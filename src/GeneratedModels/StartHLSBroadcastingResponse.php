@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * StartHLSBroadcastingResponse is the payload for starting an HLS broadcasting.
- *
- * @property string $duration
- * @property string $playlistUrl
  */
 class StartHLSBroadcastingResponse extends BaseModel
 {

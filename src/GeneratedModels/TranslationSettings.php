@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool $enabled
- * @property array $languages
- */
 class TranslationSettings extends BaseModel
 {
     public function __construct(

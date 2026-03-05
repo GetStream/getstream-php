@@ -5,18 +5,12 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Request to provide feedback on an activity
- *
- * @property bool|null $hide
- * @property bool|null $showLess
- * @property bool|null $showMore
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class ActivityFeedbackRequest extends BaseModel
 {
     public function __construct(
-        public ?bool $hide = null, // Whether to hide this activity
         public ?bool $showLess = null, // Whether to show less content like this
+        public ?bool $hide = null, // Whether to hide this activity
         public ?bool $showMore = null, // Whether to show more content like this
         public ?string $userID = null,
         public ?UserRequest $user = null,

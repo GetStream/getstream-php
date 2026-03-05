@@ -3,19 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $type
- * @property BanOptions|null $banOptions
- * @property FlagUserOptions|null $flagUserOptions
- */
 class RuleBuilderAction extends BaseModel
 {
     public function __construct(
         public ?string $type = null,
         public ?BanOptions $banOptions = null,
         public ?FlagUserOptions $flagUserOptions = null,
+        public ?CallActionOptions $callOptions = null,
     ) {
     }
 

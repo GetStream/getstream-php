@@ -3,14 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $activeCalls
- * @property int $activePublishers
- * @property int $activeSubscribers
- * @property int $participants
- */
 class ActiveCallsSummary extends BaseModel
 {
     public function __construct(

@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $action
- * @property string $name
- * @property int $threshold
- */
 class AutomodSemanticFiltersRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $name = null,
         public ?int $threshold = null,
+        public ?string $action = null,
     ) {
     }
 

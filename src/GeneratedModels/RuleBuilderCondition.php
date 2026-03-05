@@ -3,45 +3,30 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int|null $confidence
- * @property string|null $type
- * @property ContentCountRuleParameters|null $contentCountRuleParams
- * @property FlagCountRuleParameters|null $contentFlagCountRuleParams
- * @property ImageContentParameters|null $imageContentParams
- * @property ImageRuleParameters|null $imageRuleParams
- * @property TextContentParameters|null $textContentParams
- * @property TextRuleParameters|null $textRuleParams
- * @property UserCreatedWithinParameters|null $userCreatedWithinParams
- * @property UserCustomPropertyParameters|null $userCustomPropertyParams
- * @property FlagCountRuleParameters|null $userFlagCountRuleParams
- * @property UserIdenticalContentCountParameters|null $userIdenticalContentCountParams
- * @property UserRoleParameters|null $userRoleParams
- * @property UserRuleParameters|null $userRuleParams
- * @property VideoContentParameters|null $videoContentParams
- * @property VideoRuleParameters|null $videoRuleParams
- */
 class RuleBuilderCondition extends BaseModel
 {
     public function __construct(
-        public ?int $confidence = null,
         public ?string $type = null,
-        public ?ContentCountRuleParameters $contentCountRuleParams = null,
-        public ?FlagCountRuleParameters $contentFlagCountRuleParams = null,
-        public ?ImageContentParameters $imageContentParams = null,
-        public ?ImageRuleParameters $imageRuleParams = null,
-        public ?TextContentParameters $textContentParams = null,
+        public ?int $confidence = null,
         public ?TextRuleParameters $textRuleParams = null,
+        public ?ImageRuleParameters $imageRuleParams = null,
+        public ?VideoRuleParameters $videoRuleParams = null,
+        public ?UserRuleParameters $userRuleParams = null,
+        public ?ContentCountRuleParameters $contentCountRuleParams = null,
+        public ?FlagCountRuleParameters $userFlagCountRuleParams = null,
+        public ?FlagCountRuleParameters $contentFlagCountRuleParams = null,
+        public ?UserIdenticalContentCountParameters $userIdenticalContentCountParams = null,
+        public ?TextContentParameters $textContentParams = null,
+        public ?ImageContentParameters $imageContentParams = null,
+        public ?VideoContentParameters $videoContentParams = null,
         public ?UserCreatedWithinParameters $userCreatedWithinParams = null,
         public ?UserCustomPropertyParameters $userCustomPropertyParams = null,
-        public ?FlagCountRuleParameters $userFlagCountRuleParams = null,
-        public ?UserIdenticalContentCountParameters $userIdenticalContentCountParams = null,
         public ?UserRoleParameters $userRoleParams = null,
-        public ?UserRuleParameters $userRuleParams = null,
-        public ?VideoContentParameters $videoContentParams = null,
-        public ?VideoRuleParameters $videoRuleParams = null,
+        public ?KeyframeRuleParameters $keyframeRuleParams = null,
+        public ?ClosedCaptionRuleParameters $closedCaptionRuleParams = null,
+        public ?CallTypeRuleParameters $callTypeRuleParams = null,
+        public ?CallCustomPropertyParameters $callCustomPropertyParams = null,
+        public ?CallViolationCountParameters $callViolationCountParams = null,
     ) {
     }
 

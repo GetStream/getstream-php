@@ -3,21 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property string|null $file
- * @property string|null $thumbUrl
- * @property array<ImageSize>|null $uploadSizes
- */
 class ImageUploadResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $file = null,
         public ?string $thumbUrl = null,
-        /** @var array<ImageSize>|null Array of image size configurations */
+        public ?string $duration = null, // Duration of the request in milliseconds
+        /** @var array<ImageSize>|null */
         #[ArrayOf(ImageSize::class)]
         public ?array $uploadSizes = null, // Array of image size configurations
     ) {

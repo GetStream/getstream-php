@@ -3,35 +3,20 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool $allSenderChannels
- * @property bool $allUsers
- * @property \DateTime $createdAt
- * @property \DateTime $deletedAt
- * @property string $description
- * @property string $id
- * @property string $name
- * @property int $size
- * @property string $type
- * @property \DateTime $updatedAt
- * @property object $filter
- */
 class SegmentResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $allSenderChannels = null,
-        public ?bool $allUsers = null,
-        public ?\DateTime $createdAt = null,
-        public ?\DateTime $deletedAt = null,
-        public ?string $description = null,
         public ?string $id = null,
-        public ?string $name = null,
-        public ?int $size = null,
         public ?string $type = null,
-        public ?\DateTime $updatedAt = null,
+        public ?string $name = null,
+        public ?string $description = null,
         public ?object $filter = null,
+        public ?bool $allUsers = null,
+        public ?bool $allSenderChannels = null,
+        public ?int $size = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
+        public ?\DateTime $deletedAt = null,
     ) {
     }
 

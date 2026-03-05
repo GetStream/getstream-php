@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property string $taskID
- */
 class DeleteUsersResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $taskID = null, // ID of the task to delete users
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

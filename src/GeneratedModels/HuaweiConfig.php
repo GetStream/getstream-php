@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $disabled
- * @property string|null $id
- * @property string|null $secret
- */
 class HuaweiConfig extends BaseModel
 {
     public function __construct(
-        public ?bool $disabled = null,
         public ?string $id = null,
         public ?string $secret = null,
+        public ?bool $disabled = null,
     ) {
     }
 

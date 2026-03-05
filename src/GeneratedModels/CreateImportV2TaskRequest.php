@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Client request
- *
- * @property string $product
- * @property ImportV2TaskSettings $settings
- * @property string|null $userID
- * @property UserRequest|null $user
  */
 class CreateImportV2TaskRequest extends BaseModel
 {

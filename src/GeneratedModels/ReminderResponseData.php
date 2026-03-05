@@ -3,31 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $channelCid
- * @property \DateTime $createdAt
- * @property string $messageID
- * @property \DateTime $updatedAt
- * @property string $userID
- * @property \DateTime|null $remindAt
- * @property ChannelResponse|null $channel
- * @property MessageResponse|null $message
- * @property UserResponse|null $user
- */
 class ReminderResponseData extends BaseModel
 {
     public function __construct(
-        public ?string $channelCid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $messageID = null,
-        public ?\DateTime $updatedAt = null,
-        public ?string $userID = null,
         public ?\DateTime $remindAt = null,
+        public ?string $channelCid = null,
         public ?ChannelResponse $channel = null,
+        public ?string $messageID = null,
         public ?MessageResponse $message = null,
+        public ?string $userID = null,
         public ?UserResponse $user = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

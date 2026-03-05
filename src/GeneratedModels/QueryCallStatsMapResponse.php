@@ -5,39 +5,24 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $callID
- * @property string $callSessionID
- * @property string $callType
- * @property string $duration
- * @property CallStatsParticipantCounts $counts
- * @property \DateTime|null $callEndedAt
- * @property \DateTime|null $callStartedAt
- * @property string|null $dataSource
- * @property \DateTime|null $endTime
- * @property \DateTime|null $generatedAt
- * @property \DateTime|null $startTime
- * @property CallStatsMapPublishers|null $publishers
- * @property CallStatsMapSFUs|null $sfus
- * @property CallStatsMapSubscribers|null $subscribers
  */
 class QueryCallStatsMapResponse extends BaseModel
 {
     public function __construct(
+        public ?string $duration = null, // Duration of the request in milliseconds
+        public ?string $callType = null,
         public ?string $callID = null,
         public ?string $callSessionID = null,
-        public ?string $callType = null,
-        public ?string $duration = null, // Duration of the request in milliseconds
-        public ?CallStatsParticipantCounts $counts = null,
-        public ?\DateTime $callEndedAt = null,
         public ?\DateTime $callStartedAt = null,
-        public ?string $dataSource = null,
+        public ?\DateTime $callEndedAt = null,
+        public ?\DateTime $startTime = null,
         public ?\DateTime $endTime = null,
         public ?\DateTime $generatedAt = null,
-        public ?\DateTime $startTime = null,
+        public ?string $dataSource = null,
+        public ?CallStatsParticipantCounts $counts = null,
+        public ?CallStatsMapSubscribers $subscribers = null,
         public ?CallStatsMapPublishers $publishers = null,
         public ?CallStatsMapSFUs $sfus = null,
-        public ?CallStatsMapSubscribers $subscribers = null,
     ) {
     }
 

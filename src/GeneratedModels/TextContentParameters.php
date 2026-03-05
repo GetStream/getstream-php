@@ -3,23 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $containsUrl
- * @property string|null $severity
- * @property array|null $blocklistMatch
- * @property array|null $harmLabels
- * @property array|null $llmHarmLabels
- */
 class TextContentParameters extends BaseModel
 {
     public function __construct(
+        public ?array $harmLabels = null,
+        public ?array $llmHarmLabels = null,
         public ?bool $containsUrl = null,
         public ?string $severity = null,
         public ?array $blocklistMatch = null,
-        public ?array $harmLabels = null,
-        public ?array $llmHarmLabels = null,
     ) {
     }
 

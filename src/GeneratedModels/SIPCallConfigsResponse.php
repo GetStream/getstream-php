@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * SIP call configuration response
- *
- * @property object $customData
  */
 class SIPCallConfigsResponse extends BaseModel
 {

@@ -4,48 +4,34 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property string $channelID
- * @property int $channelMemberCount
- * @property string $channelType
- * @property string $cid
- * @property \DateTime $createdAt
- * @property string $firstUnreadMessageID
- * @property \DateTime $lastReadAt
- * @property int $totalUnreadCount
- * @property int $unreadChannels
- * @property int $unreadCount
- * @property int $unreadMessages
- * @property int $unreadThreads
- * @property string $type
- * @property string|null $lastReadMessageID
- * @property string|null $team
- * @property string|null $threadID
- * @property ChannelResponse|null $channel
- * @property User|null $user
+ * Emitted when a channel/thread is marked as unread.
  */
 class NotificationMarkUnreadEvent extends BaseModel
 {
     public function __construct(
-        public ?string $channelID = null,
-        public ?int $channelMemberCount = null,
-        public ?string $channelType = null,
-        public ?string $cid = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $firstUnreadMessageID = null,
-        public ?\DateTime $lastReadAt = null,
-        public ?int $totalUnreadCount = null,
-        public ?int $unreadChannels = null,
-        public ?int $unreadCount = null,
-        public ?int $unreadMessages = null,
-        public ?int $unreadThreads = null,
-        public ?string $type = null,
-        public ?string $lastReadMessageID = null,
-        public ?string $team = null,
-        public ?string $threadID = null,
+        public ?string $type = null, // The type of event: "notification.mark_unread" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $cid = null, // The CID of the channel which was marked as unread
+        public ?string $team = null, // The team ID
+        public ?int $channelMemberCount = null, // The number of members in the channel
+        public ?int $channelMessageCount = null,
+        public ?object $channelCustom = null,
+        public ?string $channelType = null, // The type of the channel which was marked as unread
+        public ?string $channelID = null, // The ID of the channel which was marked as unread
         public ?ChannelResponse $channel = null,
-        public ?User $user = null,
+        public ?string $threadID = null, // The ID of the thread which was marked as unread
+        public ?UserResponseCommonFields $user = null,
+        public ?string $firstUnreadMessageID = null, // The ID of the first unread message
+        public ?\DateTime $lastReadAt = null, // The time when the channel/thread was marked as unread
+        public ?string $lastReadMessageID = null, // The ID of the last read message
+        public ?int $unreadMessages = null, // The number of unread messages in the channel/thread after first_unread_message_id
+        public ?int $unreadCount = null, // The total number of unread messages
+        public ?int $totalUnreadCount = null, // The total number of unread messages
+        public ?int $unreadChannels = null, // The number of channels with unread messages
+        public ?int $unreadThreads = null, // The number of unread threads
+        public ?int $unreadThreadMessages = null, // The total number of unread messages in the threads
     ) {
     }
 

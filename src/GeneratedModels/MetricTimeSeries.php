@@ -3,11 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array|null $dataPoints
- */
 class MetricTimeSeries extends BaseModel
 {
     public function __construct(

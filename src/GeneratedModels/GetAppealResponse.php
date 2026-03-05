@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property AppealItemResponse|null $item
- */
 class GetAppealResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?AppealItemResponse $item = null,
+        public ?string $duration = null,
     ) {
     }
 

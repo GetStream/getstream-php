@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $average
- * @property int $count
- */
 class UserRatingReportResponse extends BaseModel
 {
     public function __construct(
-        public ?int $average = null,
         public ?int $count = null,
+        public ?int $average = null,
     ) {
     }
 

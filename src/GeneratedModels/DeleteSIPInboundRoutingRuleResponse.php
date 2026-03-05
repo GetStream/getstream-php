@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response confirming SIP Inbound Routing Rule deletion
- *
- * @property string $duration
  */
 class DeleteSIPInboundRoutingRuleResponse extends BaseModel
 {

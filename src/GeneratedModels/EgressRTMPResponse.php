@@ -3,21 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $name
- * @property \DateTime $startedAt
- * @property string|null $streamKey
- * @property string|null $streamUrl
- */
 class EgressRTMPResponse extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?\DateTime $startedAt = null,
-        public ?string $streamKey = null,
         public ?string $streamUrl = null,
+        public ?string $streamKey = null,
+        public ?\DateTime $startedAt = null,
     ) {
     }
 

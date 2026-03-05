@@ -3,26 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $hardDelete
- * @property bool|null $skipPush
- * @property \DateTime|null $truncatedAt
- * @property string|null $userID
- * @property array|null $memberIds
- * @property MessageRequest|null $message
- * @property UserRequest|null $user
- */
 class TruncateChannelRequest extends BaseModel
 {
     public function __construct(
         public ?bool $hardDelete = null, // Permanently delete channel data (messages, reactions, etc.)
+        public ?MessageRequest $message = null,
         public ?bool $skipPush = null, // When `message` is set disables all push notifications for it
         public ?\DateTime $truncatedAt = null, // Truncate channel data up to `truncated_at`. The system message (if provided) creation time is always greater than `truncated_at`
-        public ?string $userID = null,
         public ?array $memberIds = null, // List of member IDs to hide message history for. If empty, truncates the channel for all members
-        public ?MessageRequest $message = null,
+        public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {
     }

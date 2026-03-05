@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool $enabled
- * @property APNS $apns
- * @property FCM $fcm
- */
 class EventNotificationSettings extends BaseModel
 {
     public function __construct(

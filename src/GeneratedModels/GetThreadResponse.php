@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property ThreadStateResponse $thread
- */
 class GetThreadResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?ThreadStateResponse $thread = null,
+        public ?string $duration = null,
     ) {
     }
 

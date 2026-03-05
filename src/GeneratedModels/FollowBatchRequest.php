@@ -3,17 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array<FollowRequest> $follows
- */
 class FollowBatchRequest extends BaseModel
 {
     public function __construct(
-        /** @var array<FollowRequest>|null List of follow relationships to create */
+        /** @var array<FollowRequest>|null */
         #[ArrayOf(FollowRequest::class)]
         public ?array $follows = null, // List of follow relationships to create
+        public ?bool $enrichOwnFields = null, // If true, enriches the follow's source_feed and target_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
     ) {
     }
 

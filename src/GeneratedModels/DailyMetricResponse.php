@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $date
- * @property int $value
- */
 class DailyMetricResponse extends BaseModel
 {
     public function __construct(

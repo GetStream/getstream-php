@@ -3,44 +3,24 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property AudioSettingsResponse $audio
- * @property BackstageSettingsResponse $backstage
- * @property BroadcastSettingsResponse $broadcasting
- * @property FrameRecordingSettingsResponse $frameRecording
- * @property GeofenceSettingsResponse $geofencing
- * @property IndividualRecordingSettingsResponse $individualRecording
- * @property LimitsSettingsResponse $limits
- * @property RawRecordingSettingsResponse $rawRecording
- * @property RecordSettingsResponse $recording
- * @property RingSettingsResponse $ring
- * @property ScreensharingSettingsResponse $screensharing
- * @property SessionSettingsResponse $session
- * @property ThumbnailsSettingsResponse $thumbnails
- * @property TranscriptionSettingsResponse $transcription
- * @property VideoSettingsResponse $video
- * @property IngressSettingsResponse|null $ingress
- */
 class CallSettingsResponse extends BaseModel
 {
     public function __construct(
         public ?AudioSettingsResponse $audio = null,
         public ?BackstageSettingsResponse $backstage = null,
         public ?BroadcastSettingsResponse $broadcasting = null,
-        public ?FrameRecordingSettingsResponse $frameRecording = null,
         public ?GeofenceSettingsResponse $geofencing = null,
-        public ?IndividualRecordingSettingsResponse $individualRecording = null,
-        public ?LimitsSettingsResponse $limits = null,
-        public ?RawRecordingSettingsResponse $rawRecording = null,
         public ?RecordSettingsResponse $recording = null,
+        public ?IndividualRecordingSettingsResponse $individualRecording = null,
+        public ?RawRecordingSettingsResponse $rawRecording = null,
+        public ?FrameRecordingSettingsResponse $frameRecording = null,
         public ?RingSettingsResponse $ring = null,
         public ?ScreensharingSettingsResponse $screensharing = null,
-        public ?SessionSettingsResponse $session = null,
-        public ?ThumbnailsSettingsResponse $thumbnails = null,
         public ?TranscriptionSettingsResponse $transcription = null,
         public ?VideoSettingsResponse $video = null,
+        public ?ThumbnailsSettingsResponse $thumbnails = null,
+        public ?LimitsSettingsResponse $limits = null,
+        public ?SessionSettingsResponse $session = null,
         public ?IngressSettingsResponse $ingress = null,
     ) {
     }

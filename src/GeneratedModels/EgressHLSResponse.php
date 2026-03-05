@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $playlistUrl
- * @property string $status
- */
 class EgressHLSResponse extends BaseModel
 {
     public function __construct(

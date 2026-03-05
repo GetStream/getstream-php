@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $createdByID
- * @property string|null $name
- * @property bool|null $restoreMessages
- */
 class ReactivateUserRequest extends BaseModel
 {
     public function __construct(
-        public ?string $createdByID = null, // ID of the user who's reactivating the user
-        public ?string $name = null, // Set this field to put new name for the user
         public ?bool $restoreMessages = null, // Restore previously deleted messages
+        public ?string $name = null, // Set this field to put new name for the user
+        public ?string $createdByID = null, // ID of the user who's reactivating the user
     ) {
     }
 

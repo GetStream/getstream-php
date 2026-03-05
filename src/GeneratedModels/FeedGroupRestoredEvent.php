@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+/**
+ * Emitted when a feed group is restored.
+ */
+class FeedGroupRestoredEvent extends BaseModel
+{
+    public function __construct(
+        public ?string $groupID = null, // The ID of the feed group that was restored
+        public ?string $type = null, // The type of event: "feeds.feed_group.restored" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $fid = null,
+        public ?string $feedVisibility = null,
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

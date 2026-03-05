@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $label
- * @property string|null $description
- * @property string|null $unit
- */
 class MetricDescriptor extends BaseModel
 {
     public function __construct(
         public ?string $label = null,
-        public ?string $description = null,
         public ?string $unit = null,
+        public ?string $description = null,
     ) {
     }
 

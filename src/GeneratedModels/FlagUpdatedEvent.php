@@ -3,27 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property \DateTime $createdAt
- * @property object $custom
- * @property string $type
- * @property \DateTime|null $receivedAt
- * @property UserResponse|null $createdBy
- * @property MessageResponse|null $message
- * @property UserResponse|null $user
- */
 class FlagUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?object $custom = null,
         public ?string $type = null,
+        public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
-        public ?UserResponse $createdBy = null,
+        public ?object $custom = null,
         public ?MessageResponse $message = null,
         public ?UserResponse $user = null,
+        public ?UserResponse $createdBy = null,
     ) {
     }
 

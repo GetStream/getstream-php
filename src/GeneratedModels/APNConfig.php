@@ -3,33 +3,19 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $authKey
- * @property string|null $authType
- * @property string|null $bundleID
- * @property bool|null $development
- * @property bool|null $disabled
- * @property string|null $host
- * @property string|null $keyID
- * @property string|null $notificationTemplate
- * @property string|null $p12Cert
- * @property string|null $teamID
- */
 class APNConfig extends BaseModel
 {
     public function __construct(
-        public ?string $authKey = null,
         public ?string $authType = null,
-        public ?string $bundleID = null,
         public ?bool $development = null,
-        public ?bool $disabled = null,
         public ?string $host = null,
+        public ?string $bundleID = null,
+        public ?bool $disabled = null,
+        public ?string $authKey = null,
         public ?string $keyID = null,
-        public ?string $notificationTemplate = null,
-        public ?string $p12Cert = null,
         public ?string $teamID = null,
+        public ?string $p12Cert = null,
+        public ?string $notificationTemplate = null,
     ) {
     }
 

@@ -16,7 +16,6 @@ trait CommonTrait
 {
     /**
      * This Method returns the application settings
-     * 
      *
      * @return StreamResponse<GeneratedModels\GetApplicationResponse>
      * @throws StreamException
@@ -30,7 +29,6 @@ trait CommonTrait
     }
     /**
      * This Method updates one or more application settings
-     * 
      *
      * @param GeneratedModels\UpdateAppRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
@@ -45,7 +43,6 @@ trait CommonTrait
     }
     /**
      * Returns all available block lists
-     * 
      *
      * @param string $team
      * @return StreamResponse<GeneratedModels\ListBlockListResponse>
@@ -63,7 +60,6 @@ trait CommonTrait
     }
     /**
      * Creates a new application blocklist, once created the blocklist can be used by any channel type
-     * 
      *
      * @param GeneratedModels\CreateBlockListRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateBlockListResponse>
@@ -78,7 +74,6 @@ trait CommonTrait
     }
     /**
      * Deletes previously created application blocklist
-     * 
      *
      * @param string $name
      * @param string $team
@@ -98,7 +93,6 @@ trait CommonTrait
     }
     /**
      * Returns block list by given name
-     * 
      *
      * @param string $name
      * @param string $team
@@ -118,7 +112,6 @@ trait CommonTrait
     }
     /**
      * Updates contents of the block list
-     * 
      *
      * @param string $name
      * @param GeneratedModels\UpdateBlockListRequest $requestData
@@ -135,7 +128,6 @@ trait CommonTrait
     }
     /**
      * Sends a test message via push, this is a test endpoint to verify your push settings
-     * 
      *
      * @param GeneratedModels\CheckPushRequest $requestData
      * @return StreamResponse<GeneratedModels\CheckPushResponse>
@@ -150,7 +142,6 @@ trait CommonTrait
     }
     /**
      * Validates Amazon SNS configuration
-     * 
      *
      * @param GeneratedModels\CheckSNSRequest $requestData
      * @return StreamResponse<GeneratedModels\CheckSNSResponse>
@@ -165,7 +156,6 @@ trait CommonTrait
     }
     /**
      * Validates Amazon SQS credentials
-     * 
      *
      * @param GeneratedModels\CheckSQSRequest $requestData
      * @return StreamResponse<GeneratedModels\CheckSQSResponse>
@@ -180,7 +170,6 @@ trait CommonTrait
     }
     /**
      * Deletes one device
-     * 
      *
      * @param string $id
      * @param string $userID
@@ -202,7 +191,6 @@ trait CommonTrait
     }
     /**
      * Returns all available devices
-     * 
      *
      * @param string $userID
      * @return StreamResponse<GeneratedModels\ListDevicesResponse>
@@ -220,7 +208,6 @@ trait CommonTrait
     }
     /**
      * Adds a new device to a user, if the same device already exists the call will have no effect
-     * 
      *
      * @param GeneratedModels\CreateDeviceRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
@@ -235,7 +222,6 @@ trait CommonTrait
     }
     /**
      * Exports user profile, reactions and messages for list of given users
-     * 
      *
      * @param GeneratedModels\ExportUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\ExportUsersResponse>
@@ -250,7 +236,6 @@ trait CommonTrait
     }
     /**
      * Lists external storage
-     * 
      *
      * @return StreamResponse<GeneratedModels\ListExternalStorageResponse>
      * @throws StreamException
@@ -264,7 +249,6 @@ trait CommonTrait
     }
     /**
      * Creates new external storage
-     * 
      *
      * @param GeneratedModels\CreateExternalStorageRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateExternalStorageResponse>
@@ -279,7 +263,6 @@ trait CommonTrait
     }
     /**
      * Deletes external storage
-     * 
      *
      * @param string $name
      * @return StreamResponse<GeneratedModels\DeleteExternalStorageResponse>
@@ -294,8 +277,6 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteExternalStorageResponse::class);
     }
     /**
-     * 
-     * 
      *
      * @param string $name
      * @param GeneratedModels\UpdateExternalStorageRequest $requestData
@@ -311,8 +292,6 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateExternalStorageResponse::class);
     }
     /**
-     * 
-     * 
      *
      * @param string $name
      * @return StreamResponse<GeneratedModels\CheckExternalStorageResponse>
@@ -327,8 +306,6 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\CheckExternalStorageResponse::class);
     }
     /**
-     * 
-     * 
      *
      * @param GeneratedModels\CreateGuestRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateGuestResponse>
@@ -343,7 +320,6 @@ trait CommonTrait
     }
     /**
      * Creates a new import URL
-     * 
      *
      * @param GeneratedModels\CreateImportURLRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateImportURLResponse>
@@ -358,7 +334,6 @@ trait CommonTrait
     }
     /**
      * Gets an import
-     * 
      *
      * @return StreamResponse<GeneratedModels\ListImportsResponse>
      * @throws StreamException
@@ -372,7 +347,6 @@ trait CommonTrait
     }
     /**
      * Creates a new import
-     * 
      *
      * @param GeneratedModels\CreateImportRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateImportResponse>
@@ -387,7 +361,6 @@ trait CommonTrait
     }
     /**
      * Lists all import v2 tasks for the app
-     * 
      *
      * @param int $state
      * @return StreamResponse<GeneratedModels\ListImportV2TasksResponse>
@@ -405,7 +378,6 @@ trait CommonTrait
     }
     /**
      * Creates a new import v2 task
-     * 
      *
      * @param GeneratedModels\CreateImportV2TaskRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateImportV2TaskResponse>
@@ -420,7 +392,6 @@ trait CommonTrait
     }
     /**
      * Deletes an import v2 task. Can only delete tasks in queued state.
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\DeleteImportV2TaskResponse>
@@ -436,7 +407,6 @@ trait CommonTrait
     }
     /**
      * Gets a single import v2 task by ID
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetImportV2TaskResponse>
@@ -452,7 +422,6 @@ trait CommonTrait
     }
     /**
      * Gets an import
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetImportResponse>
@@ -468,7 +437,6 @@ trait CommonTrait
     }
     /**
      * Get an OpenGraph attachment for a link
-     * 
      *
      * @param string $url
      * @return StreamResponse<GeneratedModels\GetOGResponse>
@@ -486,7 +454,6 @@ trait CommonTrait
     }
     /**
      * Lists all available permissions
-     * 
      *
      * @return StreamResponse<GeneratedModels\ListPermissionsResponse>
      * @throws StreamException
@@ -500,7 +467,6 @@ trait CommonTrait
     }
     /**
      * Gets custom permission
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetCustomPermissionResponse>
@@ -516,7 +482,6 @@ trait CommonTrait
     }
     /**
      * Creates a new poll
-     * 
      *
      * @param GeneratedModels\CreatePollRequest $requestData
      * @return StreamResponse<GeneratedModels\PollResponse>
@@ -531,13 +496,11 @@ trait CommonTrait
     }
     /**
      * Updates a poll
-     * 
      * Sends events:
      * - feeds.poll.closed
      * - feeds.poll.updated
      * - poll.closed
      * - poll.updated
-     * 
      *
      * @param GeneratedModels\UpdatePollRequest $requestData
      * @return StreamResponse<GeneratedModels\PollResponse>
@@ -552,7 +515,6 @@ trait CommonTrait
     }
     /**
      * Queries polls
-     * 
      *
      * @param string $userID
      * @param GeneratedModels\QueryPollsRequest $requestData
@@ -571,11 +533,9 @@ trait CommonTrait
     }
     /**
      * Deletes a poll
-     * 
      * Sends events:
      * - feeds.poll.deleted
      * - poll.deleted
-     * 
      *
      * @param string $pollID
      * @param string $userID
@@ -595,7 +555,6 @@ trait CommonTrait
     }
     /**
      * Retrieves a poll
-     * 
      *
      * @param string $pollID
      * @param string $userID
@@ -615,13 +574,11 @@ trait CommonTrait
     }
     /**
      * Updates a poll partially
-     * 
      * Sends events:
      * - feeds.poll.closed
      * - feeds.poll.updated
      * - poll.closed
      * - poll.updated
-     * 
      *
      * @param string $pollID
      * @param GeneratedModels\UpdatePollPartialRequest $requestData
@@ -638,11 +595,9 @@ trait CommonTrait
     }
     /**
      * Creates a poll option
-     * 
      * Sends events:
      * - feeds.poll.updated
      * - poll.updated
-     * 
      *
      * @param string $pollID
      * @param GeneratedModels\CreatePollOptionRequest $requestData
@@ -659,11 +614,9 @@ trait CommonTrait
     }
     /**
      * Updates a poll option
-     * 
      * Sends events:
      * - feeds.poll.updated
      * - poll.updated
-     * 
      *
      * @param string $pollID
      * @param GeneratedModels\UpdatePollOptionRequest $requestData
@@ -680,11 +633,9 @@ trait CommonTrait
     }
     /**
      * Deletes a poll option
-     * 
      * Sends events:
      * - feeds.poll.updated
      * - poll.updated
-     * 
      *
      * @param string $pollID
      * @param string $optionID
@@ -706,7 +657,6 @@ trait CommonTrait
     }
     /**
      * Retrieves a poll option
-     * 
      *
      * @param string $pollID
      * @param string $optionID
@@ -728,7 +678,6 @@ trait CommonTrait
     }
     /**
      * Queries votes
-     * 
      *
      * @param string $pollID
      * @param string $userID
@@ -749,7 +698,6 @@ trait CommonTrait
     }
     /**
      * Upserts the push preferences for a user and or channel member. Set to all, mentions or none
-     * 
      *
      * @param GeneratedModels\UpsertPushPreferencesRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertPushPreferencesResponse>
@@ -764,7 +712,6 @@ trait CommonTrait
     }
     /**
      * List details of all push providers.
-     * 
      *
      * @return StreamResponse<GeneratedModels\ListPushProvidersResponse>
      * @throws StreamException
@@ -778,7 +725,6 @@ trait CommonTrait
     }
     /**
      * Upsert a push provider for v2 with multi bundle/package support
-     * 
      *
      * @param GeneratedModels\UpsertPushProviderRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertPushProviderResponse>
@@ -793,7 +739,6 @@ trait CommonTrait
     }
     /**
      * Delete a push provider from v2 with multi bundle/package support. v1 isn't supported in this endpoint
-     * 
      *
      * @param string $type
      * @param string $name
@@ -811,7 +756,6 @@ trait CommonTrait
     }
     /**
      * Retrieve push notification templates for Chat.
-     * 
      *
      * @param string $pushProviderType
      * @param string $pushProviderName
@@ -833,7 +777,6 @@ trait CommonTrait
     }
     /**
      * Create or update a push notification template for a specific event type and push provider
-     * 
      *
      * @param GeneratedModels\UpsertPushTemplateRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertPushTemplateResponse>
@@ -848,7 +791,6 @@ trait CommonTrait
     }
     /**
      * Get rate limits usage and quotas
-     * 
      *
      * @param bool $serverSide
      * @param bool $android
@@ -882,7 +824,6 @@ trait CommonTrait
     }
     /**
      * Lists all available roles
-     * 
      *
      * @return StreamResponse<GeneratedModels\ListRolesResponse>
      * @throws StreamException
@@ -896,7 +837,6 @@ trait CommonTrait
     }
     /**
      * Creates custom role
-     * 
      *
      * @param GeneratedModels\CreateRoleRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateRoleResponse>
@@ -911,7 +851,6 @@ trait CommonTrait
     }
     /**
      * Deletes custom role
-     * 
      *
      * @param string $name
      * @return StreamResponse<GeneratedModels\Response>
@@ -927,7 +866,6 @@ trait CommonTrait
     }
     /**
      * Gets status of a task
-     * 
      *
      * @param string $id
      * @return StreamResponse<GeneratedModels\GetTaskResponse>
@@ -943,7 +881,6 @@ trait CommonTrait
     }
     /**
      * Deletes previously uploaded file
-     * 
      *
      * @param string $url
      * @return StreamResponse<GeneratedModels\Response>
@@ -961,7 +898,6 @@ trait CommonTrait
     }
     /**
      * Uploads file
-     * 
      *
      * @param GeneratedModels\FileUploadRequest $requestData
      * @return StreamResponse<GeneratedModels\FileUploadResponse>
@@ -976,7 +912,6 @@ trait CommonTrait
     }
     /**
      * Deletes previously uploaded image
-     * 
      *
      * @param string $url
      * @return StreamResponse<GeneratedModels\Response>
@@ -994,7 +929,6 @@ trait CommonTrait
     }
     /**
      * Uploads image
-     * 
      *
      * @param GeneratedModels\ImageUploadRequest $requestData
      * @return StreamResponse<GeneratedModels\ImageUploadResponse>
@@ -1008,8 +942,169 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ImageUploadResponse::class);
     }
     /**
+     * Lists user groups with cursor-based pagination
+     *
+     * @param int $limit
+     * @param string $idGt
+     * @param string $createdAtGt
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\ListUserGroupsResponse>
+     * @throws StreamException
+     */
+    public function listUserGroups(int $limit, string $idGt, string $createdAtGt, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups';
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($idGt !== null) {
+            $queryParams['id_gt'] = $idGt;
+        }
+        if ($createdAtGt !== null) {
+            $queryParams['created_at_gt'] = $createdAtGt;
+        }
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListUserGroupsResponse::class);
+    }
+    /**
+     * Creates a new user group, optionally with initial members
+     *
+     * @param GeneratedModels\CreateUserGroupRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateUserGroupResponse>
+     * @throws StreamException
+     */
+    public function createUserGroup(GeneratedModels\CreateUserGroupRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateUserGroupResponse::class);
+    }
+    /**
+     * Searches user groups by name prefix for autocomplete
+     *
+     * @param string $query
+     * @param int $limit
+     * @param string $nameGt
+     * @param string $idGt
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\SearchUserGroupsResponse>
+     * @throws StreamException
+     */
+    public function searchUserGroups(string $query, int $limit, string $nameGt, string $idGt, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups/search';
+
+        $queryParams = [];
+        if ($query !== null) {
+            $queryParams['query'] = $query;
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($nameGt !== null) {
+            $queryParams['name_gt'] = $nameGt;
+        }
+        if ($idGt !== null) {
+            $queryParams['id_gt'] = $idGt;
+        }
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\SearchUserGroupsResponse::class);
+    }
+    /**
+     * Deletes a user group and all its members
+     *
+     * @param string $id
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function deleteUserGroup(string $id, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
+     * Gets a user group by ID, including its members
+     *
+     * @param string $id
+     * @param string $teamID
+     * @return StreamResponse<GeneratedModels\GetUserGroupResponse>
+     * @throws StreamException
+     */
+    public function getUserGroup(string $id, string $teamID): StreamResponse {
+        $path = '/api/v2/usergroups/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($teamID !== null) {
+            $queryParams['team_id'] = $teamID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetUserGroupResponse::class);
+    }
+    /**
+     * Updates a user group's name and/or description. team_id is immutable.
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateUserGroupRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateUserGroupResponse>
+     * @throws StreamException
+     */
+    public function updateUserGroup(string $id, GeneratedModels\UpdateUserGroupRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateUserGroupResponse::class);
+    }
+    /**
+     * Adds members to a user group. All user IDs must exist. The operation is all-or-nothing.
+     *
+     * @param string $id
+     * @param GeneratedModels\AddUserGroupMembersRequest $requestData
+     * @return StreamResponse<GeneratedModels\AddUserGroupMembersResponse>
+     * @throws StreamException
+     */
+    public function addUserGroupMembers(string $id, GeneratedModels\AddUserGroupMembersRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups/{id}/members';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddUserGroupMembersResponse::class);
+    }
+    /**
+     * Removes members from a user group. Users already not in the group are silently ignored.
+     *
+     * @param string $id
+     * @param GeneratedModels\RemoveUserGroupMembersRequest $requestData
+     * @return StreamResponse<GeneratedModels\RemoveUserGroupMembersResponse>
+     * @throws StreamException
+     */
+    public function removeUserGroupMembers(string $id, GeneratedModels\RemoveUserGroupMembersRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups/{id}/members/delete';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RemoveUserGroupMembersResponse::class);
+    }
+    /**
      * Find and filter users
-     * 
      *
      * @param GeneratedModels\QueryUsersPayload $payload
      * @return StreamResponse<GeneratedModels\QueryUsersResponse>
@@ -1020,19 +1115,20 @@ trait CommonTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = $payload;
+            try {
+                $queryParams['payload'] = json_encode($payload, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "payload" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryUsersResponse::class);
     }
     /**
      * Updates certain fields of the user
-     * 
      * Sends events:
      * - user.presence.changed
      * - user.updated
-     * - user.presence.changed
-     * 
      *
      * @param GeneratedModels\UpdateUsersPartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateUsersResponse>
@@ -1047,10 +1143,8 @@ trait CommonTrait
     }
     /**
      * Update or create users in bulk
-     * 
      * Sends events:
      * - user.updated
-     * 
      *
      * @param GeneratedModels\UpdateUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateUsersResponse>
@@ -1065,7 +1159,6 @@ trait CommonTrait
     }
     /**
      * Get list of blocked Users
-     * 
      *
      * @param string $userID
      * @return StreamResponse<GeneratedModels\GetBlockedUsersResponse>
@@ -1083,7 +1176,6 @@ trait CommonTrait
     }
     /**
      * Block users
-     * 
      *
      * @param GeneratedModels\BlockUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\BlockUsersResponse>
@@ -1098,10 +1190,8 @@ trait CommonTrait
     }
     /**
      * Deactivate users in batches
-     * 
      * Sends events:
      * - user.deactivated
-     * 
      *
      * @param GeneratedModels\DeactivateUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\DeactivateUsersResponse>
@@ -1116,11 +1206,9 @@ trait CommonTrait
     }
     /**
      * Deletes users and optionally all their belongings asynchronously.
-     * 
      * Sends events:
      * - channel.deleted
      * - user.deleted
-     * 
      *
      * @param GeneratedModels\DeleteUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteUsersResponse>
@@ -1135,7 +1223,6 @@ trait CommonTrait
     }
     /**
      * Retrieves all active live locations for a user
-     * 
      *
      * @param string $userID
      * @return StreamResponse<GeneratedModels\SharedLocationsResponse>
@@ -1153,7 +1240,6 @@ trait CommonTrait
     }
     /**
      * Updates an existing live location with new coordinates or expiration time
-     * 
      *
      * @param string $userID
      * @param GeneratedModels\UpdateLiveLocationRequest $requestData
@@ -1172,11 +1258,8 @@ trait CommonTrait
     }
     /**
      * Reactivate users in batches
-     * 
      * Sends events:
      * - user.reactivated
-     * - user.reactivated
-     * 
      *
      * @param GeneratedModels\ReactivateUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\ReactivateUsersResponse>
@@ -1191,7 +1274,6 @@ trait CommonTrait
     }
     /**
      * Restore soft deleted users
-     * 
      *
      * @param GeneratedModels\RestoreUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
@@ -1206,7 +1288,6 @@ trait CommonTrait
     }
     /**
      * Unblock users
-     * 
      *
      * @param GeneratedModels\UnblockUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\UnblockUsersResponse>
@@ -1221,10 +1302,8 @@ trait CommonTrait
     }
     /**
      * Deactivates user with possibility to activate it back
-     * 
      * Sends events:
      * - user.deactivated
-     * 
      *
      * @param string $userID
      * @param GeneratedModels\DeactivateUserRequest $requestData
@@ -1241,7 +1320,6 @@ trait CommonTrait
     }
     /**
      * Exports the user's profile, reactions and messages. Raises an error if a user has more than 10k messages or reactions
-     * 
      *
      * @param string $userID
      * @return StreamResponse<GeneratedModels\ExportUserResponse>
@@ -1257,10 +1335,8 @@ trait CommonTrait
     }
     /**
      * Activates user who's been deactivated previously
-     * 
      * Sends events:
      * - user.reactivated
-     * 
      *
      * @param string $userID
      * @param GeneratedModels\ReactivateUserRequest $requestData

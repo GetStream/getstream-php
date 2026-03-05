@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * BlockUserRequest is the payload for blocking a user.
- *
- * @property string $userID
  */
 class BlockUserRequest extends BaseModel
 {

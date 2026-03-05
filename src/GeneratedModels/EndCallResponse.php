@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response for ending a call
- *
- * @property string $duration
  */
 class EndCallResponse extends BaseModel
 {

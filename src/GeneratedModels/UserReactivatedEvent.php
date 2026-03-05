@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * 
- *
- * @property \DateTime $createdAt
- * @property string $type
- * @property User|null $user
+ * This event is sent when a user gets reactivated. The event contains information about the user that was reactivated.
  */
 class UserReactivatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?string $type = null,
-        public ?User $user = null,
+        public ?string $type = null, // The type of event: "user.reactivated" in this case
+        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?UserResponseCommonFields $user = null,
+        public ?UserResponseCommonFields $createdBy = null,
     ) {
     }
 

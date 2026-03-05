@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Create device request
- *
- * @property string $id
- * @property string $pushProvider
- * @property string|null $pushProviderName
- * @property string|null $userID
- * @property bool|null $voipToken
- * @property UserRequest|null $user
  */
 class CreateDeviceRequest extends BaseModel
 {
@@ -19,8 +12,8 @@ class CreateDeviceRequest extends BaseModel
         public ?string $id = null, // Device ID
         public ?string $pushProvider = null, // Push provider
         public ?string $pushProviderName = null, // Push provider name
-        public ?string $userID = null, // **Server-side only**. User ID which server acts upon
         public ?bool $voipToken = null, // When true the token is for Apple VoIP push notifications
+        public ?string $userID = null, // **Server-side only**. User ID which server acts upon
         public ?UserRequest $user = null,
     ) {
     }

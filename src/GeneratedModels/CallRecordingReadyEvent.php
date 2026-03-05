@@ -5,23 +5,16 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when call recording is ready
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property string $egressID
- * @property string $recordingType
- * @property CallRecording $callRecording
- * @property string $type
  */
 class CallRecordingReadyEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
+        public ?string $type = null, // The type of event: "call.recording_ready" in this case
         public ?\DateTime $createdAt = null,
+        public ?string $callCid = null,
+        public ?CallRecording $callRecording = null,
         public ?string $egressID = null,
         public ?string $recordingType = null, // The type of recording
-        public ?CallRecording $callRecording = null,
-        public ?string $type = null, // The type of event: "call.recording_ready" in this case
     ) {
     }
 

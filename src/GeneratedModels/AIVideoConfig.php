@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $async
- * @property bool|null $enabled
- * @property array<AWSRekognitionRule>|null $rules
- */
 class AIVideoConfig extends BaseModel
 {
     public function __construct(

@@ -3,20 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string|null $name
- * @property string|null $userID
- * @property object|null $custom
- * @property UserRequest|null $user
- */
 class UpdateBookmarkFolderRequest extends BaseModel
 {
     public function __construct(
         public ?string $name = null, // Name of the folder
-        public ?string $userID = null,
         public ?object $custom = null, // Custom data for the folder
+        public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {
     }

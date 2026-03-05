@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $enabled
- * @property HLSSettingsRequest|null $hls
- * @property RTMPSettingsRequest|null $rtmp
- */
 class BroadcastSettingsRequest extends BaseModel
 {
     public function __construct(

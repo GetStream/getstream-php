@@ -5,24 +5,16 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * This event is sent when a participant leaves a call session
- *
- * @property string $callCid
- * @property \DateTime $createdAt
- * @property int $durationSeconds
- * @property string $sessionID
- * @property CallParticipantResponse $participant
- * @property string $type
- * @property string|null $reason
  */
 class CallSessionParticipantLeftEvent extends BaseModel
 {
     public function __construct(
-        public ?string $callCid = null,
+        public ?string $type = null, // The type of event: "call.session_participant_left" in this case
         public ?\DateTime $createdAt = null,
-        public ?int $durationSeconds = null, // The duration participant was in the session in seconds
+        public ?string $callCid = null,
         public ?string $sessionID = null, // Call session ID
         public ?CallParticipantResponse $participant = null,
-        public ?string $type = null, // The type of event: "call.session_participant_left" in this case
+        public ?int $durationSeconds = null, // The duration participant was in the session in seconds
         public ?string $reason = null, // The reason why the participant left the session
     ) {
     }

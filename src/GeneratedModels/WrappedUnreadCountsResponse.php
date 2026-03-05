@@ -5,31 +5,23 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property string $duration
- * @property int $totalUnreadCount
- * @property int $totalUnreadThreadsCount
- * @property array<UnreadCountsChannelType> $channelType
- * @property array<UnreadCountsChannel> $channels
- * @property array<UnreadCountsThread> $threads
- * @property array|null $totalUnreadCountByTeam
  */
 class WrappedUnreadCountsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?int $totalUnreadCount = null,
         public ?int $totalUnreadThreadsCount = null,
-        /** @var array<UnreadCountsChannelType>|null */
-        #[ArrayOf(UnreadCountsChannelType::class)]
-        public ?array $channelType = null,
+        public ?array $totalUnreadCountByTeam = null,
         /** @var array<UnreadCountsChannel>|null */
         #[ArrayOf(UnreadCountsChannel::class)]
         public ?array $channels = null,
+        /** @var array<UnreadCountsChannelType>|null */
+        #[ArrayOf(UnreadCountsChannelType::class)]
+        public ?array $channelType = null,
         /** @var array<UnreadCountsThread>|null */
         #[ArrayOf(UnreadCountsThread::class)]
         public ?array $threads = null,
-        public ?array $totalUnreadCountByTeam = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

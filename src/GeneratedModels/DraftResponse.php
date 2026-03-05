@@ -3,27 +3,16 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $channelCid
- * @property \DateTime $createdAt
- * @property DraftPayloadResponse $message
- * @property string|null $parentID
- * @property ChannelResponse|null $channel
- * @property MessageResponse|null $parentMessage
- * @property MessageResponse|null $quotedMessage
- */
 class DraftResponse extends BaseModel
 {
     public function __construct(
-        public ?string $channelCid = null,
-        public ?\DateTime $createdAt = null,
         public ?DraftPayloadResponse $message = null,
-        public ?string $parentID = null,
+        public ?string $channelCid = null,
         public ?ChannelResponse $channel = null,
+        public ?string $parentID = null,
         public ?MessageResponse $parentMessage = null,
         public ?MessageResponse $quotedMessage = null,
+        public ?\DateTime $createdAt = null,
     ) {
     }
 

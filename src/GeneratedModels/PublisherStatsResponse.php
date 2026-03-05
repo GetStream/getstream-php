@@ -3,13 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property int $total
- * @property int $unique
- * @property array<TrackStatsResponse>|null $byTrack
- */
 class PublisherStatsResponse extends BaseModel
 {
     public function __construct(

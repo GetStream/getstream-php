@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * HLSSettings is the payload for HLS settings
- *
- * @property bool $autoOn
- * @property bool $enabled
- * @property array $qualityTracks
- * @property LayoutSettingsResponse $layout
  */
 class HLSSettingsResponse extends BaseModel
 {

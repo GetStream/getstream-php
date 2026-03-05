@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property PollOptionResponseData $pollOption
- */
 class PollOptionResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?PollOptionResponseData $pollOption = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

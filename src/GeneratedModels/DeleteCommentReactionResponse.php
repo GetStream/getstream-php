@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property CommentResponse $comment
- * @property FeedsReactionResponse $reaction
- */
 class DeleteCommentReactionResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?CommentResponse $comment = null,
         public ?FeedsReactionResponse $reaction = null,
+        public ?string $duration = null,
     ) {
     }
 

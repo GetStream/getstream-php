@@ -3,23 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property \DateTime $createdAt
- * @property \DateTime $updatedAt
- * @property \DateTime|null $expires
- * @property UserResponse|null $target
- * @property UserResponse|null $user
- */
 class UserMuteResponse extends BaseModel
 {
     public function __construct(
+        public ?UserResponse $user = null,
+        public ?UserResponse $target = null,
+        public ?\DateTime $expires = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
-        public ?\DateTime $expires = null,
-        public ?UserResponse $target = null,
-        public ?UserResponse $user = null,
     ) {
     }
 

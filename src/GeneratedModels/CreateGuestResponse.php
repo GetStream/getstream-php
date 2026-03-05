@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $accessToken
- * @property string $duration
- * @property UserResponse $user
- */
 class CreateGuestResponse extends BaseModel
 {
     public function __construct(
+        public ?UserResponse $user = null,
         public ?string $accessToken = null, // the access token to authenticate the user
         public ?string $duration = null, // Duration of the request in milliseconds
-        public ?UserResponse $user = null,
     ) {
     }
 

@@ -3,19 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $action
- * @property string $label
- * @property int $minConfidence
- */
 class AWSRekognitionRule extends BaseModel
 {
     public function __construct(
-        public ?string $action = null,
         public ?string $label = null,
+        public ?string $action = null,
         public ?int $minConfidence = null,
+        public ?array $subclassifications = null,
     ) {
     }
 

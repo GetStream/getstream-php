@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Response confirming SIP trunk deletion
- *
- * @property string $duration
  */
 class DeleteSIPTrunkResponse extends BaseModel
 {

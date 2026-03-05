@@ -4,27 +4,18 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * Emitted when a feed is created.
- *
- * @property \DateTime $createdAt
- * @property string $fid
- * @property object $custom
- * @property FeedResponse $feed
- * @property string $type
- * @property string|null $feedVisibility
- * @property \DateTime|null $receivedAt
- * @property UserResponseCommonFields|null $user
+ * Emitted when a feed is updated.
  */
 class FeedUpdatedEvent extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
-        public ?string $fid = null,
-        public ?object $custom = null,
         public ?FeedResponse $feed = null,
         public ?string $type = null, // The type of event: "feeds.feed.updated" in this case
-        public ?string $feedVisibility = null,
+        public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
+        public ?object $custom = null,
+        public ?string $fid = null,
+        public ?string $feedVisibility = null,
         public ?UserResponseCommonFields $user = null,
     ) {
     }

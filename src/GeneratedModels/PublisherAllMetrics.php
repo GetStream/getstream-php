@@ -3,19 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property PublisherAudioMetrics|null $audio
- * @property ActiveCallsLatencyStats|null $rttMs
- * @property PublisherVideoMetrics|null $video
- */
 class PublisherAllMetrics extends BaseModel
 {
     public function __construct(
         public ?PublisherAudioMetrics $audio = null,
-        public ?ActiveCallsLatencyStats $rttMs = null,
         public ?PublisherVideoMetrics $video = null,
+        public ?ActiveCallsLatencyStats $rttMs = null,
     ) {
     }
 

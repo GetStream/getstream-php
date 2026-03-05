@@ -5,27 +5,18 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * Basic response information
- *
- * @property int $appPk
- * @property \DateTime $createdAt
- * @property string $duration
- * @property string $id
- * @property string $product
- * @property int $state
- * @property \DateTime $updatedAt
- * @property ImportV2TaskSettings $settings
  */
 class GetImportV2TaskResponse extends BaseModel
 {
     public function __construct(
-        public ?int $appPk = null,
-        public ?\DateTime $createdAt = null,
-        public ?string $duration = null, // Duration of the request in milliseconds
         public ?string $id = null,
+        public ?int $appPk = null,
         public ?string $product = null,
         public ?int $state = null,
-        public ?\DateTime $updatedAt = null,
         public ?ImportV2TaskSettings $settings = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

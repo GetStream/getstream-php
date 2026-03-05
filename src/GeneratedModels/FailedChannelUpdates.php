@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $reason
- * @property array $cids
- */
 class FailedChannelUpdates extends BaseModel
 {
     public function __construct(

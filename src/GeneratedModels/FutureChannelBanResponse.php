@@ -3,25 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property \DateTime $createdAt
- * @property \DateTime|null $expires
- * @property string|null $reason
- * @property bool|null $shadow
- * @property UserResponse|null $bannedBy
- * @property UserResponse|null $user
- */
 class FutureChannelBanResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $createdAt = null,
+        public ?UserResponse $user = null,
+        public ?UserResponse $bannedBy = null,
         public ?\DateTime $expires = null,
         public ?string $reason = null,
         public ?bool $shadow = null,
-        public ?UserResponse $bannedBy = null,
-        public ?UserResponse $user = null,
+        public ?\DateTime $createdAt = null,
     ) {
     }
 

@@ -3,17 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $mode
- * @property string $path
- */
 class CreateImportRequest extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null,
         public ?string $path = null,
+        public ?string $mode = null,
+        public ?bool $mergeCustom = null,
     ) {
     }
 

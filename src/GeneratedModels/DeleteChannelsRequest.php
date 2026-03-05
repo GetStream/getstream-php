@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array $cids
- * @property bool|null $hardDelete
- */
 class DeleteChannelsRequest extends BaseModel
 {
     public function __construct(

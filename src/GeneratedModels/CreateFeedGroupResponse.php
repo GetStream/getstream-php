@@ -3,17 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $duration
- * @property FeedGroupResponse $feedGroup
- */
 class CreateFeedGroupResponse extends BaseModel
 {
     public function __construct(
-        public ?string $duration = null,
         public ?FeedGroupResponse $feedGroup = null,
+        public ?string $duration = null,
     ) {
     }
 

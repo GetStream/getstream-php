@@ -3,21 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property \DateTime $joinedAt
- * @property string $role
- * @property string $userSessionID
- * @property UserResponse $user
- */
 class CallParticipantResponse extends BaseModel
 {
     public function __construct(
-        public ?\DateTime $joinedAt = null,
-        public ?string $role = null,
-        public ?string $userSessionID = null,
         public ?UserResponse $user = null,
+        public ?string $userSessionID = null,
+        public ?string $role = null,
+        public ?\DateTime $joinedAt = null,
     ) {
     }
 

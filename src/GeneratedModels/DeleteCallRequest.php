@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace GetStream\GeneratedModels;
 /**
  * DeleteCallRequest is the payload for deleting a call.
- *
- * @property bool|null $hard
  */
 class DeleteCallRequest extends BaseModel
 {

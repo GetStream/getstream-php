@@ -3,27 +3,17 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property array<ChannelExport> $channels
- * @property bool|null $clearDeletedMessageText
- * @property bool|null $exportUsers
- * @property bool|null $includeSoftDeletedChannels
- * @property bool|null $includeTruncatedMessages
- * @property string|null $version
- */
 class ExportChannelsRequest extends BaseModel
 {
     public function __construct(
-        /** @var array<ChannelExport>|null Export options for channels */
+        public ?string $version = null, // Export version
+        /** @var array<ChannelExport>|null */
         #[ArrayOf(ChannelExport::class)]
         public ?array $channels = null, // Export options for channels
         public ?bool $clearDeletedMessageText = null, // Set if deleted message text should be cleared
-        public ?bool $exportUsers = null,
-        public ?bool $includeSoftDeletedChannels = null, // Set if you want to include deleted channels
         public ?bool $includeTruncatedMessages = null, // Set if you want to include truncated messages
-        public ?string $version = null, // Export version
+        public ?bool $includeSoftDeletedChannels = null, // Set if you want to include deleted channels
+        public ?bool $exportUsers = null,
     ) {
     }
 

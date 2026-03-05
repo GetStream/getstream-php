@@ -3,12 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property bool|null $skipWatched
- * @property bool|null $trackWatched
- */
 class StoriesConfig extends BaseModel
 {
     public function __construct(
