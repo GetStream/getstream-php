@@ -196,15 +196,14 @@ trait ModerationTrait
     /**
      * Delete a specific moderation template by its name
      *
-     * @param GeneratedModels\DeleteModerationTemplateRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteModerationTemplateResponse>
      * @throws StreamException
      */
-    public function v2DeleteTemplate(GeneratedModels\DeleteModerationTemplateRequest $requestData): StreamResponse {
+    public function v2DeleteTemplate(): StreamResponse {
         $path = '/api/v2/moderation/feeds_moderation_template';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationTemplateResponse::class);
     }
     /**

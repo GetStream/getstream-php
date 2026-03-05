@@ -62,13 +62,14 @@ trait FeedMethods
      * Unpin an activity from a feed. This removes the pin, so the activity will no longer be displayed at the top of the feed.
      *
      * @param string $activityID
+     * @param bool $enrichOwnFields
      * @param string $userID
      * @return StreamResponse<GeneratedModels\UnpinActivityResponse>
      * @throws StreamException
      */
     public function unpinActivity(
-        string $activityID, string $userID, ): StreamResponse {
-        return $this->feedsV3Client->unpinActivity($this->feedGroup, $this->feedId, $activityID,$userID);
+        string $activityID, bool $enrichOwnFields, string $userID, ): StreamResponse {
+        return $this->feedsV3Client->unpinActivity($this->feedGroup, $this->feedId, $activityID,$enrichOwnFields, $userID);
     }
     /**
      * Pin an activity to a feed. Pinned activities are typically displayed at the top of a feed.

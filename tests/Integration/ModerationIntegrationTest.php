@@ -79,22 +79,22 @@ class ModerationIntegrationTest extends TestCase
             users: [
                 self::$sharedUserId => [
                     'id' => self::$sharedUserId,
-                    'name' => 'Test User 1',
+                    'name' => 'Test User ' . self::$sharedUserId,
                     'role' => 'user',
                 ],
                 self::$sharedUserId2 => [
                     'id' => self::$sharedUserId2,
-                    'name' => 'Test User 2',
+                    'name' => 'Test User ' . self::$sharedUserId2,
                     'role' => 'user',
                 ],
                 self::$sharedModeratorUserId => [
                     'id' => self::$sharedModeratorUserId,
-                    'name' => 'Moderator User',
+                    'name' => 'Moderator ' . self::$sharedModeratorUserId,
                     'role' => 'admin',
                 ],
                 self::$sharedReporterUserId => [
                     'id' => self::$sharedReporterUserId,
-                    'name' => 'Reporter User',
+                    'name' => 'Reporter ' . self::$sharedReporterUserId,
                     'role' => 'user',
                 ],
             ]

@@ -31,6 +31,7 @@ class AddActivityRequest extends BaseModel
         public ?bool $createNotificationActivity = null, // Whether to create notification activities for mentioned users
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true)
         public ?bool $skipPush = null, // Whether to skip push notifications
+        public ?bool $enrichOwnFields = null,
     ) {
     }
 

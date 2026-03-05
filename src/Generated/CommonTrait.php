@@ -1072,22 +1072,6 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateUserGroupResponse::class);
     }
     /**
-     * Removes members from a user group. Users already not in the group are silently ignored.
-     *
-     * @param string $id
-     * @param GeneratedModels\RemoveUserGroupMembersRequest $requestData
-     * @return StreamResponse<GeneratedModels\RemoveUserGroupMembersResponse>
-     * @throws StreamException
-     */
-    public function removeUserGroupMembers(string $id, GeneratedModels\RemoveUserGroupMembersRequest $requestData): StreamResponse {
-        $path = '/api/v2/usergroups/{id}/members';
-        $path = str_replace('{id}', (string) $id, $path);
-
-        $queryParams = [];
-        // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\RemoveUserGroupMembersResponse::class);
-    }
-    /**
      * Adds members to a user group. All user IDs must exist. The operation is all-or-nothing.
      *
      * @param string $id
@@ -1102,6 +1086,22 @@ trait CommonTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddUserGroupMembersResponse::class);
+    }
+    /**
+     * Removes members from a user group. Users already not in the group are silently ignored.
+     *
+     * @param string $id
+     * @param GeneratedModels\RemoveUserGroupMembersRequest $requestData
+     * @return StreamResponse<GeneratedModels\RemoveUserGroupMembersResponse>
+     * @throws StreamException
+     */
+    public function removeUserGroupMembers(string $id, GeneratedModels\RemoveUserGroupMembersRequest $requestData): StreamResponse {
+        $path = '/api/v2/usergroups/{id}/members/delete';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RemoveUserGroupMembersResponse::class);
     }
     /**
      * Find and filter users

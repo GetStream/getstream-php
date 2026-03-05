@@ -14,6 +14,7 @@ class UpdateFollowRequest extends BaseModel
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true)
         public ?bool $skipPush = null, // Whether to skip push for this follow
         public ?string $status = null, // Status of the follow relationship. One of: accepted, pending, rejected
+        public ?bool $enrichOwnFields = null, // If true, enriches the follow's source_feed and target_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
         public ?string $followerRole = null,
     ) {
     }

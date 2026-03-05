@@ -48,8 +48,8 @@ class FeedActivityIntegrationTest extends TestCase
 
         $client->updateUsers(new GeneratedModels\UpdateUsersRequest(
             users: [
-                self::$sharedUserId => ['id' => self::$sharedUserId, 'name' => 'Test User 1', 'role' => 'user'],
-                self::$sharedUserId2 => ['id' => self::$sharedUserId2, 'name' => 'Test User 2', 'role' => 'user'],
+                self::$sharedUserId => ['id' => self::$sharedUserId, 'name' => 'Test User ' . self::$sharedUserId, 'role' => 'user'],
+                self::$sharedUserId2 => ['id' => self::$sharedUserId2, 'name' => 'Test User ' . self::$sharedUserId2, 'role' => 'user'],
             ]
         ));
 

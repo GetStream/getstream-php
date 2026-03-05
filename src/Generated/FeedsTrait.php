@@ -73,6 +73,20 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteActivitiesResponse::class);
     }
     /**
+     * Track metric events (views, clicks, impressions) for activities. Supports batching up to 100 events per request. Each event is independently rate-limited per user per activity per metric. Server-side calls must include user_id.
+     *
+     * @param GeneratedModels\TrackActivityMetricsRequest $requestData
+     * @return StreamResponse<GeneratedModels\TrackActivityMetricsResponse>
+     * @throws StreamException
+     */
+    public function trackActivityMetrics(GeneratedModels\TrackActivityMetricsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/activities/metrics/track';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TrackActivityMetricsResponse::class);
+    }
+    /**
      * Query activities based on filters with pagination and sorting options
      *
      * @param GeneratedModels\QueryActivitiesRequest $requestData
@@ -343,15 +357,19 @@ trait FeedsTrait
      * Restores a soft-deleted activity by its ID. Only the activity owner can restore their own activities.
      *
      * @param string $id
+     * @param bool $enrichOwnFields
      * @param GeneratedModels\RestoreActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\RestoreActivityResponse>
      * @throws StreamException
      */
-    public function restoreActivity(string $id, GeneratedModels\RestoreActivityRequest $requestData): StreamResponse {
+    public function restoreActivity(string $id, bool $enrichOwnFields, GeneratedModels\RestoreActivityRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}/restore';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($enrichOwnFields !== null) {
+            $queryParams['enrich_own_fields'] = $enrichOwnFields;
+        }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreActivityResponse::class);
     }
@@ -373,16 +391,15 @@ trait FeedsTrait
      * Delete a bookmark folder by its ID
      *
      * @param string $folderID
-     * @param GeneratedModels\DeleteBookmarkFolderRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteBookmarkFolderResponse>
      * @throws StreamException
      */
-    public function deleteBookmarkFolder(string $folderID, GeneratedModels\DeleteBookmarkFolderRequest $requestData): StreamResponse {
+    public function deleteBookmarkFolder(string $folderID): StreamResponse {
         $path = '/api/v2/feeds/bookmark_folders/{folder_id}';
         $path = str_replace('{folder_id}', (string) $folderID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteBookmarkFolderResponse::class);
     }
     /**
@@ -419,18 +436,17 @@ trait FeedsTrait
      * Delete collections in a batch operation. Users can only delete their own collections.
      *
      * @param array $collectionRefs
-     * @param GeneratedModels\DeleteCollectionsRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteCollectionsResponse>
      * @throws StreamException
      */
-    public function deleteCollections(array $collectionRefs, GeneratedModels\DeleteCollectionsRequest $requestData): StreamResponse {
+    public function deleteCollections(array $collectionRefs): StreamResponse {
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
         if ($collectionRefs !== null) {
             $queryParams['collection_refs'] = $collectionRefs;
         }
-        // Use the provided request data array directly
+        $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCollectionsResponse::class);
     }
     /**
@@ -853,17 +869,21 @@ trait FeedsTrait
      * @param string $feedGroupID
      * @param string $feedID
      * @param string $activityID
+     * @param bool $enrichOwnFields
      * @param string $userID
      * @return StreamResponse<GeneratedModels\UnpinActivityResponse>
      * @throws StreamException
      */
-    public function unpinActivity(string $feedGroupID, string $feedID, string $activityID, string $userID): StreamResponse {
+    public function unpinActivity(string $feedGroupID, string $feedID, string $activityID, bool $enrichOwnFields, string $userID): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/activities/{activity_id}/pin';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
         $queryParams = [];
+        if ($enrichOwnFields !== null) {
+            $queryParams['enrich_own_fields'] = $enrichOwnFields;
+        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
@@ -1415,10 +1435,11 @@ trait FeedsTrait
      * @param string $source
      * @param string $target
      * @param bool $deleteNotificationActivity
+     * @param bool $enrichOwnFields
      * @return StreamResponse<GeneratedModels\UnfollowResponse>
      * @throws StreamException
      */
-    public function unfollow(string $source, string $target, bool $deleteNotificationActivity): StreamResponse {
+    public function unfollow(string $source, string $target, bool $deleteNotificationActivity, bool $enrichOwnFields): StreamResponse {
         $path = '/api/v2/feeds/follows/{source}/{target}';
         $path = str_replace('{source}', (string) $source, $path);
         $path = str_replace('{target}', (string) $target, $path);
@@ -1426,6 +1447,9 @@ trait FeedsTrait
         $queryParams = [];
         if ($deleteNotificationActivity !== null) {
             $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
+        }
+        if ($enrichOwnFields !== null) {
+            $queryParams['enrich_own_fields'] = $enrichOwnFields;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\UnfollowResponse::class);

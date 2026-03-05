@@ -9,6 +9,7 @@ class CreateFeedsBatchRequest extends BaseModel
         /** @var array<FeedRequest>|null */
         #[ArrayOf(FeedRequest::class)]
         public ?array $feeds = null, // List of feeds to create
+        public ?bool $enrichOwnFields = null, // If true, enriches the created feeds with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
     ) {
     }
 

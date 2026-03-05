@@ -11,6 +11,7 @@ class QueryFeedsRequest extends BaseModel
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Sorting parameters for the query
+        public ?bool $enrichOwnFields = null,
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,

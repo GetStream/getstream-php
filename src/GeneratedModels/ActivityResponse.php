@@ -45,6 +45,7 @@ class ActivityResponse extends BaseModel
         public ?int $bookmarkCount = null, // Number of bookmarks on the activity
         public ?int $shareCount = null, // Number of times the activity was shared
         public ?int $reactionCount = null, // Number of reactions to the activity
+        public ?array $metrics = null,
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $latestReactions = null, // Recent reactions to the activity

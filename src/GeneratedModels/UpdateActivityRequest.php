@@ -27,6 +27,7 @@ class UpdateActivityRequest extends BaseModel
         public ?bool $runActivityProcessors = null, // If true, runs activity processors on the updated activity. Processors will only run if the activity text and/or attachments are changed. Defaults to false.
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications)
         public ?object $searchData = null, // Additional data for search indexing
+        public ?bool $enrichOwnFields = null, // If true, enriches the activity's current_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

@@ -11,6 +11,7 @@ class UpdateActivityPartialRequest extends BaseModel
         public ?bool $handleMentionNotifications = null, // If true, creates notification activities for newly mentioned users and deletes notifications for users no longer mentioned
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications)
         public ?bool $runActivityProcessors = null, // If true, runs activity processors on the updated activity. Processors will only run if the activity text and/or attachments are changed. Defaults to false.
+        public ?bool $enrichOwnFields = null, // If true, enriches the activity's current_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

@@ -3,10 +3,15 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class PinActivityRequest extends BaseModel
+/**
+ * Batch request to track metric events for activities. Rate-limited per user/IP per activity per metric.
+ */
+class TrackActivityMetricsRequest extends BaseModel
 {
     public function __construct(
-        public ?bool $enrichOwnFields = null, // If true, enriches the activity's current_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
+        /** @var array<TrackActivityMetricsEvent>|null */
+        #[ArrayOf(TrackActivityMetricsEvent::class)]
+        public ?array $events = null, // List of metric events to track (max 100 per request)
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

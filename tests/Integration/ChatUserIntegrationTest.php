@@ -187,7 +187,7 @@ class ChatUserIntegrationTest extends ChatTestCase
             $ids[] = $id;
             $users[$id] = new GeneratedModels\UserRequest(
                 id: $id,
-                name: 'Delete Test User',
+                name: 'Delete Test User ' . $id,
                 role: 'user',
             );
         }
@@ -237,7 +237,7 @@ class ChatUserIntegrationTest extends ChatTestCase
             $response = $this->client->createGuest(new GeneratedModels\CreateGuestRequest(
                 user: new GeneratedModels\UserRequest(
                     id: $guestID,
-                    name: 'Guest User',
+                    name: 'Guest User ' . $guestID,
                 ),
             ));
         } catch (\Exception $e) {
@@ -268,7 +268,7 @@ class ChatUserIntegrationTest extends ChatTestCase
             users: [
                 $userID => new GeneratedModels\UserRequest(
                     id: $userID,
-                    name: 'Teams User',
+                    name: 'Teams User ' . $userID,
                     role: 'admin',
                     teams: ['blue'],
                     teamsRole: ['blue' => 'admin'],
@@ -330,7 +330,7 @@ class ChatUserIntegrationTest extends ChatTestCase
             users: [
                 $userID => new GeneratedModels\UserRequest(
                     id: $userID,
-                    name: 'Privacy User',
+                    name: 'Privacy User ' . $userID,
                     role: 'user',
                 ),
             ],
@@ -509,7 +509,7 @@ class ChatUserIntegrationTest extends ChatTestCase
             users: [
                 $userID => new GeneratedModels\UserRequest(
                     id: $userID,
-                    name: 'Custom Data User',
+                    name: 'Custom Data User ' . $userID,
                     role: 'user',
                     custom: $customData,
                 ),

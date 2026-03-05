@@ -9,6 +9,7 @@ class UpsertActivitiesRequest extends BaseModel
         /** @var array<ActivityRequest>|null */
         #[ArrayOf(ActivityRequest::class)]
         public ?array $activities = null, // List of activities to create or update
+        public ?bool $enrichOwnFields = null, // If true, enriches the activities' current_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
     ) {
     }
 

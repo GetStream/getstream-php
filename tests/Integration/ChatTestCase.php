@@ -70,7 +70,7 @@ abstract class ChatTestCase extends TestCase
             $ids[] = $id;
             $users[$id] = new GeneratedModels\UserRequest(
                 id: $id,
-                name: 'Shared User ' . $i,
+                name: 'Shared User ' . $id,
                 role: 'user',
             );
         }
@@ -184,7 +184,7 @@ abstract class ChatTestCase extends TestCase
             $ids[] = $id;
             $users[$id] = new GeneratedModels\UserRequest(
                 id: $id,
-                name: 'Test User ' . substr($id, 0, 8),
+                name: 'Test User ' . $id,
                 role: 'user',
             );
         }
