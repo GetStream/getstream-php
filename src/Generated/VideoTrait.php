@@ -580,7 +580,11 @@ trait VideoTrait
             $queryParams['next'] = $next;
         }
         if ($filterConditions !== null) {
-            $queryParams['filter_conditions'] = json_encode($filterConditions);
+            try {
+                $queryParams['filter_conditions'] = json_encode($filterConditions, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "filter_conditions" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryCallParticipantSessionsResponse::class);
@@ -973,7 +977,11 @@ trait VideoTrait
             $queryParams['sort'] = $sort;
         }
         if ($filterConditions !== null) {
-            $queryParams['filter_conditions'] = json_encode($filterConditions);
+            try {
+                $queryParams['filter_conditions'] = json_encode($filterConditions, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "filter_conditions" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryCallSessionParticipantStatsResponse::class);

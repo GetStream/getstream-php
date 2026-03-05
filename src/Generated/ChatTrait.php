@@ -782,7 +782,11 @@ trait ChatTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = json_encode($payload);
+            try {
+                $queryParams['payload'] = json_encode($payload, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "payload" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\MembersResponse::class);
@@ -1220,7 +1224,11 @@ trait ChatTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = json_encode($payload);
+            try {
+                $queryParams['payload'] = json_encode($payload, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "payload" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryMessageFlagsResponse::class);
@@ -1269,7 +1277,11 @@ trait ChatTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = json_encode($payload);
+            try {
+                $queryParams['payload'] = json_encode($payload, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "payload" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryBannedUsersResponse::class);
@@ -1286,7 +1298,11 @@ trait ChatTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = json_encode($payload);
+            try {
+                $queryParams['payload'] = json_encode($payload, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "payload" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryFutureChannelBansResponse::class);
@@ -1317,7 +1333,11 @@ trait ChatTrait
 
         $queryParams = [];
         if ($payload !== null) {
-            $queryParams['payload'] = json_encode($payload);
+            try {
+                $queryParams['payload'] = json_encode($payload, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new StreamException('Failed to encode query parameter "payload" to JSON: ' . $e->getMessage());
+            }
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\SearchResponse::class);
