@@ -51,32 +51,44 @@ $client = new Client(
 
 ### ClientBuilder (New)
 
-The new SDK introduces a `ClientBuilder` with a fluent interface. This pattern has no equivalent in the old SDK.
+The new SDK introduces a `ClientBuilder` with a fluent interface. This pattern has no equivalent in the old SDK. The builder has specialized build methods for each product area:
+
+- `build()` returns a base `Client` (common operations: users, devices, tokens)
+- `buildChatClient()` returns a `ChatClient` (all common + chat operations: channels, messages, reactions)
+- `buildModerationClient()` returns a `ModerationClient` (all common + moderation operations: ban, mute)
+- `buildVideoClient()` returns a `VideoClient` (all common + video operations)
+- `buildFeedsClient()` returns a `FeedsV3Client` (all common + feeds operations)
 
 **After (getstream-php):**
 
 ```php
 use GetStream\ClientBuilder;
 
-// Build from environment variables (STREAM_API_KEY, STREAM_API_SECRET, STREAM_BASE_URL)
-$client = ClientBuilder::fromEnv()->build();
+// Build a ChatClient from environment variables (STREAM_API_KEY, STREAM_API_SECRET, STREAM_BASE_URL)
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 // Build from a custom .env file path
-$client = ClientBuilder::fromEnv('/path/to/.env')->build();
+$client = ClientBuilder::fromEnv('/path/to/.env')->buildChatClient();
 
 // Mix environment and explicit values
 $client = ClientBuilder::fromEnv()
     ->apiKey("<api-key>")
     ->apiSecret("<api-secret>")
     ->baseUrl("<custom-url>")
-    ->build();
+    ->buildChatClient();
 
 // Skip .env file loading entirely
 $client = ClientBuilder::fromEnv()
     ->skipEnvLoad()
     ->apiKey("<api-key>")
     ->apiSecret("<api-secret>")
-    ->build();
+    ->buildChatClient();
+
+// Build a base Client for common operations (users, devices, tokens)
+$client = ClientBuilder::fromEnv()->build();
+
+// Build a ModerationClient for moderation operations (ban, mute, etc.)
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 ```
 
 ### Environment Variables
@@ -96,8 +108,10 @@ Update your `use` statements:
 
 | Purpose | stream-chat-php | getstream-php |
 |---------|-----------------|---------------|
-| Client | `GetStream\StreamChat\Client` | `GetStream\Client` |
+| Base Client | `GetStream\StreamChat\Client` | `GetStream\Client` |
 | Chat Client | _(same class)_ | `GetStream\ChatClient` |
+| Moderation Client | _(none)_ | `GetStream\ModerationClient` |
+| Video Client | _(none)_ | `GetStream\VideoClient` |
 | Builder | _(none)_ | `GetStream\ClientBuilder` |
 
 `ChatClient` extends `Client` and adds all chat-specific methods via `ChatTrait`. For chat operations, you must use `ChatClient`; the base `Client` does not include chat-specific methods.
@@ -172,7 +186,7 @@ $token = $client->createUserToken(
 
 | Operation | stream-chat-php | getstream-php |
 |-----------|-----------------|---------------|
-| Create client | `new Client($key, $secret)` | `new Client(apiKey: $key, apiSecret: $secret)` or `ClientBuilder::fromEnv()->build()` |
+| Create client | `new Client($key, $secret)` | `new ChatClient(apiKey: $key, apiSecret: $secret)` or `ClientBuilder::fromEnv()->buildChatClient()` |
 | Generate user token | `$client->createToken($userId)` | `$client->createUserToken($userId)` |
 | Token with expiry | `$client->createToken($userId, time() + 3600)` | `$client->createUserToken($userId, expiration: 3600)` |
 | Token with claims | _(not supported)_ | `$client->createUserToken($userId, claims: [...])` |

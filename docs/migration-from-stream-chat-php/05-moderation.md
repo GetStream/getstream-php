@@ -25,7 +25,7 @@ $response = $channel->addModerators(['user-1', 'user-2']);
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateChannel('messaging', 'general', new GeneratedModels\UpdateChannelRequest(
     addModerators: ['user-1', 'user-2'],
@@ -56,7 +56,7 @@ $response = $channel->demoteModerators(['user-1', 'user-2']);
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateChannel('messaging', 'general', new GeneratedModels\UpdateChannelRequest(
     demoteModerators: ['user-1', 'user-2'],
@@ -91,7 +91,7 @@ $response = $client->banUser('bad-user', [
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 // Ban a user app-wide
 $response = $client->ban(new GeneratedModels\BanRequest(
@@ -130,7 +130,7 @@ $response = $channel->banUser('bad-user', [
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 $response = $client->ban(new GeneratedModels\BanRequest(
     targetUserID: 'bad-user',
@@ -162,7 +162,7 @@ $response = $client->unbanUser('bad-user');
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 $response = $client->unban(
     targetUserID: 'bad-user',
@@ -196,7 +196,7 @@ $response = $channel->unbanUser('bad-user');
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 $response = $client->unban(
     targetUserID: 'bad-user',
@@ -236,7 +236,7 @@ $response = $client->removeShadowBan('bad-user', [
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 // Shadow ban (app-level)
 $response = $client->ban(new GeneratedModels\BanRequest(
@@ -280,7 +280,7 @@ $response = $client->queryBannedUsers(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->queryBannedUsers(new GeneratedModels\QueryBannedUsersPayload(
     filterConditions: (object) ['channel_cid' => 'messaging:general'],
@@ -314,7 +314,7 @@ $response = $client->muteUser('target-user', 'requesting-user');
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 $response = $client->mute(new GeneratedModels\MuteRequest(
     targetIds: ['target-user'],
@@ -343,7 +343,7 @@ $response = $client->mute(new GeneratedModels\MuteRequest(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 $response = $client->mute(new GeneratedModels\MuteRequest(
     targetIds: ['target-user'],
@@ -373,7 +373,7 @@ $response = $client->unmuteUser('target-user', 'requesting-user');
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildModerationClient();
 
 $response = $client->unmute(new GeneratedModels\UnmuteRequest(
     targetIds: ['target-user'],

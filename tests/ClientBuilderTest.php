@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace GetStream\Tests;
 
+use GetStream\ChatClient;
 use GetStream\Client;
 use GetStream\ClientBuilder;
 use GetStream\Http\HttpClientInterface;
+use GetStream\VideoClient;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -173,6 +175,48 @@ class ClientBuilderTest extends TestCase
 
         // Assert
         self::assertSame('https://custom-env.api.com', $client->getBaseUrl());
+    }
+
+    /**
+     * @test
+     */
+    public function buildChatClient(): void
+    {
+        $client = (new ClientBuilder())
+            ->apiKey('test-key')
+            ->apiSecret('test-secret')
+            ->baseUrl('https://custom.api.com')
+            ->httpClient($this->mockHttpClient)
+            ->skipEnvLoad()
+            ->buildChatClient();
+
+        self::assertInstanceOf(ChatClient::class, $client);
+        self::assertInstanceOf(Client::class, $client);
+        self::assertSame('test-key', $client->getApiKey());
+        self::assertSame('test-secret', $client->getApiSecret());
+        self::assertSame('https://custom.api.com', $client->getBaseUrl());
+        self::assertSame($this->mockHttpClient, $client->getHttpClient());
+    }
+
+    /**
+     * @test
+     */
+    public function buildVideoClient(): void
+    {
+        $client = (new ClientBuilder())
+            ->apiKey('test-key')
+            ->apiSecret('test-secret')
+            ->baseUrl('https://custom.api.com')
+            ->httpClient($this->mockHttpClient)
+            ->skipEnvLoad()
+            ->buildVideoClient();
+
+        self::assertInstanceOf(VideoClient::class, $client);
+        self::assertInstanceOf(Client::class, $client);
+        self::assertSame('test-key', $client->getApiKey());
+        self::assertSame('test-secret', $client->getApiSecret());
+        self::assertSame('https://custom.api.com', $client->getBaseUrl());
+        self::assertSame($this->mockHttpClient, $client->getHttpClient());
     }
 
     /**

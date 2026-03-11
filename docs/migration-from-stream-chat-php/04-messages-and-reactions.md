@@ -26,7 +26,7 @@ $response = $channel->sendMessage(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->sendMessage('messaging', 'general', new GeneratedModels\SendMessageRequest(
     message: new GeneratedModels\MessageRequest(
@@ -69,7 +69,7 @@ $response = $channel->sendMessage(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->sendMessage('messaging', 'general', new GeneratedModels\SendMessageRequest(
     message: new GeneratedModels\MessageRequest(
@@ -118,7 +118,7 @@ $response = $channel->sendMessage(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 // Reply in a thread
 $response = $client->sendMessage('messaging', 'general', new GeneratedModels\SendMessageRequest(
@@ -162,7 +162,7 @@ $response = $client->getMessage('message-id-123');
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->getMessage('message-id-123', showDeletedMessage: false);
 ```
@@ -193,7 +193,7 @@ $response = $client->updateMessage([
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateMessage('message-id-123', new GeneratedModels\UpdateMessageRequest(
     message: new GeneratedModels\MessageRequest(
@@ -218,7 +218,7 @@ The new SDK also supports partial message updates, which the old SDK does not ha
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateMessagePartial('message-id-123', new GeneratedModels\UpdateMessagePartialRequest(
     set: (object) ['text' => 'Partially updated text', 'color' => 'blue'],
@@ -248,7 +248,7 @@ $response = $client->deleteMessage('message-id-123', ['hard' => true]);
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 // Soft delete
 $response = $client->deleteMessage('message-id-123', hard: false, deletedBy: '', deleteForMe: false);
@@ -292,7 +292,7 @@ $response = $channel->sendReaction(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->sendReaction('message-id-123', new GeneratedModels\SendReactionRequest(
     reaction: new GeneratedModels\ReactionRequest(
@@ -340,7 +340,7 @@ $response = $channel->getReactions('message-id-123', ['limit' => 10, 'offset' =>
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 // Get reactions for a message
 $response = $client->getReactions('message-id-123', limit: 25, offset: 0);
@@ -372,7 +372,7 @@ $response = $channel->deleteReaction('message-id-123', 'like', 'user-1');
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->deleteReaction('message-id-123', type: 'like', userID: 'user-1');
 ```

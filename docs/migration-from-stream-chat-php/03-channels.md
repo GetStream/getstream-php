@@ -32,7 +32,7 @@ $response = $client->createChannelType([
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->createChannelType(new GeneratedModels\CreateChannelTypeRequest(
     name: 'support',
@@ -70,7 +70,7 @@ $response = $client->listChannelTypes();
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->listChannelTypes();
 ```
@@ -96,7 +96,7 @@ $response = $client->getChannelType('support');
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->getChannelType('support');
 ```
@@ -127,7 +127,7 @@ $response = $client->updateChannelType('support', [
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateChannelType('support', new GeneratedModels\UpdateChannelTypeRequest(
     typingEvents: false,
@@ -157,7 +157,7 @@ $response = $client->deleteChannelType('support');
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->deleteChannelType('support');
 ```
@@ -187,7 +187,7 @@ $response = $channel->create('admin-user', ['user-1', 'user-2']);
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->getOrCreateChannel('messaging', 'general', new GeneratedModels\ChannelGetOrCreateRequest(
     data: new GeneratedModels\ChannelInput(
@@ -226,7 +226,7 @@ $response = $channel->create('user-1');
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 // Use getOrCreateDistinctChannel (no channel ID needed)
 $response = $client->getOrCreateDistinctChannel('messaging', new GeneratedModels\ChannelGetOrCreateRequest(
@@ -268,7 +268,7 @@ $response = $channel->addMembers(['user-5'], [
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateChannel('messaging', 'general', new GeneratedModels\UpdateChannelRequest(
     addMembers: [
@@ -310,7 +310,7 @@ $response = $channel->removeMembers(['user-3', 'user-4']);
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateChannel('messaging', 'general', new GeneratedModels\UpdateChannelRequest(
     removeMembers: ['user-3', 'user-4'],
@@ -350,7 +350,7 @@ $response = $client->queryChannels(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 // Basic query
 $response = $client->queryChannels(new GeneratedModels\QueryChannelsRequest(
@@ -407,7 +407,7 @@ $response = $channel->update(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateChannel('messaging', 'general', new GeneratedModels\UpdateChannelRequest(
     message: new GeneratedModels\MessageRequest(
@@ -441,7 +441,7 @@ $response = $channel->updatePartial(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->updateChannelPartial('messaging', 'general', new GeneratedModels\UpdateChannelPartialRequest(
     set: (object) ['name' => 'Updated Name', 'color' => 'blue'],
@@ -474,7 +474,7 @@ $response = $channel->delete();
 ```php
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->deleteChannel('messaging', 'general', hardDelete: false);
 ```
@@ -508,7 +508,7 @@ $response = $client->deleteChannels(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->deleteChannels(new GeneratedModels\DeleteChannelsRequest(
     cids: ['messaging:general', 'messaging:support'],

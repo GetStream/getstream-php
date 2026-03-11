@@ -22,10 +22,10 @@ $client->addDevice("device-token-abc", "apn", "user-123", "my-apn-provider");
 **After (getstream-php):**
 
 ```php
-use GetStream\ChatClient;
+use GetStream\ClientBuilder;
 use GetStream\GeneratedModels\CreateDeviceRequest;
 
-$client = new ChatClient("<api-key>", "<api-secret>");
+$client = ClientBuilder::fromEnv()->build();
 
 $client->createDevice(new CreateDeviceRequest(
     id: 'device-token-abc',

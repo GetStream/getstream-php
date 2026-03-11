@@ -14,7 +14,7 @@ If you are starting a new project, use **getstream-php**. If you have an existin
 |---|---|---|
 | **Package** | `get-stream/stream-chat` | `getstream/getstream-php` |
 | **Namespace** | `GetStream\StreamChat\Client` | `GetStream\Client` / `GetStream\ChatClient` |
-| **Client init** | `new Client($apiKey, $apiSecret)` | `ClientBuilder::fromEnv()->build()` or `new Client(apiKey: ..., apiSecret: ...)` |
+| **Client init** | `new Client($apiKey, $apiSecret)` | `ClientBuilder::fromEnv()->buildChatClient()` or `new ChatClient(apiKey: ..., apiSecret: ...)` |
 | **API style** | Associative arrays for everything | Typed model classes with named arguments |
 | **Channel operations** | `$client->Channel($type, $id)->method()` | `$client->methodName($type, $id, ...)` |
 | **Custom fields** | Top-level array keys | `custom: (object) [...]` property |
@@ -47,7 +47,7 @@ $response = $channel->sendMessage(
 use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 
-$client = ClientBuilder::fromEnv()->build();
+$client = ClientBuilder::fromEnv()->buildChatClient();
 
 $response = $client->sendMessage(
     'messaging',
