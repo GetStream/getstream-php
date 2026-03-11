@@ -118,6 +118,26 @@ class ClientBuilder
     /**
      * @throws StreamException
      */
+    public function buildChatClient(): ChatClient
+    {
+        $this->loadCreds();
+
+        return new ChatClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+    }
+
+    /**
+     * @throws StreamException
+     */
+    public function buildVideoClient(): VideoClient
+    {
+        $this->loadCreds();
+
+        return new VideoClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+    }
+
+    /**
+     * @throws StreamException
+     */
     public function buildModerationClient(): ModerationClient
     {
         $this->loadCreds();
