@@ -100,7 +100,7 @@ Update your `use` statements:
 | Chat Client | _(same class)_ | `GetStream\ChatClient` |
 | Builder | _(none)_ | `GetStream\ClientBuilder` |
 
-`ChatClient` extends `Client` and adds all chat-specific methods via `ChatTrait`. For chat operations, you can use either `Client` or `ChatClient` directly.
+`ChatClient` extends `Client` and adds all chat-specific methods via `ChatTrait`. For chat operations, you must use `ChatClient`; the base `Client` does not include chat-specific methods.
 
 ## User Token Generation
 
