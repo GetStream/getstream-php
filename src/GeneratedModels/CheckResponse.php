@@ -10,6 +10,7 @@ class CheckResponse extends BaseModel
         public ?string $taskID = null, // ID of the running moderation task
         public ?string $recommendedAction = null, // Suggested action based on moderation results
         public ?ReviewQueueItemResponse $item = null,
+        public ?TriggeredRuleResponse $triggeredRule = null,
         public ?string $duration = null,
     ) {
     }

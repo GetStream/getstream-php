@@ -12,6 +12,7 @@ class ResolveSipInboundRequest extends BaseModel
         public ?string $sipTrunkNumber = null, // SIP trunk number to resolve
         public ?string $sipCallerNumber = null, // SIP caller number
         public ?SIPChallengeRequest $challenge = null,
+        public ?string $trunkID = null, // Optional pre-authenticated trunk ID (from PreAuth no-auth flow)
         public ?array $sipHeaders = null, // Optional SIP headers as key-value pairs
         public ?string $routingNumber = null, // Optional routing number for routing number-based call routing (10 digits)
     ) {

@@ -19,16 +19,14 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('integration')]
 class ChatModerationIntegrationTest extends ChatTestCase
 {
-    protected static function sharedUserCount(): int
-    {
-        return 4;
-    }
-
     // =========================================================================
     // Ban / Unban
     // =========================================================================
 
-    public function testBanUnbanUser(): void
+    /**
+     * @test
+     */
+    public function banUnbanUser(): void
     {
         $shared = $this->getSharedUserIDs();
         $userIDs = [$shared[0], $shared[1], $shared[2]];
@@ -55,7 +53,7 @@ class ChatModerationIntegrationTest extends ChatTestCase
         self::assertNotEmpty($qResp->getData()->bans, 'Should find the banned user');
 
         $ban = $qResp->getData()->bans[0];
-        self::assertEquals('test ban reason', $ban->reason);
+        self::assertSame('test ban reason', $ban->reason);
         // When timeout is set, expires should be populated
         self::assertNotNull($ban->expires, 'Ban with timeout should have Expires set');
 
@@ -100,7 +98,10 @@ class ChatModerationIntegrationTest extends ChatTestCase
     // Mute / Unmute
     // =========================================================================
 
-    public function testMuteUnmuteUser(): void
+    /**
+     * @test
+     */
+    public function muteUnmuteUser(): void
     {
         $userIDs = $this->getSharedUserIDs();
         $muterID = $userIDs[0];
@@ -157,7 +158,10 @@ class ChatModerationIntegrationTest extends ChatTestCase
     // Flag
     // =========================================================================
 
-    public function testFlagMessageAndUser(): void
+    /**
+     * @test
+     */
+    public function flagMessageAndUser(): void
     {
         $shared = $this->getSharedUserIDs();
         $userID = $shared[0];
@@ -203,5 +207,10 @@ class ChatModerationIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($flagUserResp, 'flag user');
         self::assertNotEmpty($flagUserResp->getData()->itemID, 'Flag user should return an item ID');
+    }
+
+    protected static function sharedUserCount(): int
+    {
+        return 4;
     }
 }

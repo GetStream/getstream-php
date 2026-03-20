@@ -43,6 +43,7 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?Thresholds $automodThresholds = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null,
+        public ?ChatPreferences $chatPreferences = null,
         public ?array $commands = null, // List of commands that channel supports
     ) {
     }

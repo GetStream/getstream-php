@@ -13,6 +13,10 @@ class QueryModerationRulesResponse extends BaseModel
         public ?array $keyframeLabels = null, // Deprecated: use keyframe_label_classifications instead. Available L1 harm labels for keyframe rules
         public ?array $keyframeLabelClassifications = null, // L1 to L2 mapping of keyframe harm label classifications
         public ?array $closedCaptionLabels = null, // Available harm labels for closed caption rules
+        /** @var array<AIImageLabelDefinition>|null */
+        #[ArrayOf(AIImageLabelDefinition::class)]
+        public ?array $aiImageLabelDefinitions = null, // AI image label definitions with metadata for dashboard rendering
+        public ?array $aiImageSubclassifications = null, // Stream L1 to leaf-level label name mapping for AI image rules
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $duration = null,

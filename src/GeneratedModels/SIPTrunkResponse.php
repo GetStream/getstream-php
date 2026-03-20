@@ -15,6 +15,7 @@ class SIPTrunkResponse extends BaseModel
         public ?string $uri = null, // The URI for the SIP trunk
         public ?string $username = null, // Username for SIP trunk authentication
         public ?string $password = null, // Password for SIP trunk authentication
+        public ?array $allowedIps = null, // Allowed IPv4/IPv6 addresses or CIDR blocks
         public ?\DateTime $createdAt = null, // Creation timestamp
         public ?\DateTime $updatedAt = null, // Last update timestamp
     ) {

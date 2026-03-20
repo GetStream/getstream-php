@@ -17,11 +17,6 @@ class ChatMessageIntegrationTest extends ChatTestCase
     private string $userID;
     private string $userID2;
 
-    protected static function sharedUserCount(): int
-    {
-        return 2;
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -34,7 +29,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Send / Get / Update / Delete
     // =========================================================================
 
-    public function testSendAndGetMessage(): void
+    /**
+     * @test
+     */
+    public function sendAndGetMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -47,11 +45,14 @@ class ChatMessageIntegrationTest extends ChatTestCase
 
         $data = $resp->getData();
         self::assertNotNull($data->message);
-        self::assertEquals($msgID, $data->message->id);
-        self::assertEquals($msgText, $data->message->text);
+        self::assertSame($msgID, $data->message->id);
+        self::assertSame($msgText, $data->message->text);
     }
 
-    public function testGetManyMessages(): void
+    /**
+     * @test
+     */
+    public function getsManyMessages(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -66,7 +67,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
         self::assertCount(3, $data->messages);
     }
 
-    public function testUpdateMessage(): void
+    /**
+     * @test
+     */
+    public function updatesMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Original text');
@@ -79,10 +83,13 @@ class ChatMessageIntegrationTest extends ChatTestCase
             ),
         ));
         $this->assertResponseSuccess($resp, 'update message');
-        self::assertEquals($updatedText, $resp->getData()->message->text);
+        self::assertSame($updatedText, $resp->getData()->message->text);
     }
 
-    public function testPartialUpdateMessage(): void
+    /**
+     * @test
+     */
+    public function partialUpdateMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Partial update test');
@@ -107,7 +114,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
         self::assertNotNull($resp->getData()->message);
     }
 
-    public function testDeleteMessage(): void
+    /**
+     * @test
+     */
+    public function deleteMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Message to delete');
@@ -115,24 +125,30 @@ class ChatMessageIntegrationTest extends ChatTestCase
         // Soft delete
         $resp = $this->deleteMessageApi($msgID);
         $this->assertResponseSuccess($resp, 'delete message');
-        self::assertEquals('deleted', $resp->getData()->message->type);
+        self::assertSame('deleted', $resp->getData()->message->type);
     }
 
-    public function testHardDeleteMessage(): void
+    /**
+     * @test
+     */
+    public function hardDeleteMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Message to hard delete');
 
         $resp = $this->deleteMessageApi($msgID, hard: true);
         $this->assertResponseSuccess($resp, 'hard delete message');
-        self::assertEquals('deleted', $resp->getData()->message->type);
+        self::assertSame('deleted', $resp->getData()->message->type);
     }
 
     // =========================================================================
     // Pin / Unpin
     // =========================================================================
 
-    public function testPinUnpinMessage(): void
+    /**
+     * @test
+     */
+    public function pinUnpinMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -157,7 +173,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
         self::assertFalse($resp->getData()->message->pinned);
     }
 
-    public function testPinExpiration(): void
+    /**
+     * @test
+     */
+    public function pinExpiration(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID, $this->userID2]);
 
@@ -189,7 +208,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Translate
     // =========================================================================
 
-    public function testTranslateMessage(): void
+    /**
+     * @test
+     */
+    public function translatesMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Hello, how are you?');
@@ -206,7 +228,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Threads
     // =========================================================================
 
-    public function testThreadReply(): void
+    /**
+     * @test
+     */
+    public function threadReply(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID, $this->userID2]);
 
@@ -234,7 +259,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Search
     // =========================================================================
 
-    public function testSearchMessages(): void
+    /**
+     * @test
+     */
+    public function searchesMessages(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -252,7 +280,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
         self::assertNotEmpty($resp->getData()->results, 'Search should return at least one result');
     }
 
-    public function testSearchWithMessageFilters(): void
+    /**
+     * @test
+     */
+    public function searchWithMessageFilters(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -272,7 +303,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
         self::assertGreaterThanOrEqual(2, count($resp->getData()->results), 'Should find at least 2 messages with MessageFilterConditions');
     }
 
-    public function testSearchQueryAndMessageFiltersError(): void
+    /**
+     * @test
+     */
+    public function searchQueryAndMessageFiltersError(): void
     {
         // Using both query and messageFilterConditions together should error
         $this->expectException(\Exception::class);
@@ -283,8 +317,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
         ));
     }
 
-
-    public function testSearchOffsetAndNextError(): void
+    /**
+     * @test
+     */
+    public function searchOffsetAndNextError(): void
     {
         // Using offset with next should error
         $this->expectException(\Exception::class);
@@ -300,7 +336,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Special Message Types
     // =========================================================================
 
-    public function testSilentMessage(): void
+    /**
+     * @test
+     */
+    public function silentMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -315,7 +354,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
         self::assertTrue($resp->getData()->message->silent);
     }
 
-    public function testSystemMessage(): void
+    /**
+     * @test
+     */
+    public function systemMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -327,14 +369,17 @@ class ChatMessageIntegrationTest extends ChatTestCase
             ),
         ));
         $this->assertResponseSuccess($resp, 'send system message');
-        self::assertEquals('system', $resp->getData()->message->type);
+        self::assertSame('system', $resp->getData()->message->type);
     }
 
     // =========================================================================
     // Pending Messages
     // =========================================================================
 
-    public function testPendingMessage(): void
+    /**
+     * @test
+     */
+    public function pendingMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -350,8 +395,9 @@ class ChatMessageIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'pending messages not enabled') || str_contains($e->getMessage(), 'feature flag')) {
-                $this->markTestSkipped('Pending messages feature not enabled for this app');
+                self::markTestSkipped('Pending messages feature not enabled for this app');
             }
+
             throw $e;
         }
         $this->assertResponseSuccess($sendResp, 'send pending message');
@@ -362,10 +408,13 @@ class ChatMessageIntegrationTest extends ChatTestCase
         $commitResp = $this->commitMessage($msgID);
         $this->assertResponseSuccess($commitResp, 'commit pending message');
         self::assertNotNull($commitResp->getData()->message);
-        self::assertEquals($msgID, $commitResp->getData()->message->id);
+        self::assertSame($msgID, $commitResp->getData()->message->id);
     }
 
-    public function testPendingFalse(): void
+    /**
+     * @test
+     */
+    public function pendingFalse(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -382,14 +431,17 @@ class ChatMessageIntegrationTest extends ChatTestCase
         // Get the message to verify it's immediately available
         $getResp = $this->getMessage($sendResp->getData()->message->id);
         $this->assertResponseSuccess($getResp, 'get non-pending message');
-        self::assertEquals('Non-pending message', $getResp->getData()->message->text);
+        self::assertSame('Non-pending message', $getResp->getData()->message->text);
     }
 
     // =========================================================================
     // Message History
     // =========================================================================
 
-    public function testQueryMessageHistory(): void
+    /**
+     * @test
+     */
+    public function queriesMessageHistory(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID, $this->userID2]);
 
@@ -429,8 +481,9 @@ class ChatMessageIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'feature flag') || str_contains($e->getMessage(), 'not enabled')) {
-                $this->markTestSkipped('QueryMessageHistory feature not enabled for this app');
+                self::markTestSkipped('QueryMessageHistory feature not enabled for this app');
             }
+
             throw $e;
         }
         $this->assertResponseSuccess($histResp, 'query message history');
@@ -438,17 +491,20 @@ class ChatMessageIntegrationTest extends ChatTestCase
 
         // Verify history entries reference the correct message
         foreach ($histResp->getData()->messageHistory as $entry) {
-            self::assertEquals($msgID, $entry->messageID);
+            self::assertSame($msgID, $entry->messageID);
         }
 
         // Verify text values in history (descending order by default)
-        self::assertEquals('updated text', $histResp->getData()->messageHistory[0]->text);
-        self::assertEquals($this->userID, $histResp->getData()->messageHistory[0]->messageUpdatedByID);
-        self::assertEquals('initial text', $histResp->getData()->messageHistory[1]->text);
-        self::assertEquals($this->userID, $histResp->getData()->messageHistory[1]->messageUpdatedByID);
+        self::assertSame('updated text', $histResp->getData()->messageHistory[0]->text);
+        self::assertSame($this->userID, $histResp->getData()->messageHistory[0]->messageUpdatedByID);
+        self::assertSame('initial text', $histResp->getData()->messageHistory[1]->text);
+        self::assertSame($this->userID, $histResp->getData()->messageHistory[1]->messageUpdatedByID);
     }
 
-    public function testQueryMessageHistorySort(): void
+    /**
+     * @test
+     */
+    public function queryMessageHistorySort(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID, $this->userID2]);
 
@@ -483,23 +539,27 @@ class ChatMessageIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'feature flag') || str_contains($e->getMessage(), 'not enabled')) {
-                $this->markTestSkipped('QueryMessageHistory feature not enabled for this app');
+                self::markTestSkipped('QueryMessageHistory feature not enabled for this app');
             }
+
             throw $e;
         }
         $this->assertResponseSuccess($histResp, 'query message history with sort');
         self::assertGreaterThanOrEqual(2, count($histResp->getData()->messageHistory));
 
         // Ascending: oldest first
-        self::assertEquals('sort initial', $histResp->getData()->messageHistory[0]->text);
-        self::assertEquals($this->userID, $histResp->getData()->messageHistory[0]->messageUpdatedByID);
+        self::assertSame('sort initial', $histResp->getData()->messageHistory[0]->text);
+        self::assertSame($this->userID, $histResp->getData()->messageHistory[0]->messageUpdatedByID);
     }
 
     // =========================================================================
     // URL Enrichment
     // =========================================================================
 
-    public function testSkipEnrichUrl(): void
+    /**
+     * @test
+     */
+    public function skipEnrichUrl(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -525,7 +585,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Channel Hidden / Visibility
     // =========================================================================
 
-    public function testKeepChannelHidden(): void
+    /**
+     * @test
+     */
+    public function keepChannelHidden(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -558,7 +621,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Delete / Undelete Variants
     // =========================================================================
 
-    public function testUndeleteMessage(): void
+    /**
+     * @test
+     */
+    public function undeletesMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Message to undelete');
@@ -570,7 +636,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
         // Verify it's deleted
         $getResp = $this->getMessage($msgID);
         $this->assertResponseSuccess($getResp, 'get deleted message');
-        self::assertEquals('deleted', $getResp->getData()->message->type);
+        self::assertSame('deleted', $getResp->getData()->message->type);
 
         // Undelete the message
         try {
@@ -579,17 +645,21 @@ class ChatMessageIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'undeleted_by') || str_contains($e->getMessage(), 'required field')) {
-                $this->markTestSkipped('UndeleteMessage requires field not yet in generated request struct');
+                self::markTestSkipped('UndeleteMessage requires field not yet in generated request struct');
             }
+
             throw $e;
         }
         $this->assertResponseSuccess($undelResp, 'undelete message');
         self::assertNotNull($undelResp->getData()->message);
-        self::assertNotEquals('deleted', $undelResp->getData()->message->type);
-        self::assertEquals('Message to undelete', $undelResp->getData()->message->text);
+        self::assertNotSame('deleted', $undelResp->getData()->message->type);
+        self::assertSame('Message to undelete', $undelResp->getData()->message->text);
     }
 
-    public function testRestrictedVisibility(): void
+    /**
+     * @test
+     */
+    public function restrictedVisibility(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID, $this->userID2]);
 
@@ -604,15 +674,19 @@ class ChatMessageIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'private messaging is not allowed') || str_contains($e->getMessage(), 'not enabled')) {
-                $this->markTestSkipped('RestrictedVisibility (private messaging) is not enabled for this app');
+                self::markTestSkipped('RestrictedVisibility (private messaging) is not enabled for this app');
             }
+
             throw $e;
         }
         $this->assertResponseSuccess($sendResp, 'send restricted visibility message');
-        self::assertEquals([$this->userID], $sendResp->getData()->message->restrictedVisibility);
+        self::assertSame([$this->userID], $sendResp->getData()->message->restrictedVisibility);
     }
 
-    public function testDeleteMessageForMe(): void
+    /**
+     * @test
+     */
+    public function deleteMessageForMe(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'test message to delete for me');
@@ -626,7 +700,10 @@ class ChatMessageIntegrationTest extends ChatTestCase
     // Channel Role in Member
     // =========================================================================
 
-    public function testChannelRoleInMember(): void
+    /**
+     * @test
+     */
+    public function channelRoleInMember(): void
     {
         $roleUserIDs = $this->createTestUsers(2);
         $memberUserID = $roleUserIDs[0];
@@ -656,7 +733,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($respMember, 'send from channel_member');
         self::assertNotNull($respMember->getData()->message->member, 'Member should be present in message response');
-        self::assertEquals('channel_member', $respMember->getData()->message->member->channelRole);
+        self::assertSame('channel_member', $respMember->getData()->message->member->channelRole);
 
         // Send message from channel_moderator
         $respMod = $this->sendMessage($channelType, $channelID, new GeneratedModels\SendMessageRequest(
@@ -667,6 +744,11 @@ class ChatMessageIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($respMod, 'send from channel_moderator');
         self::assertNotNull($respMod->getData()->message->member, 'Member should be present in message response');
-        self::assertEquals('channel_moderator', $respMod->getData()->message->member->channelRole);
+        self::assertSame('channel_moderator', $respMod->getData()->message->member->channelRole);
+    }
+
+    protected static function sharedUserCount(): int
+    {
+        return 2;
     }
 }

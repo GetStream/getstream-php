@@ -23,6 +23,9 @@ class ConfigResponse extends BaseModel
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
         public ?array $supportedVideoCallHarmTypes = null,
         public ?array $aiImageSubclassifications = null, // Available L2 subclassifications per L1 image moderation label, based on the active provider
+        /** @var array<AIImageLabelDefinition>|null */
+        #[ArrayOf(AIImageLabelDefinition::class)]
+        public ?array $aiImageLabelDefinitions = null, // Configurable image moderation label definitions for dashboard rendering
     ) {
     }
 

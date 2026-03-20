@@ -3,12 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ChannelPushPreferencesResponse extends BaseModel
+class RunStats extends BaseModel
 {
     public function __construct(
-        public ?string $chatLevel = null,
-        public ?ChatPreferencesResponse $chatPreferences = null,
-        public ?\DateTime $disabledUntil = null,
+        public ?int $channelsDeleted = null,
+        public ?int $messagesDeleted = null,
     ) {
     }
 

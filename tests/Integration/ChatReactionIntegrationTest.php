@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
-use GetStream\StreamResponse;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -15,15 +14,12 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('integration')]
 class ChatReactionIntegrationTest extends ChatTestCase
 {
-    protected static function sharedUserCount(): int
-    {
-        return 2;
-    }
-
     /**
      * Test sending a reaction and retrieving reactions on a message.
+     *
+     * @test
      */
-    public function testSendAndGetReactions(): void
+    public function sendAndGetReactions(): void
     {
         $userIDs = $this->getSharedUserIDs();
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
@@ -37,9 +33,9 @@ class ChatReactionIntegrationTest extends ChatTestCase
             ),
         ));
         $this->assertResponseSuccess($resp, 'send like reaction');
-        $this->assertNotNull($resp->getData()->reaction);
-        $this->assertEquals('like', $resp->getData()->reaction->type);
-        $this->assertEquals($userIDs[0], $resp->getData()->reaction->userID);
+        self::assertNotNull($resp->getData()->reaction);
+        self::assertSame('like', $resp->getData()->reaction->type);
+        self::assertSame($userIDs[0], $resp->getData()->reaction->userID);
 
         // Send a "love" reaction from user 2
         $resp = $this->sendReaction($msgID, new GeneratedModels\SendReactionRequest(
@@ -49,19 +45,21 @@ class ChatReactionIntegrationTest extends ChatTestCase
             ),
         ));
         $this->assertResponseSuccess($resp, 'send love reaction');
-        $this->assertEquals('love', $resp->getData()->reaction->type);
+        self::assertSame('love', $resp->getData()->reaction->type);
 
         // Get reactions and verify both are present
         $getResp = $this->getReactions($msgID);
         $this->assertResponseSuccess($getResp, 'get reactions');
-        $this->assertNotNull($getResp->getData()->reactions);
-        $this->assertGreaterThanOrEqual(2, count($getResp->getData()->reactions));
+        self::assertNotNull($getResp->getData()->reactions);
+        self::assertGreaterThanOrEqual(2, count($getResp->getData()->reactions));
     }
 
     /**
      * Test deleting a reaction from a message.
+     *
+     * @test
      */
-    public function testDeleteReaction(): void
+    public function deletesReaction(): void
     {
         $userIDs = [$this->getSharedUserIDs()[0]];
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
@@ -87,15 +85,17 @@ class ChatReactionIntegrationTest extends ChatTestCase
         $reactions = $getResp->getData()->reactions ?? [];
         foreach ($reactions as $r) {
             if ($r->userID === $userIDs[0]) {
-                $this->assertNotEquals('like', $r->type, 'Like reaction should have been deleted');
+                self::assertNotSame('like', $r->type, 'Like reaction should have been deleted');
             }
         }
     }
 
     /**
      * Test enforce_unique: sending a second reaction with enforce_unique replaces the first.
+     *
+     * @test
      */
-    public function testEnforceUniqueReaction(): void
+    public function enforceUniqueReaction(): void
     {
         $userIDs = [$this->getSharedUserIDs()[0]];
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
@@ -132,6 +132,11 @@ class ChatReactionIntegrationTest extends ChatTestCase
                 $userReactions++;
             }
         }
-        $this->assertEquals(1, $userReactions, 'EnforceUnique should keep only one reaction per user');
+        self::assertSame(1, $userReactions, 'EnforceUnique should keep only one reaction per user');
+    }
+
+    protected static function sharedUserCount(): int
+    {
+        return 2;
     }
 }

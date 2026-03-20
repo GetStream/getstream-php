@@ -40,6 +40,7 @@ class ChannelConfig extends BaseModel
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null,
+        public ?ChatPreferences $chatPreferences = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?array $commands = null, // List of commands that channel supports

@@ -7,6 +7,7 @@ class PushPreferencesResponse extends BaseModel
 {
     public function __construct(
         public ?string $chatLevel = null,
+        public ?ChatPreferencesResponse $chatPreferences = null,
         public ?string $callLevel = null,
         public ?string $feedsLevel = null,
         public ?FeedsPreferencesResponse $feedsPreferences = null,

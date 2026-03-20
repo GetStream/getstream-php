@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GetStream\Tests\Integration;
 
 use GetStream\GeneratedModels;
-use GetStream\StreamResponse;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -20,11 +19,6 @@ class ChatPollsIntegrationTest extends ChatTestCase
 
     /** @var string|null User ID to use for poll cleanup */
     private ?string $pollCleanupUserID = null;
-
-    protected static function sharedUserCount(): int
-    {
-        return 2;
-    }
 
     protected function tearDown(): void
     {
@@ -42,8 +36,10 @@ class ChatPollsIntegrationTest extends ChatTestCase
 
     /**
      * Test creating a poll with options, querying it by ID, and verifying the results.
+     *
+     * @test
      */
-    public function testCreateAndQueryPoll(): void
+    public function createAndQueryPoll(): void
     {
         $userIDs = [$this->getSharedUserIDs()[0]];
         $this->pollCleanupUserID = $userIDs[0];
@@ -63,20 +59,21 @@ class ChatPollsIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'Polls are not enabled') || str_contains($e->getMessage(), 'polls') && str_contains($e->getMessage(), 'not enabled')) {
-                $this->markTestSkipped('Polls feature not enabled for this app');
+                self::markTestSkipped('Polls feature not enabled for this app');
             }
+
             throw $e;
         }
 
         $this->assertResponseSuccess($createResp, 'create poll');
         $poll = $createResp->getData()->poll;
-        $this->assertNotNull($poll);
-        $this->assertNotEmpty($poll->id);
-        $this->assertEquals('Favorite color?', $poll->name);
-        $this->assertEquals('Pick your favorite color', $poll->description);
-        $this->assertTrue($poll->enforceUniqueVote);
-        $this->assertNotNull($poll->options);
-        $this->assertCount(3, $poll->options);
+        self::assertNotNull($poll);
+        self::assertNotEmpty($poll->id);
+        self::assertSame('Favorite color?', $poll->name);
+        self::assertSame('Pick your favorite color', $poll->description);
+        self::assertTrue($poll->enforceUniqueVote);
+        self::assertNotNull($poll->options);
+        self::assertCount(3, $poll->options);
 
         $pollID = $poll->id;
         $this->createdPollIDs[] = $pollID;
@@ -84,31 +81,34 @@ class ChatPollsIntegrationTest extends ChatTestCase
         // Get the poll by ID
         $getResp = $this->getPoll($pollID);
         $this->assertResponseSuccess($getResp, 'get poll');
-        $this->assertEquals($pollID, $getResp->getData()->poll->id);
-        $this->assertEquals('Favorite color?', $getResp->getData()->poll->name);
+        self::assertSame($pollID, $getResp->getData()->poll->id);
+        self::assertSame('Favorite color?', $getResp->getData()->poll->name);
 
         // Query polls with filter by ID
         $queryResp = $this->queryPolls(new GeneratedModels\QueryPollsRequest(
             filter: (object) ['id' => $pollID],
         ), $userIDs[0]);
         $this->assertResponseSuccess($queryResp, 'query polls');
-        $this->assertNotNull($queryResp->getData()->polls);
-        $this->assertGreaterThanOrEqual(1, count($queryResp->getData()->polls));
+        self::assertNotNull($queryResp->getData()->polls);
+        self::assertGreaterThanOrEqual(1, count($queryResp->getData()->polls));
 
         $found = false;
         foreach ($queryResp->getData()->polls as $p) {
             if ($p->id === $pollID) {
                 $found = true;
+
                 break;
             }
         }
-        $this->assertTrue($found, 'Poll should be found in query results');
+        self::assertTrue($found, 'Poll should be found in query results');
     }
 
     /**
      * Test creating a poll, attaching it to a message, and casting a vote.
+     *
+     * @test
      */
-    public function testCastPollVote(): void
+    public function castsPollVote(): void
     {
         $userIDs = $this->getSharedUserIDs();
         $this->pollCleanupUserID = $userIDs[0];
@@ -126,21 +126,22 @@ class ChatPollsIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'Polls are not enabled') || str_contains($e->getMessage(), 'polls') && str_contains($e->getMessage(), 'not enabled')) {
-                $this->markTestSkipped('Polls feature not enabled for this app');
+                self::markTestSkipped('Polls feature not enabled for this app');
             }
+
             throw $e;
         }
 
         $this->assertResponseSuccess($createResp, 'create vote test poll');
         $poll = $createResp->getData()->poll;
-        $this->assertNotNull($poll);
+        self::assertNotNull($poll);
         $pollID = $poll->id;
         $this->createdPollIDs[] = $pollID;
 
-        $this->assertNotNull($poll->options);
-        $this->assertGreaterThanOrEqual(2, count($poll->options));
+        self::assertNotNull($poll->options);
+        self::assertGreaterThanOrEqual(2, count($poll->options));
         $optionID = $poll->options[0]->id;
-        $this->assertNotEmpty($optionID);
+        self::assertNotEmpty($optionID);
 
         // Create a channel and send a message with the poll attached
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);
@@ -155,13 +156,14 @@ class ChatPollsIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'polls not enabled') || str_contains($e->getMessage(), 'Polls are not enabled')) {
-                $this->markTestSkipped('Polls not enabled for this channel type');
+                self::markTestSkipped('Polls not enabled for this channel type');
             }
+
             throw $e;
         }
         $this->assertResponseSuccess($msgResp, 'send message with poll');
         $msgID = $msgResp->getData()->message->id;
-        $this->assertNotEmpty($msgID);
+        self::assertNotEmpty($msgID);
 
         // Cast a vote from the second user
         $voteResp = $this->castPollVote($msgID, $pollID, new GeneratedModels\CastPollVoteRequest(
@@ -171,13 +173,18 @@ class ChatPollsIntegrationTest extends ChatTestCase
             ),
         ));
         $this->assertResponseSuccess($voteResp, 'cast poll vote');
-        $this->assertNotNull($voteResp->getData()->vote);
-        $this->assertEquals($optionID, $voteResp->getData()->vote->optionID);
+        self::assertNotNull($voteResp->getData()->vote);
+        self::assertSame($optionID, $voteResp->getData()->vote->optionID);
 
         // Verify the poll has votes by getting it again
         $getResp = $this->getPoll($pollID);
         $this->assertResponseSuccess($getResp, 'get poll after vote');
-        $this->assertNotNull($getResp->getData()->poll);
-        $this->assertEquals(1, $getResp->getData()->poll->voteCount);
+        self::assertNotNull($getResp->getData()->poll);
+        self::assertSame(1, $getResp->getData()->poll->voteCount);
+    }
+
+    protected static function sharedUserCount(): int
+    {
+        return 2;
     }
 }

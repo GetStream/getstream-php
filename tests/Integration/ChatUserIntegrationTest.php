@@ -48,9 +48,9 @@ class ChatUserIntegrationTest extends ChatTestCase
         self::assertNotNull($data->users);
         self::assertGreaterThanOrEqual(2, count($data->users));
 
-        $foundIDs = array_map(fn($u) => $u->id, $data->users);
+        $foundIDs = array_map(static fn ($u) => $u->id, $data->users);
         foreach ($userIDs as $id) {
-            self::assertContains($id, $foundIDs, "User $id should be found in query results");
+            self::assertContains($id, $foundIDs, "User {$id} should be found in query results");
         }
     }
 
@@ -132,7 +132,7 @@ class ChatUserIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($blockedResp, 'get blocked users');
         $blocks = $blockedResp->getData()->blocks;
         self::assertNotNull($blocks);
-        $blockedIDs = array_map(fn($b) => $b->blockedUserID, $blocks);
+        $blockedIDs = array_map(static fn ($b) => $b->blockedUserID, $blocks);
         self::assertContains($bob, $blockedIDs, 'Bob should be in blocked list');
 
         // Unblock bob
@@ -146,7 +146,7 @@ class ChatUserIntegrationTest extends ChatTestCase
         $blockedResp = $this->client->getBlockedUsers($alice);
         $this->assertResponseSuccess($blockedResp, 'get blocked users after unblock');
         $blocks = $blockedResp->getData()->blocks ?? [];
-        $blockedIDs = array_map(fn($b) => $b->blockedUserID, $blocks);
+        $blockedIDs = array_map(static fn ($b) => $b->blockedUserID, $blocks);
         self::assertNotContains($bob, $blockedIDs, 'Bob should not be in blocked list after unblock');
     }
 
@@ -202,6 +202,7 @@ class ChatUserIntegrationTest extends ChatTestCase
                 conversations: 'hard',
             ));
             $this->assertResponseSuccess($resp, 'delete users');
+
             return $resp;
         }, maxAttempts: 5, sleepMs: 3000);
 
@@ -210,7 +211,7 @@ class ChatUserIntegrationTest extends ChatTestCase
 
         // Wait for task to complete
         $taskResult = $this->waitForTask($taskID);
-        self::assertEquals('completed', $taskResult->status, 'Delete task should complete');
+        self::assertSame('completed', $taskResult->status, 'Delete task should complete');
     }
 
     /**
@@ -242,7 +243,7 @@ class ChatUserIntegrationTest extends ChatTestCase
             ));
         } catch (\Exception $e) {
             // Guest access may be disabled for this app
-            $this->markTestSkipped('Guest user creation not enabled: ' . $e->getMessage());
+            self::markTestSkipped('Guest user creation not enabled: ' . $e->getMessage());
         }
 
         $this->assertResponseSuccess($response, 'create guest');
@@ -282,9 +283,9 @@ class ChatUserIntegrationTest extends ChatTestCase
         self::assertArrayHasKey($userID, $data->users);
 
         $user = $data->users[$userID];
-        self::assertEquals('admin', $user->role);
-        self::assertEquals(['blue'], $user->teams);
-        self::assertEquals(['blue' => 'admin'], $user->teamsRole);
+        self::assertSame('admin', $user->role);
+        self::assertSame(['blue'], $user->teams);
+        self::assertSame(['blue' => 'admin'], $user->teamsRole);
     }
 
     /**
@@ -313,8 +314,8 @@ class ChatUserIntegrationTest extends ChatTestCase
         self::assertArrayHasKey($userID, $data->users);
 
         $user = $data->users[$userID];
-        self::assertEquals(['blue'], $user->teams);
-        self::assertEquals(['blue' => 'admin'], $user->teamsRole);
+        self::assertSame(['blue'], $user->teams);
+        self::assertSame(['blue' => 'admin'], $user->teamsRole);
     }
 
     /**
@@ -468,7 +469,7 @@ class ChatUserIntegrationTest extends ChatTestCase
         self::assertNotEmpty($taskID, 'Task ID should not be empty');
 
         $taskResult = $this->waitForTask($taskID);
-        self::assertEquals('completed', $taskResult->status, 'Deactivate task should complete');
+        self::assertSame('completed', $taskResult->status, 'Deactivate task should complete');
 
         // Verify both are deactivated — query without flag should return 0
         $queryResp = $this->client->queryUsers(new GeneratedModels\QueryUsersPayload(

@@ -1322,6 +1322,68 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryRemindersResponse::class);
     }
     /**
+     * Returns all retention policies configured for the app. Server-side only.
+     *
+     * @return StreamResponse<GeneratedModels\GetRetentionPolicyResponse>
+     * @throws StreamException
+     */
+    public function getRetentionPolicy(): StreamResponse {
+        $path = '/api/v2/chat/retention_policy';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyResponse::class);
+    }
+    /**
+     * Creates or updates a retention policy for the app. Server-side only.
+     *
+     * @param GeneratedModels\SetRetentionPolicyRequest $requestData
+     * @return StreamResponse<GeneratedModels\SetRetentionPolicyResponse>
+     * @throws StreamException
+     */
+    public function setRetentionPolicy(GeneratedModels\SetRetentionPolicyRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/retention_policy';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SetRetentionPolicyResponse::class);
+    }
+    /**
+     * Removes a retention policy for the app. Server-side only.
+     *
+     * @param GeneratedModels\DeleteRetentionPolicyRequest $requestData
+     * @return StreamResponse<GeneratedModels\DeleteRetentionPolicyResponse>
+     * @throws StreamException
+     */
+    public function deleteRetentionPolicy(GeneratedModels\DeleteRetentionPolicyRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/retention_policy/delete';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteRetentionPolicyResponse::class);
+    }
+    /**
+     * Returns paginated retention cleanup run history for the app. Server-side only.
+     *
+     * @param int $limit
+     * @param int $offset
+     * @return StreamResponse<GeneratedModels\GetRetentionPolicyRunsResponse>
+     * @throws StreamException
+     */
+    public function getRetentionPolicyRuns(int $limit, int $offset): StreamResponse {
+        $path = '/api/v2/chat/retention_policy/runs';
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($offset !== null) {
+            $queryParams['offset'] = $offset;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyRunsResponse::class);
+    }
+    /**
      * Search messages across channels
      *
      * @param GeneratedModels\SearchPayload $payload

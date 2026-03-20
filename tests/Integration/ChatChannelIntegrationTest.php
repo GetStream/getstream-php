@@ -20,11 +20,6 @@ class ChatChannelIntegrationTest extends ChatTestCase
     private string $memberID2;
     private string $memberID3;
 
-    protected static function sharedUserCount(): int
-    {
-        return 4;
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -49,8 +44,8 @@ class ChatChannelIntegrationTest extends ChatTestCase
 
         $data = $resp->getData();
         self::assertNotEmpty($data->channels);
-        self::assertEquals($channelID, $data->channels[0]->channel->id);
-        self::assertEquals('messaging', $data->channels[0]->channel->type);
+        self::assertSame($channelID, $data->channels[0]->channel->id);
+        self::assertSame('messaging', $data->channels[0]->channel->type);
     }
 
     /**
@@ -97,7 +92,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($resp2, 'create distinct channel (second call)');
 
-        self::assertEquals($resp1->getData()->channel->cid, $resp2->getData()->channel->cid);
+        self::assertSame($resp1->getData()->channel->cid, $resp2->getData()->channel->cid);
 
         // Track for cleanup
         $this->createdChannels[] = ['type' => 'messaging', 'id' => $resp1->getData()->channel->id];
@@ -116,7 +111,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($resp, 'query channels');
 
         self::assertNotEmpty($resp->getData()->channels);
-        self::assertEquals($channelID, $resp->getData()->channels[0]->channel->id);
+        self::assertSame($channelID, $resp->getData()->channels[0]->channel->id);
     }
 
     /**
@@ -138,7 +133,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($resp, 'update channel');
 
         self::assertNotNull($resp->getData()->channel);
-        self::assertEquals('blue', $resp->getData()->channel->custom->color ?? null);
+        self::assertSame('blue', $resp->getData()->channel->custom->color ?? null);
     }
 
     /**
@@ -157,7 +152,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($resp, 'partial update channel (set)');
         self::assertNotNull($resp->getData()->channel);
-        self::assertEquals('red', $resp->getData()->channel->custom->color ?? null);
+        self::assertSame('red', $resp->getData()->channel->custom->color ?? null);
 
         // Unset fields
         $resp = $this->updateChannelPartial($type, $channelID, new GeneratedModels\UpdateChannelPartialRequest(
@@ -205,7 +200,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         $cid2 = "messaging:{$channelID2}";
 
         // Remove from cleanup tracking since we're hard-deleting them here
-        $this->createdChannels = array_filter($this->createdChannels, function ($ch) use ($channelID1, $channelID2) {
+        $this->createdChannels = array_filter($this->createdChannels, static function ($ch) use ($channelID1, $channelID2) {
             return $ch['id'] !== $channelID1 && $ch['id'] !== $channelID2;
         });
 
@@ -217,7 +212,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         self::assertNotEmpty($resp->getData()->taskID);
 
         $taskResult = $this->waitForTask($resp->getData()->taskID);
-        self::assertEquals('completed', $taskResult->status);
+        self::assertSame('completed', $taskResult->status);
     }
 
     /**
@@ -253,7 +248,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         // Verify member removed
         $stateResp = $this->getOrCreateChannel($type, $channelID, new GeneratedModels\ChannelGetOrCreateRequest());
         $this->assertResponseSuccess($stateResp, 'get channel after remove member');
-        $memberIDs = array_map(fn($m) => $m->userID, $stateResp->getData()->members ?? []);
+        $memberIDs = array_map(static fn ($m) => $m->userID, $stateResp->getData()->members ?? []);
         self::assertNotContains($this->memberID3, $memberIDs, 'memberID3 should have been removed');
     }
 
@@ -437,7 +432,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($qResp, 'query muted channels');
         self::assertCount(1, $qResp->getData()->channels, 'Should find exactly 1 muted channel');
-        self::assertEquals($cid, $qResp->getData()->channels[0]->channel->cid);
+        self::assertSame($cid, $qResp->getData()->channels[0]->channel->cid);
 
         // Unmute
         $resp = $this->unmuteChannel(new GeneratedModels\UnmuteChannelRequest(
@@ -474,7 +469,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($resp, 'member partial update (set)');
         self::assertNotNull($resp->getData()->channelMember);
-        self::assertEquals('moderator', $resp->getData()->channelMember->custom->role_label ?? null);
+        self::assertSame('moderator', $resp->getData()->channelMember->custom->role_label ?? null);
 
         // Unset a custom field
         $resp = $this->updateMemberPartial($type, $channelID, $this->memberID1, new GeneratedModels\UpdateMemberPartialRequest(
@@ -518,7 +513,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($qResp, 'query members after assign roles');
         self::assertNotEmpty($qResp->getData()->members);
-        self::assertEquals('channel_moderator', $qResp->getData()->members[0]->channelRole);
+        self::assertSame('channel_moderator', $qResp->getData()->members[0]->channelRole);
     }
 
     /**
@@ -545,7 +540,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($qResp, 'query members after add moderator');
         self::assertNotEmpty($qResp->getData()->members);
-        self::assertEquals('channel_moderator', $qResp->getData()->members[0]->channelRole);
+        self::assertSame('channel_moderator', $qResp->getData()->members[0]->channelRole);
 
         // Demote moderator back to member
         $resp = $this->updateChannel($type, $channelID, new GeneratedModels\UpdateChannelRequest(
@@ -561,7 +556,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($qResp, 'query members after demote moderator');
         self::assertNotEmpty($qResp->getData()->members);
-        self::assertEquals('channel_member', $qResp->getData()->members[0]->channelRole);
+        self::assertSame('channel_member', $qResp->getData()->members[0]->channelRole);
     }
 
     /**
@@ -647,7 +642,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($qResp, 'query pinned channels');
         self::assertCount(1, $qResp->getData()->channels, 'Should find 1 pinned channel');
-        self::assertEquals("messaging:{$channelID}", $qResp->getData()->channels[0]->channel->cid);
+        self::assertSame("messaging:{$channelID}", $qResp->getData()->channels[0]->channel->cid);
 
         // Unpin
         $resp = $this->updateMemberPartial($type, $channelID, $this->memberID1, new GeneratedModels\UpdateMemberPartialRequest(
@@ -746,8 +741,8 @@ class ChatChannelIntegrationTest extends ChatTestCase
                 $roleMap[$m->userID] = $m->channelRole;
             }
         }
-        self::assertEquals('channel_moderator', $roleMap[$modUserID] ?? null, 'First user should be channel_moderator');
-        self::assertEquals('channel_member', $roleMap[$memberUserID] ?? null, 'Second user should be channel_member');
+        self::assertSame('channel_moderator', $roleMap[$modUserID] ?? null, 'First user should be channel_moderator');
+        self::assertSame('channel_member', $roleMap[$memberUserID] ?? null, 'Second user should be channel_member');
     }
 
     /**
@@ -997,7 +992,8 @@ class ChatChannelIntegrationTest extends ChatTestCase
         $tmpFile = tempnam(sys_get_temp_dir(), 'chat-test-') . '.png';
         // Minimal valid PNG: 1x1 white pixel
         $pngData = base64_decode(
-            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=='
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==',
+            true
         );
         file_put_contents($tmpFile, $pngData);
 
@@ -1033,5 +1029,10 @@ class ChatChannelIntegrationTest extends ChatTestCase
         } finally {
             @unlink($tmpFile);
         }
+    }
+
+    protected static function sharedUserCount(): int
+    {
+        return 4;
     }
 }
