@@ -8,6 +8,7 @@ class FilterConfigResponse extends BaseModel
     public function __construct(
         public ?array $llmLabels = null,
         public ?array $aiTextLabels = null,
+        public ?array $configKeys = null,
     ) {
     }
 

@@ -9,7 +9,7 @@ class AWSRekognitionRule extends BaseModel
         public ?string $label = null,
         public ?string $action = null,
         public ?int $minConfidence = null,
-        public ?array $subclassifications = null,
+        public ?object $subclassifications = null,
     ) {
     }
 

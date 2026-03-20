@@ -57,6 +57,7 @@ class UpdateAppRequest extends BaseModel
         public ?bool $userResponseTimeEnabled = null,
         public ?int $maxAggregatedActivitiesLength = null,
         public ?string $moderationS3ImageAccessRoleArn = null,
+        public ?array $activityMetricsConfig = null,
     ) {
     }
 

@@ -1116,6 +1116,20 @@ trait VideoTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetEdgesResponse::class);
     }
     /**
+     * Determine authentication requirements for an inbound SIP call before sending a digest challenge
+     *
+     * @param GeneratedModels\ResolveSipAuthRequest $requestData
+     * @return StreamResponse<GeneratedModels\ResolveSipAuthResponse>
+     * @throws StreamException
+     */
+    public function resolveSipAuth(GeneratedModels\ResolveSipAuthRequest $requestData): StreamResponse {
+        $path = '/api/v2/video/sip/auth';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ResolveSipAuthResponse::class);
+    }
+    /**
      * List all SIP Inbound Routing Rules for the application
      *
      * @return StreamResponse<GeneratedModels\ListSIPInboundRoutingRuleResponse>
