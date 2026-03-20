@@ -108,7 +108,7 @@ class ChatPollsIntegrationTest extends ChatTestCase
      *
      * @test
      */
-    public function castPollVote(): void
+    public function castsPollVote(): void
     {
         $userIDs = $this->getSharedUserIDs();
         $this->pollCleanupUserID = $userIDs[0];

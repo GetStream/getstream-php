@@ -59,7 +59,7 @@ class ChatReactionIntegrationTest extends ChatTestCase
      *
      * @test
      */
-    public function deleteReaction(): void
+    public function deletesReaction(): void
     {
         $userIDs = [$this->getSharedUserIDs()[0]];
         [$type, $id] = $this->createTestChannelWithMembers($userIDs[0], $userIDs);

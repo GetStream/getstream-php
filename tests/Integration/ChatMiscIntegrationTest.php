@@ -259,7 +259,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function listChannelTypes(): void
+    public function listsChannelTypes(): void
     {
         $resp = $this->listChannelTypes();
         $this->assertResponseSuccess($resp, 'list channel types');
@@ -313,7 +313,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function queryBannedUsers(): void
+    public function queriesBannedUsers(): void
     {
         $shared = $this->getSharedUserIDs();
         $adminID = $shared[0];
@@ -406,7 +406,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function exportChannels(): void
+    public function exportsChannels(): void
     {
         $userID = $this->getSharedUserIDs()[0];
 
@@ -490,7 +490,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function getUnreadCounts(): void
+    public function getsUnreadCounts(): void
     {
         $shared = $this->getSharedUserIDs();
         $userID = $shared[0];
@@ -507,7 +507,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function getUnreadCountsBatch(): void
+    public function getsUnreadCountsBatch(): void
     {
         $shared = $this->getSharedUserIDs();
         $userID = $shared[0];
@@ -591,7 +591,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function sendUserCustomEvent(): void
+    public function sendsUserCustomEvent(): void
     {
         $userID = $this->getSharedUserIDs()[0];
 
@@ -611,7 +611,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function queryTeamUsageStats(): void
+    public function queriesTeamUsageStats(): void
     {
         try {
             $resp = $this->queryTeamUsageStats(new GeneratedModels\QueryTeamUsageStatsRequest());

@@ -52,7 +52,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function getManyMessages(): void
+    public function getsManyMessages(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -70,7 +70,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function updateMessage(): void
+    public function updatesMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Original text');
@@ -211,7 +211,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function translateMessage(): void
+    public function translatesMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Hello, how are you?');
@@ -262,7 +262,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function searchMessages(): void
+    public function searchesMessages(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
 
@@ -441,7 +441,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function queryMessageHistory(): void
+    public function queriesMessageHistory(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID, $this->userID2]);
 
@@ -624,7 +624,7 @@ class ChatMessageIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function undeleteMessage(): void
+    public function undeletesMessage(): void
     {
         [$type, $channelID] = $this->createTestChannelWithMembers($this->userID, [$this->userID]);
         $msgID = $this->sendTestMessage($type, $channelID, $this->userID, 'Message to undelete');
