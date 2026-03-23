@@ -640,6 +640,96 @@ class ChatMiscIntegrationTest extends ChatTestCase
         self::markTestSkipped('ChannelBatchUpdate is not yet available in the generated SDK');
     }
 
+    // =========================================================================
+    // Retention Policy
+    // =========================================================================
+
+    /**
+     * @test
+     */
+    public function setRetentionPolicy(): string
+    {
+        try {
+            $resp = $this->client->setRetentionPolicy(new GeneratedModels\SetRetentionPolicyRequest(
+                policy: 'old-messages',
+                maxAgeHours: 720,
+            ));
+            $this->assertResponseSuccess($resp, 'set retention policy');
+            self::assertNotNull($resp->getData()->policy, 'Policy should be returned');
+        } catch (\Exception $e) {
+            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
+                self::markTestSkipped('Retention policies are not enabled for this app');
+            }
+
+            throw $e;
+        }
+
+        return 'old-messages';
+    }
+
+    /**
+     * @test
+     * @depends setRetentionPolicy
+     */
+    public function getRetentionPolicy(string $policyName): string
+    {
+        try {
+            $resp = $this->client->getRetentionPolicy();
+            $this->assertResponseSuccess($resp, 'get retention policy');
+            self::assertNotNull($resp->getData()->policies, 'Policies list should be returned');
+            self::assertNotEmpty($resp->getData()->policies, 'Should have at least one policy');
+        } catch (\Exception $e) {
+            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
+                self::markTestSkipped('Retention policies are not enabled for this app');
+            }
+
+            throw $e;
+        }
+
+        return $policyName;
+    }
+
+    /**
+     * @test
+     * @depends getRetentionPolicy
+     */
+    public function getRetentionPolicyRuns(string $policyName): string
+    {
+        try {
+            $resp = $this->client->getRetentionPolicyRuns(limit: 10, offset: 0);
+            $this->assertResponseSuccess($resp, 'get retention policy runs');
+            self::assertNotNull($resp->getData()->runs, 'Runs list should be returned');
+        } catch (\Exception $e) {
+            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
+                self::markTestSkipped('Retention policies are not enabled for this app');
+            }
+
+            throw $e;
+        }
+
+        return $policyName;
+    }
+
+    /**
+     * @test
+     * @depends getRetentionPolicyRuns
+     */
+    public function deleteRetentionPolicy(string $policyName): void
+    {
+        try {
+            $resp = $this->client->deleteRetentionPolicy(new GeneratedModels\DeleteRetentionPolicyRequest(
+                policy: $policyName,
+            ));
+            $this->assertResponseSuccess($resp, 'delete retention policy');
+        } catch (\Exception $e) {
+            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
+                self::markTestSkipped('Retention policies are not enabled for this app');
+            }
+
+            throw $e;
+        }
+    }
+
     protected static function sharedUserCount(): int
     {
         return 2;
