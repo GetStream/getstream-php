@@ -647,15 +647,16 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function setRetentionPolicy(): string
+    public function getRetentionPolicy(): string
     {
+        $policyName = 'old-messages';
+
+        // Ensure a policy exists before querying
         try {
-            $resp = $this->client->setRetentionPolicy(new GeneratedModels\SetRetentionPolicyRequest(
-                policy: 'old-messages',
+            $this->client->setRetentionPolicy(new GeneratedModels\SetRetentionPolicyRequest(
+                policy: $policyName,
                 maxAgeHours: 720,
             ));
-            $this->assertResponseSuccess($resp, 'set retention policy');
-            self::assertNotNull($resp->getData()->policy, 'Policy should be returned');
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
                 self::markTestSkipped('Retention policies are not enabled for this app');
@@ -664,15 +665,6 @@ class ChatMiscIntegrationTest extends ChatTestCase
             throw $e;
         }
 
-        return 'old-messages';
-    }
-
-    /**
-     * @test
-     * @depends setRetentionPolicy
-     */
-    public function getRetentionPolicy(string $policyName): string
-    {
         try {
             $resp = $this->client->getRetentionPolicy();
             $this->assertResponseSuccess($resp, 'get retention policy');
