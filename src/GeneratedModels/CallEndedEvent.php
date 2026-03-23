@@ -15,6 +15,9 @@ class CallEndedEvent extends BaseModel
         public ?CallResponse $call = null,
         public ?UserResponse $user = null,
         public ?string $reason = null, // The reason why the call ended, if available
+        /** @var array<MemberResponse>|null */
+        #[ArrayOf(MemberResponse::class)]
+        public ?array $members = null, // The list of members in the call
     ) {
     }
 

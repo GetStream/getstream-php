@@ -16,16 +16,14 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('integration')]
 class ChatMiscIntegrationTest extends ChatTestCase
 {
-    protected static function sharedUserCount(): int
-    {
-        return 2;
-    }
-
     // =========================================================================
     // Devices
     // =========================================================================
 
-    public function testCreateListDeleteDevice(): void
+    /**
+     * @test
+     */
+    public function createListDeleteDevice(): void
     {
         $userID = $this->getSharedUserIDs()[0];
         $deviceID = 'integration-test-device-' . $this->randomString(12);
@@ -40,8 +38,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
             $this->assertResponseSuccess($resp, 'create device');
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'no push providers configured') || str_contains($e->getMessage(), 'push')) {
-                $this->markTestSkipped('Push providers not configured for this app');
+                self::markTestSkipped('Push providers not configured for this app');
             }
+
             throw $e;
         }
 
@@ -53,7 +52,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
         foreach ($listResp->getData()->devices ?? [] as $device) {
             if ($device->id === $deviceID) {
                 $found = true;
-                self::assertEquals('firebase', $device->pushProvider);
+                self::assertSame('firebase', $device->pushProvider);
             }
         }
         self::assertTrue($found, 'Created device should appear in list');
@@ -67,7 +66,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($listResp2, 'list devices after delete');
 
         foreach ($listResp2->getData()->devices ?? [] as $device) {
-            self::assertNotEquals($deviceID, $device->id, 'Device should be deleted');
+            self::assertNotSame($deviceID, $device->id, 'Device should be deleted');
         }
     }
 
@@ -75,7 +74,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Blocklists
     // =========================================================================
 
-    public function testCreateListDeleteBlocklist(): void
+    /**
+     * @test
+     */
+    public function createListDeleteBlocklist(): void
     {
         $blocklistName = 'test-blocklist-' . $this->randomString(8);
 
@@ -105,7 +107,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
             // Get blocklist
             $getResp = $this->client->getBlockList($blocklistName, '');
             $this->assertResponseSuccess($getResp, 'get blocklist');
-            self::assertEquals($blocklistName, $getResp->getData()->blocklist->name);
+            self::assertSame($blocklistName, $getResp->getData()->blocklist->name);
 
             // Delete blocklist
             $delResp = $this->client->deleteBlockList($blocklistName, '');
@@ -116,6 +118,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 $this->client->deleteBlockList($blocklistName, '');
             } catch (\Exception $ignore) {
             }
+
             throw $e;
         }
     }
@@ -124,7 +127,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Commands
     // =========================================================================
 
-    public function testCreateListDeleteCommand(): void
+    /**
+     * @test
+     */
+    public function createListDeleteCommand(): void
     {
         $cmdName = 'testcmd' . $this->randomString(6);
 
@@ -136,13 +142,13 @@ class ChatMiscIntegrationTest extends ChatTestCase
             ));
             $this->assertResponseSuccess($createResp, 'create command');
             self::assertNotNull($createResp->getData()->command);
-            self::assertEquals($cmdName, $createResp->getData()->command->name);
+            self::assertSame($cmdName, $createResp->getData()->command->name);
 
             // Get command
             $getResp = $this->getCommand($cmdName);
             $this->assertResponseSuccess($getResp, 'get command');
-            self::assertEquals($cmdName, $getResp->getData()->name);
-            self::assertEquals('A test command', $getResp->getData()->description);
+            self::assertSame($cmdName, $getResp->getData()->name);
+            self::assertSame('A test command', $getResp->getData()->description);
 
             // Commands are eventually consistent
             sleep(2);
@@ -162,13 +168,14 @@ class ChatMiscIntegrationTest extends ChatTestCase
             // Delete command
             $delResp = $this->deleteCommandApi($cmdName);
             $this->assertResponseSuccess($delResp, 'delete command');
-            self::assertEquals($cmdName, $delResp->getData()->name);
+            self::assertSame($cmdName, $delResp->getData()->name);
         } catch (\Exception $e) {
             // Clean up on failure
             try {
                 $this->deleteCommandApi($cmdName);
             } catch (\Exception $ignore) {
             }
+
             throw $e;
         }
     }
@@ -177,7 +184,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Channel Types
     // =========================================================================
 
-    public function testCreateUpdateDeleteChannelType(): void
+    /**
+     * @test
+     */
+    public function createUpdateDeleteChannelType(): void
     {
         $typeName = 'testtype' . $this->randomString(6);
 
@@ -190,16 +200,17 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 maxMessageLength: 3000,
             ));
             $this->assertResponseSuccess($createResp, 'create channel type');
-            self::assertEquals($typeName, $createResp->getData()->name);
-            self::assertEquals(3000, $createResp->getData()->maxMessageLength);
+            self::assertSame($typeName, $createResp->getData()->name);
+            self::assertSame(3000, $createResp->getData()->maxMessageLength);
 
             // Channel types are eventually consistent - retry with delay
             $getResp = $this->retryUntilSuccess(function () use ($typeName) {
                 $resp = $this->getChannelType($typeName);
                 $this->assertResponseSuccess($resp, 'get channel type');
+
                 return $resp;
             }, maxAttempts: 10, sleepMs: 2000);
-            self::assertEquals($typeName, $getResp->getData()->name);
+            self::assertSame($typeName, $getResp->getData()->name);
 
             // Update channel type — retry until the response reflects the updated
             // value, because the backend may return stale data from its local
@@ -212,8 +223,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
                     typingEvents: false,
                 ));
                 $this->assertResponseSuccess($resp, 'update channel type');
-                self::assertEquals(4000, $resp->getData()->maxMessageLength);
+                self::assertSame(4000, $resp->getData()->maxMessageLength);
                 self::assertFalse($resp->getData()->typingEvents);
+
                 return $resp;
             }, maxAttempts: 5, sleepMs: 2000);
 
@@ -223,6 +235,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 try {
                     $this->deleteChannelType($typeName);
                     $deleteErr = null;
+
                     break;
                 } catch (\Exception $e) {
                     $deleteErr = $e;
@@ -238,11 +251,15 @@ class ChatMiscIntegrationTest extends ChatTestCase
                 $this->deleteChannelType($typeName);
             } catch (\Exception $ignore) {
             }
+
             throw $e;
         }
     }
 
-    public function testListChannelTypes(): void
+    /**
+     * @test
+     */
+    public function listsChannelTypes(): void
     {
         $resp = $this->listChannelTypes();
         $this->assertResponseSuccess($resp, 'list channel types');
@@ -256,7 +273,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Permissions
     // =========================================================================
 
-    public function testListPermissions(): void
+    /**
+     * @test
+     */
+    public function listPermissions(): void
     {
         $resp = $this->client->listPermissions();
         $this->assertResponseSuccess($resp, 'list permissions');
@@ -264,19 +284,25 @@ class ChatMiscIntegrationTest extends ChatTestCase
         self::assertNotEmpty($resp->getData()->permissions, 'Should have at least one permission');
     }
 
-    public function testCreatePermission(): void
+    /**
+     * @test
+     */
+    public function createPermission(): void
     {
         // CreatePermission is hidden from the generated spec (Ignore: true in backend)
         // per Go SDK reference. Skip this test.
-        $this->markTestSkipped('CreatePermission is not available in the generated SDK');
+        self::markTestSkipped('CreatePermission is not available in the generated SDK');
     }
 
-    public function testGetPermission(): void
+    /**
+     * @test
+     */
+    public function getPermission(): void
     {
         $resp = $this->client->getPermission('create-channel');
         $this->assertResponseSuccess($resp, 'get permission');
 
-        self::assertEquals('create-channel', $resp->getData()->permission->id);
+        self::assertSame('create-channel', $resp->getData()->permission->id);
         self::assertNotEmpty($resp->getData()->permission->action);
     }
 
@@ -284,7 +310,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Query Banned Users
     // =========================================================================
 
-    public function testQueryBannedUsers(): void
+    /**
+     * @test
+     */
+    public function queriesBannedUsers(): void
     {
         $shared = $this->getSharedUserIDs();
         $adminID = $shared[0];
@@ -325,7 +354,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Mute / Unmute User
     // =========================================================================
 
-    public function testMuteUnmuteUser(): void
+    /**
+     * @test
+     */
+    public function muteUnmuteUser(): void
     {
         $shared = $this->getSharedUserIDs();
         $muterID = $shared[0];
@@ -356,7 +388,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // App Settings
     // =========================================================================
 
-    public function testGetAppSettings(): void
+    /**
+     * @test
+     */
+    public function getAppSettings(): void
     {
         $resp = $this->client->getApp();
         $this->assertResponseSuccess($resp, 'get app settings');
@@ -368,7 +403,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Export Channels
     // =========================================================================
 
-    public function testExportChannels(): void
+    /**
+     * @test
+     */
+    public function exportsChannels(): void
     {
         $userID = $this->getSharedUserIDs()[0];
 
@@ -385,14 +423,17 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
         // Wait for the export task to complete
         $taskResult = $this->waitForTask($exportResp->getData()->taskID);
-        self::assertEquals('completed', $taskResult->status);
+        self::assertSame('completed', $taskResult->status);
     }
 
     // =========================================================================
     // Threads
     // =========================================================================
 
-    public function testThreads(): void
+    /**
+     * @test
+     */
+    public function threads(): void
     {
         $shared = $this->getSharedUserIDs();
         $userID = $shared[0];
@@ -436,7 +477,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
         foreach ($resp->getData()->threads as $thread) {
             if ($thread->parentMessageID === $parentID) {
                 $found = true;
-                self::assertEquals($userID2, $thread->createdByUserID);
+                self::assertSame($userID2, $thread->createdByUserID);
             }
         }
         self::assertTrue($found, "Thread should appear in query results for channel {$channelCID}");
@@ -446,7 +487,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Unread Counts
     // =========================================================================
 
-    public function testGetUnreadCounts(): void
+    /**
+     * @test
+     */
+    public function getsUnreadCounts(): void
     {
         $shared = $this->getSharedUserIDs();
         $userID = $shared[0];
@@ -460,7 +504,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
         self::assertGreaterThanOrEqual(0, $resp->getData()->totalUnreadCount);
     }
 
-    public function testGetUnreadCountsBatch(): void
+    /**
+     * @test
+     */
+    public function getsUnreadCountsBatch(): void
     {
         $shared = $this->getSharedUserIDs();
         $userID = $shared[0];
@@ -482,7 +529,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Reminders
     // =========================================================================
 
-    public function testReminders(): void
+    /**
+     * @test
+     */
+    public function reminders(): void
     {
         $userID = $this->getSharedUserIDs()[0];
 
@@ -491,6 +541,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
         // Create a reminder
         $remindAt = new \DateTime('+24 hours');
+
         try {
             $createResp = $this->createReminder($msgID, new GeneratedModels\CreateReminderRequest(
                 remindAt: $remindAt,
@@ -499,13 +550,14 @@ class ChatMiscIntegrationTest extends ChatTestCase
             $this->assertResponseSuccess($createResp, 'create reminder');
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'reminder')) {
-                $this->markTestSkipped('Reminders are not enabled for this app');
+                self::markTestSkipped('Reminders are not enabled for this app');
             }
+
             throw $e;
         }
 
-        self::assertEquals($msgID, $createResp->getData()->messageID);
-        self::assertEquals($userID, $createResp->getData()->userID);
+        self::assertSame($msgID, $createResp->getData()->messageID);
+        self::assertSame($userID, $createResp->getData()->userID);
         self::assertNotNull($createResp->getData()->remindAt, 'RemindAt should be set');
 
         // Update reminder
@@ -515,7 +567,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
             userID: $userID,
         ));
         $this->assertResponseSuccess($updateResp, 'update reminder');
-        self::assertEquals($msgID, $updateResp->getData()->reminder->messageID);
+        self::assertSame($msgID, $updateResp->getData()->reminder->messageID);
 
         // Query reminders
         $qResp = $this->queryReminders(new GeneratedModels\QueryRemindersRequest(
@@ -525,7 +577,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
         ));
         $this->assertResponseSuccess($qResp, 'query reminders');
         self::assertNotEmpty($qResp->getData()->reminders, 'Should find the reminder');
-        self::assertEquals($msgID, $qResp->getData()->reminders[0]->messageID);
+        self::assertSame($msgID, $qResp->getData()->reminders[0]->messageID);
 
         // Delete reminder
         $delResp = $this->deleteReminderApi($msgID, $userID);
@@ -536,7 +588,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Send User Custom Event
     // =========================================================================
 
-    public function testSendUserCustomEvent(): void
+    /**
+     * @test
+     */
+    public function sendsUserCustomEvent(): void
     {
         $userID = $this->getSharedUserIDs()[0];
 
@@ -553,7 +608,10 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Query Team Usage Stats
     // =========================================================================
 
-    public function testQueryTeamUsageStats(): void
+    /**
+     * @test
+     */
+    public function queriesTeamUsageStats(): void
     {
         try {
             $resp = $this->queryTeamUsageStats(new GeneratedModels\QueryTeamUsageStatsRequest());
@@ -561,8 +619,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
             self::assertNotNull($resp->getData()->teams);
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'Token signature is invalid') || str_contains($e->getMessage(), 'not available')) {
-                $this->markTestSkipped('QueryTeamUsageStats not available on this app');
+                self::markTestSkipped('QueryTeamUsageStats not available on this app');
             }
+
             throw $e;
         }
     }
@@ -571,10 +630,18 @@ class ChatMiscIntegrationTest extends ChatTestCase
     // Channel Batch Update
     // =========================================================================
 
-    public function testChannelBatchUpdate(): void
+    /**
+     * @test
+     */
+    public function channelBatchUpdate(): void
     {
         // ChannelBatchUpdate is behind Ignore+Beta in the backend spec,
         // so the generated SDK doesn't include it yet. Per Go SDK reference.
-        $this->markTestSkipped('ChannelBatchUpdate is not yet available in the generated SDK');
+        self::markTestSkipped('ChannelBatchUpdate is not yet available in the generated SDK');
+    }
+
+    protected static function sharedUserCount(): int
+    {
+        return 2;
     }
 }

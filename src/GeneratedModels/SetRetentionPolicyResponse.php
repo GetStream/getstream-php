@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ChannelPushPreferencesResponse extends BaseModel
+/**
+ * Basic response information
+ */
+class SetRetentionPolicyResponse extends BaseModel
 {
     public function __construct(
-        public ?string $chatLevel = null,
-        public ?ChatPreferencesResponse $chatPreferences = null,
-        public ?\DateTime $disabledUntil = null,
+        public ?RetentionPolicy $policy = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

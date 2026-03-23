@@ -46,6 +46,7 @@ class ChannelTypeConfig extends BaseModel
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null,
+        public ?ChatPreferences $chatPreferences = null,
         /** @var array<Command>|null */
         #[ArrayOf(Command::class)]
         public ?array $commands = null,

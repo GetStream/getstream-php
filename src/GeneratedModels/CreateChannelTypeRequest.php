@@ -42,6 +42,7 @@ class CreateChannelTypeRequest extends BaseModel
         public ?string $partitionTtl = null, // Partition TTL
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null, // Default push notification level for the channel type. One of: all, all_mentions, mentions, direct_mentions, none
+        public ?ChatPreferences $chatPreferences = null,
     ) {
     }
 

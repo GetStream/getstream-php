@@ -9,6 +9,7 @@ class PushPreferenceInput extends BaseModel
         public ?string $userID = null, // The user id for which to set the push preferences. Required when using server side auths, defaults to current user with client side auth.
         public ?string $channelCid = null, // Set the push preferences for a specific channel. If empty it sets the default for the user
         public ?string $chatLevel = null, // Set the level of chat push notifications for the user. Note: "mentions" is deprecated in favor of "direct_mentions". One of: all, mentions, direct_mentions, all_mentions, none, default
+        public ?ChatPreferencesInput $chatPreferences = null,
         public ?string $callLevel = null, // Set the level of call push notifications for the user. One of: all, none, default
         public ?string $feedsLevel = null, // Set the level of feeds push notifications for the user. One of: all, none, default
         public ?FeedsPreferences $feedsPreferences = null,

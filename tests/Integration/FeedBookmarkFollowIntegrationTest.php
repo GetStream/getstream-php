@@ -7,7 +7,6 @@ namespace GetStream\Tests\Integration;
 use GetStream\Client;
 use GetStream\ClientBuilder;
 use GetStream\Exceptions\StreamApiException;
-use GetStream\Exceptions\StreamException;
 use GetStream\Feed;
 use GetStream\FeedsV3Client;
 use GetStream\GeneratedModels;

@@ -10,6 +10,7 @@ class RuleBuilderAction extends BaseModel
         public ?BanOptions $banOptions = null,
         public ?FlagUserOptions $flagUserOptions = null,
         public ?CallActionOptions $callOptions = null,
+        public ?bool $skipInbox = null,
     ) {
     }
 

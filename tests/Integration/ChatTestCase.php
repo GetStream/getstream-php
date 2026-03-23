@@ -6,7 +6,6 @@ namespace GetStream\Tests\Integration;
 
 use GetStream\Client;
 use GetStream\ClientBuilder;
-use GetStream\Exceptions\StreamApiException;
 use GetStream\GeneratedModels;
 use GetStream\StreamResponse;
 use PHPUnit\Framework\Attributes\Group;
@@ -32,6 +31,19 @@ abstract class ChatTestCase extends TestCase
     /** @var array{type: string, id: string}[] Channels created during the test, cleaned up in tearDown */
     protected array $createdChannels = [];
 
+    // =========================================================================
+    // Video API Wrappers
+    // =========================================================================
+
+    /** @var string[] Call type names created during the test, cleaned up in tearDown */
+    protected array $createdCallTypes = [];
+
+    /** @var array{type: string, id: string}[] Calls created during the test, cleaned up in tearDown */
+    protected array $createdCalls = [];
+
+    /** @var string[] External storage names created during the test, cleaned up in tearDown */
+    protected array $createdExternalStorages = [];
+
     // ------------------------------------------------------------------
     // Class-level shared user management (created once per test class)
     // ------------------------------------------------------------------
@@ -41,15 +53,6 @@ abstract class ChatTestCase extends TestCase
 
     /** @var array<string, string[]> Class-level shared user IDs keyed by class name */
     private static array $classUserIDs = [];
-
-    /**
-     * Override to declare how many shared users this test class needs.
-     * Return 0 (default) to opt-out and create users per-test instead.
-     */
-    protected static function sharedUserCount(): int
-    {
-        return 0;
-    }
 
     public static function setUpBeforeClass(): void
     {
@@ -93,50 +96,6 @@ abstract class ChatTestCase extends TestCase
         parent::tearDownAfterClass();
     }
 
-    /**
-     * Delete users with retry and jitter to avoid the DeleteUsers rate limit (6/min).
-     * With 8 parallel paratest workers all tearing down at the same time, a burst
-     * of concurrent calls easily exceeds the limit. A random initial jitter spreads
-     * the calls across the minute window before any retry backoff kicks in.
-     *
-     * @param string[] $userIDs
-     */
-    private static function deleteUsersHardWithRetry(Client $client, array $userIDs): void
-    {
-        // Jitter 0-4s to spread concurrent teardown calls from parallel workers
-        usleep(random_int(0, 4000000));
-
-        for ($i = 0; $i < 8; $i++) {
-            try {
-                $client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
-                    userIds: $userIDs,
-                    user: 'hard',
-                    messages: 'hard',
-                    conversations: 'hard',
-                ));
-                return;
-            } catch (\Exception $e) {
-                if (strpos($e->getMessage(), 'Too many requests') === false &&
-                    strpos($e->getMessage(), '429') === false) {
-                    // Non-rate-limit error during cleanup — ignore it
-                    return;
-                }
-                // Exponential backoff: 2s, 4s, 8s, 16s … capped at 30s
-                sleep(min(2 ** ($i + 1), 30));
-            }
-        }
-    }
-
-    /**
-     * Get the class-level shared user IDs.
-     *
-     * @return string[]
-     */
-    protected function getSharedUserIDs(): array
-    {
-        return self::$classUserIDs[static::class] ?? [];
-    }
-
     // ------------------------------------------------------------------
     // Per-test setup / teardown
     // ------------------------------------------------------------------
@@ -164,6 +123,25 @@ abstract class ChatTestCase extends TestCase
         }
 
         parent::tearDown();
+    }
+
+    /**
+     * Override to declare how many shared users this test class needs.
+     * Return 0 (default) to opt-out and create users per-test instead.
+     */
+    protected static function sharedUserCount(): int
+    {
+        return 0;
+    }
+
+    /**
+     * Get the class-level shared user IDs.
+     *
+     * @return string[]
+     */
+    protected function getSharedUserIDs(): array
+    {
+        return self::$classUserIDs[static::class] ?? [];
     }
 
     // =========================================================================
@@ -227,6 +205,7 @@ abstract class ChatTestCase extends TestCase
      * Create a messaging channel with members.
      *
      * @param string[] $memberIDs
+     *
      * @return array{0: string, 1: string} [channelType, channelID]
      */
     protected function createTestChannelWithMembers(string $creatorID, array $memberIDs): array
@@ -235,7 +214,7 @@ abstract class ChatTestCase extends TestCase
         $channelID = 'test-ch-' . uniqid();
 
         $members = array_map(
-            fn(string $id) => new GeneratedModels\ChannelMemberRequest(userID: $id),
+            static fn (string $id) => new GeneratedModels\ChannelMemberRequest(userID: $id),
             $memberIDs,
         );
 
@@ -280,9 +259,10 @@ abstract class ChatTestCase extends TestCase
      * Useful for eventually consistent API operations.
      *
      * @template T
+     *
      * @param callable(): T $fn
-     * @param int $maxAttempts
-     * @param int $sleepMs milliseconds to wait between attempts
+     * @param int           $sleepMs milliseconds to wait between attempts
+     *
      * @return T
      */
     protected function retryUntilSuccess(callable $fn, int $maxAttempts = 5, int $sleepMs = 500): mixed
@@ -296,6 +276,7 @@ abstract class ChatTestCase extends TestCase
                 usleep($sleepMs * 1000);
             }
         }
+
         throw $lastException;
     }
 
@@ -524,6 +505,7 @@ abstract class ChatTestCase extends TestCase
     protected function queryMembers(GeneratedModels\QueryMembersPayload $payload): StreamResponse
     {
         $queryParams = ['payload' => json_encode($payload->toArray())];
+
         return StreamResponse::fromJson(
             $this->client->makeRequest('GET', '/api/v2/chat/members', $queryParams),
             GeneratedModels\MembersResponse::class,
@@ -1007,6 +989,7 @@ abstract class ChatTestCase extends TestCase
     protected function queryMessageFlags(GeneratedModels\QueryMessageFlagsPayload $payload): StreamResponse
     {
         $queryParams = ['payload' => json_encode($payload->toArray())];
+
         return StreamResponse::fromJson(
             $this->client->makeRequest('GET', '/api/v2/chat/moderation/flags/message', $queryParams),
             GeneratedModels\QueryMessageFlagsResponse::class,
@@ -1146,19 +1129,6 @@ abstract class ChatTestCase extends TestCase
             GeneratedModels\QueryTeamUsageStatsResponse::class,
         );
     }
-
-    // =========================================================================
-    // Video API Wrappers
-    // =========================================================================
-
-    /** @var string[] Call type names created during the test, cleaned up in tearDown */
-    protected array $createdCallTypes = [];
-
-    /** @var array{type: string, id: string}[] Calls created during the test, cleaned up in tearDown */
-    protected array $createdCalls = [];
-
-    /** @var string[] External storage names created during the test, cleaned up in tearDown */
-    protected array $createdExternalStorages = [];
 
     /**
      * @return StreamResponse<GeneratedModels\CreateCallTypeResponse>
@@ -1398,8 +1368,6 @@ abstract class ChatTestCase extends TestCase
 
     /**
      * Create a call and track it for cleanup.
-     *
-     * @return GeneratedModels\GetOrCreateCallResponse
      */
     protected function createTrackedCall(string $type, string $id, string $creatorID): GeneratedModels\GetOrCreateCallResponse
     {
@@ -1410,6 +1378,7 @@ abstract class ChatTestCase extends TestCase
         ));
         $this->assertResponseSuccess($response, 'create call');
         $this->createdCalls[] = ['type' => $type, 'id' => $id];
+
         return $response->getData();
     }
 
@@ -1423,5 +1392,40 @@ abstract class ChatTestCase extends TestCase
             $response->isSuccessful(),
             "Failed to {$operation}. Status: {$response->getStatusCode()}, Body: {$response->getRawBody()}"
         );
+    }
+
+    /**
+     * Delete users with retry and jitter to avoid the DeleteUsers rate limit (6/min).
+     * With 8 parallel paratest workers all tearing down at the same time, a burst
+     * of concurrent calls easily exceeds the limit. A random initial jitter spreads
+     * the calls across the minute window before any retry backoff kicks in.
+     *
+     * @param string[] $userIDs
+     */
+    private static function deleteUsersHardWithRetry(Client $client, array $userIDs): void
+    {
+        // Jitter 0-4s to spread concurrent teardown calls from parallel workers
+        usleep(random_int(0, 4000000));
+
+        for ($i = 0; $i < 8; $i++) {
+            try {
+                $client->deleteUsers(new GeneratedModels\DeleteUsersRequest(
+                    userIds: $userIDs,
+                    user: 'hard',
+                    messages: 'hard',
+                    conversations: 'hard',
+                ));
+
+                return;
+            } catch (\Exception $e) {
+                if (strpos($e->getMessage(), 'Too many requests') === false
+                    && strpos($e->getMessage(), '429') === false) {
+                    // Non-rate-limit error during cleanup — ignore it
+                    return;
+                }
+                // Exponential backoff: 2s, 4s, 8s, 16s … capped at 30s
+                sleep(min(2 ** ($i + 1), 30));
+            }
+        }
     }
 }

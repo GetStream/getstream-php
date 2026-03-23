@@ -3,12 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ChannelPushPreferencesResponse extends BaseModel
+class AIImageLabelDefinition extends BaseModel
 {
     public function __construct(
-        public ?string $chatLevel = null,
-        public ?ChatPreferencesResponse $chatPreferences = null,
-        public ?\DateTime $disabledUntil = null,
+        public ?string $key = null,
+        public ?string $label = null,
+        public ?string $description = null,
+        public ?string $group = null,
     ) {
     }
 
