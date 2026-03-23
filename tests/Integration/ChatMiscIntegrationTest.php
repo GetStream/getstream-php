@@ -647,7 +647,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     /**
      * @test
      */
-    public function getRetentionPolicy(): string
+    public function getRetentionPolicy(): void
     {
         $policyName = 'old-messages';
 
@@ -676,16 +676,21 @@ class ChatMiscIntegrationTest extends ChatTestCase
             }
 
             throw $e;
+        } finally {
+            // Clean up the policy we created
+            try {
+                $this->client->deleteRetentionPolicy(new GeneratedModels\DeleteRetentionPolicyRequest(
+                    policy: $policyName,
+                ));
+            } catch (\Exception $ignore) {
+            }
         }
-
-        return $policyName;
     }
 
     /**
      * @test
-     * @depends getRetentionPolicy
      */
-    public function getRetentionPolicyRuns(string $policyName): void
+    public function getRetentionPolicyRuns(): void
     {
         try {
             $resp = $this->client->getRetentionPolicyRuns(limit: 10, offset: 0);
@@ -698,7 +703,6 @@ class ChatMiscIntegrationTest extends ChatTestCase
 
             throw $e;
         }
-
     }
 
     protected static function sharedUserCount(): int
