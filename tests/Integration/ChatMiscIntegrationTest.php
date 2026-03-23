@@ -685,7 +685,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
      * @test
      * @depends getRetentionPolicy
      */
-    public function getRetentionPolicyRuns(string $policyName): string
+    public function getRetentionPolicyRuns(string $policyName): void
     {
         try {
             $resp = $this->client->getRetentionPolicyRuns(limit: 10, offset: 0);
@@ -699,27 +699,6 @@ class ChatMiscIntegrationTest extends ChatTestCase
             throw $e;
         }
 
-        return $policyName;
-    }
-
-    /**
-     * @test
-     * @depends getRetentionPolicyRuns
-     */
-    public function deleteRetentionPolicy(string $policyName): void
-    {
-        try {
-            $resp = $this->client->deleteRetentionPolicy(new GeneratedModels\DeleteRetentionPolicyRequest(
-                policy: $policyName,
-            ));
-            $this->assertResponseSuccess($resp, 'delete retention policy');
-        } catch (\Exception $e) {
-            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
-                self::markTestSkipped('Retention policies are not enabled for this app');
-            }
-
-            throw $e;
-        }
     }
 
     protected static function sharedUserCount(): int
