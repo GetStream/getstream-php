@@ -17,7 +17,8 @@ class AddCommentRequest extends BaseModel
         public ?string $parentID = null, // ID of parent comment for replies. When provided, object_id and object_type are automatically inherited from the parent comment.
         public ?object $custom = null, // Custom data for the comment
         public ?bool $createNotificationActivity = null, // Whether to create a notification activity for this comment
-        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true)
+        /** @deprecated */
+        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?bool $skipPush = null,
         public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for this comment
         public ?string $userID = null,

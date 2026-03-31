@@ -10,9 +10,11 @@ class CallStatsParticipantCounts extends BaseModel
         public ?int $sessions = null,
         public ?int $liveSessions = null,
         public ?int $publishers = null,
+        public ?int $cqScore = null,
         public ?int $peakConcurrentUsers = null,
         public ?int $peakConcurrentSessions = null,
         public ?int $totalParticipantDuration = null,
+        public ?int $callEventCount = null,
     ) {
     }
 

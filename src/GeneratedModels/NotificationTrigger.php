@@ -9,6 +9,7 @@ class NotificationTrigger extends BaseModel
         public ?string $type = null, // The type of notification (mention, reaction, comment, follow, etc.)
         public ?string $text = null, // Human-readable text describing the notification
         public ?NotificationComment $comment = null,
+        public ?object $custom = null, // Custom data from the trigger object (comment, reaction, etc.)
     ) {
     }
 

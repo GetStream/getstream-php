@@ -9,9 +9,11 @@ namespace GetStream\GeneratedModels;
 class GetRetentionPolicyRunsResponse extends BaseModel
 {
     public function __construct(
-        /** @var array<RetentionCleanupRun>|null */
-        #[ArrayOf(RetentionCleanupRun::class)]
+        /** @var array<RetentionRunResponse>|null */
+        #[ArrayOf(RetentionRunResponse::class)]
         public ?array $runs = null,
+        public ?string $next = null,
+        public ?string $prev = null,
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }

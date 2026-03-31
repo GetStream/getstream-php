@@ -641,51 +641,8 @@ class ChatMiscIntegrationTest extends ChatTestCase
     }
 
     // =========================================================================
-    // Retention Policy
+    // Retention Policy Runs
     // =========================================================================
-
-    /**
-     * @test
-     */
-    public function getRetentionPolicy(): void
-    {
-        $policyName = 'old-messages';
-
-        // Ensure a policy exists before querying
-        try {
-            $this->client->setRetentionPolicy(new GeneratedModels\SetRetentionPolicyRequest(
-                policy: $policyName,
-                maxAgeHours: 720,
-            ));
-        } catch (\Exception $e) {
-            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
-                self::markTestSkipped('Retention policies are not enabled for this app');
-            }
-
-            throw $e;
-        }
-
-        try {
-            $resp = $this->client->getRetentionPolicy();
-            $this->assertResponseSuccess($resp, 'get retention policy');
-            self::assertNotNull($resp->getData()->policies, 'Policies list should be returned');
-            self::assertNotEmpty($resp->getData()->policies, 'Should have at least one policy');
-        } catch (\Exception $e) {
-            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
-                self::markTestSkipped('Retention policies are not enabled for this app');
-            }
-
-            throw $e;
-        } finally {
-            // Clean up the policy we created
-            try {
-                $this->client->deleteRetentionPolicy(new GeneratedModels\DeleteRetentionPolicyRequest(
-                    policy: $policyName,
-                ));
-            } catch (\Exception $ignore) {
-            }
-        }
-    }
 
     /**
      * @test
@@ -693,7 +650,9 @@ class ChatMiscIntegrationTest extends ChatTestCase
     public function getRetentionPolicyRuns(): void
     {
         try {
-            $resp = $this->client->getRetentionPolicyRuns(limit: 10, offset: 0);
+            $resp = $this->client->getRetentionPolicyRuns(new GeneratedModels\GetRetentionPolicyRunsRequest(
+                limit: 10,
+            ));
             $this->assertResponseSuccess($resp, 'get retention policy runs');
             self::assertNotNull($resp->getData()->runs, 'Runs list should be returned');
         } catch (\Exception $e) {

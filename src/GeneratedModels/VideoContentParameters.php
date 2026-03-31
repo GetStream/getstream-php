@@ -7,6 +7,7 @@ class VideoContentParameters extends BaseModel
 {
     public function __construct(
         public ?array $harmLabels = null,
+        public ?string $labelOperator = null,
     ) {
     }
 

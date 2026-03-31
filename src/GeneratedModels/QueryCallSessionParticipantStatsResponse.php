@@ -21,6 +21,9 @@ class QueryCallSessionParticipantStatsResponse extends BaseModel
         /** @var array<CallStatsParticipant>|null */
         #[ArrayOf(CallStatsParticipant::class)]
         public ?array $participants = null,
+        /** @var array<CallLevelEventPayload>|null */
+        #[ArrayOf(CallLevelEventPayload::class)]
+        public ?array $callEvents = null,
         public ?string $tmpDataSource = null,
     ) {
     }
