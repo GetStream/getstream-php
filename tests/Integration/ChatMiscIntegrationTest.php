@@ -650,7 +650,8 @@ class ChatMiscIntegrationTest extends ChatTestCase
     public function getRetentionPolicyRuns(): void
     {
         try {
-            $resp = $this->client->getRetentionPolicyRuns(new GeneratedModels\GetRetentionPolicyRunsRequest(
+            $chatClient = \GetStream\ClientBuilder::fromEnv()->buildChatClient();
+            $resp = $chatClient->getRetentionPolicyRuns(new GeneratedModels\GetRetentionPolicyRunsRequest(
                 limit: 10,
             ));
             $this->assertResponseSuccess($resp, 'get retention policy runs');
