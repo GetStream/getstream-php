@@ -25,6 +25,7 @@ class ActivityResponse extends BaseModel
         public ?NotificationContext $notificationContext = null,
         public ?int $popularity = null, // Popularity score of the activity
         public ?int $score = null, // Ranking score for this activity
+        public ?object $scoreVars = null, // Variable values used at ranking time. Only included when include_score_vars is enabled in enrichment options.
         public ?string $selectorSource = null, // Which activity selector provided this activity (e.g., 'following', 'popular', 'interest'). Only set when using multiple activity selectors with ranking.
         /** @var array<CommentResponse>|null */
         #[ArrayOf(CommentResponse::class)]

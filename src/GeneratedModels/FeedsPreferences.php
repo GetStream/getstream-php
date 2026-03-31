@@ -11,7 +11,8 @@ class FeedsPreferences extends BaseModel
         public ?string $reaction = null, // Push notification preference for reactions on user's activities or comments. One of: all, none
         public ?string $commentReaction = null, // Push notification preference for reactions on comments. One of: all, none
         public ?string $commentReply = null, // Push notification preference for replies to comments. One of: all, none
-        public ?string $mention = null, // Push notification preference for mentions in activities or comments. One of: all, none
+        public ?string $commentMention = null, // Push notification preference for mentions in comments. One of: all, none
+        public ?string $mention = null, // Push notification preference for mentions in activities. One of: all, none
         public ?array $customActivityTypes = null, // Push notification preferences for custom activity types. Map of activity type to preference (all or none)
     ) {
     }

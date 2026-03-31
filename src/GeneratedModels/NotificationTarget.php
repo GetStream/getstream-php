@@ -16,6 +16,7 @@ class NotificationTarget extends BaseModel
         public ?string $name = null, // The name of the target user (for user targets like follows)
         public ?NotificationComment $comment = null,
         public ?NotificationParentActivity $parentActivity = null,
+        public ?object $custom = null, // Custom data from the target activity
     ) {
     }
 

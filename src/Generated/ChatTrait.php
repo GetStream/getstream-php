@@ -1363,25 +1363,18 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteRetentionPolicyResponse::class);
     }
     /**
-     * Returns paginated retention cleanup run history for the app. Server-side only.
+     * Returns filtered and sorted retention cleanup run history for the app. Supports filter_conditions on 'policy' (possible values: 'old-messages', 'inactive-channels') and 'date' fields. Server-side only.
      *
-     * @param int $limit
-     * @param int $offset
+     * @param GeneratedModels\GetRetentionPolicyRunsRequest $requestData
      * @return StreamResponse<GeneratedModels\GetRetentionPolicyRunsResponse>
      * @throws StreamException
      */
-    public function getRetentionPolicyRuns(int $limit, int $offset): StreamResponse {
+    public function getRetentionPolicyRuns(GeneratedModels\GetRetentionPolicyRunsRequest $requestData): StreamResponse {
         $path = '/api/v2/chat/retention_policy/runs';
 
         $queryParams = [];
-        if ($limit !== null) {
-            $queryParams['limit'] = $limit;
-        }
-        if ($offset !== null) {
-            $queryParams['offset'] = $offset;
-        }
-        $requestData = null;
-        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyRunsResponse::class);
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyRunsResponse::class);
     }
     /**
      * Search messages across channels

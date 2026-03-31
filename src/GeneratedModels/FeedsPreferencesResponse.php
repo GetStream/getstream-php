@@ -11,6 +11,7 @@ class FeedsPreferencesResponse extends BaseModel
         public ?string $reaction = null,
         public ?string $commentReaction = null,
         public ?string $commentReply = null,
+        public ?string $commentMention = null,
         public ?string $mention = null,
         public ?array $customActivityTypes = null,
     ) {

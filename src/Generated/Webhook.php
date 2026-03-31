@@ -95,6 +95,7 @@ use GetStream\GeneratedModels\CommentDeletedEvent;
 use GetStream\GeneratedModels\CommentReactionAddedEvent;
 use GetStream\GeneratedModels\CommentReactionDeletedEvent;
 use GetStream\GeneratedModels\CommentReactionUpdatedEvent;
+use GetStream\GeneratedModels\CommentRestoredEvent;
 use GetStream\GeneratedModels\CommentUpdatedEvent;
 use GetStream\GeneratedModels\CustomEvent;
 use GetStream\GeneratedModels\CustomVideoEvent;
@@ -275,6 +276,7 @@ class Webhook
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_ADDED = 'feeds.comment.reaction.added';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_DELETED = 'feeds.comment.reaction.deleted';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_UPDATED = 'feeds.comment.reaction.updated';
+    public const EVENT_TYPE_FEEDS_COMMENT_RESTORED = 'feeds.comment.restored';
     public const EVENT_TYPE_FEEDS_COMMENT_UPDATED = 'feeds.comment.updated';
     public const EVENT_TYPE_FEEDS_FEED_CREATED = 'feeds.feed.created';
     public const EVENT_TYPE_FEEDS_FEED_DELETED = 'feeds.feed.deleted';
@@ -503,6 +505,7 @@ class Webhook
             'feeds.comment.reaction.added' => CommentReactionAddedEvent::class,
             'feeds.comment.reaction.deleted' => CommentReactionDeletedEvent::class,
             'feeds.comment.reaction.updated' => CommentReactionUpdatedEvent::class,
+            'feeds.comment.restored' => CommentRestoredEvent::class,
             'feeds.comment.updated' => CommentUpdatedEvent::class,
             'feeds.feed.created' => FeedCreatedEvent::class,
             'feeds.feed.deleted' => FeedDeletedEvent::class,

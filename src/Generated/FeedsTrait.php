@@ -534,6 +534,7 @@ trait FeedsTrait
      * @param int $depth
      * @param string $sort
      * @param int $repliesLimit
+     * @param string $idAround
      * @param string $userID
      * @param int $limit
      * @param string $prev
@@ -541,7 +542,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetCommentsResponse>
      * @throws StreamException
      */
-    public function getComments(string $objectID, string $objectType, int $depth, string $sort, int $repliesLimit, string $userID, int $limit, string $prev, string $next): StreamResponse {
+    public function getComments(string $objectID, string $objectType, int $depth, string $sort, int $repliesLimit, string $idAround, string $userID, int $limit, string $prev, string $next): StreamResponse {
         $path = '/api/v2/feeds/comments';
 
         $queryParams = [];
@@ -559,6 +560,9 @@ trait FeedsTrait
         }
         if ($repliesLimit !== null) {
             $queryParams['replies_limit'] = $repliesLimit;
+        }
+        if ($idAround !== null) {
+            $queryParams['id_around'] = $idAround;
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
@@ -672,6 +676,25 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentResponse::class);
     }
     /**
+     * Updates certain fields of the comment. Use 'set' to update specific fields and 'unset' to remove fields.
+     * Sends events:
+     * - feeds.activity.updated
+     * - feeds.comment.updated
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateCommentPartialRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateCommentPartialResponse>
+     * @throws StreamException
+     */
+    public function updateCommentPartial(string $id, GeneratedModels\UpdateCommentPartialRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{id}/partial';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentPartialResponse::class);
+    }
+    /**
      * Adds a reaction to a comment
      *
      * @param string $id
@@ -735,6 +758,7 @@ trait FeedsTrait
      * @param int $depth
      * @param string $sort
      * @param int $repliesLimit
+     * @param string $idAround
      * @param string $userID
      * @param int $limit
      * @param string $prev
@@ -742,7 +766,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetCommentRepliesResponse>
      * @throws StreamException
      */
-    public function getCommentReplies(string $id, int $depth, string $sort, int $repliesLimit, string $userID, int $limit, string $prev, string $next): StreamResponse {
+    public function getCommentReplies(string $id, int $depth, string $sort, int $repliesLimit, string $idAround, string $userID, int $limit, string $prev, string $next): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/replies';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -755,6 +779,9 @@ trait FeedsTrait
         }
         if ($repliesLimit !== null) {
             $queryParams['replies_limit'] = $repliesLimit;
+        }
+        if ($idAround !== null) {
+            $queryParams['id_around'] = $idAround;
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
@@ -770,6 +797,22 @@ trait FeedsTrait
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentRepliesResponse::class);
+    }
+    /**
+     * Restores a soft-deleted comment by its ID. The comment and all its descendants are restored. Requires moderator permissions.
+     *
+     * @param string $id
+     * @param GeneratedModels\RestoreCommentRequest $requestData
+     * @return StreamResponse<GeneratedModels\RestoreCommentResponse>
+     * @throws StreamException
+     */
+    public function restoreComment(string $id, GeneratedModels\RestoreCommentRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{id}/restore';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreCommentResponse::class);
     }
     /**
      * List all feed groups for the application
@@ -1449,11 +1492,12 @@ trait FeedsTrait
      * @param string $source
      * @param string $target
      * @param bool $deleteNotificationActivity
+     * @param bool $keepHistory
      * @param bool $enrichOwnFields
      * @return StreamResponse<GeneratedModels\UnfollowResponse>
      * @throws StreamException
      */
-    public function unfollow(string $source, string $target, bool $deleteNotificationActivity, bool $enrichOwnFields): StreamResponse {
+    public function unfollow(string $source, string $target, bool $deleteNotificationActivity, bool $keepHistory, bool $enrichOwnFields): StreamResponse {
         $path = '/api/v2/feeds/follows/{source}/{target}';
         $path = str_replace('{source}', (string) $source, $path);
         $path = str_replace('{target}', (string) $target, $path);
@@ -1461,6 +1505,9 @@ trait FeedsTrait
         $queryParams = [];
         if ($deleteNotificationActivity !== null) {
             $queryParams['delete_notification_activity'] = $deleteNotificationActivity;
+        }
+        if ($keepHistory !== null) {
+            $queryParams['keep_history'] = $keepHistory;
         }
         if ($enrichOwnFields !== null) {
             $queryParams['enrich_own_fields'] = $enrichOwnFields;

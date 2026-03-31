@@ -15,7 +15,8 @@ class UpdateCommentRequest extends BaseModel
         public ?bool $skipPush = null,
         public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for this comment
         public ?bool $handleMentionNotifications = null, // If true, creates notification activities for newly mentioned users and deletes notifications for users no longer mentioned
-        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications)
+        /** @deprecated */
+        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

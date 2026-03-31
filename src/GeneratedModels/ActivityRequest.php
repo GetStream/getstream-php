@@ -29,7 +29,8 @@ class ActivityRequest extends BaseModel
         public ?object $custom = null, // Custom data for the activity
         public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for the activity
         public ?bool $createNotificationActivity = null, // Whether to create notification activities for mentioned users
-        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true)
+        /** @deprecated */
+        public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?bool $skipPush = null, // Whether to skip push notifications
     ) {
     }

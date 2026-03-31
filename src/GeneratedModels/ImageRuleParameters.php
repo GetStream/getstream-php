@@ -9,6 +9,7 @@ class ImageRuleParameters extends BaseModel
         public ?int $threshold = null,
         public ?string $timeWindow = null,
         public ?array $harmLabels = null,
+        public ?int $minConfidence = null,
     ) {
     }
 

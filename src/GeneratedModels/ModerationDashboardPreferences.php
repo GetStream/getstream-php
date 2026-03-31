@@ -14,6 +14,8 @@ class ModerationDashboardPreferences extends BaseModel
         public ?bool $asyncReviewQueueUpsert = null,
         public ?bool $disableAuditLogs = null,
         public ?array $keyframeClassificationsMap = null,
+        public ?array $escalationReasons = null,
+        public ?bool $escalationQueueEnabled = null,
     ) {
     }
 
