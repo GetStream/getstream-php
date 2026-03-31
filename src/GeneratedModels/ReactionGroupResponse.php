@@ -13,6 +13,9 @@ class ReactionGroupResponse extends BaseModel
         public ?int $sumScores = null, // SumScores is the sum of all scores of reactions of this type. Medium allows you to clap articles more than once and shows the sum of all claps from all users. For example, you can send `clap` x5 using `score: 5`.
         public ?\DateTime $firstReactionAt = null, // FirstReactionAt is the time of the first reaction of this type. This is the same also if all reaction of this type are deleted, because if someone will react again with the same type, will be preserved the sorting.
         public ?\DateTime $lastReactionAt = null, // LastReactionAt is the time of the last reaction of this type.
+        /** @var array<ReactionGroupUserResponse>|null */
+        #[ArrayOf(ReactionGroupUserResponse::class)]
+        public ?array $latestReactionsBy = null, // The most recent users who reacted with this type, ordered by most recent first.
     ) {
     }
 

@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class QueryCallStatsRequest extends BaseModel
 {
     public function __construct(
-        public ?object $filterConditions = null,
+        public ?object $filterConditions = null, // Filter conditions to apply to the query
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
-        public ?array $sort = null,
+        public ?array $sort = null, // Array of sort parameters
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,

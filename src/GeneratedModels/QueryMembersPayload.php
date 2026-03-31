@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * Client request
- */
 class QueryMembersPayload extends BaseModel
 {
     public function __construct(
@@ -14,10 +11,10 @@ class QueryMembersPayload extends BaseModel
         /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $members = null,
-        public ?object $filterConditions = null,
+        public ?object $filterConditions = null, // Filter conditions to apply to the query
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
-        public ?array $sort = null,
+        public ?array $sort = null, // Array of sort parameters
         public ?int $limit = null,
         public ?int $offset = null,
         public ?string $userID = null,

@@ -188,6 +188,7 @@ class FeedBookmarkFollowIntegrationTest extends TestCase
                 self::USER_FEED_TYPE . $this->testUserId,
                 self::USER_FEED_TYPE . $this->testUserId2,
                 false,
+                false,
                 false
             );
         } catch (StreamApiException $e) {

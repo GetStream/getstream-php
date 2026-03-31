@@ -15,6 +15,20 @@ use GetStream\GeneratedModels;
 trait ModerationTrait
 {
     /**
+     * Insert a moderation action log entry. Server-side only. Used by product services to log moderation-related actions.
+     *
+     * @param GeneratedModels\InsertActionLogRequest $requestData
+     * @return StreamResponse<GeneratedModels\InsertActionLogResponse>
+     * @throws StreamException
+     */
+    public function insertActionLog(GeneratedModels\InsertActionLogRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/action_logs';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\InsertActionLogResponse::class);
+    }
+    /**
      * Appeal against the moderation decision
      *
      * @param GeneratedModels\AppealRequest $requestData
@@ -246,6 +260,20 @@ trait ModerationTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FlagResponse::class);
+    }
+    /**
+     * Returns the number of moderation flags created against a specific user's content. Optionally filter by entity type.
+     *
+     * @param GeneratedModels\GetFlagCountRequest $requestData
+     * @return StreamResponse<GeneratedModels\GetFlagCountResponse>
+     * @throws StreamException
+     */
+    public function getFlagCount(GeneratedModels\GetFlagCountRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/flag_count';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetFlagCountResponse::class);
     }
     /**
      * Query flags associated with moderation items. This is used for building a moderation dashboard.

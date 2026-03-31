@@ -27,6 +27,7 @@ class EnrichmentOptions extends BaseModel
         public ?bool $enrichOwnFollowings = null, // Default: false. When true, includes fetching and enriching own_followings (follows where activity author's feeds follow current user's feeds).
         public ?bool $skipOwnCapabilities = null, // Default: false. When true, skips computing and including capabilities for feeds.
         public ?bool $skipAll = null, // Default: false. When true, skips all enrichments.
+        public ?bool $includeScoreVars = null, // Default: false. When true, includes score_vars in activity responses containing variable values used at ranking time.
     ) {
     }
 

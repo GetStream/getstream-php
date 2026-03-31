@@ -40,11 +40,15 @@ class ReviewQueueItemResponse extends BaseModel
         public ?AppealItemResponse $appeal = null,
         public ?EnrichedActivity $feedsV2Activity = null,
         public ?Reaction $feedsV2Reaction = null,
-        public ?ActivityResponse $feedsV3Activity = null,
-        public ?CommentResponse $feedsV3Comment = null,
+        public ?FeedsV3ActivityResponse $feedsV3Activity = null,
+        public ?FeedsV3CommentResponse $feedsV3Comment = null,
         public ?array $teams = null, // Teams associated with this item
         public ?string $configKey = null,
         public ?int $flagsCount = null,
+        public ?bool $escalated = null, // Whether the item has been escalated
+        public ?EscalationMetadata $escalationMetadata = null,
+        public ?string $escalatedBy = null, // ID of the moderator who escalated the item
+        public ?\DateTime $escalatedAt = null, // When the item was escalated
     ) {
     }
 

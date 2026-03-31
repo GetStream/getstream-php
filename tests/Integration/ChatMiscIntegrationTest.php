@@ -640,6 +640,31 @@ class ChatMiscIntegrationTest extends ChatTestCase
         self::markTestSkipped('ChannelBatchUpdate is not yet available in the generated SDK');
     }
 
+    // =========================================================================
+    // Retention Policy Runs
+    // =========================================================================
+
+    /**
+     * @test
+     */
+    public function getRetentionPolicyRuns(): void
+    {
+        try {
+            $chatClient = \GetStream\ClientBuilder::fromEnv()->buildChatClient();
+            $resp = $chatClient->getRetentionPolicyRuns(new GeneratedModels\GetRetentionPolicyRunsRequest(
+                limit: 10,
+            ));
+            $this->assertResponseSuccess($resp, 'get retention policy runs');
+            self::assertNotNull($resp->getData()->runs, 'Runs list should be returned');
+        } catch (\Exception $e) {
+            if (str_contains($e->getMessage(), 'not enabled') || str_contains($e->getMessage(), 'retention')) {
+                self::markTestSkipped('Retention policies are not enabled for this app');
+            }
+
+            throw $e;
+        }
+    }
+
     protected static function sharedUserCount(): int
     {
         return 2;

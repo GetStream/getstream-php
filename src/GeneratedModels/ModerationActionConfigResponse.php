@@ -15,6 +15,7 @@ class ModerationActionConfigResponse extends BaseModel
         public ?string $icon = null, // Icon for the dashboard
         public ?string $description = null, // Description of what this action does
         public ?object $custom = null, // Custom data for the action
+        public ?string $queueType = null, // Queue type this action config belongs to
     ) {
     }
 

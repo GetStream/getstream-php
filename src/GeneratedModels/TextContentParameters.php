@@ -11,6 +11,7 @@ class TextContentParameters extends BaseModel
         public ?bool $containsUrl = null,
         public ?string $severity = null,
         public ?array $blocklistMatch = null,
+        public ?string $labelOperator = null,
     ) {
     }
 

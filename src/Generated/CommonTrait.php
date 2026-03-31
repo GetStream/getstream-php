@@ -391,6 +391,59 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateImportV2TaskResponse::class);
     }
     /**
+     * Removes the external storage configuration for the app. Idempotent: succeeds even if no configuration exists.
+     *
+     * @return StreamResponse<GeneratedModels\DeleteExternalStorageResponse>
+     * @throws StreamException
+     */
+    public function deleteImporterExternalStorage(): StreamResponse {
+        $path = '/api/v2/imports/v2/external-storage';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteExternalStorageResponse::class);
+    }
+    /**
+     * Returns the current external storage configuration for the app. Returns 404 if no configuration exists.
+     *
+     * @return StreamResponse<GeneratedModels\GetExternalStorageResponse>
+     * @throws StreamException
+     */
+    public function getImporterExternalStorage(): StreamResponse {
+        $path = '/api/v2/imports/v2/external-storage';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetExternalStorageResponse::class);
+    }
+    /**
+     * Creates or updates the external storage configuration for the app. Currently only AWS S3 (via cross-account IAM role assumption) is supported.
+     *
+     * @param GeneratedModels\UpsertExternalStorageRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertExternalStorageResponse>
+     * @throws StreamException
+     */
+    public function upsertImporterExternalStorage(GeneratedModels\UpsertExternalStorageRequest $requestData): StreamResponse {
+        $path = '/api/v2/imports/v2/external-storage';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertExternalStorageResponse::class);
+    }
+    /**
+     * Validates the configured external S3 storage by performing a live STS AssumeRole and S3 ListObjectsV2 check.
+     *
+     * @return StreamResponse<GeneratedModels\ValidateExternalStorageResponse>
+     * @throws StreamException
+     */
+    public function validateImporterExternalStorage(): StreamResponse {
+        $path = '/api/v2/imports/v2/external-storage/validate';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ValidateExternalStorageResponse::class);
+    }
+    /**
      * Deletes an import v2 task. Can only delete tasks in queued state.
      *
      * @param string $id

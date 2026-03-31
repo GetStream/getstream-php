@@ -15,6 +15,7 @@ class CheckRequest extends BaseModel
         public ?object $options = null, // Additional moderation configuration options
         public ?bool $testMode = null, // Whether to run moderation in test mode
         public ?ModerationConfig $config = null,
+        public ?\DateTime $contentPublishedAt = null, // Original timestamp when the content was produced (for correlating flagged content with source video timeline)
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

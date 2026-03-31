@@ -10,6 +10,7 @@ class AddUserGroupMembersRequest extends BaseModel
 {
     public function __construct(
         public ?array $memberIds = null, // List of user IDs to add as members
+        public ?bool $asAdmin = null, // Whether to add the members as group admins. Defaults to false
         public ?string $teamID = null,
     ) {
     }
