@@ -146,6 +146,18 @@ This creates clean, typed models with automatic JSON handling - no boilerplate c
 
 ## Development
 
+### Release Workflow
+
+Releases are automated when a pull request is merged into `main` or `master`.
+
+- PR titles must follow Conventional Commit format (for example: `feat: ...`, `fix: ...`).
+- Version bump is derived from PR title/body:
+  - `feat:` => minor
+  - `fix:` or `bug:` => patch
+  - `feat!:` / `fix!:` / `BREAKING CHANGE` => major
+- Non-release types like `chore:`, `docs:`, `test:` do not create a release.
+- The release workflow updates `composer.json` and `src/Constant.php`, pushes a tag, creates a GitHub release, and triggers Packagist.
+
 ### Linting and Code Quality
 
 ```bash

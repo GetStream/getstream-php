@@ -6,12 +6,23 @@ on:
     branches: [master, main]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
+  check-pr-title:
+    name: Validate PR title
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: aslafy-z/conventional-pr-title-action@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   test:
     name: 🧪 Test & lint
+    needs: check-pr-title
+    if: always() && (github.event_name != 'pull_request' || needs.check-pr-title.result == 'success')
     environment: ci
     runs-on: ubuntu-latest
 
