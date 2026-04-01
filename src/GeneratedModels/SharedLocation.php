@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class SharedLocation extends BaseModel
 {
     public function __construct(
-        public ?int $latitude = null,
-        public ?int $longitude = null,
+        public ?float $latitude = null,
+        public ?float $longitude = null,
         public ?string $createdByDeviceID = null,
         public ?\DateTime $endAt = null,
     ) {

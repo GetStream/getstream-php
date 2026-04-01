@@ -11,8 +11,8 @@ class CallStatsLocation extends BaseModel
         public ?string $country = null,
         public ?string $countryIsoCode = null,
         public ?string $continent = null,
-        public ?int $latitude = null,
-        public ?int $longitude = null,
+        public ?float $latitude = null,
+        public ?float $longitude = null,
         public ?int $accuracyRadiusMeters = null,
     ) {
     }

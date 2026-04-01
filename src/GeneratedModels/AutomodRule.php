@@ -7,7 +7,7 @@ class AutomodRule extends BaseModel
 {
     public function __construct(
         public ?string $label = null,
-        public ?int $threshold = null,
+        public ?float $threshold = null,
         public ?string $action = null,
     ) {
     }

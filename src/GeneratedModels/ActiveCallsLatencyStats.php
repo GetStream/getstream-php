@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class ActiveCallsLatencyStats extends BaseModel
 {
     public function __construct(
-        public ?int $p50 = null,
-        public ?int $p90 = null,
+        public ?float $p50 = null,
+        public ?float $p90 = null,
     ) {
     }
 

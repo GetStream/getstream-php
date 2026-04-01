@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class CallReportResponse extends BaseModel
 {
     public function __construct(
-        public ?int $score = null,
+        public ?float $score = null,
         public ?\DateTime $startedAt = null,
         public ?\DateTime $endedAt = null,
     ) {

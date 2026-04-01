@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class ActiveCallsResolutionStats extends BaseModel
 {
     public function __construct(
-        public ?int $p10 = null,
-        public ?int $p50 = null,
+        public ?float $p10 = null,
+        public ?float $p50 = null,
     ) {
     }
 

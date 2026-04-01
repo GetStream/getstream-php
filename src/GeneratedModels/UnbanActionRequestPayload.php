@@ -11,6 +11,7 @@ class UnbanActionRequestPayload extends BaseModel
     public function __construct(
         public ?string $channelCid = null, // Channel CID for channel-specific unban
         public ?string $decisionReason = null, // Reason for the appeal decision
+        public ?bool $removeFutureChannelsBan = null, // Also remove the future channels ban for this user
     ) {
     }
 

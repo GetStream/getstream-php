@@ -7,7 +7,7 @@ class RuleBuilderCondition extends BaseModel
 {
     public function __construct(
         public ?string $type = null,
-        public ?int $confidence = null,
+        public ?float $confidence = null,
         public ?TextRuleParameters $textRuleParams = null,
         public ?ImageRuleParameters $imageRuleParams = null,
         public ?VideoRuleParameters $videoRuleParams = null,

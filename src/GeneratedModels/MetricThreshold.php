@@ -8,7 +8,7 @@ class MetricThreshold extends BaseModel
     public function __construct(
         public ?string $level = null,
         public ?string $operator = null,
-        public ?int $value = null,
+        public ?float $value = null,
         public ?string $valueUnit = null,
         public ?int $windowSeconds = null,
     ) {

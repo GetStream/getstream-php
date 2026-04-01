@@ -21,7 +21,7 @@ class Reaction extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?\DateTime $deletedAt = null,
-        public ?int $score = null,
+        public ?float $score = null,
         public ?object $moderation = null,
     ) {
     }

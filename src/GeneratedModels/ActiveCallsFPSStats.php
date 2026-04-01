@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class ActiveCallsFPSStats extends BaseModel
 {
     public function __construct(
-        public ?int $p05 = null,
-        public ?int $p10 = null,
-        public ?int $p50 = null,
-        public ?int $p90 = null,
+        public ?float $p05 = null,
+        public ?float $p10 = null,
+        public ?float $p50 = null,
+        public ?float $p90 = null,
     ) {
     }
 

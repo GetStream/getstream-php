@@ -9,7 +9,7 @@ class ReportByHistogramBucket extends BaseModel
         public ?string $category = null,
         public ?Bound $lowerBound = null,
         public ?Bound $upperBound = null,
-        public ?int $sum = null,
+        public ?float $sum = null,
         public ?int $count = null,
     ) {
     }

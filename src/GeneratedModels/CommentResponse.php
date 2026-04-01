@@ -36,8 +36,8 @@ class CommentResponse extends BaseModel
         public ?int $upvoteCount = null, // Number of upvotes for this comment
         public ?int $downvoteCount = null, // Number of downvotes for this comment
         public ?int $score = null, // Score of the comment based on reactions
-        public ?int $confidenceScore = null, // Confidence score of the comment
-        public ?int $controversyScore = null, // Controversy score of the comment
+        public ?float $confidenceScore = null, // Confidence score of the comment
+        public ?float $controversyScore = null, // Controversy score of the comment
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $ownReactions = null, // Current user's reactions to this activity

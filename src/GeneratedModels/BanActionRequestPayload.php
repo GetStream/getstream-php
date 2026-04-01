@@ -17,6 +17,7 @@ class BanActionRequestPayload extends BaseModel
         public ?bool $ipBan = null, // Whether to ban by IP address
         public ?string $deleteMessages = null, // Message deletion mode: soft, pruning, or hard
         public ?int $timeout = null, // Duration of ban in minutes
+        public ?bool $banFromFutureChannels = null, // Also ban user from all channels this moderator creates in the future
     ) {
     }
 

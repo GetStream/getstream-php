@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class LabelThresholds extends BaseModel
 {
     public function __construct(
-        public ?int $flag = null, // Threshold for automatic message flag
-        public ?int $block = null, // Threshold for automatic message block
+        public ?float $flag = null, // Threshold for automatic message flag
+        public ?float $block = null, // Threshold for automatic message block
     ) {
     }
 

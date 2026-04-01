@@ -16,7 +16,7 @@ class MessageModerationResult extends BaseModel
         public ?string $blocklistName = null, // Name of the blocklist
         public ?Thresholds $moderationThresholds = null,
         public ?ModerationResponse $aiModerationResponse = null,
-        public ?int $userKarma = null, // Karma of the user
+        public ?float $userKarma = null, // Karma of the user
         public ?bool $userBadKarma = null, // Whether user has bad karma
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $updatedAt = null, // Date/time of the last update
