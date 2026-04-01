@@ -51,6 +51,8 @@ This guide explains how to set up automatic publishing to Packagist using GitHub
 When a PR is merged into `main` or `master`, the release workflow will:
 
 1. Parse the PR title using Conventional Commit style.
+   - Required ticket format: `type: [FEEDS-1234] description`
+   - Keep `feat`/`fix`/`bug` at the beginning of the title
 2. Decide the bump type:
    - `feat:` => minor
    - `fix:` or `bug:` => patch
@@ -62,9 +64,9 @@ When a PR is merged into `main` or `master`, the release workflow will:
 ### Creating a Release
 
 1. Open a PR with a Conventional Commit style title, for example:
-   - `feat: add feed search endpoint`
-   - `fix: handle nil reaction id`
-   - `feat!: remove deprecated batch API`
+   - `feat: [FEEDS-1350] add feed search endpoint`
+   - `fix: [FEEDS-1402] handle nil reaction id`
+   - `feat!: [FEEDS-1410] remove deprecated batch API`
 2. Merge the PR into `main` or `master`.
 3. GitHub Actions will automatically perform release + Packagist update.
 
