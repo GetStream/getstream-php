@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class ActivityLocation extends BaseModel
 {
     public function __construct(
-        public ?int $lat = null, // Latitude coordinate
-        public ?int $lng = null, // Longitude coordinate
+        public ?float $lat = null, // Latitude coordinate
+        public ?float $lng = null, // Longitude coordinate
     ) {
     }
 

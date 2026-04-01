@@ -14,7 +14,7 @@ class TextRuleParameters extends BaseModel
         public ?string $severity = null,
         public ?array $blocklistMatch = null,
         public ?array $semanticFilterNames = null,
-        public ?int $semanticFilterMinThreshold = null,
+        public ?float $semanticFilterMinThreshold = null,
     ) {
     }
 

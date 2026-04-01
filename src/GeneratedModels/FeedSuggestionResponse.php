@@ -33,7 +33,7 @@ class FeedSuggestionResponse extends BaseModel
         public ?\DateTime $createdAt = null, // When the feed was created
         public ?\DateTime $updatedAt = null, // When the feed was last updated
         public ?\DateTime $deletedAt = null, // When the feed was deleted
-        public ?int $recommendationScore = null,
+        public ?float $recommendationScore = null,
         public ?string $reason = null,
         public ?array $algorithmScores = null,
     ) {

@@ -39,8 +39,8 @@ class ThreadedCommentResponse extends BaseModel
         public ?int $upvoteCount = null,
         public ?int $downvoteCount = null,
         public ?int $score = null,
-        public ?int $confidenceScore = null,
-        public ?int $controversyScore = null,
+        public ?float $confidenceScore = null,
+        public ?float $controversyScore = null,
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $ownReactions = null,

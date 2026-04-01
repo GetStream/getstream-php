@@ -19,7 +19,7 @@ class CallStatsParticipantSession extends BaseModel
         public ?string $browserVersion = null,
         public ?string $currentIp = null,
         public ?string $currentSfu = null,
-        public ?int $distanceToSfuKilometers = null,
+        public ?float $distanceToSfuKilometers = null,
         public ?CallStatsLocation $location = null,
         public ?PublishedTrackFlags $publishedTracks = null,
         public ?int $cqScore = null,

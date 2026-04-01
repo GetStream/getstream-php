@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class ModerationResponse extends BaseModel
 {
     public function __construct(
-        public ?int $toxic = null,
-        public ?int $explicit = null,
-        public ?int $spam = null,
+        public ?float $toxic = null,
+        public ?float $explicit = null,
+        public ?float $spam = null,
         public ?string $action = null,
     ) {
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GetStream\Tests\Integration;
 
+use GetStream\ClientBuilder;
 use GetStream\GeneratedModels;
 use PHPUnit\Framework\Attributes\Group;
 
@@ -650,7 +651,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
     public function getRetentionPolicyRuns(): void
     {
         try {
-            $chatClient = \GetStream\ClientBuilder::fromEnv()->buildChatClient();
+            $chatClient = ClientBuilder::fromEnv()->buildChatClient();
             $resp = $chatClient->getRetentionPolicyRuns(new GeneratedModels\GetRetentionPolicyRunsRequest(
                 limit: 10,
             ));

@@ -42,7 +42,7 @@ class FeedsV3ActivityResponse extends BaseModel
         public ?int $bookmarkCount = null,
         public ?int $shareCount = null,
         public ?int $reactionCount = null,
-        public ?int $score = null,
+        public ?float $score = null,
         public ?array $metrics = null,
         public ?array $latestReactions = null,
         /** @var array<string, FeedsReactionGroup>|null */

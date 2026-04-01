@@ -9,8 +9,8 @@ class SharedLocationResponse extends BaseModel
         public ?string $channelCid = null, // Channel CID
         public ?string $messageID = null, // Message ID
         public ?string $userID = null, // User ID
-        public ?int $latitude = null, // Latitude coordinate
-        public ?int $longitude = null, // Longitude coordinate
+        public ?float $latitude = null, // Latitude coordinate
+        public ?float $longitude = null, // Longitude coordinate
         public ?string $createdByDeviceID = null, // Device ID that created the live location
         public ?\DateTime $endAt = null, // Time when the live location expires
         public ?\DateTime $createdAt = null, // Date/time of creation

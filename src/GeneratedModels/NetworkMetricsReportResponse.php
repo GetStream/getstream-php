@@ -6,10 +6,10 @@ namespace GetStream\GeneratedModels;
 class NetworkMetricsReportResponse extends BaseModel
 {
     public function __construct(
-        public ?int $averageLatency = null,
-        public ?int $averageJitter = null,
-        public ?int $averageConnectionTime = null,
-        public ?int $averageTimeToReconnect = null,
+        public ?float $averageLatency = null,
+        public ?float $averageJitter = null,
+        public ?float $averageConnectionTime = null,
+        public ?float $averageTimeToReconnect = null,
     ) {
     }
 

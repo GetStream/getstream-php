@@ -10,7 +10,7 @@ class CampaignStatsResponse extends BaseModel
         public ?\DateTime $statsCompletedAt = null,
         public ?int $statsMessagesSent = null,
         public ?int $statsChannelsCreated = null,
-        public ?int $progress = null,
+        public ?float $progress = null,
         public ?int $statsUsersSent = null,
         public ?int $statsUsersRead = null,
     ) {

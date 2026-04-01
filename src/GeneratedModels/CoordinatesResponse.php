@@ -9,8 +9,8 @@ namespace GetStream\GeneratedModels;
 class CoordinatesResponse extends BaseModel
 {
     public function __construct(
-        public ?int $latitude = null, // Latitude coordinate
-        public ?int $longitude = null, // Longitude coordinate
+        public ?float $latitude = null, // Latitude coordinate
+        public ?float $longitude = null, // Longitude coordinate
     ) {
     }
 

@@ -7,7 +7,7 @@ class AutomodSemanticFiltersRule extends BaseModel
 {
     public function __construct(
         public ?string $name = null,
-        public ?int $threshold = null,
+        public ?float $threshold = null,
         public ?string $action = null,
     ) {
     }
