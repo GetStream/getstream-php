@@ -48,9 +48,11 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_BODY: ${{ github.event.pull_request.body }}
         run: |
+          PR_BODY_FILE=$(mktemp)
+          printf '%s' "$PR_BODY" > "$PR_BODY_FILE"
           php scripts/release/bump_version.php \
             --title "$PR_TITLE" \
-            --body "$PR_BODY" \
+            --body-file "$PR_BODY_FILE" \
             --output "$GITHUB_OUTPUT"
 
       - name: Stop when PR does not require release

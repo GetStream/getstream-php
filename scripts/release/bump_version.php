@@ -6,6 +6,7 @@ declare(strict_types=1);
  * Computes next release version from PR title/body and updates version files.
  * Usage:
  *   php scripts/release/bump_version.php --title "feat: add x" --body "..." --output "$GITHUB_OUTPUT"
+ *   php scripts/release/bump_version.php --title "feat: add x" --body-file "/tmp/body.txt" --output "$GITHUB_OUTPUT"
  */
 final class ReleaseScriptException extends RuntimeException
 {
@@ -35,25 +36,27 @@ function runCommand(string $command): string
 
 function findLatestSemverTag(): string
 {
-    $tagsRaw = runCommand('git tag --list --sort=-version:refname');
+    $tagsRaw = runCommand('git tag --list');
     if ($tagsRaw === '') {
         return '0.0.0';
     }
 
     $tags = preg_split('/\R/', $tagsRaw) ?: [];
-    foreach ($tags as $tag) {
-        $tag = trim($tag);
-        if ($tag === '') {
-            continue;
-        }
+    $versions = [];
 
-        $normalized = ltrim($tag, 'v');
+    foreach ($tags as $tag) {
+        $normalized = ltrim(trim($tag), 'v');
         if (preg_match('/^\d+\.\d+\.\d+$/', $normalized) === 1) {
-            return $normalized;
+            $versions[] = $normalized;
         }
     }
 
-    return '0.0.0';
+    if ($versions === []) {
+        return '0.0.0';
+    }
+
+    usort($versions, 'version_compare');
+    return end($versions) ?: '0.0.0';
 }
 
 function determineBumpType(string $title, string $body): string
@@ -114,18 +117,18 @@ function updateComposerVersion(string $path, string $version): void
         throw new ReleaseScriptException('Could not read composer.json');
     }
 
-    $composer = json_decode($raw, true);
-    if (!is_array($composer)) {
-        throw new ReleaseScriptException('Could not parse composer.json');
+    $updated = preg_replace(
+        '/"version":\s*"[^"]*"/',
+        '"version": "v' . $version . '"',
+        $raw,
+        1
+    );
+
+    if ($updated === null || $updated === $raw) {
+        throw new ReleaseScriptException('Could not update version in composer.json');
     }
 
-    $composer['version'] = 'v' . $version;
-    $updated = json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-    if ($updated === false) {
-        throw new ReleaseScriptException('Could not encode composer.json');
-    }
-
-    file_put_contents($path, $updated . PHP_EOL);
+    file_put_contents($path, $updated);
 }
 
 function updateConstantVersion(string $path, string $version): void
@@ -165,8 +168,22 @@ function writeOutputs(string $outputPath, array $values): void
     file_put_contents($outputPath, implode(PHP_EOL, $lines) . PHP_EOL, FILE_APPEND);
 }
 
+function resolveBody(array $argv): string
+{
+    $bodyFile = getArgValue($argv, 'body-file');
+    if ($bodyFile !== '') {
+        $raw = file_get_contents($bodyFile);
+        if ($raw === false) {
+            throw new ReleaseScriptException('Could not read body-file');
+        }
+        return $raw;
+    }
+
+    return getArgValue($argv, 'body');
+}
+
 $title = getArgValue($argv, 'title');
-$body = getArgValue($argv, 'body');
+$body = resolveBody($argv);
 $outputPath = getArgValue($argv, 'output');
 
 $bump = determineBumpType($title, $body);
