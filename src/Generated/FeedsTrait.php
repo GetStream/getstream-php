@@ -622,6 +622,61 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCommentsResponse::class);
     }
     /**
+     * Deletes a bookmark from a comment
+     *
+     * @param string $commentID
+     * @param string $folderID
+     * @param string $userID
+     * @return StreamResponse<GeneratedModels\DeleteCommentBookmarkResponse>
+     * @throws StreamException
+     */
+    public function deleteCommentBookmark(string $commentID, string $folderID, string $userID): StreamResponse {
+        $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
+        $path = str_replace('{comment_id}', (string) $commentID, $path);
+
+        $queryParams = [];
+        if ($folderID !== null) {
+            $queryParams['folder_id'] = $folderID;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCommentBookmarkResponse::class);
+    }
+    /**
+     * Updates a bookmark for a comment
+     *
+     * @param string $commentID
+     * @param GeneratedModels\UpdateCommentBookmarkRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateCommentBookmarkResponse>
+     * @throws StreamException
+     */
+    public function updateCommentBookmark(string $commentID, GeneratedModels\UpdateCommentBookmarkRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
+        $path = str_replace('{comment_id}', (string) $commentID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentBookmarkResponse::class);
+    }
+    /**
+     * Adds a bookmark to a comment
+     *
+     * @param string $commentID
+     * @param GeneratedModels\AddCommentBookmarkRequest $requestData
+     * @return StreamResponse<GeneratedModels\AddCommentBookmarkResponse>
+     * @throws StreamException
+     */
+    public function addCommentBookmark(string $commentID, GeneratedModels\AddCommentBookmarkRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
+        $path = str_replace('{comment_id}', (string) $commentID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddCommentBookmarkResponse::class);
+    }
+    /**
      * Deletes a comment from an object (e.g., activity) and broadcasts appropriate events
      *
      * @param string $id

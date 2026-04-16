@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class Location extends BaseModel
+class BypassRequest extends BaseModel
 {
     public function __construct(
-        public ?float $lat = null, // Latitude coordinate
-        public ?float $lng = null, // Longitude coordinate
+        public ?string $targetUserID = null, // ID of the user to update
+        public ?bool $enabled = null, // Whether to enable moderation bypass for this user
     ) {
     }
 

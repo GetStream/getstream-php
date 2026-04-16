@@ -100,6 +100,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkImageModerationResponse::class);
     }
     /**
+     * Enable or disable moderation bypass for a user. This endpoint is server-side only.
+     *
+     * @param GeneratedModels\BypassRequest $requestData
+     * @return StreamResponse<GeneratedModels\BypassResponse>
+     * @throws StreamException
+     */
+    public function bypass(GeneratedModels\BypassRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/bypass';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BypassResponse::class);
+    }
+    /**
      * Run moderation checks on the provided content
      *
      * @param GeneratedModels\CheckRequest $requestData
@@ -146,16 +160,20 @@ trait ModerationTrait
      *
      * @param string $key
      * @param string $team
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\DeleteModerationConfigResponse>
      * @throws StreamException
      */
-    public function deleteConfig(string $key, string $team): StreamResponse {
+    public function deleteConfig(string $key, string $team, string $userID): StreamResponse {
         $path = '/api/v2/moderation/config/{key}';
         $path = str_replace('{key}', (string) $key, $path);
 
         $queryParams = [];
         if ($team !== null) {
             $queryParams['team'] = $team;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationConfigResponse::class);
@@ -320,13 +338,17 @@ trait ModerationTrait
     /**
      * Delete an existing moderation rule
      *
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\DeleteModerationRuleResponse>
      * @throws StreamException
      */
-    public function deleteModerationRule(): StreamResponse {
+    public function deleteModerationRule(string $userID): StreamResponse {
         $path = '/api/v2/moderation/moderation_rule/{id}';
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationRuleResponse::class);
     }

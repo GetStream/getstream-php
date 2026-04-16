@@ -22,6 +22,7 @@ class SubmitActionRequest extends BaseModel
         public ?UnblockActionRequestPayload $unblock = null,
         public ?BlockActionRequestPayload $block = null,
         public ?ShadowBlockActionRequestPayload $shadowBlock = null,
+        public ?BypassActionRequest $bypass = null,
         public ?RejectAppealRequestPayload $rejectAppeal = null,
         public ?FlagRequest $flag = null,
         public ?EscalatePayload $escalate = null,
