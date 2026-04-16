@@ -3,11 +3,10 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class Location extends BaseModel
+class BypassActionRequest extends BaseModel
 {
     public function __construct(
-        public ?float $lat = null, // Latitude coordinate
-        public ?float $lng = null, // Longitude coordinate
+        public ?bool $enabled = null,
     ) {
     }
 

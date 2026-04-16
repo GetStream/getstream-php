@@ -35,6 +35,7 @@ class CommentResponse extends BaseModel
         public ?int $replyCount = null, // Number of replies to this comment
         public ?int $upvoteCount = null, // Number of upvotes for this comment
         public ?int $downvoteCount = null, // Number of downvotes for this comment
+        public ?int $bookmarkCount = null,
         public ?int $score = null, // Score of the comment based on reactions
         public ?float $confidenceScore = null, // Confidence score of the comment
         public ?float $controversyScore = null, // Controversy score of the comment

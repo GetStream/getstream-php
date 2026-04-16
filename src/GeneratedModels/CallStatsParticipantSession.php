@@ -23,6 +23,9 @@ class CallStatsParticipantSession extends BaseModel
         public ?CallStatsLocation $location = null,
         public ?PublishedTrackFlags $publishedTracks = null,
         public ?int $cqScore = null,
+        public ?int $jitterMs = null,
+        public ?int $latencyMs = null,
+        public ?int $freezesDurationMs = null,
         public ?string $os = null,
     ) {
     }

@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class Location extends BaseModel
+class AddCommentBookmarkResponse extends BaseModel
 {
     public function __construct(
-        public ?float $lat = null, // Latitude coordinate
-        public ?float $lng = null, // Longitude coordinate
+        public ?BookmarkResponse $bookmark = null,
+        public ?string $duration = null,
     ) {
     }
 

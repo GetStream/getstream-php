@@ -31,7 +31,7 @@ class ActivityResponse extends BaseModel
         #[ArrayOf(CommentResponse::class)]
         public ?array $comments = null, // Latest 5 comments of this activity (comment replies excluded)
         public ?string $text = null, // Text content of the activity
-        public ?ActivityLocation $location = null,
+        public ?Location $location = null,
         public ?ActivityResponse $parent = null,
         public ?PollResponseData $poll = null,
         public ?\DateTime $editedAt = null, // When the activity was last edited

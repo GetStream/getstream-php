@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class UpdateBookmarkRequest extends BaseModel
+class UpdateCommentBookmarkRequest extends BaseModel
 {
     public function __construct(
         public ?string $folderID = null, // ID of the folder containing the bookmark
