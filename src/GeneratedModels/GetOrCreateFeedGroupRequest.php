@@ -19,6 +19,7 @@ class GetOrCreateFeedGroupRequest extends BaseModel
         public ?array $activitySelectors = null, // Configuration for activity selectors
         public ?RankingConfig $ranking = null,
         public ?AggregationConfig $aggregation = null,
+        public ?ActivityFilterConfig $activityFilter = null,
     ) {
     }
 

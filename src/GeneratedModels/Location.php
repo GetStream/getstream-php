@@ -3,19 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * 
- *
- * @property string $continentCode
- * @property string $countryIsoCode
- * @property string $subdivisionIsoCode
- */
 class Location extends BaseModel
 {
     public function __construct(
-        public ?string $continentCode = null,
-        public ?string $countryIsoCode = null,
-        public ?string $subdivisionIsoCode = null,
+        public ?float $lat = null, // Latitude coordinate
+        public ?float $lng = null, // Longitude coordinate
     ) {
     }
 

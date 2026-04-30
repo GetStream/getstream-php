@@ -874,6 +874,19 @@ trait VideoTrait
     }
     /**
      *
+     * @param GeneratedModels\QueryCallSessionStatsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryCallSessionStatsResponse>
+     * @throws StreamException
+     */
+    public function queryCallSessionStats(GeneratedModels\QueryCallSessionStatsRequest $requestData): StreamResponse {
+        $path = '/api/v2/video/call_stats';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallSessionStatsResponse::class);
+    }
+    /**
+     *
      * @param string $callType
      * @param string $callID
      * @param string $session

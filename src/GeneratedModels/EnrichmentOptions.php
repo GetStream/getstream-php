@@ -28,6 +28,7 @@ class EnrichmentOptions extends BaseModel
         public ?bool $skipOwnCapabilities = null, // Default: false. When true, skips computing and including capabilities for feeds.
         public ?bool $skipAll = null, // Default: false. When true, skips all enrichments.
         public ?bool $includeScoreVars = null, // Default: false. When true, includes score_vars in activity responses containing variable values used at ranking time.
+        public ?bool $includeFlatActivities = null, // Controls the top-level flat 'activities' array for aggregated feeds. For new apps, defaults to false (excluded); set to true to include. For older apps, defaults to true (included) for backward compatibility; set to false to exclude.
     ) {
     }
 

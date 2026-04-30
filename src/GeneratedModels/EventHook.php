@@ -28,6 +28,7 @@ class EventHook extends BaseModel
         public ?int $timeoutMs = null,
         public ?AsyncModerationCallbackConfig $callback = null,
         public ?bool $snsEventBasedMessageGroupIDEnabled = null,
+        public ?WebhookFailoverConfig $failoverConfig = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
     ) {

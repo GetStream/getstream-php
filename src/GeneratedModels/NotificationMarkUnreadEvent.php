@@ -30,6 +30,7 @@ class NotificationMarkUnreadEvent extends BaseModel
         public ?int $unreadCount = null, // The total number of unread messages
         public ?int $totalUnreadCount = null, // The total number of unread messages
         public ?int $unreadChannels = null, // The number of channels with unread messages
+        public ?array $groupedUnreadChannels = null,
         public ?int $unreadThreads = null, // The number of unread threads
         public ?int $unreadThreadMessages = null, // The total number of unread messages in the threads
     ) {

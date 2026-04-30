@@ -15,6 +15,100 @@ use GetStream\GeneratedModels;
 trait ModerationTrait
 {
     /**
+     * Returns moderation action configs grouped by entity type, sorted by order ascending. Supports fetching DB-configured actions, hardcoded defaults, or both.
+     *
+     * @param string $queueType
+     * @param string $entityType
+     * @param bool $excludeDefaults
+     * @param bool $onlyDefaults
+     * @param string $userID
+     * @return StreamResponse<GeneratedModels\GetActionConfigResponse>
+     * @throws StreamException
+     */
+    public function getActionConfig(string $queueType, string $entityType, bool $excludeDefaults, bool $onlyDefaults, string $userID): StreamResponse {
+        $path = '/api/v2/moderation/action_config';
+
+        $queryParams = [];
+        if ($queueType !== null) {
+            $queryParams['queue_type'] = $queueType;
+        }
+        if ($entityType !== null) {
+            $queryParams['entity_type'] = $entityType;
+        }
+        if ($excludeDefaults !== null) {
+            $queryParams['exclude_defaults'] = $excludeDefaults;
+        }
+        if ($onlyDefaults !== null) {
+            $queryParams['only_defaults'] = $onlyDefaults;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActionConfigResponse::class);
+    }
+    /**
+     * Create a new moderation action config entry or update an existing one. Action configs control the action buttons displayed in the moderation dashboard for each entity type.
+     *
+     * @param GeneratedModels\UpsertActionConfigRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertActionConfigResponse>
+     * @throws StreamException
+     */
+    public function upsertActionConfig(GeneratedModels\UpsertActionConfigRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/action_config';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertActionConfigResponse::class);
+    }
+    /**
+     * Create or update multiple moderation action config entries in a single request. Omit the ID field to create; provide an ID to update.
+     *
+     * @param GeneratedModels\BulkUpsertActionConfigRequest $requestData
+     * @return StreamResponse<GeneratedModels\BulkUpsertActionConfigResponse>
+     * @throws StreamException
+     */
+    public function bulkUpsertActionConfig(GeneratedModels\BulkUpsertActionConfigRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/action_config/bulk';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkUpsertActionConfigResponse::class);
+    }
+    /**
+     * Delete multiple moderation action config entries by UUID in a single request.
+     *
+     * @param GeneratedModels\BulkDeleteActionConfigRequest $requestData
+     * @return StreamResponse<GeneratedModels\BulkDeleteActionConfigResponse>
+     * @throws StreamException
+     */
+    public function bulkDeleteActionConfig(GeneratedModels\BulkDeleteActionConfigRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/action_config/bulk_delete';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkDeleteActionConfigResponse::class);
+    }
+    /**
+     * Delete a specific moderation action config entry by its UUID.
+     *
+     * @param string $id
+     * @param string $userID
+     * @return StreamResponse<GeneratedModels\DeleteActionConfigResponse>
+     * @throws StreamException
+     */
+    public function deleteActionConfig(string $id, string $userID): StreamResponse {
+        $path = '/api/v2/moderation/action_config/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteActionConfigResponse::class);
+    }
+    /**
      * Insert a moderation action log entry. Server-side only. Used by product services to log moderation-related actions.
      *
      * @param GeneratedModels\InsertActionLogRequest $requestData
@@ -100,6 +194,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkImageModerationResponse::class);
     }
     /**
+     * Enable or disable moderation bypass for a user. This endpoint is server-side only.
+     *
+     * @param GeneratedModels\BypassRequest $requestData
+     * @return StreamResponse<GeneratedModels\BypassResponse>
+     * @throws StreamException
+     */
+    public function bypass(GeneratedModels\BypassRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/bypass';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BypassResponse::class);
+    }
+    /**
      * Run moderation checks on the provided content
      *
      * @param GeneratedModels\CheckRequest $requestData
@@ -146,16 +254,20 @@ trait ModerationTrait
      *
      * @param string $key
      * @param string $team
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\DeleteModerationConfigResponse>
      * @throws StreamException
      */
-    public function deleteConfig(string $key, string $team): StreamResponse {
+    public function deleteConfig(string $key, string $team, string $userID): StreamResponse {
         $path = '/api/v2/moderation/config/{key}';
         $path = str_replace('{key}', (string) $key, $path);
 
         $queryParams = [];
         if ($team !== null) {
             $queryParams['team'] = $team;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationConfigResponse::class);
@@ -290,6 +402,34 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryModerationFlagsResponse::class);
     }
     /**
+     * Run moderation on text and return labels
+     *
+     * @param GeneratedModels\LabelsRequest $requestData
+     * @return StreamResponse<GeneratedModels\LabelsResponse>
+     * @throws StreamException
+     */
+    public function labels(GeneratedModels\LabelsRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/labels';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\LabelsResponse::class);
+    }
+    /**
+     * Search and filter moderation label results with support for pagination and sorting. View the history of moderation labels applied to content.
+     *
+     * @param GeneratedModels\QueryLabelResultsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryLabelResultsResponse>
+     * @throws StreamException
+     */
+    public function queryLabelResults(GeneratedModels\QueryLabelResultsRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/labels/results';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryLabelResultsResponse::class);
+    }
+    /**
      * Search and filter moderation action logs with support for pagination. View the history of moderation actions taken, including who performed them and when.
      *
      * @param GeneratedModels\QueryModerationLogsRequest $requestData
@@ -320,13 +460,17 @@ trait ModerationTrait
     /**
      * Delete an existing moderation rule
      *
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\DeleteModerationRuleResponse>
      * @throws StreamException
      */
-    public function deleteModerationRule(): StreamResponse {
+    public function deleteModerationRule(string $userID): StreamResponse {
         $path = '/api/v2/moderation/moderation_rule/{id}';
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationRuleResponse::class);
     }

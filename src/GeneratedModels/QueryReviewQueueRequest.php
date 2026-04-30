@@ -14,6 +14,7 @@ class QueryReviewQueueRequest extends BaseModel
         public ?int $lockDuration = null, // Duration for which items should be locked
         public ?int $lockCount = null, // Number of items to lock (1-25)
         public ?bool $statsOnly = null, // Whether to return only statistics
+        public ?bool $excludeDefaultActionConfig = null,
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
