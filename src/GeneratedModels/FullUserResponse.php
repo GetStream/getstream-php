@@ -40,6 +40,7 @@ class FullUserResponse extends BaseModel
         public ?int $unreadThreads = null,
         public ?array $latestHiddenChannels = null,
         public ?bool $shadowBanned = null,
+        public ?bool $bypassModeration = null,
         public ?array $blockedUserIds = null,
         public ?\DateTime $banExpires = null,
     ) {

@@ -16,6 +16,7 @@ class ModerationDashboardPreferences extends BaseModel
         public ?array $keyframeClassificationsMap = null,
         public ?array $escalationReasons = null,
         public ?bool $escalationQueueEnabled = null,
+        public ?bool $includeAttachmentPayload = null,
     ) {
     }
 

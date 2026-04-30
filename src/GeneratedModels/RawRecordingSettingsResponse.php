@@ -7,6 +7,7 @@ class RawRecordingSettingsResponse extends BaseModel
 {
     public function __construct(
         public ?string $mode = null,
+        public ?bool $audioOnly = null,
     ) {
     }
 

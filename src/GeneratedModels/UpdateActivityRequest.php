@@ -14,7 +14,7 @@ class UpdateActivityRequest extends BaseModel
         public ?string $visibility = null, // Visibility setting for the activity
         public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name and is required
         public ?string $restrictReplies = null, // Controls who can add comments/replies to this activity. One of: everyone, people_i_follow, nobody
-        public ?ActivityLocation $location = null,
+        public ?Location $location = null,
         public ?\DateTime $expiresAt = null, // Time when the activity will expire
         public ?array $filterTags = null, // Tags used for filtering the activity
         public ?array $interestTags = null, // Tags indicating interest categories
@@ -29,6 +29,7 @@ class UpdateActivityRequest extends BaseModel
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?object $searchData = null, // Additional data for search indexing
         public ?bool $enrichOwnFields = null, // If true, enriches the activity's current_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
+        public ?bool $forceModeration = null, // If true, forces moderation to run for server-side requests. By default, server-side requests skip moderation. Client-side requests always run moderation regardless of this field.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

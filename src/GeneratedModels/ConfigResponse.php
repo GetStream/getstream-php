@@ -26,6 +26,9 @@ class ConfigResponse extends BaseModel
         /** @var array<AIImageLabelDefinition>|null */
         #[ArrayOf(AIImageLabelDefinition::class)]
         public ?array $aiImageLabelDefinitions = null, // Configurable image moderation label definitions for dashboard rendering
+        /** @var array<BodyguardProfileSummary>|null */
+        #[ArrayOf(BodyguardProfileSummary::class)]
+        public ?array $availableBodyguardProfiles = null, // Names of Bodyguard credential profiles registered on this app. The dashboard uses this list to render the profile picker on the AI Text section.
     ) {
     }
 

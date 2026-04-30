@@ -17,7 +17,7 @@ class AddActivityRequest extends BaseModel
         public ?string $visibility = null, // Visibility setting for the activity. One of: public, private, tag
         public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name and is required
         public ?string $restrictReplies = null, // Controls who can add comments/replies to this activity. One of: everyone, people_i_follow, nobody
-        public ?ActivityLocation $location = null,
+        public ?Location $location = null,
         public ?string $expiresAt = null, // Expiration time for the activity
         public ?array $mentionedUserIds = null, // List of users mentioned in the activity
         public ?object $searchData = null, // Additional data for search indexing
@@ -33,6 +33,7 @@ class AddActivityRequest extends BaseModel
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?bool $skipPush = null, // Whether to skip push notifications
         public ?bool $enrichOwnFields = null,
+        public ?bool $forceModeration = null,
     ) {
     }
 

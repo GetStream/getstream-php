@@ -13,6 +13,7 @@ class CallStatsReportReadyEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
         public ?string $sessionID = null, // Call session ID
+        public ?CallStatsParticipantCounts $counts = null,
         /** @var array<CallStatsParticipant>|null */
         #[ArrayOf(CallStatsParticipant::class)]
         public ?array $participantsOverview = null, // Top participant sessions overview
