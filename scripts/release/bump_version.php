@@ -64,7 +64,10 @@ function determineBumpType(string $title, string $body): string
     $title = trim($title);
     $body = trim($body);
 
-    if (preg_match('/BREAKING[ -]CHANGE/i', $body) === 1) {
+    if (
+        preg_match('/BREAKING[ -]CHANGES?/i', $title) === 1
+        || preg_match('/BREAKING[ -]CHANGES?/i', $body) === 1
+    ) {
         return 'major';
     }
 
@@ -108,6 +111,27 @@ function incrementVersion(string $version, string $bump): string
     }
 
     return sprintf('%d.%d.%d', $major, $minor, $patch);
+}
+
+function readComposerVersion(string $path): string
+{
+    $raw = file_get_contents($path);
+    if ($raw === false) {
+        throw new ReleaseScriptException('Could not read composer.json');
+    }
+
+    $decoded = json_decode($raw, true);
+    if (!is_array($decoded)) {
+        throw new ReleaseScriptException('Invalid composer.json');
+    }
+
+    $version = (string) ($decoded['version'] ?? '');
+    $version = ltrim(trim($version), 'v');
+    if (preg_match('/^\d+\.\d+\.\d+$/', $version) !== 1) {
+        throw new ReleaseScriptException('Could not parse semantic version from composer.json');
+    }
+
+    return $version;
 }
 
 function updateComposerVersion(string $path, string $version): void
@@ -185,6 +209,33 @@ function resolveBody(array $argv): string
 $title = getArgValue($argv, 'title');
 $body = resolveBody($argv);
 $outputPath = getArgValue($argv, 'output');
+$manualBump = strtolower(trim(getArgValue($argv, 'manual-bump')));
+$useCurrentVersion = strtolower(trim(getArgValue($argv, 'use-current-version', 'false'))) === 'true';
+
+if ($manualBump !== '') {
+    $allowed = ['major', 'minor', 'patch'];
+    if (!in_array($manualBump, $allowed, true)) {
+        throw new ReleaseScriptException('manual-bump must be one of: major, minor, patch');
+    }
+
+    $previousVersion = findLatestSemverTag();
+    if ($useCurrentVersion) {
+        $nextVersion = readComposerVersion('composer.json');
+    } else {
+        $nextVersion = incrementVersion($previousVersion, $manualBump);
+        updateComposerVersion('composer.json', $nextVersion);
+        updateConstantVersion('src/Constant.php', $nextVersion);
+    }
+
+    writeOutputs($outputPath, [
+        'should_release' => 'true',
+        'bump' => $manualBump,
+        'previous_version' => $previousVersion,
+        'version' => $nextVersion,
+        'tag' => 'v' . $nextVersion,
+    ]);
+    exit(0);
+}
 
 $bump = determineBumpType($title, $body);
 if ($bump === 'none') {
