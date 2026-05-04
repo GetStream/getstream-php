@@ -141,6 +141,10 @@ jobs:
       - name: Create release tag
         if: steps.already_released.outputs.value != 'true' && steps.release_meta_final.outputs.should_release == 'true'
         run: |
+          if git rev-parse -q --verify "refs/tags/${{ steps.release_meta_final.outputs.tag }}" >/dev/null; then
+            echo "Tag ${{ steps.release_meta_final.outputs.tag }} already exists; skipping tag creation."
+            exit 0
+          fi
           git tag "${{ steps.release_meta_final.outputs.tag }}"
           git push origin "${{ steps.release_meta_final.outputs.tag }}"
 
@@ -149,6 +153,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.release_meta_final.outputs.tag }}
+          skipIfReleaseExists: true
           prerelease: ${{ github.event.inputs.prerelease == 'true' }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
