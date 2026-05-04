@@ -32,6 +32,7 @@ class MessageNewEvent extends BaseModel
         public ?int $unreadCount = null, // The number of unread messages
         public ?int $totalUnreadCount = null,
         public ?int $unreadChannels = null,
+        public ?array $groupedUnreadChannels = null,
     ) {
     }
 

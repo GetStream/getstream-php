@@ -26,6 +26,7 @@ class FeedGroup extends BaseModel
         public ?AggregationConfig $aggregation = null,
         public ?int $aggregationVersion = null,
         public ?\DateTime $lastFeedGetAt = null,
+        public ?ActivityFilterConfig $activityFilter = null,
     ) {
     }
 

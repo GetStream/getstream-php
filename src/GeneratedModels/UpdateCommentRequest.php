@@ -17,6 +17,7 @@ class UpdateCommentRequest extends BaseModel
         public ?bool $handleMentionNotifications = null, // If true, creates notification activities for newly mentioned users and deletes notifications for users no longer mentioned
         /** @deprecated */
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when handle_mention_notifications creates notifications) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
+        public ?bool $forceModeration = null, // If true, forces moderation to run for server-side requests. By default, server-side requests skip moderation. Client-side requests always run moderation regardless of this field.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

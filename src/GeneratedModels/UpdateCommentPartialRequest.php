@@ -13,6 +13,7 @@ class UpdateCommentPartialRequest extends BaseModel
         public ?bool $handleMentionNotifications = null, // Whether to handle mention notification changes
         /** @deprecated */
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to notification activities Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
+        public ?bool $forceModeration = null, // If true, forces moderation to run for server-side requests. By default, server-side requests skip moderation. Client-side requests always run moderation regardless of this field.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

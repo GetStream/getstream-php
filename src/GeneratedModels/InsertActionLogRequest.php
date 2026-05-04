@@ -15,6 +15,8 @@ class InsertActionLogRequest extends BaseModel
         public ?string $actionType = null, // Type of moderation action taken
         public ?object $custom = null, // Custom metadata for the action log
         public ?string $reason = null, // Reason for the action
+        public ?string $reporterUserID = null, // ID of the user who triggered the action; empty for automated actions
+        public ?string $reporterType = null, // Type of reporter; 'api_integration' when the action was triggered by an API integration call with no authenticated user
     ) {
     }
 

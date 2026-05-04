@@ -10,6 +10,7 @@ class QueryReviewQueueResponse extends BaseModel
         #[ArrayOf(ReviewQueueItemResponse::class)]
         public ?array $items = null, // List of review queue items
         public ?array $actionConfig = null, // Configuration for moderation actions
+        public ?array $defaultActionConfig = null,
         public ?FilterConfigResponse $filterConfig = null,
         public ?object $stats = null, // Statistics about the review queue
         public ?string $next = null,

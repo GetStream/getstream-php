@@ -11,6 +11,7 @@ class ActionLogResponse extends BaseModel
         public ?string $type = null, // Type of moderation action
         public ?UserResponse $user = null,
         public ?string $userID = null, // ID of the user who performed the action
+        public ?string $reporterType = null, // Classification of who triggered the action (e.g. user, moderator, automod, api_integration)
         public ?string $reason = null, // Reason for the moderation action
         public ?object $custom = null, // Additional metadata about the action
         public ?ReviewQueueItemResponse $reviewQueueItem = null,

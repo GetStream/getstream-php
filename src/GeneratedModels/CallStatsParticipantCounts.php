@@ -14,6 +14,10 @@ class CallStatsParticipantCounts extends BaseModel
         public ?int $peakConcurrentUsers = null,
         public ?int $peakConcurrentSessions = null,
         public ?int $totalParticipantDuration = null,
+        public ?int $sfusUsed = null,
+        public ?int $averageJitterMs = null,
+        public ?int $averageLatencyMs = null,
+        public ?int $maxFreezesDurationMs = null,
         public ?int $callEventCount = null,
     ) {
     }

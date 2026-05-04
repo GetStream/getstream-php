@@ -12,6 +12,7 @@ class FeedSuggestionResponse extends BaseModel
         public ?string $name = null, // Name of the feed
         public ?string $description = null, // Description of the feed
         public ?object $custom = null, // Custom data for the feed
+        public ?Location $location = null,
         public ?array $filterTags = null, // Tags used for filtering feeds
         public ?string $visibility = null, // Visibility setting for the feed
         public ?UserResponse $createdBy = null,

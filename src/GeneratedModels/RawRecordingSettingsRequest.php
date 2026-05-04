@@ -7,6 +7,7 @@ class RawRecordingSettingsRequest extends BaseModel
 {
     public function __construct(
         public ?string $mode = null, // Recording mode. One of: available, disabled, auto-on
+        public ?bool $audioOnly = null, // If true, only audio tracks will be recorded
     ) {
     }
 

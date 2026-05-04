@@ -21,7 +21,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?int $severity = null, // Severity level of the content
         public ?string $aiTextSeverity = null, // AI-determined text severity
         public ?string $latestModeratorAction = null,
-        public ?MessageResponse $message = null,
+        public ?ChatMessageResponse $message = null,
         public ?EnrichedActivity $activity = null,
         public ?Reaction $reaction = null,
         public ?CallResponse $call = null,

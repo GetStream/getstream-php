@@ -9,6 +9,7 @@ namespace GetStream\GeneratedModels;
 class ModerationActionConfigResponse extends BaseModel
 {
     public function __construct(
+        public ?string $id = null,
         public ?string $entityType = null, // Type of entity this action applies to
         public ?int $order = null, // Display order (lower numbers shown first)
         public ?string $action = null, // The action to take

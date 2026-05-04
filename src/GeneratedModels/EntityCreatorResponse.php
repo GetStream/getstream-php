@@ -25,6 +25,7 @@ class EntityCreatorResponse extends BaseModel
         public ?array $blockedUserIds = null,
         public ?int $avgResponseTime = null,
         public ?bool $shadowBanned = null,
+        public ?bool $bypassModeration = null,
         public ?\DateTime $banExpires = null,
         public ?PushNotificationSettingsResponse $pushNotifications = null,
         public ?PrivacySettingsResponse $privacySettings = null,

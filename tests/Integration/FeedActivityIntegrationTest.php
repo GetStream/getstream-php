@@ -327,7 +327,7 @@ class FeedActivityIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // snippet-start: GetActivity
-        $response = $this->feedsV3Client->getActivity($activityId);
+        $response = $this->feedsV3Client->getActivity($activityId, 'last', 10, $this->testUserId);
         // snippet-end: GetActivity
 
         $this->assertResponseSuccess($response, 'get activity');

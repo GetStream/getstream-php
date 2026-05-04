@@ -21,6 +21,7 @@ class AddCommentRequest extends BaseModel
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?bool $skipPush = null,
         public ?bool $skipEnrichUrl = null, // Whether to skip URL enrichment for this comment
+        public ?bool $forceModeration = null, // If true, forces moderation to run for server-side requests. By default, server-side requests skip moderation. Client-side requests always run moderation regardless of this field.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {
