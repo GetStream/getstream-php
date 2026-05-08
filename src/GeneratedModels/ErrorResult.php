@@ -7,6 +7,7 @@ class ErrorResult extends BaseModel
 {
     public function __construct(
         public ?string $type = null,
+        public ?string $description = null,
         public ?string $stacktrace = null,
         public ?string $version = null,
     ) {

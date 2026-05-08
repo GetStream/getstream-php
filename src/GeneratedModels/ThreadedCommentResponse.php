@@ -38,6 +38,7 @@ class ThreadedCommentResponse extends BaseModel
         public ?int $replyCount = null,
         public ?int $upvoteCount = null,
         public ?int $downvoteCount = null,
+        public ?int $bookmarkCount = null,
         public ?int $score = null,
         public ?float $confidenceScore = null,
         public ?float $controversyScore = null,

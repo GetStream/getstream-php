@@ -13,7 +13,7 @@ class ActivitySelectorConfigResponse extends BaseModel
         public ?array $sort = null, // Sort parameters for activity selection
         public ?\DateTime $cutoffTime = null, // Time threshold for activity selection (timestamp)
         public ?string $cutoffWindow = null, // Flexible relative time window for activity selection (e.g., '1h', '3d', '1y')
-        public ?int $minPopularity = null, // Minimum popularity threshold
+        public ?int $minPopularity = null, // Minimum popularity threshold. For the 'popular' selector, values below 1 are normalized to the default (5) at read time.
         public ?object $params = null, // Generic params for selector-specific configuration
     ) {
     }

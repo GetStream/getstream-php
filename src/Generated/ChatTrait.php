@@ -15,6 +15,20 @@ use GetStream\GeneratedModels;
 trait ChatTrait
 {
     /**
+     * Creates a campaign
+     *
+     * @param GeneratedModels\CreateCampaignRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateCampaignResponse>
+     * @throws StreamException
+     */
+    public function createCampaign(GeneratedModels\CreateCampaignRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/campaigns';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateCampaignResponse::class);
+    }
+    /**
      * Query campaigns with filter query
      *
      * @param GeneratedModels\QueryCampaignsRequest $requestData
@@ -27,6 +41,21 @@ trait ChatTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCampaignsResponse::class);
+    }
+    /**
+     * Delete campaign
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\DeleteCampaignResponse>
+     * @throws StreamException
+     */
+    public function deleteCampaign(string $id): StreamResponse {
+        $path = '/api/v2/chat/campaigns/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCampaignResponse::class);
     }
     /**
      * Get campaign by ID.
@@ -54,6 +83,22 @@ trait ChatTrait
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCampaignResponse::class);
+    }
+    /**
+     * Updates a campaign
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateCampaignRequest $requestData
+     * @return StreamResponse<GeneratedModels\CampaignResponse>
+     * @throws StreamException
+     */
+    public function updateCampaign(string $id, GeneratedModels\UpdateCampaignRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/campaigns/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\CampaignResponse::class);
     }
     /**
      * Starts or schedules a campaign
@@ -157,6 +202,20 @@ trait ChatTrait
         }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MarkDeliveredResponse::class);
+    }
+    /**
+     * Query channels grouped into predefined buckets. Only available for enterprise apps.
+     *
+     * @param GeneratedModels\GroupedQueryChannelsRequest $requestData
+     * @return StreamResponse<GeneratedModels\GroupedQueryChannelsResponse>
+     * @throws StreamException
+     */
+    public function groupedQueryChannels(GeneratedModels\GroupedQueryChannelsRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/grouped';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GroupedQueryChannelsResponse::class);
     }
     /**
      * Marks channels as read up to the specific message. If no channels is given, mark all channel as read

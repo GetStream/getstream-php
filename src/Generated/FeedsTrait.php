@@ -306,14 +306,26 @@ trait FeedsTrait
      * Returns activity by ID
      *
      * @param string $id
+     * @param string $commentSort
+     * @param int $commentLimit
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
      * @throws StreamException
      */
-    public function getActivity(string $id): StreamResponse {
+    public function getActivity(string $id, string $commentSort, int $commentLimit, string $userID): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($commentSort !== null) {
+            $queryParams['comment_sort'] = $commentSort;
+        }
+        if ($commentLimit !== null) {
+            $queryParams['comment_limit'] = $commentLimit;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActivityResponse::class);
     }
@@ -354,7 +366,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateActivityResponse::class);
     }
     /**
-     * Restores a soft-deleted activity by its ID. Only the activity owner can restore their own activities.
+     * Restores a soft-deleted, moderation-removed, or shadow-blocked activity by its ID. Deleted activities can be restored by the owner (client-side). Moderation-blocked activities can only be restored server-side.
      *
      * @param string $id
      * @param bool $enrichOwnFields
@@ -622,6 +634,61 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCommentsResponse::class);
     }
     /**
+     * Deletes a bookmark from a comment
+     *
+     * @param string $commentID
+     * @param string $folderID
+     * @param string $userID
+     * @return StreamResponse<GeneratedModels\DeleteCommentBookmarkResponse>
+     * @throws StreamException
+     */
+    public function deleteCommentBookmark(string $commentID, string $folderID, string $userID): StreamResponse {
+        $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
+        $path = str_replace('{comment_id}', (string) $commentID, $path);
+
+        $queryParams = [];
+        if ($folderID !== null) {
+            $queryParams['folder_id'] = $folderID;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCommentBookmarkResponse::class);
+    }
+    /**
+     * Updates a bookmark for a comment
+     *
+     * @param string $commentID
+     * @param GeneratedModels\UpdateCommentBookmarkRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateCommentBookmarkResponse>
+     * @throws StreamException
+     */
+    public function updateCommentBookmark(string $commentID, GeneratedModels\UpdateCommentBookmarkRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
+        $path = str_replace('{comment_id}', (string) $commentID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentBookmarkResponse::class);
+    }
+    /**
+     * Adds a bookmark to a comment
+     *
+     * @param string $commentID
+     * @param GeneratedModels\AddCommentBookmarkRequest $requestData
+     * @return StreamResponse<GeneratedModels\AddCommentBookmarkResponse>
+     * @throws StreamException
+     */
+    public function addCommentBookmark(string $commentID, GeneratedModels\AddCommentBookmarkRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
+        $path = str_replace('{comment_id}', (string) $commentID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddCommentBookmarkResponse::class);
+    }
+    /**
      * Deletes a comment from an object (e.g., activity) and broadcasts appropriate events
      *
      * @param string $id
@@ -648,14 +715,18 @@ trait FeedsTrait
      * Get a comment by ID
      *
      * @param string $id
+     * @param string $userID
      * @return StreamResponse<GeneratedModels\GetCommentResponse>
      * @throws StreamException
      */
-    public function getComment(string $id): StreamResponse {
+    public function getComment(string $id, string $userID): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentResponse::class);
     }
@@ -799,7 +870,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentRepliesResponse::class);
     }
     /**
-     * Restores a soft-deleted comment by its ID. The comment and all its descendants are restored. Requires moderator permissions.
+     * Restores a soft-deleted, moderation-removed, or shadow-blocked comment by its ID. The comment and all its descendants are restored. Deleted comments can be restored client-side. Moderation-blocked comments can only be restored server-side.
      *
      * @param string $id
      * @param GeneratedModels\RestoreCommentRequest $requestData
@@ -966,6 +1037,24 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PinActivityResponse::class);
+    }
+    /**
+     * Changes the visibility of an existing feed. Follow reconciliation (rewriting pending follows on loosening, or removing disallowed follows/members on tightening) runs asynchronously in the background; the response returns optimistically with the intended visibility.
+     *
+     * @param string $feedGroupID
+     * @param string $feedID
+     * @param GeneratedModels\ChangeFeedVisibilityRequest $requestData
+     * @return StreamResponse<GeneratedModels\ChangeFeedVisibilityResponse>
+     * @throws StreamException
+     */
+    public function changeFeedVisibility(string $feedGroupID, string $feedID, GeneratedModels\ChangeFeedVisibilityRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/change_visibility';
+        $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
+        $path = str_replace('{feed_id}', (string) $feedID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ChangeFeedVisibilityResponse::class);
     }
     /**
      * Add, remove, or set members for a feed
@@ -1573,6 +1662,20 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMembershipLevelResponse::class);
+    }
+    /**
+     * Queries revision history for activities and comments
+     *
+     * @param GeneratedModels\QueryRevisionHistoryRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryRevisionHistoryResponse>
+     * @throws StreamException
+     */
+    public function queryRevisionHistory(GeneratedModels\QueryRevisionHistoryRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/revisions/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryRevisionHistoryResponse::class);
     }
     /**
      * Retrieve usage statistics for feeds including activity count, follow count, and API request count.

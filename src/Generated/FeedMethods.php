@@ -84,6 +84,17 @@ trait FeedMethods
         return $this->feedsV3Client->pinActivity($this->feedGroup, $this->feedId, $activityID, $requestData);
     }
     /**
+     * Changes the visibility of an existing feed. Follow reconciliation (rewriting pending follows on loosening, or removing disallowed follows/members on tightening) runs asynchronously in the background; the response returns optimistically with the intended visibility.
+     *
+     * @param GeneratedModels\ChangeFeedVisibilityRequest $requestData
+     * @return StreamResponse<GeneratedModels\ChangeFeedVisibilityResponse>
+     * @throws StreamException
+     */
+    public function changeFeedVisibility(
+        GeneratedModels\ChangeFeedVisibilityRequest $requestData): StreamResponse {
+        return $this->feedsV3Client->changeFeedVisibility($this->feedGroup, $this->feedId, $requestData);
+    }
+    /**
      * Add, remove, or set members for a feed
      *
      * @param GeneratedModels\UpdateFeedMembersRequest $requestData

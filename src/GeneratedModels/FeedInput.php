@@ -10,6 +10,7 @@ class FeedInput extends BaseModel
         public ?string $description = null,
         public ?string $visibility = null,
         public ?object $custom = null,
+        public ?Location $location = null,
         public ?array $filterTags = null,
         /** @var array<FeedMemberRequest>|null */
         #[ArrayOf(FeedMemberRequest::class)]

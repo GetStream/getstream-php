@@ -28,6 +28,7 @@ class UserResponse extends BaseModel
         public ?array $blockedUserIds = null,
         public ?int $avgResponseTime = null,
         public ?bool $shadowBanned = null, // Whether a user is shadow banned
+        public ?bool $bypassModeration = null,
         public ?\DateTime $banExpires = null, // Date when ban expires
         public ?PushNotificationSettingsResponse $pushNotifications = null,
         public ?PrivacySettingsResponse $privacySettings = null,

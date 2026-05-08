@@ -11,6 +11,7 @@ class ImportV2TaskItem extends BaseModel
         public ?string $product = null,
         public ?int $state = null,
         public ?ImportV2TaskSettings $settings = null,
+        public ?object $result = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
     ) {

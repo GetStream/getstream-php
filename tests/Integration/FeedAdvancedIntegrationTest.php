@@ -538,7 +538,7 @@ class FeedAdvancedIntegrationTest extends TestCase
     {
         try {
             // snippet-start: HandleInvalidActivityId
-            $response = $this->feedsV3Client->getActivity('invalid-activity-id-12345');
+            $response = $this->feedsV3Client->getActivity('invalid-activity-id-12345', '', 0, '');
             // snippet-end: HandleInvalidActivityId
             if (!$response->isSuccessful()) {
                 self::assertTrue(true);
@@ -655,7 +655,7 @@ class FeedAdvancedIntegrationTest extends TestCase
             // Bookmark may not be supported
         }
 
-        $enrichedResponse = $this->feedsV3Client->getActivity($postId);
+        $enrichedResponse = $this->feedsV3Client->getActivity($postId, '', 0, '');
         $this->assertResponseSuccess($enrichedResponse, 'get enriched activity');
         // snippet-end: RealWorldScenario
     }
