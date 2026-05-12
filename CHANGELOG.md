@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New instance methods on `GetStream\Client`: `verifySignature($body, $signature)`
   and `verifyAndParseWebhook($body, $signature)` — drop the api_secret parameter
   in favor of the client's stored secret. Dual API: static methods remain available.
+- New instance methods on `GetStream\Client`: `parseSqs(string $messageBody)`,
+  `parseSns(string $notificationBody)` (no signature; AWS IAM).
 - Conformance fixture suite under `tests/fixtures/webhooks/`.
 
 ### Changed

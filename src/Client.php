@@ -124,6 +124,29 @@ class Client
     }
 
     /**
+     * Decode + parse a Stream-delivered SQS message body.
+     *
+     * Convenience wrapper around \GetStream\Webhook::parseSqs. No signature is
+     * required; SQS deliveries are authenticated via AWS IAM.
+     */
+    public function parseSqs(string $messageBody): object
+    {
+        return \GetStream\Webhook::parseSqs($messageBody);
+    }
+
+    /**
+     * Decode + parse a Stream-delivered SNS notification body.
+     *
+     * Accepts either the raw SNS HTTP envelope JSON or the pre-extracted Message
+     * string. Convenience wrapper around \GetStream\Webhook::parseSns. No signature
+     * is required; SNS deliveries are authenticated via AWS IAM.
+     */
+    public function parseSns(string $notificationBody): object
+    {
+        return \GetStream\Webhook::parseSns($notificationBody);
+    }
+
+    /**
      * Create a feed instance.
      *
      * @param string $feedGroup The feed group (e.g., 'user', 'timeline')
