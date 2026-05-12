@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class FeedsReactionGroupResponse extends BaseModel
 {
     public function __construct(
-        public ?int $count = null, // Number of reactions in this group
-        public ?\DateTime $firstReactionAt = null, // Time of the first reaction
-        public ?\DateTime $lastReactionAt = null, // Time of the most recent reaction
+        public ?int $count = null,
+        public ?\DateTime $firstReactionAt = null,
+        public ?\DateTime $lastReactionAt = null,
     ) {
     }
 

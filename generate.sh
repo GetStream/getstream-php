@@ -21,6 +21,9 @@ set -e
 # cd in API repo, generate new spec and then generate code from it
 ( cd $SOURCE_PATH ; make openapi ; go run ./cmd/chat-manager openapi generate-client --language php --spec ./releases/v2/serverside-api.yaml --output $DST_PATH )
 
+# Generate webhook conformance fixtures
+( cd $SOURCE_PATH ; go run ./cmd/chat-manager openapi generate-webhook-fixtures --output ../getstream-php/tests/fixtures/webhooks )
+
 # Fix any potential issues in generated code
 echo "Applying PHP-specific fixes..."
 

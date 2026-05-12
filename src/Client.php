@@ -101,6 +101,29 @@ class Client
     }
 
     /**
+     * Verify a webhook signature using this client's API secret.
+     *
+     * Convenience wrapper around \GetStream\Webhook::verifySignature that supplies
+     * the secret automatically. The static method is still available.
+     */
+    public function verifySignature(string $body, string $signature): bool
+    {
+        return \GetStream\Webhook::verifySignature($body, $signature, $this->apiSecret);
+    }
+
+    /**
+     * Verify and parse a webhook payload in one call, using this client's API secret.
+     *
+     * Handles gzip-compressed bodies transparently.
+     *
+     * @throws \GetStream\Exceptions\InvalidWebhookException on signature mismatch or parse failure
+     */
+    public function verifyAndParseWebhook(string $body, string $signature): object
+    {
+        return \GetStream\Webhook::verifyAndParseWebhook($body, $signature, $this->apiSecret);
+    }
+
+    /**
      * Create a feed instance.
      *
      * @param string $feedGroup The feed group (e.g., 'user', 'timeline')
