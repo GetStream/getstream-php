@@ -11,11 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Webhook handling spec helpers (CHA-2961): `UnknownEvent` class for forward-compat;
   `gunzipPayload`, `decodeSqsPayload`, `decodeSnsPayload` primitives;
-  `verifyAndParseWebhook` HTTP composite; `parseSqsPayload` / `parseSnsPayload`
-  queue composites (no signature — backend emits no HMAC for queue messages today).
+  `verifyAndParseWebhook` HTTP composite; `parseSqs` / `parseSns`
+  queue composites (no signature — backend emits no HMAC for queue messages today;
+  trust is established via AWS IAM controls on the SQS queue / SNS topic).
   Transparent gzip via magic-byte detection.
 - New `GetStream\Webhook` namespace alias (preferred); `GetStream\Generated\Webhook`
-  retained as backward-compat alias.
+  retained as backward-compat alias. PSR-4 shim (`src/Webhook.php`) ensures the
+  canonical name resolves on first touch.
 - New exception class: `GetStream\Exceptions\InvalidWebhookException` (unified —
   covers signature mismatches, parse failures, decompression errors, etc.).
 - New `GetStream\Models\UnknownEvent` class.

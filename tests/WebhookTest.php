@@ -278,7 +278,7 @@ class WebhookTest extends TestCase
 
     // -------------------------------------------------------------------------
     // Spec §6 helpers + composites: parseEvent, gunzipPayload, decodeSqsPayload,
-    // decodeSnsPayload, verifyAndParseWebhook, parseSqsPayload, parseSnsPayload.
+    // decodeSnsPayload, verifyAndParseWebhook, parseSqs, parseSns.
     // -------------------------------------------------------------------------
 
     public function testWebhookCanonicalAliasResolves(): void
@@ -417,21 +417,21 @@ class WebhookTest extends TestCase
         Webhook::verifyAndParseWebhook('{"type":"message.deleted"}', $sig, $this->secret);
     }
 
-    public function testParseSqsPayloadHappyPath(): void
+    public function testParseSqsHappyPath(): void
     {
         $plain = '{"type":"message.new"}';
-        $event = Webhook::parseSqsPayload(\base64_encode($plain));
+        $event = Webhook::parseSqs(\base64_encode($plain));
         $this->assertNotNull($event);
     }
 
-    public function testParseSnsPayloadHappyPath(): void
+    public function testParseSnsHappyPath(): void
     {
         $plain = '{"type":"message.new"}';
         $envelope = \json_encode([
             'Type' => 'Notification',
             'Message' => \base64_encode($plain),
         ]);
-        $event = Webhook::parseSnsPayload($envelope);
+        $event = Webhook::parseSns($envelope);
         $this->assertNotNull($event);
     }
 
@@ -479,9 +479,9 @@ class WebhookTest extends TestCase
         $this->assertNotNull(Webhook::parseEvent($body));
         $this->assertNotNull(Webhook::verifyAndParseWebhook($body, $sig, $secret));
         $this->assertNotNull(Webhook::verifyAndParseWebhook($bodyGz, $sig, $secret));
-        $this->assertNotNull(Webhook::parseSqsPayload($sqsCompressed));
-        $this->assertNotNull(Webhook::parseSqsPayload($sqsRaw));
-        $this->assertNotNull(Webhook::parseSnsPayload($sns));
+        $this->assertNotNull(Webhook::parseSqs($sqsCompressed));
+        $this->assertNotNull(Webhook::parseSqs($sqsRaw));
+        $this->assertNotNull(Webhook::parseSns($sns));
     }
 
     public function testWebhookConformanceTamperedBody(): void
@@ -566,7 +566,7 @@ class WebhookTest extends TestCase
         $sqs = \trim(\file_get_contents($dir . '/sqs_body.txt'));
         $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
         $this->expectExceptionMessage('base64');
-        Webhook::parseSqsPayload($sqs);
+        Webhook::parseSqs($sqs);
     }
 
     public function testWebhookConformanceBadSnsEnvelope(): void
@@ -578,6 +578,6 @@ class WebhookTest extends TestCase
         $sns = \trim(\file_get_contents($dir . '/sns_notification.txt'));
         $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
         $this->expectExceptionMessage('SNS envelope');
-        Webhook::parseSnsPayload($sns);
+        Webhook::parseSns($sns);
     }
 }

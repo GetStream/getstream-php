@@ -749,19 +749,19 @@ class Webhook
      * @return object the typed event class or UnknownEvent
      * @throws InvalidWebhookException
      */
-    public static function parseSqsPayload(string $messageBody): object
+    public static function parseSqs(string $messageBody): object
     {
         return self::parseEvent(self::decodeSqsPayload($messageBody));
     }
 
     /**
      * SNS composite: parse SNS envelope -> base64-decode -> gunzip -> parse.
-     * Same no-signature posture as {@see self::parseSqsPayload()}.
+     * Same no-signature posture as {@see self::parseSqs()}.
      *
      * @return object the typed event class or UnknownEvent
      * @throws InvalidWebhookException
      */
-    public static function parseSnsPayload(string $notificationBody): object
+    public static function parseSns(string $notificationBody): object
     {
         return self::parseEvent(self::decodeSnsPayload($notificationBody));
     }
