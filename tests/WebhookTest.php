@@ -284,8 +284,12 @@ class WebhookTest extends TestCase
     public function testWebhookCanonicalAliasResolves(): void
     {
         // Spec §7: GetStream\Webhook is the canonical name; should alias to GetStream\Generated\Webhook.
-        $this->assertTrue(\class_exists(\GetStream\Webhook::class));
-        $this->assertSame(\GetStream\Generated\Webhook::class, \ltrim(\GetStream\Webhook::class, '\\'));
+        $this->assertTrue(\class_exists(\GetStream\Webhook::class), 'GetStream\Webhook alias resolves');
+        $this->assertSame(
+            'GetStream\Generated\Webhook',
+            (new \ReflectionClass(\GetStream\Webhook::class))->getName(),
+            'alias resolves to the canonical Generated class'
+        );
     }
 
     public function testParseEventReturnsUnknownEventForUnknownDiscriminator(): void
