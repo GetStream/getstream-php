@@ -304,25 +304,25 @@ class WebhookTest extends TestCase
 
     public function testParseEventEmptyBody(): void
     {
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         Webhook::parseEvent('');
     }
 
     public function testParseEventInvalidJson(): void
     {
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         Webhook::parseEvent('not json');
     }
 
     public function testParseEventNonObjectJson(): void
     {
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         Webhook::parseEvent('[1,2,3]');
     }
 
     public function testParseEventMissingType(): void
     {
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         Webhook::parseEvent('{"foo":"bar"}');
     }
 
@@ -344,7 +344,7 @@ class WebhookTest extends TestCase
     {
         // Two gzip magic bytes followed by garbage.
         $corrupt = "\x1F\x8Bnot-actually-a-gzip-stream";
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         Webhook::gunzipPayload($corrupt);
     }
 
@@ -386,16 +386,18 @@ class WebhookTest extends TestCase
         $this->assertSame($plain, Webhook::decodeSnsPayload($envelope));
     }
 
-    public function testDecodeSnsPayloadRaisesOnInvalidEnvelope(): void
+    public function testDecodeSnsPayloadTreatsNonEnvelopeAsRawMessage(): void
     {
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
-        Webhook::decodeSnsPayload('not json');
+        // Fix #4: decodeSnsPayload accepts either a full SNS envelope or a
+        // pre-extracted Message string. Non-envelope input flows through as bytes.
+        $this->assertNotNull(Webhook::decodeSnsPayload('not json'));
     }
 
-    public function testDecodeSnsPayloadRaisesOnMissingMessageField(): void
+    public function testDecodeSnsPayloadTreatsMissingMessageFieldAsRawMessage(): void
     {
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
-        Webhook::decodeSnsPayload('{"Type":"Notification"}');
+        // Fix #4: envelope-shaped JSON without a string Message field is treated
+        // as a pre-extracted Message string and flows through.
+        $this->assertNotNull(Webhook::decodeSnsPayload('{"Type":"Notification"}'));
     }
 
     public function testVerifyAndParseWebhookHappyPath(): void
@@ -420,7 +422,16 @@ class WebhookTest extends TestCase
     {
         $body = '{"type":"message.new"}';
         $sig = $this->computeSignature($body, $this->secret);
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\InvalidSignatureException::class);
+        Webhook::verifyAndParseWebhook('{"type":"message.deleted"}', $sig, $this->secret);
+    }
+
+    public function testVerifyAndParseWebhookTamperedBodyMatchesBase(): void
+    {
+        // Single-arm catch on the base WebhookException must also match.
+        $body = '{"type":"message.new"}';
+        $sig = $this->computeSignature($body, $this->secret);
+        $this->expectException(\GetStream\Exceptions\WebhookException::class);
         Webhook::verifyAndParseWebhook('{"type":"message.deleted"}', $sig, $this->secret);
     }
 
@@ -499,7 +510,7 @@ class WebhookTest extends TestCase
         }
         $body = \file_get_contents($dir . '/body.json');
         $sig = \trim(\file_get_contents($dir . '/signature.txt'));
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\InvalidSignatureException::class);
         $this->expectExceptionMessage('signature mismatch');
         Webhook::verifyAndParseWebhook($body, $sig, 'test_secret_do_not_use_in_production');
     }
@@ -523,7 +534,7 @@ class WebhookTest extends TestCase
             $this->markTestSkipped('fixtures not present');
         }
         $body = \file_get_contents($dir . '/body.json');
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         $this->expectExceptionMessage("missing 'type'");
         Webhook::parseEvent($body);
     }
@@ -535,7 +546,7 @@ class WebhookTest extends TestCase
             $this->markTestSkipped('fixtures not present');
         }
         $body = \file_get_contents($dir . '/body.json');
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         $this->expectExceptionMessage('failed to parse webhook payload');
         Webhook::parseEvent($body);
     }
@@ -547,7 +558,7 @@ class WebhookTest extends TestCase
             $this->markTestSkipped('fixtures not present');
         }
         $body = \file_get_contents($dir . '/body.json');
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         $this->expectExceptionMessage('must not be empty');
         Webhook::parseEvent($body);
     }
@@ -559,7 +570,7 @@ class WebhookTest extends TestCase
             $this->markTestSkipped('fixtures not present');
         }
         $body = \file_get_contents($dir . '/body.gz');
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         $this->expectExceptionMessage('gzip decompression failed');
         Webhook::gunzipPayload($body);
     }
@@ -569,25 +580,28 @@ class WebhookTest extends TestCase
         // Per CHA-3071 wire format: decodeSqsPayload falls back to raw bytes when
         // base64 decoding fails (uncompressed wire format). For input that is
         // neither valid base64 nor valid JSON nor gzip-prefixed, parseSqs still
-        // throws InvalidWebhookException — just down the chain at JSON parsing.
+        // throws MalformedWebhookException — just down the chain at JSON parsing.
         $dir = __DIR__ . '/fixtures/webhooks/_invalid/bad_base64';
         if (!\is_dir($dir)) {
             $this->markTestSkipped('fixtures not present');
         }
         $sqs = \trim(\file_get_contents($dir . '/sqs_body.txt'));
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         Webhook::parseSqs($sqs);
     }
 
     public function testWebhookConformanceBadSnsEnvelope(): void
     {
+        // Fix #4: bad_sns_envelope (non-envelope JSON) is now treated as a
+        // pre-extracted Message string and flows through the SQS path,
+        // surfacing as a downstream parse failure rather than SNS-specific.
+        // Still MalformedWebhookException.
         $dir = __DIR__ . '/fixtures/webhooks/_invalid/bad_sns_envelope';
         if (!\is_dir($dir)) {
             $this->markTestSkipped('fixtures not present');
         }
         $sns = \trim(\file_get_contents($dir . '/sns_notification.txt'));
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
-        $this->expectExceptionMessage('SNS envelope');
+        $this->expectException(\GetStream\Exceptions\MalformedWebhookException::class);
         Webhook::parseSns($sns);
     }
 }

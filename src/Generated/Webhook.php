@@ -3,7 +3,9 @@
 
 namespace GetStream\Generated;
 
-use GetStream\Exceptions\InvalidWebhookException;
+use GetStream\Exceptions\InvalidSignatureException;
+use GetStream\Exceptions\MalformedWebhookException;
+use GetStream\Exceptions\WebhookException;
 use GetStream\Models\UnknownEvent;
 use GetStream\GeneratedModels\ActivityAddedEvent;
 use GetStream\GeneratedModels\ActivityDeletedEvent;
@@ -612,7 +614,7 @@ class Webhook
      * Magic-byte detection is reliable for Stream payloads because Stream webhook
      * bodies are always JSON, and JSON cannot start with 0x1F.
      *
-     * @throws InvalidWebhookException if the body has the gzip magic prefix but
+     * @throws MalformedWebhookException if the body has the gzip magic prefix but
      *         isn't a valid gzip stream
      */
     public static function gunzipPayload(string $body): string
@@ -622,7 +624,7 @@ class Webhook
         }
         $result = @\gzdecode($body);
         if ($result === false) {
-            throw new InvalidWebhookException('gzip decompression failed');
+            throw new MalformedWebhookException('gzip decompression failed');
         }
         return $result;
     }
@@ -641,7 +643,7 @@ class Webhook
      * {@see self::parseSqs()} sits on top of this and works transparently for
      * both wire formats — no caller code change, no flag, no header.
      *
-     * @throws InvalidWebhookException if gzip decompression fails (only when input has gzip magic prefix)
+     * @throws MalformedWebhookException if gzip decompression fails (only when input has gzip magic prefix)
      */
     public static function decodeSqsPayload(string $messageBody): string
     {
@@ -654,23 +656,37 @@ class Webhook
     }
 
     /**
-     * Extract the {@code Message} field from a standard AWS SNS notification envelope,
-     * then base64-decode and gunzip. Envelope shape:
-     *   {"Type":"Notification","Message":"<base64>","MessageId":"...","Timestamp":"...","TopicArn":"..."}
+     * Return the inner Message field when $body is a standard SNS notification
+     * envelope JSON; otherwise return $body unchanged so a pre-extracted Message
+     * string flows through.
      *
-     * @throws InvalidWebhookException
+     * Heuristic: try to JSON-parse the input. If it yields an array with a
+     * string 'Message' field, that's the envelope shape — return the Message.
+     * Otherwise the input is presumed to BE the pre-extracted Message
+     * (base64-encoded bytes are not valid JSON, so this falls through cleanly).
+     */
+    private static function unwrapSnsNotificationBody(string $body): string
+    {
+        $env = \json_decode($body, true);
+        if (\is_array($env) && isset($env['Message']) && \is_string($env['Message'])) {
+            return $env['Message'];
+        }
+        return $body;
+    }
+
+    /**
+     * Decode an SNS notification body. Accepts either:
+     *   - a full SNS HTTP notification envelope JSON
+     *     ({"Type":"Notification","Message":"<base64>",...}), or
+     *   - a pre-extracted Message string (forwarded-through-SQS path).
+     * The inner payload is then base64-decoded and gunzipped via
+     * {@see self::decodeSqsPayload()}.
+     *
+     * @throws MalformedWebhookException
      */
     public static function decodeSnsPayload(string $notificationBody): string
     {
-        $env = \json_decode($notificationBody, true);
-        if (!\is_array($env)) {
-            throw new InvalidWebhookException('invalid SNS envelope JSON');
-        }
-        $msg = $env['Message'] ?? null;
-        if (!\is_string($msg)) {
-            throw new InvalidWebhookException("SNS envelope missing 'Message' string field");
-        }
-        return self::decodeSqsPayload($msg);
+        return self::decodeSqsPayload(self::unwrapSnsNotificationBody($notificationBody));
     }
 
     /**
@@ -682,24 +698,24 @@ class Webhook
      * throws.
      *
      * @return object the typed event class or UnknownEvent
-     * @throws InvalidWebhookException for invalid JSON, missing/non-string type field,
+     * @throws MalformedWebhookException for invalid JSON, missing/non-string type field,
      *         or known-type deserialization failure
      */
     public static function parseEvent(string $payload): object
     {
         if ($payload === '') {
-            throw new InvalidWebhookException('payload must not be empty');
+            throw new MalformedWebhookException('payload must not be empty');
         }
         $data = \json_decode($payload, true);
         if (\json_last_error() !== \JSON_ERROR_NONE) {
-            throw new InvalidWebhookException('failed to parse webhook payload: ' . \json_last_error_msg());
+            throw new MalformedWebhookException('failed to parse webhook payload: ' . \json_last_error_msg());
         }
         if (!\is_array($data)) {
-            throw new InvalidWebhookException('webhook payload must be a JSON object');
+            throw new MalformedWebhookException('webhook payload must be a JSON object');
         }
         $eventType = $data['type'] ?? null;
         if (!\is_string($eventType) || $eventType === '') {
-            throw new InvalidWebhookException("webhook payload missing 'type' string field");
+            throw new MalformedWebhookException("webhook payload missing 'type' string field");
         }
 
         $eventClass = self::getEventClass($eventType);
@@ -719,7 +735,7 @@ class Webhook
         try {
             return $eventClass::fromJson($data);
         } catch (\Throwable $e) {
-            throw new InvalidWebhookException('failed to deserialize event: ' . $e->getMessage(), 0, $e);
+            throw new MalformedWebhookException('failed to deserialize event: ' . $e->getMessage(), 0, $e);
         }
     }
 
@@ -731,14 +747,16 @@ class Webhook
      * can pass either the raw HTTP body or already-decompressed bytes; both work.
      *
      * @return object the typed event class or UnknownEvent
-     * @throws InvalidWebhookException for signature mismatches as well as parse/decompression
-     *         failures; distinguish modes via the exception's message substring
+     * @throws InvalidSignatureException if the X-Signature header does not match
+     *         the HMAC-SHA256 of the body under the configured secret.
+     * @throws MalformedWebhookException if gunzip, JSON parse, type dispatch,
+     *         or event deserialization fails.
      */
     public static function verifyAndParseWebhook(string $body, string $signature, string $secret): object
     {
         $payload = self::gunzipPayload($body);
         if (!self::verifySignature($payload, $signature, $secret)) {
-            throw new InvalidWebhookException('webhook signature mismatch');
+            throw new InvalidSignatureException('webhook signature mismatch');
         }
         return self::parseEvent($payload);
     }
@@ -751,7 +769,7 @@ class Webhook
      * it'll be a separate function rather than retrofitting this signature.
      *
      * @return object the typed event class or UnknownEvent
-     * @throws InvalidWebhookException
+     * @throws MalformedWebhookException
      */
     public static function parseSqs(string $messageBody): object
     {
@@ -763,7 +781,7 @@ class Webhook
      * Same no-signature posture as {@see self::parseSqs()}.
      *
      * @return object the typed event class or UnknownEvent
-     * @throws InvalidWebhookException
+     * @throws MalformedWebhookException
      */
     public static function parseSns(string $notificationBody): object
     {
