@@ -628,23 +628,27 @@ class Webhook
     }
 
     /**
-     * base64-decode an SQS Message Body, then gunzip if gzip-prefixed.
+     * Decode an SQS Message Body: try base64 first, fall back to raw bytes if
+     * base64 fails, then gunzip if gzip-prefixed.
      *
-     * Forward-compat: today the backend emits plain JSON to SQS; once compression
-     * is extended to queue transports, bodies will be base64(gzip(json)). This
-     * helper handles both cases via the magic-byte detection in {@see self::gunzipPayload()}.
+     * Wire format (per CHA-3071): SQS bodies are raw JSON when
+     * enable_hook_payload_compression is off (today's default for all existing
+     * apps), and base64(gzip(json)) when it's on. This helper handles both:
+     * raw JSON starts with '{' which is not valid base64, so the base64 decode
+     * fails and we fall through to raw bytes, then {@see self::gunzipPayload()}'s
+     * magic-byte detection decides whether to decompress.
      *
-     * Note: if the input is plain JSON (not base64), strict base64 decoding will
-     * fail and throw InvalidWebhookException. Callers receiving today's plain-JSON
-     * SQS messages should call {@see self::parseEvent()} directly.
+     * {@see self::parseSqs()} sits on top of this and works transparently for
+     * both wire formats — no caller code change, no flag, no header.
      *
-     * @throws InvalidWebhookException
+     * @throws InvalidWebhookException if gzip decompression fails (only when input has gzip magic prefix)
      */
     public static function decodeSqsPayload(string $messageBody): string
     {
         $decoded = \base64_decode($messageBody, true);
         if ($decoded === false) {
-            throw new InvalidWebhookException('invalid base64');
+            // Not base64 — treat input as raw bytes (uncompressed wire format).
+            $decoded = $messageBody;
         }
         return self::gunzipPayload($decoded);
     }

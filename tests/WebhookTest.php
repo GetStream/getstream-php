@@ -364,10 +364,13 @@ class WebhookTest extends TestCase
         $this->assertSame($plain, Webhook::decodeSqsPayload($encoded));
     }
 
-    public function testDecodeSqsPayloadRaisesOnInvalidBase64(): void
+    public function testDecodeSqsPayloadPassesThroughNonBase64(): void
     {
-        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
-        Webhook::decodeSqsPayload('!!!not base64!!!');
+        // Per chat#13392 wire format: SQS bodies are raw JSON when
+        // hook_payload_compression is off. decodeSqsPayload must fall back to
+        // raw bytes on non-base64 input rather than raise.
+        $plain = '{"type":"message.new"}';
+        $this->assertSame($plain, Webhook::decodeSqsPayload($plain));
     }
 
     public function testDecodeSnsPayloadExtractsAndDecodesMessage(): void
@@ -563,13 +566,16 @@ class WebhookTest extends TestCase
 
     public function testWebhookConformanceBadBase64(): void
     {
+        // Per CHA-3071 wire format: decodeSqsPayload falls back to raw bytes when
+        // base64 decoding fails (uncompressed wire format). For input that is
+        // neither valid base64 nor valid JSON nor gzip-prefixed, parseSqs still
+        // throws InvalidWebhookException — just down the chain at JSON parsing.
         $dir = __DIR__ . '/fixtures/webhooks/_invalid/bad_base64';
         if (!\is_dir($dir)) {
             $this->markTestSkipped('fixtures not present');
         }
         $sqs = \trim(\file_get_contents($dir . '/sqs_body.txt'));
         $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
-        $this->expectExceptionMessage('base64');
         Webhook::parseSqs($sqs);
     }
 
