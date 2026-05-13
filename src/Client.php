@@ -116,8 +116,7 @@ class Client
      *
      * Handles gzip-compressed bodies transparently.
      *
-     * @throws \GetStream\Exceptions\InvalidSignatureException on signature mismatch
-     * @throws \GetStream\Exceptions\MalformedWebhookException on parse failure
+     * @throws \GetStream\Exceptions\InvalidWebhookException on signature mismatch or parse failure
      */
     public function verifyAndParseWebhook(string $body, string $signature): object
     {
