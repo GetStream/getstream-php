@@ -17,3 +17,10 @@ namespace GetStream;
  */
 
 require_once __DIR__ . '/Generated/Webhook.php';
+
+if (!class_exists(\GetStream\Webhook::class, false)) {
+    throw new \LogicException(
+        'GetStream\\Webhook alias failed to register; '
+        . 'GetStream\\Generated\\Webhook may not have loaded class_alias correctly.'
+    );
+}
