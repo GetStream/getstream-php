@@ -903,6 +903,39 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateRoleResponse::class);
     }
     /**
+     * Searches mentionable roles (user-assignable + channel-assignable, built-in and custom) by name prefix for autocomplete
+     *
+     * @param string $query
+     * @param int $limit
+     * @param string $nameGt
+     * @param string $roleType
+     * @param bool $includeGlobalRoles
+     * @return StreamResponse<GeneratedModels\SearchRolesResponse>
+     * @throws StreamException
+     */
+    public function searchRoles(string $query, int $limit, string $nameGt, string $roleType, bool $includeGlobalRoles): StreamResponse {
+        $path = '/api/v2/roles/search';
+
+        $queryParams = [];
+        if ($query !== null) {
+            $queryParams['query'] = $query;
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($nameGt !== null) {
+            $queryParams['name_gt'] = $nameGt;
+        }
+        if ($roleType !== null) {
+            $queryParams['role_type'] = $roleType;
+        }
+        if ($includeGlobalRoles !== null) {
+            $queryParams['include_global_roles'] = $includeGlobalRoles;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\SearchRolesResponse::class);
+    }
+    /**
      * Deletes custom role
      *
      * @param string $name

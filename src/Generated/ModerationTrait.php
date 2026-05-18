@@ -559,6 +559,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SubmitActionResponse::class);
     }
     /**
+     * Forward a moderator-supplied correction to the moderation feedback pipeline. Server-side only.
+     *
+     * @param GeneratedModels\SubmitModerationFeedbackRequest $requestData
+     * @return StreamResponse<GeneratedModels\SubmitModerationFeedbackResponse>
+     * @throws StreamException
+     */
+    public function submitModerationFeedback(GeneratedModels\SubmitModerationFeedbackRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/submit_moderation_feedback';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SubmitModerationFeedbackResponse::class);
+    }
+    /**
      * Unban a user from a channel or globally.
      *
      * @param string $targetUserID

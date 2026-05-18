@@ -7,12 +7,12 @@ class FeedsReactionResponse extends BaseModel
 {
     public function __construct(
         public ?UserResponse $user = null,
-        public ?string $activityID = null, // ID of the activity that was reacted to
-        public ?string $commentID = null, // ID of the comment that was reacted to
-        public ?string $type = null, // Type of reaction
-        public ?object $custom = null, // Custom data for the reaction
-        public ?\DateTime $createdAt = null, // When the reaction was created
-        public ?\DateTime $updatedAt = null, // When the reaction was last updated
+        public ?string $activityID = null,
+        public ?string $commentID = null,
+        public ?string $type = null,
+        public ?object $custom = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
     ) {
     }
 

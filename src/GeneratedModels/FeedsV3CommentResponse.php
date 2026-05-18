@@ -9,30 +9,39 @@ class FeedsV3CommentResponse extends BaseModel
         public ?string $id = null,
         public ?string $objectID = null,
         public ?string $objectType = null,
-        public ?string $status = null,
-        public ?string $text = null,
-        public ?string $parentID = null,
         public ?UserResponse $user = null,
-        /** @var array<UserResponse>|null */
-        #[ArrayOf(UserResponse::class)]
-        public ?array $mentionedUsers = null,
-        public ?array $ownReactions = null,
+        public ?string $text = null,
+        public ?object $custom = null,
+        public ?string $parentID = null,
+        public ?int $reactionCount = null,
+        /** @var array<FeedsReactionResponse>|null */
+        #[ArrayOf(FeedsReactionResponse::class)]
+        public ?array $latestReactions = null,
+        /** @var array<string, FeedsReactionGroupResponse>|null */
+        #[MapOf(FeedsReactionGroupResponse::class)]
+        public ?array $reactionGroups = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null,
-        public ?object $custom = null,
+        /** @var array<UserResponse>|null */
+        #[ArrayOf(UserResponse::class)]
+        public ?array $mentionedUsers = null,
+        public ?string $status = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?\DateTime $editedAt = null,
         public ?\DateTime $deletedAt = null,
+        public ?ModerationV2Response $moderation = null,
+        public ?int $replyCount = null,
         public ?int $upvoteCount = null,
         public ?int $downvoteCount = null,
+        public ?int $bookmarkCount = null,
         public ?int $score = null,
         public ?float $confidenceScore = null,
         public ?float $controversyScore = null,
-        public ?int $replyCount = null,
-        public ?int $reactionCount = null,
-        public ?ModerationV2Response $moderation = null,
+        /** @var array<FeedsReactionResponse>|null */
+        #[ArrayOf(FeedsReactionResponse::class)]
+        public ?array $ownReactions = null,
     ) {
     }
 

@@ -14,6 +14,8 @@ class QueryBookmarksRequest extends BaseModel
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
+        public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 

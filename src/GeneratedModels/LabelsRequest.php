@@ -12,6 +12,7 @@ class LabelsRequest extends BaseModel
         public ?string $category = null, // Optional category for filtering (max 128 chars)
         public ?string $contentID = null, // Customer-supplied identifier for the moderated content, for tracing
         public ?string $userID = null, // Optional customer-supplied user identifier for the content author (max 256 chars). Enables filtering stored results by user_id.
+        public ?bool $dryRun = null, // When true, run moderation and return labels without persisting the result. Useful for one-off checks (e.g. UI testers) that should not be recorded in the stored history.
     ) {
     }
 

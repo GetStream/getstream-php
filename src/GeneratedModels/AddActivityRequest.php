@@ -34,6 +34,7 @@ class AddActivityRequest extends BaseModel
         public ?bool $skipPush = null, // Whether to skip push notifications
         public ?bool $enrichOwnFields = null,
         public ?bool $forceModeration = null,
+        public ?bool $createUsers = null,
     ) {
     }
 

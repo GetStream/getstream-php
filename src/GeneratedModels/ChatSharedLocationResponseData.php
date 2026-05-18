@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+class ChatSharedLocationResponseData extends BaseModel
+{
+    public function __construct(
+        public ?string $channelCid = null,
+        public ?string $messageID = null,
+        public ?string $userID = null,
+        public ?float $latitude = null,
+        public ?float $longitude = null,
+        public ?string $createdByDeviceID = null,
+        public ?\DateTime $endAt = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
+        public ?ChatMessageResponse $message = null,
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}
