@@ -787,7 +787,6 @@ class Webhook
     }
 }
 
-// Spec §7 alias: canonical name `GetStream\Webhook` aliases the existing
-// `GetStream\Generated\Webhook` for one minor-version cycle. New callers should
-// use the canonical name; existing callers continue to work unchanged.
-\class_alias(\GetStream\Generated\Webhook::class, 'GetStream\\Webhook');
+// Canonical name `GetStream\Webhook` is declared as a real subclass in
+// src/Webhook.php (emitted by webhook_shim.tpl). Static analyzers can see it
+// directly; the runtime class inherits every static helper declared above.

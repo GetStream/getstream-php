@@ -281,14 +281,15 @@ class WebhookTest extends TestCase
     // decodeSnsPayload, verifyAndParseWebhook, parseSqs, parseSns.
     // -------------------------------------------------------------------------
 
-    public function testWebhookCanonicalAliasResolves(): void
+    public function testWebhookCanonicalExtendsGenerated(): void
     {
-        // Spec §7: GetStream\Webhook is the canonical name; should alias to GetStream\Generated\Webhook.
-        $this->assertTrue(\class_exists(\GetStream\Webhook::class), 'GetStream\Webhook alias resolves');
-        $this->assertSame(
-            'GetStream\Generated\Webhook',
-            (new \ReflectionClass(\GetStream\Webhook::class))->getName(),
-            'alias resolves to the canonical Generated class'
+        // Canonical name GetStream\Webhook is declared as a real subclass of
+        // GetStream\Generated\Webhook (see src/Webhook.php). Static methods
+        // resolve through inheritance; static analyzers see the class directly.
+        $this->assertTrue(\class_exists(\GetStream\Webhook::class), 'GetStream\Webhook resolves');
+        $this->assertTrue(
+            \is_subclass_of(\GetStream\Webhook::class, \GetStream\Generated\Webhook::class),
+            'GetStream\Webhook extends GetStream\Generated\Webhook'
         );
     }
 
