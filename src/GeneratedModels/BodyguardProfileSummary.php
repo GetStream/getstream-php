@@ -8,6 +8,7 @@ class BodyguardProfileSummary extends BaseModel
     public function __construct(
         public ?string $name = null,
         public ?string $displayName = null,
+        public ?string $textType = null,
     ) {
     }
 

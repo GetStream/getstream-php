@@ -922,10 +922,11 @@ trait FeedsTrait
      * @param string $feedGroupID
      * @param string $feedID
      * @param bool $hardDelete
+     * @param bool $purgeUserActivities
      * @return StreamResponse<GeneratedModels\DeleteFeedResponse>
      * @throws StreamException
      */
-    public function deleteFeed(string $feedGroupID, string $feedID, bool $hardDelete): StreamResponse {
+    public function deleteFeed(string $feedGroupID, string $feedID, bool $hardDelete, bool $purgeUserActivities): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -933,6 +934,9 @@ trait FeedsTrait
         $queryParams = [];
         if ($hardDelete !== null) {
             $queryParams['hard_delete'] = $hardDelete;
+        }
+        if ($purgeUserActivities !== null) {
+            $queryParams['purge_user_activities'] = $purgeUserActivities;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedResponse::class);

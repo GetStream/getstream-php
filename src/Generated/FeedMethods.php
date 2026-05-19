@@ -18,12 +18,13 @@ trait FeedMethods
      * Delete a single feed by its ID
      *
      * @param bool $hardDelete
+     * @param bool $purgeUserActivities
      * @return StreamResponse<GeneratedModels\DeleteFeedResponse>
      * @throws StreamException
      */
     public function deleteFeed(
-        bool $hardDelete, ): StreamResponse {
-        return $this->feedsV3Client->deleteFeed($this->feedGroup, $this->feedId,$hardDelete);
+        bool $hardDelete, bool $purgeUserActivities, ): StreamResponse {
+        return $this->feedsV3Client->deleteFeed($this->feedGroup, $this->feedId,$hardDelete, $purgeUserActivities);
     }
     /**
      * Create a single feed for a given feed group

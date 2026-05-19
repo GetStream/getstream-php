@@ -54,6 +54,7 @@ class UpdateAppRequest extends BaseModel
         /** @var array<EventHook>|null */
         #[ArrayOf(EventHook::class)]
         public ?array $eventHooks = null,
+        public ?bool $enableHookPayloadCompression = null,
         public ?bool $userResponseTimeEnabled = null,
         public ?int $maxAggregatedActivitiesLength = null,
         public ?string $moderationS3ImageAccessRoleArn = null,

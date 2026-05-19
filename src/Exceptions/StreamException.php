@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GetStream\Exceptions;
 
-use Exception;
-
 /**
  * Base exception for GetStream SDK.
  */
@@ -16,9 +14,9 @@ class StreamException extends \Exception
      *
      * @param string          $message  The exception message
      * @param int             $code     The exception code
-     * @param \Exception|null $previous Previous exception
+     * @param \Throwable|null $previous Previous Throwable (any Error or Exception)
      */
-    public function __construct(string $message = '', int $code = 0, ?\Exception $previous = null)
+    public function __construct(string $message = '', int $code = 0, ?\Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

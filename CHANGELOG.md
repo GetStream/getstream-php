@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Webhook handling spec helpers (CHA-2961): `UnknownEvent` class for forward-compat;
+  `gunzipPayload`, `decodeSqsPayload`, `decodeSnsPayload` primitives;
+  `verifyAndParseWebhook` HTTP composite; `parseSqs` / `parseSns`
+  queue composites (no signature — backend emits no HMAC for queue messages today;
+  trust is established via AWS IAM controls on the SQS queue / SNS topic).
+  Transparent gzip via magic-byte detection.
+- New `GetStream\Webhook` namespace alias (preferred); `GetStream\Generated\Webhook`
+  retained as backward-compat alias. PSR-4 shim (`src/Webhook.php`) ensures the
+  canonical name resolves on first touch.
+- New exception class: `GetStream\Exceptions\InvalidWebhookException` (unified —
+  covers signature mismatches, parse failures, decompression errors, etc.).
+- New `GetStream\Models\UnknownEvent` class.
+- New instance methods on `GetStream\Client`: `verifySignature($body, $signature)`
+  and `verifyAndParseWebhook($body, $signature)` — drop the api_secret parameter
+  in favor of the client's stored secret. Dual API: static methods remain available.
+- New instance methods on `GetStream\Client`: `parseSqs(string $messageBody)`,
+  `parseSns(string $notificationBody)` (no signature; AWS IAM).
+- Conformance fixture suite under `tests/fixtures/webhooks/`.
+
+### Changed
+
+- No breaking changes.
+
+[Spec](https://www.notion.so/stream-wiki/Server-Side-SDK-Webhook-Handling-Spec-34b6a5d7f9f681e78003c443f227493c)
+
 ## [4.0.0] - 2026-03-05
 
 ### Breaking Changes

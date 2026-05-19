@@ -13,6 +13,7 @@ class RuleBuilderCondition extends BaseModel
         public ?VideoRuleParameters $videoRuleParams = null,
         public ?UserRuleParameters $userRuleParams = null,
         public ?ContentCountRuleParameters $contentCountRuleParams = null,
+        public ?ChannelMessageCountRuleParameters $channelMessageCountRuleParams = null,
         public ?FlagCountRuleParameters $userFlagCountRuleParams = null,
         public ?FlagCountRuleParameters $contentFlagCountRuleParams = null,
         public ?UserIdenticalContentCountParameters $userIdenticalContentCountParams = null,

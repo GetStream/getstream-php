@@ -13,6 +13,7 @@ class AddReactionRequest extends BaseModel
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?bool $skipPush = null,
         public ?bool $enforceUnique = null, // Whether to enforce unique reactions per user (remove other reaction types from the user when adding this one)
+        public ?bool $createUsers = null, // Server-side only. If true, auto-creates the reacting user identified by user_id when they don't already exist. Default: false.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {
