@@ -73,34 +73,46 @@ class GuzzleHttpClient implements HttpClientInterface
      * @param string $url     Full URL to request
      * @param array  $headers Request headers
      * @param mixed  $body    Request body
+     * @param array  $options Per-call Guzzle option overrides (e.g. ['timeout' => 2])
      *
      * @return StreamResponse<mixed>
      *
      * @throws StreamException
      */
-    public function request(string $method, string $url, array $headers = [], mixed $body = null): StreamResponse
-    {
+    public function request(
+        string $method,
+        string $url,
+        array $headers = [],
+        mixed $body = null,
+        array $options = []
+    ): StreamResponse {
         try {
-            $options = [
+            $requestOptions = [
                 'headers' => $headers,
             ];
+
+            // Per-call overrides (§5.2). 'timeout' is the canonical key; any
+            // other valid Guzzle key is also forwarded.
+            foreach ($options as $key => $value) {
+                $requestOptions[$key] = $value;
+            }
 
             // Add body if provided
             if ($body !== null) {
                 // Check if this is multipart form data (array of arrays with 'name' and 'contents')
                 if (is_array($body) && !empty($body) && isset($body[0]) && is_array($body[0]) && isset($body[0]['name'])) {
                     // This is multipart form data
-                    $options['multipart'] = $body;
+                    $requestOptions['multipart'] = $body;
                 } elseif (is_array($body) || is_object($body)) {
-                    $options['json'] = $body;
+                    $requestOptions['json'] = $body;
                 } else {
-                    $options['body'] = $body;
+                    $requestOptions['body'] = $body;
                 }
             }
 
             // Retry loop for rate-limited responses
             for ($attempt = 0;; $attempt++) {
-                $response = $this->client->request($method, $url, $options);
+                $response = $this->client->request($method, $url, $requestOptions);
 
                 if ($response->getStatusCode() !== 429 || $attempt >= $this->maxRetries) {
                     return $this->createStreamResponse($response);

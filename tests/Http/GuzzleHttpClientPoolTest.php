@@ -70,4 +70,24 @@ class GuzzleHttpClientPoolTest extends TestCase
         $sdk->request('GET', 'http://example.test/');
         self::assertSame(99, $this->history[0]['options']['timeout'] ?? null);
     }
+
+    /** @test */
+    public function perCallTimeoutOptionReachesGuzzle(): void
+    {
+        $sdk = $this->buildWithHistory();
+        $sdk->request('GET', 'http://example.test/', [], null, ['timeout' => 2]);
+
+        self::assertSame(2, $this->history[0]['options']['timeout'] ?? null,
+            'per-call timeout reaches Guzzle request options');
+    }
+
+    /** @test */
+    public function perCallOptionOverridesClientDefault(): void
+    {
+        $sdk = $this->buildWithHistory(new PoolConfig(requestTimeout: 17));
+        $sdk->request('GET', 'http://example.test/', [], null, ['timeout' => 2]);
+
+        // Per-call 2s wins over client default 17s.
+        self::assertSame(2, $this->history[0]['options']['timeout'] ?? null);
+    }
 }
