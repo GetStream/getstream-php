@@ -37,6 +37,10 @@ class GuzzleHttpClient implements HttpClientInterface
             'http_errors' => false, // We'll handle errors ourselves
         ];
 
+        // CHA-2964 invariant: do NOT set 'decode_content' => false in this
+        // config array. Guzzle's default decode_content=true advertises
+        // "Accept-Encoding: gzip, deflate" and decodes responses transparently.
+        // Setting it false disables both.
         $this->client = new GuzzleClient(array_merge($defaultConfig, $config));
         $this->maxRetries = $maxRetries;
     }
