@@ -269,10 +269,15 @@ class ClientBuilderTest extends TestCase
     public function userSuppliedHttpClientBypassesBuild(): void
     {
         $mock = $this->createMock(HttpClientInterface::class);
+
+        // The mock must NEVER have request() called during build() — building
+        // should be a pure construction step, no probe requests.
+        $mock->expects(self::never())->method('request');
+
         $client = (new ClientBuilder())
             ->apiKey('k')
             ->apiSecret('s')
-            ->maxConnsPerHost(99) // these 4 must NOT mutate $mock (§7)
+            ->maxConnsPerHost(99)
             ->idleTimeout(99)
             ->connectTimeout(99)
             ->requestTimeout(99)
@@ -280,6 +285,10 @@ class ClientBuilderTest extends TestCase
             ->skipEnvLoad()
             ->build();
 
+        // Identity check: the user's exact instance comes back unwrapped.
         self::assertSame($mock, $client->getHttpClient());
+
+        // And it is NOT a GuzzleHttpClient (no pool config is applied to it).
+        self::assertNotInstanceOf(\GetStream\Http\GuzzleHttpClient::class, $client->getHttpClient());
     }
 }
