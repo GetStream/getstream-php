@@ -231,10 +231,50 @@ class ClientBuilderTest extends TestCase
             ->apiKey('test')
             ->apiSecret('test')
             ->baseUrl('test')
+            ->maxConnsPerHost(5)
+            ->idleTimeout(55)
+            ->connectTimeout(10)
+            ->requestTimeout(30)
             ->httpClient($this->mockHttpClient)
             ->skipEnvLoad()
             ->envPath('/test/path');
 
         self::assertSame($builder, $result);
+    }
+
+    /** @test */
+    public function poolConfigKnobsAreChained(): void
+    {
+        // After Task 3 wires GuzzleHttpClient::__construct(?PoolConfig), this
+        // test will assert against $client->getHttpClient()->getPoolConfig().
+        // For now, we just assert the builder exposes the 4 fluent methods
+        // and returns $this for chaining (Task 2 scope).
+        $builder = (new ClientBuilder())
+            ->apiKey('k')
+            ->apiSecret('s')
+            ->maxConnsPerHost(12)
+            ->idleTimeout(40)
+            ->connectTimeout(4)
+            ->requestTimeout(25);
+
+        self::assertInstanceOf(ClientBuilder::class, $builder);
+    }
+
+    /** @test */
+    public function userSuppliedHttpClientBypassesBuild(): void
+    {
+        $mock = $this->createMock(HttpClientInterface::class);
+        $client = (new ClientBuilder())
+            ->apiKey('k')
+            ->apiSecret('s')
+            ->maxConnsPerHost(99) // these 4 must NOT mutate $mock (§7)
+            ->idleTimeout(99)
+            ->connectTimeout(99)
+            ->requestTimeout(99)
+            ->httpClient($mock)
+            ->skipEnvLoad()
+            ->build();
+
+        self::assertSame($mock, $client->getHttpClient());
     }
 }
