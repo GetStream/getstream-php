@@ -15,15 +15,10 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * CHA-2964: Guzzle's default `decode_content` => true advertises
- * `Accept-Encoding: gzip, deflate` via curl and transparently decodes
- * gzip-encoded responses. These regression tests guard against future
- * `decode_content => false` overrides in src/Http/GuzzleHttpClient.php.
- *
- * Note: real Accept-Encoding negotiation and response decoding live in
- * Guzzle's curl/StreamHandler layers and never run with MockHandler. The
- * tests assert what is observable in middleware: the resolved
- * `decode_content` option, and end-to-end behavior through a middleware
+ * Regression tests guarding Guzzle's default `decode_content => true`, which
+ * gives transparent gzip advertise + decode. Real negotiation happens in
+ * Guzzle's curl layer (not visible to MockHandler), so the tests assert the
+ * resolved `decode_content` option and exercise end-to-end via a middleware
  * that mirrors EasyHandle's decoding logic.
  */
 class GzipTest extends TestCase
@@ -102,7 +97,7 @@ class GzipTest extends TestCase
         self::assertArrayHasKey('decode_content', $options, 'decode_content option must reach the handler');
         self::assertNotFalse(
             $options['decode_content'],
-            'CHA-2964 invariant: SDK must NOT set decode_content => false (disables gzip advertise + decode)',
+            'SDK must not set decode_content => false; it disables gzip advertise + decode',
         );
         self::assertTrue(
             $options['decode_content'] === true,
