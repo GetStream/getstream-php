@@ -37,8 +37,6 @@ class GuzzleHttpClient implements HttpClientInterface
             'http_errors' => false, // We'll handle errors ourselves
         ];
 
-        // Don't set 'decode_content' => false; it disables Guzzle's
-        // Accept-Encoding advertisement and automatic gzip decoding.
         $this->client = new GuzzleClient(array_merge($defaultConfig, $config));
         $this->maxRetries = $maxRetries;
     }
