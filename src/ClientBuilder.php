@@ -265,12 +265,13 @@ class ClientBuilder
      */
     private function resolveHttpClient(): HttpClientInterface
     {
-        if ($this->httpClient !== null) {
+        $user = $this->httpClient;
+        if ($user !== null) {
             $this->logInfo(
                 'getstream-php connection pool: user_http_client=true (5 knobs not applied)'
             );
 
-            return $this->httpClient;
+            return $user;
         }
 
         $client = new GuzzleHttpClient([], 3, $this->pool);
