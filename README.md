@@ -30,6 +30,31 @@ STREAM_API_SECRET=your_api_secret_here
 STREAM_BASE_URL=https://chat.stream-io-api.com
 ```
 
+## Connection Pool Tuning
+
+```php
+$client = (new GetStream\ClientBuilder())
+    ->apiKey($apiKey)
+    ->apiSecret($apiSecret)
+    ->maxConnsPerHost(5)   // default 5
+    ->idleTimeout(55)      // default 55s (no-op under PHP-FPM, see below)
+    ->connectTimeout(10)   // default 10s
+    ->requestTimeout(30)   // default 30s
+    ->build();
+```
+
+**Per-call timeout override:**
+
+```php
+$response = $client->getHttpClient()->request(
+    'GET', $url, $headers, null, ['timeout' => 2]
+);
+```
+
+**PHP-FPM caveat:** Under PHP-FPM and CLI scripts the curl handle dies with the request, so `idleTimeout` and `maxConnsPerHost` have no inter-request effect. They take effect in long-running runtimes (Swoole, RoadRunner, ReactPHP, daemons).
+
+**Escape hatch:** Passing your own client via `->httpClient($mine)` skips all 4 knobs — your client is used as-is.
+
 ## Code Generation
 
 Generate API methods from OpenAPI spec:

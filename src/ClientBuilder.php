@@ -261,14 +261,40 @@ class ClientBuilder
     /**
      * Resolve the HttpClient. If the user supplied one via httpClient(),
      * return it as-is (§7 escape hatch). Otherwise build a GuzzleHttpClient
-     * with the configured PoolConfig.
+     * with the configured PoolConfig and emit the §8 INFO log.
      */
     private function resolveHttpClient(): HttpClientInterface
     {
         if ($this->httpClient !== null) {
+            $this->logInfo(
+                'getstream-php connection pool: user_http_client=true (5 knobs not applied)'
+            );
+
             return $this->httpClient;
         }
 
-        return new GuzzleHttpClient([], 3, $this->pool);
+        $client = new GuzzleHttpClient([], 3, $this->pool);
+
+        $this->logInfo(sprintf(
+            'getstream-php connection pool: max_conns_per_host=%d idle_timeout=%ds connect_timeout=%ds request_timeout=%ds user_http_client=false',
+            $this->pool->maxConnsPerHost,
+            $this->pool->idleTimeout,
+            $this->pool->connectTimeout,
+            $this->pool->requestTimeout,
+        ));
+
+        return $client;
+    }
+
+    /**
+     * Emit one INFO log line via error_log(). Suppressed under PHPUnit to
+     * keep test output clean (PHPUNIT_RUNNING constant is set in phpunit.xml).
+     */
+    private function logInfo(string $message): void
+    {
+        if (defined('PHPUNIT_RUNNING') && PHPUNIT_RUNNING) {
+            return;
+        }
+        error_log('[INFO] ' . $message);
     }
 }
