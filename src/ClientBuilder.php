@@ -260,9 +260,8 @@ class ClientBuilder
 
     /**
      * Resolve the HttpClient. If the user supplied one via httpClient(),
-     * return it as-is (§7 escape hatch). Otherwise build a GuzzleHttpClient.
-     * Task 3 will pass $this->pool here once GuzzleHttpClient's constructor
-     * accepts a PoolConfig argument.
+     * return it as-is (§7 escape hatch). Otherwise build a GuzzleHttpClient
+     * with the configured PoolConfig.
      */
     private function resolveHttpClient(): HttpClientInterface
     {
@@ -270,6 +269,6 @@ class ClientBuilder
             return $this->httpClient;
         }
 
-        return new GuzzleHttpClient();
+        return new GuzzleHttpClient([], 3, $this->pool);
     }
 }

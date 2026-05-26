@@ -23,22 +23,47 @@ class GuzzleHttpClient implements HttpClientInterface
     /** Maximum number of retries for rate-limited (429) responses. */
     private int $maxRetries;
 
+    /** @var PoolConfig Effective pool configuration (kept for diagnostics). */
+    private PoolConfig $pool;
+
     /**
      * Create a new GuzzleHttpClient.
      *
-     * @param array $config     Guzzle client configuration
-     * @param int   $maxRetries Maximum retries for 429 rate-limit responses (default 3)
+     * @param array            $config     Guzzle client configuration (wins over $pool defaults)
+     * @param int              $maxRetries Maximum retries for 429 rate-limit responses (default 3)
+     * @param PoolConfig|null  $pool       Connection pool configuration. When null, spec defaults apply.
      */
-    public function __construct(array $config = [], int $maxRetries = 3)
+    public function __construct(array $config = [], int $maxRetries = 3, ?PoolConfig $pool = null)
     {
+        $pool = $pool ?? new PoolConfig();
+
         $defaultConfig = [
-            'timeout' => 30,
-            'connect_timeout' => 10,
+            'timeout' => $pool->requestTimeout,
+            'connect_timeout' => $pool->connectTimeout,
             'http_errors' => false, // We'll handle errors ourselves
+            'curl' => [
+                // Cap concurrent connections opened by curl's internal multi handle.
+                // IdleTimeout has no direct Guzzle/curl analogue; honored only in
+                // long-running runtimes. For PHP-FPM, idle sockets die with the
+                // request — see CHANGELOG §9.1.
+                CURLOPT_MAXCONNECTS => $pool->maxConnsPerHost,
+                CURLOPT_FORBID_REUSE => 0, // explicit: allow connection reuse (KeepAlive invariant)
+            ],
         ];
 
-        $this->client = new GuzzleClient(array_merge($defaultConfig, $config));
+        // User-supplied $config wins. array_replace_recursive preserves the
+        // user's curl array while filling in defaults we set above.
+        $merged = array_replace_recursive($defaultConfig, $config);
+
+        $this->client = new GuzzleClient($merged);
         $this->maxRetries = $maxRetries;
+        $this->pool = $pool;
+    }
+
+    /** Return the effective PoolConfig (for diagnostics / logging). */
+    public function getPoolConfig(): PoolConfig
+    {
+        return $this->pool;
     }
 
     /**
