@@ -573,7 +573,7 @@ class WebhookTest extends TestCase
         // Per CHA-3071 wire format: decodeSqsPayload falls back to raw bytes when
         // base64 decoding fails (uncompressed wire format). For input that is
         // neither valid base64 nor valid JSON nor gzip-prefixed, parseSqs still
-        // throws InvalidWebhookException — just down the chain at JSON parsing.
+        // throws InvalidWebhookException, just down the chain at JSON parsing.
         $dir = __DIR__ . '/fixtures/webhooks/_invalid/bad_base64';
         if (!\is_dir($dir)) {
             $this->markTestSkipped('fixtures not present');

@@ -39,17 +39,17 @@ Under PHP-FPM and CLI scripts, the PHP process exits at the end of each request 
 - Webhook handling spec helpers (CHA-2961): `UnknownEvent` class for forward-compat;
   `gunzipPayload`, `decodeSqsPayload`, `decodeSnsPayload` primitives;
   `verifyAndParseWebhook` HTTP composite; `parseSqs` / `parseSns`
-  queue composites (no signature — backend emits no HMAC for queue messages today;
+  queue composites (no signature: backend emits no HMAC for queue messages today;
   trust is established via AWS IAM controls on the SQS queue / SNS topic).
   Transparent gzip via magic-byte detection.
 - New `GetStream\Webhook` namespace alias (preferred); `GetStream\Generated\Webhook`
   retained as backward-compat alias. PSR-4 shim (`src/Webhook.php`) ensures the
   canonical name resolves on first touch.
-- New exception class: `GetStream\Exceptions\InvalidWebhookException` (unified —
-  covers signature mismatches, parse failures, decompression errors, etc.).
+- New exception class: `GetStream\Exceptions\InvalidWebhookException` (unified,
+  covering signature mismatches, parse failures, decompression errors, etc.).
 - New `GetStream\Models\UnknownEvent` class.
 - New instance methods on `GetStream\Client`: `verifySignature($body, $signature)`
-  and `verifyAndParseWebhook($body, $signature)` — drop the api_secret parameter
+  and `verifyAndParseWebhook($body, $signature)` that drop the api_secret parameter
   in favor of the client's stored secret. Dual API: static methods remain available.
 - New instance methods on `GetStream\Client`: `parseSqs(string $messageBody)`,
   `parseSns(string $notificationBody)` (no signature; AWS IAM).
