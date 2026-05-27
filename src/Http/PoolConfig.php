@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GetStream\Http;
 
 /**
- * Immutable value object for the 5 canonical HTTP connection-pool knobs (spec §4).
+ * Immutable value object for the 5 canonical HTTP connection-pool knobs.
  * Defaults: 5 conns/host, 55s idle, 10s connect, 30s request. KeepAlive is an
  * invariant (true). All durations are whole seconds.
  */

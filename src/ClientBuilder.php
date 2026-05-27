@@ -260,8 +260,8 @@ class ClientBuilder
 
     /**
      * Resolve the HttpClient. If the user supplied one via httpClient(),
-     * return it as-is (§7 escape hatch). Otherwise build a GuzzleHttpClient
-     * with the configured PoolConfig and emit the §8 INFO log.
+     * return it as-is (escape hatch). Otherwise build a GuzzleHttpClient
+     * with the configured PoolConfig and emit the INFO log.
      */
     private function resolveHttpClient(): HttpClientInterface
     {

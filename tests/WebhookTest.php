@@ -277,7 +277,7 @@ class WebhookTest extends TestCase
     }
 
     // -------------------------------------------------------------------------
-    // Spec §6 helpers + composites: parseEvent, gunzipPayload, decodeSqsPayload,
+    // Webhook helpers + composites: parseEvent, gunzipPayload, decodeSqsPayload,
     // decodeSnsPayload, verifyAndParseWebhook, parseSqs, parseSns.
     // -------------------------------------------------------------------------
 

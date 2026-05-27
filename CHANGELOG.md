@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `GetStream\Http\PoolConfig` immutable value object holding the 5 canonical knobs.
 - `HttpClientInterface::request()` gains an optional 5th `array $options = []` parameter
   for per-call overrides (e.g., `['timeout' => 2]`). Backward-compatible.
-- INFO log on `ClientBuilder::build()` listing the effective pool config (spec §8).
+- INFO log on `ClientBuilder::build()` listing the effective pool config.
   Emitted via `error_log()`; suppressed in PHPUnit runs.
 - `GuzzleHttpClient::getPoolConfig()` accessor for diagnostics.
 
@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `GuzzleHttpClient::__construct()` gains an optional 3rd `?PoolConfig $pool` parameter.
   Existing callsites continue to work unchanged.
 
-### PHP-FPM caveat (§9.1)
+### PHP-FPM caveat
 
 Under PHP-FPM and CLI scripts, the PHP process exits at the end of each request and
 the curl handle dies with it. `idleTimeout` and `maxConnsPerHost` are accepted on the
@@ -36,10 +36,8 @@ effect only in long-running PHP runtimes (Swoole, RoadRunner, ReactPHP, daemons)
 
 ### Out of scope
 
-- No env-var overrides (spec §3 defers this).
+- No env-var overrides.
 - No PSR-3 logger injection; INFO log goes through `error_log()`.
-
-[Spec](https://www.notion.so/stream-wiki/Server-Side-SDK-Connection-Pooling-Spec-3496a5d7f9f680749b8be9ee238ae108)
 
 ## [Unreleased]
 
@@ -67,8 +65,6 @@ effect only in long-running PHP runtimes (Swoole, RoadRunner, ReactPHP, daemons)
 ### Changed
 
 - No breaking changes.
-
-[Spec](https://www.notion.so/stream-wiki/Server-Side-SDK-Webhook-Handling-Spec-34b6a5d7f9f681e78003c443f227493c)
 
 ## [4.0.0] - 2026-03-05
 
