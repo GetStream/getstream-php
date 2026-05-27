@@ -20,10 +20,8 @@ interface HttpClientInterface
      * @param array  $headers Request headers
      * @param mixed  $body    Request body (will be JSON encoded if array)
      * @param array  $options Per-call options. Supported keys:
-     *                       - 'timeout' (int|float seconds): overrides the client's
-     *                         RequestTimeout for this single call.
-     *                       Implementations MAY accept additional keys but MUST
-     *                       silently ignore unknown ones.
+     *                       - 'timeout' (int|float seconds): overrides the client's RequestTimeout for this single call.
+     *                       Implementations MAY accept additional keys but MUST silently ignore unknown ones.
      *
      * @return StreamResponse<mixed>
      *

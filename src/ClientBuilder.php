@@ -259,9 +259,9 @@ class ClientBuilder
     }
 
     /**
-     * Resolve the HttpClient. If the user supplied one via httpClient(),
-     * return it as-is (escape hatch). Otherwise build a GuzzleHttpClient
-     * with the configured PoolConfig and emit the INFO log.
+     * Resolve the HttpClient.
+     * If the user supplied one via httpClient(), return it as-is (escape hatch).
+     * Otherwise build a GuzzleHttpClient with the configured PoolConfig and emit the INFO log.
      */
     private function resolveHttpClient(): HttpClientInterface
     {
@@ -288,8 +288,8 @@ class ClientBuilder
     }
 
     /**
-     * Emit one INFO log line via error_log(). Suppressed under PHPUnit to
-     * keep test output clean (PHPUNIT_RUNNING constant is set in phpunit.xml).
+     * Emit one INFO log line via error_log().
+     * Suppressed under PHPUnit to keep test output clean (PHPUNIT_RUNNING constant is set in phpunit.xml).
      */
     private function logInfo(string $message): void
     {

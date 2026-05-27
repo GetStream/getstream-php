@@ -43,16 +43,16 @@ class GuzzleHttpClient implements HttpClientInterface
             'http_errors' => false, // We'll handle errors ourselves
             'curl' => [
                 // Cap concurrent connections opened by curl's internal multi handle.
-                // IdleTimeout has no direct Guzzle/curl analogue; honored only in
-                // long-running runtimes. For PHP-FPM, idle sockets die with the
-                // request. See the PHP-FPM note in the README/CHANGELOG.
+                // IdleTimeout has no direct Guzzle/curl analogue; honored only in long-running runtimes.
+                // For PHP-FPM, idle sockets die with the request.
+                // See the PHP-FPM note in the README/CHANGELOG.
                 CURLOPT_MAXCONNECTS => $pool->maxConnsPerHost,
                 CURLOPT_FORBID_REUSE => 0, // explicit: allow connection reuse (KeepAlive invariant)
             ],
         ];
 
-        // User-supplied $config wins. array_replace_recursive preserves the
-        // user's curl array while filling in defaults we set above.
+        // User-supplied $config wins.
+        // array_replace_recursive preserves the user's curl array while filling in defaults we set above.
         $merged = array_replace_recursive($defaultConfig, $config);
 
         $this->client = new GuzzleClient($merged);
@@ -91,8 +91,8 @@ class GuzzleHttpClient implements HttpClientInterface
                 'headers' => $headers,
             ];
 
-            // Per-call overrides. 'timeout' is the canonical key; any
-            // other valid Guzzle key is also forwarded.
+            // Per-call overrides.
+            // 'timeout' is the canonical key; any other valid Guzzle key is also forwarded.
             foreach ($options as $key => $value) {
                 $requestOptions[$key] = $value;
             }
