@@ -42,10 +42,13 @@ class GuzzleHttpClient implements HttpClientInterface
             'connect_timeout' => $pool->connectTimeout,
             'http_errors' => false, // We'll handle errors ourselves
             'curl' => [
-                // Cap concurrent connections opened by curl's internal multi handle.
-                // IdleTimeout has no direct Guzzle/curl analogue; honored only in long-running runtimes.
-                // For PHP-FPM, idle sockets die with the request.
-                // See the PHP-FPM note in the README/CHANGELOG.
+                // Advisory only: CURLOPT_MAXCONNECTS sizes this single curl handle's own
+                // connection cache. Under Guzzle's default CurlHandler it does NOT enforce a
+                // hard per-host concurrency cap (in any runtime); a real cap needs a shared
+                // CurlMultiHandler with CURLMOPT_MAX_HOST_CONNECTIONS, which we do not wire.
+                // idleTimeout has no direct Guzzle/curl analogue; honored only in long-running
+                // runtimes. Under PHP-FPM idle sockets die with the request.
+                // See the pooling caveats in the README/CHANGELOG.
                 CURLOPT_MAXCONNECTS => $pool->maxConnsPerHost,
                 CURLOPT_FORBID_REUSE => 0, // explicit: allow connection reuse (KeepAlive invariant)
             ],

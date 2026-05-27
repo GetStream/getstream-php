@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Connection pool configuration on `ClientBuilder` ([CHA-2956](https://linear.app/stream/issue/CHA-2956/connection-pooling)). Four new chained methods, all `int` seconds:
-    * `maxConnsPerHost(int)`: default `5` (curl `CURLOPT_MAXCONNECTS`)
+    * `maxConnsPerHost(int)`: default `5` (advisory; sets curl `CURLOPT_MAXCONNECTS`, see caveat below)
     * `idleTimeout(int)`: default `55` (no-op under PHP-FPM, see caveat below)
     * `connectTimeout(int)`: default `10` (Guzzle `connect_timeout`)
     * `requestTimeout(int)`: default `30` (Guzzle `timeout`)
@@ -23,9 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `GuzzleHttpClient::__construct()` gains an optional 3rd `?PoolConfig $pool` parameter. Existing callsites continue to work unchanged.
 
-### PHP-FPM caveat
+### Pooling caveats
 
-Under PHP-FPM and CLI scripts, the PHP process exits at the end of each request and the curl handle dies with it. `idleTimeout` and `maxConnsPerHost` are accepted on the builder but have **no effect** on inter-request pooling in these runtimes. They take effect only in long-running PHP runtimes (Swoole, RoadRunner, ReactPHP, daemons).
+`idleTimeout` (PHP-FPM): under PHP-FPM and CLI scripts, the PHP process exits at the end of each request and the curl handle dies with it. `idleTimeout` is accepted on the builder but has **no effect** on inter-request pooling in these runtimes. It takes effect only in long-running PHP runtimes (Swoole, RoadRunner, ReactPHP, daemons).
+
+`maxConnsPerHost` (advisory, all runtimes): this sets curl `CURLOPT_MAXCONNECTS`, which only sizes a single curl handle's own connection cache. Under Guzzle's default `CurlHandler` it does **not** enforce a hard per-host concurrency cap, in any runtime. A real cap requires the consumer to supply a shared `GuzzleHttp\Handler\CurlMultiHandler` configured with `CURLMOPT_MAX_HOST_CONNECTIONS` (via `->httpClient(...)`); the SDK does not wire one by default.
 
 ### Out of scope
 

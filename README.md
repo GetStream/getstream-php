@@ -36,7 +36,7 @@ STREAM_BASE_URL=https://chat.stream-io-api.com
 $client = (new GetStream\ClientBuilder())
     ->apiKey($apiKey)
     ->apiSecret($apiSecret)
-    ->maxConnsPerHost(5)   // default 5
+    ->maxConnsPerHost(5)   // default 5 (advisory, see below)
     ->idleTimeout(55)      // default 55s (no-op under PHP-FPM, see below)
     ->connectTimeout(10)   // default 10s
     ->requestTimeout(30)   // default 30s
@@ -51,7 +51,11 @@ $response = $client->getHttpClient()->request(
 );
 ```
 
-**PHP-FPM caveat:** Under PHP-FPM and CLI scripts the curl handle dies with the request, so `idleTimeout` and `maxConnsPerHost` have no inter-request effect. They take effect in long-running runtimes (Swoole, RoadRunner, ReactPHP, daemons).
+Per-call `curl` overrides replace (do not merge with) the client-level `curl` options, since Guzzle unions options shallowly. Only `['timeout' => N]` is documented for per-call use.
+
+**`idleTimeout` (PHP-FPM caveat):** under PHP-FPM and CLI scripts the curl handle dies with the request, so `idleTimeout` has no inter-request effect. It takes effect in long-running runtimes (Swoole, RoadRunner, ReactPHP, daemons).
+
+**`maxConnsPerHost` (advisory):** this sets curl `CURLOPT_MAXCONNECTS`, which only sizes a single curl handle's own connection cache. Under Guzzle's default `CurlHandler` it does not enforce a hard per-host concurrency cap, in any runtime. For a real cap, supply your own client via `->httpClient(...)` backed by a shared `GuzzleHttp\Handler\CurlMultiHandler` configured with `CURLMOPT_MAX_HOST_CONNECTIONS`.
 
 **Escape hatch:** Passing your own client via `->httpClient($mine)` skips all 4 knobs; your client is used as-is.
 
