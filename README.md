@@ -53,7 +53,7 @@ $response = $client->getHttpClient()->request(
 
 **PHP-FPM caveat:** Under PHP-FPM and CLI scripts the curl handle dies with the request, so `idleTimeout` and `maxConnsPerHost` have no inter-request effect. They take effect in long-running runtimes (Swoole, RoadRunner, ReactPHP, daemons).
 
-**Escape hatch:** Passing your own client via `->httpClient($mine)` skips all 4 knobs — your client is used as-is.
+**Escape hatch:** Passing your own client via `->httpClient($mine)` skips all 4 knobs; your client is used as-is.
 
 ## Code Generation
 

@@ -270,7 +270,7 @@ class ClientBuilderTest extends TestCase
     {
         $mock = $this->createMock(HttpClientInterface::class);
 
-        // The mock must NEVER have request() called during build() — building
+        // The mock must NEVER have request() called during build(); building
         // should be a pure construction step, no probe requests.
         $mock->expects(self::never())->method('request');
 

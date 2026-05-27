@@ -10,10 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Connection pool configuration on `ClientBuilder` ([CHA-2956](https://linear.app/stream/issue/CHA-2956/connection-pooling)). Four new chained methods, all `int` seconds:
-    * `maxConnsPerHost(int)` — default `5` (curl `CURLOPT_MAXCONNECTS`)
-    * `idleTimeout(int)` — default `55` (no-op under PHP-FPM, see caveat below)
-    * `connectTimeout(int)` — default `10` (Guzzle `connect_timeout`)
-    * `requestTimeout(int)` — default `30` (Guzzle `timeout`)
+    * `maxConnsPerHost(int)` - default `5` (curl `CURLOPT_MAXCONNECTS`)
+    * `idleTimeout(int)` - default `55` (no-op under PHP-FPM, see caveat below)
+    * `connectTimeout(int)` - default `10` (Guzzle `connect_timeout`)
+    * `requestTimeout(int)` - default `30` (Guzzle `timeout`)
 - `GetStream\Http\PoolConfig` immutable value object holding the 5 canonical knobs.
 - `HttpClientInterface::request()` gains an optional 5th `array $options = []` parameter for per-call overrides (e.g., `['timeout' => 2]`). Backward-compatible.
 - INFO log on `ClientBuilder::build()` listing the effective pool config. Emitted via `error_log()`; suppressed in PHPUnit runs.
