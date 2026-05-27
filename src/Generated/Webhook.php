@@ -639,7 +639,7 @@ class Webhook
      * magic-byte detection decides whether to decompress.
      *
      * {@see self::parseSqs()} sits on top of this and works transparently for
-     * both wire formats — no caller code change, no flag, no header.
+     * both wire formats: no caller code change, no flag, no header.
      *
      * @throws InvalidWebhookException if gzip decompression fails (only when input has gzip magic prefix)
      */
@@ -647,7 +647,7 @@ class Webhook
     {
         $decoded = \base64_decode($messageBody, true);
         if ($decoded === false) {
-            // Not base64 — treat input as raw bytes (uncompressed wire format).
+            // Not base64, so treat input as raw bytes (uncompressed wire format).
             $decoded = $messageBody;
         }
         return self::gunzipPayload($decoded);
@@ -659,7 +659,7 @@ class Webhook
      * string flows through.
      *
      * Heuristic: try to JSON-parse the input. If it yields an array with a
-     * string 'Message' field, that's the envelope shape — return the Message.
+     * string 'Message' field, that's the envelope shape; return the Message.
      * Otherwise the input is presumed to BE the pre-extracted Message
      * (base64-encoded bytes are not valid JSON, so this falls through cleanly).
      */
