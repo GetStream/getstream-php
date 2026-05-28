@@ -24,7 +24,8 @@ use PHPUnit\Framework\TestCase;
  *  - StreamRateLimitException + Retry-After parsing (§5.2, §7)
  *  - StreamTransportException + errorType enum + cause chain (§5.3, §6.4)
  *  - cause-chain preservation on every wrap point (§6.4)
- *  - removal of the auto-retry-on-429 middleware (§7)
+ *  - preservation of PHP's auto-retry-on-429 middleware. A standardized retry
+ *    policy across all 6 SDKs is owned by CHA-2959 (Rate limits and retry).
  */
 class ErrorHandlingTest extends TestCase
 {
@@ -37,7 +38,9 @@ class ErrorHandlingTest extends TestCase
         $mock = new MockHandler($responses);
         $stack = HandlerStack::create($mock);
         $stack->push(Middleware::history($capturedHistory));
-        return new GuzzleHttpClient(['handler' => $stack]);
+        // maxRetries=0 keeps the no-retry tests fast and isolates the assertion
+        // surface. Retry behavior is covered by its own test below.
+        return new GuzzleHttpClient(['handler' => $stack], 0);
     }
 
     /** @test */
@@ -63,7 +66,10 @@ class ErrorHandlingTest extends TestCase
             self::fail('rate-limit subclass should not fire for status 400');
         } catch (StreamApiException $e) {
             self::assertSame(400, $e->getStatusCode());
-            self::assertSame(4, $e->getCode());
+            // getCode() preserves the pre-CHA-2958 behavior (HTTP status).
+            // The canonical APIError.code is exposed via getApiErrorCode().
+            self::assertSame(400, $e->getCode());
+            self::assertSame(4, $e->getApiErrorCode());
             self::assertSame('channel_id is required', $e->getMessage());
             self::assertSame(['channel_id' => 'is required'], $e->getExceptionFields());
             self::assertFalse($e->isUnrecoverable());
@@ -107,7 +113,8 @@ class ErrorHandlingTest extends TestCase
             self::fail('expected StreamApiException');
         } catch (StreamApiException $e) {
             self::assertSame(500, $e->getStatusCode());
-            self::assertSame(0, $e->getCode());
+            self::assertSame(500, $e->getCode(), 'getCode() returns HTTP status (back-compat)');
+            self::assertSame(0, $e->getApiErrorCode(), 'APIError.code is 0 on unparseable body');
             self::assertSame('failed to parse error response', $e->getMessage());
             self::assertSame('<<<not json>>>', $e->getRawResponseBody());
             self::assertNotNull($e->getPrevious(), 'cause chain must point to the JSON parse error');
@@ -179,30 +186,34 @@ class ErrorHandlingTest extends TestCase
     }
 
     /**
-     * Regression guard for §7: the SDK must NOT auto-retry on 429. A single
-     * 429 response is enough — the request must fail, not be re-attempted.
+     * PHP retains its existing auto-retry-on-429 middleware in the CHA-2958
+     * rollout. A uniform retry policy across all 6 SDKs is owned by CHA-2959.
+     * With maxRetries=2 and three 429 responses, the SDK must issue exactly
+     * three HTTP attempts (initial + 2 retries) and ultimately raise.
      *
      * @test
      */
-    public function rateLimitDoesNotAutoRetry(): void
+    public function rateLimitAutoRetriesUpToMaxRetries(): void
     {
         $history = [];
         $body = json_encode(['code' => 9, 'message' => 'rate limited']);
-        // If auto-retry were still wired, the MockHandler would run out of
-        // queued responses on the second attempt and Guzzle would raise.
-        $client = $this->makeClient(
-            [new GuzzleResponse(429, ['Content-Type' => 'application/json', 'Retry-After' => '1'], $body)],
-            $history,
-        );
+        $mock = new MockHandler([
+            new GuzzleResponse(429, ['Content-Type' => 'application/json', 'Retry-After' => '0'], $body),
+            new GuzzleResponse(429, ['Content-Type' => 'application/json', 'Retry-After' => '0'], $body),
+            new GuzzleResponse(429, ['Content-Type' => 'application/json', 'Retry-After' => '0'], $body),
+        ]);
+        $stack = HandlerStack::create($mock);
+        $stack->push(Middleware::history($history));
+        $client = new GuzzleHttpClient(['handler' => $stack], 2);
 
         try {
             $client->request('GET', 'https://example.invalid/api/v2/throttled');
-            self::fail('expected StreamRateLimitException on first 429');
+            self::fail('expected StreamRateLimitException after retries exhausted');
         } catch (StreamRateLimitException $e) {
-            self::assertSame(1, $e->getRetryAfter());
+            self::assertSame(0, $e->getRetryAfter());
         }
 
-        self::assertCount(1, $history, 'SDK must issue exactly one HTTP attempt on 429 (no auto-retry)');
+        self::assertCount(3, $history, 'SDK must issue maxRetries+1 attempts on persistent 429s');
     }
 
     /** @test */

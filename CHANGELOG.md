@@ -40,11 +40,11 @@ Under PHP-FPM (and one-shot CLI scripts) the PHP process exits at the end of eac
 
 ### Breaking behavior changes (no API rename)
 
-- **Auto-retry on HTTP 429 is REMOVED.** The Guzzle middleware that previously retried up to 3 times with `Retry-After`-aware sleep (`GuzzleHttpClient`'s old `$maxRetries=3` constructor parameter and the in-`request()` retry loop) has been deleted. The SDK now surfaces a single failure on the first 429. Inspect `StreamRateLimitException::getRetryAfter()` and compose your own retry policy (or use a middleware such as `guzzlehttp/retry-middleware`). Callers that were passing `maxRetries` as the second constructor argument to `GuzzleHttpClient` must remove that argument; `PoolConfig` moves into the second position. The `ClientBuilder` flow is unchanged for public callers.
 - **`StreamApiException` structured fields are reshaped to match the canonical `APIError` envelope.** The constructor signature changes: `(string $message, int $statusCode, int $code, array $exceptionFields, bool $unrecoverable, string $rawResponseBody, ?string $moreInfo, mixed $details, ?\Throwable $previous)`. Replaced accessors:
     * `getResponseBody(): ?string` → `getRawResponseBody(): string`
     * `getErrorDetails(): array` (non-canonical bag) → `getExceptionFields(): array<string,string>` (only the validation map from `exception_fields`)
-    * New: `isUnrecoverable(): bool`, `getMoreInfo(): ?string`, `getDetails(): mixed`. `getStatusCode()` and `getCode()` keep their existing semantics; `getCode()` now returns `APIError.code` (it previously aliased the HTTP status).
+    * New: `isUnrecoverable(): bool`, `getMoreInfo(): ?string`, `getDetails(): mixed`.
+    * `getStatusCode()` and `getCode()` keep their existing semantics — both return the HTTP status (back-compat with pre-CHA-2958 callers that branched on `$e->getCode() === 429`). The canonical `APIError.code` is exposed via the new `getApiErrorCode(): int`.
 
 ### Added
 

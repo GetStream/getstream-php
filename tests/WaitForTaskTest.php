@@ -35,7 +35,8 @@ class WaitForTaskTest extends TestCase
             $raw = (string) json_encode($payload);
             return new StreamResponse(200, self::HEADERS, $payload, $raw);
         });
-        return new TestableClient('key', 'secret', 'https://example.invalid', $http, $virtualNow);
+        // 32-byte secret to satisfy firebase/php-jwt's HS256 minimum key length.
+        return new TestableClient('key', str_repeat('s', 32), 'https://example.invalid', $http, $virtualNow);
     }
 
     /** @test */

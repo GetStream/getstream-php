@@ -11,12 +11,15 @@ namespace GetStream\Exceptions;
  *
  * Inherited from `\Exception`:
  *   getMessage(): string  — `APIError.message`
- *   getCode(): int        — `APIError.code` (NOT the HTTP status)
+ *   getCode(): int        — HTTP status code (back-compat with pre-CHA-2958).
+ *                           For the canonical `APIError.code`, call
+ *                           `getApiErrorCode()`.
  *   getPrevious(): ?\Throwable  — underlying cause (e.g. JSON parse error)
  */
 class StreamApiException extends StreamException
 {
     private int $statusCode;
+    private int $apiErrorCode;
     /** @var array<string, string> */
     private array $exceptionFields;
     private bool $unrecoverable;
@@ -26,8 +29,10 @@ class StreamApiException extends StreamException
 
     /**
      * @param string         $message         APIError.message
-     * @param int            $statusCode      HTTP status (e.g. 400, 404, 500)
-     * @param int            $code            APIError.code
+     * @param int            $statusCode      HTTP status (e.g. 400, 404, 500). Also
+     *                                        what `getCode()` returns (back-compat
+     *                                        with pre-CHA-2958).
+     * @param int            $code            APIError.code (read via `getApiErrorCode()`)
      * @param array<string, string> $exceptionFields APIError.exception_fields (empty when not validation)
      * @param bool           $unrecoverable   APIError.unrecoverable
      * @param string         $rawResponseBody Raw HTTP response body
@@ -46,8 +51,13 @@ class StreamApiException extends StreamException
         mixed $details = null,
         ?\Throwable $previous = null,
     ) {
-        parent::__construct($message, $code, $previous);
+        // Pass $statusCode (not $code) to the parent so `getCode()` keeps
+        // returning the HTTP status — preserves pre-CHA-2958 behavior for
+        // callers that branched on `$e->getCode() === 429` etc. The canonical
+        // `APIError.code` is exposed via `getApiErrorCode()`.
+        parent::__construct($message, $statusCode, $previous);
         $this->statusCode = $statusCode;
+        $this->apiErrorCode = $code;
         $this->exceptionFields = $exceptionFields;
         $this->unrecoverable = $unrecoverable;
         $this->rawResponseBody = $rawResponseBody;
@@ -58,6 +68,16 @@ class StreamApiException extends StreamException
     public function getStatusCode(): int
     {
         return $this->statusCode;
+    }
+
+    /**
+     * The canonical `APIError.code` from the Stream error envelope. Distinct
+     * from `getCode()` (which returns the HTTP status for back-compat) and
+     * from `getStatusCode()` (its alias).
+     */
+    public function getApiErrorCode(): int
+    {
+        return $this->apiErrorCode;
     }
 
     /**

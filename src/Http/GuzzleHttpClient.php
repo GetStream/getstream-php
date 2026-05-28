@@ -25,16 +25,21 @@ class GuzzleHttpClient implements HttpClientInterface
 {
     private GuzzleClient $client;
 
+    /** Maximum number of retries for rate-limited (429) responses. */
+    private int $maxRetries;
+
     /** @var PoolConfig Effective pool configuration (kept for diagnostics). */
     private PoolConfig $pool;
 
     /**
      * Create a new GuzzleHttpClient.
      *
-     * @param array            $config Guzzle client configuration (wins over $pool defaults)
-     * @param PoolConfig|null  $pool   Connection pool configuration. When null, spec defaults apply.
+     * @param array            $config     Guzzle client configuration (wins over $pool defaults)
+     * @param int              $maxRetries Maximum retries for 429 rate-limit responses (default 3).
+     *                                     A standardized cross-SDK retry policy is owned by CHA-2959.
+     * @param PoolConfig|null  $pool       Connection pool configuration. When null, spec defaults apply.
      */
-    public function __construct(array $config = [], ?PoolConfig $pool = null)
+    public function __construct(array $config = [], int $maxRetries = 3, ?PoolConfig $pool = null)
     {
         $pool = $pool ?? new PoolConfig();
 
@@ -80,6 +85,7 @@ class GuzzleHttpClient implements HttpClientInterface
         $merged = array_replace_recursive($defaultConfig, $config);
 
         $this->client = new GuzzleClient($merged);
+        $this->maxRetries = $maxRetries;
         $this->pool = $pool;
     }
 
@@ -132,34 +138,49 @@ class GuzzleHttpClient implements HttpClientInterface
             }
         }
 
-        try {
-            $response = $this->client->request($method, $url, $requestOptions);
-        } catch (ClientException | ServerException $e) {
-            // Reachable only if a caller flipped `http_errors` back to true.
-            $response = $e->getResponse();
-            if ($response === null) {
+        // Retry loop for rate-limited (429) responses. The spec (§7) keeps
+        // this behavior in place for the CHA-2958 rollout; a uniform retry
+        // policy across all 6 SDKs is owned by CHA-2959.
+        for ($attempt = 0;; $attempt++) {
+            try {
+                $response = $this->client->request($method, $url, $requestOptions);
+            } catch (ClientException | ServerException $e) {
+                // Reachable only if a caller flipped `http_errors` back to true.
+                $response = $e->getResponse();
+                if ($response === null) {
+                    throw new StreamTransportException(
+                        $e->getMessage(),
+                        StreamTransportException::ERROR_TYPE_UNKNOWN,
+                        $e,
+                    );
+                }
+                return $this->createStreamResponse($response, $e);
+            } catch (ConnectException $e) {
+                throw new StreamTransportException(
+                    $e->getMessage(),
+                    self::mapConnectErrorType($e),
+                    $e,
+                );
+            } catch (GuzzleException $e) {
                 throw new StreamTransportException(
                     $e->getMessage(),
                     StreamTransportException::ERROR_TYPE_UNKNOWN,
                     $e,
                 );
             }
-            return $this->createStreamResponse($response, $e);
-        } catch (ConnectException $e) {
-            throw new StreamTransportException(
-                $e->getMessage(),
-                self::mapConnectErrorType($e),
-                $e,
-            );
-        } catch (GuzzleException $e) {
-            throw new StreamTransportException(
-                $e->getMessage(),
-                StreamTransportException::ERROR_TYPE_UNKNOWN,
-                $e,
-            );
-        }
 
-        return $this->createStreamResponse($response);
+            if ($response->getStatusCode() !== 429 || $attempt >= $this->maxRetries) {
+                return $this->createStreamResponse($response);
+            }
+
+            // Parse Retry-After header or use exponential backoff. Jitter
+            // desynchronizes parallel test processes to avoid stampedes.
+            $retryAfter = $response->getHeaderLine('Retry-After');
+            $sleepSeconds = $retryAfter !== '' ? (int) $retryAfter : ($attempt + 1);
+            $sleepSeconds = min($sleepSeconds, 10);
+            $jitter = random_int(0, max(1, (int) round($sleepSeconds * 0.3)));
+            sleep($sleepSeconds + $jitter);
+        }
     }
 
     /**
