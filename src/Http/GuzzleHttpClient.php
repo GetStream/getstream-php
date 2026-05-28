@@ -11,6 +11,8 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Handler\CurlMultiHandler;
+use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -37,25 +39,45 @@ class GuzzleHttpClient implements HttpClientInterface
     {
         $pool = $pool ?? new PoolConfig();
 
+        // Persistent multi handle: routes every request (sync and async) through one
+        // libcurl multi handle that holds a connection pool for the lifetime of this
+        // GuzzleHttpClient instance. CURLMOPT_MAX_HOST_CONNECTIONS is a real per-host
+        // concurrency cap inside the multi handle; CURLMOPT_MAXCONNECTS sizes the
+        // multi handle's overall connection cache. Pooling takes effect only when this
+        // instance is reused across requests (long-running runtimes: Swoole, RoadRunner,
+        // ReactPHP, CLI daemons). Under PHP-FPM the PHP process exits per request and
+        // the multi handle dies with it; the per-call request/connect timeouts still
+        // apply but there is no cross-request connection reuse.
+        $multi = new CurlMultiHandler([
+            'options' => [
+                CURLMOPT_MAX_HOST_CONNECTIONS => $pool->maxConnsPerHost,
+                CURLMOPT_MAXCONNECTS => $pool->maxConnsPerHost,
+            ],
+        ]);
+        $defaultHandler = HandlerStack::create($multi);
+
+        $curlOptions = [
+            CURLOPT_FORBID_REUSE => 0, // KeepAlive invariant: allow connection reuse.
+        ];
+        // CURLOPT_MAXLIFETIME_CONN (libcurl >= 7.80.0) caps how long a pooled connection
+        // can be reused since it was created. We use it to recycle connections ahead of
+        // the upstream load balancer's idle close window. If the constant is not present
+        // on this PHP build, pooling still works without active lifetime capping.
+        if (defined('CURLOPT_MAXLIFETIME_CONN')) {
+            $curlOptions[\constant('CURLOPT_MAXLIFETIME_CONN')] = $pool->idleTimeout;
+        }
+
         $defaultConfig = [
             'timeout' => $pool->requestTimeout,
             'connect_timeout' => $pool->connectTimeout,
-            'http_errors' => false, // We'll handle errors ourselves
-            'curl' => [
-                // Advisory only: CURLOPT_MAXCONNECTS sizes this single curl handle's own
-                // connection cache. Under Guzzle's default CurlHandler it does NOT enforce a
-                // hard per-host concurrency cap (in any runtime); a real cap needs a shared
-                // CurlMultiHandler with CURLMOPT_MAX_HOST_CONNECTIONS, which we do not wire.
-                // idleTimeout has no direct Guzzle/curl analogue; honored only in long-running
-                // runtimes. Under PHP-FPM idle sockets die with the request.
-                // See the pooling caveats in the README/CHANGELOG.
-                CURLOPT_MAXCONNECTS => $pool->maxConnsPerHost,
-                CURLOPT_FORBID_REUSE => 0, // explicit: allow connection reuse (KeepAlive invariant)
-            ],
+            'http_errors' => false, // We handle errors ourselves.
+            'handler' => $defaultHandler,
+            'curl' => $curlOptions,
         ];
 
-        // User-supplied $config wins.
-        // array_replace_recursive preserves the user's curl array while filling in defaults we set above.
+        // User-supplied $config wins. array_replace_recursive lets callers override the
+        // handler (used by tests with MockHandler) or extend the curl options without
+        // wiping our defaults.
         $merged = array_replace_recursive($defaultConfig, $config);
 
         $this->client = new GuzzleClient($merged);

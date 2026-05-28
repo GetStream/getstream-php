@@ -46,7 +46,11 @@ class GuzzleHttpClientPoolTest extends TestCase
         $opts = $this->history[0]['options'];
         self::assertSame(25, $opts['timeout'] ?? null);
         self::assertSame(4, $opts['connect_timeout'] ?? null);
-        self::assertSame(8, $opts['curl'][CURLOPT_MAXCONNECTS] ?? null);
+        // idleTimeout is enforced via libcurl's per-connection lifetime cap (CURLOPT_MAXLIFETIME_CONN).
+        // Available since libcurl 7.80.0; if the constant is unavailable, pooling still works without it.
+        if (defined('CURLOPT_MAXLIFETIME_CONN')) {
+            self::assertSame(40, $opts['curl'][\constant('CURLOPT_MAXLIFETIME_CONN')] ?? null);
+        }
     }
 
     /** @test */
@@ -58,7 +62,33 @@ class GuzzleHttpClientPoolTest extends TestCase
         $opts = $this->history[0]['options'];
         self::assertSame(30, $opts['timeout'] ?? null);
         self::assertSame(10, $opts['connect_timeout'] ?? null);
-        self::assertSame(5, $opts['curl'][CURLOPT_MAXCONNECTS] ?? null);
+        if (defined('CURLOPT_MAXLIFETIME_CONN')) {
+            self::assertSame(55, $opts['curl'][\constant('CURLOPT_MAXLIFETIME_CONN')] ?? null);
+        }
+    }
+
+    /** @test */
+    public function defaultHandlerIsPersistentCurlMultiHandler(): void
+    {
+        // When no handler is supplied, the default stack must wrap a CurlMultiHandler
+        // so the per-host connection cap (CURLMOPT_MAX_HOST_CONNECTIONS) is real
+        // across requests in long-running runtimes.
+        $sdk = new GuzzleHttpClient([], 0, new PoolConfig());
+
+        $clientProp = (new \ReflectionObject($sdk))->getProperty('client');
+        $clientProp->setAccessible(true);
+        $guzzle = $clientProp->getValue($sdk);
+
+        $configProp = (new \ReflectionObject($guzzle))->getProperty('config');
+        $configProp->setAccessible(true);
+        $config = $configProp->getValue($guzzle);
+
+        self::assertInstanceOf(HandlerStack::class, $config['handler']);
+
+        $stack = $config['handler'];
+        $handlerProp = (new \ReflectionObject($stack))->getProperty('handler');
+        $handlerProp->setAccessible(true);
+        self::assertInstanceOf(\GuzzleHttp\Handler\CurlMultiHandler::class, $handlerProp->getValue($stack));
     }
 
     /** @test */

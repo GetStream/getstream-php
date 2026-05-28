@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Connection pool configuration on `ClientBuilder` ([CHA-2956](https://linear.app/stream/issue/CHA-2956/connection-pooling)). Four new chained methods, all `int` seconds:
-    * `maxConnsPerHost(int)`: default `5` (advisory; sets curl `CURLOPT_MAXCONNECTS`, see caveat below)
-    * `idleTimeout(int)`: default `55` (no-op under PHP-FPM, see caveat below)
+    * `maxConnsPerHost(int)`: default `5` (per-host concurrency cap via curl `CURLMOPT_MAX_HOST_CONNECTIONS` on a persistent multi handle; effective in long-running PHP runtimes)
+    * `idleTimeout(int)`: default `55` (per-connection lifetime cap via `CURLOPT_MAXLIFETIME_CONN`; effective in long-running PHP runtimes; requires libcurl 7.80.0 or later)
     * `connectTimeout(int)`: default `10` (Guzzle `connect_timeout`)
     * `requestTimeout(int)`: default `30` (Guzzle `timeout`)
 - `GetStream\Http\PoolConfig` immutable value object holding the 5 canonical knobs.
@@ -25,9 +25,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Pooling caveats
 
-`idleTimeout` (PHP-FPM): under PHP-FPM and CLI scripts, the PHP process exits at the end of each request and the curl handle dies with it. `idleTimeout` is accepted on the builder but has **no effect** on inter-request pooling in these runtimes. It takes effect only in long-running PHP runtimes (Swoole, RoadRunner, ReactPHP, daemons).
+`maxConnsPerHost` and `idleTimeout` are enforced via libcurl's multi-handle pool (`CURLMOPT_MAX_HOST_CONNECTIONS`) and connection lifetime cap (`CURLOPT_MAXLIFETIME_CONN`). They take effect only when the SDK client is reused across requests within a single PHP process: long-running runtimes such as Swoole, RoadRunner, ReactPHP, and CLI daemons. Instantiate the SDK client once and reuse it.
 
-`maxConnsPerHost` (advisory, all runtimes): this sets curl `CURLOPT_MAXCONNECTS`, which only sizes a single curl handle's own connection cache. Under Guzzle's default `CurlHandler` it does **not** enforce a hard per-host concurrency cap, in any runtime. A real cap requires the consumer to supply a shared `GuzzleHttp\Handler\CurlMultiHandler` configured with `CURLMOPT_MAX_HOST_CONNECTIONS` (via `->httpClient(...)`); the SDK does not wire one by default.
+Under PHP-FPM (and one-shot CLI scripts) the PHP process exits at the end of each request, taking the multi handle and any pooled connections with it. The per-call request and connect timeouts still apply; pool sizing and idle cycling have no cross-request effect because there is nothing to keep alive between requests.
+
+`CURLOPT_MAXLIFETIME_CONN` requires libcurl 7.80.0 (Nov 2021) or later. If your PHP build links against an older libcurl, pooling still works without active lifetime cycling.
 
 ### Out of scope
 
