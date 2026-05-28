@@ -30,7 +30,6 @@ class GuzzleHttpClientPoolTest extends TestCase
 
         return new GuzzleHttpClient(
             array_merge(['handler' => $stack], $extraConfig),
-            0,
             $pool,
         );
     }
@@ -73,7 +72,7 @@ class GuzzleHttpClientPoolTest extends TestCase
         // When no handler is supplied, the default stack must wrap a CurlMultiHandler
         // so the per-host connection cap (CURLMOPT_MAX_HOST_CONNECTIONS) is real
         // across requests in long-running runtimes.
-        $sdk = new GuzzleHttpClient([], 0, new PoolConfig());
+        $sdk = new GuzzleHttpClient([], new PoolConfig());
 
         $clientProp = (new \ReflectionObject($sdk))->getProperty('client');
         $clientProp->setAccessible(true);

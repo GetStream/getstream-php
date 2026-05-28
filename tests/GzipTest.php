@@ -67,7 +67,7 @@ class GzipTest extends TestCase
         $stack->push(self::decodingMiddleware());
         $stack->push(Middleware::history($capturedHistory));
 
-        return new GuzzleHttpClient(['handler' => $stack], 0);
+        return new GuzzleHttpClient(['handler' => $stack]);
     }
 
     /**

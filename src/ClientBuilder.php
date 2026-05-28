@@ -278,7 +278,7 @@ class ClientBuilder
             return $user;
         }
 
-        $client = new GuzzleHttpClient([], 3, $this->pool);
+        $client = new GuzzleHttpClient([], $this->pool);
 
         $this->logInfo(sprintf(
             'getstream-php connection pool: max_conns_per_host=%d idle_timeout=%ds connect_timeout=%ds request_timeout=%ds user_http_client=false',

@@ -6,6 +6,8 @@ namespace GetStream;
 
 use GetStream\Auth\JWTGenerator;
 use GetStream\Exceptions\StreamException;
+use GetStream\Exceptions\StreamTaskException;
+use GetStream\Exceptions\StreamTransportException;
 use GetStream\Generated\CommonTrait;
 use GetStream\Http\GuzzleHttpClient;
 use GetStream\Http\HttpClientInterface;
@@ -273,5 +275,67 @@ class Client
         $requestData = ['users' => $users];
 
         return $this->makeRequest('POST', $path, [], $requestData);
+    }
+
+    /**
+     * Poll the task-status endpoint until the task settles into `completed`,
+     * settles into `failed`, or the timeout elapses.
+     *
+     * @param string $taskId             Task ID returned by an async operation
+     * @param int    $pollIntervalSeconds Delay between polls (default 1s)
+     * @param int    $timeoutSeconds      Maximum total wait (default 60s)
+     *
+     * @return GeneratedModels\GetTaskResponse Settled task payload
+     *
+     * @throws StreamTaskException       On task `status: "failed"`
+     * @throws StreamTransportException  When polling does not settle before $timeoutSeconds
+     * @throws StreamException           Propagated from the underlying poll request
+     */
+    public function waitForTask(
+        string $taskId,
+        int $pollIntervalSeconds = 1,
+        int $timeoutSeconds = 60,
+    ): GeneratedModels\GetTaskResponse {
+        $deadline = $this->now() + $timeoutSeconds;
+        $pollMicros = max(0, $pollIntervalSeconds) * 1_000_000;
+
+        while (true) {
+            $response = $this->getTask($taskId);
+            /** @var GeneratedModels\GetTaskResponse $task */
+            $task = $response->getData();
+
+            if ($task->status === 'completed') {
+                return $task;
+            }
+
+            if ($task->status === 'failed') {
+                $error = $task->error;
+                throw new StreamTaskException(
+                    $task->taskID ?? $taskId,
+                    $error?->type ?? '',
+                    $error?->description ?? '',
+                    $error?->stacktrace ?? null,
+                    $error?->version ?? null,
+                );
+            }
+
+            if ($this->now() >= $deadline) {
+                throw new StreamTransportException(
+                    sprintf('waitForTask: timed out after %ds (task %s status=%s)', $timeoutSeconds, $taskId, $task->status ?? 'unknown'),
+                    StreamTransportException::ERROR_TYPE_TIMEOUT,
+                    new \RuntimeException('waitForTask deadline exceeded'),
+                );
+            }
+
+            usleep($pollMicros);
+        }
+    }
+
+    /**
+     * Override hook for tests that need a deterministic clock.
+     */
+    protected function now(): int
+    {
+        return time();
     }
 }

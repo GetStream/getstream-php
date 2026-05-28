@@ -75,7 +75,7 @@ class LiveIntegrationTest extends TestCase
             echo "✅ Activity added with ID: {$data['id']}\n";
         } catch (StreamApiException $e) {
             echo "❌ API Error: {$e->getMessage()} (Status: {$e->getStatusCode()})\n";
-            echo "Response: {$e->getResponseBody()}\n";
+            echo "Response: {$e->getRawResponseBody()}\n";
             self::fail('API call failed');
         }
     }
