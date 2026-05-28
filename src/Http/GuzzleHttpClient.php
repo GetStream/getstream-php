@@ -146,15 +146,9 @@ class GuzzleHttpClient implements HttpClientInterface
                 $response = $this->client->request($method, $url, $requestOptions);
             } catch (ClientException | ServerException $e) {
                 // Reachable only if a caller flipped `http_errors` back to true.
-                $response = $e->getResponse();
-                if ($response === null) {
-                    throw new StreamTransportException(
-                        $e->getMessage(),
-                        StreamTransportException::ERROR_TYPE_UNKNOWN,
-                        $e,
-                    );
-                }
-                return $this->createStreamResponse($response, $e);
+                // BadResponseException always carries a response, so PHPStan
+                // proves $e->getResponse() is non-null here.
+                return $this->createStreamResponse($e->getResponse(), $e);
             } catch (ConnectException $e) {
                 throw new StreamTransportException(
                     $e->getMessage(),
