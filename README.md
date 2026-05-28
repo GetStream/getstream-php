@@ -30,6 +30,33 @@ STREAM_API_SECRET=your_api_secret_here
 STREAM_BASE_URL=https://chat.stream-io-api.com
 ```
 
+## Connection Pool Tuning
+
+```php
+$client = (new GetStream\ClientBuilder())
+    ->apiKey($apiKey)
+    ->apiSecret($apiSecret)
+    ->maxConnsPerHost(5)   // default 5 (per-host concurrency cap, see runtime caveats)
+    ->idleTimeout(55)      // default 55s (per-connection lifetime cap, see runtime caveats)
+    ->connectTimeout(10)   // default 10s
+    ->requestTimeout(30)   // default 30s
+    ->build();
+```
+
+**Per-call timeout override:**
+
+```php
+$response = $client->getHttpClient()->request(
+    'GET', $url, $headers, null, ['timeout' => 2]
+);
+```
+
+Per-call `curl` overrides replace (do not merge with) the client-level `curl` options, since Guzzle unions options shallowly. Only `['timeout' => N]` is documented for per-call use.
+
+**Runtime caveats.** `maxConnsPerHost` and `idleTimeout` are enforced via libcurl's persistent multi-handle pool (`CURLMOPT_MAX_HOST_CONNECTIONS` and `CURLOPT_MAXLIFETIME_CONN`). They take effect only when the SDK client is reused across requests within a single PHP process: long-running runtimes such as Swoole, RoadRunner, ReactPHP, and CLI daemons. Instantiate the SDK client once and reuse it. Under PHP-FPM (and one-shot CLI scripts) the PHP process exits at the end of each request, so there is no cross-request pool to size; the per-call request and connect timeouts still apply. `idleTimeout` requires libcurl 7.80.0 (Nov 2021) or later; pooling still works without it on older builds, just without active lifetime cycling.
+
+**Escape hatch:** Passing your own client via `->httpClient($mine)` skips all 4 knobs; your client is used as-is.
+
 ## Code Generation
 
 Generate API methods from OpenAPI spec:

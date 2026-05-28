@@ -231,10 +231,64 @@ class ClientBuilderTest extends TestCase
             ->apiKey('test')
             ->apiSecret('test')
             ->baseUrl('test')
+            ->maxConnsPerHost(5)
+            ->idleTimeout(55)
+            ->connectTimeout(10)
+            ->requestTimeout(30)
             ->httpClient($this->mockHttpClient)
             ->skipEnvLoad()
             ->envPath('/test/path');
 
         self::assertSame($builder, $result);
+    }
+
+    /** @test */
+    public function poolConfigKnobsAreChained(): void
+    {
+        $client = (new ClientBuilder())
+            ->apiKey('k')
+            ->apiSecret('s')
+            ->maxConnsPerHost(12)
+            ->idleTimeout(40)
+            ->connectTimeout(4)
+            ->requestTimeout(25)
+            ->skipEnvLoad()
+            ->build();
+
+        $http = $client->getHttpClient();
+        self::assertInstanceOf(\GetStream\Http\GuzzleHttpClient::class, $http);
+
+        $pool = $http->getPoolConfig();
+        self::assertSame(12, $pool->maxConnsPerHost);
+        self::assertSame(40, $pool->idleTimeout);
+        self::assertSame(4, $pool->connectTimeout);
+        self::assertSame(25, $pool->requestTimeout);
+    }
+
+    /** @test */
+    public function userSuppliedHttpClientBypassesBuild(): void
+    {
+        $mock = $this->createMock(HttpClientInterface::class);
+
+        // The mock must NEVER have request() called during build(); building
+        // should be a pure construction step, no probe requests.
+        $mock->expects(self::never())->method('request');
+
+        $client = (new ClientBuilder())
+            ->apiKey('k')
+            ->apiSecret('s')
+            ->maxConnsPerHost(99)
+            ->idleTimeout(99)
+            ->connectTimeout(99)
+            ->requestTimeout(99)
+            ->httpClient($mock)
+            ->skipEnvLoad()
+            ->build();
+
+        // Identity check: the user's exact instance comes back unwrapped.
+        self::assertSame($mock, $client->getHttpClient());
+
+        // And it is NOT a GuzzleHttpClient (no pool config is applied to it).
+        self::assertNotInstanceOf(\GetStream\Http\GuzzleHttpClient::class, $client->getHttpClient());
     }
 }

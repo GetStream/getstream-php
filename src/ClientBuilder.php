@@ -6,7 +6,9 @@ namespace GetStream;
 
 use Dotenv\Dotenv;
 use GetStream\Exceptions\StreamException;
+use GetStream\Http\GuzzleHttpClient;
 use GetStream\Http\HttpClientInterface;
+use GetStream\Http\PoolConfig;
 
 /**
  * Builder class for creating GetStream clients with environment variable support.
@@ -19,6 +21,12 @@ class ClientBuilder
     private ?HttpClientInterface $httpClient = null;
     private bool $loadEnv = true;
     private ?string $envPath = null;
+    private PoolConfig $pool;
+
+    public function __construct()
+    {
+        $this->pool = new PoolConfig();
+    }
 
     /**
      * Set the API key.
@@ -56,6 +64,50 @@ class ClientBuilder
     public function httpClient(HttpClientInterface $httpClient): self
     {
         $this->httpClient = $httpClient;
+
+        return $this;
+    }
+
+    /**
+     * Advisory hint for per-host connections. Default: 5. Ignored when httpClient() is used.
+     * Sets curl CURLOPT_MAXCONNECTS (a single curl handle's connection-cache size); under Guzzle's
+     * default CurlHandler this does not enforce a hard per-host concurrency cap in any runtime.
+     */
+    public function maxConnsPerHost(int $n): self
+    {
+        $this->pool = $this->pool->withMaxConnsPerHost($n);
+
+        return $this;
+    }
+
+    /**
+     * Idle connection lifetime in seconds. Default: 55.
+     * No-op under PHP-FPM (curl handle dies with the request); honored in long-running runtimes.
+     * Ignored when httpClient() is used.
+     */
+    public function idleTimeout(int $seconds): self
+    {
+        $this->pool = $this->pool->withIdleTimeout($seconds);
+
+        return $this;
+    }
+
+    /** TCP + TLS handshake cap in seconds (Guzzle `connect_timeout`). Default: 10. Ignored when httpClient() is used. */
+    public function connectTimeout(int $seconds): self
+    {
+        $this->pool = $this->pool->withConnectTimeout($seconds);
+
+        return $this;
+    }
+
+    /**
+     * Default per-request timeout in seconds (Guzzle `timeout`). Default: 30.
+     * Per-call override: pass `['timeout' => N]` as the 5th arg of HttpClientInterface::request().
+     * Ignored when httpClient() is used.
+     */
+    public function requestTimeout(int $seconds): self
+    {
+        $this->pool = $this->pool->withRequestTimeout($seconds);
 
         return $this;
     }
@@ -102,7 +154,7 @@ class ClientBuilder
     {
         $this->loadCreds();
 
-        return new Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+        return new Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->resolveHttpClient());
     }
 
     /**
@@ -112,7 +164,7 @@ class ClientBuilder
     {
         $this->loadCreds();
 
-        return new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+        return new FeedsV3Client($this->apiKey, $this->apiSecret, $this->baseUrl, $this->resolveHttpClient());
     }
 
     /**
@@ -122,7 +174,7 @@ class ClientBuilder
     {
         $this->loadCreds();
 
-        return new ChatClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+        return new ChatClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->resolveHttpClient());
     }
 
     /**
@@ -132,7 +184,7 @@ class ClientBuilder
     {
         $this->loadCreds();
 
-        return new VideoClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+        return new VideoClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->resolveHttpClient());
     }
 
     /**
@@ -142,7 +194,7 @@ class ClientBuilder
     {
         $this->loadCreds();
 
-        return new ModerationClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->httpClient);
+        return new ModerationClient($this->apiKey, $this->apiSecret, $this->baseUrl, $this->resolveHttpClient());
     }
 
     public function loadCreds(): void
@@ -208,5 +260,46 @@ class ClientBuilder
         $value = $_ENV[$name] ?? $_SERVER[$name] ?? getenv($name);
 
         return $value !== false ? $value : null;
+    }
+
+    /**
+     * Resolve the HttpClient.
+     * If the user supplied one via httpClient(), return it as-is (escape hatch).
+     * Otherwise build a GuzzleHttpClient with the configured PoolConfig and emit the INFO log.
+     */
+    private function resolveHttpClient(): HttpClientInterface
+    {
+        $user = $this->httpClient;
+        if ($user !== null) {
+            $this->logInfo(
+                'getstream-php connection pool: user_http_client=true (5 knobs not applied)'
+            );
+
+            return $user;
+        }
+
+        $client = new GuzzleHttpClient([], 3, $this->pool);
+
+        $this->logInfo(sprintf(
+            'getstream-php connection pool: max_conns_per_host=%d idle_timeout=%ds connect_timeout=%ds request_timeout=%ds user_http_client=false',
+            $this->pool->maxConnsPerHost,
+            $this->pool->idleTimeout,
+            $this->pool->connectTimeout,
+            $this->pool->requestTimeout,
+        ));
+
+        return $client;
+    }
+
+    /**
+     * Emit one INFO log line via error_log().
+     * Suppressed under PHPUnit to keep test output clean (PHPUNIT_RUNNING constant is set in phpunit.xml).
+     */
+    private function logInfo(string $message): void
+    {
+        if (defined('PHPUNIT_RUNNING') && PHPUNIT_RUNNING) {
+            return;
+        }
+        error_log('[INFO] ' . $message);
     }
 }
