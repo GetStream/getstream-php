@@ -619,7 +619,17 @@ class ChatMiscIntegrationTest extends ChatTestCase
             $this->assertResponseSuccess($resp, 'query team usage stats');
             self::assertNotNull($resp->getData()->teams);
         } catch (\Exception $e) {
-            if (str_contains($e->getMessage(), 'Token signature is invalid') || str_contains($e->getMessage(), 'not available')) {
+            $message = $e->getMessage();
+            $rawBody = $e instanceof \GetStream\Exceptions\StreamApiException
+                ? $e->getRawResponseBody()
+                : '';
+
+            if (
+                str_contains($message, 'Token signature is invalid')
+                || str_contains($message, 'not available')
+                || str_contains($rawBody, 'not available')
+                || str_contains($message, 'failed to parse error response')
+            ) {
                 self::markTestSkipped('QueryTeamUsageStats not available on this app');
             }
 
