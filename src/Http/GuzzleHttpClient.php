@@ -36,7 +36,6 @@ class GuzzleHttpClient implements HttpClientInterface
      *
      * @param array            $config     Guzzle client configuration (wins over $pool defaults)
      * @param int              $maxRetries Maximum retries for 429 rate-limit responses (default 3).
-     *                                     A standardized cross-SDK retry policy is owned by CHA-2959.
      * @param PoolConfig|null  $pool       Connection pool configuration. When null, spec defaults apply.
      */
     public function __construct(array $config = [], int $maxRetries = 3, ?PoolConfig $pool = null)
@@ -138,16 +137,12 @@ class GuzzleHttpClient implements HttpClientInterface
             }
         }
 
-        // Retry loop for rate-limited (429) responses. The spec (§7) keeps
-        // this behavior in place for the CHA-2958 rollout; a uniform retry
-        // policy across all 6 SDKs is owned by CHA-2959.
+        // Retry loop for rate-limited (429) responses.
         for ($attempt = 0;; $attempt++) {
             try {
                 $response = $this->client->request($method, $url, $requestOptions);
             } catch (ClientException | ServerException $e) {
                 // Reachable only if a caller flipped `http_errors` back to true.
-                // BadResponseException always carries a response, so PHPStan
-                // proves $e->getResponse() is non-null here.
                 return $this->createStreamResponse($e->getResponse(), $e);
             } catch (ConnectException $e) {
                 throw new StreamTransportException(
@@ -233,8 +228,8 @@ class GuzzleHttpClient implements HttpClientInterface
 
     /**
      * Build a StreamApiException (or StreamRateLimitException for 429) from a
-     * non-2xx response. Falls back to the §6.3 "unparseable error response"
-     * shape when the body is not a valid APIError envelope.
+     * non-2xx response. Falls back to a sentinel-message StreamApiException
+     * when the body is not a valid APIError envelope.
      */
     private function buildApiException(
         int $statusCode,
@@ -280,7 +275,7 @@ class GuzzleHttpClient implements HttpClientInterface
         }
 
         if (!$parsedEnvelope) {
-            // §6.3: HTTP layer succeeded, body is unparseable as APIError.
+            // HTTP layer succeeded, body is unparseable as APIError.
             $message = 'failed to parse error response';
         }
 

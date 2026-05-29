@@ -11,7 +11,7 @@ namespace GetStream\Exceptions;
  *
  * Inherited from `\Exception`:
  *   getMessage(): string  — `APIError.message`
- *   getCode(): int        — HTTP status code (back-compat with pre-CHA-2958).
+ *   getCode(): int        — HTTP status code.
  *                           For the canonical `APIError.code`, call
  *                           `getApiErrorCode()`.
  *   getPrevious(): ?\Throwable  — underlying cause (e.g. JSON parse error)
@@ -30,8 +30,7 @@ class StreamApiException extends StreamException
     /**
      * @param string         $message         APIError.message
      * @param int            $statusCode      HTTP status (e.g. 400, 404, 500). Also
-     *                                        what `getCode()` returns (back-compat
-     *                                        with pre-CHA-2958).
+     *                                        what `getCode()` returns.
      * @param int            $code            APIError.code (read via `getApiErrorCode()`)
      * @param array<string, string> $exceptionFields APIError.exception_fields (empty when not validation)
      * @param bool           $unrecoverable   APIError.unrecoverable
@@ -51,10 +50,9 @@ class StreamApiException extends StreamException
         mixed $details = null,
         ?\Throwable $previous = null,
     ) {
-        // Pass $statusCode (not $code) to the parent so `getCode()` keeps
-        // returning the HTTP status — preserves pre-CHA-2958 behavior for
-        // callers that branched on `$e->getCode() === 429` etc. The canonical
-        // `APIError.code` is exposed via `getApiErrorCode()`.
+        // Pass $statusCode (not $code) to the parent so `getCode()` returns
+        // the HTTP status. The canonical `APIError.code` is exposed via
+        // `getApiErrorCode()`.
         parent::__construct($message, $statusCode, $previous);
         $this->statusCode = $statusCode;
         $this->apiErrorCode = $code;
@@ -72,8 +70,7 @@ class StreamApiException extends StreamException
 
     /**
      * The canonical `APIError.code` from the Stream error envelope. Distinct
-     * from `getCode()` (which returns the HTTP status for back-compat) and
-     * from `getStatusCode()` (its alias).
+     * from `getCode()` (HTTP status) and `getStatusCode()` (its alias).
      */
     public function getApiErrorCode(): int
     {

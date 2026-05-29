@@ -11,10 +11,7 @@ use GetStream\Http\HttpClientInterface;
 use GetStream\StreamResponse;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Covers CHA-2958 §8: the task-waiting helper polls until completed / failed
- * / timeout and surfaces a StreamTaskException on failure.
- */
+/** Tests the task-waiting helper: polls until completed/failed/timeout and surfaces StreamTaskException on failure. */
 class WaitForTaskTest extends TestCase
 {
     private const HEADERS = ['content-type' => 'application/json'];
@@ -102,12 +99,7 @@ class WaitForTaskTest extends TestCase
     }
 }
 
-/**
- * Client subclass exposing a virtual clock so the timeout branch can be
- * exercised without sleeping for real. Each call to `now()` advances by
- * `$advanceClockBy` seconds — that mirrors elapsed time between poll
- * iterations without involving wall-clock.
- */
+/** Client subclass with a virtual clock for deterministic timeout tests. */
 class TestableClient extends Client
 {
     public int $advanceClockBy = 0;

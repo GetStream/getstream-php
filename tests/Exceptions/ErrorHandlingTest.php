@@ -18,15 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Covers the CHA-2958 error-handling spec for getstream-php:
- *  - structured field exposure on StreamApiException (§5.1)
- *  - StreamRateLimitException + Retry-After parsing (§5.2, §7)
- *  - StreamTransportException + errorType enum + cause chain (§5.3, §6.4)
- *  - cause-chain preservation on every wrap point (§6.4)
- *  - preservation of PHP's auto-retry-on-429 middleware. A standardized retry
- *    policy across all 6 SDKs is owned by CHA-2959 (Rate limits and retry).
- */
+/** Covers exception field exposure, Retry-After parsing, transport error wrapping, cause-chain preservation, and PHP's auto-retry-on-429 middleware. */
 class ErrorHandlingTest extends TestCase
 {
     /**
@@ -38,8 +30,7 @@ class ErrorHandlingTest extends TestCase
         $mock = new MockHandler($responses);
         $stack = HandlerStack::create($mock);
         $stack->push(Middleware::history($capturedHistory));
-        // maxRetries=0 keeps the no-retry tests fast and isolates the assertion
-        // surface. Retry behavior is covered by its own test below.
+        // maxRetries=0 keeps the no-retry tests fast.
         return new GuzzleHttpClient(['handler' => $stack], 0);
     }
 
@@ -66,8 +57,7 @@ class ErrorHandlingTest extends TestCase
             self::fail('rate-limit subclass should not fire for status 400');
         } catch (StreamApiException $e) {
             self::assertSame(400, $e->getStatusCode());
-            // getCode() preserves the pre-CHA-2958 behavior (HTTP status).
-            // The canonical APIError.code is exposed via getApiErrorCode().
+            // getCode() returns HTTP status; getApiErrorCode() returns the canonical APIError.code.
             self::assertSame(400, $e->getCode());
             self::assertSame(4, $e->getApiErrorCode());
             self::assertSame('channel_id is required', $e->getMessage());
@@ -186,10 +176,8 @@ class ErrorHandlingTest extends TestCase
     }
 
     /**
-     * PHP retains its existing auto-retry-on-429 middleware in the CHA-2958
-     * rollout. A uniform retry policy across all 6 SDKs is owned by CHA-2959.
-     * With maxRetries=2 and three 429 responses, the SDK must issue exactly
-     * three HTTP attempts (initial + 2 retries) and ultimately raise.
+     * With maxRetries=2 and three 429 responses, the SDK issues exactly three
+     * HTTP attempts (initial + 2 retries) and raises StreamRateLimitException.
      *
      * @test
      */
