@@ -38,7 +38,22 @@ Under PHP-FPM (and one-shot CLI scripts) the PHP process exits at the end of eac
 
 ## [Unreleased]
 
+### Breaking behavior changes (no API rename)
+
+- **`StreamApiException` structured fields are reshaped to match the canonical `APIError` envelope.** The constructor signature changes: `(string $message, int $statusCode, int $code, array $exceptionFields, bool $unrecoverable, string $rawResponseBody, ?string $moreInfo, mixed $details, ?\Throwable $previous)`. Replaced accessors:
+    * `getResponseBody(): ?string` → `getRawResponseBody(): string`
+    * `getErrorDetails(): array` (non-canonical bag) → `getExceptionFields(): array<string,string>` (only the validation map from `exception_fields`)
+    * New: `isUnrecoverable(): bool`, `getMoreInfo(): ?string`, `getDetails(): mixed`.
+    * `getStatusCode()` and `getCode()` keep their existing semantics — both return the HTTP status (back-compat with pre-CHA-2958 callers that branched on `$e->getCode() === 429`). The canonical `APIError.code` is exposed via the new `getApiErrorCode(): int`.
+
 ### Added
+
+- Error-handling spec rollout (CHA-2958, [spec](https://www.notion.so/3526a5d7f9f681e5a1b8d881cb5cbcf1)):
+    * New `StreamRateLimitException extends StreamApiException` for HTTP 429 responses. Exposes `getRetryAfter(): ?int` (seconds; `null` when the header is absent or unparseable). Both integer seconds (`Retry-After: 30`) and HTTP-date forms (`Retry-After: Fri, 31 Dec 2026 23:59:59 GMT`) are accepted per RFC 7231 §7.1.3; HTTP-date deltas are clamped to ≥ 0.
+    * New `StreamTransportException extends StreamException` for network-layer failures with no HTTP response (connection reset, timeout, TLS handshake failure, DNS failure). Exposes `getErrorType(): string` returning one of `connection_reset` · `timeout` · `dns_failure` · `tls_handshake_failed` · `unknown` (matches the logging spec's `error.type` enum). The original Guzzle exception is preserved via `getPrevious()`.
+    * New `StreamTaskException extends StreamException` thrown by `Client::waitForTask()` when a polled task settles into `status: "failed"`. Carries `getTaskId()`, `getErrorType()`, `getDescription()`, `getStackTrace()`, `getVersion()` from the task's `ErrorResult` payload.
+    * New `Client::waitForTask(string $taskId, int $pollIntervalSeconds = 1, int $timeoutSeconds = 60)`. Polls `/api/v2/tasks/{id}` until the task settles into `completed` (returns `GetTaskResponse`) or `failed` (throws `StreamTaskException`). On timeout it raises `StreamTransportException` with `errorType = "timeout"`.
+- Cause-chain preservation: every wrap point in `GuzzleHttpClient` now passes the caught `GuzzleException` as the `$previous` argument to the SDK exception, fixing the broken chain in the prior `GuzzleHttpClient::request()` catch block. Unparseable error responses (HTTP layer succeeded, body is not a valid `APIError`) wrap a `\JsonException` cause and surface as a base `StreamApiException` with `code = 0` and `message = "failed to parse error response"`.
 
 - Webhook handling spec helpers (CHA-2961): `UnknownEvent` class for forward-compat;
   `gunzipPayload`, `decodeSqsPayload`, `decodeSnsPayload` primitives;
