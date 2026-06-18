@@ -16,6 +16,7 @@ class UpdateAppRequest extends BaseModel
         public ?string $webhookUrl = null,
         public ?bool $moderationEnabled = null,
         public ?bool $moderationAnalyticsEnabled = null,
+        public ?bool $moderationOnboardingComplete = null,
         public ?string $moderationWebhookUrl = null,
         public ?string $permissionVersion = null,
         public ?array $userSearchDisallowedRoles = null,
@@ -27,6 +28,7 @@ class UpdateAppRequest extends BaseModel
         public ?bool $autoTranslationEnabled = null,
         public ?bool $asyncUrlEnrichEnabled = null,
         public ?string $beforeMessageSendHookUrl = null,
+        public ?int $beforeMessageSendHookAttemptTimeoutMs = null,
         public ?string $customActionHandlerUrl = null,
         public ?string $enforceUniqueUsernames = null,
         public ?string $sqsUrl = null,
@@ -59,6 +61,7 @@ class UpdateAppRequest extends BaseModel
         public ?int $maxAggregatedActivitiesLength = null,
         public ?string $moderationS3ImageAccessRoleArn = null,
         public ?array $activityMetricsConfig = null,
+        public ?string $videoPrimaryUseCase = null,
     ) {
     }
 

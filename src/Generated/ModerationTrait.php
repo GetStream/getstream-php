@@ -123,6 +123,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\InsertActionLogResponse::class);
     }
     /**
+     * Moderate named text fields and raw image bytes via multipart/form-data. Returns a per-field lightweight verdict.
+     *
+     * @param GeneratedModels\AnalyzeRequest $requestData
+     * @return StreamResponse<GeneratedModels\AnalyzeResponse>
+     * @throws StreamException
+     */
+    public function analyze(GeneratedModels\AnalyzeRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/analyze';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AnalyzeResponse::class);
+    }
+    /**
      * Appeal against the moderation decision
      *
      * @param GeneratedModels\AppealRequest $requestData
@@ -164,6 +178,20 @@ trait ModerationTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryAppealsResponse::class);
+    }
+    /**
+     * Process multiple appeals in a single request by applying the specified action to each. Supported actions: unban, restore, unblock, mark_reviewed, reject_appeal. Each appeal goes through the same path as a single submit_action call.
+     *
+     * @param GeneratedModels\BulkActionAppealsRequest $requestData
+     * @return StreamResponse<GeneratedModels\BulkActionAppealsResponse>
+     * @throws StreamException
+     */
+    public function bulkActionAppeals(GeneratedModels\BulkActionAppealsRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/appeals/bulk_action';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkActionAppealsResponse::class);
     }
     /**
      * Ban a user from a channel or the entire app
@@ -543,6 +571,33 @@ trait ModerationTrait
         $queryParams = [];
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetReviewQueueItemResponse::class);
+    }
+    /**
+     * Retrieve a setup session for an app
+     *
+     * @return StreamResponse<GeneratedModels\GetSetupSessionResponse>
+     * @throws StreamException
+     */
+    public function getSetupSession(): StreamResponse {
+        $path = '/api/v2/moderation/setup';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetSetupSessionResponse::class);
+    }
+    /**
+     * Update a setup session for an app
+     *
+     * @param GeneratedModels\UpsertSetupSessionRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertSetupSessionResponse>
+     * @throws StreamException
+     */
+    public function upsertSetupSession(GeneratedModels\UpsertSetupSessionRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/setup';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertSetupSessionResponse::class);
     }
     /**
      * Take action on flagged content, such as marking content as safe, deleting content, banning users, or executing custom moderation actions. Supports various action types with configurable parameters.

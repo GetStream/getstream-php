@@ -474,6 +474,21 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetImportV2TaskResponse::class);
     }
     /**
+     * Requests a controlled stop of an import v2 task. Allowed only for tasks in queued or processing state; a processing import stops cleanly on its next progress tick.
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\CancelImportV2TaskResponse>
+     * @throws StreamException
+     */
+    public function cancelImportV2Task(string $id): StreamResponse {
+        $path = '/api/v2/imports/v2/{id}/cancel';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CancelImportV2TaskResponse::class);
+    }
+    /**
      * Gets an import
      *
      * @param string $id

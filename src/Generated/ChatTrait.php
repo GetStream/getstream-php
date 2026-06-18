@@ -1457,6 +1457,20 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\SearchResponse::class);
     }
     /**
+     * Create a segment
+     *
+     * @param GeneratedModels\CreateSegmentRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateSegmentResponse>
+     * @throws StreamException
+     */
+    public function createSegment(GeneratedModels\CreateSegmentRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/segments';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateSegmentResponse::class);
+    }
+    /**
      * Query segments
      *
      * @param GeneratedModels\QuerySegmentsRequest $requestData
@@ -1499,6 +1513,38 @@ trait ChatTrait
         $queryParams = [];
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetSegmentResponse::class);
+    }
+    /**
+     * Update an existing segment
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateSegmentRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateSegmentResponse>
+     * @throws StreamException
+     */
+    public function updateSegment(string $id, GeneratedModels\UpdateSegmentRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/segments/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateSegmentResponse::class);
+    }
+    /**
+     * Add targets to a segment
+     *
+     * @param string $id
+     * @param GeneratedModels\AddSegmentTargetsRequest $requestData
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function addSegmentTargets(string $id, GeneratedModels\AddSegmentTargetsRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/segments/{id}/addtargets';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Delete targets from a segment

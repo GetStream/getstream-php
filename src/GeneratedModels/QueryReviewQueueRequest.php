@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class QueryReviewQueueRequest extends BaseModel
 {
     public function __construct(
-        public ?object $filter = null, // Filter conditions for review queue items
+        public ?object $filter = null, // Filter conditions for review queue items. Accepts built-in fields (e.g. status, channel_cid, severity, recommended_action) and customer-supplied moderation_payload.custom keys: any key that is not a built-in field is matched against the item's custom moderation data (e.g. {"location_id": "loc-42"}). Use filter_config.filterable_custom_keys to discover which custom keys the app exposes as chips.
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Sorting parameters for the results

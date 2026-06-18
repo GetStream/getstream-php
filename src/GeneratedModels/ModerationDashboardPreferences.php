@@ -17,6 +17,9 @@ class ModerationDashboardPreferences extends BaseModel
         public ?array $escalationReasons = null,
         public ?bool $escalationQueueEnabled = null,
         public ?bool $includeAttachmentPayload = null,
+        public ?string $webhookHeaderClientRequestIDKey = null,
+        public ?array $filterableCustomKeys = null,
+        public ?int $analyzeMaxImageSizeBytes = null,
     ) {
     }
 

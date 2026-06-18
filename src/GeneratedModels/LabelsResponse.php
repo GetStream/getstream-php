@@ -14,6 +14,7 @@ class LabelsResponse extends BaseModel
         public ?string $severity = null, // Severity level
         public ?string $language = null, // Detected language
         public ?string $maskedContent = null, // Content with blocklisted tokens masked or substituted. Present only when a blocklist rewrote the original content.
+        public ?string $fullyMaskedContent = null, // The original content with every non-whitespace character masked. Present only when recommended_action is not 'keep'. Derived at runtime and never stored.
         public ?string $duration = null,
     ) {
     }

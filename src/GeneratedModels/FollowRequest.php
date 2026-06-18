@@ -17,7 +17,7 @@ class FollowRequest extends BaseModel
         public ?string $status = null, // Status of the follow relationship. One of: accepted, pending, rejected
         public ?int $activityCopyLimit = null, // Maximum number of historical activities to copy from the target feed when the follow is first materialized. Not set = unlimited (default). 0 = copy nothing. Range: 0-1000.
         public ?bool $enrichOwnFields = null, // If true, enriches the follow's source_feed and target_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
-        public ?bool $createUsers = null, // If true, auto-creates users referenced by the source and target FIDs when they don't already exist. Server-side only. Defaults to false. For FollowBatch/GetOrCreateFollows, use the top-level create_users field; per-item follows[i].create_users is rejected.
+        public ?bool $createUsers = null, // If true, auto-creates users referenced by the source and target FIDs when they don't already exist. Server-side only. Defaults to false. Use directly on single follow endpoints (Follow, GetOrCreateFollow). On batch endpoints (FollowBatch, GetOrCreateFollows), use the top-level create_users field; per-item follows[i].create_users is rejected.
     ) {
     }
 

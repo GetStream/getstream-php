@@ -14,6 +14,7 @@ class GetOrCreateFeedRequest extends BaseModel
         public ?string $view = null,
         public ?object $externalRanking = null,
         public ?array $interestWeights = null,
+        public ?bool $overwriteInterestWeights = null,
         public ?object $filter = null,
         public ?PagerRequest $memberPagination = null,
         public ?PagerRequest $followersPagination = null,

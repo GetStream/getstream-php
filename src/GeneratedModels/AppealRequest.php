@@ -10,6 +10,7 @@ class AppealRequest extends BaseModel
         public ?string $entityType = null, // Type of entity being appealed (e.g., message, user)
         public ?string $appealReason = null, // Explanation for why the content is being appealed
         public ?array $attachments = null, // Array of Attachment URLs(e.g., images)
+        public ?string $reviewQueueItemID = null, // ID of the review queue item (flagged message) that triggered the ban. Applicable only for user ban appeals.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

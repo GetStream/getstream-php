@@ -10,9 +10,11 @@ class QueryModerationRulesResponse extends BaseModel
         #[ArrayOf(ModerationRuleV2Response::class)]
         public ?array $rules = null, // List of moderation rules
         public ?array $defaultLlmLabels = null, // Default LLM label descriptions
+        public ?array $defaultUsernameLlmLabels = null, // Recommended LLM label descriptions for username-scoped policies (key starts with 'username:'). Used by /moderation/v2/labels fast-path.
         public ?array $keyframeLabels = null, // Deprecated: use keyframe_label_classifications instead. Available L1 harm labels for keyframe rules
         public ?array $keyframeLabelClassifications = null, // L1 to L2 mapping of keyframe harm label classifications
         public ?array $closedCaptionLabels = null, // Available harm labels for closed caption rules
+        public ?array $ocrLabels = null, // Available harm labels for keyframe OCR rules. Mirrors `closed_caption_labels` today but kept as a separate field so the two pickers can diverge later.
         /** @var array<AIImageLabelDefinition>|null */
         #[ArrayOf(AIImageLabelDefinition::class)]
         public ?array $aiImageLabelDefinitions = null, // AI image label definitions with metadata for dashboard rendering

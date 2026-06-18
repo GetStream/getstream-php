@@ -10,12 +10,12 @@ class UserGroupResponse extends BaseModel
         public ?string $name = null,
         public ?string $description = null,
         public ?string $teamID = null,
-        /** @var array<UserGroupMember>|null */
-        #[ArrayOf(UserGroupMember::class)]
-        public ?array $members = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?string $createdBy = null,
+        /** @var array<UserGroupMember>|null */
+        #[ArrayOf(UserGroupMember::class)]
+        public ?array $members = null,
     ) {
     }
 

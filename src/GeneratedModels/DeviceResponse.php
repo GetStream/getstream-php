@@ -16,6 +16,7 @@ class DeviceResponse extends BaseModel
         public ?bool $disabled = null, // Whether device is disabled or not
         public ?string $disabledReason = null, // Reason explaining why device had been disabled
         public ?bool $voip = null, // When true the token is for Apple VoIP push notifications
+        public ?string $hardwareID = null, // Stable physical device identifier used to deduplicate pushes across push providers
         public ?string $userID = null, // User ID
     ) {
     }

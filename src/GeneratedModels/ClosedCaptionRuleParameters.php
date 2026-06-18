@@ -9,6 +9,7 @@ class ClosedCaptionRuleParameters extends BaseModel
         public ?array $harmLabels = null,
         public ?array $llmHarmLabels = null,
         public ?int $threshold = null,
+        public ?string $timeWindow = null,
     ) {
     }
 

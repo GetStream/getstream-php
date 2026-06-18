@@ -19,6 +19,7 @@ class ModerationConfig extends BaseModel
         public ?AIVideoConfig $aiVideoConfig = null,
         public ?GoogleVisionConfig $googleVisionConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
+        public ?FloodConfig $floodConfig = null,
         public ?LLMConfig $llmConfig = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
