@@ -141,15 +141,21 @@ function updateComposerVersion(string $path, string $version): void
         throw new ReleaseScriptException('Could not read composer.json');
     }
 
+    $count = 0;
     $updated = preg_replace(
         '/"version":\s*"[^"]*"/',
         '"version": "v' . $version . '"',
         $raw,
-        1
+        1,
+        $count
     );
 
-    if ($updated === null || $updated === $raw) {
-        throw new ReleaseScriptException('Could not update version in composer.json');
+    if ($updated === null) {
+        throw new ReleaseScriptException('Regex failed while updating composer.json');
+    }
+
+    if ($count === 0) {
+        throw new ReleaseScriptException('Could not find version field in composer.json');
     }
 
     file_put_contents($path, $updated);
