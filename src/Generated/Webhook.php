@@ -133,8 +133,10 @@ use GetStream\GeneratedModels\MessageUpdatedEvent;
 use GetStream\GeneratedModels\ModerationCheckCompletedEvent;
 use GetStream\GeneratedModels\ModerationCustomActionEvent;
 use GetStream\GeneratedModels\ModerationFlaggedEvent;
+use GetStream\GeneratedModels\ModerationImageAnalysisCompleteEvent;
 use GetStream\GeneratedModels\ModerationMarkReviewedEvent;
 use GetStream\GeneratedModels\ModerationRulesTriggeredEvent;
+use GetStream\GeneratedModels\ModerationTextAnalysisCompleteEvent;
 use GetStream\GeneratedModels\NotificationFeedUpdatedEvent;
 use GetStream\GeneratedModels\NotificationMarkUnreadEvent;
 use GetStream\GeneratedModels\NotificationThreadMessageNewEvent;
@@ -318,7 +320,9 @@ class Webhook
     public const EVENT_TYPE_MESSAGE_UPDATED = 'message.updated';
     public const EVENT_TYPE_MODERATION_CUSTOM_ACTION = 'moderation.custom_action';
     public const EVENT_TYPE_MODERATION_FLAGGED = 'moderation.flagged';
+    public const EVENT_TYPE_MODERATION_IMAGE_ANALYSIS_COMPLETE = 'moderation.image_analysis.complete';
     public const EVENT_TYPE_MODERATION_MARK_REVIEWED = 'moderation.mark_reviewed';
+    public const EVENT_TYPE_MODERATION_TEXT_ANALYSIS_COMPLETE = 'moderation.text_analysis.complete';
     public const EVENT_TYPE_MODERATION_CHECK_COMPLETED = 'moderation_check.completed';
     public const EVENT_TYPE_MODERATION_RULE_TRIGGERED = 'moderation_rule.triggered';
     public const EVENT_TYPE_NOTIFICATION_MARK_UNREAD = 'notification.mark_unread';
@@ -555,7 +559,9 @@ class Webhook
             'message.updated' => MessageUpdatedEvent::class,
             'moderation.custom_action' => ModerationCustomActionEvent::class,
             'moderation.flagged' => ModerationFlaggedEvent::class,
+            'moderation.image_analysis.complete' => ModerationImageAnalysisCompleteEvent::class,
             'moderation.mark_reviewed' => ModerationMarkReviewedEvent::class,
+            'moderation.text_analysis.complete' => ModerationTextAnalysisCompleteEvent::class,
             'moderation_check.completed' => ModerationCheckCompletedEvent::class,
             'moderation_rule.triggered' => ModerationRulesTriggeredEvent::class,
             'notification.mark_unread' => NotificationMarkUnreadEvent::class,

@@ -8,6 +8,7 @@ class KeyframeRuleParameters extends BaseModel
     public function __construct(
         public ?array $harmLabels = null,
         public ?int $threshold = null,
+        public ?string $timeWindow = null,
         public ?float $minConfidence = null,
     ) {
     }

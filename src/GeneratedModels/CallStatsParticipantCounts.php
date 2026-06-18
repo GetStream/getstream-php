@@ -19,6 +19,8 @@ class CallStatsParticipantCounts extends BaseModel
         public ?int $averageLatencyMs = null,
         public ?int $maxFreezesDurationMs = null,
         public ?int $callEventCount = null,
+        public ?int $minUserRating = null,
+        public ?float $avgUserRating = null,
     ) {
     }
 

@@ -25,6 +25,7 @@ class UserBannedEvent extends BaseModel
         public ?UserResponseCommonFields $createdBy = null,
         public ?\DateTime $expiration = null, // The expiration date of the ban
         public ?bool $shadow = null, // Whether the user was shadow banned
+        public ?string $reviewQueueItemID = null, // ID of the review queue item (flagged message) that triggered the ban, if the ban was applied from the moderation review queue
         public ?int $totalBans = null,
     ) {
     }

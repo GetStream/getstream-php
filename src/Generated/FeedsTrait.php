@@ -1580,6 +1580,20 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RejectFollowResponse::class);
     }
     /**
+     * Creates a follow if it does not exist, or returns the existing one. Broadcasts feeds.follow.created (FollowCreatedEvent) only when the follow is newly created.
+     *
+     * @param GeneratedModels\FollowRequest $requestData
+     * @return StreamResponse<GeneratedModels\GetOrCreateFollowResponse>
+     * @throws StreamException
+     */
+    public function getOrCreateFollow(GeneratedModels\FollowRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/follows/upsert';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateFollowResponse::class);
+    }
+    /**
      * Removes a follow and broadcasts FollowRemovedEvent
      *
      * @param string $source
@@ -1726,6 +1740,20 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnfollowBatchResponse::class);
     }
     /**
+     * Removes a follow and broadcasts feeds.follow.deleted (FollowDeletedEvent). Does not return an error if the follow does not exist.
+     *
+     * @param GeneratedModels\GetOrCreateUnfollowRequest $requestData
+     * @return StreamResponse<GeneratedModels\GetOrCreateUnfollowResponse>
+     * @throws StreamException
+     */
+    public function getOrCreateUnfollow(GeneratedModels\GetOrCreateUnfollowRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/unfollow/upsert';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateUnfollowResponse::class);
+    }
+    /**
      * Delete all feed data for a user including: feeds, activities, follows, comments, feed reactions, bookmark folders, bookmarks, and collections owned by the user
      *
      * @param string $userID
@@ -1755,5 +1783,24 @@ trait FeedsTrait
         $queryParams = [];
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportFeedUserDataResponse::class);
+    }
+    /**
+     * Returns the user's most common interest tags ranked by the number of distinct activities they reacted to that carried each tag. Client-side callers may only read their own interests; server-side callers may fetch any user. Results are sorted by descending count, then alphabetically by tag.
+     *
+     * @param string $userID
+     * @param int $limit
+     * @return StreamResponse<GeneratedModels\GetUserInterestsResponse>
+     * @throws StreamException
+     */
+    public function getUserInterests(string $userID, int $limit): StreamResponse {
+        $path = '/api/v2/feeds/users/{user_id}/interests';
+        $path = str_replace('{user_id}', (string) $userID, $path);
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetUserInterestsResponse::class);
     }
 }

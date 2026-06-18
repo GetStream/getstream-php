@@ -18,6 +18,7 @@ class BlockListResponse extends BaseModel
         public ?string $team = null,
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,
+        public ?bool $isConfusableFoldingEnabled = null,
     ) {
     }
 

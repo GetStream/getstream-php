@@ -11,6 +11,7 @@ class CreateBlockListRequest extends BaseModel
     public function __construct(
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,
+        public ?bool $isConfusableFoldingEnabled = null,
         public ?string $name = null, // Block list name
         public ?array $words = null, // List of words to block
         public ?string $type = null, // Block list type. One of: regex, domain, domain_allowlist, email, email_allowlist, word

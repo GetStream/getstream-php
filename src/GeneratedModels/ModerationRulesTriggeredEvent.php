@@ -20,6 +20,9 @@ class ModerationRulesTriggeredEvent extends BaseModel
         public ?string $userID = null, // The ID of the user who triggered the rule
         public ?array $triggeredActions = null, // Array of action types that were triggered
         public ?string $reviewQueueItemID = null, // The review queue item ID if applicable
+        /** @var array<MatchedContent>|null */
+        #[ArrayOf(MatchedContent::class)]
+        public ?array $matchedContents = null, // Ordered list of contents whose verdicts contributed to an aggregation rule's threshold. Populated only for aggregation rules when callers supplied `content_ids`.
     ) {
     }
 

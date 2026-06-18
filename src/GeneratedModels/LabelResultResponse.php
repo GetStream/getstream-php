@@ -12,6 +12,7 @@ class LabelResultResponse extends BaseModel
         public ?string $contentType = null,
         public ?string $content = null, // The moderated content
         public ?string $maskedContent = null, // Content with blocklisted tokens masked (when a blocklist rule with action=mask rewrote the original)
+        public ?string $fullyMaskedContent = null, // The stored content with every non-whitespace character masked. Present only when recommended_action is not 'keep'. Derived at runtime and never stored.
         public ?string $language = null, // Detected language
         public ?string $category = null, // Category
         public ?array $labels = null, // Moderation labels

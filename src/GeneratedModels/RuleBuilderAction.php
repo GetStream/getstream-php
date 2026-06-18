@@ -11,6 +11,7 @@ class RuleBuilderAction extends BaseModel
         public ?FlagUserOptions $flagUserOptions = null,
         public ?CallActionOptions $callOptions = null,
         public ?bool $skipInbox = null,
+        public ?string $reason = null,
     ) {
     }
 

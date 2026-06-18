@@ -6,9 +6,10 @@ namespace GetStream\GeneratedModels;
 class FilterConfigResponse extends BaseModel
 {
     public function __construct(
-        public ?array $llmLabels = null,
-        public ?array $aiTextLabels = null,
-        public ?array $configKeys = null,
+        public ?array $llmLabels = null, // LLM moderation labels available as filter values
+        public ?array $aiTextLabels = null, // AI text moderation labels available as filter values
+        public ?array $configKeys = null, // Moderation config keys present in the queue, available as filter values
+        public ?array $filterableCustomKeys = null, // The moderation_payload.custom keys the app has configured as review-queue filter chips (via moderation_dashboard_preferences.filterable_custom_keys). Discovery hint for the dashboard only — the filter accepts any custom key regardless of this list.
     ) {
     }
 

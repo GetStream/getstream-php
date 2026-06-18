@@ -10,6 +10,8 @@ class GroupedChannelsBucket extends BaseModel
         #[ArrayOf(ChannelStateResponseFields::class)]
         public ?array $channels = null, // Channels returned for this bucket
         public ?int $unreadChannels = null, // Unread channels currently classified into this bucket
+        public ?string $next = null, // Cursor for the next page of this group
+        public ?string $prev = null, // Cursor for the previous page of this group
     ) {
     }
 

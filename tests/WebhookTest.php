@@ -221,7 +221,9 @@ class WebhookTest extends TestCase
             'message.updated' => ['message.updated', 'MessageUpdatedEvent'],
             'moderation.custom_action' => ['moderation.custom_action', 'ModerationCustomActionEvent'],
             'moderation.flagged' => ['moderation.flagged', 'ModerationFlaggedEvent'],
+            'moderation.image_analysis.complete' => ['moderation.image_analysis.complete', 'ModerationImageAnalysisCompleteEvent'],
             'moderation.mark_reviewed' => ['moderation.mark_reviewed', 'ModerationMarkReviewedEvent'],
+            'moderation.text_analysis.complete' => ['moderation.text_analysis.complete', 'ModerationTextAnalysisCompleteEvent'],
             'moderation_check.completed' => ['moderation_check.completed', 'ModerationCheckCompletedEvent'],
             'moderation_rule.triggered' => ['moderation_rule.triggered', 'ModerationRulesTriggeredEvent'],
             'notification.mark_unread' => ['notification.mark_unread', 'NotificationMarkUnreadEvent'],
@@ -277,7 +279,7 @@ class WebhookTest extends TestCase
     }
 
     // -------------------------------------------------------------------------
-    // Webhook helpers + composites: parseEvent, gunzipPayload, decodeSqsPayload,
+    // Spec §6 helpers + composites: parseEvent, gunzipPayload, decodeSqsPayload,
     // decodeSnsPayload, verifyAndParseWebhook, parseSqs, parseSns.
     // -------------------------------------------------------------------------
 

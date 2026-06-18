@@ -873,6 +873,20 @@ trait VideoTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteTranscriptionResponse::class);
     }
     /**
+     * Reports a batch of client-side telemetry events. Events are processed independently; one invalid event does not block the rest of the batch, but the request fails if any event is invalid.
+     *
+     * @param GeneratedModels\ReportClientEventRequest $requestData
+     * @return StreamResponse<GeneratedModels\ReportClientEventResponse>
+     * @throws StreamException
+     */
+    public function reportClientCallEvent(GeneratedModels\ReportClientEventRequest $requestData): StreamResponse {
+        $path = '/api/v2/video/call_client_event';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ReportClientEventResponse::class);
+    }
+    /**
      *
      * @param GeneratedModels\QueryCallSessionStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCallSessionStatsResponse>

@@ -10,6 +10,7 @@ class UpdateBlockListRequest extends BaseModel
         public ?array $words = null, // List of words to block
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,
+        public ?bool $isConfusableFoldingEnabled = null,
     ) {
     }
 
