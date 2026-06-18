@@ -6,8 +6,20 @@ namespace GetStream\GeneratedModels;
 class FlagResponse extends BaseModel
 {
     public function __construct(
-        public ?string $itemID = null, // Unique identifier of the created moderation item
-        public ?string $duration = null,
+        public ?bool $createdByAutomod = null,
+        public ?UserResponse $user = null,
+        public ?string $targetMessageID = null,
+        public ?MessageResponse $targetMessage = null,
+        public ?UserResponse $targetUser = null,
+        public ?\DateTime $createdAt = null,
+        public ?\DateTime $updatedAt = null,
+        public ?\DateTime $reviewedAt = null,
+        public ?string $reviewedBy = null,
+        public ?\DateTime $approvedAt = null,
+        public ?\DateTime $rejectedAt = null,
+        public ?string $reason = null,
+        public ?FlagDetails $details = null,
+        public ?object $custom = null,
     ) {
     }
 

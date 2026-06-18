@@ -197,7 +197,7 @@ trait ModerationTrait
      * Ban a user from a channel or the entire app
      *
      * @param GeneratedModels\BanRequest $requestData
-     * @return StreamResponse<GeneratedModels\BanResponse>
+     * @return StreamResponse<GeneratedModels\ModerationBanResponse>
      * @throws StreamException
      */
     public function ban(GeneratedModels\BanRequest $requestData): StreamResponse {
@@ -205,7 +205,7 @@ trait ModerationTrait
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BanResponse::class);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ModerationBanResponse::class);
     }
     /**
      * Moderate multiple images in bulk using a CSV file
@@ -391,7 +391,7 @@ trait ModerationTrait
      * Flag any type of content (messages, users, channels, activities) for moderation review. Supports custom content types and additional metadata for flagged content.
      *
      * @param GeneratedModels\FlagRequest $requestData
-     * @return StreamResponse<GeneratedModels\FlagResponse>
+     * @return StreamResponse<GeneratedModels\FlagItemResponse>
      * @throws StreamException
      */
     public function flag(GeneratedModels\FlagRequest $requestData): StreamResponse {
@@ -399,7 +399,7 @@ trait ModerationTrait
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FlagResponse::class);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FlagItemResponse::class);
     }
     /**
      * Returns the number of moderation flags created against a specific user's content. Optionally filter by entity type.
