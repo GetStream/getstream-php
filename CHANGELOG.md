@@ -5,7 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [7.3.0] - 2026-MM-DD
+## [7.4.0] - 2026-MM-DD
+
+### Fixed — response type naming collisions
+
+Corrected generated response models that previously shared a class name across endpoints with different shapes (chat-v1 vs v2-moderation). These align the SDK with the backend contract. No runtime behavior changes for real data paths, but the return types of `flag()` and `ban()` are renamed: any code that explicitly type-hints or uses `instanceof` against the old classes must update.
+
+- `Moderation::flag()` now returns `StreamResponse<FlagItemResponse>` (was `FlagResponse`). `FlagItemResponse` keeps the same `itemID` and `duration` fields, so reading them is unaffected. `FlagResponse` is repurposed to the rich flag object (`createdByAutomod`, `user`, `targetMessage`, `details`, etc.) returned by other flag endpoints.
+- `Moderation::ban()` now returns `StreamResponse<ModerationBanResponse>` (was `BanResponse`). `ModerationBanResponse` exposes `duration` — the only field `/api/v2/moderation/ban` actually returns. The previous `BanResponse` fields (`user`, `channel`, `expires`, `bannedBy`, ...) were never populated by this endpoint, so reads against them already returned `null`.
+- `FlagDetails` no longer carries `extra`, and its `automod` field is now typed `AutomodDetailsResponse` (was `AutomodDetails`), matching the backend `FlagDetails` struct. The `extra` field belongs to `FlagDetailsResponse`, which is unchanged.
+- `ChannelConfig` field set corrected to match the backend, resolving the naming collision that motivated this change. New `ChannelConfigOverrides` model added.
+
+### Breaking behavior changes (no API rename)
+
+- **`StreamApiException` structured fields are reshaped to match the canonical `APIError` envelope.** The constructor signature changes: `(string $message, int $statusCode, int $code, array $exceptionFields, bool $unrecoverable, string $rawResponseBody, ?string $moreInfo, mixed $details, ?\Throwable $previous)`. Replaced accessors:
+    * `getResponseBody(): ?string` → `getRawResponseBody(): string`
+    * `getErrorDetails(): array` (non-canonical bag) → `getExceptionFields(): array<string,string>` (only the validation map from `exception_fields`)
+    * New: `isUnrecoverable(): bool`, `getMoreInfo(): ?string`, `getDetails(): mixed`.
+    * `getStatusCode()` and `getCode()` keep their existing semantics — both return the HTTP status (back-compat with pre-CHA-2958 callers that branched on `$e->getCode() === 429`). The canonical `APIError.code` is exposed via the new `getApiErrorCode(): int`.
 
 ### Added
 
@@ -18,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `HttpClientInterface::request()` gains an optional 5th `array $options = []` parameter for per-call overrides (e.g., `['timeout' => 2]`). Backward-compatible.
 - INFO log on `ClientBuilder::build()` listing the effective pool config. Emitted via `error_log()`; suppressed in PHPUnit runs.
 - `GuzzleHttpClient::getPoolConfig()` accessor for diagnostics.
+- Error-handling spec rollout (CHA-2958, [spec](https://www.notion.so/3526a5d7f9f681e5a1b8d881cb5cbcf1)):
+    * New `StreamRateLimitException extends StreamApiException` for HTTP 429 responses. Exposes `getRetryAfter(): ?int` (seconds; `null` when the header is absent or unparseable). Both integer seconds (`Retry-After: 30`) and HTTP-date forms (`Retry-After: Fri, 31 Dec 2026 23:59:59 GMT`) are accepted per RFC 7231 §7.1.3; HTTP-date deltas are clamped to ≥ 0.
+    * New `StreamTransportException extends StreamException` for network-layer failures with no HTTP response (connection reset, timeout, TLS handshake failure, DNS failure). Exposes `getErrorType(): string` returning one of `connection_reset` · `timeout` · `dns_failure` · `tls_handshake_failed` · `unknown` (matches the logging spec's `error.type` enum). The original Guzzle exception is preserved via `getPrevious()`.
+    * New `StreamTaskException extends StreamException` thrown by `Client::waitForTask()` when a polled task settles into `status: "failed"`. Carries `getTaskId()`, `getErrorType()`, `getDescription()`, `getStackTrace()`, `getVersion()` from the task's `ErrorResult` payload.
+    * New `Client::waitForTask(string $taskId, int $pollIntervalSeconds = 1, int $timeoutSeconds = 60)`. Polls `/api/v2/tasks/{id}` until the task settles into `completed` (returns `GetTaskResponse`) or `failed` (throws `StreamTaskException`). On timeout it raises `StreamTransportException` with `errorType = "timeout"`.
+- Cause-chain preservation: every wrap point in `GuzzleHttpClient` now passes the caught `GuzzleException` as the `$previous` argument to the SDK exception, fixing the broken chain in the prior `GuzzleHttpClient::request()` catch block. Unparseable error responses (HTTP layer succeeded, body is not a valid `APIError`) wrap a `\JsonException` cause and surface as a base `StreamApiException` with `code = 0` and `message = "failed to parse error response"`.
 
 ### Changed
 
@@ -36,24 +59,9 @@ Under PHP-FPM (and one-shot CLI scripts) the PHP process exits at the end of eac
 - No env-var overrides.
 - No PSR-3 logger injection; INFO log goes through `error_log()`.
 
-## [Unreleased]
-
-### Breaking behavior changes (no API rename)
-
-- **`StreamApiException` structured fields are reshaped to match the canonical `APIError` envelope.** The constructor signature changes: `(string $message, int $statusCode, int $code, array $exceptionFields, bool $unrecoverable, string $rawResponseBody, ?string $moreInfo, mixed $details, ?\Throwable $previous)`. Replaced accessors:
-    * `getResponseBody(): ?string` → `getRawResponseBody(): string`
-    * `getErrorDetails(): array` (non-canonical bag) → `getExceptionFields(): array<string,string>` (only the validation map from `exception_fields`)
-    * New: `isUnrecoverable(): bool`, `getMoreInfo(): ?string`, `getDetails(): mixed`.
-    * `getStatusCode()` and `getCode()` keep their existing semantics — both return the HTTP status (back-compat with pre-CHA-2958 callers that branched on `$e->getCode() === 429`). The canonical `APIError.code` is exposed via the new `getApiErrorCode(): int`.
+## [7.1.0] - 2026-05-19
 
 ### Added
-
-- Error-handling spec rollout (CHA-2958, [spec](https://www.notion.so/3526a5d7f9f681e5a1b8d881cb5cbcf1)):
-    * New `StreamRateLimitException extends StreamApiException` for HTTP 429 responses. Exposes `getRetryAfter(): ?int` (seconds; `null` when the header is absent or unparseable). Both integer seconds (`Retry-After: 30`) and HTTP-date forms (`Retry-After: Fri, 31 Dec 2026 23:59:59 GMT`) are accepted per RFC 7231 §7.1.3; HTTP-date deltas are clamped to ≥ 0.
-    * New `StreamTransportException extends StreamException` for network-layer failures with no HTTP response (connection reset, timeout, TLS handshake failure, DNS failure). Exposes `getErrorType(): string` returning one of `connection_reset` · `timeout` · `dns_failure` · `tls_handshake_failed` · `unknown` (matches the logging spec's `error.type` enum). The original Guzzle exception is preserved via `getPrevious()`.
-    * New `StreamTaskException extends StreamException` thrown by `Client::waitForTask()` when a polled task settles into `status: "failed"`. Carries `getTaskId()`, `getErrorType()`, `getDescription()`, `getStackTrace()`, `getVersion()` from the task's `ErrorResult` payload.
-    * New `Client::waitForTask(string $taskId, int $pollIntervalSeconds = 1, int $timeoutSeconds = 60)`. Polls `/api/v2/tasks/{id}` until the task settles into `completed` (returns `GetTaskResponse`) or `failed` (throws `StreamTaskException`). On timeout it raises `StreamTransportException` with `errorType = "timeout"`.
-- Cause-chain preservation: every wrap point in `GuzzleHttpClient` now passes the caught `GuzzleException` as the `$previous` argument to the SDK exception, fixing the broken chain in the prior `GuzzleHttpClient::request()` catch block. Unparseable error responses (HTTP layer succeeded, body is not a valid `APIError`) wrap a `\JsonException` cause and surface as a base `StreamApiException` with `code = 0` and `message = "failed to parse error response"`.
 
 - Webhook handling spec helpers (CHA-2961): `UnknownEvent` class for forward-compat;
   `gunzipPayload`, `decodeSqsPayload`, `decodeSnsPayload` primitives;
