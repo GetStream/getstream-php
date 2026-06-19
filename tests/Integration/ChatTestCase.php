@@ -973,13 +973,13 @@ abstract class ChatTestCase extends TestCase
     // =========================================================================
 
     /**
-     * @return StreamResponse<GeneratedModels\FlagResponse>
+     * @return StreamResponse<GeneratedModels\FlagItemResponse>
      */
     protected function flagContent(GeneratedModels\FlagRequest $request): StreamResponse
     {
         return StreamResponse::fromJson(
             $this->client->makeRequest('POST', '/api/v2/moderation/flag', [], $request),
-            GeneratedModels\FlagResponse::class,
+            GeneratedModels\FlagItemResponse::class,
         );
     }
 

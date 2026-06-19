@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class FlagDetails extends BaseModel
+class FlagItemResponse extends BaseModel
 {
     public function __construct(
-        public ?AutomodDetailsResponse $automod = null,
-        public ?string $originalText = null,
+        public ?string $itemID = null, // Unique identifier of the created moderation item
+        public ?string $duration = null,
     ) {
     }
 

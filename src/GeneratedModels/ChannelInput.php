@@ -21,7 +21,7 @@ class ChannelInput extends BaseModel
         /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $members = null,
-        public ?ChannelConfig $configOverrides = null,
+        public ?ChannelConfigOverrides $configOverrides = null,
         public ?array $filterTags = null,
     ) {
     }
