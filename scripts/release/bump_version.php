@@ -3,10 +3,9 @@
 declare(strict_types=1);
 
 /**
- * Computes next release version from PR title/body and updates version files.
+ * Computes next release version from the PR title and updates version files.
  * Usage:
- *   php scripts/release/bump_version.php --title "feat: add x" --body "..." --output "$GITHUB_OUTPUT"
- *   php scripts/release/bump_version.php --title "feat: add x" --body-file "/tmp/body.txt" --output "$GITHUB_OUTPUT"
+ *   php scripts/release/bump_version.php --title "feat: add x" --output "$GITHUB_OUTPUT"
  */
 final class ReleaseScriptException extends RuntimeException
 {
@@ -59,17 +58,12 @@ function findLatestSemverTag(): string
     return end($versions) ?: '0.0.0';
 }
 
-function determineBumpType(string $title, string $body): string
+function determineBumpType(string $title): string
 {
+    // Breaking changes are signalled only by the `!` marker in the title
+    // (e.g. `feat!:`). Free-text body/title prose is not trusted: a PR that
+    // merely mentions the major-bump phrase must not force a major bump.
     $title = trim($title);
-    $body = trim($body);
-
-    if (
-        preg_match('/BREAKING[ -]CHANGES?/i', $title) === 1
-        || preg_match('/BREAKING[ -]CHANGES?/i', $body) === 1
-    ) {
-        return 'major';
-    }
 
     if (preg_match('/^([a-z]+)(\([^)]+\))?(!)?:/i', $title, $matches) !== 1) {
         return 'none';
@@ -198,22 +192,7 @@ function writeOutputs(string $outputPath, array $values): void
     file_put_contents($outputPath, implode(PHP_EOL, $lines) . PHP_EOL, FILE_APPEND);
 }
 
-function resolveBody(array $argv): string
-{
-    $bodyFile = getArgValue($argv, 'body-file');
-    if ($bodyFile !== '') {
-        $raw = file_get_contents($bodyFile);
-        if ($raw === false) {
-            throw new ReleaseScriptException('Could not read body-file');
-        }
-        return $raw;
-    }
-
-    return getArgValue($argv, 'body');
-}
-
 $title = getArgValue($argv, 'title');
-$body = resolveBody($argv);
 $outputPath = getArgValue($argv, 'output');
 $manualBump = strtolower(trim(getArgValue($argv, 'manual-bump')));
 $useCurrentVersion = strtolower(trim(getArgValue($argv, 'use-current-version', 'false'))) === 'true';
@@ -243,7 +222,7 @@ if ($manualBump !== '') {
     exit(0);
 }
 
-$bump = determineBumpType($title, $body);
+$bump = determineBumpType($title);
 if ($bump === 'none') {
     writeOutputs($outputPath, [
         'should_release' => 'false',

@@ -53,10 +53,10 @@ When a PR is merged into `main` or `master`, the release workflow will:
 1. Parse the PR title using Conventional Commit style.
    - Required ticket format: `type: [FEEDS-1234] description`
    - Keep `feat`/`fix`/`bug` at the beginning of the title
-2. Decide the bump type:
+2. Decide the bump type from the PR title (the body is not scanned):
    - `feat:` => minor
    - `fix:` or `bug:` => patch
-   - `feat!:` / `fix!:` / `BREAKING CHANGE` => major
+   - `feat!:` / `fix!:` / `<type>(scope)!:` (the `!` marker) => major
 3. Update `composer.json` and `src/Constant.php` via `scripts/release/bump_version.php`
 4. Commit version files, create a `vX.Y.Z` tag, create a GitHub release
 5. Trigger Packagist update
