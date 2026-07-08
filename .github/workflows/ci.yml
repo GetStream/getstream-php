@@ -12,13 +12,15 @@ concurrency:
 permissions:
   actions: write
   contents: read
-  pull-requests: write
+  pull-requests: read
 
 jobs:
   check-pr-title:
     name: Validate PR title
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      statuses: write
     steps:
     - uses: aslafy-z/conventional-pr-title-action@v3
       env:
