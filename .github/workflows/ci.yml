@@ -9,11 +9,18 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
+permissions:
+  actions: write
+  contents: read
+  pull-requests: read
+
 jobs:
   check-pr-title:
     name: Validate PR title
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      statuses: write
     steps:
     - uses: aslafy-z/conventional-pr-title-action@v3
       env:
