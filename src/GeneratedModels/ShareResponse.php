@@ -3,14 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ClosedCaptionRuleParameters extends BaseModel
+class ShareResponse extends BaseModel
 {
     public function __construct(
-        public ?array $harmLabels = null,
-        public ?array $llmHarmLabels = null,
-        public ?int $threshold = null,
-        public ?string $timeWindow = null,
-        public ?string $severity = null,
+        public ?UserResponse $user = null,
+        public ?string $activityID = null, // ID of the sharing (child) activity
+        public ?\DateTime $createdAt = null, // When the share occurred
     ) {
     }
 

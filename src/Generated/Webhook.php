@@ -24,6 +24,7 @@ use GetStream\GeneratedModels\AsyncBulkImageModerationEvent;
 use GetStream\GeneratedModels\AsyncExportChannelsEvent;
 use GetStream\GeneratedModels\AsyncExportErrorEvent;
 use GetStream\GeneratedModels\AsyncExportModerationLogsEvent;
+use GetStream\GeneratedModels\AsyncExportReviewQueueEvent;
 use GetStream\GeneratedModels\AsyncExportUsersEvent;
 use GetStream\GeneratedModels\BlockedUserEvent;
 use GetStream\GeneratedModels\BookmarkAddedEvent;
@@ -263,6 +264,8 @@ class Webhook
     public const EVENT_TYPE_EXPORT_CHANNELS_SUCCESS = 'export.channels.success';
     public const EVENT_TYPE_EXPORT_MODERATION_LOGS_ERROR = 'export.moderation_logs.error';
     public const EVENT_TYPE_EXPORT_MODERATION_LOGS_SUCCESS = 'export.moderation_logs.success';
+    public const EVENT_TYPE_EXPORT_REVIEW_QUEUE_ERROR = 'export.review_queue.error';
+    public const EVENT_TYPE_EXPORT_REVIEW_QUEUE_SUCCESS = 'export.review_queue.success';
     public const EVENT_TYPE_EXPORT_USERS_ERROR = 'export.users.error';
     public const EVENT_TYPE_EXPORT_USERS_SUCCESS = 'export.users.success';
     public const EVENT_TYPE_FEEDS_ACTIVITY_ADDED = 'feeds.activity.added';
@@ -502,6 +505,8 @@ class Webhook
             'export.channels.success' => AsyncExportChannelsEvent::class,
             'export.moderation_logs.error' => AsyncExportErrorEvent::class,
             'export.moderation_logs.success' => AsyncExportModerationLogsEvent::class,
+            'export.review_queue.error' => AsyncExportErrorEvent::class,
+            'export.review_queue.success' => AsyncExportReviewQueueEvent::class,
             'export.users.error' => AsyncExportErrorEvent::class,
             'export.users.success' => AsyncExportUsersEvent::class,
             'feeds.activity.added' => ActivityAddedEvent::class,

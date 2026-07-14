@@ -17,6 +17,7 @@ class ConfigResponse extends BaseModel
         public ?LLMConfig $llmConfig = null,
         public ?AIImageConfig $aiImageConfig = null,
         public ?AIVideoConfig $aiVideoConfig = null,
+        public ?AIAudioConfigResponse $aiAudioConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?FloodConfig $floodConfig = null,
         public ?\DateTime $createdAt = null, // When the configuration was created

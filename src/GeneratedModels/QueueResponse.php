@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ClosedCaptionRuleParameters extends BaseModel
+/**
+ * Basic response information
+ */
+class QueueResponse extends BaseModel
 {
     public function __construct(
-        public ?array $harmLabels = null,
-        public ?array $llmHarmLabels = null,
-        public ?int $threshold = null,
-        public ?string $timeWindow = null,
-        public ?string $severity = null,
+        public ?ModerationQueueResponse $queue = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

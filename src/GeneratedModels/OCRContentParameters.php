@@ -3,13 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ClosedCaptionRuleParameters extends BaseModel
+class OCRContentParameters extends BaseModel
 {
     public function __construct(
         public ?array $harmLabels = null,
-        public ?array $llmHarmLabels = null,
-        public ?int $threshold = null,
-        public ?string $timeWindow = null,
+        public ?string $labelOperator = null,
         public ?string $severity = null,
     ) {
     }

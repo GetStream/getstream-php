@@ -31,6 +31,7 @@ class ActivityResponse extends BaseModel
         #[ArrayOf(CommentResponse::class)]
         public ?array $comments = null, // Latest 5 comments of this activity (comment replies excluded)
         public ?string $text = null, // Text content of the activity
+        public ?array $i18n = null,
         public ?Location $location = null,
         public ?ActivityResponse $parent = null,
         public ?PollResponseData $poll = null,
@@ -50,6 +51,9 @@ class ActivityResponse extends BaseModel
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $latestReactions = null, // Recent reactions to the activity
+        /** @var array<ShareResponse>|null */
+        #[ArrayOf(ShareResponse::class)]
+        public ?array $latestShares = null, // Recent shares of the activity, one entry per share (org-gated)
         /** @var array<string, FeedsReactionGroupResponse>|null */
         #[MapOf(FeedsReactionGroupResponse::class)]
         public ?array $reactionGroups = null, // Grouped reactions by type

@@ -14,7 +14,7 @@ class QueryModerationRulesResponse extends BaseModel
         public ?array $keyframeLabels = null, // Deprecated: use keyframe_label_classifications instead. Available L1 harm labels for keyframe rules
         public ?array $keyframeLabelClassifications = null, // L1 to L2 mapping of keyframe harm label classifications
         public ?array $closedCaptionLabels = null, // Available harm labels for closed caption rules
-        public ?array $ocrLabels = null, // Available harm labels for keyframe OCR rules. Mirrors `closed_caption_labels` today but kept as a separate field so the two pickers can diverge later.
+        public ?array $ocrLabels = null, // Available harm labels for OCR-based rule conditions (keyframe_ocr_rule and ocr_content). Mirrors `closed_caption_labels` today but kept as a separate field so the pickers can diverge later.
         /** @var array<AIImageLabelDefinition>|null */
         #[ArrayOf(AIImageLabelDefinition::class)]
         public ?array $aiImageLabelDefinitions = null, // AI image label definitions with metadata for dashboard rendering

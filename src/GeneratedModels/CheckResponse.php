@@ -11,6 +11,9 @@ class CheckResponse extends BaseModel
         public ?string $recommendedAction = null, // Suggested action based on moderation results
         public ?ReviewQueueItemResponse $item = null,
         public ?TriggeredRuleResponse $triggeredRule = null,
+        /** @var array<TriggeredRuleResponse>|null */
+        #[ArrayOf(TriggeredRuleResponse::class)]
+        public ?array $triggeredRules = null, // All moderation rules triggered by this check (content, user, and call rules), with their resolved actions
         public ?string $duration = null,
     ) {
     }

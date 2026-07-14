@@ -11,6 +11,7 @@ class CommentResponse extends BaseModel
         public ?string $objectType = null, // Type of the object this comment is associated with
         public ?UserResponse $user = null,
         public ?string $text = null, // Text content of the comment
+        public ?array $i18n = null,
         public ?object $custom = null, // Custom data for the comment
         public ?string $parentID = null, // ID of parent comment for nested replies
         public ?int $reactionCount = null, // Number of reactions to this comment

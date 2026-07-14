@@ -544,6 +544,79 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MuteResponse::class);
     }
     /**
+     *
+     * @return StreamResponse<GeneratedModels\ListQueuesResponse>
+     * @throws StreamException
+     */
+    public function listQueues(): StreamResponse {
+        $path = '/api/v2/moderation/queues';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListQueuesResponse::class);
+    }
+    /**
+     *
+     * @param GeneratedModels\CreateQueueRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueueResponse>
+     * @throws StreamException
+     */
+    public function createQueue(GeneratedModels\CreateQueueRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/queues';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
+    }
+    /**
+     *
+     * @param string $id
+     * @param string $userID
+     * @return StreamResponse<GeneratedModels\QueueResponse>
+     * @throws StreamException
+     */
+    public function getQueue(string $id, string $userID): StreamResponse {
+        $path = '/api/v2/moderation/queues/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
+    }
+    /**
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateQueueRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueueResponse>
+     * @throws StreamException
+     */
+    public function updateQueue(string $id, GeneratedModels\UpdateQueueRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/queues/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
+    }
+    /**
+     *
+     * @param string $id
+     * @param GeneratedModels\DeleteQueueRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueueResponse>
+     * @throws StreamException
+     */
+    public function deleteQueue(string $id, GeneratedModels\DeleteQueueRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/queues/{id}/delete';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
+    }
+    /**
      * Query review queue items allows you to filter the review queue items. This is used for building a moderation dashboard.
      *
      * @param GeneratedModels\QueryReviewQueueRequest $requestData

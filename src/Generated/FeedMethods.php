@@ -29,13 +29,15 @@ trait FeedMethods
     /**
      * Create a single feed for a given feed group
      *
+     * @param string $language
+     * @param bool $translateText
      * @param GeneratedModels\GetOrCreateFeedRequest $requestData
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedResponse>
      * @throws StreamException
      */
     public function getOrCreateFeed(
-        GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
-        return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId, $requestData);
+        string $language, bool $translateText, GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
+        return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId,$language, $translateText, $requestData);
     }
     /**
      * Update an existing feed
@@ -142,13 +144,15 @@ trait FeedMethods
     /**
      * Query pinned activities for a feed with filter query
      *
+     * @param string $language
+     * @param bool $translateText
      * @param GeneratedModels\QueryPinnedActivitiesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryPinnedActivitiesResponse>
      * @throws StreamException
      */
     public function queryPinnedActivities(
-        GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
-        return $this->feedsV3Client->queryPinnedActivities($this->feedGroup, $this->feedId, $requestData);
+        string $language, bool $translateText, GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
+        return $this->feedsV3Client->queryPinnedActivities($this->feedGroup, $this->feedId,$language, $translateText, $requestData);
     }
 }
 

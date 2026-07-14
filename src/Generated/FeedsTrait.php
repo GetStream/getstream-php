@@ -43,7 +43,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertActivitiesResponse::class);
     }
     /**
-     * Updates certain fields of multiple activities in a batch. Use 'set' to update specific fields and 'unset' to remove fields. Activities that fail due to not found, permission denied, or no changes detected are silently skipped and not included in the response. However, validation errors (e.g., updating reserved fields, invalid field values) will fail the entire batch request.
+     * Updates certain fields of multiple activities in a batch. Use 'set' to update specific fields and 'unset' to remove fields. Activities that fail due to not found, permission denied, or no changes detected are silently skipped and not included in the response. However, validation errors (e.g., updating reserved fields, invalid field values, exceeding size limits) will fail the entire batch request.
      * Sends events:
      * - feeds.activity.updated
      *
@@ -89,16 +89,38 @@ trait FeedsTrait
     /**
      * Query activities based on filters with pagination and sorting options
      *
+     * @param string $language
+     * @param bool $translateText
      * @param GeneratedModels\QueryActivitiesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryActivitiesResponse>
      * @throws StreamException
      */
-    public function queryActivities(GeneratedModels\QueryActivitiesRequest $requestData): StreamResponse {
+    public function queryActivities(string $language, bool $translateText, GeneratedModels\QueryActivitiesRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/activities/query';
 
         $queryParams = [];
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
+        }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryActivitiesResponse::class);
+    }
+    /**
+     * Returns a single user's reactions across a set of activity IDs, without activity payloads
+     *
+     * @param GeneratedModels\BatchQueryActivityReactionsRequest $requestData
+     * @return StreamResponse<GeneratedModels\BatchQueryActivityReactionsResponse>
+     * @throws StreamException
+     */
+    public function batchQueryActivityReactions(GeneratedModels\BatchQueryActivityReactionsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/activities/reactions/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BatchQueryActivityReactionsResponse::class);
     }
     /**
      * Deletes a bookmark from an activity
@@ -280,6 +302,33 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteActivityReactionResponse::class);
     }
     /**
+     * List the shares recorded for an activity, newest-first
+     *
+     * @param string $activityID
+     * @param int $limit
+     * @param string $prev
+     * @param string $next
+     * @return StreamResponse<GeneratedModels\QueryActivitySharesResponse>
+     * @throws StreamException
+     */
+    public function queryActivityShares(string $activityID, int $limit, string $prev, string $next): StreamResponse {
+        $path = '/api/v2/feeds/activities/{activity_id}/shares';
+        $path = str_replace('{activity_id}', (string) $activityID, $path);
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($prev !== null) {
+            $queryParams['prev'] = $prev;
+        }
+        if ($next !== null) {
+            $queryParams['next'] = $next;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryActivitySharesResponse::class);
+    }
+    /**
      * Delete a single activity by its ID
      *
      * @param string $id
@@ -306,17 +355,25 @@ trait FeedsTrait
      * Returns activity by ID
      *
      * @param string $id
+     * @param string $language
+     * @param bool $translateText
      * @param string $commentSort
      * @param int $commentLimit
      * @param string $userID
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
      * @throws StreamException
      */
-    public function getActivity(string $id, string $commentSort, int $commentLimit, string $userID): StreamResponse {
+    public function getActivity(string $id, string $language, bool $translateText, string $commentSort, int $commentLimit, string $userID): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
+        }
         if ($commentSort !== null) {
             $queryParams['comment_sort'] = $commentSort;
         }
@@ -386,6 +443,24 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreActivityResponse::class);
     }
     /**
+     * Translates an activity's text to a given language using automated translation
+     * Sends events:
+     * - feeds.activity.updated
+     *
+     * @param string $id
+     * @param GeneratedModels\TranslateActivityRequest $requestData
+     * @return StreamResponse<GeneratedModels\TranslateActivityResponse>
+     * @throws StreamException
+     */
+    public function translateActivity(string $id, GeneratedModels\TranslateActivityRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/activities/{id}/translate';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TranslateActivityResponse::class);
+    }
+    /**
      * Query bookmark folders with filter query
      *
      * @param GeneratedModels\QueryBookmarkFoldersRequest $requestData
@@ -433,14 +508,22 @@ trait FeedsTrait
     /**
      * Query bookmarks with filter query
      *
+     * @param string $language
+     * @param bool $translateText
      * @param GeneratedModels\QueryBookmarksRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryBookmarksResponse>
      * @throws StreamException
      */
-    public function queryBookmarks(GeneratedModels\QueryBookmarksRequest $requestData): StreamResponse {
+    public function queryBookmarks(string $language, bool $translateText, GeneratedModels\QueryBookmarksRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/bookmarks/query';
 
         $queryParams = [];
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
+        }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryBookmarksResponse::class);
     }
@@ -547,6 +630,8 @@ trait FeedsTrait
      * @param string $sort
      * @param int $repliesLimit
      * @param string $idAround
+     * @param string $language
+     * @param bool $translateText
      * @param string $userID
      * @param int $limit
      * @param string $prev
@@ -554,7 +639,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetCommentsResponse>
      * @throws StreamException
      */
-    public function getComments(string $objectID, string $objectType, int $depth, string $sort, int $repliesLimit, string $idAround, string $userID, int $limit, string $prev, string $next): StreamResponse {
+    public function getComments(string $objectID, string $objectType, int $depth, string $sort, int $repliesLimit, string $idAround, string $language, bool $translateText, string $userID, int $limit, string $prev, string $next): StreamResponse {
         $path = '/api/v2/feeds/comments';
 
         $queryParams = [];
@@ -575,6 +660,12 @@ trait FeedsTrait
         }
         if ($idAround !== null) {
             $queryParams['id_around'] = $idAround;
+        }
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
@@ -622,16 +713,38 @@ trait FeedsTrait
     /**
      * Query comments using MongoDB-style filters with pagination and sorting options
      *
+     * @param string $language
+     * @param bool $translateText
      * @param GeneratedModels\QueryCommentsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCommentsResponse>
      * @throws StreamException
      */
-    public function queryComments(GeneratedModels\QueryCommentsRequest $requestData): StreamResponse {
+    public function queryComments(string $language, bool $translateText, GeneratedModels\QueryCommentsRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/comments/query';
 
         $queryParams = [];
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
+        }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCommentsResponse::class);
+    }
+    /**
+     * Returns a single user's reactions across a set of comment IDs, without comment payloads
+     *
+     * @param GeneratedModels\BatchQueryCommentReactionsRequest $requestData
+     * @return StreamResponse<GeneratedModels\BatchQueryCommentReactionsResponse>
+     * @throws StreamException
+     */
+    public function batchQueryCommentReactions(GeneratedModels\BatchQueryCommentReactionsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/reactions/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BatchQueryCommentReactionsResponse::class);
     }
     /**
      * Deletes a bookmark from a comment
@@ -715,15 +828,23 @@ trait FeedsTrait
      * Get a comment by ID
      *
      * @param string $id
+     * @param string $language
+     * @param bool $translateText
      * @param string $userID
      * @return StreamResponse<GeneratedModels\GetCommentResponse>
      * @throws StreamException
      */
-    public function getComment(string $id, string $userID): StreamResponse {
+    public function getComment(string $id, string $language, bool $translateText, string $userID): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
+        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
@@ -830,6 +951,8 @@ trait FeedsTrait
      * @param string $sort
      * @param int $repliesLimit
      * @param string $idAround
+     * @param string $language
+     * @param bool $translateText
      * @param string $userID
      * @param int $limit
      * @param string $prev
@@ -837,7 +960,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetCommentRepliesResponse>
      * @throws StreamException
      */
-    public function getCommentReplies(string $id, int $depth, string $sort, int $repliesLimit, string $idAround, string $userID, int $limit, string $prev, string $next): StreamResponse {
+    public function getCommentReplies(string $id, int $depth, string $sort, int $repliesLimit, string $idAround, string $language, bool $translateText, string $userID, int $limit, string $prev, string $next): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/replies';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -853,6 +976,12 @@ trait FeedsTrait
         }
         if ($idAround !== null) {
             $queryParams['id_around'] = $idAround;
+        }
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
@@ -884,6 +1013,24 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreCommentResponse::class);
+    }
+    /**
+     * Translates a comment's text to a given language using automated translation
+     * Sends events:
+     * - feeds.comment.updated
+     *
+     * @param string $id
+     * @param GeneratedModels\TranslateCommentRequest $requestData
+     * @return StreamResponse<GeneratedModels\TranslateCommentResponse>
+     * @throws StreamException
+     */
+    public function translateComment(string $id, GeneratedModels\TranslateCommentRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{id}/translate';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TranslateCommentResponse::class);
     }
     /**
      * List all feed groups for the application
@@ -946,16 +1093,24 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
+     * @param string $language
+     * @param bool $translateText
      * @param GeneratedModels\GetOrCreateFeedRequest $requestData
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedResponse>
      * @throws StreamException
      */
-    public function getOrCreateFeed(string $feedGroupID, string $feedID, GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
+    public function getOrCreateFeed(string $feedGroupID, string $feedID, string $language, bool $translateText, GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
+        }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateFeedResponse::class);
     }
@@ -1137,16 +1292,24 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
+     * @param string $language
+     * @param bool $translateText
      * @param GeneratedModels\QueryPinnedActivitiesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryPinnedActivitiesResponse>
      * @throws StreamException
      */
-    public function queryPinnedActivities(string $feedGroupID, string $feedID, GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
+    public function queryPinnedActivities(string $feedGroupID, string $feedID, string $language, bool $translateText, GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/pinned_activities/query';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
+        }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryPinnedActivitiesResponse::class);
     }

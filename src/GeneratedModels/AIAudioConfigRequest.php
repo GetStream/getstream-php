@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ClosedCaptionRuleParameters extends BaseModel
+class AIAudioConfigRequest extends BaseModel
 {
     public function __construct(
-        public ?array $harmLabels = null,
-        public ?array $llmHarmLabels = null,
-        public ?int $threshold = null,
-        public ?string $timeWindow = null,
-        public ?string $severity = null,
+        public ?string $profile = null,
+        /** @var array<BodyguardRule>|null */
+        #[ArrayOf(BodyguardRule::class)]
+        public ?array $rules = null,
     ) {
     }
 
