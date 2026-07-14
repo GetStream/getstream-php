@@ -23,8 +23,8 @@ trait FeedMethods
      * @throws StreamException
      */
     public function deleteFeed(
-        bool $hardDelete, bool $purgeUserActivities, ): StreamResponse {
-        return $this->feedsV3Client->deleteFeed($this->feedGroup, $this->feedId,$hardDelete, $purgeUserActivities);
+        ?bool $hardDelete = null, ?bool $purgeUserActivities = null): StreamResponse {
+        return $this->feedsV3Client->deleteFeed($this->feedGroup, $this->feedId, $hardDelete, $purgeUserActivities);
     }
     /**
      * Create a single feed for a given feed group
@@ -36,8 +36,8 @@ trait FeedMethods
      * @throws StreamException
      */
     public function getOrCreateFeed(
-        string $language, bool $translateText, GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
-        return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId,$language, $translateText, $requestData);
+        GeneratedModels\GetOrCreateFeedRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+        return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId, $requestData, $language, $translateText);
     }
     /**
      * Update an existing feed
@@ -71,8 +71,8 @@ trait FeedMethods
      * @throws StreamException
      */
     public function unpinActivity(
-        string $activityID, bool $enrichOwnFields, string $userID, ): StreamResponse {
-        return $this->feedsV3Client->unpinActivity($this->feedGroup, $this->feedId, $activityID,$enrichOwnFields, $userID);
+        string $activityID, ?bool $enrichOwnFields = null, ?string $userID = null): StreamResponse {
+        return $this->feedsV3Client->unpinActivity($this->feedGroup, $this->feedId, $activityID, $enrichOwnFields, $userID);
     }
     /**
      * Pin an activity to a feed. Pinned activities are typically displayed at the top of a feed.
@@ -151,8 +151,8 @@ trait FeedMethods
      * @throws StreamException
      */
     public function queryPinnedActivities(
-        string $language, bool $translateText, GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
-        return $this->feedsV3Client->queryPinnedActivities($this->feedGroup, $this->feedId,$language, $translateText, $requestData);
+        GeneratedModels\QueryPinnedActivitiesRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+        return $this->feedsV3Client->queryPinnedActivities($this->feedGroup, $this->feedId, $requestData, $language, $translateText);
     }
 }
 

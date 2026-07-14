@@ -25,7 +25,7 @@ trait ModerationTrait
      * @return StreamResponse<GeneratedModels\GetActionConfigResponse>
      * @throws StreamException
      */
-    public function getActionConfig(string $queueType, string $entityType, bool $excludeDefaults, bool $onlyDefaults, string $userID): StreamResponse {
+    public function getActionConfig(?string $queueType = null, ?string $entityType = null, ?bool $excludeDefaults = null, ?bool $onlyDefaults = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/moderation/action_config';
 
         $queryParams = [];
@@ -97,7 +97,7 @@ trait ModerationTrait
      * @return StreamResponse<GeneratedModels\DeleteActionConfigResponse>
      * @throws StreamException
      */
-    public function deleteActionConfig(string $id, string $userID): StreamResponse {
+    public function deleteActionConfig(string $id, ?string $userID = null): StreamResponse {
         $path = '/api/v2/moderation/action_config/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -286,7 +286,7 @@ trait ModerationTrait
      * @return StreamResponse<GeneratedModels\DeleteModerationConfigResponse>
      * @throws StreamException
      */
-    public function deleteConfig(string $key, string $team, string $userID): StreamResponse {
+    public function deleteConfig(string $key, ?string $team = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/moderation/config/{key}';
         $path = str_replace('{key}', (string) $key, $path);
 
@@ -308,7 +308,7 @@ trait ModerationTrait
      * @return StreamResponse<GeneratedModels\GetConfigResponse>
      * @throws StreamException
      */
-    public function getConfig(string $key, string $team): StreamResponse {
+    public function getConfig(string $key, ?string $team = null): StreamResponse {
         $path = '/api/v2/moderation/config/{key}';
         $path = str_replace('{key}', (string) $key, $path);
 
@@ -492,7 +492,7 @@ trait ModerationTrait
      * @return StreamResponse<GeneratedModels\DeleteModerationRuleResponse>
      * @throws StreamException
      */
-    public function deleteModerationRule(string $userID): StreamResponse {
+    public function deleteModerationRule(?string $userID = null): StreamResponse {
         $path = '/api/v2/moderation/moderation_rule/{id}';
 
         $queryParams = [];
@@ -575,7 +575,7 @@ trait ModerationTrait
      * @return StreamResponse<GeneratedModels\QueueResponse>
      * @throws StreamException
      */
-    public function getQueue(string $id, string $userID): StreamResponse {
+    public function getQueue(string $id, ?string $userID = null): StreamResponse {
         $path = '/api/v2/moderation/queues/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -710,7 +710,7 @@ trait ModerationTrait
      * @return StreamResponse<GeneratedModels\UnbanResponse>
      * @throws StreamException
      */
-    public function unban(string $targetUserID, string $channelCid, string $createdBy, GeneratedModels\UnbanRequest $requestData): StreamResponse {
+    public function unban(GeneratedModels\UnbanRequest $requestData, string $targetUserID, ?string $channelCid = null, ?string $createdBy = null): StreamResponse {
         $path = '/api/v2/moderation/unban';
 
         $queryParams = [];

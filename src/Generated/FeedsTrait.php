@@ -95,7 +95,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\QueryActivitiesResponse>
      * @throws StreamException
      */
-    public function queryActivities(string $language, bool $translateText, GeneratedModels\QueryActivitiesRequest $requestData): StreamResponse {
+    public function queryActivities(GeneratedModels\QueryActivitiesRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/activities/query';
 
         $queryParams = [];
@@ -131,7 +131,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteBookmarkResponse>
      * @throws StreamException
      */
-    public function deleteBookmark(string $activityID, string $folderID, string $userID): StreamResponse {
+    public function deleteBookmark(string $activityID, ?string $folderID = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/bookmarks';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -231,7 +231,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\PollVoteResponse>
      * @throws StreamException
      */
-    public function deletePollVote(string $activityID, string $pollID, string $voteID, string $userID): StreamResponse {
+    public function deletePollVote(string $activityID, string $pollID, string $voteID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/polls/{poll_id}/vote/{vote_id}';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
         $path = str_replace('{poll_id}', (string) $pollID, $path);
@@ -286,7 +286,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteActivityReactionResponse>
      * @throws StreamException
      */
-    public function deleteActivityReaction(string $activityID, string $type, bool $deleteNotificationActivity, string $userID): StreamResponse {
+    public function deleteActivityReaction(string $activityID, string $type, ?bool $deleteNotificationActivity = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/reactions/{type}';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
         $path = str_replace('{type}', (string) $type, $path);
@@ -311,7 +311,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\QueryActivitySharesResponse>
      * @throws StreamException
      */
-    public function queryActivityShares(string $activityID, int $limit, string $prev, string $next): StreamResponse {
+    public function queryActivityShares(string $activityID, ?int $limit = null, ?string $prev = null, ?string $next = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/shares';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
@@ -337,7 +337,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteActivityResponse>
      * @throws StreamException
      */
-    public function deleteActivity(string $id, bool $hardDelete, bool $deleteNotificationActivity): StreamResponse {
+    public function deleteActivity(string $id, ?bool $hardDelete = null, ?bool $deleteNotificationActivity = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -355,25 +355,19 @@ trait FeedsTrait
      * Returns activity by ID
      *
      * @param string $id
-     * @param string $language
-     * @param bool $translateText
      * @param string $commentSort
      * @param int $commentLimit
      * @param string $userID
+     * @param string $language
+     * @param bool $translateText
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
      * @throws StreamException
      */
-    public function getActivity(string $id, string $language, bool $translateText, string $commentSort, int $commentLimit, string $userID): StreamResponse {
+    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        if ($language !== null) {
-            $queryParams['language'] = $language;
-        }
-        if ($translateText !== null) {
-            $queryParams['translate_text'] = $translateText;
-        }
         if ($commentSort !== null) {
             $queryParams['comment_sort'] = $commentSort;
         }
@@ -382,6 +376,12 @@ trait FeedsTrait
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
+        }
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActivityResponse::class);
@@ -431,7 +431,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\RestoreActivityResponse>
      * @throws StreamException
      */
-    public function restoreActivity(string $id, bool $enrichOwnFields, GeneratedModels\RestoreActivityRequest $requestData): StreamResponse {
+    public function restoreActivity(string $id, GeneratedModels\RestoreActivityRequest $requestData, ?bool $enrichOwnFields = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}/restore';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -514,7 +514,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\QueryBookmarksResponse>
      * @throws StreamException
      */
-    public function queryBookmarks(string $language, bool $translateText, GeneratedModels\QueryBookmarksRequest $requestData): StreamResponse {
+    public function queryBookmarks(GeneratedModels\QueryBookmarksRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/bookmarks/query';
 
         $queryParams = [];
@@ -552,7 +552,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\ReadCollectionsResponse>
      * @throws StreamException
      */
-    public function readCollections(string $userID, array $collectionRefs): StreamResponse {
+    public function readCollections(?string $userID = null, ?array $collectionRefs = null): StreamResponse {
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
@@ -630,16 +630,16 @@ trait FeedsTrait
      * @param string $sort
      * @param int $repliesLimit
      * @param string $idAround
-     * @param string $language
-     * @param bool $translateText
      * @param string $userID
      * @param int $limit
      * @param string $prev
      * @param string $next
+     * @param string $language
+     * @param bool $translateText
      * @return StreamResponse<GeneratedModels\GetCommentsResponse>
      * @throws StreamException
      */
-    public function getComments(string $objectID, string $objectType, int $depth, string $sort, int $repliesLimit, string $idAround, string $language, bool $translateText, string $userID, int $limit, string $prev, string $next): StreamResponse {
+    public function getComments(string $objectID, string $objectType, ?int $depth = null, ?string $sort = null, ?int $repliesLimit = null, ?string $idAround = null, ?string $userID = null, ?int $limit = null, ?string $prev = null, ?string $next = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/comments';
 
         $queryParams = [];
@@ -661,12 +661,6 @@ trait FeedsTrait
         if ($idAround !== null) {
             $queryParams['id_around'] = $idAround;
         }
-        if ($language !== null) {
-            $queryParams['language'] = $language;
-        }
-        if ($translateText !== null) {
-            $queryParams['translate_text'] = $translateText;
-        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
@@ -678,6 +672,12 @@ trait FeedsTrait
         }
         if ($next !== null) {
             $queryParams['next'] = $next;
+        }
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentsResponse::class);
@@ -719,7 +719,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\QueryCommentsResponse>
      * @throws StreamException
      */
-    public function queryComments(string $language, bool $translateText, GeneratedModels\QueryCommentsRequest $requestData): StreamResponse {
+    public function queryComments(GeneratedModels\QueryCommentsRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/comments/query';
 
         $queryParams = [];
@@ -755,7 +755,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteCommentBookmarkResponse>
      * @throws StreamException
      */
-    public function deleteCommentBookmark(string $commentID, string $folderID, string $userID): StreamResponse {
+    public function deleteCommentBookmark(string $commentID, ?string $folderID = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
         $path = str_replace('{comment_id}', (string) $commentID, $path);
 
@@ -810,7 +810,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteCommentResponse>
      * @throws StreamException
      */
-    public function deleteComment(string $id, bool $hardDelete, bool $deleteNotificationActivity): StreamResponse {
+    public function deleteComment(string $id, ?bool $hardDelete = null, ?bool $deleteNotificationActivity = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -828,25 +828,25 @@ trait FeedsTrait
      * Get a comment by ID
      *
      * @param string $id
+     * @param string $userID
      * @param string $language
      * @param bool $translateText
-     * @param string $userID
      * @return StreamResponse<GeneratedModels\GetCommentResponse>
      * @throws StreamException
      */
-    public function getComment(string $id, string $language, bool $translateText, string $userID): StreamResponse {
+    public function getComment(string $id, ?string $userID = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         if ($language !== null) {
             $queryParams['language'] = $language;
         }
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
-        }
-        if ($userID !== null) {
-            $queryParams['user_id'] = $userID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentResponse::class);
@@ -928,7 +928,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteCommentReactionResponse>
      * @throws StreamException
      */
-    public function deleteCommentReaction(string $id, string $type, bool $deleteNotificationActivity, string $userID): StreamResponse {
+    public function deleteCommentReaction(string $id, string $type, ?bool $deleteNotificationActivity = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/reactions/{type}';
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{type}', (string) $type, $path);
@@ -951,16 +951,16 @@ trait FeedsTrait
      * @param string $sort
      * @param int $repliesLimit
      * @param string $idAround
-     * @param string $language
-     * @param bool $translateText
      * @param string $userID
      * @param int $limit
      * @param string $prev
      * @param string $next
+     * @param string $language
+     * @param bool $translateText
      * @return StreamResponse<GeneratedModels\GetCommentRepliesResponse>
      * @throws StreamException
      */
-    public function getCommentReplies(string $id, int $depth, string $sort, int $repliesLimit, string $idAround, string $language, bool $translateText, string $userID, int $limit, string $prev, string $next): StreamResponse {
+    public function getCommentReplies(string $id, ?int $depth = null, ?string $sort = null, ?int $repliesLimit = null, ?string $idAround = null, ?string $userID = null, ?int $limit = null, ?string $prev = null, ?string $next = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/replies';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -977,12 +977,6 @@ trait FeedsTrait
         if ($idAround !== null) {
             $queryParams['id_around'] = $idAround;
         }
-        if ($language !== null) {
-            $queryParams['language'] = $language;
-        }
-        if ($translateText !== null) {
-            $queryParams['translate_text'] = $translateText;
-        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
@@ -994,6 +988,12 @@ trait FeedsTrait
         }
         if ($next !== null) {
             $queryParams['next'] = $next;
+        }
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentRepliesResponse::class);
@@ -1039,7 +1039,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\ListFeedGroupsResponse>
      * @throws StreamException
      */
-    public function listFeedGroups(bool $includeSoftDeleted): StreamResponse {
+    public function listFeedGroups(?bool $includeSoftDeleted = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups';
 
         $queryParams = [];
@@ -1073,7 +1073,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteFeedResponse>
      * @throws StreamException
      */
-    public function deleteFeed(string $feedGroupID, string $feedID, bool $hardDelete, bool $purgeUserActivities): StreamResponse {
+    public function deleteFeed(string $feedGroupID, string $feedID, ?bool $hardDelete = null, ?bool $purgeUserActivities = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -1099,7 +1099,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedResponse>
      * @throws StreamException
      */
-    public function getOrCreateFeed(string $feedGroupID, string $feedID, string $language, bool $translateText, GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
+    public function getOrCreateFeed(string $feedGroupID, string $feedID, GeneratedModels\GetOrCreateFeedRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -1161,7 +1161,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\UnpinActivityResponse>
      * @throws StreamException
      */
-    public function unpinActivity(string $feedGroupID, string $feedID, string $activityID, bool $enrichOwnFields, string $userID): StreamResponse {
+    public function unpinActivity(string $feedGroupID, string $feedID, string $activityID, ?bool $enrichOwnFields = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/activities/{activity_id}/pin';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -1298,7 +1298,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\QueryPinnedActivitiesResponse>
      * @throws StreamException
      */
-    public function queryPinnedActivities(string $feedGroupID, string $feedID, string $language, bool $translateText, GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
+    public function queryPinnedActivities(string $feedGroupID, string $feedID, GeneratedModels\QueryPinnedActivitiesRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/pinned_activities/query';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -1322,7 +1322,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetFollowSuggestionsResponse>
      * @throws StreamException
      */
-    public function getFollowSuggestions(string $feedGroupID, int $limit, string $userID): StreamResponse {
+    public function getFollowSuggestions(string $feedGroupID, ?int $limit = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/follow_suggestions';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
 
@@ -1359,7 +1359,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\DeleteFeedGroupResponse>
      * @throws StreamException
      */
-    public function deleteFeedGroup(string $id, bool $hardDelete): StreamResponse {
+    public function deleteFeedGroup(string $id, ?bool $hardDelete = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1378,7 +1378,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetFeedGroupResponse>
      * @throws StreamException
      */
-    public function getFeedGroup(string $id, bool $includeSoftDeleted): StreamResponse {
+    public function getFeedGroup(string $id, ?bool $includeSoftDeleted = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1622,7 +1622,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetFeedsRateLimitsResponse>
      * @throws StreamException
      */
-    public function getFeedsRateLimits(string $endpoints, bool $android, bool $ios, bool $web, bool $serverSide): StreamResponse {
+    public function getFeedsRateLimits(?string $endpoints = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?bool $serverSide = null): StreamResponse {
         $path = '/api/v2/feeds/feeds/rate_limits';
 
         $queryParams = [];
@@ -1767,7 +1767,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\UnfollowResponse>
      * @throws StreamException
      */
-    public function unfollow(string $source, string $target, bool $deleteNotificationActivity, bool $keepHistory, bool $enrichOwnFields): StreamResponse {
+    public function unfollow(string $source, string $target, ?bool $deleteNotificationActivity = null, ?bool $keepHistory = null, ?bool $enrichOwnFields = null): StreamResponse {
         $path = '/api/v2/feeds/follows/{source}/{target}';
         $path = str_replace('{source}', (string) $source, $path);
         $path = str_replace('{target}', (string) $target, $path);
@@ -1955,7 +1955,7 @@ trait FeedsTrait
      * @return StreamResponse<GeneratedModels\GetUserInterestsResponse>
      * @throws StreamException
      */
-    public function getUserInterests(string $userID, int $limit): StreamResponse {
+    public function getUserInterests(string $userID, ?int $limit = null): StreamResponse {
         $path = '/api/v2/feeds/users/{user_id}/interests';
         $path = str_replace('{user_id}', (string) $userID, $path);
 
