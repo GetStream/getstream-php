@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [9.0.0] - 2026-07-15
+
+OpenAPI regeneration for optional query parameters ([FEEDS-1651](https://linear.app/stream/issue/FEEDS-1651), [#54](https://github.com/GetStream/getstream-php/pull/54)).
+
+### Breaking changes
+
+Optional OpenAPI query parameters are now nullable with `= null` defaults, and **required request bodies come before optional query params**.
+
+Positional call sites that passed query args before the request body will break:
+
+```php
+// Before (v8)
+$client->queryActivities($language, $translateText, $request);
+$client->unban($userId, $channelCid, $createdBy, $request);
+
+// After (v9)
+$client->queryActivities($request, $language = null, $translateText = null);
+$client->unban($request, $userId, $channelCid = null, $createdBy = null);
+```
+
+Migration: pass the request object first, then optional query args (named arguments recommended).
+
+`getActivity` query order keeps enrichment args ahead of translation params:
+
+```php
+$client->getActivity($id, $commentSort = null, $commentLimit = null, $userID = null, $language = null, $translateText = null);
+// Compatible: getActivity($id, 'last', 10, $userId);
+```
+
+### Fixed
+
+- Optional query/path parameters are no longer required in generated PHP method signatures
+- Feeds translation query params (`language`, `translate_text`) are optional and appended after existing `getActivity` / `getComment` query params
+
+### Added
+
+- Block list import support (`importBlockList` + related models)
+- Pagination / filter query params on block list list/get/delete helpers
+
 ## [7.4.0] - 2026-06-19
 
 ### Fixed — response type naming collisions
