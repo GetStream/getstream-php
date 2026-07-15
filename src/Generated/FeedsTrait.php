@@ -355,25 +355,19 @@ trait FeedsTrait
      * Returns activity by ID
      *
      * @param string $id
-     * @param ?string $language
-     * @param ?bool $translateText
      * @param ?string $commentSort
      * @param ?int $commentLimit
      * @param ?string $userID
+     * @param ?string $language
+     * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
      * @throws StreamException
      */
-    public function getActivity(string $id, ?string $language = null, ?bool $translateText = null, ?string $commentSort = null, ?int $commentLimit = null, ?string $userID = null): StreamResponse {
+    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        if ($language !== null) {
-            $queryParams['language'] = $language;
-        }
-        if ($translateText !== null) {
-            $queryParams['translate_text'] = $translateText;
-        }
         if ($commentSort !== null) {
             $queryParams['comment_sort'] = $commentSort;
         }
@@ -382,6 +376,12 @@ trait FeedsTrait
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
+        }
+        if ($language !== null) {
+            $queryParams['language'] = $language;
+        }
+        if ($translateText !== null) {
+            $queryParams['translate_text'] = $translateText;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActivityResponse::class);
@@ -828,25 +828,25 @@ trait FeedsTrait
      * Get a comment by ID
      *
      * @param string $id
+     * @param ?string $userID
      * @param ?string $language
      * @param ?bool $translateText
-     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\GetCommentResponse>
      * @throws StreamException
      */
-    public function getComment(string $id, ?string $language = null, ?bool $translateText = null, ?string $userID = null): StreamResponse {
+    public function getComment(string $id, ?string $userID = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         if ($language !== null) {
             $queryParams['language'] = $language;
         }
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
-        }
-        if ($userID !== null) {
-            $queryParams['user_id'] = $userID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentResponse::class);
