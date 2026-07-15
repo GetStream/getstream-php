@@ -31,6 +31,7 @@ class FeedsV3ActivityResponse extends BaseModel
         #[ArrayOf(FeedsV3CommentResponse::class)]
         public ?array $comments = null,
         public ?string $text = null,
+        public ?array $i18n = null,
         public ?FeedsActivityLocation $location = null,
         public ?FeedsV3ActivityResponse $parent = null,
         public ?PollResponseData $poll = null,
@@ -50,6 +51,9 @@ class FeedsV3ActivityResponse extends BaseModel
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $latestReactions = null,
+        /** @var array<FeedsShareResponse>|null */
+        #[ArrayOf(FeedsShareResponse::class)]
+        public ?array $latestShares = null,
         /** @var array<string, FeedsReactionGroupResponse>|null */
         #[MapOf(FeedsReactionGroupResponse::class)]
         public ?array $reactionGroups = null,

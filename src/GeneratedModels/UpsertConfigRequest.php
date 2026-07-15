@@ -18,6 +18,7 @@ class UpsertConfigRequest extends BaseModel
         public ?GoogleVisionConfig $googleVisionConfig = null,
         public ?AIImageConfig $aiImageConfig = null,
         public ?AIVideoConfig $aiVideoConfig = null,
+        public ?AIAudioConfigRequest $aiAudioConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?FloodConfig $floodConfig = null,
         public ?RuleBuilderConfig $ruleBuilderConfig = null,

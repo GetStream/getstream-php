@@ -11,6 +11,7 @@ class UpdateBlockListRequest extends BaseModel
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,
         public ?bool $isConfusableFoldingEnabled = null,
+        public ?bool $isSubstringMatchingEnabled = null,
     ) {
     }
 

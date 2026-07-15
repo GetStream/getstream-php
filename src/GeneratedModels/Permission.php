@@ -15,6 +15,7 @@ class Permission extends BaseModel
         public ?object $condition = null, // MongoDB style condition which decides whether or not the permission is granted
         public ?bool $custom = null, // Whether this is a custom permission or built-in
         public ?string $level = null, // Level at which permission could be applied (app or channel). One of: app, channel
+        public ?string $ownerResource = null, // Resource type that defines ownership for this permission's action (e.g. 'Channel' for CreateMessage, 'Message' for UpdateMessage). Identical across all variants of an action; primarily meaningful for owner grants.
         public ?array $tags = null, // List of tags of the permission
     ) {
     }
