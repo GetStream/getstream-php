@@ -61,13 +61,13 @@ trait ChatTrait
      * Get campaign by ID.
      *
      * @param string $id
-     * @param string $prev
-     * @param string $next
-     * @param int $limit
+     * @param ?string $prev
+     * @param ?string $next
+     * @param ?int $limit
      * @return StreamResponse<GeneratedModels\GetCampaignResponse>
      * @throws StreamException
      */
-    public function getCampaign(string $id, string $prev, string $next, int $limit): StreamResponse {
+    public function getCampaign(string $id, ?string $prev = null, ?string $next = null, ?int $limit = null): StreamResponse {
         $path = '/api/v2/chat/campaigns/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -188,12 +188,12 @@ trait ChatTrait
     /**
      * Mark the status of a channel message delivered.
      *
-     * @param string $userID
      * @param GeneratedModels\MarkDeliveredRequest $requestData
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\MarkDeliveredResponse>
      * @throws StreamException
      */
-    public function markDelivered(string $userID, GeneratedModels\MarkDeliveredRequest $requestData): StreamResponse {
+    public function markDelivered(GeneratedModels\MarkDeliveredRequest $requestData, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/delivered';
 
         $queryParams = [];
@@ -262,11 +262,11 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param bool $hardDelete
+     * @param ?bool $hardDelete
      * @return StreamResponse<GeneratedModels\DeleteChannelResponse>
      * @throws StreamException
      */
-    public function deleteChannel(string $type, string $id, bool $hardDelete): StreamResponse {
+    public function deleteChannel(string $type, string $id, ?bool $hardDelete = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -283,14 +283,14 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param bool $state
-     * @param int $messagesLimit
-     * @param int $membersLimit
-     * @param int $watchersLimit
+     * @param ?bool $state
+     * @param ?int $messagesLimit
+     * @param ?int $membersLimit
+     * @param ?int $watchersLimit
      * @return StreamResponse<GeneratedModels\ChannelStateResponse>
      * @throws StreamException
      */
-    public function getChannel(string $type, string $id, bool $state, int $messagesLimit, int $membersLimit, int $watchersLimit): StreamResponse {
+    public function getChannel(string $type, string $id, ?bool $state = null, ?int $messagesLimit = null, ?int $membersLimit = null, ?int $watchersLimit = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -362,12 +362,12 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param string $parentID
-     * @param string $userID
+     * @param ?string $parentID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteDraft(string $type, string $id, string $parentID, string $userID): StreamResponse {
+    public function deleteDraft(string $type, string $id, ?string $parentID = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/draft';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -387,12 +387,12 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param string $parentID
-     * @param string $userID
+     * @param ?string $parentID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\GetDraftResponse>
      * @throws StreamException
      */
-    public function getDraft(string $type, string $id, string $parentID, string $userID): StreamResponse {
+    public function getDraft(string $type, string $id, ?string $parentID = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/draft';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -430,11 +430,11 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param string $url
+     * @param ?string $url
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteChannelFile(string $type, string $id, string $url): StreamResponse {
+    public function deleteChannelFile(string $type, string $id, ?string $url = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/file';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -489,11 +489,11 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param string $url
+     * @param ?string $url
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteChannelImage(string $type, string $id, string $url): StreamResponse {
+    public function deleteChannelImage(string $type, string $id, ?string $url = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/image';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -527,12 +527,12 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param string $userID
      * @param GeneratedModels\UpdateMemberPartialRequest $requestData
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\UpdateMemberPartialResponse>
      * @throws StreamException
      */
-    public function updateMemberPartial(string $type, string $id, string $userID, GeneratedModels\UpdateMemberPartialRequest $requestData): StreamResponse {
+    public function updateMemberPartial(string $type, string $id, GeneratedModels\UpdateMemberPartialRequest $requestData, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/member';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -865,11 +865,11 @@ trait ChatTrait
     /**
      * Find and filter channel members
      *
-     * @param GeneratedModels\QueryMembersPayload $payload
+     * @param ?GeneratedModels\QueryMembersPayload $payload
      * @return StreamResponse<GeneratedModels\MembersResponse>
      * @throws StreamException
      */
-    public function queryMembers(GeneratedModels\QueryMembersPayload $payload): StreamResponse {
+    public function queryMembers(?GeneratedModels\QueryMembersPayload $payload = null): StreamResponse {
         $path = '/api/v2/chat/members';
 
         $queryParams = [];
@@ -903,13 +903,13 @@ trait ChatTrait
      * - message.deleted
      *
      * @param string $id
-     * @param bool $hard
-     * @param string $deletedBy
-     * @param bool $deleteForMe
+     * @param ?bool $hard
+     * @param ?string $deletedBy
+     * @param ?bool $deleteForMe
      * @return StreamResponse<GeneratedModels\DeleteMessageResponse>
      * @throws StreamException
      */
-    public function deleteMessage(string $id, bool $hard, string $deletedBy, bool $deleteForMe): StreamResponse {
+    public function deleteMessage(string $id, ?bool $hard = null, ?string $deletedBy = null, ?bool $deleteForMe = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -930,11 +930,11 @@ trait ChatTrait
      * Returns message by ID
      *
      * @param string $id
-     * @param bool $showDeletedMessage
+     * @param ?bool $showDeletedMessage
      * @return StreamResponse<GeneratedModels\GetMessageResponse>
      * @throws StreamException
      */
-    public function getMessage(string $id, bool $showDeletedMessage): StreamResponse {
+    public function getMessage(string $id, ?bool $showDeletedMessage = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1062,11 +1062,11 @@ trait ChatTrait
      *
      * @param string $id
      * @param string $type
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\DeleteReactionResponse>
      * @throws StreamException
      */
-    public function deleteReaction(string $id, string $type, string $userID): StreamResponse {
+    public function deleteReaction(string $id, string $type, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}/reaction/{type}';
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{type}', (string) $type, $path);
@@ -1082,12 +1082,12 @@ trait ChatTrait
      * Returns list of reactions of specific message
      *
      * @param string $id
-     * @param int $limit
-     * @param int $offset
+     * @param ?int $limit
+     * @param ?int $offset
      * @return StreamResponse<GeneratedModels\GetReactionsResponse>
      * @throws StreamException
      */
-    public function getReactions(string $id, int $limit, int $offset): StreamResponse {
+    public function getReactions(string $id, ?int $limit = null, ?int $offset = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}/reactions';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1187,11 +1187,11 @@ trait ChatTrait
      * @param string $messageID
      * @param string $pollID
      * @param string $voteID
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\PollVoteResponse>
      * @throws StreamException
      */
-    public function deletePollVote(string $messageID, string $pollID, string $voteID, string $userID): StreamResponse {
+    public function deletePollVote(string $messageID, string $pollID, string $voteID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/messages/{message_id}/polls/{poll_id}/vote/{vote_id}';
         $path = str_replace('{message_id}', (string) $messageID, $path);
         $path = str_replace('{poll_id}', (string) $pollID, $path);
@@ -1210,11 +1210,11 @@ trait ChatTrait
      * - reminder.deleted
      *
      * @param string $messageID
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\DeleteReminderResponse>
      * @throws StreamException
      */
-    public function deleteReminder(string $messageID, string $userID): StreamResponse {
+    public function deleteReminder(string $messageID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/messages/{message_id}/reminders';
         $path = str_replace('{message_id}', (string) $messageID, $path);
 
@@ -1265,17 +1265,17 @@ trait ChatTrait
      * Returns replies (thread) of the message
      *
      * @param string $parentID
-     * @param int $limit
-     * @param string $idGte
-     * @param string $idGt
-     * @param string $idLte
-     * @param string $idLt
-     * @param string $idAround
-     * @param array $sort
+     * @param ?int $limit
+     * @param ?string $idGte
+     * @param ?string $idGt
+     * @param ?string $idLte
+     * @param ?string $idLt
+     * @param ?string $idAround
+     * @param ?array $sort
      * @return StreamResponse<GeneratedModels\GetRepliesResponse>
      * @throws StreamException
      */
-    public function getReplies(string $parentID, int $limit, string $idGte, string $idGt, string $idLte, string $idLt, string $idAround, array $sort): StreamResponse {
+    public function getReplies(string $parentID, ?int $limit = null, ?string $idGte = null, ?string $idGt = null, ?string $idLte = null, ?string $idLt = null, ?string $idAround = null, ?array $sort = null): StreamResponse {
         $path = '/api/v2/chat/messages/{parent_id}/replies';
         $path = str_replace('{parent_id}', (string) $parentID, $path);
 
@@ -1307,11 +1307,11 @@ trait ChatTrait
     /**
      * Find and filter message flags
      *
-     * @param GeneratedModels\QueryMessageFlagsPayload $payload
+     * @param ?GeneratedModels\QueryMessageFlagsPayload $payload
      * @return StreamResponse<GeneratedModels\QueryMessageFlagsResponse>
      * @throws StreamException
      */
-    public function queryMessageFlags(GeneratedModels\QueryMessageFlagsPayload $payload): StreamResponse {
+    public function queryMessageFlags(?GeneratedModels\QueryMessageFlagsPayload $payload = null): StreamResponse {
         $path = '/api/v2/chat/moderation/flags/message';
 
         $queryParams = [];
@@ -1360,11 +1360,11 @@ trait ChatTrait
     /**
      * Find and filter channel scoped or global user bans
      *
-     * @param GeneratedModels\QueryBannedUsersPayload $payload
+     * @param ?GeneratedModels\QueryBannedUsersPayload $payload
      * @return StreamResponse<GeneratedModels\QueryBannedUsersResponse>
      * @throws StreamException
      */
-    public function queryBannedUsers(GeneratedModels\QueryBannedUsersPayload $payload): StreamResponse {
+    public function queryBannedUsers(?GeneratedModels\QueryBannedUsersPayload $payload = null): StreamResponse {
         $path = '/api/v2/chat/query_banned_users';
 
         $queryParams = [];
@@ -1381,11 +1381,11 @@ trait ChatTrait
     /**
      * Find and filter future channel bans created by the authenticated user
      *
-     * @param GeneratedModels\QueryFutureChannelBansPayload $payload
+     * @param ?GeneratedModels\QueryFutureChannelBansPayload $payload
      * @return StreamResponse<GeneratedModels\QueryFutureChannelBansResponse>
      * @throws StreamException
      */
-    public function queryFutureChannelBans(GeneratedModels\QueryFutureChannelBansPayload $payload): StreamResponse {
+    public function queryFutureChannelBans(?GeneratedModels\QueryFutureChannelBansPayload $payload = null): StreamResponse {
         $path = '/api/v2/chat/query_future_channel_bans';
 
         $queryParams = [];
@@ -1471,11 +1471,11 @@ trait ChatTrait
     /**
      * Search messages across channels
      *
-     * @param GeneratedModels\SearchPayload $payload
+     * @param ?GeneratedModels\SearchPayload $payload
      * @return StreamResponse<GeneratedModels\SearchResponse>
      * @throws StreamException
      */
-    public function search(GeneratedModels\SearchPayload $payload): StreamResponse {
+    public function search(?GeneratedModels\SearchPayload $payload = null): StreamResponse {
         $path = '/api/v2/chat/search';
 
         $queryParams = [];
@@ -1666,13 +1666,13 @@ trait ChatTrait
      * Return a specific thread
      *
      * @param string $messageID
-     * @param int $replyLimit
-     * @param int $participantLimit
-     * @param int $memberLimit
+     * @param ?int $replyLimit
+     * @param ?int $participantLimit
+     * @param ?int $memberLimit
      * @return StreamResponse<GeneratedModels\GetThreadResponse>
      * @throws StreamException
      */
-    public function getThread(string $messageID, int $replyLimit, int $participantLimit, int $memberLimit): StreamResponse {
+    public function getThread(string $messageID, ?int $replyLimit = null, ?int $participantLimit = null, ?int $memberLimit = null): StreamResponse {
         $path = '/api/v2/chat/threads/{message_id}';
         $path = str_replace('{message_id}', (string) $messageID, $path);
 
@@ -1710,11 +1710,11 @@ trait ChatTrait
     /**
      * Fetch unread counts for a single user
      *
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\WrappedUnreadCountsResponse>
      * @throws StreamException
      */
-    public function unreadCounts(string $userID): StreamResponse {
+    public function unreadCounts(?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/unread';
 
         $queryParams = [];

@@ -44,16 +44,28 @@ trait CommonTrait
     /**
      * Returns all available block lists
      *
-     * @param string $team
+     * @param ?string $team
+     * @param ?string $ownerUserID
+     * @param ?string $cursor
+     * @param ?int $limit
      * @return StreamResponse<GeneratedModels\ListBlockListResponse>
      * @throws StreamException
      */
-    public function listBlockLists(string $team): StreamResponse {
+    public function listBlockLists(?string $team = null, ?string $ownerUserID = null, ?string $cursor = null, ?int $limit = null): StreamResponse {
         $path = '/api/v2/blocklists';
 
         $queryParams = [];
         if ($team !== null) {
             $queryParams['team'] = $team;
+        }
+        if ($ownerUserID !== null) {
+            $queryParams['owner_user_id'] = $ownerUserID;
+        }
+        if ($cursor !== null) {
+            $queryParams['cursor'] = $cursor;
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListBlockListResponse::class);
@@ -73,20 +85,42 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateBlockListResponse::class);
     }
     /**
+     * Enqueues an asynchronous bulk import of items into an existing blocklist.
+     * Returns a task ID that can be polled via GET /tasks/{id} to observe progress.
+     * AddItems is idempotent: items already present are skipped without error.
+     * For lists exceeding the HTTP request-body cap, issue repeated import calls each
+     * carrying a bounded slice of items — the task result accumulates correctly.
+     *
+     * @param GeneratedModels\ImportBlockListRequest $requestData
+     * @return StreamResponse<GeneratedModels\ImportBlockListResponse>
+     * @throws StreamException
+     */
+    public function importBlockList(GeneratedModels\ImportBlockListRequest $requestData): StreamResponse {
+        $path = '/api/v2/blocklists/{id}/import';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ImportBlockListResponse::class);
+    }
+    /**
      * Deletes previously created application blocklist
      *
      * @param string $name
-     * @param string $team
+     * @param ?string $team
+     * @param ?string $ownerUserID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteBlockList(string $name, string $team): StreamResponse {
+    public function deleteBlockList(string $name, ?string $team = null, ?string $ownerUserID = null): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
         if ($team !== null) {
             $queryParams['team'] = $team;
+        }
+        if ($ownerUserID !== null) {
+            $queryParams['owner_user_id'] = $ownerUserID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
@@ -95,11 +129,11 @@ trait CommonTrait
      * Returns block list by given name
      *
      * @param string $name
-     * @param string $team
+     * @param ?string $team
      * @return StreamResponse<GeneratedModels\GetBlockListResponse>
      * @throws StreamException
      */
-    public function getBlockList(string $name, string $team): StreamResponse {
+    public function getBlockList(string $name, ?string $team = null): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
@@ -172,11 +206,11 @@ trait CommonTrait
      * Deletes one device
      *
      * @param string $id
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteDevice(string $id, string $userID): StreamResponse {
+    public function deleteDevice(string $id, ?string $userID = null): StreamResponse {
         $path = '/api/v2/devices';
 
         $queryParams = [];
@@ -192,11 +226,11 @@ trait CommonTrait
     /**
      * Returns all available devices
      *
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\ListDevicesResponse>
      * @throws StreamException
      */
-    public function listDevices(string $userID): StreamResponse {
+    public function listDevices(?string $userID = null): StreamResponse {
         $path = '/api/v2/devices';
 
         $queryParams = [];
@@ -362,11 +396,11 @@ trait CommonTrait
     /**
      * Lists all import v2 tasks for the app
      *
-     * @param int $state
+     * @param ?int $state
      * @return StreamResponse<GeneratedModels\ListImportV2TasksResponse>
      * @throws StreamException
      */
-    public function listImportV2Tasks(int $state): StreamResponse {
+    public function listImportV2Tasks(?int $state = null): StreamResponse {
         $path = '/api/v2/imports/v2';
 
         $queryParams = [];
@@ -584,12 +618,12 @@ trait CommonTrait
     /**
      * Queries polls
      *
-     * @param string $userID
      * @param GeneratedModels\QueryPollsRequest $requestData
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\QueryPollsResponse>
      * @throws StreamException
      */
-    public function queryPolls(string $userID, GeneratedModels\QueryPollsRequest $requestData): StreamResponse {
+    public function queryPolls(GeneratedModels\QueryPollsRequest $requestData, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/query';
 
         $queryParams = [];
@@ -606,11 +640,11 @@ trait CommonTrait
      * - poll.deleted
      *
      * @param string $pollID
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deletePoll(string $pollID, string $userID): StreamResponse {
+    public function deletePoll(string $pollID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/{poll_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -625,11 +659,11 @@ trait CommonTrait
      * Retrieves a poll
      *
      * @param string $pollID
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\PollResponse>
      * @throws StreamException
      */
-    public function getPoll(string $pollID, string $userID): StreamResponse {
+    public function getPoll(string $pollID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/{poll_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -707,11 +741,11 @@ trait CommonTrait
      *
      * @param string $pollID
      * @param string $optionID
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deletePollOption(string $pollID, string $optionID, string $userID): StreamResponse {
+    public function deletePollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
@@ -728,11 +762,11 @@ trait CommonTrait
      *
      * @param string $pollID
      * @param string $optionID
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
-    public function getPollOption(string $pollID, string $optionID, string $userID): StreamResponse {
+    public function getPollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
@@ -748,12 +782,12 @@ trait CommonTrait
      * Queries votes
      *
      * @param string $pollID
-     * @param string $userID
      * @param GeneratedModels\QueryPollVotesRequest $requestData
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\PollVotesResponse>
      * @throws StreamException
      */
-    public function queryPollVotes(string $pollID, string $userID, GeneratedModels\QueryPollVotesRequest $requestData): StreamResponse {
+    public function queryPollVotes(string $pollID, GeneratedModels\QueryPollVotesRequest $requestData, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/votes';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
@@ -826,11 +860,11 @@ trait CommonTrait
      * Retrieve push notification templates for Chat.
      *
      * @param string $pushProviderType
-     * @param string $pushProviderName
+     * @param ?string $pushProviderName
      * @return StreamResponse<GeneratedModels\GetPushTemplatesResponse>
      * @throws StreamException
      */
-    public function getPushTemplates(string $pushProviderType, string $pushProviderName): StreamResponse {
+    public function getPushTemplates(string $pushProviderType, ?string $pushProviderName = null): StreamResponse {
         $path = '/api/v2/push_templates';
 
         $queryParams = [];
@@ -860,15 +894,15 @@ trait CommonTrait
     /**
      * Get rate limits usage and quotas
      *
-     * @param bool $serverSide
-     * @param bool $android
-     * @param bool $ios
-     * @param bool $web
-     * @param string $endpoints
+     * @param ?bool $serverSide
+     * @param ?bool $android
+     * @param ?bool $ios
+     * @param ?bool $web
+     * @param ?string $endpoints
      * @return StreamResponse<GeneratedModels\GetRateLimitsResponse>
      * @throws StreamException
      */
-    public function getRateLimits(bool $serverSide, bool $android, bool $ios, bool $web, string $endpoints): StreamResponse {
+    public function getRateLimits(?bool $serverSide = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?string $endpoints = null): StreamResponse {
         $path = '/api/v2/rate_limits';
 
         $queryParams = [];
@@ -921,14 +955,14 @@ trait CommonTrait
      * Searches mentionable roles (user-assignable + channel-assignable, built-in and custom) by name prefix for autocomplete
      *
      * @param string $query
-     * @param int $limit
-     * @param string $nameGt
-     * @param string $roleType
-     * @param bool $includeGlobalRoles
+     * @param ?int $limit
+     * @param ?string $nameGt
+     * @param ?string $roleType
+     * @param ?bool $includeGlobalRoles
      * @return StreamResponse<GeneratedModels\SearchRolesResponse>
      * @throws StreamException
      */
-    public function searchRoles(string $query, int $limit, string $nameGt, string $roleType, bool $includeGlobalRoles): StreamResponse {
+    public function searchRoles(string $query, ?int $limit = null, ?string $nameGt = null, ?string $roleType = null, ?bool $includeGlobalRoles = null): StreamResponse {
         $path = '/api/v2/roles/search';
 
         $queryParams = [];
@@ -983,11 +1017,11 @@ trait CommonTrait
     /**
      * Deletes previously uploaded file
      *
-     * @param string $url
+     * @param ?string $url
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteFile(string $url): StreamResponse {
+    public function deleteFile(?string $url = null): StreamResponse {
         $path = '/api/v2/uploads/file';
 
         $queryParams = [];
@@ -1014,11 +1048,11 @@ trait CommonTrait
     /**
      * Deletes previously uploaded image
      *
-     * @param string $url
+     * @param ?string $url
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteImage(string $url): StreamResponse {
+    public function deleteImage(?string $url = null): StreamResponse {
         $path = '/api/v2/uploads/image';
 
         $queryParams = [];
@@ -1045,14 +1079,14 @@ trait CommonTrait
     /**
      * Lists user groups with cursor-based pagination
      *
-     * @param int $limit
-     * @param string $idGt
-     * @param string $createdAtGt
-     * @param string $teamID
+     * @param ?int $limit
+     * @param ?string $idGt
+     * @param ?string $createdAtGt
+     * @param ?string $teamID
      * @return StreamResponse<GeneratedModels\ListUserGroupsResponse>
      * @throws StreamException
      */
-    public function listUserGroups(int $limit, string $idGt, string $createdAtGt, string $teamID): StreamResponse {
+    public function listUserGroups(?int $limit = null, ?string $idGt = null, ?string $createdAtGt = null, ?string $teamID = null): StreamResponse {
         $path = '/api/v2/usergroups';
 
         $queryParams = [];
@@ -1089,14 +1123,14 @@ trait CommonTrait
      * Searches user groups by name prefix for autocomplete
      *
      * @param string $query
-     * @param int $limit
-     * @param string $nameGt
-     * @param string $idGt
-     * @param string $teamID
+     * @param ?int $limit
+     * @param ?string $nameGt
+     * @param ?string $idGt
+     * @param ?string $teamID
      * @return StreamResponse<GeneratedModels\SearchUserGroupsResponse>
      * @throws StreamException
      */
-    public function searchUserGroups(string $query, int $limit, string $nameGt, string $idGt, string $teamID): StreamResponse {
+    public function searchUserGroups(string $query, ?int $limit = null, ?string $nameGt = null, ?string $idGt = null, ?string $teamID = null): StreamResponse {
         $path = '/api/v2/usergroups/search';
 
         $queryParams = [];
@@ -1122,11 +1156,11 @@ trait CommonTrait
      * Deletes a user group and all its members
      *
      * @param string $id
-     * @param string $teamID
+     * @param ?string $teamID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteUserGroup(string $id, string $teamID): StreamResponse {
+    public function deleteUserGroup(string $id, ?string $teamID = null): StreamResponse {
         $path = '/api/v2/usergroups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1141,11 +1175,11 @@ trait CommonTrait
      * Gets a user group by ID, including its members
      *
      * @param string $id
-     * @param string $teamID
+     * @param ?string $teamID
      * @return StreamResponse<GeneratedModels\GetUserGroupResponse>
      * @throws StreamException
      */
-    public function getUserGroup(string $id, string $teamID): StreamResponse {
+    public function getUserGroup(string $id, ?string $teamID = null): StreamResponse {
         $path = '/api/v2/usergroups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -1207,11 +1241,11 @@ trait CommonTrait
     /**
      * Find and filter users
      *
-     * @param GeneratedModels\QueryUsersPayload $payload
+     * @param ?GeneratedModels\QueryUsersPayload $payload
      * @return StreamResponse<GeneratedModels\QueryUsersResponse>
      * @throws StreamException
      */
-    public function queryUsers(GeneratedModels\QueryUsersPayload $payload): StreamResponse {
+    public function queryUsers(?GeneratedModels\QueryUsersPayload $payload = null): StreamResponse {
         $path = '/api/v2/users';
 
         $queryParams = [];
@@ -1261,11 +1295,11 @@ trait CommonTrait
     /**
      * Get list of blocked Users
      *
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\GetBlockedUsersResponse>
      * @throws StreamException
      */
-    public function getBlockedUsers(string $userID): StreamResponse {
+    public function getBlockedUsers(?string $userID = null): StreamResponse {
         $path = '/api/v2/users/block';
 
         $queryParams = [];
@@ -1325,11 +1359,11 @@ trait CommonTrait
     /**
      * Retrieves all active live locations for a user
      *
-     * @param string $userID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\SharedLocationsResponse>
      * @throws StreamException
      */
-    public function getUserLiveLocations(string $userID): StreamResponse {
+    public function getUserLiveLocations(?string $userID = null): StreamResponse {
         $path = '/api/v2/users/live_locations';
 
         $queryParams = [];
@@ -1342,12 +1376,12 @@ trait CommonTrait
     /**
      * Updates an existing live location with new coordinates or expiration time
      *
-     * @param string $userID
      * @param GeneratedModels\UpdateLiveLocationRequest $requestData
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\SharedLocationResponse>
      * @throws StreamException
      */
-    public function updateLiveLocation(string $userID, GeneratedModels\UpdateLiveLocationRequest $requestData): StreamResponse {
+    public function updateLiveLocation(GeneratedModels\UpdateLiveLocationRequest $requestData, ?string $userID = null): StreamResponse {
         $path = '/api/v2/users/live_locations';
 
         $queryParams = [];

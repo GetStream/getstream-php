@@ -3,13 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class BlockListRule extends BaseModel
+class ImportBlockListRequest extends BaseModel
 {
     public function __construct(
-        public ?string $name = null,
-        public ?string $team = null,
-        public ?bool $ownerScope = null,
-        public ?string $action = null,
+        public ?array $items = null,
+        public ?int $chunkSize = null,
     ) {
     }
 
