@@ -54,10 +54,10 @@ class FeedActivityIntegrationTest extends TestCase
         ));
 
         $feedsClient->feed('user', self::$sharedUserId)->getOrCreateFeed(
-            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId)
+            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId)
         );
         $feedsClient->feed('user', self::$sharedUserId2)->getOrCreateFeed(
-            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId2)
+            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId2)
         );
     }
 
@@ -327,7 +327,7 @@ class FeedActivityIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityId;
 
         // snippet-start: GetActivity
-        $response = $this->feedsV3Client->getActivity($activityId, 'last', 10, $this->testUserId);
+        $response = $this->feedsV3Client->getActivity($activityId, commentSort: 'last', commentLimit: 10, userID: $this->testUserId);
         // snippet-end: GetActivity
 
         $this->assertResponseSuccess($response, 'get activity');
