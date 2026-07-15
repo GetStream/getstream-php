@@ -29,12 +29,12 @@ trait VideoTrait
     }
     /**
      *
-     * @param bool $full
      * @param GeneratedModels\QueryUserFeedbackRequest $requestData
+     * @param ?bool $full
      * @return StreamResponse<GeneratedModels\QueryUserFeedbackResponse>
      * @throws StreamException
      */
-    public function queryUserFeedback(bool $full, GeneratedModels\QueryUserFeedbackRequest $requestData): StreamResponse {
+    public function queryUserFeedback(GeneratedModels\QueryUserFeedbackRequest $requestData, ?bool $full = null): StreamResponse {
         $path = '/api/v2/video/call/feedback';
 
         $queryParams = [];
@@ -75,14 +75,14 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param int $membersLimit
-     * @param bool $ring
-     * @param bool $notify
-     * @param bool $video
+     * @param ?int $membersLimit
+     * @param ?bool $ring
+     * @param ?bool $notify
+     * @param ?bool $video
      * @return StreamResponse<GeneratedModels\GetCallResponse>
      * @throws StreamException
      */
-    public function getCall(string $type, string $id, int $membersLimit, bool $ring, bool $notify, bool $video): StreamResponse {
+    public function getCall(string $type, string $id, ?int $membersLimit = null, ?bool $ring = null, ?bool $notify = null, ?bool $video = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -330,12 +330,12 @@ trait VideoTrait
      *
      * @param string $id
      * @param string $type
-     * @param int $limit
      * @param GeneratedModels\QueryCallParticipantsRequest $requestData
+     * @param ?int $limit
      * @return StreamResponse<GeneratedModels\QueryCallParticipantsResponse>
      * @throws StreamException
      */
-    public function queryCallParticipants(string $id, string $type, int $limit, GeneratedModels\QueryCallParticipantsRequest $requestData): StreamResponse {
+    public function queryCallParticipants(string $id, string $type, GeneratedModels\QueryCallParticipantsRequest $requestData, ?int $limit = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/participants';
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{type}', (string) $type, $path);
@@ -430,11 +430,11 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param string $sessionID
+     * @param ?string $sessionID
      * @return StreamResponse<GeneratedModels\GetCallReportResponse>
      * @throws StreamException
      */
-    public function getCallReport(string $type, string $id, string $sessionID): StreamResponse {
+    public function getCallReport(string $type, string $id, ?string $sessionID = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/report';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -528,12 +528,12 @@ trait VideoTrait
      * @param string $session
      * @param string $user
      * @param string $userSession
-     * @param \DateTime $since
-     * @param \DateTime $until
+     * @param ?\DateTime $since
+     * @param ?\DateTime $until
      * @return StreamResponse<GeneratedModels\GetCallParticipantSessionMetricsResponse>
      * @throws StreamException
      */
-    public function getCallParticipantSessionMetrics(string $type, string $id, string $session, string $user, string $userSession, \DateTime $since, \DateTime $until): StreamResponse {
+    public function getCallParticipantSessionMetrics(string $type, string $id, string $session, string $user, string $userSession, ?\DateTime $since = null, ?\DateTime $until = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/session/{session}/participant/{user}/{user_session}/details/track';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -556,14 +556,14 @@ trait VideoTrait
      * @param string $type
      * @param string $id
      * @param string $session
-     * @param int $limit
-     * @param string $prev
-     * @param string $next
-     * @param object $filterConditions
+     * @param ?int $limit
+     * @param ?string $prev
+     * @param ?string $next
+     * @param ?object $filterConditions
      * @return StreamResponse<GeneratedModels\QueryCallParticipantSessionsResponse>
      * @throws StreamException
      */
-    public function queryCallParticipantSessions(string $type, string $id, string $session, int $limit, string $prev, string $next, object $filterConditions): StreamResponse {
+    public function queryCallParticipantSessions(string $type, string $id, string $session, ?int $limit = null, ?string $prev = null, ?string $next = null, ?object $filterConditions = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/session/{session}/participant_sessions';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -904,15 +904,15 @@ trait VideoTrait
      * @param string $callType
      * @param string $callID
      * @param string $session
-     * @param \DateTime $startTime
-     * @param \DateTime $endTime
-     * @param bool $excludePublishers
-     * @param bool $excludeSubscribers
-     * @param bool $excludeSfus
+     * @param ?\DateTime $startTime
+     * @param ?\DateTime $endTime
+     * @param ?bool $excludePublishers
+     * @param ?bool $excludeSubscribers
+     * @param ?bool $excludeSfus
      * @return StreamResponse<GeneratedModels\QueryCallStatsMapResponse>
      * @throws StreamException
      */
-    public function getCallStatsMap(string $callType, string $callID, string $session, \DateTime $startTime, \DateTime $endTime, bool $excludePublishers, bool $excludeSubscribers, bool $excludeSfus): StreamResponse {
+    public function getCallStatsMap(string $callType, string $callID, string $session, ?\DateTime $startTime = null, ?\DateTime $endTime = null, ?bool $excludePublishers = null, ?bool $excludeSubscribers = null, ?bool $excludeSfus = null): StreamResponse {
         $path = '/api/v2/video/call_stats/{call_type}/{call_id}/{session}/map';
         $path = str_replace('{call_type}', (string) $callType, $path);
         $path = str_replace('{call_id}', (string) $callID, $path);
@@ -944,13 +944,13 @@ trait VideoTrait
      * @param string $session
      * @param string $user
      * @param string $userSession
-     * @param string $since
-     * @param string $until
-     * @param int $maxPoints
+     * @param ?string $since
+     * @param ?string $until
+     * @param ?int $maxPoints
      * @return StreamResponse<GeneratedModels\GetCallSessionParticipantStatsDetailsResponse>
      * @throws StreamException
      */
-    public function getCallSessionParticipantStatsDetails(string $callType, string $callID, string $session, string $user, string $userSession, string $since, string $until, int $maxPoints): StreamResponse {
+    public function getCallSessionParticipantStatsDetails(string $callType, string $callID, string $session, string $user, string $userSession, ?string $since = null, ?string $until = null, ?int $maxPoints = null): StreamResponse {
         $path = '/api/v2/video/call_stats/{call_type}/{call_id}/{session}/participant/{user}/{user_session}/details';
         $path = str_replace('{call_type}', (string) $callType, $path);
         $path = str_replace('{call_id}', (string) $callID, $path);
@@ -976,15 +976,15 @@ trait VideoTrait
      * @param string $callType
      * @param string $callID
      * @param string $session
-     * @param int $limit
-     * @param string $prev
-     * @param string $next
-     * @param array $sort
-     * @param object $filterConditions
+     * @param ?int $limit
+     * @param ?string $prev
+     * @param ?string $next
+     * @param ?array $sort
+     * @param ?object $filterConditions
      * @return StreamResponse<GeneratedModels\QueryCallSessionParticipantStatsResponse>
      * @throws StreamException
      */
-    public function queryCallSessionParticipantStats(string $callType, string $callID, string $session, int $limit, string $prev, string $next, array $sort, object $filterConditions): StreamResponse {
+    public function queryCallSessionParticipantStats(string $callType, string $callID, string $session, ?int $limit = null, ?string $prev = null, ?string $next = null, ?array $sort = null, ?object $filterConditions = null): StreamResponse {
         $path = '/api/v2/video/call_stats/{call_type}/{call_id}/{session}/participants';
         $path = str_replace('{call_type}', (string) $callType, $path);
         $path = str_replace('{call_id}', (string) $callID, $path);
@@ -1020,13 +1020,13 @@ trait VideoTrait
      * @param string $session
      * @param string $user
      * @param string $userSession
-     * @param string $startTime
-     * @param string $endTime
-     * @param array $severity
+     * @param ?string $startTime
+     * @param ?string $endTime
+     * @param ?array $severity
      * @return StreamResponse<GeneratedModels\QueryCallSessionParticipantStatsTimelineResponse>
      * @throws StreamException
      */
-    public function getCallSessionParticipantStatsTimeline(string $callType, string $callID, string $session, string $user, string $userSession, string $startTime, string $endTime, array $severity): StreamResponse {
+    public function getCallSessionParticipantStatsTimeline(string $callType, string $callID, string $session, string $user, string $userSession, ?string $startTime = null, ?string $endTime = null, ?array $severity = null): StreamResponse {
         $path = '/api/v2/video/call_stats/{call_type}/{call_id}/{session}/participants/{user}/{user_session}/timeline';
         $path = str_replace('{call_type}', (string) $callType, $path);
         $path = str_replace('{call_id}', (string) $callID, $path);

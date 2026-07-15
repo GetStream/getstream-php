@@ -539,7 +539,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         try {
             // snippet-start: HandleInvalidActivityId
             $response =
-                $this->feedsV3Client->getActivity('invalid-activity-id-12345', 'last', 10, $this->testUserId);
+                $this->feedsV3Client->getActivity('invalid-activity-id-12345', commentSort: 'last', commentLimit: 10, userID: $this->testUserId);
             // snippet-end: HandleInvalidActivityId
             if (!$response->isSuccessful()) {
                 self::assertTrue(true);
@@ -656,7 +656,7 @@ class FeedAdvancedIntegrationTest extends TestCase
             // Bookmark may not be supported
         }
 
-        $enrichedResponse = $this->feedsV3Client->getActivity($postId, 'last', 10, $this->testUserId);
+        $enrichedResponse = $this->feedsV3Client->getActivity($postId, commentSort: 'last', commentLimit: 10, userID: $this->testUserId);
         $this->assertResponseSuccess($enrichedResponse, 'get enriched activity');
         // snippet-end: RealWorldScenario
     }
