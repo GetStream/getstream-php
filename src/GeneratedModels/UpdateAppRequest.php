@@ -46,11 +46,13 @@ class UpdateAppRequest extends BaseModel
         public ?bool $migratePermissionsToV2 = null,
         public ?int $remindersInterval = null,
         public ?int $remindersMaxMembers = null,
+        public ?int $remindersMaxPerUser = null,
         public ?int $cdnExpirationSeconds = null,
         public ?AsyncModerationConfiguration $asyncModerationConfig = null,
         public ?DataDogInfo $datadogInfo = null,
         public ?string $feedsV2Region = null,
         public ?bool $feedsModerationEnabled = null,
+        public ?bool $feedAuditLogsEnabled = null,
         public ?bool $guestUserCreationDisabled = null,
         public ?ModerationDashboardPreferences $moderationDashboardPreferences = null,
         /** @var array<EventHook>|null */

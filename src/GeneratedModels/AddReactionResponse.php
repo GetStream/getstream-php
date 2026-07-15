@@ -8,7 +8,11 @@ class AddReactionResponse extends BaseModel
     public function __construct(
         public ?ActivityResponse $activity = null,
         public ?FeedsReactionResponse $reaction = null,
-        public ?bool $notificationCreated = null, // Whether a notification activity was successfully created
+        /** @deprecated */
+        public ?bool $notificationCreated = null, // Deprecated. Mirrors notification_accepted; use notification_accepted for async enqueue status Deprecated: use notification_accepted
+        public ?bool $notificationAccepted = null, // Whether notification creation was accepted for asynchronous processing
+        public ?string $notificationTaskID = null, // ID of the async notification-creation task; poll GET /tasks/{id} for its status
+        public ?ActivityResponse $referenceActivity = null,
         public ?string $duration = null,
     ) {
     }

@@ -164,6 +164,8 @@ class WebhookTest extends TestCase
             'export.channels.success' => ['export.channels.success', 'AsyncExportChannelsEvent'],
             'export.moderation_logs.error' => ['export.moderation_logs.error', 'AsyncExportErrorEvent'],
             'export.moderation_logs.success' => ['export.moderation_logs.success', 'AsyncExportModerationLogsEvent'],
+            'export.review_queue.error' => ['export.review_queue.error', 'AsyncExportErrorEvent'],
+            'export.review_queue.success' => ['export.review_queue.success', 'AsyncExportReviewQueueEvent'],
             'export.users.error' => ['export.users.error', 'AsyncExportErrorEvent'],
             'export.users.success' => ['export.users.success', 'AsyncExportUsersEvent'],
             'feeds.activity.added' => ['feeds.activity.added', 'ActivityAddedEvent'],

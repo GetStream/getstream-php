@@ -45,15 +45,27 @@ trait CommonTrait
      * Returns all available block lists
      *
      * @param string $team
+     * @param string $ownerUserID
+     * @param string $cursor
+     * @param int $limit
      * @return StreamResponse<GeneratedModels\ListBlockListResponse>
      * @throws StreamException
      */
-    public function listBlockLists(string $team): StreamResponse {
+    public function listBlockLists(string $team, string $ownerUserID, string $cursor, int $limit): StreamResponse {
         $path = '/api/v2/blocklists';
 
         $queryParams = [];
         if ($team !== null) {
             $queryParams['team'] = $team;
+        }
+        if ($ownerUserID !== null) {
+            $queryParams['owner_user_id'] = $ownerUserID;
+        }
+        if ($cursor !== null) {
+            $queryParams['cursor'] = $cursor;
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListBlockListResponse::class);
@@ -73,20 +85,42 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateBlockListResponse::class);
     }
     /**
+     * Enqueues an asynchronous bulk import of items into an existing blocklist.
+     * Returns a task ID that can be polled via GET /tasks/{id} to observe progress.
+     * AddItems is idempotent: items already present are skipped without error.
+     * For lists exceeding the HTTP request-body cap, issue repeated import calls each
+     * carrying a bounded slice of items — the task result accumulates correctly.
+     *
+     * @param GeneratedModels\ImportBlockListRequest $requestData
+     * @return StreamResponse<GeneratedModels\ImportBlockListResponse>
+     * @throws StreamException
+     */
+    public function importBlockList(GeneratedModels\ImportBlockListRequest $requestData): StreamResponse {
+        $path = '/api/v2/blocklists/{id}/import';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ImportBlockListResponse::class);
+    }
+    /**
      * Deletes previously created application blocklist
      *
      * @param string $name
      * @param string $team
+     * @param string $ownerUserID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteBlockList(string $name, string $team): StreamResponse {
+    public function deleteBlockList(string $name, string $team, string $ownerUserID): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
         if ($team !== null) {
             $queryParams['team'] = $team;
+        }
+        if ($ownerUserID !== null) {
+            $queryParams['owner_user_id'] = $ownerUserID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);

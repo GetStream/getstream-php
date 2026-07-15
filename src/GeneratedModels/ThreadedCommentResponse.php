@@ -14,6 +14,7 @@ class ThreadedCommentResponse extends BaseModel
         public ?string $objectType = null,
         public ?UserResponse $user = null,
         public ?string $text = null,
+        public ?array $i18n = null,
         public ?object $custom = null,
         public ?string $parentID = null,
         public ?int $reactionCount = null,

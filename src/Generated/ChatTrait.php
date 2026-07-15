@@ -279,6 +279,39 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteChannelResponse::class);
     }
     /**
+     * Returns a channel by its CID without creating it. Responds with 404 when the channel does not exist, so it doubles as an existence check. Pass state=true to also load messages, read state and watchers.
+     *
+     * @param string $type
+     * @param string $id
+     * @param bool $state
+     * @param int $messagesLimit
+     * @param int $membersLimit
+     * @param int $watchersLimit
+     * @return StreamResponse<GeneratedModels\ChannelStateResponse>
+     * @throws StreamException
+     */
+    public function getChannel(string $type, string $id, bool $state, int $messagesLimit, int $membersLimit, int $watchersLimit): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($state !== null) {
+            $queryParams['state'] = $state;
+        }
+        if ($messagesLimit !== null) {
+            $queryParams['messages_limit'] = $messagesLimit;
+        }
+        if ($membersLimit !== null) {
+            $queryParams['members_limit'] = $membersLimit;
+        }
+        if ($watchersLimit !== null) {
+            $queryParams['watchers_limit'] = $watchersLimit;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ChannelStateResponse::class);
+    }
+    /**
      * Updates certain fields of the channel
      * Sends events:
      * - channel.updated
