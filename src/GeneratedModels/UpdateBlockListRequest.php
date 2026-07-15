@@ -7,6 +7,7 @@ class UpdateBlockListRequest extends BaseModel
 {
     public function __construct(
         public ?string $team = null,
+        public ?string $ownerUserID = null,
         public ?array $words = null, // List of words to block
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,

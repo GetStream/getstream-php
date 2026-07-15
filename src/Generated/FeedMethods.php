@@ -17,27 +17,27 @@ trait FeedMethods
     /**
      * Delete a single feed by its ID
      *
-     * @param bool $hardDelete
-     * @param bool $purgeUserActivities
+     * @param ?bool $hardDelete
+     * @param ?bool $purgeUserActivities
      * @return StreamResponse<GeneratedModels\DeleteFeedResponse>
      * @throws StreamException
      */
     public function deleteFeed(
-        bool $hardDelete, bool $purgeUserActivities, ): StreamResponse {
+        ?bool $hardDelete = null, ?bool $purgeUserActivities = null): StreamResponse {
         return $this->feedsV3Client->deleteFeed($this->feedGroup, $this->feedId,$hardDelete, $purgeUserActivities);
     }
     /**
      * Create a single feed for a given feed group
      *
-     * @param string $language
-     * @param bool $translateText
      * @param GeneratedModels\GetOrCreateFeedRequest $requestData
+     * @param ?string $language
+     * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedResponse>
      * @throws StreamException
      */
     public function getOrCreateFeed(
-        string $language, bool $translateText, GeneratedModels\GetOrCreateFeedRequest $requestData): StreamResponse {
-        return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId,$language, $translateText, $requestData);
+        GeneratedModels\GetOrCreateFeedRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+        return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId, $requestData,$language, $translateText);
     }
     /**
      * Update an existing feed
@@ -65,13 +65,13 @@ trait FeedMethods
      * Unpin an activity from a feed. This removes the pin, so the activity will no longer be displayed at the top of the feed.
      *
      * @param string $activityID
-     * @param bool $enrichOwnFields
-     * @param string $userID
+     * @param ?bool $enrichOwnFields
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\UnpinActivityResponse>
      * @throws StreamException
      */
     public function unpinActivity(
-        string $activityID, bool $enrichOwnFields, string $userID, ): StreamResponse {
+        string $activityID, ?bool $enrichOwnFields = null, ?string $userID = null): StreamResponse {
         return $this->feedsV3Client->unpinActivity($this->feedGroup, $this->feedId, $activityID,$enrichOwnFields, $userID);
     }
     /**
@@ -144,19 +144,18 @@ trait FeedMethods
     /**
      * Query pinned activities for a feed with filter query
      *
-     * @param string $language
-     * @param bool $translateText
      * @param GeneratedModels\QueryPinnedActivitiesRequest $requestData
+     * @param ?string $language
+     * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\QueryPinnedActivitiesResponse>
      * @throws StreamException
      */
     public function queryPinnedActivities(
-        string $language, bool $translateText, GeneratedModels\QueryPinnedActivitiesRequest $requestData): StreamResponse {
-        return $this->feedsV3Client->queryPinnedActivities($this->feedGroup, $this->feedId,$language, $translateText, $requestData);
+        GeneratedModels\QueryPinnedActivitiesRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+        return $this->feedsV3Client->queryPinnedActivities($this->feedGroup, $this->feedId, $requestData,$language, $translateText);
     }
 }
 
 
 // Helper templates for parameter signatures and calls in php
-
 

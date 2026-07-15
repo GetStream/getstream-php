@@ -187,7 +187,7 @@ class ModerationIntegrationTest extends TestCase
             unbannedByID: $this->moderatorUserId
         );
 
-        $response = $this->moderationClient->unban($this->testUserId, '', '', $request);
+        $response = $this->moderationClient->unban($request, $this->testUserId);
         // snippet-stop: UnbanUser
 
         $this->assertResponseSuccess($response, 'unban user');
@@ -405,7 +405,7 @@ class ModerationIntegrationTest extends TestCase
                     $request = new GeneratedModels\UnbanRequest(
                         unbannedByID: $this->moderatorUserId
                     );
-                    $this->moderationClient->unban($userId, '', '', $request);
+                    $this->moderationClient->unban($request, $userId);
                     echo "✅ Cleaned up ban for user: {$userId}\n";
                 } catch (StreamApiException $e) {
                     echo "Warning: Failed to unban user {$userId}: " . $e->getMessage() . "\n";

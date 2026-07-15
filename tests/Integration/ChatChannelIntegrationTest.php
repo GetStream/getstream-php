@@ -151,16 +151,20 @@ class ChatChannelIntegrationTest extends ChatTestCase
             ],
         ));
         $this->assertResponseSuccess($resp, 'partial update channel (set)');
-        self::assertNotNull($resp->getData()->channel);
-        self::assertSame('red', $resp->getData()->channel->custom->color ?? null);
+
+        $stateResp = $this->getOrCreateChannel($type, $channelID, new GeneratedModels\ChannelGetOrCreateRequest());
+        $this->assertResponseSuccess($stateResp, 'get channel after partial update (set)');
+        self::assertSame('red', $stateResp->getData()->channel->custom->color ?? null);
 
         // Unset fields
         $resp = $this->updateChannelPartial($type, $channelID, new GeneratedModels\UpdateChannelPartialRequest(
             unset: ['color'],
         ));
         $this->assertResponseSuccess($resp, 'partial update channel (unset)');
-        self::assertNotNull($resp->getData()->channel);
-        $custom = $resp->getData()->channel->custom;
+
+        $stateResp = $this->getOrCreateChannel($type, $channelID, new GeneratedModels\ChannelGetOrCreateRequest());
+        $this->assertResponseSuccess($stateResp, 'get channel after partial update (unset)');
+        $custom = $stateResp->getData()->channel->custom;
         self::assertTrue(
             $custom === null || !isset($custom->color),
             'color should be unset',

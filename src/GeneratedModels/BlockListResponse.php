@@ -16,6 +16,7 @@ class BlockListResponse extends BaseModel
         public ?string $type = null, // Block list type. One of: regex, domain, domain_allowlist, email, email_allowlist, word
         public ?array $words = null, // List of words to block
         public ?string $team = null,
+        public ?string $ownerUserID = null,
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,
         public ?bool $isConfusableFoldingEnabled = null,

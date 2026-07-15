@@ -55,10 +55,10 @@ class FeedReactionCommentIntegrationTest extends TestCase
         ));
 
         $feedsClient->feed('user', self::$sharedUserId)->getOrCreateFeed(
-            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId)
+            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId)
         );
         $feedsClient->feed('user', self::$sharedUserId2)->getOrCreateFeed(
-            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId2)
+            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId2)
         );
     }
 

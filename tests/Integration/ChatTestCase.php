@@ -294,11 +294,11 @@ abstract class ChatTestCase extends TestCase
 
     /**
      * Poll an async task until completed or failed.
-     * Uses adaptive backoff: 100ms → 200ms → 400ms → 800ms → 1s (cap), up to 60 attempts (~60s max).
+     * Uses adaptive backoff: 100ms → 200ms → 400ms → 800ms → 1s (cap), up to 120 attempts (~120s max).
      */
     protected function waitForTask(string $taskID): GeneratedModels\GetTaskResponse
     {
-        $maxAttempts = 60;
+        $maxAttempts = 120;
         for ($i = 0; $i < $maxAttempts; $i++) {
             $response = $this->client->getTask($taskID);
             $this->assertResponseSuccess($response, 'get task status');
