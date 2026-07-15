@@ -22,6 +22,7 @@ class RuleBuilderCondition extends BaseModel
         public ?TextContentParameters $textContentParams = null,
         public ?ImageContentParameters $imageContentParams = null,
         public ?VideoContentParameters $videoContentParams = null,
+        public ?OCRContentParameters $ocrContentParams = null,
         public ?UserCreatedWithinParameters $userCreatedWithinParams = null,
         public ?UserCustomPropertyParameters $userCustomPropertyParams = null,
         public ?UserRoleParameters $userRoleParams = null,

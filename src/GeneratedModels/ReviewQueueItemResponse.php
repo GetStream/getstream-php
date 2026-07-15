@@ -24,7 +24,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?ChatMessageResponse $message = null,
         public ?EnrichedActivity $activity = null,
         public ?Reaction $reaction = null,
-        public ?CallResponse $call = null,
+        public ?ModerationCallResponse $call = null,
         public ?EntityCreatorResponse $entityCreator = null,
         public ?string $entityCreatorID = null, // ID of who created the entity
         public ?UserResponse $assignedTo = null,

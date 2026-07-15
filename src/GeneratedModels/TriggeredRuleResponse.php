@@ -10,6 +10,7 @@ class TriggeredRuleResponse extends BaseModel
         public ?CallActionOptions $callOptions = null,
         public ?string $ruleID = null, // ID of the moderation rule that triggered
         public ?string $ruleName = null, // Name of the moderation rule that triggered
+        public ?string $type = null, // Type of the moderation rule that triggered (content, user, or call)
         public ?int $violationNumber = null, // Violation count for action sequence rules (1-based)
     ) {
     }

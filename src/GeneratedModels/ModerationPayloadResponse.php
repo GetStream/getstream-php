@@ -12,7 +12,12 @@ class ModerationPayloadResponse extends BaseModel
         public ?array $texts = null, // Text content to moderate
         public ?array $images = null, // Image URLs to moderate
         public ?array $videos = null, // Video URLs to moderate
+        public ?array $audios = null, // Audio URLs to moderate
         public ?object $custom = null, // Custom data for moderation
+        public ?array $textOrderedKeys = null, // Caller-supplied keys for texts (e.g. "title", "description"), index-aligned with texts[]
+        public ?array $imageOrderedKeys = null, // Caller-supplied keys for images, index-aligned with images[]
+        public ?array $textIds = null, // Caller-supplied content IDs per text key (from content_ids on /analyze)
+        public ?array $imageIds = null, // Caller-supplied content IDs per image key (from content_ids on /analyze)
     ) {
     }
 

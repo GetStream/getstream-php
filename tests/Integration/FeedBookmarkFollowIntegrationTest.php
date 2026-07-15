@@ -54,10 +54,10 @@ class FeedBookmarkFollowIntegrationTest extends TestCase
         ));
 
         $feedsClient->feed('user', self::$sharedUserId)->getOrCreateFeed(
-            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId)
+            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId)
         );
         $feedsClient->feed('user', self::$sharedUserId2)->getOrCreateFeed(
-            new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId2)
+            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: self::$sharedUserId2)
         );
     }
 
@@ -235,7 +235,7 @@ class FeedBookmarkFollowIntegrationTest extends TestCase
     {
         // snippet-start: GetOrCreateFeed
         $feedResponse1 = $this->testFeed->getOrCreateFeed(
-            new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId)
+            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId)
         );
         // snippet-end: GetOrCreateFeed
 
@@ -254,7 +254,7 @@ class FeedBookmarkFollowIntegrationTest extends TestCase
         $this->createdActivityIds[] = $activityResponse1->getData()->activity->id;
 
         $feedResponse2 = $this->testFeed2->getOrCreateFeed(
-            new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId2)
+            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId2)
         );
         $this->assertResponseSuccess($feedResponse2, 'get or create feed 2');
 
@@ -281,7 +281,7 @@ class FeedBookmarkFollowIntegrationTest extends TestCase
         }
 
         $verifyFeedResponse = $this->testFeed2->getOrCreateFeed(
-            new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId2)
+            '', false, new GeneratedModels\GetOrCreateFeedRequest(userID: $this->testUserId2)
         );
         $this->assertResponseSuccess($verifyFeedResponse, 'verify feed 2 exists');
         $verifyFeedData = $verifyFeedResponse->getData();

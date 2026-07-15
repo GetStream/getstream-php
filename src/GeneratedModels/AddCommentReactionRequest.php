@@ -13,6 +13,7 @@ class AddCommentReactionRequest extends BaseModel
         public ?bool $copyCustomToNotification = null, // Whether to copy custom data to the notification activity (only applies when create_notification_activity is true) Deprecated: use notification_context.trigger.custom and notification_context.target.custom instead
         public ?bool $skipPush = null,
         public ?bool $enforceUnique = null, // Whether to enforce unique reactions per user (remove other reaction types from the user when adding this one)
+        public ?array $targetFeeds = null, // Optional list of feeds to create a reference (share) activity of the commented-on activity in. The reference activity's type mirrors the reaction type.
         public ?string $userID = null,
         public ?UserRequest $user = null,
     ) {

@@ -3,14 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ClosedCaptionRuleParameters extends BaseModel
+class DeleteQueueRequest extends BaseModel
 {
     public function __construct(
-        public ?array $harmLabels = null,
-        public ?array $llmHarmLabels = null,
-        public ?int $threshold = null,
-        public ?string $timeWindow = null,
-        public ?string $severity = null,
+        public ?string $userID = null,
+        public ?UserRequest $user = null,
     ) {
     }
 
