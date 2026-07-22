@@ -320,7 +320,7 @@ class ClientBuilder
     {
         if ($this->logBodies) {
             $logger->warning(
-                'Request/response bodies will be included in log events (keys api_secret/token/password are redacted).'
+                'HTTP request/response bodies will be logged. Auth headers and known-secret fields are still redacted, but other sensitive data (messages, PII) may appear in logs. Disable for production.'
             );
         }
     }
