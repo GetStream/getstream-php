@@ -176,7 +176,7 @@ class GuzzleHttpClient implements HttpClientInterface
             'url.path' => $path,
             'url.query' => LogRedaction::redactQuery($query),
             'error.type' => $transportException->getErrorType(),
-            'error.message' => $transportException->getMessage(),
+            'error.message' => LogRedaction::redactMessage($transportException->getMessage()),
             'duration_ms' => $durationMs,
         ]);
     }

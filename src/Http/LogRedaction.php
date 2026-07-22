@@ -50,4 +50,20 @@ final class LogRedaction
 
         return $encoded !== false ? $encoded : $body;
     }
+
+    /**
+     * Redact secret query-parameter values wherever `key=value` appears in a
+     * free-form string (e.g. a transport exception message that echoes back
+     * the failed request URL). Value runs up to the next `&`, whitespace, or
+     * end of string; everything else in the message is left untouched.
+     */
+    public static function redactMessage(string $message): string
+    {
+        $keys = implode('|', array_map(
+            static fn (string $key): string => preg_quote($key, '/'),
+            self::QUERY_PARAMS,
+        ));
+
+        return (string) preg_replace('/(' . $keys . ')=[^&\s]*/i', '${1}=' . self::REDACTED, $message);
+    }
 }

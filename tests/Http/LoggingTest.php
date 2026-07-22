@@ -80,6 +80,30 @@ final class LoggingTest extends TestCase
         $this->assertArrayHasKey('error.type', $failed[0]['context']);
     }
 
+    public function testTransportFailureRedactsSecretFromMessage(): void
+    {
+        // Guzzle builds its ConnectException message by appending the full
+        // request URL (incl. query string); its own redaction only strips
+        // HTTP Basic userinfo, not query params. This is the mainline shape
+        // of that message for a DNS/connect/TLS/timeout failure.
+        $leakyMessage = 'cURL error 7: Failed to connect to 127.0.0.1 port 1 after 0 ms: '
+            . 'Couldn\'t connect to server for http://localhost/api/v2/app?api_key=SUPERSECRETKEY&user_id=123';
+        $logger = new RecordingLogger();
+        $client = $this->client(
+            [new ConnectException($leakyMessage, new Request('GET', 'http://localhost/api/v2/app?api_key=SUPERSECRETKEY&user_id=123'))],
+            $logger,
+        );
+        try {
+            $client->request('GET', 'http://localhost/api/v2/app?api_key=SUPERSECRETKEY&user_id=123');
+            $this->fail('expected exception');
+        } catch (\GetStream\Exceptions\StreamTransportException) {
+        }
+        $failed = $logger->named('http.request.failed');
+        $message = $failed[0]['context']['error.message'];
+        $this->assertStringContainsString('api_key=<redacted>', $message);
+        $this->assertStringNotContainsString('SUPERSECRETKEY', $message);
+    }
+
     public function testQueryRedaction(): void
     {
         $logger = new RecordingLogger();
@@ -118,5 +142,15 @@ final class LoggingTest extends TestCase
         $this->assertStringNotContainsString('"p"', $out);
         $this->assertStringContainsString('"keep":"v"', $out);
         $this->assertSame('not json', LogRedaction::redactJsonBody('not json'));
+
+        $this->assertSame(
+            'api_key=<redacted>&user_id=123',
+            LogRedaction::redactMessage('api_key=SUPERSECRETKEY&user_id=123'),
+        );
+        $this->assertSame(
+            'api_secret=<redacted> token=<redacted>',
+            LogRedaction::redactMessage('api_secret=shh token=tok'),
+        );
+        $this->assertStringContainsString('user_id=123', LogRedaction::redactMessage('user_id=123'));
     }
 }
