@@ -17,8 +17,5 @@
             <directory suffix=".php">src</directory>
         </include>
     </source>
-    <php>
-        <const name="PHPUNIT_RUNNING" value="true"/>
-    </php>
 </phpunit>
 

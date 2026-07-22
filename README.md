@@ -57,6 +57,40 @@ Per-call `curl` overrides replace (do not merge with) the client-level `curl` op
 
 **Escape hatch:** Passing your own client via `->httpClient($mine)` skips all 4 knobs; your client is used as-is.
 
+## Logging
+
+The SDK emits structured events through a [PSR-3](https://www.php-fig.org/psr/psr-3/) `Psr\Log\LoggerInterface`. No logger is injected by default (`Psr\Log\NullLogger`, a no-op); pass your own via `->logger(...)`:
+
+```php
+$client = (new GetStream\ClientBuilder())
+    ->apiKey($apiKey)
+    ->apiSecret($apiSecret)
+    ->logger($myPsr3Logger)
+    ->build();
+```
+
+Events emitted:
+
+| Event | Level | When |
+|---|---|---|
+| `client.initialized` | INFO | Once, at construction |
+| `http.request.sent` | DEBUG | Before each HTTP attempt |
+| `http.response.received` | DEBUG | After any HTTP response, including 4xx/5xx (status codes are data, not a failure) |
+| `http.request.failed` | ERROR | Transport failure only (connection reset, timeout, DNS failure, TLS handshake failure) — no HTTP response was received |
+
+The SDK never sets the logger's minimum level; that's the caller's responsibility.
+
+**Bodies are not logged by default.** Enable with `->logBodies(true)`; this emits one WARN at construction and adds (key-redacted) `http.request.body` / `http.response.body` fields to the DEBUG events. Query values for `api_key`, `api_secret`, `token` and top-level JSON body keys `api_secret`, `token`, `password` are always redacted (case-insensitive for query values), whether or not body logging is on. No headers are ever logged.
+
+```php
+$client = (new GetStream\ClientBuilder())
+    ->apiKey($apiKey)
+    ->apiSecret($apiSecret)
+    ->logger($myPsr3Logger)
+    ->logBodies(true)
+    ->build();
+```
+
 ## Code Generation
 
 Generate API methods from OpenAPI spec:

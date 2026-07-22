@@ -4,76 +4,73 @@ declare(strict_types=1);
 
 namespace GetStream\Tests\Integration;
 
+use GetStream\ClientBuilder;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\AbstractLogger;
 
 /**
  * @group integration
  */
 class ConnectionPoolLogTest extends TestCase
 {
-    public function testInfoLogContainsAllKnobs(): void
+    public function testClientInitializedLogContainsAllKnobs(): void
     {
-        $tmp = tempnam(sys_get_temp_dir(), 'gs-cp-log-');
-        $autoload = realpath(__DIR__ . '/../../vendor/autoload.php');
-        $script = <<<PHP
-<?php
-require_once '{$autoload}';
-ini_set('error_log', \$argv[1]);
-(new GetStream\\ClientBuilder())
-    ->apiKey('k')->apiSecret('s')
-    ->maxConnsPerHost(7)->idleTimeout(33)->connectTimeout(2)->requestTimeout(11)
-    ->skipEnvLoad()
-    ->build();
-PHP;
-        $scriptPath = tempnam(sys_get_temp_dir(), 'gs-cp-script-') . '.php';
-        file_put_contents($scriptPath, $script);
+        $logger = new class extends AbstractLogger {
+            /** @var list<array{level: string, message: string, context: array}> */
+            public array $records = [];
 
-        $cmd = sprintf('php %s %s 2>&1', escapeshellarg($scriptPath), escapeshellarg($tmp));
-        exec($cmd, $out, $code);
-        self::assertSame(0, $code, implode("\n", $out));
+            public function log($level, \Stringable|string $message, array $context = []): void
+            {
+                $this->records[] = ['level' => (string) $level, 'message' => (string) $message, 'context' => $context];
+            }
+        };
 
-        $log = file_get_contents($tmp);
-        self::assertStringContainsString('max_conns_per_host=7', $log);
-        self::assertStringContainsString('idle_timeout=33s', $log);
-        self::assertStringContainsString('connect_timeout=2s', $log);
-        self::assertStringContainsString('request_timeout=11s', $log);
-        self::assertStringContainsString('user_http_client=false', $log);
+        (new ClientBuilder())
+            ->apiKey('k')->apiSecret('s')
+            ->maxConnsPerHost(7)->idleTimeout(33)->connectTimeout(2)->requestTimeout(11)
+            ->logger($logger)
+            ->skipEnvLoad()
+            ->build();
 
-        @unlink($tmp);
-        @unlink($scriptPath);
+        self::assertCount(1, $logger->records);
+        $event = $logger->records[0];
+        self::assertSame('info', $event['level']);
+        self::assertSame('client.initialized', $event['message']);
+        self::assertSame(7, $event['context']['stream.client.max_conns_per_host']);
+        self::assertSame(33, $event['context']['stream.client.idle_timeout_seconds']);
+        self::assertSame(2, $event['context']['stream.client.connect_timeout_seconds']);
+        self::assertSame(11, $event['context']['stream.client.request_timeout_seconds']);
+        self::assertFalse($event['context']['stream.client.user_http_client']);
     }
 
-    public function testInfoLogIndicatesEscapeHatchUsed(): void
+    public function testClientInitializedLogIndicatesEscapeHatchUsed(): void
     {
-        $tmp = tempnam(sys_get_temp_dir(), 'gs-cp-log-');
-        $autoload = realpath(__DIR__ . '/../../vendor/autoload.php');
-        $script = <<<PHP
-<?php
-require_once '{$autoload}';
-ini_set('error_log', \$argv[1]);
-\$mock = new class implements GetStream\\Http\\HttpClientInterface {
-    public function request(string \$method, string \$url, array \$headers = [], mixed \$body = null, array \$options = []): GetStream\\StreamResponse {
-        return new GetStream\\StreamResponse(200, [], null, '');
-    }
-};
-(new GetStream\\ClientBuilder())
-    ->apiKey('k')->apiSecret('s')
-    ->httpClient(\$mock)
-    ->skipEnvLoad()
-    ->build();
-PHP;
-        $scriptPath = tempnam(sys_get_temp_dir(), 'gs-cp-script-') . '.php';
-        file_put_contents($scriptPath, $script);
+        $logger = new class extends AbstractLogger {
+            /** @var list<array{level: string, message: string, context: array}> */
+            public array $records = [];
 
-        $cmd = sprintf('php %s %s 2>&1', escapeshellarg($scriptPath), escapeshellarg($tmp));
-        exec($cmd, $out, $code);
-        self::assertSame(0, $code, implode("\n", $out));
+            public function log($level, \Stringable|string $message, array $context = []): void
+            {
+                $this->records[] = ['level' => (string) $level, 'message' => (string) $message, 'context' => $context];
+            }
+        };
 
-        $log = file_get_contents($tmp);
-        self::assertStringContainsString('user_http_client=true', $log);
-        self::assertStringContainsString('5 knobs not applied', $log);
+        $mock = new class implements \GetStream\Http\HttpClientInterface {
+            public function request(string $method, string $url, array $headers = [], mixed $body = null, array $options = []): \GetStream\StreamResponse
+            {
+                return new \GetStream\StreamResponse(200, [], null, '');
+            }
+        };
 
-        @unlink($tmp);
-        @unlink($scriptPath);
+        (new ClientBuilder())
+            ->apiKey('k')->apiSecret('s')
+            ->httpClient($mock)
+            ->logger($logger)
+            ->skipEnvLoad()
+            ->build();
+
+        self::assertCount(1, $logger->records);
+        self::assertSame('client.initialized', $logger->records[0]['message']);
+        self::assertTrue($logger->records[0]['context']['stream.client.user_http_client']);
     }
 }
