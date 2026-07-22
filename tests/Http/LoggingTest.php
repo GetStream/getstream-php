@@ -12,24 +12,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\AbstractLogger;
 
-final class RecordingLogger extends AbstractLogger
-{
-    /** @var list<array{level: string, message: string, context: array}> */
-    public array $records = [];
-
-    public function log($level, \Stringable|string $message, array $context = []): void
-    {
-        $this->records[] = ['level' => (string) $level, 'message' => (string) $message, 'context' => $context];
-    }
-
-    /** @return list<array{level: string, message: string, context: array}> */
-    public function named(string $event): array
-    {
-        return array_values(array_filter($this->records, fn ($r) => $r['message'] === $event));
-    }
-}
+// RecordingLogger moved to its own autoloadable file (tests/Http/RecordingLogger.php)
+// so it resolves under paratest's per-process runner; see that file.
 
 final class LoggingTest extends TestCase
 {
