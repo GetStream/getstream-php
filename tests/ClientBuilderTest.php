@@ -8,6 +8,7 @@ use GetStream\ChatClient;
 use GetStream\Client;
 use GetStream\ClientBuilder;
 use GetStream\Http\HttpClientInterface;
+use GetStream\Tests\Http\RecordingLogger;
 use GetStream\VideoClient;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -290,5 +291,78 @@ class ClientBuilderTest extends TestCase
 
         // And it is NOT a GuzzleHttpClient (no pool config is applied to it).
         self::assertNotInstanceOf(\GetStream\Http\GuzzleHttpClient::class, $client->getHttpClient());
+    }
+
+    /** @test */
+    public function loggerReceivesExactlyOneClientInitializedInfoEvent(): void
+    {
+        $logger = new RecordingLogger();
+
+        (new ClientBuilder())
+            ->apiKey('k')
+            ->apiSecret('s')
+            ->maxConnsPerHost(7)
+            ->idleTimeout(33)
+            ->connectTimeout(2)
+            ->requestTimeout(11)
+            ->logger($logger)
+            ->skipEnvLoad()
+            ->build();
+
+        $events = $logger->named('client.initialized');
+        self::assertCount(1, $events);
+        self::assertSame('info', $events[0]['level']);
+
+        $context = $events[0]['context'];
+        self::assertSame('getstream-php', $context['stream.sdk.name']);
+        self::assertSame(\GetStream\Constant::VERSION, $context['stream.sdk.version']);
+        self::assertSame(7, $context['stream.client.max_conns_per_host']);
+        self::assertSame(33, $context['stream.client.idle_timeout_seconds']);
+        self::assertSame(2, $context['stream.client.connect_timeout_seconds']);
+        self::assertSame(11, $context['stream.client.request_timeout_seconds']);
+        self::assertTrue($context['stream.client.gzip_enabled']);
+        self::assertFalse($context['stream.client.user_http_client']);
+        self::assertFalse($context['stream.client.log_bodies']);
+    }
+
+    /** @test */
+    public function logBodiesTrueAddsExactlyOneWarnAndFlagsSchema(): void
+    {
+        $logger = new RecordingLogger();
+
+        (new ClientBuilder())
+            ->apiKey('k')
+            ->apiSecret('s')
+            ->logger($logger)
+            ->logBodies(true)
+            ->skipEnvLoad()
+            ->build();
+
+        $warnings = array_values(array_filter($logger->records, fn ($r) => $r['level'] === 'warning'));
+        self::assertCount(1, $warnings);
+
+        $initialized = $logger->named('client.initialized');
+        self::assertCount(1, $initialized);
+        self::assertTrue($initialized[0]['context']['stream.client.log_bodies']);
+    }
+
+    /** @test */
+    public function buildingWithoutLoggerProducesNoErrorLogOutput(): void
+    {
+        $tmp = tempnam(sys_get_temp_dir(), 'gs-no-log-');
+        $previous = ini_set('error_log', $tmp);
+
+        try {
+            (new ClientBuilder())
+                ->apiKey('k')
+                ->apiSecret('s')
+                ->skipEnvLoad()
+                ->build();
+        } finally {
+            ini_set('error_log', $previous === false ? '' : $previous);
+        }
+
+        self::assertSame('', file_get_contents($tmp), 'no logger injected: construction must produce zero error_log output');
+        @unlink($tmp);
     }
 }

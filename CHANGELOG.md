@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Structured logging via [PSR-3](https://www.php-fig.org/psr/psr-3/): `ClientBuilder::logger()` injects any `Psr\Log\LoggerInterface`; no logger is used by default. Emits `client.initialized` (INFO, once), `http.request.sent` / `http.response.received` (DEBUG, per attempt), and `http.request.failed` (ERROR, transport failures only). Query and JSON-body secrets (`api_key`, `api_secret`, `token`, `password`) are always redacted. Request/response bodies are excluded by default; opt in with `ClientBuilder::logBodies(true)`.
+
+### Changed
+
+- **Behavior change:** the connection-pool configuration is no longer written to PHP's `error_log()` at client construction. That information is now available only through an injected PSR-3 logger, as the `client.initialized` event. If you relied on the old `error_log` line, inject a logger via `->logger(...)` instead.
+
 ## [9.0.0] - 2026-07-15
 
 OpenAPI regeneration for optional query parameters ([FEEDS-1651](https://linear.app/stream/issue/FEEDS-1651), [#54](https://github.com/GetStream/getstream-php/pull/54)).

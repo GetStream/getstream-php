@@ -17,6 +17,8 @@ use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Guzzle HTTP client implementation.
@@ -31,16 +33,30 @@ class GuzzleHttpClient implements HttpClientInterface
     /** @var PoolConfig Effective pool configuration (kept for diagnostics). */
     private PoolConfig $pool;
 
+    private LoggerInterface $logger;
+
+    /** Whether request/response bodies are included (key-redacted) in log events. */
+    private bool $logBodies;
+
     /**
      * Create a new GuzzleHttpClient.
      *
-     * @param array            $config     Guzzle client configuration (wins over $pool defaults)
-     * @param int              $maxRetries Maximum retries for 429 rate-limit responses (default 3).
-     * @param PoolConfig|null  $pool       Connection pool configuration. When null, spec defaults apply.
+     * @param array             $config     Guzzle client configuration (wins over $pool defaults)
+     * @param int               $maxRetries Maximum retries for 429 rate-limit responses (default 3).
+     * @param PoolConfig|null   $pool       Connection pool configuration. When null, spec defaults apply.
+     * @param LoggerInterface|null $logger  PSR-3 logger for structured request/response events. Defaults to NullLogger.
+     * @param bool              $logBodies  When true, include (key-redacted) request/response bodies in log events.
      */
-    public function __construct(array $config = [], int $maxRetries = 3, ?PoolConfig $pool = null)
-    {
+    public function __construct(
+        array $config = [],
+        int $maxRetries = 3,
+        ?PoolConfig $pool = null,
+        ?LoggerInterface $logger = null,
+        bool $logBodies = false,
+    ) {
         $pool = $pool ?? new PoolConfig();
+        $this->logger = $logger ?? new NullLogger();
+        $this->logBodies = $logBodies;
 
         // Persistent multi handle: routes every request (sync and async) through one
         // libcurl multi handle that holds a connection pool for the lifetime of this
@@ -94,6 +110,77 @@ class GuzzleHttpClient implements HttpClientInterface
         return $this->pool;
     }
 
+    private static function elapsedMs(int $startNs): int
+    {
+        return (int) ((hrtime(true) - $startNs) / 1e6);
+    }
+
+    /** Emit the `http.request.sent` DEBUG event for one HTTP attempt. */
+    private function emitRequestSent(string $method, string $path, string $query, array $requestOptions): void
+    {
+        $context = [
+            'http.request.method' => $method,
+            'url.path' => $path,
+            'url.query' => LogRedaction::redactQuery($query),
+        ];
+
+        if ($this->logBodies && isset($requestOptions['json'])) {
+            $encoded = json_encode($requestOptions['json']);
+            if ($encoded !== false) {
+                $context['http.request.body'] = LogRedaction::redactJsonBody($encoded);
+            }
+        }
+
+        $this->logger->debug('http.request.sent', $context);
+    }
+
+    /**
+     * Emit the `http.response.received` DEBUG event for one HTTP attempt
+     * (any status code, including 4xx/5xx: those are data, not a transport
+     * failure). Reads the response body exactly once and returns it so the
+     * caller can reuse it instead of consuming the stream a second time.
+     */
+    private function emitResponseReceived(ResponseInterface $response, int $durationMs): string
+    {
+        $size = $response->getBody()->getSize();
+        $rawBody = (string) $response->getBody();
+
+        $context = [
+            'http.response.status_code' => $response->getStatusCode(),
+            'http.response.body.size' => $size ?? strlen($rawBody),
+            'duration_ms' => $durationMs,
+        ];
+
+        if ($this->logBodies) {
+            $contentType = $response->getHeaderLine('Content-Type');
+            $context['http.response.body'] = str_contains($contentType, 'application/json')
+                ? LogRedaction::redactJsonBody($rawBody)
+                : $rawBody;
+        }
+
+        $this->logger->debug('http.response.received', $context);
+
+        return $rawBody;
+    }
+
+    /** Emit the `http.request.failed` ERROR event: transport failure, no HTTP response received. */
+    private function emitRequestFailed(
+        string $method,
+        string $path,
+        string $query,
+        StreamTransportException $transportException,
+        int $durationMs,
+    ): void {
+        $this->logger->error('http.request.failed', [
+            'http.request.method' => $method,
+            'url.path' => $path,
+            'url.query' => LogRedaction::redactQuery($query),
+            'error.type' => $transportException->getErrorType(),
+            'error.message' => $transportException->getMessage(),
+            'duration_ms' => $durationMs,
+        ]);
+    }
+
     /**
      * Make an HTTP request.
      *
@@ -137,29 +224,48 @@ class GuzzleHttpClient implements HttpClientInterface
             }
         }
 
+        $parsedPath = parse_url($url, PHP_URL_PATH);
+        $path = is_string($parsedPath) ? $parsedPath : $url;
+        $parsedQuery = parse_url($url, PHP_URL_QUERY);
+        $query = is_string($parsedQuery) ? $parsedQuery : '';
+
         // Retry loop for rate-limited (429) responses.
         for ($attempt = 0;; $attempt++) {
+            $this->emitRequestSent($method, $path, $query, $requestOptions);
+            $start = hrtime(true);
+
             try {
                 $response = $this->client->request($method, $url, $requestOptions);
             } catch (ClientException | ServerException $e) {
                 // Reachable only if a caller flipped `http_errors` back to true.
-                return $this->createStreamResponse($e->getResponse(), $e);
+                $durationMs = self::elapsedMs($start);
+                $rawBody = $this->emitResponseReceived($e->getResponse(), $durationMs);
+
+                return $this->createStreamResponse($e->getResponse(), $e, $rawBody);
             } catch (ConnectException $e) {
-                throw new StreamTransportException(
+                $transportException = new StreamTransportException(
                     $e->getMessage(),
                     self::mapConnectErrorType($e),
                     $e,
                 );
+                $this->emitRequestFailed($method, $path, $query, $transportException, self::elapsedMs($start));
+
+                throw $transportException;
             } catch (GuzzleException $e) {
-                throw new StreamTransportException(
+                $transportException = new StreamTransportException(
                     $e->getMessage(),
                     StreamTransportException::ERROR_TYPE_UNKNOWN,
                     $e,
                 );
+                $this->emitRequestFailed($method, $path, $query, $transportException, self::elapsedMs($start));
+
+                throw $transportException;
             }
 
+            $rawBody = $this->emitResponseReceived($response, self::elapsedMs($start));
+
             if ($response->getStatusCode() !== 429 || $attempt >= $this->maxRetries) {
-                return $this->createStreamResponse($response);
+                return $this->createStreamResponse($response, null, $rawBody);
             }
 
             // Parse Retry-After header or use exponential backoff. Jitter
@@ -179,13 +285,16 @@ class GuzzleHttpClient implements HttpClientInterface
      * @param \Throwable|null $previous Cause-chain link when the caller already
      *                                  caught a Guzzle exception that exposed
      *                                  the response.
+     * @param string|null $rawBody Body already read by the caller (e.g. for logging).
+     *                             The response body stream can only be consumed once;
+     *                             pass it through instead of re-reading it here.
      *
      * @return StreamResponse<mixed>
      */
-    private function createStreamResponse(ResponseInterface $response, ?\Throwable $previous = null): StreamResponse
+    private function createStreamResponse(ResponseInterface $response, ?\Throwable $previous = null, ?string $rawBody = null): StreamResponse
     {
         $statusCode = $response->getStatusCode();
-        $rawBody = $response->getBody()->getContents();
+        $rawBody ??= $response->getBody()->getContents();
 
         // Convert headers to lowercase keys
         $headers = [];

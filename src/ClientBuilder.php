@@ -9,6 +9,8 @@ use GetStream\Exceptions\StreamException;
 use GetStream\Http\GuzzleHttpClient;
 use GetStream\Http\HttpClientInterface;
 use GetStream\Http\PoolConfig;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Builder class for creating GetStream clients with environment variable support.
@@ -22,6 +24,8 @@ class ClientBuilder
     private bool $loadEnv = true;
     private ?string $envPath = null;
     private PoolConfig $pool;
+    private ?LoggerInterface $logger = null;
+    private bool $logBodies = false;
 
     public function __construct()
     {
@@ -108,6 +112,30 @@ class ClientBuilder
     public function requestTimeout(int $seconds): self
     {
         $this->pool = $this->pool->withRequestTimeout($seconds);
+
+        return $this;
+    }
+
+    /**
+     * Inject a PSR-3 logger for structured `client.initialized` / `http.request.*` /
+     * `http.response.*` events. Default when none is set: `Psr\Log\NullLogger` (no-op).
+     * The SDK never sets the logger's level; that is the caller's responsibility.
+     */
+    public function logger(LoggerInterface $logger): self
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * Include (key-redacted) request/response bodies in the `http.request.sent` /
+     * `http.response.received` log events. Off by default. Enabling this emits one
+     * WARN at construction time.
+     */
+    public function logBodies(bool $on): self
+    {
+        $this->logBodies = $on;
 
         return $this;
     }
@@ -265,41 +293,51 @@ class ClientBuilder
     /**
      * Resolve the HttpClient.
      * If the user supplied one via httpClient(), return it as-is (escape hatch).
-     * Otherwise build a GuzzleHttpClient with the configured PoolConfig and emit the INFO log.
+     * Otherwise build a GuzzleHttpClient with the configured PoolConfig. Either way,
+     * emit one `client.initialized` INFO event through the injected PSR-3 logger.
      */
     private function resolveHttpClient(): HttpClientInterface
     {
+        $logger = $this->logger ?? new NullLogger();
+
         $user = $this->httpClient;
         if ($user !== null) {
-            $this->logInfo(
-                'getstream-php connection pool: user_http_client=true (5 knobs not applied)'
-            );
+            $logger->info('client.initialized', $this->clientInitializedContext(userHttpClient: true));
+            $this->warnIfLogBodies($logger);
 
             return $user;
         }
 
-        $client = new GuzzleHttpClient([], 3, $this->pool);
+        $client = new GuzzleHttpClient([], 3, $this->pool, $logger, $this->logBodies);
 
-        $this->logInfo(sprintf(
-            'getstream-php connection pool: max_conns_per_host=%d idle_timeout=%ds connect_timeout=%ds request_timeout=%ds user_http_client=false',
-            $this->pool->maxConnsPerHost,
-            $this->pool->idleTimeout,
-            $this->pool->connectTimeout,
-            $this->pool->requestTimeout,
-        ));
+        $logger->info('client.initialized', $this->clientInitializedContext(userHttpClient: false));
+        $this->warnIfLogBodies($logger);
 
         return $client;
     }
 
-    /**
-     * Emit one INFO log line via error_log().
-     * Suppressed under PHPUnit to keep test output clean (PHPUNIT_RUNNING constant is set in phpunit.xml).
-     */
-    private function logInfo(string $message): void
+    private function warnIfLogBodies(LoggerInterface $logger): void
     {
-        if (defined('PHPUNIT_RUNNING') && PHPUNIT_RUNNING) {
-            return;
+        if ($this->logBodies) {
+            $logger->warning(
+                'Request/response bodies will be included in log events (keys api_secret/token/password are redacted).'
+            );
         }
-        error_log('[INFO] ' . $message);
+    }
+
+    /** @return array<string, scalar> */
+    private function clientInitializedContext(bool $userHttpClient): array
+    {
+        return [
+            'stream.sdk.name' => 'getstream-php',
+            'stream.sdk.version' => Constant::VERSION,
+            'stream.client.max_conns_per_host' => $this->pool->maxConnsPerHost,
+            'stream.client.idle_timeout_seconds' => $this->pool->idleTimeout,
+            'stream.client.connect_timeout_seconds' => $this->pool->connectTimeout,
+            'stream.client.request_timeout_seconds' => $this->pool->requestTimeout,
+            'stream.client.gzip_enabled' => true,
+            'stream.client.user_http_client' => $userHttpClient,
+            'stream.client.log_bodies' => $this->logBodies,
+        ];
     }
 }
