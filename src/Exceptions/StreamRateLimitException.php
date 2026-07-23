@@ -9,8 +9,11 @@ namespace GetStream\Exceptions;
  * `Retry-After` header (integer seconds; `null` if header missing or
  * unparseable).
  *
- * Auto-retry is NOT performed by the SDK. Inspect `getRetryAfter()` and
- * compose your own retry strategy (or use a middleware).
+ * Auto-retry is off by default. Enable the opt-in policy with
+ * `ClientBuilder::retry(new RetryConfig(enabled: true))`; it retries only
+ * GET/HEAD requests, honoring this exception's `getRetryAfter()` value.
+ * Compose your own strategy from `getRetryAfter()` if you need anything
+ * richer.
  */
 class StreamRateLimitException extends StreamApiException
 {

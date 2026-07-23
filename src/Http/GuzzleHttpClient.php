@@ -27,9 +27,6 @@ class GuzzleHttpClient implements HttpClientInterface
 {
     private GuzzleClient $client;
 
-    /** Maximum number of retries for rate-limited (429) responses. */
-    private int $maxRetries;
-
     /** @var PoolConfig Effective pool configuration (kept for diagnostics). */
     private PoolConfig $pool;
 
@@ -38,25 +35,34 @@ class GuzzleHttpClient implements HttpClientInterface
     /** Whether request/response bodies are included (key-redacted) in log events. */
     private bool $logBodies;
 
+    private RetryConfig $retry;
+
     /**
      * Create a new GuzzleHttpClient.
      *
      * @param array             $config     Guzzle client configuration (wins over $pool defaults)
-     * @param int               $maxRetries Maximum retries for 429 rate-limit responses (default 3).
+     * @param int               $maxRetries Deprecated, ignored: retry behavior is now governed
+     *                                      entirely by $retry. Kept only for positional-call
+     *                                      compatibility.
      * @param PoolConfig|null   $pool       Connection pool configuration. When null, spec defaults apply.
      * @param LoggerInterface|null $logger  PSR-3 logger for structured request/response events. Defaults to NullLogger.
      * @param bool              $logBodies  When true, include (key-redacted) request/response bodies in log events.
+     * @param RetryConfig|null  $retry      Opt-in auto-retry policy. When null, retries are disabled
+     *                                      and the client performs exactly one attempt.
      */
+    // @phpstan-ignore-next-line constructor.unusedParameter (deprecated, kept for positional-call compatibility)
     public function __construct(
         array $config = [],
         int $maxRetries = 3,
         ?PoolConfig $pool = null,
         ?LoggerInterface $logger = null,
         bool $logBodies = false,
+        ?RetryConfig $retry = null,
     ) {
         $pool = $pool ?? new PoolConfig();
         $this->logger = $logger ?? new NullLogger();
         $this->logBodies = $logBodies;
+        $this->retry = $retry ?? new RetryConfig();
 
         // Persistent multi handle: routes every request (sync and async) through one
         // libcurl multi handle that holds a connection pool for the lifetime of this
@@ -100,7 +106,6 @@ class GuzzleHttpClient implements HttpClientInterface
         $merged = array_replace_recursive($defaultConfig, $config);
 
         $this->client = new GuzzleClient($merged);
-        $this->maxRetries = $maxRetries;
         $this->pool = $pool;
     }
 
@@ -182,6 +187,30 @@ class GuzzleHttpClient implements HttpClientInterface
     }
 
     /**
+     * Emit the `http.request.failed` DEBUG event when a failed attempt is about
+     * to be retried (as opposed to the ERROR-level event emitted for a
+     * transport failure that surfaces to the caller unchanged).
+     */
+    private function emitRetryAttempt(
+        string $method,
+        string $path,
+        string $query,
+        StreamRateLimitException | StreamTransportException $e,
+        int $durationMs,
+        int $retryAttempt,
+    ): void {
+        $this->logger->debug('http.request.failed', [
+            'http.request.method' => $method,
+            'url.path' => $path,
+            'url.query' => LogRedaction::redactQuery($query),
+            'error.type' => $e instanceof StreamTransportException ? $e->getErrorType() : 'rate_limited',
+            'error.message' => LogRedaction::redactMessage($e->getMessage()),
+            'duration_ms' => $durationMs,
+            'retry.attempt' => $retryAttempt,
+        ]);
+    }
+
+    /**
      * Make an HTTP request.
      *
      * @param string $method  HTTP method
@@ -229,52 +258,96 @@ class GuzzleHttpClient implements HttpClientInterface
         $parsedQuery = parse_url($url, PHP_URL_QUERY);
         $query = is_string($parsedQuery) ? $parsedQuery : '';
 
-        // Retry loop for rate-limited (429) responses.
+        // Opt-in retry policy: disabled (default) means exactly one attempt.
+        // When enabled, only GET/HEAD requests failing with 429 (recoverable)
+        // or a transport error are retried; see shouldRetry()/retryDelay().
         for ($attempt = 0;; $attempt++) {
             $this->emitRequestSent($method, $path, $query, $requestOptions);
             $start = hrtime(true);
 
             try {
-                $response = $this->client->request($method, $url, $requestOptions);
-            } catch (ClientException | ServerException $e) {
-                // Reachable only if a caller flipped `http_errors` back to true.
-                $durationMs = self::elapsedMs($start);
-                $rawBody = $this->emitResponseReceived($e->getResponse(), $durationMs);
+                try {
+                    $response = $this->client->request($method, $url, $requestOptions);
+                } catch (ClientException | ServerException $e) {
+                    // Reachable only if a caller flipped `http_errors` back to true.
+                    $durationMs = self::elapsedMs($start);
+                    $rawBody = $this->emitResponseReceived($e->getResponse(), $durationMs);
 
-                return $this->createStreamResponse($e->getResponse(), $e, $rawBody);
-            } catch (ConnectException $e) {
-                $transportException = new StreamTransportException(
-                    $e->getMessage(),
-                    self::mapConnectErrorType($e),
-                    $e,
-                );
-                $this->emitRequestFailed($method, $path, $query, $transportException, self::elapsedMs($start));
+                    return $this->createStreamResponse($e->getResponse(), $e, $rawBody);
+                } catch (ConnectException $e) {
+                    throw new StreamTransportException($e->getMessage(), self::mapConnectErrorType($e), $e);
+                } catch (GuzzleException $e) {
+                    throw new StreamTransportException($e->getMessage(), StreamTransportException::ERROR_TYPE_UNKNOWN, $e);
+                }
 
-                throw $transportException;
-            } catch (GuzzleException $e) {
-                $transportException = new StreamTransportException(
-                    $e->getMessage(),
-                    StreamTransportException::ERROR_TYPE_UNKNOWN,
-                    $e,
-                );
-                $this->emitRequestFailed($method, $path, $query, $transportException, self::elapsedMs($start));
+                $rawBody = $this->emitResponseReceived($response, self::elapsedMs($start));
 
-                throw $transportException;
-            }
-
-            $rawBody = $this->emitResponseReceived($response, self::elapsedMs($start));
-
-            if ($response->getStatusCode() !== 429 || $attempt >= $this->maxRetries) {
                 return $this->createStreamResponse($response, null, $rawBody);
-            }
+            } catch (StreamRateLimitException | StreamTransportException $e) {
+                $durationMs = self::elapsedMs($start);
 
-            // Parse Retry-After header or use exponential backoff. Jitter
-            // desynchronizes parallel test processes to avoid stampedes.
-            $retryAfter = $response->getHeaderLine('Retry-After');
-            $sleepSeconds = $retryAfter !== '' ? (int) $retryAfter : ($attempt + 1);
-            $sleepSeconds = min($sleepSeconds, 10);
-            $jitter = random_int(0, max(1, (int) round($sleepSeconds * 0.3)));
-            sleep($sleepSeconds + $jitter);
+                if (!$this->shouldRetry($e, $method, $attempt)) {
+                    if ($e instanceof StreamTransportException) {
+                        $this->emitRequestFailed($method, $path, $query, $e, $durationMs);
+                    }
+
+                    throw $e;
+                }
+
+                $this->emitRetryAttempt($method, $path, $query, $e, $durationMs, $attempt + 1);
+                $this->sleepSeconds($this->retryDelay($e, $attempt));
+            }
+        }
+    }
+
+    /**
+     * Decide whether a failed attempt is eligible for retry: retries are
+     * opt-in (disabled unless a RetryConfig with enabled=true was supplied),
+     * apply only to GET/HEAD, never to a 429 marked `unrecoverable`, and stop
+     * once the configured `maxAttempts` is reached.
+     */
+    private function shouldRetry(StreamRateLimitException | StreamTransportException $e, string $method, int $attempt): bool
+    {
+        if (!$this->retry->enabled) {
+            return false;
+        }
+        if (!in_array(strtoupper($method), ['GET', 'HEAD'], true)) {
+            return false;
+        }
+        if ($attempt + 1 >= $this->retry->maxAttempts) {
+            return false;
+        }
+        if ($e instanceof StreamRateLimitException) {
+            return !$e->isUnrecoverable();
+        }
+
+        return true;
+    }
+
+    /**
+     * Backoff before the next retry: honors a parsed `Retry-After` (no
+     * jitter) when present and positive, otherwise full jitter over an
+     * exponential ceiling, both capped at `maxBackoff`.
+     */
+    private function retryDelay(StreamRateLimitException | StreamTransportException $e, int $attempt): float
+    {
+        if ($e instanceof StreamRateLimitException) {
+            $retryAfter = $e->getRetryAfter();
+            if ($retryAfter !== null && $retryAfter > 0) {
+                return min((float) $retryAfter, $this->retry->maxBackoff);
+            }
+        }
+
+        $ceiling = min($this->retry->maxBackoff, 1.0 * (2 ** $attempt));
+
+        return $ceiling <= 0 ? 0.0 : mt_rand(0, (int) round($ceiling * 1000)) / 1000.0;
+    }
+
+    /** Overridable so tests can record the delay instead of actually sleeping. */
+    protected function sleepSeconds(float $seconds): void
+    {
+        if ($seconds > 0) {
+            usleep((int) round($seconds * 1_000_000));
         }
     }
 

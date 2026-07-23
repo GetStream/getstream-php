@@ -57,6 +57,22 @@ Per-call `curl` overrides replace (do not merge with) the client-level `curl` op
 
 **Escape hatch:** Passing your own client via `->httpClient($mine)` skips all 4 knobs; your client is used as-is.
 
+## Retries (opt-in)
+
+Auto-retry is off by default: the client makes exactly one attempt and surfaces errors unchanged. Enable it with `->retry(new RetryConfig(...))`:
+
+```php
+$client = GetStream\ClientBuilder::fromEnv()
+    ->retry(new RetryConfig(enabled: true, maxAttempts: 3, maxBackoff: 30.0))
+    ->build();
+```
+
+When enabled, a failed attempt is retried only if all of the following hold: the method is `GET` or `HEAD`; the failure is an HTTP 429 (and not marked `unrecoverable`) or a transport error (`StreamTransportException`); and fewer than `maxAttempts` attempts have been made. Writes (`POST`/`PUT`/`PATCH`/`DELETE`) and any other 4xx/5xx status are never retried.
+
+Backoff honors a parsed `Retry-After` header when present (capped at `maxBackoff`, no jitter); otherwise it uses exponential backoff with full jitter, also capped at `maxBackoff`. On exhaustion, the last attempt's error is thrown unchanged.
+
+**Breaking change from earlier versions:** this SDK previously retried HTTP 429 responses on every request automatically (`maxRetries`, default 3). That always-on behavior is gone; retries are now opt-in via `RetryConfig` and apply only to `GET`/`HEAD`.
+
 ## Logging
 
 The SDK emits structured events through a [PSR-3](https://www.php-fig.org/psr/psr-3/) `Psr\Log\LoggerInterface`. No logger is injected by default (`Psr\Log\NullLogger`, a no-op); pass your own via `->logger(...)`:
@@ -76,7 +92,8 @@ Events emitted:
 | `client.initialized` | INFO | Once, at construction |
 | `http.request.sent` | DEBUG | Before each HTTP attempt |
 | `http.response.received` | DEBUG | After any HTTP response, including 4xx/5xx (status codes are data, not a failure) |
-| `http.request.failed` | ERROR | Transport failure only (connection reset, timeout, DNS failure, TLS handshake failure) — no HTTP response was received |
+| `http.request.failed` | ERROR | Transport failure that surfaces to the caller unchanged (connection reset, timeout, DNS failure, TLS handshake failure) — no HTTP response was received |
+| `http.request.failed` | DEBUG | Also emitted, with a `retry.attempt` field, right before each retry backoff sleep (see [Retries](#retries-opt-in)) |
 
 The SDK never sets the logger's minimum level; that's the caller's responsibility.
 

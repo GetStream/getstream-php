@@ -10,10 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Structured logging via [PSR-3](https://www.php-fig.org/psr/psr-3/): `ClientBuilder::logger()` injects any `Psr\Log\LoggerInterface`; no logger is used by default. Emits `client.initialized` (INFO, once), `http.request.sent` / `http.response.received` (DEBUG, per attempt), and `http.request.failed` (ERROR, transport failures only). Query and JSON-body secrets (`api_key`, `api_secret`, `token`, `password`) are always redacted. Request/response bodies are excluded by default; opt in with `ClientBuilder::logBodies(true)`.
+- Opt-in auto-retry policy: `ClientBuilder::retry(new RetryConfig(enabled: true, maxAttempts: 3, maxBackoff: 30.0))`. Retries apply only to `GET`/`HEAD` requests failing with HTTP 429 (unless marked `unrecoverable`) or a transport error, honor `Retry-After` when present, and otherwise back off exponentially with full jitter, both capped at `maxBackoff`. A DEBUG `http.request.failed` event with a `retry.attempt` field is emitted before each retry.
 
 ### Changed
 
 - **Behavior change:** the connection-pool configuration is no longer written to PHP's `error_log()` at client construction. That information is now available only through an injected PSR-3 logger, as the `client.initialized` event. If you relied on the old `error_log` line, inject a logger via `->logger(...)` instead.
+- **Breaking:** the SDK no longer retries HTTP 429 responses automatically. Previously every request retried up to `maxRetries` (default 3) on 429. Retries are now opt-in via `ClientBuilder::retry(new RetryConfig(enabled: true))` and apply only to `GET`/`HEAD` requests. The `GuzzleHttpClient` constructor's `$maxRetries` parameter is deprecated and ignored; pass a `RetryConfig` instead.
 
 ## [9.0.0] - 2026-07-15
 
