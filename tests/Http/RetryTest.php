@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GetStream\Tests\Http;
 
 use GetStream\Exceptions\StreamRateLimitException;
+use GetStream\Exceptions\StreamTransportException;
 use GetStream\Http\RetryConfig;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Handler\MockHandler;
@@ -22,7 +23,7 @@ final class RetryTest extends TestCase
     /** @var list<array{request: Request}> */
     private array $history = [];
 
-    private function client(array $responses, ?RetryConfig $retry): RecordingClient
+    private function client(array $responses, ?RetryConfig $retry, ?RecordingLogger $logger = null): RecordingClient
     {
         $this->history = [];
         $mock = new MockHandler($responses);
@@ -30,7 +31,16 @@ final class RetryTest extends TestCase
         $stack->push(Middleware::history($this->history));
 
         // Constructor is (config, maxRetries [deprecated/ignored], pool, logger, logBodies, retry).
-        return new RecordingClient(['handler' => $stack], 3, null, null, false, $retry);
+        return new RecordingClient(['handler' => $stack], 3, null, $logger, false, $retry);
+    }
+
+    /** Retry-attempt records only (the DEBUG `http.request.failed` emitted before a retry, not the final ERROR one). */
+    private static function retryRecords(RecordingLogger $logger): array
+    {
+        return array_values(array_filter(
+            $logger->named('http.request.failed'),
+            fn (array $r) => $r['level'] === 'debug',
+        ));
     }
 
     private static function enabled(int $maxAttempts = 3, float $maxBackoff = 30.0): RetryConfig
@@ -137,6 +147,44 @@ final class RetryTest extends TestCase
                 $this->assertGreaterThanOrEqual(0.0, $delay);
                 $this->assertLessThanOrEqual($ceiling, $delay);
             }
+        }
+    }
+
+    /** A retried transport error carries the canonical `error.type` classifier plus `retry.attempt`. */
+    public function testTransportErrorRetryLogCarriesErrorType(): void
+    {
+        $logger = new RecordingLogger();
+        $client = $this->client([
+            new ConnectException('reset', new Request('GET', 'http://localhost/x')),
+            new Response(200, [], '{"ok":true}'),
+        ], self::enabled(maxBackoff: 0.001), $logger);
+        $client->request('GET', 'http://localhost/x');
+
+        $retries = self::retryRecords($logger);
+        $this->assertCount(1, $retries);
+        // ConnectException message inspection (no handler-context errno on the mock):
+        // "reset" matches the connection_reset branch in mapConnectErrorType().
+        $this->assertSame(StreamTransportException::ERROR_TYPE_CONNECTION_RESET, $retries[0]['context']['error.type']);
+        $this->assertSame(1, $retries[0]['context']['retry.attempt']);
+    }
+
+    /** A retried 429 carries `retry.attempt` but never `error.type` / the invented `rate_limited` value: that field is a closed transport-only enum. */
+    public function testRateLimitRetryLogOmitsErrorType(): void
+    {
+        $logger = new RecordingLogger();
+        $client = $this->client([
+            new Response(429, ['Retry-After' => '0'], '{}'),
+            new Response(200, [], '{"ok":true}'),
+        ], self::enabled(), $logger);
+        $client->request('GET', 'http://localhost/x');
+
+        $retries = self::retryRecords($logger);
+        $this->assertCount(1, $retries);
+        $this->assertArrayNotHasKey('error.type', $retries[0]['context']);
+        $this->assertSame(1, $retries[0]['context']['retry.attempt']);
+
+        foreach ($logger->records as $record) {
+            $this->assertNotSame('rate_limited', $record['context']['error.type'] ?? null);
         }
     }
 }

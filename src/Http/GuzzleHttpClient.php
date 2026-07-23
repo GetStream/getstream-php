@@ -199,15 +199,24 @@ class GuzzleHttpClient implements HttpClientInterface
         int $durationMs,
         int $retryAttempt,
     ): void {
-        $this->logger->debug('http.request.failed', [
+        $context = [
             'http.request.method' => $method,
             'url.path' => $path,
             'url.query' => LogRedaction::redactQuery($query),
-            'error.type' => $e instanceof StreamTransportException ? $e->getErrorType() : 'rate_limited',
             'error.message' => LogRedaction::redactMessage($e->getMessage()),
             'duration_ms' => $durationMs,
             'retry.attempt' => $retryAttempt,
-        ]);
+        ];
+
+        // `error.type` is a closed transport-failure enum (connection_reset |
+        // timeout | dns_failure | tls_handshake_failed | unknown); a 429 is a
+        // received response, not a transport failure, so it has no value in
+        // that enum and the field is omitted rather than invented.
+        if ($e instanceof StreamTransportException) {
+            $context['error.type'] = $e->getErrorType();
+        }
+
+        $this->logger->debug('http.request.failed', $context);
     }
 
     /**
