@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0] - 2026-07-24
+
 ### Added
 
 - Structured logging via [PSR-3](https://www.php-fig.org/psr/psr-3/): `ClientBuilder::logger()` injects any `Psr\Log\LoggerInterface`; no logger is used by default. Emits `client.initialized` (INFO, once), `http.request.sent` / `http.response.received` (DEBUG, per attempt), and `http.request.failed` (ERROR, transport failures only). Query and JSON-body secrets (`api_key`, `api_secret`, `token`, `password`) are always redacted. Request/response bodies are excluded by default; opt in with `ClientBuilder::logBodies(true)`.
