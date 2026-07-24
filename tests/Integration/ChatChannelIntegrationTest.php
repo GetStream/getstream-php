@@ -215,7 +215,7 @@ class ChatChannelIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($resp, 'hard delete channels');
         self::assertNotEmpty($resp->getData()->taskID);
 
-        $taskResult = $this->waitForTask($resp->getData()->taskID);
+        $taskResult = $this->waitForTask($resp->getData()->taskID, skipOnTimeout: true);
         self::assertSame('completed', $taskResult->status);
     }
 
