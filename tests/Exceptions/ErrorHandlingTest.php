@@ -10,6 +10,7 @@ use GetStream\Exceptions\StreamRateLimitException;
 use GetStream\Exceptions\StreamTaskException;
 use GetStream\Exceptions\StreamTransportException;
 use GetStream\Http\GuzzleHttpClient;
+use GetStream\Http\RetryConfig;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -18,7 +19,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
 
-/** Covers exception field exposure, Retry-After parsing, transport error wrapping, cause-chain preservation, and PHP's auto-retry-on-429 middleware. */
+/** Covers exception field exposure, Retry-After parsing, transport error wrapping, cause-chain preservation, and the opt-in RetryConfig retry policy. */
 class ErrorHandlingTest extends TestCase
 {
     /**
@@ -30,8 +31,8 @@ class ErrorHandlingTest extends TestCase
         $mock = new MockHandler($responses);
         $stack = HandlerStack::create($mock);
         $stack->push(Middleware::history($capturedHistory));
-        // maxRetries=0 keeps the no-retry tests fast.
-        return new GuzzleHttpClient(['handler' => $stack], 0);
+        // Retries are opt-in and off by default (no RetryConfig passed): one attempt, no retry.
+        return new GuzzleHttpClient(['handler' => $stack]);
     }
 
     /** @test */
@@ -176,12 +177,12 @@ class ErrorHandlingTest extends TestCase
     }
 
     /**
-     * With maxRetries=2 and three 429 responses, the SDK issues exactly three
-     * HTTP attempts (initial + 2 retries) and raises StreamRateLimitException.
+     * With retries enabled (maxAttempts=3) and three 429 responses, the SDK
+     * issues exactly three HTTP attempts and raises StreamRateLimitException.
      *
      * @test
      */
-    public function rateLimitAutoRetriesUpToMaxRetries(): void
+    public function rateLimitAutoRetriesUpToMaxAttemptsWhenEnabled(): void
     {
         $history = [];
         $body = json_encode(['code' => 9, 'message' => 'rate limited']);
@@ -192,7 +193,8 @@ class ErrorHandlingTest extends TestCase
         ]);
         $stack = HandlerStack::create($mock);
         $stack->push(Middleware::history($history));
-        $client = new GuzzleHttpClient(['handler' => $stack], 2);
+        $retry = new RetryConfig(enabled: true, maxAttempts: 3, maxBackoff: 0.001);
+        $client = new GuzzleHttpClient(['handler' => $stack], 3, null, null, false, $retry);
 
         try {
             $client->request('GET', 'https://example.invalid/api/v2/throttled');
@@ -201,7 +203,25 @@ class ErrorHandlingTest extends TestCase
             self::assertSame(0, $e->getRetryAfter());
         }
 
-        self::assertCount(3, $history, 'SDK must issue maxRetries+1 attempts on persistent 429s');
+        self::assertCount(3, $history, 'SDK must issue maxAttempts total attempts on persistent 429s');
+    }
+
+    /** @test */
+    public function rateLimitIsNotRetriedByDefault(): void
+    {
+        $history = [];
+        $body = json_encode(['code' => 9, 'message' => 'rate limited']);
+        $client = $this->makeClient([
+            new GuzzleResponse(429, ['Content-Type' => 'application/json', 'Retry-After' => '0'], $body),
+        ], $history);
+
+        try {
+            $client->request('GET', 'https://example.invalid/api/v2/throttled');
+            self::fail('expected StreamRateLimitException');
+        } catch (StreamRateLimitException) {
+        }
+
+        self::assertCount(1, $history, 'retries are opt-in: default RetryConfig performs exactly one attempt');
     }
 
     /** @test */

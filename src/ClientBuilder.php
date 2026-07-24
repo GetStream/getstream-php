@@ -9,6 +9,7 @@ use GetStream\Exceptions\StreamException;
 use GetStream\Http\GuzzleHttpClient;
 use GetStream\Http\HttpClientInterface;
 use GetStream\Http\PoolConfig;
+use GetStream\Http\RetryConfig;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -26,6 +27,7 @@ class ClientBuilder
     private PoolConfig $pool;
     private ?LoggerInterface $logger = null;
     private bool $logBodies = false;
+    private ?RetryConfig $retry = null;
 
     public function __construct()
     {
@@ -136,6 +138,19 @@ class ClientBuilder
     public function logBodies(bool $on): self
     {
         $this->logBodies = $on;
+
+        return $this;
+    }
+
+    /**
+     * Opt-in auto-retry policy (default: disabled, no retries; the client
+     * performs exactly one attempt and surfaces errors unchanged). When
+     * enabled, retries only GET/HEAD requests that fail with HTTP 429 or a
+     * transport error.
+     */
+    public function retry(RetryConfig $retry): self
+    {
+        $this->retry = $retry;
 
         return $this;
     }
@@ -308,7 +323,7 @@ class ClientBuilder
             return $user;
         }
 
-        $client = new GuzzleHttpClient([], 3, $this->pool, $logger, $this->logBodies);
+        $client = new GuzzleHttpClient([], 3, $this->pool, $logger, $this->logBodies, $this->retry);
 
         $logger->info('client.initialized', $this->clientInitializedContext(userHttpClient: false));
         $this->warnIfLogBodies($logger);
