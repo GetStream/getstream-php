@@ -467,7 +467,7 @@ class GuzzleHttpClient implements HttpClientInterface
 
         if (!$parsedEnvelope) {
             // HTTP layer succeeded, body is unparseable as APIError.
-            $message = 'failed to parse error response';
+            $message = sprintf('failed to parse error response: unexpected server response code %d', $statusCode);
         }
 
         if ($statusCode === 429) {

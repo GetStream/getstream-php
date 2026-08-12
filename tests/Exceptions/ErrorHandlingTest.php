@@ -106,7 +106,7 @@ class ErrorHandlingTest extends TestCase
             self::assertSame(500, $e->getStatusCode());
             self::assertSame(500, $e->getCode(), 'getCode() returns HTTP status (back-compat)');
             self::assertSame(0, $e->getApiErrorCode(), 'APIError.code is 0 on unparseable body');
-            self::assertSame('failed to parse error response', $e->getMessage());
+            self::assertSame('failed to parse error response: unexpected server response code 500', $e->getMessage());
             self::assertSame('<<<not json>>>', $e->getRawResponseBody());
             self::assertNotNull($e->getPrevious(), 'cause chain must point to the JSON parse error');
             self::assertInstanceOf(\JsonException::class, $e->getPrevious());
