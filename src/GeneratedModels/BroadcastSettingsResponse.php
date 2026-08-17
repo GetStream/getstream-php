@@ -10,8 +10,8 @@ class BroadcastSettingsResponse extends BaseModel
 {
     public function __construct(
         public ?bool $enabled = null,
-        public ?HLSSettingsResponse $hls = null,
-        public ?RTMPSettingsResponse $rtmp = null,
+        public ?HLSSettingsResponse $hls = null, // HLSSettings is the payload for HLS settings
+        public ?RTMPSettingsResponse $rtmp = null, // RTMPSettingsResponse is the payload for RTMP settings
     ) {
     }
 

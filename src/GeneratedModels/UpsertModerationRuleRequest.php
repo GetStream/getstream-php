@@ -8,11 +8,11 @@ class UpsertModerationRuleRequest extends BaseModel
     public function __construct(
         public ?string $name = null, // Unique rule name
         public ?string $userID = null, // Optional user ID to associate with the audit log entry
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
         public ?string $description = null, // Optional description of the rule
         public ?array $configKeys = null, // List of config keys this rule applies to
         public ?string $team = null, // Team scope for the rule
-        public ?string $ruleType = null, // Type of rule: user, content, or call
+        public ?string $ruleType = null, // Type of rule: user, content, call, or flood
         /** @var array<RuleBuilderCondition>|null */
         #[ArrayOf(RuleBuilderCondition::class)]
         public ?array $conditions = null, // Flat list of conditions (legacy)

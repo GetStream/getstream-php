@@ -7,7 +7,7 @@ class AppealItemResponse extends BaseModel
 {
     public function __construct(
         public ?string $id = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $entityType = null, // Type of entity
         public ?string $entityID = null, // ID of the entity
         public ?ModerationPayload $entityContent = null,

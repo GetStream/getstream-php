@@ -8,7 +8,7 @@ class ChatReactionResponse extends BaseModel
     public function __construct(
         public ?string $messageID = null,
         public ?string $userID = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $type = null,
         public ?int $score = null,
         public ?\DateTime $createdAt = null,

@@ -18,7 +18,7 @@ class QueryMembersPayload extends BaseModel
         public ?int $limit = null,
         public ?int $offset = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

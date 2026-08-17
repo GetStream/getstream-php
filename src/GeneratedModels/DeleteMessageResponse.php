@@ -9,7 +9,7 @@ namespace GetStream\GeneratedModels;
 class DeleteMessageResponse extends BaseModel
 {
     public function __construct(
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }

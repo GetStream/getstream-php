@@ -21,7 +21,7 @@ class MessageReadEvent extends BaseModel
         public ?string $channelType = null, // The type of the channel where the message was read
         public ?string $channelID = null, // The ID of the channel where the message was read
         public ?UserResponseCommonFields $user = null,
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?ThreadResponse $thread = null,
         public ?string $lastReadMessageID = null, // The ID of the last read message
     ) {

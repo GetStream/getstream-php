@@ -7,7 +7,7 @@ class ChannelBatchUpdateRequest extends BaseModel
 {
     public function __construct(
         public ?string $operation = null,
-        public ?object $filter = null,
+        public ?object $filter = null, // Filter to apply to the query
         /** @var array<ChannelBatchMemberRequest>|null */
         #[ArrayOf(ChannelBatchMemberRequest::class)]
         public ?array $members = null,

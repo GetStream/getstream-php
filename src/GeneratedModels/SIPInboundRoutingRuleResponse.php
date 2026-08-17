@@ -14,11 +14,11 @@ class SIPInboundRoutingRuleResponse extends BaseModel
         public ?array $trunkIds = null, // List of SIP trunk IDs
         public ?array $calledNumbers = null, // List of called numbers
         public ?array $callerNumbers = null, // List of caller numbers
-        public ?SIPDirectRoutingRuleCallConfigsResponse $directRoutingConfigs = null,
-        public ?SIPInboundRoutingRulePinConfigsResponse $pinRoutingConfigs = null,
-        public ?SIPCallerConfigsResponse $callerConfigs = null,
-        public ?SIPCallConfigsResponse $callConfigs = null,
-        public ?SIPPinProtectionConfigsResponse $pinProtectionConfigs = null,
+        public ?SIPDirectRoutingRuleCallConfigsResponse $directRoutingConfigs = null, // Direct routing rule call configuration response
+        public ?SIPInboundRoutingRulePinConfigsResponse $pinRoutingConfigs = null, // PIN routing rule call configuration response
+        public ?SIPCallerConfigsResponse $callerConfigs = null, // SIP caller configuration response
+        public ?SIPCallConfigsResponse $callConfigs = null, // SIP call configuration response
+        public ?SIPPinProtectionConfigsResponse $pinProtectionConfigs = null, // PIN protection configuration response
         public ?\DateTime $createdAt = null, // Creation timestamp
         public ?\DateTime $updatedAt = null, // Last update timestamp
         public ?string $duration = null,

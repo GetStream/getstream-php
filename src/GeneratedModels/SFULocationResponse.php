@@ -8,8 +8,8 @@ class SFULocationResponse extends BaseModel
     public function __construct(
         public ?string $id = null,
         public ?string $datacenter = null,
-        public ?LocationResponse $location = null,
-        public ?CoordinatesResponse $coordinates = null,
+        public ?LocationResponse $location = null, // Geographic location metadata
+        public ?CoordinatesResponse $coordinates = null, // Geographic coordinates
         public ?int $count = null,
     ) {
     }

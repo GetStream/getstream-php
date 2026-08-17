@@ -20,7 +20,7 @@ class ChannelDeletedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel which was deleted
         public ?string $channelID = null, // The ID of the channel which was deleted
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?UserResponseCommonFields $user = null,
     ) {
     }

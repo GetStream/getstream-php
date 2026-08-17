@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class GetOrCreateCallRequest extends BaseModel
 {
     public function __construct(
-        public ?CallRequest $data = null,
+        public ?CallRequest $data = null, // CallRequest is the payload for creating a call.
         public ?bool $ring = null, // if provided it sends a ring event to the members for this call
         public ?bool $notify = null, // if provided it sends a notification event to the members for this call
         public ?bool $video = null,

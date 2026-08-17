@@ -8,7 +8,7 @@ class FeedsBookmarkResponse extends BaseModel
     public function __construct(
         public ?string $objectType = null,
         public ?string $objectID = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?object $custom = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,

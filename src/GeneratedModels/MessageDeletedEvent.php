@@ -21,7 +21,7 @@ class MessageDeletedEvent extends BaseModel
         public ?string $channelType = null, // The type of the channel where the message was sent
         public ?string $channelID = null, // The ID of the channel where the message was sent
         public ?string $messageID = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?UserResponseCommonFields $user = null,
         public ?bool $hardDelete = null, // Whether the message was hard deleted
         public ?bool $deletedForMe = null, // Whether the message was deleted only for the current user

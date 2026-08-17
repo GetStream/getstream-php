@@ -8,7 +8,7 @@ class BookmarkResponse extends BaseModel
     public function __construct(
         public ?string $objectType = null, // Type of the bookmarked object (activity or comment)
         public ?string $objectID = null, // ID of the bookmarked object
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?ActivityResponse $activity = null,
         public ?CommentResponse $comment = null,
         public ?BookmarkFolderResponse $folder = null,

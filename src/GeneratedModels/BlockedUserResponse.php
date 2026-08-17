@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class BlockedUserResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $userID = null, // ID of the user who blocked another user
-        public ?UserResponse $blockedUser = null,
+        public ?UserResponse $blockedUser = null, // User response object
         public ?string $blockedUserID = null, // ID of the user who got blocked
         public ?\DateTime $createdAt = null,
     ) {

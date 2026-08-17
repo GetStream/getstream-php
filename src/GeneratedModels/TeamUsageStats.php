@@ -10,22 +10,22 @@ class TeamUsageStats extends BaseModel
 {
     public function __construct(
         public ?string $team = null, // Team identifier (empty string for users not assigned to any team)
-        public ?MetricStats $usersDaily = null,
-        public ?MetricStats $messagesDaily = null,
-        public ?MetricStats $translationsDaily = null,
-        public ?MetricStats $imageModerationsDaily = null,
-        public ?MetricStats $concurrentUsers = null,
-        public ?MetricStats $concurrentConnections = null,
-        public ?MetricStats $usersTotal = null,
-        public ?MetricStats $usersLast24Hours = null,
-        public ?MetricStats $usersLast30Days = null,
-        public ?MetricStats $usersMonthToDate = null,
-        public ?MetricStats $usersEngagedLast30Days = null,
-        public ?MetricStats $usersEngagedMonthToDate = null,
-        public ?MetricStats $messagesTotal = null,
-        public ?MetricStats $messagesLast24Hours = null,
-        public ?MetricStats $messagesLast30Days = null,
-        public ?MetricStats $messagesMonthToDate = null,
+        public ?MetricStats $usersDaily = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $messagesDaily = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $translationsDaily = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $imageModerationsDaily = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $concurrentUsers = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $concurrentConnections = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $usersTotal = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $usersLast24Hours = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $usersLast30Days = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $usersMonthToDate = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $usersEngagedLast30Days = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $usersEngagedMonthToDate = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $messagesTotal = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $messagesLast24Hours = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $messagesLast30Days = null, // Statistics for a single metric with optional daily breakdown
+        public ?MetricStats $messagesMonthToDate = null, // Statistics for a single metric with optional daily breakdown
     ) {
     }
 

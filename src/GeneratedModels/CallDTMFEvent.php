@@ -16,7 +16,7 @@ class CallDTMFEvent extends BaseModel
         public ?int $durationMs = null, // Duration of the digit press in milliseconds
         public ?int $seqNumber = null, // Monotonically increasing sequence number for ordering DTMF events within a session
         public ?\DateTime $timestamp = null, // When the digit press ended and was detected
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
     ) {
     }
 

@@ -16,7 +16,7 @@ class ModerationCustomActionEvent extends BaseModel
         public ?string $actionID = null, // The ID of the custom action that was executed
         public ?object $actionOptions = null, // Additional options passed to the custom action
         public ?ReviewQueueItemResponse $reviewQueueItem = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
     ) {
     }
 

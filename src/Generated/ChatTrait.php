@@ -279,7 +279,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteChannelResponse::class);
     }
     /**
-     * Returns a channel by its CID without creating it. Responds with 404 when the channel does not exist, so it doubles as an existence check. Pass state=true to also load messages, read state and watchers.
+     * Returns a channel by its CID without creating it. Responds with 404 when the channel does not exist, so it doubles as an existence check. Pass state=true to also load messages, read state and watchers, and the messages_id_* parameters to page those messages by message ID.
      *
      * @param string $type
      * @param string $id
@@ -287,10 +287,16 @@ trait ChatTrait
      * @param ?int $messagesLimit
      * @param ?int $membersLimit
      * @param ?int $watchersLimit
+     * @param ?string $messagesIDLt
+     * @param ?string $messagesIDLte
+     * @param ?string $messagesIDGt
+     * @param ?string $messagesIDGte
+     * @param ?string $messagesIDAround
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\ChannelStateResponse>
      * @throws StreamException
      */
-    public function getChannel(string $type, string $id, ?bool $state = null, ?int $messagesLimit = null, ?int $membersLimit = null, ?int $watchersLimit = null): StreamResponse {
+    public function getChannel(string $type, string $id, ?bool $state = null, ?int $messagesLimit = null, ?int $membersLimit = null, ?int $watchersLimit = null, ?string $messagesIDLt = null, ?string $messagesIDLte = null, ?string $messagesIDGt = null, ?string $messagesIDGte = null, ?string $messagesIDAround = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -307,6 +313,24 @@ trait ChatTrait
         }
         if ($watchersLimit !== null) {
             $queryParams['watchers_limit'] = $watchersLimit;
+        }
+        if ($messagesIDLt !== null) {
+            $queryParams['messages_id_lt'] = $messagesIDLt;
+        }
+        if ($messagesIDLte !== null) {
+            $queryParams['messages_id_lte'] = $messagesIDLte;
+        }
+        if ($messagesIDGt !== null) {
+            $queryParams['messages_id_gt'] = $messagesIDGt;
+        }
+        if ($messagesIDGte !== null) {
+            $queryParams['messages_id_gte'] = $messagesIDGte;
+        }
+        if ($messagesIDAround !== null) {
+            $queryParams['messages_id_around'] = $messagesIDAround;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ChannelStateResponse::class);
@@ -547,6 +571,7 @@ trait ChatTrait
     /**
      * Sends new message to the specified channel
      * Sends events:
+     * - channel.visible
      * - message.new
      * - message.updated
      *
@@ -571,10 +596,11 @@ trait ChatTrait
      * @param string $type
      * @param string $id
      * @param array $ids
+     * @param ?array $memberCustomInclude
      * @return StreamResponse<GeneratedModels\GetManyMessagesResponse>
      * @throws StreamException
      */
-    public function getManyMessages(string $type, string $id, array $ids): StreamResponse {
+    public function getManyMessages(string $type, string $id, array $ids, ?array $memberCustomInclude = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/messages';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -582,6 +608,9 @@ trait ChatTrait
         $queryParams = [];
         if ($ids !== null) {
             $queryParams['ids'] = $ids;
+        }
+        if ($memberCustomInclude !== null) {
+            $queryParams['member_custom_include'] = $memberCustomInclude;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetManyMessagesResponse::class);
@@ -849,7 +878,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryDraftsResponse::class);
     }
     /**
-     * Exports channel data to JSON file
+     * Exports channel data to a JSON or CSV file (CSV requires version=v2)
      *
      * @param GeneratedModels\ExportChannelsRequest $requestData
      * @return StreamResponse<GeneratedModels\ExportChannelsResponse>
@@ -1272,10 +1301,11 @@ trait ChatTrait
      * @param ?string $idLt
      * @param ?string $idAround
      * @param ?array $sort
+     * @param ?array $memberCustomInclude
      * @return StreamResponse<GeneratedModels\GetRepliesResponse>
      * @throws StreamException
      */
-    public function getReplies(string $parentID, ?int $limit = null, ?string $idGte = null, ?string $idGt = null, ?string $idLte = null, ?string $idLt = null, ?string $idAround = null, ?array $sort = null): StreamResponse {
+    public function getReplies(string $parentID, ?int $limit = null, ?string $idGte = null, ?string $idGt = null, ?string $idLte = null, ?string $idLt = null, ?string $idAround = null, ?array $sort = null, ?array $memberCustomInclude = null): StreamResponse {
         $path = '/api/v2/chat/messages/{parent_id}/replies';
         $path = str_replace('{parent_id}', (string) $parentID, $path);
 
@@ -1300,6 +1330,9 @@ trait ChatTrait
         }
         if ($sort !== null) {
             $queryParams['sort'] = $sort;
+        }
+        if ($memberCustomInclude !== null) {
+            $queryParams['member_custom_include'] = $memberCustomInclude;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetRepliesResponse::class);

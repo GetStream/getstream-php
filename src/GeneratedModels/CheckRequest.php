@@ -17,7 +17,7 @@ class CheckRequest extends BaseModel
         public ?ModerationConfig $config = null,
         public ?\DateTime $contentPublishedAt = null, // Original timestamp when the content was produced (for correlating flagged content with source video timeline)
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

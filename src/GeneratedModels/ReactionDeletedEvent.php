@@ -11,7 +11,7 @@ class ReactionDeletedEvent extends BaseModel
     public function __construct(
         public ?ReactionResponse $reaction = null,
         public ?string $messageID = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         /** @var array<UserResponseCommonFields>|null */
         #[ArrayOf(UserResponseCommonFields::class)]
         public ?array $threadParticipants = null, // The participants of the thread
@@ -27,7 +27,7 @@ class ReactionDeletedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel containing the message
         public ?string $channelID = null, // The ID of the channel containing the message
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

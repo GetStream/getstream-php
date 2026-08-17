@@ -221,6 +221,7 @@ class WebhookTest extends TestCase
             'message.unblocked' => ['message.unblocked', 'MessageUnblockedEvent'],
             'message.undeleted' => ['message.undeleted', 'MessageUndeletedEvent'],
             'message.updated' => ['message.updated', 'MessageUpdatedEvent'],
+            'moderation.analysis.failed' => ['moderation.analysis.failed', 'ModerationAnalysisFailedEvent'],
             'moderation.custom_action' => ['moderation.custom_action', 'ModerationCustomActionEvent'],
             'moderation.flagged' => ['moderation.flagged', 'ModerationFlaggedEvent'],
             'moderation.image_analysis.complete' => ['moderation.image_analysis.complete', 'ModerationImageAnalysisCompleteEvent'],

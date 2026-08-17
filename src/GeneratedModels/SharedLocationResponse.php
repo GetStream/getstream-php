@@ -15,8 +15,8 @@ class SharedLocationResponse extends BaseModel
         public ?\DateTime $endAt = null, // Time when the live location expires
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $updatedAt = null, // Date/time of the last update
-        public ?MessageResponse $message = null,
-        public ?ChannelResponse $channel = null,
+        public ?MessageResponse $message = null, // Represents any chat message
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?string $duration = null,
     ) {
     }

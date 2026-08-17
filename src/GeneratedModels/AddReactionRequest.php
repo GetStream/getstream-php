@@ -16,7 +16,7 @@ class AddReactionRequest extends BaseModel
         public ?array $targetFeeds = null, // Optional list of feeds to create a reference (share) activity of the original activity in. The reference activity's type mirrors the reaction type.
         public ?bool $createUsers = null, // Server-side only. If true, auto-creates the reacting user identified by user_id when they don't already exist. Default: false.
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

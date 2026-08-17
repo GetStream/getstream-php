@@ -13,6 +13,7 @@ class ChannelGetOrCreateRequest extends BaseModel
         public ?MessagePaginationParams $messages = null,
         public ?PaginationParams $members = null,
         public ?PaginationParams $watchers = null,
+        public ?array $memberCustomInclude = null, // Top-level keys of the message sender's channel-member custom data to include under member.custom (max 8 keys, 64 chars each)
     ) {
     }
 

@@ -24,6 +24,9 @@ class ActivityRequest extends BaseModel
         public ?array $filterTags = null, // Tags for filtering activities
         public ?array $interestTags = null, // Tags for indicating user interests
         public ?array $collectionRefs = null, // Collections that this activity references
+        /** @var array<CollectionRequest>|null */
+        #[ArrayOf(CollectionRequest::class)]
+        public ?array $collections = null, // Collections to create or update as part of this request, so an activity and the collections it references can be written in one call. Their refs (name:id) are added to collection_refs automatically; you do not need to restate them, and they count toward the same per-activity collection-reference limit, which is the effective cap here. A collection that already exists has its custom data updated. Use collection_refs instead when the collection already exists and you are only referencing it, which requires no collection permissions.
         public ?string $parentID = null, // ID of parent activity for replies/comments
         public ?string $pollID = null, // ID of a poll to attach to activity
         public ?object $custom = null, // Custom data for the activity

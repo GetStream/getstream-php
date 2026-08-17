@@ -7,6 +7,7 @@ class MessageOptions extends BaseModel
 {
     public function __construct(
         public ?bool $includeThreadParticipants = null,
+        public ?array $memberCustomInclude = null,
     ) {
     }
 

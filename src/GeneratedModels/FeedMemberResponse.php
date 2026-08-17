@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class FeedMemberResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $role = null, // Role of the member in the feed
         public ?string $status = null, // Status of the membership. One of: member, pending, rejected
         public ?MembershipLevelResponse $membershipLevel = null,

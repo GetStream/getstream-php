@@ -9,7 +9,7 @@ namespace GetStream\GeneratedModels;
 class CallIngressResponse extends BaseModel
 {
     public function __construct(
-        public ?RTMPIngress $rtmp = null,
+        public ?RTMPIngress $rtmp = null, // RTMP input settings
         public ?WHIPIngress $whip = null,
         public ?SRTIngress $srt = null,
     ) {

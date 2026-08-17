@@ -38,6 +38,7 @@ class AppResponseFields extends BaseModel
         public ?string $customActionHandlerUrl = null,
         public ?string $enforceUniqueUsernames = null,
         public ?string $videoPrimaryUseCase = null,
+        public ?string $chatPrimaryUseCase = null,
         public ?string $sqsUrl = null,
         public ?string $sqsKey = null,
         public ?string $sqsSecret = null,
@@ -73,6 +74,7 @@ class AppResponseFields extends BaseModel
         public ?bool $moderationAudioCallModerationEnabled = null,
         public ?string $moderationS3ImageAccessRoleArn = null,
         public ?array $activityMetricsConfig = null,
+        public ?bool $memberCustomOnMessagesEnabled = null,
     ) {
     }
 

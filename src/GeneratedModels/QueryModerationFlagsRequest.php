@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class QueryModerationFlagsRequest extends BaseModel
 {
     public function __construct(
-        public ?object $filter = null,
+        public ?object $filter = null, // Filter conditions for moderation flags
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,

@@ -12,7 +12,7 @@ class CreateQueueRequest extends BaseModel
         public ?object $filters = null,
         public ?array $sort = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

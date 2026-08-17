@@ -13,7 +13,7 @@ class PermissionRequestEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.permission_request" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?array $permissions = null, // The list of permissions requested by the user
     ) {
     }

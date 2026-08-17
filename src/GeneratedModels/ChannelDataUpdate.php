@@ -10,7 +10,7 @@ class ChannelDataUpdate extends BaseModel
         public ?bool $disabled = null,
         public ?object $custom = null,
         public ?string $team = null,
-        public ?ChannelConfigOverrides $configOverrides = null,
+        public ?ChannelConfigOverrides $configOverrides = null, // Channel configuration overrides
         public ?bool $autoTranslationEnabled = null,
         public ?string $autoTranslationLanguage = null,
     ) {

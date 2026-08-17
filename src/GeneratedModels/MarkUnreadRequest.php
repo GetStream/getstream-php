@@ -10,7 +10,7 @@ class MarkUnreadRequest extends BaseModel
         public ?string $threadID = null, // Mark a thread unread, specify one of the thread, message timestamp, or message id
         public ?\DateTime $messageTimestamp = null, // Timestamp of the message from where the channel is marked unread
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

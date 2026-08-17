@@ -9,7 +9,7 @@ namespace GetStream\GeneratedModels;
 class GetMessageResponse extends BaseModel
 {
     public function __construct(
-        public ?MessageWithChannelResponse $message = null,
+        public ?MessageWithChannelResponse $message = null, // Represents any chat message
         public ?array $pendingMessageMetadata = null,
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {

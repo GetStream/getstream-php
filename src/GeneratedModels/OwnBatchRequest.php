@@ -12,7 +12,7 @@ class OwnBatchRequest extends BaseModel
         public ?array $feeds = null, // List of feed IDs to get own fields for
         public ?array $fields = null, // Optional list of specific fields to return. If not specified, all fields (own_follows, own_followings, own_capabilities, own_membership) are returned
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

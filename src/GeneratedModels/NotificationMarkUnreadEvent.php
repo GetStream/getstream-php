@@ -20,7 +20,7 @@ class NotificationMarkUnreadEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel which was marked as unread
         public ?string $channelID = null, // The ID of the channel which was marked as unread
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?string $threadID = null, // The ID of the thread which was marked as unread
         public ?UserResponseCommonFields $user = null,
         public ?string $firstUnreadMessageID = null, // The ID of the first unread message

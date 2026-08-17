@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class CreateCommandResponse extends BaseModel
 {
     public function __construct(
-        public ?Command $command = null,
+        public ?Command $command = null, // Represents custom chat command
         public ?string $duration = null,
     ) {
     }

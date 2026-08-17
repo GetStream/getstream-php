@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class ExportUserResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         /** @var array<MessageResponse>|null */
         #[ArrayOf(MessageResponse::class)]
         public ?array $messages = null, // List of exported messages

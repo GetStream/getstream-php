@@ -8,7 +8,7 @@ class ActivityResponse extends BaseModel
     public function __construct(
         public ?string $id = null, // Unique identifier for the activity
         public ?string $type = null, // Type of activity
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?array $feeds = null, // List of feed IDs containing this activity
         public ?string $visibility = null, // Visibility setting for the activity. One of: public, private, tag
         public ?string $visibilityTag = null, // If visibility is 'tag', this is the tag name

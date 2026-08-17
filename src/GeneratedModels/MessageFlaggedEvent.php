@@ -20,12 +20,12 @@ class MessageFlaggedEvent extends BaseModel
         public ?string $channelType = null, // The type of the channel where the message was sent
         public ?string $channelID = null, // The ID of the channel where the message was sent
         public ?string $messageID = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?UserResponseCommonFields $user = null,
         public ?FlagResponse $flag = null,
         public ?string $reason = null, // The reason for the flag
         public ?int $totalFlags = null, // The total number of flags for the user
-        public ?MessageModerationResult $details = null,
+        public ?MessageModerationResult $details = null, // Result of the message moderation
         public ?object $custom = null, // Custom data
     ) {
     }

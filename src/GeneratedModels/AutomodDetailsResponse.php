@@ -8,7 +8,7 @@ class AutomodDetailsResponse extends BaseModel
     public function __construct(
         public ?string $action = null,
         public ?string $originalMessageType = null,
-        public ?MessageModerationResult $result = null,
+        public ?MessageModerationResult $result = null, // Result of the message moderation
         public ?FlagMessageDetailsResponse $messageDetails = null,
         public ?array $imageLabels = null,
     ) {

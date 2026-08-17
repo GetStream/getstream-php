@@ -9,7 +9,7 @@ class UpdatePollPartialRequest extends BaseModel
         public ?object $set = null, // Sets new field values
         public ?array $unset = null, // Array of field names to unset
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

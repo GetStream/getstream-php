@@ -13,7 +13,7 @@ class MuteUsersRequest extends BaseModel
         public ?bool $screenshare = null,
         public ?bool $screenshareAudio = null,
         public ?string $mutedByID = null,
-        public ?UserRequest $mutedBy = null,
+        public ?UserRequest $mutedBy = null, // User request object
     ) {
     }
 

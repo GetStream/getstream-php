@@ -8,7 +8,7 @@ class MarkChannelsReadRequest extends BaseModel
     public function __construct(
         public ?array $readByChannel = null, // Map of channel ID to last read message ID
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

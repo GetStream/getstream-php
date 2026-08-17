@@ -9,7 +9,7 @@ namespace GetStream\GeneratedModels;
 class CreateSIPTrunkResponse extends BaseModel
 {
     public function __construct(
-        public ?SIPTrunkResponse $sipTrunk = null,
+        public ?SIPTrunkResponse $sipTrunk = null, // SIP trunk information
         public ?string $duration = null,
     ) {
     }

@@ -21,7 +21,7 @@ class MessageUndeletedEvent extends BaseModel
         public ?string $channelType = null, // The type of the channel where the message was sent
         public ?string $channelID = null, // The ID of the channel where the message was sent
         public ?string $messageID = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
     ) {
     }
 

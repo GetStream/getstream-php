@@ -10,7 +10,7 @@ class ReactionGroupUserResponse extends BaseModel
 {
     public function __construct(
         public ?string $userID = null, // The ID of the user who reacted.
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?\DateTime $createdAt = null, // The time when the user reacted.
     ) {
     }

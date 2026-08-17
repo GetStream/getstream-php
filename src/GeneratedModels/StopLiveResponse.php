@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class StopLiveResponse extends BaseModel
 {
     public function __construct(
-        public ?CallResponse $call = null,
+        public ?CallResponse $call = null, // Represents a call
         public ?string $duration = null,
     ) {
     }

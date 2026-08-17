@@ -18,8 +18,9 @@ class QueryChannelsRequest extends BaseModel
         public ?string $predefinedFilter = null, // ID of a predefined filter to use instead of filter_conditions
         public ?object $filterValues = null, // Values to interpolate into the predefined filter template
         public ?object $sortValues = null,
+        public ?array $memberCustomInclude = null, // Top-level keys of the message sender's channel-member custom data to include under member.custom (max 8 keys, 64 chars each)
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

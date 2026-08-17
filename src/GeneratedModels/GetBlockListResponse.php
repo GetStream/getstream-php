@@ -9,7 +9,7 @@ namespace GetStream\GeneratedModels;
 class GetBlockListResponse extends BaseModel
 {
     public function __construct(
-        public ?BlockListResponse $blocklist = null,
+        public ?BlockListResponse $blocklist = null, // Block list contains restricted words
         public ?string $duration = null,
     ) {
     }

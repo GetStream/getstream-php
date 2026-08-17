@@ -10,7 +10,7 @@ class CreateCollectionsRequest extends BaseModel
         #[ArrayOf(CollectionRequest::class)]
         public ?array $collections = null, // List of collections to create
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

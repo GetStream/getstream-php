@@ -8,6 +8,7 @@ class FloodConfig extends BaseModel
     public function __construct(
         public ?FloodIdenticalConfig $identical = null,
         public ?FloodSimilarConfig $similar = null,
+        public ?array $allowlist = null,
     ) {
     }
 

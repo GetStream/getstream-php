@@ -10,9 +10,9 @@ class FlagUpdatedEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
-        public ?MessageResponse $message = null,
-        public ?UserResponse $user = null,
-        public ?UserResponse $createdBy = null,
+        public ?MessageResponse $message = null, // Represents any chat message
+        public ?UserResponse $user = null, // User response object
+        public ?UserResponse $createdBy = null, // User response object
     ) {
     }
 

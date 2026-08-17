@@ -8,6 +8,7 @@ class UpsertExternalStorageRequest extends BaseModel
     public function __construct(
         public ?string $type = null,
         public ?UpsertExternalStorageAWSS3Request $awsS3 = null,
+        public ?UpsertExternalStorageGCSRequest $gcs = null,
     ) {
     }
 

@@ -15,7 +15,7 @@ class ModerationCallResponse extends BaseModel
         public ?bool $backstage = null,
         public ?object $custom = null,
         public ?array $blockedUserIds = null,
-        public ?UserResponse $createdBy = null,
+        public ?UserResponse $createdBy = null, // User response object
         public ?\DateTime $endedAt = null,
         public ?\DateTime $startsAt = null,
         public ?string $team = null,

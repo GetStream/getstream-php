@@ -13,7 +13,7 @@ class CustomVideoEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
         public ?object $custom = null, // Custom data for this object
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
     ) {
     }
 

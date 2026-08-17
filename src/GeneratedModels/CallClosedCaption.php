@@ -14,7 +14,7 @@ class CallClosedCaption extends BaseModel
         public ?\DateTime $startTime = null,
         public ?\DateTime $endTime = null,
         public ?string $speakerID = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $language = null,
         public ?string $service = null,
         public ?bool $translated = null,

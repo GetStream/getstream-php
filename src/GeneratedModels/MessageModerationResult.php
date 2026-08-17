@@ -14,7 +14,7 @@ class MessageModerationResult extends BaseModel
         public ?string $moderatedBy = null, // User who moderated the message
         public ?string $blockedWord = null, // Word that was blocked
         public ?string $blocklistName = null, // Name of the blocklist
-        public ?Thresholds $moderationThresholds = null,
+        public ?Thresholds $moderationThresholds = null, // Sets thresholds for AI moderation
         public ?ModerationResponse $aiModerationResponse = null,
         public ?float $userKarma = null, // Karma of the user
         public ?bool $userBadKarma = null, // Whether user has bad karma

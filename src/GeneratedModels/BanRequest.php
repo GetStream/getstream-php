@@ -13,7 +13,7 @@ class BanRequest extends BaseModel
         public ?bool $shadow = null, // Whether this is a shadow ban
         public ?bool $ipBan = null, // Whether to ban the user's IP address
         public ?string $bannedByID = null, // ID of the user performing the ban
-        public ?UserRequest $bannedBy = null,
+        public ?UserRequest $bannedBy = null, // User request object
         public ?string $deleteMessages = null,
     ) {
     }

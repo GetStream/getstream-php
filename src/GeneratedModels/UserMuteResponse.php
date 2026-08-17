@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class UserMuteResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
-        public ?UserResponse $target = null,
+        public ?UserResponse $user = null, // User response object
+        public ?UserResponse $target = null, // User response object
         public ?\DateTime $expires = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,

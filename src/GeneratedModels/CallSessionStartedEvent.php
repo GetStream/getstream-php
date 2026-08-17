@@ -13,7 +13,7 @@ class CallSessionStartedEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
         public ?string $sessionID = null, // Call session ID
-        public ?CallResponse $call = null,
+        public ?CallResponse $call = null, // Represents a call
     ) {
     }
 

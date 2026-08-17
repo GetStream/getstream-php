@@ -12,7 +12,7 @@ class CallFrameRecordingStoppedEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.frame_recording_stopped" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?CallResponse $call = null,
+        public ?CallResponse $call = null, // Represents a call
         public ?string $egressID = null,
     ) {
     }

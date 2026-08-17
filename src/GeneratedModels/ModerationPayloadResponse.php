@@ -18,6 +18,7 @@ class ModerationPayloadResponse extends BaseModel
         public ?array $imageOrderedKeys = null, // Caller-supplied keys for images, index-aligned with images[]
         public ?array $textIds = null, // Caller-supplied content IDs per text key (from content_ids on /analyze)
         public ?array $imageIds = null, // Caller-supplied content IDs per image key (from content_ids on /analyze)
+        public ?array $otherMedia = null, // Media URLs from attachments outside the typed image/video/audio lists (custom attachment types such as GIF pickers)
     ) {
     }
 

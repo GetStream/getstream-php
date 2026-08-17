@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class FeedsShareResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $activityID = null,
         public ?\DateTime $createdAt = null,
     ) {

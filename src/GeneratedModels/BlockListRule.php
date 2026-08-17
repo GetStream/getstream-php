@@ -8,7 +8,6 @@ class BlockListRule extends BaseModel
     public function __construct(
         public ?string $name = null,
         public ?string $team = null,
-        public ?bool $ownerScope = null,
         public ?string $action = null,
     ) {
     }

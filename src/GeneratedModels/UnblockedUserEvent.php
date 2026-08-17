@@ -13,7 +13,7 @@ class UnblockedUserEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.unblocked_user" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
     ) {
     }
 

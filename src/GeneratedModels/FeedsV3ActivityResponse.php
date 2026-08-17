@@ -8,7 +8,7 @@ class FeedsV3ActivityResponse extends BaseModel
     public function __construct(
         public ?string $id = null,
         public ?string $type = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?array $feeds = null,
         public ?string $visibility = null,
         public ?string $visibilityTag = null,

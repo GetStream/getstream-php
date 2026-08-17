@@ -9,7 +9,7 @@ class UnmuteChannelRequest extends BaseModel
         public ?array $channelCids = null, // Channel CIDs to mute (if multiple channels)
         public ?int $expiration = null, // Duration of mute in milliseconds
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class ChannelStateResponse extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         /** @var array<MessageResponse>|null */
         #[ArrayOf(MessageResponse::class)]
         public ?array $messages = null,

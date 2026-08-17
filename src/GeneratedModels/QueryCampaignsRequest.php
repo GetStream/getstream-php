@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class QueryCampaignsRequest extends BaseModel
 {
     public function __construct(
-        public ?object $filter = null,
+        public ?object $filter = null, // Filter to apply to the query
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,

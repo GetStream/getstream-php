@@ -8,7 +8,7 @@ class BlockUsersRequest extends BaseModel
     public function __construct(
         public ?string $blockedUserID = null, // User id to block
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

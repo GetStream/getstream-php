@@ -15,7 +15,7 @@ class UpsertActionConfigRequest extends BaseModel
         public ?object $custom = null, // Action-specific parameters passed to the action handler
         public ?string $queueType = null, // Queue this config belongs to; null means the default queue
         public ?string $userID = null, // Optional user ID to associate with the audit log entry
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

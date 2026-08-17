@@ -14,7 +14,7 @@ class QueryBannedUsersPayload extends BaseModel
         public ?int $offset = null, // Number of records to offset
         public ?bool $excludeExpiredBans = null, // Whether to exclude expired bans or not
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

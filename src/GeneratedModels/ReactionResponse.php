@@ -8,7 +8,7 @@ class ReactionResponse extends BaseModel
     public function __construct(
         public ?string $messageID = null, // Message ID
         public ?string $userID = null, // User ID
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $type = null, // Type of reaction
         public ?int $score = null, // Score of the reaction
         public ?\DateTime $createdAt = null, // Date/time of creation

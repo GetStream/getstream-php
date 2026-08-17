@@ -61,9 +61,11 @@ class UpdateAppRequest extends BaseModel
         public ?bool $enableHookPayloadCompression = null,
         public ?bool $userResponseTimeEnabled = null,
         public ?int $maxAggregatedActivitiesLength = null,
+        public ?bool $memberCustomOnMessagesEnabled = null,
         public ?string $moderationS3ImageAccessRoleArn = null,
         public ?array $activityMetricsConfig = null,
         public ?string $videoPrimaryUseCase = null,
+        public ?string $chatPrimaryUseCase = null,
     ) {
     }
 

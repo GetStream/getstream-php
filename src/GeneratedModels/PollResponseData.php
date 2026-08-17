@@ -29,7 +29,7 @@ class PollResponseData extends BaseModel
         #[ArrayOf(PollVoteResponseData::class)]
         public ?array $ownVotes = null,
         public ?string $createdByID = null,
-        public ?UserResponse $createdBy = null,
+        public ?UserResponse $createdBy = null, // User response object
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?object $custom = null,

@@ -18,9 +18,9 @@ class UpdatePollRequest extends BaseModel
         public ?bool $allowUserSuggestedOptions = null, // Allow user suggested options
         public ?bool $allowAnswers = null, // Allow answers
         public ?bool $isClosed = null, // Is closed
-        public ?object $custom = null,
+        public ?object $custom = null, // Custom data for this object
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

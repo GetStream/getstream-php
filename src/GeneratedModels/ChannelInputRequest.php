@@ -18,8 +18,8 @@ class ChannelInputRequest extends BaseModel
         /** @var array<ChannelMemberRequest>|null */
         #[ArrayOf(ChannelMemberRequest::class)]
         public ?array $members = null,
-        public ?ConfigOverridesRequest $configOverrides = null,
-        public ?UserRequest $createdBy = null,
+        public ?ConfigOverridesRequest $configOverrides = null, // Channel configuration overrides
+        public ?UserRequest $createdBy = null, // User request object
     ) {
     }
 

@@ -13,11 +13,11 @@ class UpdateSIPInboundRoutingRuleRequest extends BaseModel
         public ?array $trunkIds = null, // List of SIP trunk IDs
         public ?array $calledNumbers = null, // List of called numbers
         public ?array $callerNumbers = null, // List of caller numbers (optional)
-        public ?SIPDirectRoutingRuleCallConfigsRequest $directRoutingConfigs = null,
-        public ?SIPInboundRoutingRulePinConfigsRequest $pinRoutingConfigs = null,
-        public ?SIPCallerConfigsRequest $callerConfigs = null,
-        public ?SIPCallConfigsRequest $callConfigs = null,
-        public ?SIPPinProtectionConfigsRequest $pinProtectionConfigs = null,
+        public ?SIPDirectRoutingRuleCallConfigsRequest $directRoutingConfigs = null, // Configuration for direct routing rule calls
+        public ?SIPInboundRoutingRulePinConfigsRequest $pinRoutingConfigs = null, // Configuration for PIN routing rule calls
+        public ?SIPCallerConfigsRequest $callerConfigs = null, // Configuration for SIP caller settings
+        public ?SIPCallConfigsRequest $callConfigs = null, // Configuration for SIP call settings
+        public ?SIPPinProtectionConfigsRequest $pinProtectionConfigs = null, // Configuration for PIN protection settings
     ) {
     }
 

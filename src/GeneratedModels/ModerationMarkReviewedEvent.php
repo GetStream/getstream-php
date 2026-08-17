@@ -10,7 +10,7 @@ class ModerationMarkReviewedEvent extends BaseModel
 {
     public function __construct(
         public ?ReviewQueueItemResponse $item = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?string $type = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $receivedAt = null,

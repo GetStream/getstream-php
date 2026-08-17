@@ -15,7 +15,7 @@ class FeedSuggestionResponse extends BaseModel
         public ?Location $location = null,
         public ?array $filterTags = null, // Tags used for filtering feeds
         public ?string $visibility = null, // Visibility setting for the feed
-        public ?UserResponse $createdBy = null,
+        public ?UserResponse $createdBy = null, // User response object
         public ?int $memberCount = null, // Number of members in this feed
         public ?int $followerCount = null, // Number of followers of this feed
         public ?int $followingCount = null, // Number of feeds this feed follows

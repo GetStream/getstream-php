@@ -12,7 +12,7 @@ class CallLiveStartedEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.live_started" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?CallResponse $call = null,
+        public ?CallResponse $call = null, // Represents a call
     ) {
     }
 
