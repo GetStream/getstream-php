@@ -17,7 +17,8 @@ class CreateBlockListRequest extends BaseModel
         public ?array $words = null, // List of words to block
         public ?string $type = null, // Block list type. One of: regex, domain, domain_allowlist, email, email_allowlist, word
         public ?string $team = null,
-        public ?string $ownerUserID = null,
+        public ?string $userID = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

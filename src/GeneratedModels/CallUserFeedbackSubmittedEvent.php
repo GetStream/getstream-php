@@ -13,7 +13,7 @@ class CallUserFeedbackSubmittedEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
         public ?string $sessionID = null, // Call session ID
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?int $rating = null, // The rating given by the user (1-5)
         public ?string $reason = null, // The reason provided by the user for the rating
         public ?object $custom = null, // Custom data provided by the user

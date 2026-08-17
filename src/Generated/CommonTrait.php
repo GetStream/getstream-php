@@ -45,21 +45,17 @@ trait CommonTrait
      * Returns all available block lists
      *
      * @param ?string $team
-     * @param ?string $ownerUserID
      * @param ?string $cursor
      * @param ?int $limit
      * @return StreamResponse<GeneratedModels\ListBlockListResponse>
      * @throws StreamException
      */
-    public function listBlockLists(?string $team = null, ?string $ownerUserID = null, ?string $cursor = null, ?int $limit = null): StreamResponse {
+    public function listBlockLists(?string $team = null, ?string $cursor = null, ?int $limit = null): StreamResponse {
         $path = '/api/v2/blocklists';
 
         $queryParams = [];
         if ($team !== null) {
             $queryParams['team'] = $team;
-        }
-        if ($ownerUserID !== null) {
-            $queryParams['owner_user_id'] = $ownerUserID;
         }
         if ($cursor !== null) {
             $queryParams['cursor'] = $cursor;
@@ -91,12 +87,14 @@ trait CommonTrait
      * For lists exceeding the HTTP request-body cap, issue repeated import calls each
      * carrying a bounded slice of items — the task result accumulates correctly.
      *
+     * @param string $id
      * @param GeneratedModels\ImportBlockListRequest $requestData
      * @return StreamResponse<GeneratedModels\ImportBlockListResponse>
      * @throws StreamException
      */
-    public function importBlockList(GeneratedModels\ImportBlockListRequest $requestData): StreamResponse {
+    public function importBlockList(string $id, GeneratedModels\ImportBlockListRequest $requestData): StreamResponse {
         $path = '/api/v2/blocklists/{id}/import';
+        $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
         // Use the provided request data array directly
@@ -107,11 +105,11 @@ trait CommonTrait
      *
      * @param string $name
      * @param ?string $team
-     * @param ?string $ownerUserID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function deleteBlockList(string $name, ?string $team = null, ?string $ownerUserID = null): StreamResponse {
+    public function deleteBlockList(string $name, ?string $team = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/blocklists/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
@@ -119,8 +117,8 @@ trait CommonTrait
         if ($team !== null) {
             $queryParams['team'] = $team;
         }
-        if ($ownerUserID !== null) {
-            $queryParams['owner_user_id'] = $ownerUserID;
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
@@ -451,7 +449,7 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetExternalStorageResponse::class);
     }
     /**
-     * Creates or updates the external storage configuration for the app. Currently only AWS S3 (via cross-account IAM role assumption) is supported.
+     * Creates or updates the external storage configuration for the app. Supports AWS S3 (via cross-account IAM role assumption) and GCS (via service-account JSON credentials).
      *
      * @param GeneratedModels\UpsertExternalStorageRequest $requestData
      * @return StreamResponse<GeneratedModels\UpsertExternalStorageResponse>
@@ -465,7 +463,7 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertExternalStorageResponse::class);
     }
     /**
-     * Validates the configured external S3 storage by performing a live STS AssumeRole and S3 ListObjectsV2 check.
+     * Validates the configured external storage. For AWS S3, performs a live STS AssumeRole and S3 ListObjectsV2 check. For GCS, performs a live bucket listing check using the configured service-account credentials.
      *
      * @return StreamResponse<GeneratedModels\ValidateExternalStorageResponse>
      * @throws StreamException
@@ -762,19 +760,15 @@ trait CommonTrait
      *
      * @param string $pollID
      * @param string $optionID
-     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
-    public function getPollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
+    public function getPollOption(string $pollID, string $optionID): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
 
         $queryParams = [];
-        if ($userID !== null) {
-            $queryParams['user_id'] = $userID;
-        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PollOptionResponse::class);
     }
@@ -898,11 +892,12 @@ trait CommonTrait
      * @param ?bool $android
      * @param ?bool $ios
      * @param ?bool $web
+     * @param ?bool $unity
      * @param ?string $endpoints
      * @return StreamResponse<GeneratedModels\GetRateLimitsResponse>
      * @throws StreamException
      */
-    public function getRateLimits(?bool $serverSide = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?string $endpoints = null): StreamResponse {
+    public function getRateLimits(?bool $serverSide = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?bool $unity = null, ?string $endpoints = null): StreamResponse {
         $path = '/api/v2/rate_limits';
 
         $queryParams = [];
@@ -917,6 +912,9 @@ trait CommonTrait
         }
         if ($web !== null) {
             $queryParams['web'] = $web;
+        }
+        if ($unity !== null) {
+            $queryParams['unity'] = $unity;
         }
         if ($endpoints !== null) {
             $queryParams['endpoints'] = $endpoints;

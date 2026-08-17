@@ -12,7 +12,7 @@ class CallMemberUpdatedEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.member_updated" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?CallResponse $call = null,
+        public ?CallResponse $call = null, // Represents a call
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null, // The list of members that were updated

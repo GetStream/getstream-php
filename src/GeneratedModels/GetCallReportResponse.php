@@ -17,6 +17,7 @@ class GetCallReportResponse extends BaseModel
         /** @var array<VideoReactionsResponse>|null */
         #[ArrayOf(VideoReactionsResponse::class)]
         public ?array $videoReactions = null,
+        public ?BroadcastDigest $digest = null,
     ) {
     }
 

@@ -10,7 +10,7 @@ class AddCommentBookmarkRequest extends BaseModel
         public ?AddFolderRequest $newFolder = null,
         public ?object $custom = null, // Custom data for the bookmark
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

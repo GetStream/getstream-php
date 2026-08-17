@@ -13,7 +13,7 @@ class FlagRequest extends BaseModel
         public ?ModerationPayload $moderationPayload = null,
         public ?object $custom = null, // Additional metadata about the flag
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

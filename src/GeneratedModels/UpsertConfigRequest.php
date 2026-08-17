@@ -26,7 +26,7 @@ class UpsertConfigRequest extends BaseModel
         public ?AIImageConfig $awsRekognitionConfig = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
         public ?string $userID = null, // Optional user ID to associate with the audit log entry
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

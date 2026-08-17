@@ -12,7 +12,7 @@ class MarkActivityRequest extends BaseModel
         public ?array $markSeen = null, // List of activity IDs to mark as seen
         public ?array $markWatched = null, // List of activity IDs to mark as watched (for stories)
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

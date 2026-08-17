@@ -7,7 +7,7 @@ class ChannelMemberResponse extends BaseModel
 {
     public function __construct(
         public ?string $userID = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?bool $isModerator = null, // Whether member is channel moderator or not
         public ?object $custom = null,
         public ?bool $invited = null, // Whether member was invited or not
@@ -22,6 +22,8 @@ class ChannelMemberResponse extends BaseModel
         public ?bool $shadowBanned = null, // Whether member is shadow banned in this channel or not
         public ?\DateTime $pinnedAt = null,
         public ?\DateTime $archivedAt = null,
+        public ?bool $banFromFutureChannels = null, // Whether the member's ban also applies to channels the channel's creator will create in the future (an active future channel ban by the creator targets this member)
+        public ?\DateTime $futureChannelBanExpires = null, // Expiration date of the future channel ban; absent when the future channel ban is permanent
         public ?string $role = null, // Permission level of the member in the channel (DEPRECATED: use channel_role instead). One of: member, moderator, admin, owner
         public ?string $channelRole = null, // Role of the member in the channel
         public ?bool $notificationsMuted = null,

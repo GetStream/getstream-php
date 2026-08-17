@@ -15,7 +15,7 @@ class UpdateActivityPartialRequest extends BaseModel
         public ?bool $enrichOwnFields = null, // If true, enriches the activity's current_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
         public ?bool $forceModeration = null, // If true, forces moderation to run for server-side requests. By default, server-side requests skip moderation. Client-side requests always run moderation regardless of this field.
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

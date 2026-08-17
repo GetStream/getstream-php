@@ -14,6 +14,8 @@ class ExportChannelsRequest extends BaseModel
         public ?bool $includeTruncatedMessages = null, // Set if you want to include truncated messages
         public ?bool $includeSoftDeletedChannels = null, // Set if you want to include deleted channels
         public ?bool $exportUsers = null,
+        public ?string $format = null, // Output format: 'json' (default) or 'csv'. csv requires version=v2 and is incompatible with export_users
+        public ?array $includeFields = null, // For csv format: subset of message columns to include (defaults to a standard set)
     ) {
     }
 

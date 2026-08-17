@@ -9,7 +9,7 @@ class MuteRequest extends BaseModel
         public ?array $targetIds = null, // User IDs to mute (if multiple users)
         public ?int $timeout = null, // Duration of mute in minutes
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

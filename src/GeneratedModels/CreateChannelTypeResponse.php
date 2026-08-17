@@ -35,7 +35,7 @@ class CreateChannelTypeResponse extends BaseModel
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
         public ?array $allowedFlagReasons = null,
-        public ?Thresholds $automodThresholds = null,
+        public ?Thresholds $automodThresholds = null, // Sets thresholds for AI moderation
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,

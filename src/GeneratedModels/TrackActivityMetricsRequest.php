@@ -13,7 +13,7 @@ class TrackActivityMetricsRequest extends BaseModel
         #[ArrayOf(TrackActivityMetricsEvent::class)]
         public ?array $events = null, // List of metric events to track (max 100 per request)
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

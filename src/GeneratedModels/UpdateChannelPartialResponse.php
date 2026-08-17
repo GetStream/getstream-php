@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class UpdateChannelPartialResponse extends BaseModel
 {
     public function __construct(
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         /** @var array<ChannelMemberResponse>|null */
         #[ArrayOf(ChannelMemberResponse::class)]
         public ?array $members = null, // List of updated members

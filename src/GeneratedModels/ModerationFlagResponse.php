@@ -8,11 +8,11 @@ class ModerationFlagResponse extends BaseModel
     public function __construct(
         public ?string $type = null,
         public ?string $userID = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $entityType = null,
         public ?string $entityID = null,
         public ?string $entityCreatorID = null,
-        public ?ModerationPayloadResponse $moderationPayload = null,
+        public ?ModerationPayloadResponse $moderationPayload = null, // Content payload for moderation
         public ?string $reason = null,
         public ?object $custom = null,
         public ?array $labels = null,

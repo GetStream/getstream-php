@@ -8,7 +8,7 @@ class MessageActionRequest extends BaseModel
     public function __construct(
         public ?array $formData = null, // ReadOnlyData to execute command with
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

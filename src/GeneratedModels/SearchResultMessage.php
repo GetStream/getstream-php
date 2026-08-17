@@ -12,8 +12,8 @@ class SearchResultMessage extends BaseModel
         public ?string $command = null,
         public ?string $html = null,
         public ?string $type = null,
-        public ?UserResponse $user = null,
-        public ?ChannelMemberResponse $member = null,
+        public ?UserResponse $user = null, // User response object
+        public ?ChannelMemberPartialResponse $member = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null,
@@ -33,7 +33,7 @@ class SearchResultMessage extends BaseModel
         public ?int $replyCount = null,
         public ?int $deletedReplyCount = null,
         public ?string $quotedMessageID = null,
-        public ?MessageResponse $quotedMessage = null,
+        public ?MessageResponse $quotedMessage = null, // Represents any chat message
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
         public ?array $threadParticipants = null,
@@ -58,7 +58,7 @@ class SearchResultMessage extends BaseModel
         public ?bool $silent = null,
         public ?bool $pinned = null,
         public ?\DateTime $pinnedAt = null,
-        public ?UserResponse $pinnedBy = null,
+        public ?UserResponse $pinnedBy = null, // User response object
         public ?\DateTime $pinExpires = null,
         public ?\DateTime $messageTextUpdatedAt = null,
         public ?string $pollID = null,
@@ -69,7 +69,7 @@ class SearchResultMessage extends BaseModel
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,
         public ?bool $deletedForMe = null,
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

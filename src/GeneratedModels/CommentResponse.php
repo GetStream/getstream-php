@@ -9,7 +9,7 @@ class CommentResponse extends BaseModel
         public ?string $id = null, // Unique identifier for the comment
         public ?string $objectID = null, // ID of the object this comment is associated with
         public ?string $objectType = null, // Type of the object this comment is associated with
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $text = null, // Text content of the comment
         public ?array $i18n = null,
         public ?object $custom = null, // Custom data for the comment

@@ -15,7 +15,7 @@ class FeedsFeedResponse extends BaseModel
         public ?FeedsActivityLocation $location = null,
         public ?array $filterTags = null,
         public ?string $visibility = null,
-        public ?UserResponse $createdBy = null,
+        public ?UserResponse $createdBy = null, // User response object
         public ?int $memberCount = null,
         public ?int $followerCount = null,
         public ?int $followingCount = null,

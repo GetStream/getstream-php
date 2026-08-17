@@ -40,7 +40,7 @@ class UpdateChannelTypeRequest extends BaseModel
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
         public ?array $allowedFlagReasons = null,
-        public ?Thresholds $automodThresholds = null,
+        public ?Thresholds $automodThresholds = null, // Sets thresholds for AI moderation
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null,
         public ?ChatPreferences $chatPreferences = null,

@@ -12,7 +12,7 @@ class CampaignResponse extends BaseModel
         #[ArrayOf(Segment::class)]
         public ?array $segments = null,
         public ?string $senderID = null,
-        public ?UserResponse $sender = null,
+        public ?UserResponse $sender = null, // User response object
         public ?string $senderMode = null,
         public ?string $senderVisibility = null,
         public ?string $name = null,

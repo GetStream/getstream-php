@@ -18,6 +18,9 @@ class GetRateLimitsResponse extends BaseModel
         /** @var array<string, LimitInfoResponse>|null */
         #[MapOf(LimitInfoResponse::class)]
         public ?array $web = null, // Map of endpoint rate limits for the web platform
+        /** @var array<string, LimitInfoResponse>|null */
+        #[MapOf(LimitInfoResponse::class)]
+        public ?array $unity = null, // Map of endpoint rate limits for the Unity platform
         public ?string $duration = null,
     ) {
     }

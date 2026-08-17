@@ -9,7 +9,7 @@ namespace GetStream\GeneratedModels;
 class EventResponse extends BaseModel
 {
     public function __construct(
-        public ?WSEvent $event = null,
+        public ?WSEvent $event = null, // Represents an BaseEvent that happened in Stream Chat
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }

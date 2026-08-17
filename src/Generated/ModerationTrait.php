@@ -488,12 +488,14 @@ trait ModerationTrait
     /**
      * Delete an existing moderation rule
      *
+     * @param string $id
      * @param ?string $userID
      * @return StreamResponse<GeneratedModels\DeleteModerationRuleResponse>
      * @throws StreamException
      */
-    public function deleteModerationRule(?string $userID = null): StreamResponse {
+    public function deleteModerationRule(string $id, ?string $userID = null): StreamResponse {
         $path = '/api/v2/moderation/moderation_rule/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
         if ($userID !== null) {
@@ -505,11 +507,13 @@ trait ModerationTrait
     /**
      * Get a specific moderation rule by ID
      *
+     * @param string $id
      * @return StreamResponse<GeneratedModels\GetModerationRuleResponse>
      * @throws StreamException
      */
-    public function getModerationRule(): StreamResponse {
+    public function getModerationRule(string $id): StreamResponse {
         $path = '/api/v2/moderation/moderation_rule/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
         $requestData = null;
@@ -545,13 +549,100 @@ trait ModerationTrait
     }
     /**
      *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\PolicyTestRunResponse>
+     * @throws StreamException
+     */
+    public function getPolicyTestRun(string $id): StreamResponse {
+        $path = '/api/v2/moderation/policy_tests/runs/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PolicyTestRunResponse::class);
+    }
+    /**
+     *
+     * @return StreamResponse<GeneratedModels\PolicyTestSetListResponse>
+     * @throws StreamException
+     */
+    public function listPolicyTestSets(): StreamResponse {
+        $path = '/api/v2/moderation/policy_tests/sets';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PolicyTestSetListResponse::class);
+    }
+    /**
+     * Save a labeled set of messages that can be re-run against the moderation policy.
+     *
+     * @param GeneratedModels\CreatePolicyTestSetRequest $requestData
+     * @return StreamResponse<GeneratedModels\PolicyTestSetResponse>
+     * @throws StreamException
+     */
+    public function createPolicyTestSet(GeneratedModels\CreatePolicyTestSetRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/policy_tests/sets';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PolicyTestSetResponse::class);
+    }
+    /**
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function deletePolicyTestSet(string $id): StreamResponse {
+        $path = '/api/v2/moderation/policy_tests/sets/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\PolicyTestSetResponse>
+     * @throws StreamException
+     */
+    public function getPolicyTestSet(string $id): StreamResponse {
+        $path = '/api/v2/moderation/policy_tests/sets/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PolicyTestSetResponse::class);
+    }
+    /**
+     * Enqueue a background run of the set against the saved live moderation config.
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\PolicyTestRunResponse>
+     * @throws StreamException
+     */
+    public function startPolicyTestRun(string $id): StreamResponse {
+        $path = '/api/v2/moderation/policy_tests/sets/{id}/runs';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PolicyTestRunResponse::class);
+    }
+    /**
+     *
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\ListQueuesResponse>
      * @throws StreamException
      */
-    public function listQueues(): StreamResponse {
+    public function listQueues(?string $userID = null): StreamResponse {
         $path = '/api/v2/moderation/queues';
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListQueuesResponse::class);
     }

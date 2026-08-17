@@ -12,7 +12,7 @@ class CallMemberRemovedEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.member_removed" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?CallResponse $call = null,
+        public ?CallResponse $call = null, // Represents a call
         public ?array $members = null, // the list of member IDs removed from the call
     ) {
     }

@@ -22,7 +22,7 @@ class MemberAddedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel to which the member was added
         public ?string $channelID = null, // The ID of the channel to which the member was added
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

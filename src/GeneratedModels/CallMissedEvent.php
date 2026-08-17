@@ -13,11 +13,11 @@ class CallMissedEvent extends BaseModel
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
         public ?string $sessionID = null, // Call session ID
-        public ?CallResponse $call = null,
+        public ?CallResponse $call = null, // Represents a call
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null, // List of members who missed the call
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?bool $notifyUser = null,
     ) {
     }

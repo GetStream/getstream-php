@@ -9,7 +9,7 @@ namespace GetStream\GeneratedModels;
 class MemberResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $userID = null,
         public ?string $role = null,
         public ?object $custom = null, // Custom member response data

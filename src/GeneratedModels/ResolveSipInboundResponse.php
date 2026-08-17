@@ -9,9 +9,9 @@ namespace GetStream\GeneratedModels;
 class ResolveSipInboundResponse extends BaseModel
 {
     public function __construct(
-        public ?SipInboundCredentials $credentials = null,
-        public ?SIPInboundRoutingRuleResponse $sipRoutingRule = null,
-        public ?SIPTrunkResponse $sipTrunk = null,
+        public ?SipInboundCredentials $credentials = null, // Credentials for SIP inbound call authentication
+        public ?SIPInboundRoutingRuleResponse $sipRoutingRule = null, // SIP Inbound Routing Rule response
+        public ?SIPTrunkResponse $sipTrunk = null, // SIP trunk information
         public ?string $duration = null,
     ) {
     }

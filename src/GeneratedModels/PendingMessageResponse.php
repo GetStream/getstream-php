@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class PendingMessageResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
-        public ?ChannelResponse $channel = null,
-        public ?MessageResponse $message = null,
+        public ?UserResponse $user = null, // User response object
+        public ?ChannelResponse $channel = null, // Represents channel in chat
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?array $metadata = null,
     ) {
     }

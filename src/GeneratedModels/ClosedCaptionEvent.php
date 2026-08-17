@@ -12,7 +12,7 @@ class ClosedCaptionEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.closed_caption" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?CallClosedCaption $closedCaption = null,
+        public ?CallClosedCaption $closedCaption = null, // CallClosedCaption represents a closed caption of a call.
     ) {
     }
 

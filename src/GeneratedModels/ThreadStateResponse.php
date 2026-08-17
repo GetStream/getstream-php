@@ -7,11 +7,11 @@ class ThreadStateResponse extends BaseModel
 {
     public function __construct(
         public ?string $channelCid = null, // Channel CID
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?string $parentMessageID = null, // Parent Message ID
-        public ?MessageResponse $parentMessage = null,
+        public ?MessageResponse $parentMessage = null, // Represents any chat message
         public ?string $createdByUserID = null, // Created By User ID
-        public ?UserResponse $createdBy = null,
+        public ?UserResponse $createdBy = null, // User response object
         public ?int $replyCount = null, // Reply Count
         public ?int $participantCount = null, // Participant Count
         public ?int $activeParticipantCount = null, // Active Participant Count

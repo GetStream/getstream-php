@@ -22,6 +22,7 @@ class CallSettingsRequest extends BaseModel
         public ?LimitsSettingsRequest $limits = null,
         public ?SessionSettingsRequest $session = null,
         public ?IngressSettingsRequest $ingress = null,
+        public ?EncryptionSettingsRequest $encryption = null,
     ) {
     }
 

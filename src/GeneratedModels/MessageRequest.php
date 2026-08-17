@@ -32,7 +32,7 @@ class MessageRequest extends BaseModel
         public ?\DateTime $pinExpires = null, // Date when pinned message expires
         public ?array $restrictedVisibility = null, // A list of user ids that have restricted visibility to the message
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
         public ?string $pollID = null, // Identifier of the poll to include in the message
         public ?SharedLocation $sharedLocation = null,
     ) {

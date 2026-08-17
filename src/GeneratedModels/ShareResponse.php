@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class ShareResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $activityID = null, // ID of the sharing (child) activity
         public ?\DateTime $createdAt = null, // When the share occurred
     ) {

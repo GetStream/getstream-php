@@ -10,7 +10,7 @@ class CallRequest extends BaseModel
 {
     public function __construct(
         public ?string $team = null,
-        public ?UserRequest $createdBy = null,
+        public ?UserRequest $createdBy = null, // User request object
         public ?string $createdByID = null,
         public ?object $custom = null,
         /** @var array<MemberRequest>|null */

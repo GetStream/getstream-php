@@ -15,8 +15,8 @@ class SharedLocationResponseData extends BaseModel
         public ?\DateTime $endAt = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
-        public ?MessageResponse $message = null,
-        public ?ChannelResponse $channel = null,
+        public ?MessageResponse $message = null, // Represents any chat message
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

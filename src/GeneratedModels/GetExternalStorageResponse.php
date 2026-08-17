@@ -11,6 +11,7 @@ class GetExternalStorageResponse extends BaseModel
     public function __construct(
         public ?string $type = null,
         public ?GetExternalStorageAWSS3Response $awsS3 = null,
+        public ?GetExternalStorageGCSResponse $gcs = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?string $duration = null, // Duration of the request in milliseconds

@@ -372,14 +372,22 @@ class ChatChannelIntegrationTest extends ChatTestCase
             set: (object) ['frozen' => true],
         ));
         $this->assertResponseSuccess($resp, 'freeze channel');
-        self::assertTrue($resp->getData()->channel->frozen);
+
+        // The channel returned by a partial update can lag the write it just applied,
+        // so read the channel back instead of trusting that response.
+        $stateResp = $this->getOrCreateChannel($type, $channelID, new GeneratedModels\ChannelGetOrCreateRequest());
+        $this->assertResponseSuccess($stateResp, 'get channel after freeze');
+        self::assertTrue($stateResp->getData()->channel->frozen);
 
         // Unfreeze
         $resp = $this->updateChannelPartial($type, $channelID, new GeneratedModels\UpdateChannelPartialRequest(
             set: (object) ['frozen' => false],
         ));
         $this->assertResponseSuccess($resp, 'unfreeze channel');
-        self::assertFalse($resp->getData()->channel->frozen);
+
+        $stateResp = $this->getOrCreateChannel($type, $channelID, new GeneratedModels\ChannelGetOrCreateRequest());
+        $this->assertResponseSuccess($stateResp, 'get channel after unfreeze');
+        self::assertFalse($stateResp->getData()->channel->frozen);
     }
 
     /**

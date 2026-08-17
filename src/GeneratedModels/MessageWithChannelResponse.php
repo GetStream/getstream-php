@@ -15,8 +15,8 @@ class MessageWithChannelResponse extends BaseModel
         public ?string $command = null, // Contains provided slash command
         public ?string $html = null, // Contains HTML markup of the message. Can only be set when using server-side API
         public ?string $type = null, // Contains type of the message. One of: regular, ephemeral, error, reply, system, deleted
-        public ?UserResponse $user = null,
-        public ?ChannelMemberResponse $member = null,
+        public ?UserResponse $user = null, // User response object
+        public ?ChannelMemberPartialResponse $member = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null, // Array of message attachments
@@ -36,7 +36,7 @@ class MessageWithChannelResponse extends BaseModel
         public ?int $replyCount = null, // Number of replies to this message
         public ?int $deletedReplyCount = null,
         public ?string $quotedMessageID = null,
-        public ?MessageResponse $quotedMessage = null,
+        public ?MessageResponse $quotedMessage = null, // Represents any chat message
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
         public ?array $threadParticipants = null, // List of users who participate in thread
@@ -61,7 +61,7 @@ class MessageWithChannelResponse extends BaseModel
         public ?bool $silent = null, // Whether message is silent or not
         public ?bool $pinned = null, // Whether message is pinned or not
         public ?\DateTime $pinnedAt = null, // Date when message got pinned
-        public ?UserResponse $pinnedBy = null,
+        public ?UserResponse $pinnedBy = null, // User response object
         public ?\DateTime $pinExpires = null, // Date when pinned message expires
         public ?\DateTime $messageTextUpdatedAt = null,
         public ?string $pollID = null, // Identifier of the poll to include in the message
@@ -72,7 +72,7 @@ class MessageWithChannelResponse extends BaseModel
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,
         public ?bool $deletedForMe = null,
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

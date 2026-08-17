@@ -12,7 +12,7 @@ class ThreadedCommentResponse extends BaseModel
         public ?string $id = null,
         public ?string $objectID = null,
         public ?string $objectType = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $text = null,
         public ?array $i18n = null,
         public ?object $custom = null,
@@ -46,7 +46,7 @@ class ThreadedCommentResponse extends BaseModel
         /** @var array<FeedsReactionResponse>|null */
         #[ArrayOf(FeedsReactionResponse::class)]
         public ?array $ownReactions = null,
-        public ?RepliesMeta $meta = null,
+        public ?RepliesMeta $meta = null, // Cursor & depth information for a comment's direct replies. Mirrors Reddit's 'load more replies' semantics.
         /** @var array<ThreadedCommentResponse>|null */
         #[ArrayOf(ThreadedCommentResponse::class)]
         public ?array $replies = null, // Slice of nested comments (may be empty).

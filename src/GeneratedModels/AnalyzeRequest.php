@@ -16,7 +16,7 @@ class AnalyzeRequest extends BaseModel
         public ?array $contentIds = null, // Optional map from a content label (either a `texts` key or an `image:<key>` multipart label) to a caller-supplied per-instance identifier. Echoed on per-field verdicts and surfaced in `matched_contents` when an aggregation rule fires.
         public ?bool $asyncResponse = null, // When true, the response carries no verdicts (status `pending`) and per-modality results arrive via `moderation.text_analysis.complete` and `moderation.image_analysis.complete` webhooks. Image moderation runs on a background worker; text moderation runs synchronously and is then delivered via webhook.
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

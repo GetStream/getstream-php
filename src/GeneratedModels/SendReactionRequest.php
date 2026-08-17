@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class SendReactionRequest extends BaseModel
 {
     public function __construct(
-        public ?ReactionRequest $reaction = null,
+        public ?ReactionRequest $reaction = null, // Represents user reaction to a message
         public ?bool $enforceUnique = null, // Whether to replace all existing user reactions
         public ?bool $skipPush = null, // Skips any mobile push notifications
     ) {

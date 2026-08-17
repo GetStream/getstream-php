@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class ReadStateResponse extends BaseModel
 {
     public function __construct(
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?\DateTime $lastRead = null,
         public ?int $unreadMessages = null,
         public ?string $lastReadMessageID = null,

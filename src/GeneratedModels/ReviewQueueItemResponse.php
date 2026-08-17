@@ -11,7 +11,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?\DateTime $updatedAt = null, // When the item was last updated
         public ?string $entityType = null, // Type of entity being reviewed
         public ?string $entityID = null, // ID of the entity being reviewed
-        public ?ModerationPayloadResponse $moderationPayload = null,
+        public ?ModerationPayloadResponse $moderationPayload = null, // Content payload for moderation
         public ?string $status = null, // Current status of the review
         public ?string $recommendedAction = null, // Suggested moderation action
         public ?\DateTime $completedAt = null, // When the review was completed
@@ -27,7 +27,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?ModerationCallResponse $call = null,
         public ?EntityCreatorResponse $entityCreator = null,
         public ?string $entityCreatorID = null, // ID of who created the entity
-        public ?UserResponse $assignedTo = null,
+        public ?UserResponse $assignedTo = null, // User response object
         /** @var array<BanInfoResponse>|null */
         #[ArrayOf(BanInfoResponse::class)]
         public ?array $bans = null, // Associated ban records

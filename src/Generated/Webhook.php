@@ -131,6 +131,7 @@ use GetStream\GeneratedModels\MessageReadEvent;
 use GetStream\GeneratedModels\MessageUnblockedEvent;
 use GetStream\GeneratedModels\MessageUndeletedEvent;
 use GetStream\GeneratedModels\MessageUpdatedEvent;
+use GetStream\GeneratedModels\ModerationAnalysisFailedEvent;
 use GetStream\GeneratedModels\ModerationCheckCompletedEvent;
 use GetStream\GeneratedModels\ModerationCustomActionEvent;
 use GetStream\GeneratedModels\ModerationFlaggedEvent;
@@ -321,6 +322,7 @@ class Webhook
     public const EVENT_TYPE_MESSAGE_UNBLOCKED = 'message.unblocked';
     public const EVENT_TYPE_MESSAGE_UNDELETED = 'message.undeleted';
     public const EVENT_TYPE_MESSAGE_UPDATED = 'message.updated';
+    public const EVENT_TYPE_MODERATION_ANALYSIS_FAILED = 'moderation.analysis.failed';
     public const EVENT_TYPE_MODERATION_CUSTOM_ACTION = 'moderation.custom_action';
     public const EVENT_TYPE_MODERATION_FLAGGED = 'moderation.flagged';
     public const EVENT_TYPE_MODERATION_IMAGE_ANALYSIS_COMPLETE = 'moderation.image_analysis.complete';
@@ -562,6 +564,7 @@ class Webhook
             'message.unblocked' => MessageUnblockedEvent::class,
             'message.undeleted' => MessageUndeletedEvent::class,
             'message.updated' => MessageUpdatedEvent::class,
+            'moderation.analysis.failed' => ModerationAnalysisFailedEvent::class,
             'moderation.custom_action' => ModerationCustomActionEvent::class,
             'moderation.flagged' => ModerationFlaggedEvent::class,
             'moderation.image_analysis.complete' => ModerationImageAnalysisCompleteEvent::class,

@@ -18,7 +18,7 @@ class CheckPushRequest extends BaseModel
         public ?string $pushProviderName = null, // Name of push provider
         public ?string $eventType = null, // Type of event for push templates (default: message.new). One of: message.new, message.updated, reaction.new, reaction.updated, notification.reminder_due
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

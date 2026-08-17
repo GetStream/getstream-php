@@ -12,7 +12,7 @@ class CallTranscriptionReadyEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.transcription_ready" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?CallTranscription $callTranscription = null,
+        public ?CallTranscription $callTranscription = null, // CallTranscription represents a transcription of a call.
         public ?string $egressID = null,
     ) {
     }

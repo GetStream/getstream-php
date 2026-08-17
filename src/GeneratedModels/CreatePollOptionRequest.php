@@ -7,9 +7,9 @@ class CreatePollOptionRequest extends BaseModel
 {
     public function __construct(
         public ?string $text = null, // Option text
-        public ?object $custom = null,
+        public ?object $custom = null, // Custom data for this object
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

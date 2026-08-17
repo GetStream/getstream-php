@@ -19,10 +19,10 @@ class NotificationThreadMessageNewEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel where the message was sent
         public ?string $channelID = null, // The ID of the channel where the message was sent
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?string $threadID = null, // The ID of the thread
         public ?string $messageID = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?int $watcherCount = null, // The number of watchers
         /** @var array<UserResponseCommonFields>|null */
         #[ArrayOf(UserResponseCommonFields::class)]

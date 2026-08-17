@@ -9,7 +9,7 @@ class UpdateChannelPartialRequest extends BaseModel
         public ?object $set = null,
         public ?array $unset = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

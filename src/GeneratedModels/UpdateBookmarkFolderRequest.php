@@ -9,7 +9,7 @@ class UpdateBookmarkFolderRequest extends BaseModel
         public ?string $name = null, // Name of the folder
         public ?object $custom = null, // Custom data for the folder
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

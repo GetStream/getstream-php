@@ -8,7 +8,7 @@ class CastPollVoteRequest extends BaseModel
     public function __construct(
         public ?VoteData $vote = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

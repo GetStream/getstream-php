@@ -19,14 +19,14 @@ class GetOrCreateFeedRequest extends BaseModel
         public ?PagerRequest $memberPagination = null,
         public ?PagerRequest $followersPagination = null,
         public ?PagerRequest $followingPagination = null,
-        public ?EnrichmentOptions $enrichmentOptions = null,
-        public ?FriendReactionsOptions $friendReactionsOptions = null,
+        public ?EnrichmentOptions $enrichmentOptions = null, // Options to skip specific enrichments to improve performance. Default is false (enrichments are included). Setting a field to true skips that enrichment.
+        public ?FriendReactionsOptions $friendReactionsOptions = null, // Options to control fetching reactions from friends (users you follow or have mutual follows with).
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $idAround = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

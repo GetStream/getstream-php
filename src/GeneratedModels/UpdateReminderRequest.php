@@ -8,7 +8,7 @@ class UpdateReminderRequest extends BaseModel
     public function __construct(
         public ?\DateTime $remindAt = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

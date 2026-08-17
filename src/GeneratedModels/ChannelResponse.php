@@ -16,7 +16,7 @@ class ChannelResponse extends BaseModel
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $updatedAt = null, // Date/time of the last update
         public ?\DateTime $deletedAt = null, // Date/time of deletion
-        public ?UserResponse $createdBy = null,
+        public ?UserResponse $createdBy = null, // User response object
         public ?bool $frozen = null, // Whether channel is frozen or not
         public ?bool $disabled = null,
         /** @var array<ChannelMemberResponse>|null */
@@ -28,7 +28,7 @@ class ChannelResponse extends BaseModel
         public ?\DateTime $muteExpiresAt = null, // Date of mute expiration
         public ?string $team = null, // Team the channel belongs to (multi-tenant only)
         public ?bool $autoTranslationEnabled = null, // Whether auto translation is enabled or not
-        public ?string $autoTranslationLanguage = null, // Language to translate to when auto translation is active
+        public ?string $autoTranslationLanguage = null, // Language (or comma-separated list of languages) to translate to when auto translation is active
         public ?\DateTime $hideMessagesBefore = null, // Date since when the message history is accessible
         public ?int $cooldown = null, // Cooldown period after sending each message
         /** @var array<ChannelOwnCapability>|null */
@@ -37,7 +37,7 @@ class ChannelResponse extends BaseModel
         public ?bool $hidden = null, // Whether this channel is hidden by current user or not
         public ?bool $blocked = null, // Whether this channel is blocked by current user or not
         public ?\DateTime $truncatedAt = null, // Date of the latest truncation of the channel
-        public ?UserResponse $truncatedBy = null,
+        public ?UserResponse $truncatedBy = null, // User response object
         public ?object $custom = null, // Custom data for this object
         public ?int $messageCount = null, // Number of messages in the channel
         public ?array $filterTags = null, // List of filter tags associated with the channel

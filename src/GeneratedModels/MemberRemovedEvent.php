@@ -22,7 +22,7 @@ class MemberRemovedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel from which the member was removed
         public ?string $channelID = null, // The ID of the channel from which the member was removed
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

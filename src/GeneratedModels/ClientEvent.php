@@ -27,6 +27,7 @@ class ClientEvent extends BaseModel
         public ?int $retryCountAttempt = null, // Total in-stage retries the client made before resolving (0–1000). Required on completed join events.
         public ?int $elapsedTime = null, // Milliseconds elapsed between the stage attempt's initiation and this event. 
         public ?string $callSessionID = null, // Call session ID associated with the attempt. Required on every event except CoordinatorJoin initiation and CoordinatorJoin failure (where the call session is not yet established); optional on MediaDevicePermission.
+        public ?string $joinReason = null, // Reason the client initiated the join. Optional on CoordinatorJoin events; empty when not provided.
         public ?string $sfuID = null, // Identifier of the SFU the client was attempting to connect to. Required on WSJoin and PeerConnectionConnect failure, and on FirstAudioFrame and FirstVideoFrame.
         public ?string $trackID = null, // Identifier of the media track the frame belongs to. Required on FirstVideoFrame; optional on FirstAudioFrame.
         public ?string $retryFailureReason = null, // Failure reason string. Required on CoordinatorJoin, CoordinatorWS, WSJoin, and PeerConnectionConnect failure.

@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class UpdateMessageRequest extends BaseModel
 {
     public function __construct(
-        public ?MessageRequest $message = null,
+        public ?MessageRequest $message = null, // Message data for creating or updating a message
         public ?bool $skipPush = null,
         public ?bool $skipEnrichUrl = null, // Skip enrich URL
     ) {

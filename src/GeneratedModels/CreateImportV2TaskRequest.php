@@ -12,7 +12,7 @@ class CreateImportV2TaskRequest extends BaseModel
         public ?string $product = null,
         public ?ImportV2TaskSettings $settings = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

@@ -12,9 +12,9 @@ class UpdateExternalStorageRequest extends BaseModel
         public ?string $storageType = null, // The type of storage to use
         public ?string $bucket = null, // The name of the bucket on the service provider
         public ?string $path = null, // The path prefix to use for storing files
-        public ?S3Request $awsS3 = null,
+        public ?S3Request $awsS3 = null, // Config for creating Amazon S3 storage.
         public ?string $gcsCredentials = null,
-        public ?AzureRequest $azureBlob = null,
+        public ?AzureRequest $azureBlob = null, // Config for creating Azure Blob Storage storage
     ) {
     }
 

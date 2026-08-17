@@ -15,7 +15,7 @@ class MessageUnblockedEvent extends BaseModel
         public ?object $custom = null,
         public ?string $cid = null, // The CID of the channel where the message was unblocked
         public ?string $messageID = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?UserResponseCommonFields $user = null,
     ) {
     }

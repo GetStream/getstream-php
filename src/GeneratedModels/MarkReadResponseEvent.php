@@ -16,7 +16,7 @@ class MarkReadResponseEvent extends BaseModel
         public ?ThreadResponse $thread = null,
         public ?\DateTime $createdAt = null,
         public ?string $lastReadMessageID = null,
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

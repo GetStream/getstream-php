@@ -8,9 +8,9 @@ class CallSettingsResponse extends BaseModel
     public function __construct(
         public ?AudioSettingsResponse $audio = null,
         public ?BackstageSettingsResponse $backstage = null,
-        public ?BroadcastSettingsResponse $broadcasting = null,
+        public ?BroadcastSettingsResponse $broadcasting = null, // BroadcastSettingsResponse is the payload for broadcasting settings
         public ?GeofenceSettingsResponse $geofencing = null,
-        public ?RecordSettingsResponse $recording = null,
+        public ?RecordSettingsResponse $recording = null, // RecordSettings is the payload for recording settings
         public ?IndividualRecordingSettingsResponse $individualRecording = null,
         public ?RawRecordingSettingsResponse $rawRecording = null,
         public ?FrameRecordingSettingsResponse $frameRecording = null,
@@ -22,6 +22,7 @@ class CallSettingsResponse extends BaseModel
         public ?LimitsSettingsResponse $limits = null,
         public ?SessionSettingsResponse $session = null,
         public ?IngressSettingsResponse $ingress = null,
+        public ?EncryptionSettingsResponse $encryption = null, // EncryptionSettings is the payload for end-to-end encryption settings
     ) {
     }
 

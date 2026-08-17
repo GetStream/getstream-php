@@ -9,7 +9,7 @@ class FeedsV3CommentResponse extends BaseModel
         public ?string $id = null,
         public ?string $objectID = null,
         public ?string $objectType = null,
-        public ?UserResponse $user = null,
+        public ?UserResponse $user = null, // User response object
         public ?string $text = null,
         public ?array $i18n = null,
         public ?object $custom = null,

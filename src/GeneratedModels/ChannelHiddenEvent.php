@@ -20,7 +20,7 @@ class ChannelHiddenEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel which was hidden
         public ?string $channelID = null, // The ID of the channel which was hidden
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?UserResponseCommonFields $user = null,
         public ?bool $clearHistory = null, // Whether the history was cleared
     ) {

@@ -15,7 +15,7 @@ class CreateDeviceRequest extends BaseModel
         public ?bool $voipToken = null, // When true the token is for Apple VoIP push notifications
         public ?string $hardwareID = null, // Stable physical device identifier used to deduplicate pushes across push providers (e.g. APNs VoIP and Firebase on the same iOS device). Distinct from 'id', which is the push token.
         public ?string $userID = null, // **Server-side only**. User ID which server acts upon
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

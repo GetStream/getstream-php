@@ -11,7 +11,7 @@ class QueryReactionsRequest extends BaseModel
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null, // Array of sort parameters
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
         public ?int $limit = null,
         public ?string $next = null,
         public ?string $prev = null,

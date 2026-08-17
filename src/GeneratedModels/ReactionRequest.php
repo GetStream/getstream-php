@@ -15,7 +15,7 @@ class ReactionRequest extends BaseModel
         public ?\DateTime $updatedAt = null, // Date/time of the last update
         public ?object $custom = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

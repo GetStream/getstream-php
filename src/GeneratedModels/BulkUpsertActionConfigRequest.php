@@ -10,7 +10,7 @@ class BulkUpsertActionConfigRequest extends BaseModel
         #[ArrayOf(UpsertActionConfigItem::class)]
         public ?array $actionConfigs = null, // List of action configs to create or update
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

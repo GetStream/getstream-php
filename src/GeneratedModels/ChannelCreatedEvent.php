@@ -20,7 +20,7 @@ class ChannelCreatedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel which was created
         public ?string $channelID = null, // The ID of the channel which was created
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?UserResponseCommonFields $user = null,
     ) {
     }

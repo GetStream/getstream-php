@@ -14,7 +14,7 @@ class CallResponse extends BaseModel
         public ?string $cid = null, // The unique identifier for a call (<type>:<id>)
         public ?string $currentSessionID = null,
         public ?string $team = null,
-        public ?UserResponse $createdBy = null,
+        public ?UserResponse $createdBy = null, // User response object
         public ?object $custom = null, // Custom data for this object
         public ?\DateTime $createdAt = null, // Date/time of creation
         public ?\DateTime $updatedAt = null, // Date/time of the last update
@@ -27,7 +27,7 @@ class CallResponse extends BaseModel
         public ?bool $backstage = null,
         public ?CallSettingsResponse $settings = null,
         public ?array $blockedUserIds = null,
-        public ?CallIngressResponse $ingress = null,
+        public ?CallIngressResponse $ingress = null, // CallIngressResponse is the payload for ingress settings
         public ?CallSessionResponse $session = null,
         public ?EgressResponse $egress = null,
         public ?ThumbnailResponse $thumbnails = null,

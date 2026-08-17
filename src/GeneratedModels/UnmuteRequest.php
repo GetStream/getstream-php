@@ -8,7 +8,7 @@ class UnmuteRequest extends BaseModel
     public function __construct(
         public ?array $targetIds = null, // User IDs to unmute
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

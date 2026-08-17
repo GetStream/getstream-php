@@ -8,6 +8,7 @@ class MatchedContent extends BaseModel
     public function __construct(
         public ?string $type = null, // Content type that contributed this entry: `image` or `text`.
         public ?string $id = null, // The `content_ids[label]` value supplied on the `/analyze` request that contributed this entry.
+        public ?string $text = null,
         public ?\DateTime $publishedAt = null, // `content_published_at` from the contributing `/analyze` request, or server receive time when that field was omitted.
         /** @var array<Classification>|null */
         #[ArrayOf(Classification::class)]

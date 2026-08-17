@@ -12,8 +12,8 @@ class ChatMessageResponse extends BaseModel
         public ?string $command = null,
         public ?string $html = null,
         public ?string $type = null,
-        public ?UserResponse $user = null,
-        public ?ChannelMemberResponse $member = null,
+        public ?UserResponse $user = null, // User response object
+        public ?ChannelMemberPartialResponse $member = null,
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null,
@@ -58,7 +58,7 @@ class ChatMessageResponse extends BaseModel
         public ?bool $silent = null,
         public ?bool $pinned = null,
         public ?\DateTime $pinnedAt = null,
-        public ?UserResponse $pinnedBy = null,
+        public ?UserResponse $pinnedBy = null, // User response object
         public ?\DateTime $pinExpires = null,
         public ?\DateTime $messageTextUpdatedAt = null,
         public ?string $pollID = null,

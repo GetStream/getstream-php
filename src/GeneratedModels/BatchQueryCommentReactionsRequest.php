@@ -15,7 +15,7 @@ class BatchQueryCommentReactionsRequest extends BaseModel
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $userID = null, // Server-side only. The user whose reactions to fetch; defaults to the authenticated user for client-side requests
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

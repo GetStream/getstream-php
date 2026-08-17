@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class UpsertActionConfigResponse extends BaseModel
 {
     public function __construct(
-        public ?ModerationActionConfigResponse $actionConfig = null,
+        public ?ModerationActionConfigResponse $actionConfig = null, // Configuration for a moderation action
         public ?string $duration = null,
     ) {
     }

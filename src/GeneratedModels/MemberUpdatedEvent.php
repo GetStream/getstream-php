@@ -22,7 +22,7 @@ class MemberUpdatedEvent extends BaseModel
         public ?object $channelCustom = null,
         public ?string $channelType = null, // The type of the channel in which the member was updated
         public ?string $channelID = null, // The ID of the channel in which the member was updated
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
 

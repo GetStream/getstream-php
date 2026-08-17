@@ -8,7 +8,7 @@ class BulkDeleteActionConfigRequest extends BaseModel
     public function __construct(
         public ?array $ids = null, // UUIDs of the action configs to delete
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

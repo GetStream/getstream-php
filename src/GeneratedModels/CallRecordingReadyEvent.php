@@ -12,7 +12,7 @@ class CallRecordingReadyEvent extends BaseModel
         public ?string $type = null, // The type of event: "call.recording_ready" in this case
         public ?\DateTime $createdAt = null,
         public ?string $callCid = null,
-        public ?CallRecording $callRecording = null,
+        public ?CallRecording $callRecording = null, // CallRecording represents a recording of a call.
         public ?string $egressID = null,
         public ?string $recordingType = null, // The type of recording
     ) {

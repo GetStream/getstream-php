@@ -21,9 +21,9 @@ class CreatePollRequest extends BaseModel
         public ?bool $allowUserSuggestedOptions = null,
         public ?bool $allowAnswers = null, // Indicates whether users can suggest user defined answers
         public ?bool $isClosed = null, // Indicates whether the poll is open for voting
-        public ?object $custom = null,
+        public ?object $custom = null, // Custom data for this object
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

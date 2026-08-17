@@ -21,14 +21,14 @@ class MessageNewEvent extends BaseModel
         public ?string $channelType = null, // The type of the channel where the message was sent
         public ?string $channelID = null, // The ID of the channel where the message was sent
         public ?string $messageID = null,
-        public ?MessageResponse $message = null,
+        public ?MessageResponse $message = null, // Represents any chat message
         public ?UserResponseCommonFields $user = null,
         public ?int $watcherCount = null, // The number of watchers
         /** @var array<UserResponseCommonFields>|null */
         #[ArrayOf(UserResponseCommonFields::class)]
         public ?array $threadParticipants = null, // The participants of the thread
         public ?string $parentAuthor = null, // The author of the parent message
-        public ?ChannelResponse $channel = null,
+        public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?int $unreadCount = null, // The number of unread messages
         public ?int $totalUnreadCount = null,
         public ?int $unreadChannels = null,

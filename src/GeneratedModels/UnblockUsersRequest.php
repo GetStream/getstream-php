@@ -8,7 +8,7 @@ class UnblockUsersRequest extends BaseModel
     public function __construct(
         public ?string $blockedUserID = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

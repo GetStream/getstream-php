@@ -10,7 +10,7 @@ class EventRequest extends BaseModel
         public ?string $parentID = null,
         public ?object $custom = null,
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 

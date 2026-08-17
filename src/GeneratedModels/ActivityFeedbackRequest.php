@@ -13,7 +13,7 @@ class ActivityFeedbackRequest extends BaseModel
         public ?bool $hide = null, // Whether to hide this activity
         public ?bool $showMore = null, // Whether to show more content like this
         public ?string $userID = null,
-        public ?UserRequest $user = null,
+        public ?UserRequest $user = null, // User request object
     ) {
     }
 
