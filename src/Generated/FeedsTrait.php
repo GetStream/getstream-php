@@ -1216,6 +1216,23 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ChangeFeedVisibilityResponse::class);
     }
     /**
+     * Returns the number of activities in a feed, the total number of comments on those activities (including nested replies), and the sum of both. The comment total is cached for a few seconds on large feeds.
+     *
+     * @param string $feedGroupID
+     * @param string $feedID
+     * @return StreamResponse<GeneratedModels\GetFeedCountsResponse>
+     * @throws StreamException
+     */
+    public function getFeedCounts(string $feedGroupID, string $feedID): StreamResponse {
+        $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/counts';
+        $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
+        $path = str_replace('{feed_id}', (string) $feedID, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFeedCountsResponse::class);
+    }
+    /**
      * Add, remove, or set members for a feed
      *
      * @param string $feedGroupID

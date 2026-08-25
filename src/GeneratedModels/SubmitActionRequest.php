@@ -19,8 +19,8 @@ class SubmitActionRequest extends BaseModel
         public ?BanActionRequestPayload $ban = null, // Configuration for ban moderation action
         public ?CustomActionRequestPayload $custom = null, // Configuration for custom moderation action
         public ?UnbanActionRequestPayload $unban = null, // Configuration for unban moderation action
-        public ?RestoreActionRequestPayload $restore = null, // Configuration for restore action
-        public ?UnblockActionRequestPayload $unblock = null, // Configuration for unblock action
+        public ?RestoreActionRequestPayload $restore = null, // Configuration for restore action. State-aware: reverses whichever of a delete, a block, or a shadow block currently applies to the content (including both a delete and a block/shadow block at once).
+        public ?UnblockActionRequestPayload $unblock = null, // Deprecated: use restore instead — it now also reverses a block or shadow block. Configuration for unblock action.
         public ?BlockActionRequestPayload $block = null, // Configuration for block action
         public ?ShadowBlockActionRequestPayload $shadowBlock = null, // Configuration for shadow block action
         public ?BypassActionRequest $bypass = null,

@@ -3,13 +3,12 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * Deprecated: use restore instead — it now also reverses a block or shadow block. Configuration for unblock action.
- */
-class UnblockActionRequestPayload extends BaseModel
+class PredefinedFilterStatsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $decisionReason = null, // Reason for the appeal decision
+        public ?int $calls = null,
+        public ?int $maxLatencyMs = null,
+        public ?\DateTime $lastSeen = null,
     ) {
     }
 

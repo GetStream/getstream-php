@@ -566,6 +566,35 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListPermissionsResponse::class);
     }
     /**
+     * Creates permission
+     *
+     * @param GeneratedModels\CreatePermissionRequest $requestData
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function createPermission(GeneratedModels\CreatePermissionRequest $requestData): StreamResponse {
+        $path = '/api/v2/permissions';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
+     * Deletes custom permission
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function deletePermission(string $id): StreamResponse {
+        $path = '/api/v2/permissions/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
      * Gets custom permission
      *
      * @param string $id
@@ -579,6 +608,22 @@ trait CommonTrait
         $queryParams = [];
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCustomPermissionResponse::class);
+    }
+    /**
+     * Updates custom permission
+     *
+     * @param string $id
+     * @param GeneratedModels\PermissionRequest $requestData
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function updatePermission(string $id, GeneratedModels\PermissionRequest $requestData): StreamResponse {
+        $path = '/api/v2/permissions/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
      * Creates a new poll

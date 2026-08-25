@@ -12,6 +12,7 @@ class Classification extends BaseModel
         /** @var array<Classification>|null */
         #[ArrayOf(Classification::class)]
         public ?array $subclassifications = null,
+        public ?array $matchedContributors = null,
     ) {
     }
 
