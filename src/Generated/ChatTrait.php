@@ -616,6 +616,83 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetManyMessagesResponse::class);
     }
     /**
+     * Returns pinned messages for the channel
+     *
+     * @param string $type
+     * @param string $id
+     * @param ?int $limit
+     * @param ?int $offset
+     * @param ?string $idGte
+     * @param ?string $idGt
+     * @param ?string $idLte
+     * @param ?string $idLt
+     * @param ?\DateTime $pinnedAtAfterOrEqual
+     * @param ?\DateTime $pinnedAtAfter
+     * @param ?\DateTime $pinnedAtBeforeOrEqual
+     * @param ?\DateTime $pinnedAtBefore
+     * @param ?string $idAround
+     * @param ?\DateTime $pinnedAtAround
+     * @param ?string $userID
+     * @param ?array $sort
+     * @param ?array $memberCustomInclude
+     * @return StreamResponse<GeneratedModels\GetPinnedMessagesResponse>
+     * @throws StreamException
+     */
+    public function getPinnedMessages(string $type, string $id, ?int $limit = null, ?int $offset = null, ?string $idGte = null, ?string $idGt = null, ?string $idLte = null, ?string $idLt = null, ?\DateTime $pinnedAtAfterOrEqual = null, ?\DateTime $pinnedAtAfter = null, ?\DateTime $pinnedAtBeforeOrEqual = null, ?\DateTime $pinnedAtBefore = null, ?string $idAround = null, ?\DateTime $pinnedAtAround = null, ?string $userID = null, ?array $sort = null, ?array $memberCustomInclude = null): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}/pinned_messages';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($offset !== null) {
+            $queryParams['offset'] = $offset;
+        }
+        if ($idGte !== null) {
+            $queryParams['id_gte'] = $idGte;
+        }
+        if ($idGt !== null) {
+            $queryParams['id_gt'] = $idGt;
+        }
+        if ($idLte !== null) {
+            $queryParams['id_lte'] = $idLte;
+        }
+        if ($idLt !== null) {
+            $queryParams['id_lt'] = $idLt;
+        }
+        if ($pinnedAtAfterOrEqual !== null) {
+            $queryParams['pinned_at_after_or_equal'] = $pinnedAtAfterOrEqual;
+        }
+        if ($pinnedAtAfter !== null) {
+            $queryParams['pinned_at_after'] = $pinnedAtAfter;
+        }
+        if ($pinnedAtBeforeOrEqual !== null) {
+            $queryParams['pinned_at_before_or_equal'] = $pinnedAtBeforeOrEqual;
+        }
+        if ($pinnedAtBefore !== null) {
+            $queryParams['pinned_at_before'] = $pinnedAtBefore;
+        }
+        if ($idAround !== null) {
+            $queryParams['id_around'] = $idAround;
+        }
+        if ($pinnedAtAround !== null) {
+            $queryParams['pinned_at_around'] = $pinnedAtAround;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        if ($sort !== null) {
+            $queryParams['sort'] = $sort;
+        }
+        if ($memberCustomInclude !== null) {
+            $queryParams['member_custom_include'] = $memberCustomInclude;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetPinnedMessagesResponse::class);
+    }
+    /**
      * This Method creates a channel or returns an existing one with matching attributes
      * Sends events:
      * - channel.created
@@ -1391,6 +1468,87 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnmuteResponse::class);
     }
     /**
+     * Get all predefined filters with optional sorting by created_at, updated_at, name, or operation
+     *
+     * @param ?bool $includeStats
+     * @param ?array $sort
+     * @return StreamResponse<GeneratedModels\QueryPredefinedFiltersResponse>
+     * @throws StreamException
+     */
+    public function getPredefinedFilters(?bool $includeStats = null, ?array $sort = null): StreamResponse {
+        $path = '/api/v2/chat/predefined_filters';
+
+        $queryParams = [];
+        if ($includeStats !== null) {
+            $queryParams['include_stats'] = $includeStats;
+        }
+        if ($sort !== null) {
+            $queryParams['sort'] = $sort;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\QueryPredefinedFiltersResponse::class);
+    }
+    /**
+     * Create a predefined filter that can be used in Query endpoints
+     *
+     * @param GeneratedModels\CreatePredefinedFilterRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreatePredefinedFilterResponse>
+     * @throws StreamException
+     */
+    public function createPredefinedFilter(GeneratedModels\CreatePredefinedFilterRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/predefined_filters';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreatePredefinedFilterResponse::class);
+    }
+    /**
+     * Delete a predefined filter by name
+     *
+     * @param string $name
+     * @return StreamResponse<GeneratedModels\Response>
+     * @throws StreamException
+     */
+    public function deletePredefinedFilter(string $name): StreamResponse {
+        $path = '/api/v2/chat/predefined_filters/{name}';
+        $path = str_replace('{name}', (string) $name, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\Response::class);
+    }
+    /**
+     * Get a predefined filter by name
+     *
+     * @param string $name
+     * @return StreamResponse<GeneratedModels\GetPredefinedFilterResponse>
+     * @throws StreamException
+     */
+    public function getPredefinedFilter(string $name): StreamResponse {
+        $path = '/api/v2/chat/predefined_filters/{name}';
+        $path = str_replace('{name}', (string) $name, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetPredefinedFilterResponse::class);
+    }
+    /**
+     * Update a predefined filter by name
+     *
+     * @param string $name
+     * @param GeneratedModels\UpdatePredefinedFilterRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdatePredefinedFilterResponse>
+     * @throws StreamException
+     */
+    public function updatePredefinedFilter(string $name, GeneratedModels\UpdatePredefinedFilterRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/predefined_filters/{name}';
+        $path = str_replace('{name}', (string) $name, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdatePredefinedFilterResponse::class);
+    }
+    /**
      * Find and filter channel scoped or global user bans
      *
      * @param ?GeneratedModels\QueryBannedUsersPayload $payload
@@ -1668,6 +1826,9 @@ trait ChatTrait
      * - Use 'month' parameter (YYYY-MM format) for monthly aggregated values
      * - Use 'start_date'/'end_date' parameters (YYYY-MM-DD format) for daily breakdown
      * - If neither provided, defaults to current month (monthly mode)
+     * **Team Filter:**
+     * - Use 'team' to return a single team's stats (empty string selects users not assigned to any team)
+     * - Mutually exclusive with the 'next' pagination cursor
      * This endpoint is server-side only.
      *
      * @param GeneratedModels\QueryTeamUsageStatsRequest $requestData

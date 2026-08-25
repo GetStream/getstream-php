@@ -98,6 +98,16 @@ trait FeedMethods
         return $this->feedsV3Client->changeFeedVisibility($this->feedGroup, $this->feedId, $requestData);
     }
     /**
+     * Returns the number of activities in a feed, the total number of comments on those activities (including nested replies), and the sum of both. The comment total is cached for a few seconds on large feeds.
+     *
+     * @return StreamResponse<GeneratedModels\GetFeedCountsResponse>
+     * @throws StreamException
+     */
+    public function getFeedCounts(
+        ): StreamResponse {
+        return $this->feedsV3Client->getFeedCounts($this->feedGroup, $this->feedId);
+    }
+    /**
      * Add, remove, or set members for a feed
      *
      * @param GeneratedModels\UpdateFeedMembersRequest $requestData

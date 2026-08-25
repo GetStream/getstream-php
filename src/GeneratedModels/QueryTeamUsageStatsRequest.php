@@ -14,6 +14,7 @@ class QueryTeamUsageStatsRequest extends BaseModel
         public ?string $endDate = null, // End date in YYYY-MM-DD format. Used with start_date for custom date range. Returns daily breakdown.
         public ?int $limit = null, // Maximum number of teams to return per page (default: 30, max: 30)
         public ?string $next = null, // Cursor for pagination to fetch next page of teams
+        public ?string $team = null, // Filter results to a single team ID. Empty string selects users not assigned to any team. Mutually exclusive with 'next'.
     ) {
     }
 

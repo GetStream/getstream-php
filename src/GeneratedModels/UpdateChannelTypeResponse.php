@@ -30,6 +30,7 @@ class UpdateChannelTypeResponse extends BaseModel
         public ?bool $userMessageReminders = null,
         public ?bool $sharedLocations = null,
         public ?bool $countMessages = null,
+        public ?string $messageRetention = null,
         public ?int $maxMessageLength = null,
         public ?string $automod = null,
         public ?string $automodBehavior = null,
