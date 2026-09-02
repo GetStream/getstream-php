@@ -13,7 +13,7 @@ class FollowResponse extends BaseModel
         public ?\DateTime $requestAcceptedAt = null, // When the follow request was accepted
         public ?\DateTime $requestRejectedAt = null, // When the follow request was rejected
         public ?string $status = null, // Status of the follow relationship. One of: accepted, pending, rejected
-        public ?string $followerRole = null, // Role of the follower (source user) in the follow relationship
+        public ?string $followerRole = null, // Role of the follower (source user) in the follow relationship, as stored. A reserved name, or a role your app no longer defines, is reported as stored but evaluated as 'feed_follower'.
         public ?\DateTime $createdAt = null, // When the follow relationship was created
         public ?\DateTime $updatedAt = null, // When the follow relationship was last updated
     ) {

@@ -19,6 +19,7 @@ class ModerationFlagResponse extends BaseModel
         public ?array $result = null,
         public ?string $reviewQueueItemID = null,
         public ?ReviewQueueItemResponse $reviewQueueItem = null,
+        public ?\DateTime $contentPublishedAt = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
     ) {

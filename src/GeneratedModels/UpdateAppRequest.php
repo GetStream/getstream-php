@@ -66,6 +66,8 @@ class UpdateAppRequest extends BaseModel
         public ?array $activityMetricsConfig = null,
         public ?string $videoPrimaryUseCase = null,
         public ?string $chatPrimaryUseCase = null,
+        public ?bool $memberCustomOnMentionedUsersEnabled = null,
+        public ?bool $memberCustomOnTypingEventsEnabled = null,
     ) {
     }
 

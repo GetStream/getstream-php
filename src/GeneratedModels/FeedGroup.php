@@ -11,6 +11,7 @@ class FeedGroup extends BaseModel
         public ?NotificationConfig $notification = null,
         public ?PushNotificationConfig $pushNotification = null,
         public ?string $defaultVisibility = null,
+        public ?string $defaultFollowerRole = null,
         public ?object $custom = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,

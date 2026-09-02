@@ -72,9 +72,12 @@ class AppResponseFields extends BaseModel
         public ?bool $moderationOnboardingComplete = null,
         public ?bool $moderationVideoCallModerationEnabled = null,
         public ?bool $moderationAudioCallModerationEnabled = null,
+        public ?bool $moderationKeyframeVideoEnabled = null,
         public ?string $moderationS3ImageAccessRoleArn = null,
         public ?array $activityMetricsConfig = null,
         public ?bool $memberCustomOnMessagesEnabled = null,
+        public ?bool $memberCustomOnMentionedUsersEnabled = null,
+        public ?bool $memberCustomOnTypingEventsEnabled = null,
     ) {
     }
 

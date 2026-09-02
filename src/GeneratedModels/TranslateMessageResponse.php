@@ -3,13 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ChannelMemberRequest extends BaseModel
+/**
+ * Basic response information
+ */
+class TranslateMessageResponse extends BaseModel
 {
     public function __construct(
-        public ?string $userID = null,
-        public ?MemberUserRequest $user = null,
-        public ?object $custom = null,
-        public ?string $channelRole = null, // Role of the member in the channel
+        public ?MessageResponse $message = null, // Represents any chat message
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

@@ -1303,19 +1303,19 @@ trait VideoTrait
      * Returns the app's per-broadcast daily digest bundle for one UTC day, with an explicit readiness status (ready, pending, failed, future_date, expired). Payload keys are only present when status is ready.
      *
      * @param ?string $date
-     * @param ?string $appID
+     * @param ?string $targetAppID
      * @return StreamResponse<GeneratedModels\GetDailyDigestResponse>
      * @throws StreamException
      */
-    public function getDailyDigest(?string $date = null, ?string $appID = null): StreamResponse {
+    public function getDailyDigest(?string $date = null, ?string $targetAppID = null): StreamResponse {
         $path = '/api/v2/video/stats/daily_digest';
 
         $queryParams = [];
         if ($date !== null) {
             $queryParams['date'] = $date;
         }
-        if ($appID !== null) {
-            $queryParams['app_id'] = $appID;
+        if ($targetAppID !== null) {
+            $queryParams['target_app_id'] = $targetAppID;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetDailyDigestResponse::class);

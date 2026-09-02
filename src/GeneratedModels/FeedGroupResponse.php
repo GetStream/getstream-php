@@ -10,6 +10,7 @@ class FeedGroupResponse extends BaseModel
         public ?NotificationConfig $notification = null,
         public ?PushNotificationConfig $pushNotification = null,
         public ?string $defaultVisibility = null, // Default visibility for activities. One of: public, visible, followers, members, private
+        public ?string $defaultFollowerRole = null, // Role new followers of feeds in this group are given. Either a built-in (feed_follower, feed_member_viewer) or any role your app has defined. Empty means feed_follower. Applied when the follow is accepted, so a follow that starts pending picks it up on approval
         public ?object $custom = null, // Custom data for the feed group
         public ?\DateTime $createdAt = null, // When the feed group was created
         public ?\DateTime $updatedAt = null, // When the feed group was last updated
@@ -24,6 +25,7 @@ class FeedGroupResponse extends BaseModel
         public ?RankingConfig $ranking = null,
         public ?AggregationConfig $aggregation = null,
         public ?ActivityFilterConfig $activityFilter = null,
+        public ?ActivityProcessingConfig $activityProcessing = null,
     ) {
     }
 

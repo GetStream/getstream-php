@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class AnalyzeResponse extends BaseModel
 {
     public function __construct(
-        public ?string $status = null, // Always `complete` — /analyze is sync-only and the full verdict is in the response.
+        public ?string $status = null, // `complete` (all fields screened), `partial` (mix of verdicts and per-field errors), or `pending` (async).
         /** @var array<string, AnalyzeTextField>|null */
         #[MapOf(AnalyzeTextField::class)]
         public ?array $texts = null, // Per-text-field moderation verdicts keyed by caller label.

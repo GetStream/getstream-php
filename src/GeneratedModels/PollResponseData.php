@@ -9,7 +9,7 @@ class PollResponseData extends BaseModel
         public ?string $id = null,
         public ?string $name = null,
         public ?string $description = null,
-        public ?string $votingVisibility = null,
+        public ?string $votingVisibility = null, // Voting visibility of the poll
         public ?bool $enforceUniqueVote = null,
         public ?int $maxVotesAllowed = null,
         public ?bool $allowUserSuggestedOptions = null,
