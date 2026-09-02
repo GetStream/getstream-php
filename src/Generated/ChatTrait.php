@@ -1230,7 +1230,7 @@ trait ChatTrait
      *
      * @param string $id
      * @param GeneratedModels\TranslateMessageRequest $requestData
-     * @return StreamResponse<GeneratedModels\MessageActionResponse>
+     * @return StreamResponse<GeneratedModels\TranslateMessageResponse>
      * @throws StreamException
      */
     public function translateMessage(string $id, GeneratedModels\TranslateMessageRequest $requestData): StreamResponse {
@@ -1239,7 +1239,7 @@ trait ChatTrait
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MessageActionResponse::class);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TranslateMessageResponse::class);
     }
     /**
      * Undelete a message that was previously soft-deleted
@@ -1356,7 +1356,7 @@ trait ChatTrait
      *
      * @param string $messageID
      * @param GeneratedModels\CreateReminderRequest $requestData
-     * @return StreamResponse<GeneratedModels\ReminderResponseData>
+     * @return StreamResponse<GeneratedModels\CreateReminderResponse>
      * @throws StreamException
      */
     public function createReminder(string $messageID, GeneratedModels\CreateReminderRequest $requestData): StreamResponse {
@@ -1365,7 +1365,7 @@ trait ChatTrait
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ReminderResponseData::class);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateReminderResponse::class);
     }
     /**
      * Returns replies (thread) of the message

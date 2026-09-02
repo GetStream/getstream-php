@@ -3,13 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class ChannelMemberRequest extends BaseModel
+class AIVideoConfigRequest extends BaseModel
 {
     public function __construct(
-        public ?string $userID = null,
-        public ?MemberUserRequest $user = null,
-        public ?object $custom = null,
-        public ?string $channelRole = null, // Role of the member in the channel
+        public ?bool $async = null,
+        public ?bool $enabled = null,
+        /** @var array<AWSRekognitionRule>|null */
+        #[ArrayOf(AWSRekognitionRule::class)]
+        public ?array $rules = null,
     ) {
     }
 

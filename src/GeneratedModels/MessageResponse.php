@@ -72,6 +72,9 @@ class MessageResponse extends BaseModel
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,
         public ?bool $deletedForMe = null,
+        /** @var array<string, ChannelMemberPartialResponse>|null */
+        #[MapOf(ChannelMemberPartialResponse::class)]
+        public ?array $mentionedChannelMembers = null, // Channel member data for the users mentioned in the message, keyed by user id. Only present when the app has member custom on mentioned users enabled, and only for the first two mentioned users of each message
     ) {
     }
 

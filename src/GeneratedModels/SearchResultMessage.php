@@ -69,6 +69,9 @@ class SearchResultMessage extends BaseModel
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,
         public ?bool $deletedForMe = null,
+        /** @var array<string, ChannelMemberPartialResponse>|null */
+        #[MapOf(ChannelMemberPartialResponse::class)]
+        public ?array $mentionedChannelMembers = null,
         public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }

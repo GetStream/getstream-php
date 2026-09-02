@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+class MemberUserRequest extends BaseModel
+{
+    public function __construct(
+        public ?string $id = null,
+        public ?string $name = null,
+        public ?string $image = null,
+        public ?object $custom = null,
+        public ?string $language = null,
+        public ?bool $invisible = null,
+        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?string $role = null,
+        public ?array $teamsRole = null,
+        public ?array $teams = null,
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

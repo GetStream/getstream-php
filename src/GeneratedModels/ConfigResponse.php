@@ -16,7 +16,7 @@ class ConfigResponse extends BaseModel
         public ?AITextConfig $aiTextConfig = null,
         public ?LLMConfig $llmConfig = null,
         public ?AIImageConfig $aiImageConfig = null,
-        public ?AIVideoConfig $aiVideoConfig = null,
+        public ?AIVideoConfigResponse $aiVideoConfig = null,
         public ?AIAudioConfigResponse $aiAudioConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?FloodConfig $floodConfig = null,

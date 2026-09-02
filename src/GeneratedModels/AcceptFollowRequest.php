@@ -8,7 +8,7 @@ class AcceptFollowRequest extends BaseModel
     public function __construct(
         public ?string $source = null, // Fully qualified ID of the source feed
         public ?string $target = null, // Fully qualified ID of the target feed
-        public ?string $followerRole = null, // Optional role for the follower in the follow relationship
+        public ?string $followerRole = null, // Optional role for the follower in the follow relationship. Server-side only. Either a built-in ('feed_follower' (the default) or 'feed_member_viewer') or any role your app has defined; grants are not inspected.
     ) {
     }
 

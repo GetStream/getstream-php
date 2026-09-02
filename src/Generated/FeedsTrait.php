@@ -1439,7 +1439,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedGroupResponse::class);
     }
     /**
-     * List all feed views for a feed group
+     * List persisted feed views for the application.
      *
      * @return StreamResponse<GeneratedModels\ListFeedViewsResponse>
      * @throws StreamException
@@ -1694,7 +1694,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SingleFollowResponse::class);
     }
     /**
-     * Accepts a pending follow request
+     * Accepts a pending follow request. Follower role can only be set via server-side requests.
      *
      * @param GeneratedModels\AcceptFollowRequest $requestData
      * @return StreamResponse<GeneratedModels\AcceptFollowResponse>
