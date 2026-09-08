@@ -10,6 +10,12 @@ class WebhookFailoverConfig extends BaseModel
         public ?string $gcsBucket = null,
         public ?string $gcsPath = null,
         public ?string $gcsCredentials = null,
+        public ?string $s3Bucket = null,
+        public ?string $s3Path = null,
+        public ?string $s3Region = null,
+        public ?string $s3APIKey = null,
+        public ?string $s3Secret = null,
+        public ?string $s3RoleArn = null,
     ) {
     }
 

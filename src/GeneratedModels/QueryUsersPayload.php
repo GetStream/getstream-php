@@ -14,6 +14,10 @@ class QueryUsersPayload extends BaseModel
         public ?bool $includeDeactivatedUsers = null,
         public ?int $limit = null,
         public ?int $offset = null,
+        public ?string $idGte = null,
+        public ?string $idGt = null,
+        public ?string $idLte = null,
+        public ?string $idLt = null,
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

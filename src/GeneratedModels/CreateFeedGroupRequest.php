@@ -8,6 +8,7 @@ class CreateFeedGroupRequest extends BaseModel
     public function __construct(
         public ?string $id = null, // Unique identifier for the feed group
         public ?NotificationConfig $notification = null,
+        public ?ActivityMarksConfig $activityMarks = null,
         public ?PushNotificationConfig $pushNotification = null,
         public ?StoriesConfig $stories = null,
         public ?object $custom = null, // Custom data for the feed group

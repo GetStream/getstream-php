@@ -8,6 +8,7 @@ class FeedGroupResponse extends BaseModel
     public function __construct(
         public ?string $id = null, // Identifier within the group
         public ?NotificationConfig $notification = null,
+        public ?ActivityMarksConfig $activityMarks = null,
         public ?PushNotificationConfig $pushNotification = null,
         public ?string $defaultVisibility = null, // Default visibility for activities. One of: public, visible, followers, members, private
         public ?string $defaultFollowerRole = null, // Role new followers of feeds in this group are given. Either a built-in (feed_follower, feed_member_viewer) or any role your app has defined. Empty means feed_follower. Applied when the follow is accepted, so a follow that starts pending picks it up on approval

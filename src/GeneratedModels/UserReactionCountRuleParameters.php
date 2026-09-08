@@ -3,15 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class PaginationParams extends BaseModel
+class UserReactionCountRuleParameters extends BaseModel
 {
     public function __construct(
-        public ?int $limit = null,
-        public ?int $offset = null,
-        public ?int $idGte = null,
-        public ?int $idGt = null,
-        public ?int $idLte = null,
-        public ?int $idLt = null,
+        public ?int $threshold = null,
+        public ?string $timeWindow = null,
     ) {
     }
 

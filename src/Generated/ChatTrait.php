@@ -89,7 +89,7 @@ trait ChatTrait
      *
      * @param string $id
      * @param GeneratedModels\UpdateCampaignRequest $requestData
-     * @return StreamResponse<GeneratedModels\CampaignResponse>
+     * @return StreamResponse<GeneratedModels\UpdateCampaignResponse>
      * @throws StreamException
      */
     public function updateCampaign(string $id, GeneratedModels\UpdateCampaignRequest $requestData): StreamResponse {
@@ -98,7 +98,7 @@ trait ChatTrait
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\CampaignResponse::class);
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateCampaignResponse::class);
     }
     /**
      * Starts or schedules a campaign
@@ -121,7 +121,7 @@ trait ChatTrait
      *
      * @param string $id
      * @param GeneratedModels\StopCampaignRequest $requestData
-     * @return StreamResponse<GeneratedModels\CampaignResponse>
+     * @return StreamResponse<GeneratedModels\StopCampaignResponse>
      * @throws StreamException
      */
     public function stopCampaign(string $id, GeneratedModels\StopCampaignRequest $requestData): StreamResponse {
@@ -130,7 +130,7 @@ trait ChatTrait
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CampaignResponse::class);
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StopCampaignResponse::class);
     }
     /**
      * Query channels with filter query
@@ -263,10 +263,11 @@ trait ChatTrait
      * @param string $type
      * @param string $id
      * @param ?bool $hardDelete
+     * @param ?bool $skipTruncate
      * @return StreamResponse<GeneratedModels\DeleteChannelResponse>
      * @throws StreamException
      */
-    public function deleteChannel(string $type, string $id, ?bool $hardDelete = null): StreamResponse {
+    public function deleteChannel(string $type, string $id, ?bool $hardDelete = null, ?bool $skipTruncate = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -274,6 +275,9 @@ trait ChatTrait
         $queryParams = [];
         if ($hardDelete !== null) {
             $queryParams['hard_delete'] = $hardDelete;
+        }
+        if ($skipTruncate !== null) {
+            $queryParams['skip_truncate'] = $skipTruncate;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteChannelResponse::class);

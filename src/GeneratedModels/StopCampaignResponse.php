@@ -3,15 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class PaginationParams extends BaseModel
+/**
+ * Basic response information
+ */
+class StopCampaignResponse extends BaseModel
 {
     public function __construct(
-        public ?int $limit = null,
-        public ?int $offset = null,
-        public ?int $idGte = null,
-        public ?int $idGt = null,
-        public ?int $idLte = null,
-        public ?int $idLt = null,
+        public ?CampaignResponse $campaign = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

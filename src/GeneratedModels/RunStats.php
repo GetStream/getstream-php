@@ -8,6 +8,7 @@ class RunStats extends BaseModel
     public function __construct(
         public ?int $channelsDeleted = null,
         public ?int $messagesDeleted = null,
+        public ?int $activitiesDeleted = null,
     ) {
     }
 

@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class BatchQueryCommentReactionsRequest extends BaseModel
 {
     public function __construct(
-        public ?array $commentIds = null, // Comment IDs to fetch the user's reactions for (max 100)
-        public ?object $filter = null, // Optional filter on reaction_type or created_at
+        public ?array $commentIds = null, // Comment IDs to fetch the user's reactions for (max 100). Omit to page over all of the user's comment reactions
+        public ?object $filter = null, // Optional filter on reaction_type or created_at. To restrict by comment, prefer comment_ids over filter.comment_id: comment_ids is capped at 100 and served by the per-comment index, and filter.comment_id is rejected when comment_ids is omitted
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,

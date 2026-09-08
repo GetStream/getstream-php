@@ -17,6 +17,14 @@ class QueryMembersPayload extends BaseModel
         public ?array $sort = null, // Array of sort parameters
         public ?int $limit = null,
         public ?int $offset = null,
+        public ?string $userIDGte = null,
+        public ?string $userIDGt = null,
+        public ?string $userIDLte = null,
+        public ?string $userIDLt = null,
+        public ?\DateTime $createdAtAfterOrEqual = null,
+        public ?\DateTime $createdAtAfter = null,
+        public ?\DateTime $createdAtBeforeOrEqual = null,
+        public ?\DateTime $createdAtBefore = null,
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

@@ -6,8 +6,8 @@ namespace GetStream\GeneratedModels;
 class BatchQueryActivityReactionsRequest extends BaseModel
 {
     public function __construct(
-        public ?array $activityIds = null, // Activity IDs to fetch the user's reactions for (max 100)
-        public ?object $filter = null, // Optional filter on reaction_type or created_at
+        public ?array $activityIds = null, // Activity IDs to fetch the user's reactions for (max 100). Omit to page over all of the user's activity reactions
+        public ?object $filter = null, // Optional filter on reaction_type or created_at. To restrict by activity, prefer activity_ids over filter.activity_id: activity_ids is capped at 100 and served by the per-activity index, and filter.activity_id is rejected when activity_ids is omitted
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
         public ?array $sort = null,
