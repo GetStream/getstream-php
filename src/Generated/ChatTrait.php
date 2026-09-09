@@ -263,10 +263,11 @@ trait ChatTrait
      * @param string $type
      * @param string $id
      * @param ?bool $hardDelete
+     * @param ?bool $skipTruncate
      * @return StreamResponse<GeneratedModels\DeleteChannelResponse>
      * @throws StreamException
      */
-    public function deleteChannel(string $type, string $id, ?bool $hardDelete = null): StreamResponse {
+    public function deleteChannel(string $type, string $id, ?bool $hardDelete = null, ?bool $skipTruncate = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -274,6 +275,9 @@ trait ChatTrait
         $queryParams = [];
         if ($hardDelete !== null) {
             $queryParams['hard_delete'] = $hardDelete;
+        }
+        if ($skipTruncate !== null) {
+            $queryParams['skip_truncate'] = $skipTruncate;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteChannelResponse::class);

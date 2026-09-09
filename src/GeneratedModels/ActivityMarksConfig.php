@@ -3,15 +3,11 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class PaginationParams extends BaseModel
+class ActivityMarksConfig extends BaseModel
 {
     public function __construct(
-        public ?int $limit = null,
-        public ?int $offset = null,
-        public ?int $idGte = null,
-        public ?int $idGt = null,
-        public ?int $idLte = null,
-        public ?int $idLt = null,
+        public ?bool $trackSeen = null, // Whether to return per-activity seen status on content feeds
+        public ?bool $trackRead = null, // Whether to return per-activity read status on content feeds
     ) {
     }
 

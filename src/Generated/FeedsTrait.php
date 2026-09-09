@@ -1636,11 +1636,13 @@ trait FeedsTrait
      * @param ?bool $ios
      * @param ?bool $web
      * @param ?bool $unity
+     * @param ?bool $unityDesktop
+     * @param ?bool $unityConsole
      * @param ?bool $serverSide
      * @return StreamResponse<GeneratedModels\GetFeedsRateLimitsResponse>
      * @throws StreamException
      */
-    public function getFeedsRateLimits(?string $endpoints = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?bool $unity = null, ?bool $serverSide = null): StreamResponse {
+    public function getFeedsRateLimits(?string $endpoints = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?bool $unity = null, ?bool $unityDesktop = null, ?bool $unityConsole = null, ?bool $serverSide = null): StreamResponse {
         $path = '/api/v2/feeds/feeds/rate_limits';
 
         $queryParams = [];
@@ -1658,6 +1660,12 @@ trait FeedsTrait
         }
         if ($unity !== null) {
             $queryParams['unity'] = $unity;
+        }
+        if ($unityDesktop !== null) {
+            $queryParams['unity_desktop'] = $unityDesktop;
+        }
+        if ($unityConsole !== null) {
+            $queryParams['unity_console'] = $unityConsole;
         }
         if ($serverSide !== null) {
             $queryParams['server_side'] = $serverSide;
