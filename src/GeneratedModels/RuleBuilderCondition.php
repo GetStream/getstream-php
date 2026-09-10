@@ -36,6 +36,7 @@ class RuleBuilderCondition extends BaseModel
         public ?CallTypeRuleParameters $callTypeRuleParams = null,
         public ?CallCustomPropertyParameters $callCustomPropertyParams = null,
         public ?CallViolationCountParameters $callViolationCountParams = null,
+        public ?UserReactionCountRuleParameters $userReactionCountParams = null,
     ) {
     }
 

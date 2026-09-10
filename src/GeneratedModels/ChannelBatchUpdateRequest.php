@@ -14,6 +14,7 @@ class ChannelBatchUpdateRequest extends BaseModel
         public ?ChannelDataUpdate $data = null,
         public ?object $customSet = null, // `updateData` only. Merges these keys into each channel's existing custom object, leaving every other custom key untouched. Keys are dot-paths, so `a.b` sets key `b` inside object `a` (the parent object must already exist). Cannot be combined with `data.custom`
         public ?array $customUnset = null, // `updateData` only. Deletes these keys from each channel's existing custom object, leaving every other custom key untouched. Keys are dot-paths; deleting a key that does not exist is a no-op. Cannot be combined with `data.custom`
+        public ?\DateTime $hideHistoryBefore = null, // Required with the `addMembersHideHistory` operation, and rejected with every other operation including `addMembers`. Hides each matched channel's history before this time from the members the operation adds. Members that already belong to a matched channel are never affected. Must be in RFC3339 format (e.g., "2024-01-01T10:00:00Z") and in the past.
     ) {
     }
 

@@ -12,6 +12,10 @@ class QueryBannedUsersPayload extends BaseModel
         public ?array $sort = null, // Array of sort parameters
         public ?int $limit = null, // Number of records to return
         public ?int $offset = null, // Number of records to offset
+        public ?\DateTime $createdAtAfterOrEqual = null,
+        public ?\DateTime $createdAtAfter = null,
+        public ?\DateTime $createdAtBeforeOrEqual = null,
+        public ?\DateTime $createdAtBefore = null,
         public ?bool $excludeExpiredBans = null, // Whether to exclude expired bans or not
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object

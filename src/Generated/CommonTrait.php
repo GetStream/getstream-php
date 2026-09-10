@@ -938,11 +938,13 @@ trait CommonTrait
      * @param ?bool $ios
      * @param ?bool $web
      * @param ?bool $unity
+     * @param ?bool $unityDesktop
+     * @param ?bool $unityConsole
      * @param ?string $endpoints
      * @return StreamResponse<GeneratedModels\GetRateLimitsResponse>
      * @throws StreamException
      */
-    public function getRateLimits(?bool $serverSide = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?bool $unity = null, ?string $endpoints = null): StreamResponse {
+    public function getRateLimits(?bool $serverSide = null, ?bool $android = null, ?bool $ios = null, ?bool $web = null, ?bool $unity = null, ?bool $unityDesktop = null, ?bool $unityConsole = null, ?string $endpoints = null): StreamResponse {
         $path = '/api/v2/rate_limits';
 
         $queryParams = [];
@@ -960,6 +962,12 @@ trait CommonTrait
         }
         if ($unity !== null) {
             $queryParams['unity'] = $unity;
+        }
+        if ($unityDesktop !== null) {
+            $queryParams['unity_desktop'] = $unityDesktop;
+        }
+        if ($unityConsole !== null) {
+            $queryParams['unity_console'] = $unityConsole;
         }
         if ($endpoints !== null) {
             $queryParams['endpoints'] = $endpoints;

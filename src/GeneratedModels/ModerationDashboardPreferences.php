@@ -20,6 +20,7 @@ class ModerationDashboardPreferences extends BaseModel
         public ?bool $includeAttachmentPayload = null,
         public ?bool $blockForeignCdnAttachments = null,
         public ?array $filterableCustomKeys = null,
+        public ?bool $enforceShadowServerSide = null,
     ) {
     }
 

@@ -21,6 +21,12 @@ class GetFeedsRateLimitsResponse extends BaseModel
         public ?array $unity = null, // Rate limits for Unity platform (endpoint name -> limit info)
         /** @var array<string, LimitInfoResponse>|null */
         #[MapOf(LimitInfoResponse::class)]
+        public ?array $unityDesktop = null, // Rate limits for Unity desktop platform (endpoint name -> limit info)
+        /** @var array<string, LimitInfoResponse>|null */
+        #[MapOf(LimitInfoResponse::class)]
+        public ?array $unityConsole = null, // Rate limits for Unity console platform (endpoint name -> limit info)
+        /** @var array<string, LimitInfoResponse>|null */
+        #[MapOf(LimitInfoResponse::class)]
         public ?array $serverSide = null, // Rate limits for server-side platform (endpoint name -> limit info)
     ) {
     }

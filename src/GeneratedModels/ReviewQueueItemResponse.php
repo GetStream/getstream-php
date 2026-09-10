@@ -21,6 +21,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?int $severity = null, // Severity level of the content
         public ?string $aiTextSeverity = null, // AI-determined text severity
         public ?string $latestModeratorAction = null,
+        public ?float $confidenceScore = null, // Highest per-label confidence (0-1) any provider reported across the item's flags; absent when no flag carried one
         public ?ChatMessageResponse $message = null,
         public ?EnrichedActivity $activity = null,
         public ?Reaction $reaction = null,
