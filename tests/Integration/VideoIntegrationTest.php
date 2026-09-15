@@ -71,13 +71,13 @@ class VideoIntegrationTest extends ChatTestCase
         self::assertSame('disabled', $updated->settings->recording->mode);
         self::assertTrue($updated->settings->backstage->enabled);
 
-        // Read call type
-        $getResp = $this->getCallTypeVideo($callTypeName);
+        // Read call type (same eventual consistency window as the update above)
+        $getResp = $this->retryUntilSuccess(fn () => $this->getCallTypeVideo($callTypeName), maxAttempts: 10, sleepMs: 1000);
         $this->assertResponseSuccess($getResp, 'get call type');
         self::assertSame($callTypeName, $getResp->getData()->name);
 
         // Delete call type (handled by cleanup, but verify it works)
-        $delResp = $this->deleteCallTypeVideo($callTypeName);
+        $delResp = $this->retryUntilSuccess(fn () => $this->deleteCallTypeVideo($callTypeName), maxAttempts: 10, sleepMs: 1000);
         $this->assertResponseSuccess($delResp, 'delete call type');
 
         // Remove from tracked list since we already deleted it
