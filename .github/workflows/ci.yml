@@ -1,73 +1,33 @@
 name: ci
 
+# pull_request only. A push trigger alongside it ran the whole suite twice on the same
+# SHA, and the duplicate integration leg raced the other run against the Stream app
+# several SDK repos share. The trade is that a merge to master, and a direct push to it,
+# now run nothing: release.yml runs this same workflow only when a release is pending,
+# so the gate before a tag is covered but the routine post-merge signal is gone.
 on:
   pull_request:
-  push:
-    branches: [master, main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 permissions:
-  actions: write
   contents: read
   pull-requests: read
 
 jobs:
   check-pr-title:
     name: Validate PR title
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       statuses: write
     steps:
-    - uses: aslafy-z/conventional-pr-title-action@v3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: aslafy-z/conventional-pr-title-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  test:
-    name: 🧪 Test & lint
+  tests:
     needs: check-pr-title
-    if: always() && (github.event_name != 'pull_request' || needs.check-pr-title.result == 'success')
-    environment: ci
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        php-version: ['8.1', '8.2', '8.3']
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php-version }}
-        extensions: curl, json
-        tools: composer:v2
-
-    - name: Cache composer dependencies
-      uses: actions/cache@v4
-      with:
-        path: vendor
-        key: composer-${{ matrix.php-version }}-${{ hashFiles('composer.lock') }}
-        restore-keys: composer-${{ matrix.php-version }}-
-
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-interaction
-
-    - name: Lint & unit tests
-      env:
-        STREAM_API_KEY: ${{ vars.STREAM_API_KEY }}
-        STREAM_API_SECRET: ${{ secrets.STREAM_API_SECRET }}
-      run: |
-        make lint
-        make test-unit
-
-    - name: Integration tests
-      if: matrix.php-version == '8.1'
-      env:
-        STREAM_API_KEY: ${{ vars.STREAM_API_KEY }}
-        STREAM_API_SECRET: ${{ secrets.STREAM_API_SECRET }}
-      run: make test-integration
+    uses: ./.github/workflows/run_tests.yml
+    secrets: inherit
