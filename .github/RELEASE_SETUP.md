@@ -46,31 +46,11 @@ This guide explains how to set up automatic publishing to Packagist using GitHub
 
 ## How It Works
 
-### Automatic Publishing
-
-When a PR is merged into `main` or `master`, the release workflow will:
-
-1. Parse the PR title using Conventional Commit style.
-   - Required ticket format: `type: [FEEDS-1234] description`
-   - Keep `feat`/`fix`/`bug` at the beginning of the title
-2. Decide the bump type from the PR title (the body is not scanned):
-   - `feat:` => minor
-   - `fix:` or `bug:` => patch
-   - `feat!:` / `fix!:` / `<type>(scope)!:` (the `!` marker) => major
-3. Update `composer.json` and `src/Constant.php` via `scripts/release/bump_version.php`
-4. Commit version files, create a `vX.Y.Z` tag, create a GitHub release
-5. Trigger Packagist update
-
-### Creating a Release
-
-1. Open a PR with a Conventional Commit style title, for example:
-   - `feat: [FEEDS-1350] add feed search endpoint`
-   - `fix: [FEEDS-1402] handle nil reaction id`
-   - `feat!: [FEEDS-1410] remove deprecated batch API`
-2. Merge the PR into `main` or `master`.
-3. GitHub Actions will automatically perform release + Packagist update.
-
-Titles like `chore:`, `docs:`, `test:` do not trigger a release.
+Releases are driven by [release-please](https://github.com/googleapis/release-please).
+The Releases section of `README.md` is the reference; the short version is that merging
+a PR with a conventional title updates a bot-authored Release PR, and merging that
+Release PR runs the suite, creates the tag and the GitHub Release, and announces the tag
+to Packagist.
 
 ### Manual Publishing (if needed)
 

@@ -243,10 +243,11 @@ Releases are driven by [release-please](https://github.com/googleapis/release-pl
   green does the workflow create the tag and the GitHub Release and announce the tag to
   Packagist. The order matters: a tag and a GitHub Release cannot be withdrawn.
 
-Packagist reads the tag itself, so the announce step only asks it to look now rather
+Packagist reads the tags itself, so the announce step only asks it to look now rather
 than on its own schedule. If it fails or the credentials are unset, the release still
-lands and Packagist catches up; dispatch `Release` with `resync_tag` set to the tag to
-re-announce it.
+lands and Packagist catches up. To prompt it by hand, dispatch `Release` with
+`resync_packagist` checked; the API takes a repository rather than a tag, so it recrawls
+everything it can see.
 
 To force a specific version, type `Release-As: X.Y.Z` in the commit message box of the
 squash dialog when merging a PR; the PR description is not copied there. To hotfix while

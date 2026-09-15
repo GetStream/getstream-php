@@ -7,10 +7,11 @@ on:
       - '*.x'
   workflow_dispatch:
     inputs:
-      resync_tag:
-        description: 'Existing tag to re-announce to Packagist, e.g. v12.1.1. Leave empty for a normal release run.'
+      resync_packagist:
+        description: 'Ask Packagist to recrawl the repository now, without running a release.'
         required: false
-        default: ''
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -49,7 +50,7 @@ jobs:
   detect:
     name: Detect pending release
     if: >-
-      (github.event_name == 'push' || inputs.resync_tag == '') &&
+      (github.event_name == 'push' || !inputs.resync_packagist) &&
       (github.ref_name == 'master' || endsWith(github.ref_name, '.x'))
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -147,7 +148,7 @@ jobs:
     needs: release
     if: >-
       !cancelled() &&
-      (inputs.resync_tag != '' || needs.release.outputs.release_created == 'true')
+      (inputs.resync_packagist || needs.release.outputs.release_created == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -157,14 +158,14 @@ jobs:
         env:
           PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
           PACKAGIST_USERNAME: ${{ vars.PACKAGIST_USERNAME }}
-          TAG: ${{ inputs.resync_tag != '' && inputs.resync_tag || needs.release.outputs.tag_name }}
         run: |
           if [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then
-            echo "::warning::PACKAGIST_TOKEN or PACKAGIST_USERNAME is unset, so ${TAG} was not announced. Packagist will pick the tag up on its own schedule."
+            echo "::warning::PACKAGIST_TOKEN or PACKAGIST_USERNAME is unset, so Packagist was not told to recrawl. It will pick new tags up on its own schedule."
             exit 0
           fi
 
-          echo "Announcing ${TAG} to Packagist."
+          # The API takes a repository, not a tag: it recrawls every tag it can see.
+          echo "Asking Packagist to recrawl the repository."
           response=$(curl -s -w "\n%{http_code}" -X POST \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $PACKAGIST_USERNAME:$PACKAGIST_TOKEN" \
