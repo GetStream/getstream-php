@@ -226,23 +226,33 @@ This creates clean, typed models with automatic JSON handling - no boilerplate c
 
 ### Release Workflow
 
-Releases are automated when a pull request is merged into `main` or `master`.
+Releases are driven by [release-please](https://github.com/googleapis/release-please).
 
-- PR titles must follow Conventional Commit format (for example: `feat: ...`, `fix: ...`).
-- Ticket prefix is required in the subject: `type: [FEEDS-1234] description`.
-- Keep the commit type first so release automation can parse it.
-- Version bump is derived from the PR title:
-  - `feat:` => minor
-  - `fix:` or `bug:` => patch
-  - `feat!:` / `fix!:` / `<type>(scope)!:` (the `!` marker) => major
-- Non-release types like `chore:`, `docs:`, `test:` do not create a release.
-- The release workflow updates `composer.json` and `src/Constant.php`, pushes a tag, creates a GitHub release, and triggers Packagist.
+- Merge PRs to `master` with conventional-commit titles, using **Squash and merge**. The
+  title becomes the commit subject and decides the next version: `feat:` is a minor,
+  `fix:` and `perf:` are a patch, `feat!:` or `<type>(scope)!:` is a major. Other types
+  (`chore`, `ci`, `docs`, `test`, `refactor`) ship nothing. Keep the ticket prefix after
+  the type, as in `feat: [FEEDS-1350] add feed retention endpoint`.
+- release-please keeps a Release PR open with the version bump in `composer.json`,
+  `src/Constant.php` and `CHANGELOG.md`. It is opened by `github-actions[bot]`, so
+  approve it and run its held checks like any other PR. Never edit those versions by
+  hand; the `// x-release-please-version` comment in `src/Constant.php` is what the
+  updater anchors on.
+- Merging the Release PR runs lint, unit tests across PHP 8.1 to 8.3 and the integration
+  suite on that merge commit, which is the commit the tag will point at. Only if that is
+  green does the workflow create the tag and the GitHub Release and announce the tag to
+  Packagist. The order matters: a tag and a GitHub Release cannot be withdrawn.
 
-Examples:
+Packagist reads the tags itself, so the announce step only asks it to look now rather
+than on its own schedule. If it fails or the credentials are unset, the release still
+lands and Packagist catches up. To prompt it by hand, dispatch `Release` with
+`resync_packagist` checked; the API takes a repository rather than a tag, so it recrawls
+everything it can see.
 
-- `feat: [FEEDS-1350] add feed retention endpoint`
-- `fix: [FEEDS-1402] handle missing reaction id`
-- `feat!: [FEEDS-1410] remove deprecated follow API`
+To force a specific version, type `Release-As: X.Y.Z` in the commit message box of the
+squash dialog when merging a PR; the PR description is not copied there. To hotfix while
+`master` carries unreleased work, branch `N.x` from the last tag, cherry-pick the fix,
+and merge the Release PR that release-please opens against that branch.
 
 ### Linting and Code Quality
 
