@@ -15,10 +15,12 @@ jobs:
     secrets: inherit
 
   # A failure here lands on no PR, and GitHub emails it only to whoever last edited the cron.
+  # Not failure(): a job that hits timeout-minutes concludes `cancelled`, and a hung run
+  # must report too.
   report:
     name: Report a red run
     needs: integration
-    if: failure()
+    if: ${{ !cancelled() && needs.integration.result != 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

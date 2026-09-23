@@ -131,7 +131,7 @@ make test-unit
 make test-integration
 ```
 
-A test in the `integration` group talks to a live Stream app and needs credentials. `make test-unit` excludes that group and needs none; `make test-integration` runs `tests/Integration/`, where every class carries the group.
+A test in the `integration` group talks to a live Stream app and needs credentials. `make test-unit` excludes that group and needs none; `make test-integration` runs only that group. Both select by group, so every test lands in exactly one lane.
 
 CI follows the same split:
 

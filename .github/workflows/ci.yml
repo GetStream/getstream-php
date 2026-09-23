@@ -10,7 +10,7 @@ on:
 # does not cancel this run, so tests-passed would still run, read `cancelled` and publish a
 # red aggregator for a push that has already been superseded.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 permissions:
