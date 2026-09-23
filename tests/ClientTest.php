@@ -20,6 +20,15 @@ class ClientTest extends TestCase
     protected function setUp(): void
     {
         $this->mockHttpClient = $this->createMock(HttpClientInterface::class);
+
+        // Set rather than read the ambient environment: CI runs this lane with no credentials.
+        $_ENV['STREAM_API_KEY'] = 'env-key';
+        $_ENV['STREAM_API_SECRET'] = '0123456789abcdef0123456789abcdef';
+    }
+
+    protected function tearDown(): void
+    {
+        unset($_ENV['STREAM_API_KEY'], $_ENV['STREAM_API_SECRET']);
     }
 
     /**

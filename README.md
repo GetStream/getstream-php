@@ -131,6 +131,16 @@ make test-unit
 make test-integration
 ```
 
+A test in the `integration` group talks to a live Stream app and needs credentials. `make test-unit` excludes that group and needs none; `make test-integration` runs only that group. Both select by group, so every test lands in exactly one lane.
+
+CI follows the same split:
+
+| When | What runs | Gates |
+| --- | --- | --- |
+| Pull request | `make lint` and `make test-unit` on PHP 8.1 to 8.3 | yes, `🧪 Tests` |
+| Daily at 12:00 UTC | `make test-integration` | no, a red run opens an issue |
+| Push to `master` with a release pending | the unit lane | yes, it gates the tag |
+
 ## Usage
 
 ### Basic Setup
@@ -234,14 +244,19 @@ Releases are driven by [release-please](https://github.com/googleapis/release-pl
   (`chore`, `ci`, `docs`, `test`, `refactor`) ship nothing. Keep the ticket prefix after
   the type, as in `feat: [FEEDS-1350] add feed retention endpoint`.
 - release-please keeps a Release PR open with the version bump in `composer.json`,
-  `src/Constant.php` and `CHANGELOG.md`. It is opened by `github-actions[bot]`, so
-  approve it and run its held checks like any other PR. Never edit those versions by
-  hand; the `// x-release-please-version` comment in `src/Constant.php` is what the
-  updater anchors on.
-- Merging the Release PR runs lint, unit tests across PHP 8.1 to 8.3 and the integration
-  suite on that merge commit, which is the commit the tag will point at. Only if that is
-  green does the workflow create the tag and the GitHub Release and announce the tag to
-  Packagist. The order matters: a tag and a GitHub Release cannot be withdrawn.
+  `src/Constant.php` and `CHANGELOG.md`. Never edit those versions by hand; the
+  `// x-release-please-version` comment in `src/Constant.php` is what the updater
+  anchors on.
+- Its runs are created held at `action_required` until someone clicks **Approve and
+  run**, because release-please opens the PR with `GITHUB_TOKEN`. The unit lane then
+  reports `skipped` and `🧪 Tests` goes green without running a test. The skip keys on
+  the PR author, so a commit pushed onto a Release PR by hand is skipped too and reaches
+  `master` untested.
+- Merging the Release PR runs lint and unit tests across PHP 8.1 to 8.3 on that merge
+  commit, which is the commit the tag will point at. Only if that is green does the
+  workflow create the tag and the GitHub Release and announce the tag to Packagist. The
+  order matters: a tag and a GitHub Release cannot be withdrawn. Integration tests are
+  advisory and gate none of it.
 
 Packagist reads the tags itself, so the announce step only asks it to look now rather
 than on its own schedule. If it fails or the credentials are unset, the release still

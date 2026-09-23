@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GetStream\Tests\Integration;
+namespace GetStream\Tests\Http;
 
 use GetStream\ClientBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\AbstractLogger;
 
-/**
- * @group integration
- */
 class ConnectionPoolLogTest extends TestCase
 {
     public function testClientInitializedLogContainsAllKnobs(): void
