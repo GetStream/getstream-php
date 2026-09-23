@@ -25,6 +25,11 @@ class ClientBuilderTest extends TestCase
         unset($_ENV['STREAM_API_KEY'], $_ENV['STREAM_API_SECRET'], $_ENV['STREAM_BASE_URL']);
     }
 
+    protected function tearDown(): void
+    {
+        unset($_ENV['STREAM_API_KEY'], $_ENV['STREAM_API_SECRET'], $_ENV['STREAM_BASE_URL']);
+    }
+
     /**
      * @test
      */
@@ -119,12 +124,13 @@ class ClientBuilderTest extends TestCase
     public function buildRequiresApiKey(): void
     {
         // Test that providing API secret but no API key still works if key is in environment
+        $_ENV['STREAM_API_KEY'] = 'env-key';
         $client = (new ClientBuilder())
             ->apiSecret('test-secret')
             ->build();
 
         self::assertInstanceOf(Client::class, $client);
-        self::assertNotEmpty($client->getApiKey()); // Should get from environment
+        self::assertSame('env-key', $client->getApiKey());
         self::assertSame('test-secret', $client->getApiSecret());
     }
 
@@ -134,13 +140,14 @@ class ClientBuilderTest extends TestCase
     public function buildRequiresApiSecret(): void
     {
         // Test that providing API key but no API secret still works if secret is in environment
+        $_ENV['STREAM_API_SECRET'] = 'env-secret';
         $client = (new ClientBuilder())
             ->apiKey('test-key')
             ->build();
 
         self::assertInstanceOf(Client::class, $client);
         self::assertSame('test-key', $client->getApiKey());
-        self::assertNotEmpty($client->getApiSecret()); // Should get from environment
+        self::assertSame('env-secret', $client->getApiSecret());
     }
 
     /**
