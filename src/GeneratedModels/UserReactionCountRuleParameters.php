@@ -8,6 +8,7 @@ class UserReactionCountRuleParameters extends BaseModel
     public function __construct(
         public ?int $threshold = null,
         public ?string $timeWindow = null,
+        public ?string $count = null,
     ) {
     }
 

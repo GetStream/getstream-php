@@ -147,7 +147,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelsResponse::class);
     }
     /**
-     * Update channels in batch
+     * Update channels in batch. By default returns task_id for an asynchronous task. With synchronous: true, updateData accepts at most 100 explicit CIDs and returns a positive success_channels_count of channels selected for update after the database write completes, without task_id. Always poll a returned task_id, including when an older node ignores synchronous.
      * Sends events:
      * - channel.frozen
      * - channel.hidden

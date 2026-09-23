@@ -805,15 +805,19 @@ trait CommonTrait
      *
      * @param string $pollID
      * @param string $optionID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
-    public function getPollOption(string $pollID, string $optionID): StreamResponse {
+    public function getPollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PollOptionResponse::class);
     }

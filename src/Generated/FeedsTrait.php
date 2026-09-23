@@ -357,13 +357,14 @@ trait FeedsTrait
      * @param string $id
      * @param ?string $commentSort
      * @param ?int $commentLimit
+     * @param ?bool $skipOwnFollowings
      * @param ?string $userID
      * @param ?string $language
      * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
      * @throws StreamException
      */
-    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
+    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?bool $skipOwnFollowings = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -373,6 +374,9 @@ trait FeedsTrait
         }
         if ($commentLimit !== null) {
             $queryParams['comment_limit'] = $commentLimit;
+        }
+        if ($skipOwnFollowings !== null) {
+            $queryParams['skip_own_followings'] = $skipOwnFollowings;
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
@@ -387,7 +391,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActivityResponse::class);
     }
     /**
-     * Updates certain fields of the activity. Use 'set' to update specific fields and 'unset' to remove fields. This allows you to update only the fields you need without replacing the entire activity. Useful for updating reply restrictions ('restrict_replies'), mentioned users, or custom data.
+     * Updates certain fields of the activity. Use 'set' to update specific fields and 'unset' to remove fields. This allows you to update only the fields you need without replacing the entire activity. Useful for updating reply restrictions ('restrict_replies'), mentioned users, or custom data. Changing `feeds` is a placement change (add/delete on those feeds), not an activity content update.
      * Sends events:
      * - feeds.activity.updated
      *
@@ -405,7 +409,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateActivityPartialResponse::class);
     }
     /**
-     * Replaces an activity with the provided data. Use this to update text, attachments, reply restrictions ('restrict_replies'), mentioned users, and other activity fields. Note: This is a full update - any fields not provided will be cleared.
+     * Replaces an activity with the provided data. Use this to update text, attachments, reply restrictions ('restrict_replies'), mentioned users, and other activity fields. Note: This is a full update - any fields not provided will be cleared. Changing `feeds` is a placement change (add/delete on those feeds), not an activity content update.
      * Sends events:
      * - feeds.activity.updated
      *
@@ -1977,7 +1981,26 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportFeedUserDataResponse::class);
     }
     /**
-     * Returns the user's most common interest tags ranked by the number of distinct activities they reacted to that carried each tag. Client-side callers may only read their own interests; server-side callers may fetch any user. Results are sorted by descending count, then alphabetically by tag.
+     * Removes the given interest tags from a user, whether they were set manually or computed from reactions. A removed computed tag returns on the next recomputation if the user's reactions still support it; to keep a tag out of ranking for good, set it with a weight of 0 or below instead. Client-side callers may only manage their own interests; server-side callers may manage any user. Returns the user's remaining interests.
+     *
+     * @param string $userID
+     * @param array $tags
+     * @return StreamResponse<GeneratedModels\DeleteUserInterestsResponse>
+     * @throws StreamException
+     */
+    public function deleteUserInterests(string $userID, array $tags): StreamResponse {
+        $path = '/api/v2/feeds/users/{user_id}/interests';
+        $path = str_replace('{user_id}', (string) $userID, $path);
+
+        $queryParams = [];
+        if ($tags !== null) {
+            $queryParams['tags'] = $tags;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteUserInterestsResponse::class);
+    }
+    /**
+     * Returns the user's interest tags with their ranking weights: tags computed from the activities the user reacted to and tags set manually through the API. Client-side callers may only read their own interests; server-side callers may fetch any user. Results are sorted by descending weight, then manually set tags before computed ones, then descending count, then alphabetically by tag.
      *
      * @param string $userID
      * @param ?int $limit
@@ -1994,5 +2017,21 @@ trait FeedsTrait
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetUserInterestsResponse::class);
+    }
+    /**
+     * Adds or updates interest tags on a user with explicit ranking weights. Tags set this way rank above the tags computed from the user's reactions at equal weight and are never overwritten by them. Client-side callers may only manage their own interests; server-side callers may manage any user. Returns the user's full interest list after the write.
+     *
+     * @param string $userID
+     * @param GeneratedModels\UpsertUserInterestsRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertUserInterestsResponse>
+     * @throws StreamException
+     */
+    public function upsertUserInterests(string $userID, GeneratedModels\UpsertUserInterestsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/users/{user_id}/interests';
+        $path = str_replace('{user_id}', (string) $userID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertUserInterestsResponse::class);
     }
 }

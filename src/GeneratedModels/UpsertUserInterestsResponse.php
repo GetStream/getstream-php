@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * User's interest tags ordered by descending weight, then manually set tags before computed ones, then descending count, then ascending tag name
+ * The user's interest tags after the write, ordered by descending weight, then manually set tags before computed ones, then descending count, then ascending tag name
  */
-class GetUserInterestsResponse extends BaseModel
+class UpsertUserInterestsResponse extends BaseModel
 {
     public function __construct(
         /** @var array<InterestTagResponse>|null */
         #[ArrayOf(InterestTagResponse::class)]
-        public ?array $interests = null, // Interest tags sorted by descending weight, then manually set tags before computed ones, then descending count, then alphabetically by tag
+        public ?array $interests = null, // All interest tags of the user after the write
         public ?string $duration = null,
     ) {
     }

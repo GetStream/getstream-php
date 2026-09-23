@@ -13,6 +13,7 @@ class ModerationDashboardPreferences extends BaseModel
         public ?OverviewDashboardConfig $overviewDashboard = null,
         public ?bool $asyncReviewQueueUpsert = null,
         public ?bool $disableAuditLogs = null,
+        public ?bool $disableActionLogs = null,
         public ?array $keyframeClassificationsMap = null,
         public ?array $escalationReasons = null,
         public ?bool $escalationQueueEnabled = null,

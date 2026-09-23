@@ -8,6 +8,7 @@ class RingCallResponse extends BaseModel
     public function __construct(
         public ?string $duration = null,
         public ?array $membersIds = null, // List of members ringing notification was sent to
+        public ?string $ringID = null, // The ring this call created, for correlating the accept, reject and missed outcomes that follow
     ) {
     }
 

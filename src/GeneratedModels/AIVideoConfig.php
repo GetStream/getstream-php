@@ -11,7 +11,6 @@ class AIVideoConfig extends BaseModel
         /** @var array<AWSRekognitionRule>|null */
         #[ArrayOf(AWSRekognitionRule::class)]
         public ?array $rules = null,
-        public ?string $provider = null,
     ) {
     }
 

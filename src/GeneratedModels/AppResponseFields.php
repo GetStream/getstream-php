@@ -78,6 +78,7 @@ class AppResponseFields extends BaseModel
         public ?bool $memberCustomOnMessagesEnabled = null,
         public ?bool $memberCustomOnMentionedUsersEnabled = null,
         public ?bool $memberCustomOnTypingEventsEnabled = null,
+        public ?bool $beforeMessageSendHookSystemMessages = null,
     ) {
     }
 

@@ -8,7 +8,9 @@ class PollResponseData extends BaseModel
     public function __construct(
         public ?string $id = null,
         public ?string $name = null,
+        public ?array $nameI18n = null,
         public ?string $description = null,
+        public ?array $descriptionI18n = null,
         public ?string $votingVisibility = null, // Voting visibility of the poll
         public ?bool $enforceUniqueVote = null,
         public ?int $maxVotesAllowed = null,
