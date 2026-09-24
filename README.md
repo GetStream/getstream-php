@@ -139,7 +139,7 @@ CI follows the same split:
 | --- | --- | --- |
 | Pull request | `make lint` and `make test-unit` on PHP 8.1 to 8.3 | yes, `🧪 Tests` |
 | Daily at 12:00 UTC | `make test-integration` | no, a red run opens an issue |
-| Push to `master` with a release pending | the unit lane | yes, it gates the tag |
+| Release PR merged | nothing on the default branch, the unit lane on `N.x` | `N.x` only |
 
 ## Usage
 
@@ -249,14 +249,8 @@ Releases are driven by [release-please](https://github.com/googleapis/release-pl
   anchors on.
 - Its runs are created held at `action_required` until someone clicks **Approve and
   run**, because release-please opens the PR with `GITHUB_TOKEN`. The unit lane then
-  reports `skipped` and `🧪 Tests` goes green without running a test. The skip keys on
-  the PR author, so a commit pushed onto a Release PR by hand is skipped too and reaches
-  `master` untested.
-- Merging the Release PR runs lint and unit tests across PHP 8.1 to 8.3 on that merge
-  commit, which is the commit the tag will point at. Only if that is green does the
-  workflow create the tag and the GitHub Release and announce the tag to Packagist. The
-  order matters: a tag and a GitHub Release cannot be withdrawn. Integration tests are
-  advisory and gate none of it.
+  reports `skipped` and `🧪 Tests` goes green without running a test. The skip only applies while the diff is nothing but what release-please writes, down to the version line in each version file, so a code or dependency change pushed onto a Release PR by hand runs the unit lane like any other PR.
+- Merging the Release PR creates the tag and the GitHub Release on that merge commit and announces the tag to Packagist, with no further test run: the Release PR adds only the version bump and changelog to an already-tested `master`. A hotfix release from `N.x` runs the unit lane first, since its commits were pushed without a PR. A tag and a GitHub Release cannot be withdrawn.
 
 Packagist reads the tags itself, so the announce step only asks it to look now rather
 than on its own schedule. If it fails or the credentials are unset, the release still
