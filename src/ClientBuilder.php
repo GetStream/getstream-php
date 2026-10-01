@@ -75,9 +75,9 @@ class ClientBuilder
     }
 
     /**
-     * Advisory hint for per-host connections. Default: 5. Ignored when httpClient() is used.
-     * Sets curl CURLOPT_MAXCONNECTS (a single curl handle's connection-cache size); under Guzzle's
-     * default CurlHandler this does not enforce a hard per-host concurrency cap in any runtime.
+     * Max concurrent connections per host. Default: 100. Ignored when httpClient() is used.
+     * Sets CURLMOPT_MAX_HOST_CONNECTIONS and CURLMOPT_MAXCONNECTS on the client's shared curl multi handle, so extra
+     * requests wait for a free connection. Takes effect only while the client is reused within one long-running process.
      */
     public function maxConnsPerHost(int $n): self
     {

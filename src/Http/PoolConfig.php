@@ -6,13 +6,13 @@ namespace GetStream\Http;
 
 /**
  * Immutable value object for the 5 canonical HTTP connection-pool knobs.
- * Defaults: 5 conns/host, 55s idle, 10s connect, 30s request.
+ * Defaults: 100 conns/host, 55s idle, 10s connect, 30s request.
  * KeepAlive is an invariant (true). All durations are whole seconds.
  */
 final class PoolConfig
 {
     public function __construct(
-        public readonly int $maxConnsPerHost = 5,
+        public readonly int $maxConnsPerHost = 100,
         public readonly int $idleTimeout = 55,
         public readonly int $connectTimeout = 10,
         public readonly int $requestTimeout = 30,

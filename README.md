@@ -36,7 +36,7 @@ STREAM_BASE_URL=https://chat.stream-io-api.com
 $client = (new GetStream\ClientBuilder())
     ->apiKey($apiKey)
     ->apiSecret($apiSecret)
-    ->maxConnsPerHost(5)   // default 5 (per-host concurrency cap, see runtime caveats)
+    ->maxConnsPerHost(100) // default 100 (per-host concurrency cap, see runtime caveats)
     ->idleTimeout(55)      // default 55s (per-connection lifetime cap, see runtime caveats)
     ->connectTimeout(10)   // default 10s
     ->requestTimeout(30)   // default 30s
