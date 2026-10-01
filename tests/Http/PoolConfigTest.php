@@ -14,7 +14,7 @@ class PoolConfigTest extends TestCase
     {
         $cfg = new PoolConfig();
 
-        self::assertSame(5, $cfg->maxConnsPerHost);
+        self::assertSame(100, $cfg->maxConnsPerHost);
         self::assertSame(55, $cfg->idleTimeout);
         self::assertSame(10, $cfg->connectTimeout);
         self::assertSame(30, $cfg->requestTimeout);
@@ -27,7 +27,7 @@ class PoolConfigTest extends TestCase
         $updated = $cfg->withMaxConnsPerHost(20);
 
         self::assertNotSame($cfg, $updated, 'withers return new instances (immutability)');
-        self::assertSame(5, $cfg->maxConnsPerHost, 'original unchanged');
+        self::assertSame(100, $cfg->maxConnsPerHost, 'original unchanged');
         self::assertSame(20, $updated->maxConnsPerHost);
     }
 
