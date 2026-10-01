@@ -88,7 +88,15 @@ class GuzzleHttpClientPoolTest extends TestCase
         $stack = $config['handler'];
         $handlerProp = (new \ReflectionObject($stack))->getProperty('handler');
         $handlerProp->setAccessible(true);
-        self::assertInstanceOf(\GuzzleHttp\Handler\CurlMultiHandler::class, $handlerProp->getValue($stack));
+        $multi = $handlerProp->getValue($stack);
+        self::assertInstanceOf(\GuzzleHttp\Handler\CurlMultiHandler::class, $multi);
+
+        $optionsProp = (new \ReflectionObject($multi))->getProperty('options');
+        $optionsProp->setAccessible(true);
+        self::assertSame(
+            [CURLMOPT_MAX_HOST_CONNECTIONS => 100, CURLMOPT_MAXCONNECTS => 100],
+            $optionsProp->getValue($multi),
+        );
     }
 
     /** @test */
