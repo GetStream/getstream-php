@@ -357,13 +357,17 @@ trait FeedsTrait
      * @param string $id
      * @param ?string $commentSort
      * @param ?int $commentLimit
+     * @param ?bool $skipOwnFollowings
      * @param ?string $userID
      * @param ?string $language
      * @param ?bool $translateText
+     * @param ?bool $includeTopLevelCommentCount
+     * @param ?bool $includeSoftDeletedActivities
+     * @param ?bool $includeModeratedActivities
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
      * @throws StreamException
      */
-    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
+    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?bool $skipOwnFollowings = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null, ?bool $includeTopLevelCommentCount = null, ?bool $includeSoftDeletedActivities = null, ?bool $includeModeratedActivities = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -374,6 +378,9 @@ trait FeedsTrait
         if ($commentLimit !== null) {
             $queryParams['comment_limit'] = $commentLimit;
         }
+        if ($skipOwnFollowings !== null) {
+            $queryParams['skip_own_followings'] = $skipOwnFollowings;
+        }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
@@ -383,11 +390,20 @@ trait FeedsTrait
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
         }
+        if ($includeTopLevelCommentCount !== null) {
+            $queryParams['include_top_level_comment_count'] = $includeTopLevelCommentCount;
+        }
+        if ($includeSoftDeletedActivities !== null) {
+            $queryParams['include_soft_deleted_activities'] = $includeSoftDeletedActivities;
+        }
+        if ($includeModeratedActivities !== null) {
+            $queryParams['include_moderated_activities'] = $includeModeratedActivities;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActivityResponse::class);
     }
     /**
-     * Updates certain fields of the activity. Use 'set' to update specific fields and 'unset' to remove fields. This allows you to update only the fields you need without replacing the entire activity. Useful for updating reply restrictions ('restrict_replies'), mentioned users, or custom data.
+     * Updates certain fields of the activity. Use 'set' to update specific fields and 'unset' to remove fields. This allows you to update only the fields you need without replacing the entire activity. Useful for updating reply restrictions ('restrict_replies'), mentioned users, or custom data. Changing `feeds` is a placement change (add/delete on those feeds), not an activity content update.
      * Sends events:
      * - feeds.activity.updated
      *
@@ -405,7 +421,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateActivityPartialResponse::class);
     }
     /**
-     * Replaces an activity with the provided data. Use this to update text, attachments, reply restrictions ('restrict_replies'), mentioned users, and other activity fields. Note: This is a full update - any fields not provided will be cleared.
+     * Replaces an activity with the provided data. Use this to update text, attachments, reply restrictions ('restrict_replies'), mentioned users, and other activity fields. Note: This is a full update - any fields not provided will be cleared. Changing `feeds` is a placement change (add/delete on those feeds), not an activity content update.
      * Sends events:
      * - feeds.activity.updated
      *
@@ -531,15 +547,19 @@ trait FeedsTrait
      * Delete collections in a batch operation. Users can only delete their own collections.
      *
      * @param array $collectionRefs
+     * @param ?bool $hardDelete
      * @return StreamResponse<GeneratedModels\DeleteCollectionsResponse>
      * @throws StreamException
      */
-    public function deleteCollections(array $collectionRefs): StreamResponse {
+    public function deleteCollections(array $collectionRefs, ?bool $hardDelete = null): StreamResponse {
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
         if ($collectionRefs !== null) {
             $queryParams['collection_refs'] = $collectionRefs;
+        }
+        if ($hardDelete !== null) {
+            $queryParams['hard_delete'] = $hardDelete;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteCollectionsResponse::class);
@@ -636,10 +656,11 @@ trait FeedsTrait
      * @param ?int $limit
      * @param ?string $prev
      * @param ?string $next
+     * @param ?bool $includeTopLevelCommentCount
      * @return StreamResponse<GeneratedModels\GetCommentsResponse>
      * @throws StreamException
      */
-    public function getComments(string $objectID, string $objectType, ?int $depth = null, ?string $sort = null, ?int $repliesLimit = null, ?string $idAround = null, ?string $language = null, ?bool $translateText = null, ?string $userID = null, ?int $limit = null, ?string $prev = null, ?string $next = null): StreamResponse {
+    public function getComments(string $objectID, string $objectType, ?int $depth = null, ?string $sort = null, ?int $repliesLimit = null, ?string $idAround = null, ?string $language = null, ?bool $translateText = null, ?string $userID = null, ?int $limit = null, ?string $prev = null, ?string $next = null, ?bool $includeTopLevelCommentCount = null): StreamResponse {
         $path = '/api/v2/feeds/comments';
 
         $queryParams = [];
@@ -678,6 +699,9 @@ trait FeedsTrait
         }
         if ($next !== null) {
             $queryParams['next'] = $next;
+        }
+        if ($includeTopLevelCommentCount !== null) {
+            $queryParams['include_top_level_comment_count'] = $includeTopLevelCommentCount;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetCommentsResponse::class);
@@ -866,6 +890,22 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentResponse::class);
+    }
+    /**
+     * Hide or unhide a comment for the current user
+     *
+     * @param string $id
+     * @param GeneratedModels\CommentFeedbackRequest $requestData
+     * @return StreamResponse<GeneratedModels\CommentFeedbackResponse>
+     * @throws StreamException
+     */
+    public function commentFeedback(string $id, GeneratedModels\CommentFeedbackRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/comments/{id}/feedback';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CommentFeedbackResponse::class);
     }
     /**
      * Updates certain fields of the comment. Use 'set' to update specific fields and 'unset' to remove fields.
@@ -1874,6 +1914,61 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMembershipLevelResponse::class);
     }
     /**
+     * Returns the feeds retention policies configured for the app. Server-side only.
+     *
+     * @return StreamResponse<GeneratedModels\GetFeedsRetentionPolicyResponse>
+     * @throws StreamException
+     */
+    public function feedsGetRetentionPolicy(): StreamResponse {
+        $path = '/api/v2/feeds/retention_policy';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFeedsRetentionPolicyResponse::class);
+    }
+    /**
+     * Creates or updates a feeds retention policy for the app (an app may have multiple, each scoped to feed groups). Server-side only.
+     *
+     * @param GeneratedModels\SetFeedsRetentionPolicyRequest $requestData
+     * @return StreamResponse<GeneratedModels\SetFeedsRetentionPolicyResponse>
+     * @throws StreamException
+     */
+    public function feedsSetRetentionPolicy(GeneratedModels\SetFeedsRetentionPolicyRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/retention_policy';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SetFeedsRetentionPolicyResponse::class);
+    }
+    /**
+     * Removes the named feeds retention policy for the app (an app may hold several). Server-side only.
+     *
+     * @param GeneratedModels\DeleteFeedsRetentionPolicyRequest $requestData
+     * @return StreamResponse<GeneratedModels\DeleteFeedsRetentionPolicyResponse>
+     * @throws StreamException
+     */
+    public function feedsDeleteRetentionPolicy(GeneratedModels\DeleteFeedsRetentionPolicyRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/retention_policy/delete';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedsRetentionPolicyResponse::class);
+    }
+    /**
+     * Returns filtered and sorted feeds retention cleanup run history for the app. Supports filter_conditions on 'policy' and 'date' fields. Server-side only.
+     *
+     * @param GeneratedModels\GetFeedsRetentionPolicyRunsRequest $requestData
+     * @return StreamResponse<GeneratedModels\GetFeedsRetentionPolicyRunsResponse>
+     * @throws StreamException
+     */
+    public function feedsGetRetentionPolicyRuns(GeneratedModels\GetFeedsRetentionPolicyRunsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/retention_policy/runs';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetFeedsRetentionPolicyRunsResponse::class);
+    }
+    /**
      * Queries revision history for activities and comments
      *
      * @param GeneratedModels\QueryRevisionHistoryRequest $requestData
@@ -1977,7 +2072,26 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportFeedUserDataResponse::class);
     }
     /**
-     * Returns the user's most common interest tags ranked by the number of distinct activities they reacted to that carried each tag. Client-side callers may only read their own interests; server-side callers may fetch any user. Results are sorted by descending count, then alphabetically by tag.
+     * Removes the given interest tags from a user, whether they were set manually or computed from reactions. A removed computed tag returns on the next recomputation if the user's reactions still support it; to keep a tag out of ranking for good, set it with a weight of 0 or below instead. Client-side callers may only manage their own interests; server-side callers may manage any user. Returns the user's remaining interests.
+     *
+     * @param string $userID
+     * @param array $tags
+     * @return StreamResponse<GeneratedModels\DeleteUserInterestsResponse>
+     * @throws StreamException
+     */
+    public function deleteUserInterests(string $userID, array $tags): StreamResponse {
+        $path = '/api/v2/feeds/users/{user_id}/interests';
+        $path = str_replace('{user_id}', (string) $userID, $path);
+
+        $queryParams = [];
+        if ($tags !== null) {
+            $queryParams['tags'] = $tags;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteUserInterestsResponse::class);
+    }
+    /**
+     * Returns the user's interest tags with their ranking weights: tags computed from the activities the user reacted to and tags set manually through the API. Client-side callers may only read their own interests; server-side callers may fetch any user. Results are sorted by descending weight, then manually set tags before computed ones, then descending count, then alphabetically by tag.
      *
      * @param string $userID
      * @param ?int $limit
@@ -1994,5 +2108,21 @@ trait FeedsTrait
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetUserInterestsResponse::class);
+    }
+    /**
+     * Adds or updates interest tags on a user with explicit ranking weights. Tags set this way rank above the tags computed from the user's reactions at equal weight and are never overwritten by them. Client-side callers may only manage their own interests; server-side callers may manage any user. Returns the user's full interest list after the write.
+     *
+     * @param string $userID
+     * @param GeneratedModels\UpsertUserInterestsRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpsertUserInterestsResponse>
+     * @throws StreamException
+     */
+    public function upsertUserInterests(string $userID, GeneratedModels\UpsertUserInterestsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/users/{user_id}/interests';
+        $path = str_replace('{user_id}', (string) $userID, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertUserInterestsResponse::class);
     }
 }

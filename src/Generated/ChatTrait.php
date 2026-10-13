@@ -147,7 +147,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelsResponse::class);
     }
     /**
-     * Update channels in batch
+     * Update channels in batch. By default returns task_id for an asynchronous task. With synchronous: true, updateData accepts at most 100 explicit CIDs and returns a positive success_channels_count of channels selected for update after the database write completes, without task_id. Always poll a returned task_id, including when an older node ignores synchronous.
      * Sends events:
      * - channel.frozen
      * - channel.hidden
@@ -1336,7 +1336,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteReminderResponse::class);
     }
     /**
-     * Updates an existing reminder
+     * Updates an existing reminder. remind_at and expires_at are both replaced on every call: omitting either one clears it
      * Sends events:
      * - reminder.updated
      *
@@ -1354,7 +1354,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateReminderResponse::class);
     }
     /**
-     * Creates a new reminder
+     * Creates a new reminder. An optional expires_at hides the reminder from every read once it passes and stops it counting against the per-user reminder cap
      * Sends events:
      * - reminder.created
      *

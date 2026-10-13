@@ -21,6 +21,7 @@ class RuleBuilderCondition extends BaseModel
         public ?FloodSimilarRuleParameters $floodSimilarParams = null,
         public ?ContentCustomPropertyCountParameters $contentCustomPropertyCountParams = null,
         public ?ContentCustomPropertyParameters $contentCustomPropertyParams = null,
+        public ?ContentCountryCodeParameters $contentCountryCodeParams = null,
         public ?IPContentCountRuleParameters $ipContentCountRuleParams = null,
         public ?IPFlagCountRuleParameters $ipFlagCountRuleParams = null,
         public ?TextContentParameters $textContentParams = null,
@@ -37,6 +38,10 @@ class RuleBuilderCondition extends BaseModel
         public ?CallCustomPropertyParameters $callCustomPropertyParams = null,
         public ?CallViolationCountParameters $callViolationCountParams = null,
         public ?UserReactionCountRuleParameters $userReactionCountParams = null,
+        public ?UserIdenticalImageCountParameters $userIdenticalImageCountParams = null,
+        public ?UserChannelCountRuleParameters $userChannelCountParams = null,
+        public ?UserChannelBanCountRuleParameters $userChannelBanCountParams = null,
+        public ?IntentRuleParameters $intentRuleParams = null, // intent_rule params: policy intent topic label and the minimum final score (1-100) that fires the condition
     ) {
     }
 

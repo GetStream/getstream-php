@@ -16,6 +16,7 @@ class ModerationPayload extends BaseModel
         public ?array $textIds = null,
         public ?array $imageIds = null,
         public ?array $otherMedia = null,
+        public ?string $countryCode = null,
     ) {
     }
 

@@ -11,6 +11,7 @@ class PollVoteResponseData extends BaseModel
         public ?string $optionID = null,
         public ?bool $isAnswer = null,
         public ?string $answerText = null,
+        public ?array $answerTextI18n = null,
         public ?string $userID = null,
         public ?UserResponse $user = null, // User response object
         public ?\DateTime $createdAt = null,

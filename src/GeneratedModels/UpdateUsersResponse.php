@@ -10,7 +10,7 @@ class UpdateUsersResponse extends BaseModel
         #[MapOf(FullUserResponse::class)]
         public ?array $users = null, // Object containing users
         /** @deprecated */
-        public ?string $membershipDeletionTaskID = null, // Deprecated: always empty. Removing a user from a team no longer deletes their memberships in that team's channels, so there is no task to poll
+        public ?string $membershipDeletionTaskID = null, // Deprecated: Always empty. Removing a user from a team no longer deletes their memberships in that team's channels, so there is no task to poll.
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }

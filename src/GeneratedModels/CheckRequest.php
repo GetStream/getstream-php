@@ -16,6 +16,7 @@ class CheckRequest extends BaseModel
         public ?bool $testMode = null, // Whether to run moderation in test mode
         public ?ModerationConfig $config = null,
         public ?\DateTime $contentPublishedAt = null, // Original timestamp when the content was produced (for correlating flagged content with source video timeline)
+        public ?string $countryCode = null, // ISO 3166-1 alpha-2 country the content is aimed at (e.g. US, DE), used as country context by AI text providers
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

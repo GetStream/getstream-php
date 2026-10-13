@@ -23,7 +23,7 @@ class ConfigOverridesRequest extends BaseModel
         public ?bool $userMessageReminders = null, // Enable/disable user message reminders
         public ?bool $sharedLocations = null, // Enable/disable shared locations
         public ?bool $countMessages = null, // Enable/disable message counting
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // Overrides the push notification level for this channel
         public ?ChatPreferences $chatPreferences = null,
     ) {
     }

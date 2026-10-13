@@ -159,6 +159,20 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateBlockListResponse::class);
     }
     /**
+     * Validates that Stream can publish to a customer-owned GCP Pub/Sub topic
+     *
+     * @param GeneratedModels\CheckGCPPubSubRequest $requestData
+     * @return StreamResponse<GeneratedModels\CheckGCPPubSubResponse>
+     * @throws StreamException
+     */
+    public function checkGCPPubSub(GeneratedModels\CheckGCPPubSubRequest $requestData): StreamResponse {
+        $path = '/api/v2/check_gcp_pubsub';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckGCPPubSubResponse::class);
+    }
+    /**
      * Sends a test message via push, this is a test endpoint to verify your push settings
      *
      * @param GeneratedModels\CheckPushRequest $requestData
@@ -805,15 +819,19 @@ trait CommonTrait
      *
      * @param string $pollID
      * @param string $optionID
+     * @param ?string $userID
      * @return StreamResponse<GeneratedModels\PollOptionResponse>
      * @throws StreamException
      */
-    public function getPollOption(string $pollID, string $optionID): StreamResponse {
+    public function getPollOption(string $pollID, string $optionID, ?string $userID = null): StreamResponse {
         $path = '/api/v2/polls/{poll_id}/options/{option_id}';
         $path = str_replace('{poll_id}', (string) $pollID, $path);
         $path = str_replace('{option_id}', (string) $optionID, $path);
 
         $queryParams = [];
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PollOptionResponse::class);
     }

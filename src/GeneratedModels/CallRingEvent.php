@@ -19,6 +19,7 @@ class CallRingEvent extends BaseModel
         public ?array $members = null, // Call members
         public ?UserResponse $user = null, // User response object
         public ?bool $video = null,
+        public ?string $ringID = null, // Identifies this ring of the call session
     ) {
     }
 
