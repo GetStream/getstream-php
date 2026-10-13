@@ -38,6 +38,7 @@ class AddActivityRequest extends BaseModel
         public ?bool $enrichOwnFields = null,
         public ?bool $forceModeration = null,
         public ?bool $createUsers = null,
+        public ?bool $skipExisting = null,
     ) {
     }
 

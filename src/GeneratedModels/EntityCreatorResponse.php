@@ -28,7 +28,7 @@ class EntityCreatorResponse extends BaseModel
         public ?bool $bypassModeration = null,
         public ?\DateTime $banExpires = null,
         public ?PushNotificationSettingsResponse $pushNotifications = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?PrivacySettingsResponse $privacySettings = null, // The privacy settings of the user.
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null,

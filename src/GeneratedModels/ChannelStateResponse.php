@@ -24,7 +24,7 @@ class ChannelStateResponse extends BaseModel
         #[ArrayOf(ChannelMemberResponse::class)]
         public ?array $members = null,
         public ?ChannelMemberResponse $membership = null,
-        public ?ChannelPushPreferencesResponse $pushPreferences = null,
+        public ?ChannelPushPreferencesResponse $pushPreferences = null, // The push preference details.
         /** @var array<ThreadStateResponse>|null */
         #[ArrayOf(ThreadStateResponse::class)]
         public ?array $threads = null,
@@ -37,6 +37,7 @@ class ChannelStateResponse extends BaseModel
         /** @var array<SharedLocationResponseData>|null */
         #[ArrayOf(SharedLocationResponseData::class)]
         public ?array $activeLiveLocations = null,
+        public ?int $cooldownRemainingMs = null,
         public ?string $duration = null,
     ) {
     }

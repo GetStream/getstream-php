@@ -15,6 +15,8 @@ class BanRequest extends BaseModel
         public ?string $bannedByID = null, // ID of the user performing the ban
         public ?UserRequest $bannedBy = null, // User request object
         public ?string $deleteMessages = null,
+        public ?bool $deleteReactions = null, // Whether to delete reactions by the banned user on other users' messages
+        public ?bool $banFromFutureChannels = null, // Whether to also ban the user from future channels created by the banner
     ) {
     }
 

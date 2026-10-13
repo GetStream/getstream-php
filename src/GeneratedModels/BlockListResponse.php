@@ -13,7 +13,7 @@ class BlockListResponse extends BaseModel
         public ?\DateTime $updatedAt = null, // Date/time of the last update
         public ?string $id = null,
         public ?string $name = null, // Block list name
-        public ?string $type = null, // Block list type. One of: regex, domain, domain_allowlist, email, email_allowlist, word
+        public ?string $type = null, // Block list type. One of: regex, domain, domain_allowlist, email, email_allowlist, word, word_allowlist
         public ?array $words = null, // List of words to block
         public ?string $team = null,
         public ?string $ownerUserID = null,

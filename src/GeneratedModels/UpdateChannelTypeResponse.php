@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * Basic response information
+ */
 class UpdateChannelTypeResponse extends BaseModel
 {
     public function __construct(
@@ -44,12 +47,12 @@ class UpdateChannelTypeResponse extends BaseModel
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?array $commands = null,
-        public ?string $duration = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

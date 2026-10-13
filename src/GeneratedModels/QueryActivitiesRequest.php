@@ -12,7 +12,8 @@ class QueryActivitiesRequest extends BaseModel
         public ?array $sort = null, // Sorting parameters for the query
         public ?bool $includePrivateActivities = null,
         public ?bool $includeExpiredActivities = null, // When true, include both expired and non-expired activities in the result.
-        public ?bool $includeSoftDeletedActivities = null, // When true, include soft-deleted activities in the result.
+        public ?bool $includeSoftDeletedActivities = null, // When true, include soft-deleted activities in the result. Server-side only; not allowed when a user is set.
+        public ?bool $includeModeratedActivities = null, // When true, include activities hidden by moderation (shadowed or removed). Server-side only; not allowed when a user is set.
         public ?bool $enrichOwnFields = null,
         public ?int $limit = null,
         public ?string $next = null,

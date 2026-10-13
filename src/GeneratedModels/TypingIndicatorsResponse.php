@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * The settings for typing indicator events.
+ */
 class TypingIndicatorsResponse extends BaseModel
 {
     public function __construct(

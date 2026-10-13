@@ -3,15 +3,18 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * The push preference details.
+ */
 class PushPreferencesResponse extends BaseModel
 {
     public function __construct(
-        public ?string $chatLevel = null,
+        public ?string $chatLevel = null, // The scope level of the push notifications.
         public ?ChatPreferencesResponse $chatPreferences = null,
         public ?string $callLevel = null,
         public ?string $feedsLevel = null,
         public ?FeedsPreferencesResponse $feedsPreferences = null,
-        public ?\DateTime $disabledUntil = null,
+        public ?\DateTime $disabledUntil = null, // If provided the notifications will be disabled until the set date.
     ) {
     }
 

@@ -12,6 +12,7 @@ class RankingConfig extends BaseModel
         /** @var array<string, DecayFunctionConfig>|null */
         #[MapOf(DecayFunctionConfig::class)]
         public ?array $functions = null, // Decay functions configuration
+        public ?float $excludeBelow = null, // Activities scoring strictly below this value are dropped from the ranked feed. Not supported on aggregated feeds
     ) {
     }
 

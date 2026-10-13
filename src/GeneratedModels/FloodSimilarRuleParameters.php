@@ -10,6 +10,7 @@ class FloodSimilarRuleParameters extends BaseModel
         public ?string $timeWindow = null,
         public ?int $similarityDistance = null,
         public ?array $allowlist = null,
+        public ?int $minTextLength = null,
     ) {
     }
 

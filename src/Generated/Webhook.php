@@ -23,9 +23,12 @@ use GetStream\GeneratedModels\AppealRejectedEvent;
 use GetStream\GeneratedModels\AsyncBulkImageModerationEvent;
 use GetStream\GeneratedModels\AsyncExportChannelsEvent;
 use GetStream\GeneratedModels\AsyncExportErrorEvent;
+use GetStream\GeneratedModels\AsyncExportLabelResultsEvent;
 use GetStream\GeneratedModels\AsyncExportModerationLogsEvent;
 use GetStream\GeneratedModels\AsyncExportReviewQueueEvent;
 use GetStream\GeneratedModels\AsyncExportUsersEvent;
+use GetStream\GeneratedModels\AsyncImportErrorEvent;
+use GetStream\GeneratedModels\AsyncImportSuccessEvent;
 use GetStream\GeneratedModels\BlockedUserEvent;
 use GetStream\GeneratedModels\BookmarkAddedEvent;
 use GetStream\GeneratedModels\BookmarkDeletedEvent;
@@ -63,6 +66,7 @@ use GetStream\GeneratedModels\CallRecordingStartedEvent;
 use GetStream\GeneratedModels\CallRecordingStoppedEvent;
 use GetStream\GeneratedModels\CallRejectedEvent;
 use GetStream\GeneratedModels\CallRingEvent;
+use GetStream\GeneratedModels\CallRingSettledEvent;
 use GetStream\GeneratedModels\CallRtmpBroadcastFailedEvent;
 use GetStream\GeneratedModels\CallRtmpBroadcastStartedEvent;
 use GetStream\GeneratedModels\CallRtmpBroadcastStoppedEvent;
@@ -96,6 +100,7 @@ use GetStream\GeneratedModels\ChannelVisibleEvent;
 use GetStream\GeneratedModels\ClosedCaptionEvent;
 use GetStream\GeneratedModels\CommentAddedEvent;
 use GetStream\GeneratedModels\CommentDeletedEvent;
+use GetStream\GeneratedModels\CommentFeedbackEvent;
 use GetStream\GeneratedModels\CommentReactionAddedEvent;
 use GetStream\GeneratedModels\CommentReactionDeletedEvent;
 use GetStream\GeneratedModels\CommentReactionUpdatedEvent;
@@ -226,6 +231,7 @@ class Webhook
     public const EVENT_TYPE_CALL_RECORDING_STOPPED = 'call.recording_stopped';
     public const EVENT_TYPE_CALL_REJECTED = 'call.rejected';
     public const EVENT_TYPE_CALL_RING = 'call.ring';
+    public const EVENT_TYPE_CALL_RING_SETTLED = 'call.ring_settled';
     public const EVENT_TYPE_CALL_RTMP_BROADCAST_FAILED = 'call.rtmp_broadcast_failed';
     public const EVENT_TYPE_CALL_RTMP_BROADCAST_STARTED = 'call.rtmp_broadcast_started';
     public const EVENT_TYPE_CALL_RTMP_BROADCAST_STOPPED = 'call.rtmp_broadcast_stopped';
@@ -263,6 +269,8 @@ class Webhook
     public const EVENT_TYPE_EXPORT_BULK_IMAGE_MODERATION_SUCCESS = 'export.bulk_image_moderation.success';
     public const EVENT_TYPE_EXPORT_CHANNELS_ERROR = 'export.channels.error';
     public const EVENT_TYPE_EXPORT_CHANNELS_SUCCESS = 'export.channels.success';
+    public const EVENT_TYPE_EXPORT_LABEL_RESULTS_ERROR = 'export.label_results.error';
+    public const EVENT_TYPE_EXPORT_LABEL_RESULTS_SUCCESS = 'export.label_results.success';
     public const EVENT_TYPE_EXPORT_MODERATION_LOGS_ERROR = 'export.moderation_logs.error';
     public const EVENT_TYPE_EXPORT_MODERATION_LOGS_SUCCESS = 'export.moderation_logs.success';
     public const EVENT_TYPE_EXPORT_REVIEW_QUEUE_ERROR = 'export.review_queue.error';
@@ -288,6 +296,7 @@ class Webhook
     public const EVENT_TYPE_FEEDS_BOOKMARK_FOLDER_UPDATED = 'feeds.bookmark_folder.updated';
     public const EVENT_TYPE_FEEDS_COMMENT_ADDED = 'feeds.comment.added';
     public const EVENT_TYPE_FEEDS_COMMENT_DELETED = 'feeds.comment.deleted';
+    public const EVENT_TYPE_FEEDS_COMMENT_FEEDBACK = 'feeds.comment.feedback';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_ADDED = 'feeds.comment.reaction.added';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_DELETED = 'feeds.comment.reaction.deleted';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_UPDATED = 'feeds.comment.reaction.updated';
@@ -308,6 +317,8 @@ class Webhook
     public const EVENT_TYPE_FEEDS_NOTIFICATION_FEED_UPDATED = 'feeds.notification_feed.updated';
     public const EVENT_TYPE_FEEDS_STORIES_FEED_UPDATED = 'feeds.stories_feed.updated';
     public const EVENT_TYPE_FLAG_UPDATED = 'flag.updated';
+    public const EVENT_TYPE_IMPORT_ERROR = 'import.error';
+    public const EVENT_TYPE_IMPORT_SUCCESS = 'import.success';
     public const EVENT_TYPE_INGRESS_ERROR = 'ingress.error';
     public const EVENT_TYPE_INGRESS_STARTED = 'ingress.started';
     public const EVENT_TYPE_INGRESS_STOPPED = 'ingress.stopped';
@@ -468,6 +479,7 @@ class Webhook
             'call.recording_stopped' => CallRecordingStoppedEvent::class,
             'call.rejected' => CallRejectedEvent::class,
             'call.ring' => CallRingEvent::class,
+            'call.ring_settled' => CallRingSettledEvent::class,
             'call.rtmp_broadcast_failed' => CallRtmpBroadcastFailedEvent::class,
             'call.rtmp_broadcast_started' => CallRtmpBroadcastStartedEvent::class,
             'call.rtmp_broadcast_stopped' => CallRtmpBroadcastStoppedEvent::class,
@@ -505,6 +517,8 @@ class Webhook
             'export.bulk_image_moderation.success' => AsyncBulkImageModerationEvent::class,
             'export.channels.error' => AsyncExportErrorEvent::class,
             'export.channels.success' => AsyncExportChannelsEvent::class,
+            'export.label_results.error' => AsyncExportErrorEvent::class,
+            'export.label_results.success' => AsyncExportLabelResultsEvent::class,
             'export.moderation_logs.error' => AsyncExportErrorEvent::class,
             'export.moderation_logs.success' => AsyncExportModerationLogsEvent::class,
             'export.review_queue.error' => AsyncExportErrorEvent::class,
@@ -530,6 +544,7 @@ class Webhook
             'feeds.bookmark_folder.updated' => BookmarkFolderUpdatedEvent::class,
             'feeds.comment.added' => CommentAddedEvent::class,
             'feeds.comment.deleted' => CommentDeletedEvent::class,
+            'feeds.comment.feedback' => CommentFeedbackEvent::class,
             'feeds.comment.reaction.added' => CommentReactionAddedEvent::class,
             'feeds.comment.reaction.deleted' => CommentReactionDeletedEvent::class,
             'feeds.comment.reaction.updated' => CommentReactionUpdatedEvent::class,
@@ -550,6 +565,8 @@ class Webhook
             'feeds.notification_feed.updated' => NotificationFeedUpdatedEvent::class,
             'feeds.stories_feed.updated' => StoriesFeedUpdatedEvent::class,
             'flag.updated' => FlagUpdatedEvent::class,
+            'import.error' => AsyncImportErrorEvent::class,
+            'import.success' => AsyncImportSuccessEvent::class,
             'ingress.error' => IngressErrorEvent::class,
             'ingress.started' => IngressStartedEvent::class,
             'ingress.stopped' => IngressStoppedEvent::class,

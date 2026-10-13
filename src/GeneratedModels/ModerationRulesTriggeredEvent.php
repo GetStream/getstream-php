@@ -23,6 +23,7 @@ class ModerationRulesTriggeredEvent extends BaseModel
         /** @var array<MatchedContent>|null */
         #[ArrayOf(MatchedContent::class)]
         public ?array $matchedContents = null, // Ordered list of contents whose verdicts contributed to an aggregation rule's threshold. Populated only for aggregation rules when callers supplied `content_ids`.
+        public ?IntentEvaluationInfo $intent = null,
     ) {
     }
 

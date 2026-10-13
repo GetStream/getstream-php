@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * All possibility of string to use
+ * An action that can be performed in a channel.
  */
 class ChannelOwnCapability extends BaseModel
 {

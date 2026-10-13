@@ -14,6 +14,7 @@ class APIError extends BaseModel
         public ?string $moreInfo = null, // URL with additional information
         public ?array $details = null, // Additional error-specific information
         public ?bool $unrecoverable = null, // Flag that indicates if the error is unrecoverable, requests that return unrecoverable errors should not be retried, this error only applies to the request that caused it
+        public ?int $cooldownRemainingMs = null, // Milliseconds until the user's slow mode cool down period ends. Only set on code 60 (cool down) errors
     ) {
     }
 
