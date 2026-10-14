@@ -11,6 +11,7 @@ class UnfollowBatchRequest extends BaseModel
         public ?array $follows = null, // List of follow relationships to remove, each with optional keep_history
         public ?bool $deleteNotificationActivity = null, // Whether to delete the corresponding notification activity (default: false)
         public ?bool $enrichOwnFields = null, // If true, enriches the follow's source_feed and target_feed with own_* fields (own_follows, own_followings, own_capabilities, own_membership). Defaults to false for performance.
+        public ?bool $async = null, // If true, the batch is queued as a background task, paced per app, and the response has empty follows and a task_id. Server-side only. Supported by the get-or-create endpoint (GetOrCreateUnfollows); UnfollowBatch rejects it. Async batches can apply out of order with other follow writes. Defaults to false.
     ) {
     }
 

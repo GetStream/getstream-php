@@ -3,11 +3,14 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * A type representing the app settings.
+ */
 class AppResponseFields extends BaseModel
 {
     public function __construct(
         public ?int $id = null,
-        public ?string $name = null,
+        public ?string $name = null, // The name of the app.
         public ?string $organization = null,
         public ?string $placement = null,
         public ?PushNotificationFields $pushNotifications = null,
@@ -29,10 +32,10 @@ class AppResponseFields extends BaseModel
         public ?bool $multiTenantEnabled = null,
         public ?bool $allowMultiUserDevices = null,
         public ?bool $imageModerationEnabled = null,
-        public ?bool $asyncUrlEnrichEnabled = null,
+        public ?bool $asyncUrlEnrichEnabled = null, // A boolean value determining if async url enrichment is enabled.
         public ?array $imageModerationLabels = null,
         public ?array $allowedFlagReasons = null,
-        public ?bool $autoTranslationEnabled = null,
+        public ?bool $autoTranslationEnabled = null, // A boolean value determining if auto translation is enabled.
         public ?string $beforeMessageSendHookUrl = null,
         public ?int $beforeMessageSendHookAttemptTimeoutMs = null,
         public ?string $customActionHandlerUrl = null,
@@ -47,6 +50,7 @@ class AppResponseFields extends BaseModel
         public ?string $snsSecret = null,
         public ?FileUploadConfig $fileUploadConfig = null,
         public ?FileUploadConfig $imageUploadConfig = null,
+        public ?AppDefaults $defaults = null, // Request limit defaults applied by the server when the corresponding field is omitted.
         public ?\DateTime $revokeTokensIssuedBefore = null,
         public ?array $grants = null,
         public ?bool $campaignEnabled = null,
@@ -78,6 +82,7 @@ class AppResponseFields extends BaseModel
         public ?bool $memberCustomOnMessagesEnabled = null,
         public ?bool $memberCustomOnMentionedUsersEnabled = null,
         public ?bool $memberCustomOnTypingEventsEnabled = null,
+        public ?bool $beforeMessageSendHookSystemMessages = null,
     ) {
     }
 

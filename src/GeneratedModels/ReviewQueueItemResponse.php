@@ -18,6 +18,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?\DateTime $reviewedAt = null, // When the item was reviewed
         public ?string $reviewedBy = null, // ID of the moderator who reviewed the item
         public ?array $languages = null, // Detected languages in the content
+        public ?string $countryCode = null,
         public ?int $severity = null, // Severity level of the content
         public ?string $aiTextSeverity = null, // AI-determined text severity
         public ?string $latestModeratorAction = null,
@@ -43,6 +44,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?Reaction $feedsV2Reaction = null,
         public ?FeedsV3ActivityResponse $feedsV3Activity = null,
         public ?FeedsV3CommentResponse $feedsV3Comment = null,
+        public ?PollResponseData $poll = null,
         public ?array $teams = null, // Teams associated with this item
         public ?string $configKey = null,
         public ?int $flagsCount = null,

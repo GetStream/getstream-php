@@ -15,6 +15,8 @@ class ActivitySelectorConfigResponse extends BaseModel
         public ?string $cutoffWindow = null, // Flexible relative time window for activity selection (e.g., '1h', '3d', '1y')
         public ?int $minPopularity = null, // Minimum popularity threshold. For the 'popular' selector, values below 1 are normalized to the default (5) at read time.
         public ?FeedGroupScope $feedGroups = null,
+        public ?int $rankingCandidateLimit = null, // Maximum number of candidate activities this selector contributes to a ranked feed
+        public ?int $timeBudgetMs = null, // Maximum time in milliseconds this selector may take before it is dropped from the read
         public ?object $params = null, // Generic params for selector-specific configuration
     ) {
     }

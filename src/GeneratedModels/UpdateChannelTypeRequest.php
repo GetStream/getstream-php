@@ -43,7 +43,7 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?array $allowedFlagReasons = null,
         public ?Thresholds $automodThresholds = null, // Sets thresholds for AI moderation
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
         public ?array $commands = null, // List of commands that channel supports
     ) {

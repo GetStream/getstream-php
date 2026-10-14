@@ -23,7 +23,7 @@ class AppealItemResponse extends BaseModel
         #[ArrayOf(ActionLogResponse::class)]
         public ?array $actions = null, // Full chronological history of all moderation actions on the review queue item
         public ?string $recommendedAction = null, // Action recommended by the automated moderation system (e.g. flag, remove, shadow)
-        public ?string $channelCid = null, // CID of the channel the entity belongs to, if applicable
+        public ?string $channelCid = null, // CID of the channel the entity belongs to (content appeals), or of the channel ban being appealed (stream:user appeals). Empty for a global ban appeal.
         public ?array $flagTypes = null, // Types of flags applied to the entity (e.g. user_report, bodyguard)
         public ?array $flagLabels = null, // Classification labels from automated and manual review
         /** @var array<ModerationFlagResponse>|null */
@@ -33,6 +33,8 @@ class AppealItemResponse extends BaseModel
         public ?string $aiTextSeverity = null, // Text severity level assigned by the AI provider
         public ?string $configKey = null, // Moderation policy key that was applied
         public ?string $reviewQueueItemID = null, // ID of the review queue item linked to this appeal, if the appeal was submitted with one
+        public ?array $languages = null, // Detected languages in the content
+        public ?string $appealReasonLanguage = null, // Detected language of the appeal_reason text itself
     ) {
     }
 

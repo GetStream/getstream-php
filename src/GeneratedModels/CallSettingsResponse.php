@@ -23,6 +23,7 @@ class CallSettingsResponse extends BaseModel
         public ?SessionSettingsResponse $session = null,
         public ?IngressSettingsResponse $ingress = null,
         public ?EncryptionSettingsResponse $encryption = null, // EncryptionSettings is the payload for end-to-end encryption settings
+        public ?LifecycleSettingsResponse $lifecycle = null, // LifecycleSettings is the payload for call lifecycle settings
     ) {
     }
 

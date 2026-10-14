@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * Basic response information
+ */
 class CreateChannelTypeResponse extends BaseModel
 {
     public function __construct(
@@ -40,7 +43,7 @@ class CreateChannelTypeResponse extends BaseModel
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
@@ -49,7 +52,7 @@ class CreateChannelTypeResponse extends BaseModel
         #[ArrayOf(PolicyRequest::class)]
         public ?array $permissions = null,
         public ?array $grants = null,
-        public ?string $duration = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

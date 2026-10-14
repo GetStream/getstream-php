@@ -15,7 +15,7 @@ class UserRequest extends BaseModel
         public ?object $custom = null, // Custom user data
         public ?string $language = null,
         public ?bool $invisible = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?PrivacySettingsResponse $privacySettings = null, // The privacy settings of the user.
         public ?string $role = null, // User's global role
         public ?array $teamsRole = null, // Map of team-specific roles for the user
         public ?array $teams = null, // List of teams the user belongs to

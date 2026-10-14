@@ -147,7 +147,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelsResponse::class);
     }
     /**
-     * Update channels in batch
+     * Update channels in batch. By default returns task_id for an asynchronous task. With synchronous: true, updateData accepts at most 100 explicit CIDs and returns a positive success_channels_count of channels selected for update after the database write completes, without task_id. Always poll a returned task_id, including when an older node ignores synchronous.
      * Sends events:
      * - channel.frozen
      * - channel.hidden
@@ -384,6 +384,24 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateChannelResponse::class);
     }
     /**
+     * Lists the users banned from a channel, by a ban on the channel or by a future channel ban issued by the channel's creator, with one entry per user
+     *
+     * @param string $type
+     * @param string $id
+     * @param GeneratedModels\QueryChannelBansRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryChannelBansResponse>
+     * @throws StreamException
+     */
+    public function queryChannelBans(string $type, string $id, GeneratedModels\QueryChannelBansRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}/bans/query';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelBansResponse::class);
+    }
+    /**
      * Deletes a draft
      * Sends events:
      * - draft.deleted
@@ -578,6 +596,7 @@ trait ChatTrait
      * - channel.visible
      * - message.new
      * - message.updated
+     * - scheduled_message.created
      *
      * @param string $type
      * @param string $id
@@ -1336,7 +1355,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteReminderResponse::class);
     }
     /**
-     * Updates an existing reminder
+     * Updates an existing reminder. remind_at and expires_at are both replaced on every call: omitting either one clears it
      * Sends events:
      * - reminder.updated
      *
@@ -1354,7 +1373,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateReminderResponse::class);
     }
     /**
-     * Creates a new reminder
+     * Creates a new reminder. An optional expires_at hides the reminder from every read once it passes and stops it counting against the per-user reminder cap
      * Sends events:
      * - reminder.created
      *
@@ -1662,6 +1681,73 @@ trait ChatTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyRunsResponse::class);
+    }
+    /**
+     * Lists the scheduled messages of one user across channels: pending ones first, then failed ones, each by scheduled_at. Client-side requests return the caller's own; server-side requests require user_id
+     *
+     * @param GeneratedModels\QueryScheduledMessagesRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryScheduledMessagesResponse>
+     * @throws StreamException
+     */
+    public function queryScheduledMessages(GeneratedModels\QueryScheduledMessagesRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryScheduledMessagesResponse::class);
+    }
+    /**
+     * Cancels a scheduled message so it is never sent, or removes a failed one. Returns 409 while the message is being sent
+     * Sends events:
+     * - scheduled_message.deleted
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\DeleteScheduledMessageResponse>
+     * @throws StreamException
+     */
+    public function deleteScheduledMessage(string $id): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteScheduledMessageResponse::class);
+    }
+    /**
+     * Replaces the message and/or the send time of a scheduled message. The scheduling checks run again, and the message is then sent, under the caller's auth mode. A request that changes only scheduled_at keeps the auth mode the message was scheduled with. Returns 409 while the message is being sent
+     * Sends events:
+     * - scheduled_message.updated
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateScheduledMessageRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateScheduledMessageResponse>
+     * @throws StreamException
+     */
+    public function updateScheduledMessage(string $id, GeneratedModels\UpdateScheduledMessageRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateScheduledMessageResponse::class);
+    }
+    /**
+     * Moves the send time of a scheduled message to now and queues the send. Every send check runs when it is sent. Returns 409 while the message is being sent
+     * Sends events:
+     * - scheduled_message.updated
+     *
+     * @param string $id
+     * @param GeneratedModels\SendScheduledMessageNowRequest $requestData
+     * @return StreamResponse<GeneratedModels\SendScheduledMessageNowResponse>
+     * @throws StreamException
+     */
+    public function sendScheduledMessageNow(string $id, GeneratedModels\SendScheduledMessageNowRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/{id}/send_now';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SendScheduledMessageNowResponse::class);
     }
     /**
      * Search messages across channels

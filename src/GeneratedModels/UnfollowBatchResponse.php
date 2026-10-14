@@ -9,6 +9,7 @@ class UnfollowBatchResponse extends BaseModel
         /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $follows = null, // List of follow relationships that were removed
+        public ?string $taskID = null, // ID of the background task when the request was sent with async: true
         public ?string $duration = null,
     ) {
     }
