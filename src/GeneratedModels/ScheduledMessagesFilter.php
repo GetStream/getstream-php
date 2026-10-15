@@ -10,7 +10,7 @@ class ScheduledMessagesFilter extends BaseModel
 {
     public function __construct(
         public ?string $cid = null, // Only scheduled messages of this channel
-        public ?array $status = null, // Only these statuses. One or more of: scheduled, sending, failed
+        public ?array $status = null, // Only these statuses, as reported in each scheduled message's status. One or more of: scheduled, sending, failed
     ) {
     }
 
