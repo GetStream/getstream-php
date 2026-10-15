@@ -24,7 +24,7 @@ class ChannelStateResponseFields extends BaseModel
         #[ArrayOf(ChannelMemberResponse::class)]
         public ?array $members = null, // List of channel members
         public ?ChannelMemberResponse $membership = null,
-        public ?ChannelPushPreferencesResponse $pushPreferences = null,
+        public ?ChannelPushPreferencesResponse $pushPreferences = null, // The push preference details.
         /** @var array<ThreadStateResponse>|null */
         #[ArrayOf(ThreadStateResponse::class)]
         public ?array $threads = null,
@@ -37,6 +37,7 @@ class ChannelStateResponseFields extends BaseModel
         /** @var array<SharedLocationResponseData>|null */
         #[ArrayOf(SharedLocationResponseData::class)]
         public ?array $activeLiveLocations = null, // Active live locations in the channel
+        public ?int $cooldownRemainingMs = null, // Milliseconds until the current user's slow mode cool down period ends. Only set on client-side get or create channel and get channel requests while the user is under cool down
     ) {
     }
 

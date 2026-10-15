@@ -10,6 +10,8 @@ class GetCommentsResponse extends BaseModel
         #[ArrayOf(ThreadedCommentResponse::class)]
         public ?array $comments = null, // Threaded listing for the activity
         public ?string $sort = null, // Sort order used for the comments (first, last, top, best, controversial)
+        public ?int $commentCount = null, // Total number of comments on the object, including replies at every depth
+        public ?int $topLevelCommentCount = null, // Number of comments directly on the object, excluding replies. Independent of depth, replies_limit and id_around, and not adjusted per viewer. Only present when include_top_level_comment_count is set
         public ?string $next = null,
         public ?string $prev = null,
         public ?string $duration = null,

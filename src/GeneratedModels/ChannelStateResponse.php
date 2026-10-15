@@ -9,35 +9,39 @@ class ChannelStateResponse extends BaseModel
         public ?ChannelResponse $channel = null, // Represents channel in chat
         /** @var array<MessageResponse>|null */
         #[ArrayOf(MessageResponse::class)]
-        public ?array $messages = null,
+        public ?array $messages = null, // List of channel messages
         /** @var array<MessageResponse>|null */
         #[ArrayOf(MessageResponse::class)]
-        public ?array $pinnedMessages = null,
-        public ?int $watcherCount = null,
+        public ?array $pinnedMessages = null, // List of pinned messages in the channel
+        public ?int $watcherCount = null, // Number of channel watchers
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
-        public ?array $watchers = null,
+        public ?array $watchers = null, // List of user who is watching the channel
         /** @var array<ReadStateResponse>|null */
         #[ArrayOf(ReadStateResponse::class)]
-        public ?array $read = null,
+        public ?array $read = null, // List of read states
         /** @var array<ChannelMemberResponse>|null */
         #[ArrayOf(ChannelMemberResponse::class)]
-        public ?array $members = null,
+        public ?array $members = null, // List of channel members
         public ?ChannelMemberResponse $membership = null,
-        public ?ChannelPushPreferencesResponse $pushPreferences = null,
+        public ?ChannelPushPreferencesResponse $pushPreferences = null, // The push preference details.
         /** @var array<ThreadStateResponse>|null */
         #[ArrayOf(ThreadStateResponse::class)]
         public ?array $threads = null,
-        public ?bool $hidden = null,
-        public ?\DateTime $hideMessagesBefore = null,
+        public ?bool $hidden = null, // Whether this channel is hidden or not
+        public ?\DateTime $hideMessagesBefore = null, // Messages before this date are hidden from the user
         /** @var array<PendingMessageResponse>|null */
         #[ArrayOf(PendingMessageResponse::class)]
-        public ?array $pendingMessages = null,
+        public ?array $pendingMessages = null, // Pending messages that this user has sent
         public ?DraftResponse $draft = null,
         /** @var array<SharedLocationResponseData>|null */
         #[ArrayOf(SharedLocationResponseData::class)]
-        public ?array $activeLiveLocations = null,
+        public ?array $activeLiveLocations = null, // Active live locations in the channel
+        public ?int $cooldownRemainingMs = null, // Milliseconds until the current user's slow mode cool down period ends. Only set on client-side get or create channel and get channel requests while the user is under cool down
         public ?string $duration = null,
+        /** @var array<ScheduledMessageResponse>|null */
+        #[ArrayOf(ScheduledMessageResponse::class)]
+        public ?array $scheduledMessages = null, // The caller's own scheduled, sending and failed messages in this channel. Set only by a client-side GetOrCreateChannel with include_scheduled_messages; absent when not requested or not known, in which case use the scheduled messages query
     ) {
     }
 

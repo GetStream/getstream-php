@@ -11,6 +11,7 @@ class SendMessageResponse extends BaseModel
         public ?string $duration = null, // Duration of the request in milliseconds
         public ?array $mentionedMembers = null, // Map of mentioned user ID to whether that user is currently an active channel member. Only set when include_mentioned_members was requested; omitted when the message has no mentions or the membership lookup failed
         public ?ChannelContextResponse $channelContext = null, // Slim channel object: identity plus creator
+        public ?ScheduledMessageResponse $scheduledMessage = null, // A message scheduled to be sent later
     ) {
     }
 

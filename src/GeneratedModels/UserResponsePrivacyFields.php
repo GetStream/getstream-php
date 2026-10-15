@@ -24,7 +24,7 @@ class UserResponsePrivacyFields extends BaseModel
         public ?\DateTime $deactivatedAt = null,
         public ?array $blockedUserIds = null,
         public ?int $avgResponseTime = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?PrivacySettingsResponse $privacySettings = null, // The privacy settings of the user.
         public ?bool $invisible = null,
     ) {
     }

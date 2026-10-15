@@ -12,6 +12,7 @@ class FollowBatchResponse extends BaseModel
         /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $created = null, // List of newly created follow relationships
+        public ?string $taskID = null, // ID of the background task when the request was sent with async: true
         public ?string $duration = null,
     ) {
     }

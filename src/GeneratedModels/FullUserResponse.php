@@ -23,7 +23,7 @@ class FullUserResponse extends BaseModel
         public ?\DateTime $revokeTokensIssuedBefore = null,
         public ?\DateTime $deactivatedAt = null,
         public ?int $avgResponseTime = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?PrivacySettingsResponse $privacySettings = null, // The privacy settings of the user.
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null,
@@ -34,7 +34,8 @@ class FullUserResponse extends BaseModel
         /** @var array<ChannelMute>|null */
         #[ArrayOf(ChannelMute::class)]
         public ?array $channelMutes = null,
-        public ?int $unreadCount = null,
+        /** @deprecated */
+        public ?int $unreadCount = null, // Deprecated: Use total_unread_count instead.
         public ?int $totalUnreadCount = null,
         public ?int $unreadChannels = null,
         public ?int $unreadThreads = null,

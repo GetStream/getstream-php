@@ -31,7 +31,7 @@ class WSEvent extends BaseModel
         public ?string $reason = null,
         public ?UserResponse $createdBy = null, // User response object
         public ?bool $automoderation = null,
-        public ?ModerationResponse $automoderationScores = null,
+        public ?ModerationResponse $automoderationScores = null, // Response from AI moderation
         public ?string $parentID = null,
         public ?string $team = null,
         public ?object $custom = null,

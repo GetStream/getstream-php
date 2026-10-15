@@ -44,6 +44,7 @@ class ActivityResponse extends BaseModel
         public ?ModerationV2Response $moderation = null,
         public ?string $moderationAction = null,
         public ?int $commentCount = null, // Number of comments on the activity
+        public ?int $topLevelCommentCount = null, // Number of top-level comments (comments directly on the activity, excluding replies). Only returned by GetActivity when include_top_level_comment_count=true; never set on feed reads or events. Same status/deletion rules as comment_count; not adjusted per viewer.
         public ?int $bookmarkCount = null, // Number of bookmarks on the activity
         public ?int $shareCount = null, // Number of times the activity was shared
         public ?int $reactionCount = null, // Number of reactions to the activity

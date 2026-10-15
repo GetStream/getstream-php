@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * Response for Device
+ * An object representing a device which can receive push notifications.
  */
 class DeviceResponse extends BaseModel
 {
     public function __construct(
         public ?string $pushProvider = null, // Push provider
         public ?string $pushProviderName = null, // Push provider name
-        public ?string $id = null, // Device ID
-        public ?\DateTime $createdAt = null, // Date/time of creation
+        public ?string $id = null, // The device identifier.
+        public ?\DateTime $createdAt = null, // The date when the device was created.
         public ?bool $disabled = null, // Whether device is disabled or not
         public ?string $disabledReason = null, // Reason explaining why device had been disabled
         public ?bool $voip = null, // When true the token is for Apple VoIP push notifications

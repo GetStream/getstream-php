@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
 /**
- * Deprecated: use restore instead — it now also reverses a block or shadow block. Configuration for unblock action.
+ * Deprecated: Use restore instead, which now also reverses a block or shadow block. Configuration for unblock action.
  */
 class UnblockActionRequestPayload extends BaseModel
 {

@@ -8,6 +8,8 @@ class CreatePollOptionRequest extends BaseModel
     public function __construct(
         public ?string $text = null, // Option text
         public ?object $custom = null, // Custom data for this object
+        public ?string $configKey = null, // Key of the moderation configuration to use. Server-side only.
+        public ?string $configTeam = null, // Team associated with the configuration. Server-side only.
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

@@ -22,6 +22,7 @@ class UpsertConfigRequest extends BaseModel
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?FloodConfig $floodConfig = null,
         public ?RuleBuilderConfig $ruleBuilderConfig = null,
+        public ?IntentConfigRequest $intentConfig = null,
         public ?AITextConfig $bodyguardConfig = null,
         public ?AIImageConfig $awsRekognitionConfig = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,

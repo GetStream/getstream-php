@@ -23,9 +23,12 @@ use GetStream\GeneratedModels\AppealRejectedEvent;
 use GetStream\GeneratedModels\AsyncBulkImageModerationEvent;
 use GetStream\GeneratedModels\AsyncExportChannelsEvent;
 use GetStream\GeneratedModels\AsyncExportErrorEvent;
+use GetStream\GeneratedModels\AsyncExportLabelResultsEvent;
 use GetStream\GeneratedModels\AsyncExportModerationLogsEvent;
 use GetStream\GeneratedModels\AsyncExportReviewQueueEvent;
 use GetStream\GeneratedModels\AsyncExportUsersEvent;
+use GetStream\GeneratedModels\AsyncImportErrorEvent;
+use GetStream\GeneratedModels\AsyncImportSuccessEvent;
 use GetStream\GeneratedModels\BlockedUserEvent;
 use GetStream\GeneratedModels\BookmarkAddedEvent;
 use GetStream\GeneratedModels\BookmarkDeletedEvent;
@@ -63,6 +66,7 @@ use GetStream\GeneratedModels\CallRecordingStartedEvent;
 use GetStream\GeneratedModels\CallRecordingStoppedEvent;
 use GetStream\GeneratedModels\CallRejectedEvent;
 use GetStream\GeneratedModels\CallRingEvent;
+use GetStream\GeneratedModels\CallRingSettledEvent;
 use GetStream\GeneratedModels\CallRtmpBroadcastFailedEvent;
 use GetStream\GeneratedModels\CallRtmpBroadcastStartedEvent;
 use GetStream\GeneratedModels\CallRtmpBroadcastStoppedEvent;
@@ -96,6 +100,7 @@ use GetStream\GeneratedModels\ChannelVisibleEvent;
 use GetStream\GeneratedModels\ClosedCaptionEvent;
 use GetStream\GeneratedModels\CommentAddedEvent;
 use GetStream\GeneratedModels\CommentDeletedEvent;
+use GetStream\GeneratedModels\CommentFeedbackEvent;
 use GetStream\GeneratedModels\CommentReactionAddedEvent;
 use GetStream\GeneratedModels\CommentReactionDeletedEvent;
 use GetStream\GeneratedModels\CommentReactionUpdatedEvent;
@@ -144,6 +149,12 @@ use GetStream\GeneratedModels\NotificationMarkUnreadEvent;
 use GetStream\GeneratedModels\NotificationThreadMessageNewEvent;
 use GetStream\GeneratedModels\PendingMessageEvent;
 use GetStream\GeneratedModels\PermissionRequestEvent;
+use GetStream\GeneratedModels\PollClosedEvent;
+use GetStream\GeneratedModels\PollDeletedEvent;
+use GetStream\GeneratedModels\PollUpdatedEvent;
+use GetStream\GeneratedModels\PollVoteCastedEvent;
+use GetStream\GeneratedModels\PollVoteChangedEvent;
+use GetStream\GeneratedModels\PollVoteRemovedEvent;
 use GetStream\GeneratedModels\ReactionDeletedEvent;
 use GetStream\GeneratedModels\ReactionNewEvent;
 use GetStream\GeneratedModels\ReactionUpdatedEvent;
@@ -153,6 +164,8 @@ use GetStream\GeneratedModels\ReminderNotificationEvent;
 use GetStream\GeneratedModels\ReminderUpdatedEvent;
 use GetStream\GeneratedModels\ReviewQueueItemNewEvent;
 use GetStream\GeneratedModels\ReviewQueueItemUpdatedEvent;
+use GetStream\GeneratedModels\ScheduledMessageFailedEvent;
+use GetStream\GeneratedModels\ScheduledMessageSentEvent;
 use GetStream\GeneratedModels\StoriesFeedUpdatedEvent;
 use GetStream\GeneratedModels\ThreadUpdatedEvent;
 use GetStream\GeneratedModels\UnblockedUserEvent;
@@ -226,6 +239,7 @@ class Webhook
     public const EVENT_TYPE_CALL_RECORDING_STOPPED = 'call.recording_stopped';
     public const EVENT_TYPE_CALL_REJECTED = 'call.rejected';
     public const EVENT_TYPE_CALL_RING = 'call.ring';
+    public const EVENT_TYPE_CALL_RING_SETTLED = 'call.ring_settled';
     public const EVENT_TYPE_CALL_RTMP_BROADCAST_FAILED = 'call.rtmp_broadcast_failed';
     public const EVENT_TYPE_CALL_RTMP_BROADCAST_STARTED = 'call.rtmp_broadcast_started';
     public const EVENT_TYPE_CALL_RTMP_BROADCAST_STOPPED = 'call.rtmp_broadcast_stopped';
@@ -263,6 +277,8 @@ class Webhook
     public const EVENT_TYPE_EXPORT_BULK_IMAGE_MODERATION_SUCCESS = 'export.bulk_image_moderation.success';
     public const EVENT_TYPE_EXPORT_CHANNELS_ERROR = 'export.channels.error';
     public const EVENT_TYPE_EXPORT_CHANNELS_SUCCESS = 'export.channels.success';
+    public const EVENT_TYPE_EXPORT_LABEL_RESULTS_ERROR = 'export.label_results.error';
+    public const EVENT_TYPE_EXPORT_LABEL_RESULTS_SUCCESS = 'export.label_results.success';
     public const EVENT_TYPE_EXPORT_MODERATION_LOGS_ERROR = 'export.moderation_logs.error';
     public const EVENT_TYPE_EXPORT_MODERATION_LOGS_SUCCESS = 'export.moderation_logs.success';
     public const EVENT_TYPE_EXPORT_REVIEW_QUEUE_ERROR = 'export.review_queue.error';
@@ -288,6 +304,7 @@ class Webhook
     public const EVENT_TYPE_FEEDS_BOOKMARK_FOLDER_UPDATED = 'feeds.bookmark_folder.updated';
     public const EVENT_TYPE_FEEDS_COMMENT_ADDED = 'feeds.comment.added';
     public const EVENT_TYPE_FEEDS_COMMENT_DELETED = 'feeds.comment.deleted';
+    public const EVENT_TYPE_FEEDS_COMMENT_FEEDBACK = 'feeds.comment.feedback';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_ADDED = 'feeds.comment.reaction.added';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_DELETED = 'feeds.comment.reaction.deleted';
     public const EVENT_TYPE_FEEDS_COMMENT_REACTION_UPDATED = 'feeds.comment.reaction.updated';
@@ -308,6 +325,8 @@ class Webhook
     public const EVENT_TYPE_FEEDS_NOTIFICATION_FEED_UPDATED = 'feeds.notification_feed.updated';
     public const EVENT_TYPE_FEEDS_STORIES_FEED_UPDATED = 'feeds.stories_feed.updated';
     public const EVENT_TYPE_FLAG_UPDATED = 'flag.updated';
+    public const EVENT_TYPE_IMPORT_ERROR = 'import.error';
+    public const EVENT_TYPE_IMPORT_SUCCESS = 'import.success';
     public const EVENT_TYPE_INGRESS_ERROR = 'ingress.error';
     public const EVENT_TYPE_INGRESS_STARTED = 'ingress.started';
     public const EVENT_TYPE_INGRESS_STOPPED = 'ingress.stopped';
@@ -333,6 +352,12 @@ class Webhook
     public const EVENT_TYPE_NOTIFICATION_MARK_UNREAD = 'notification.mark_unread';
     public const EVENT_TYPE_NOTIFICATION_REMINDER_DUE = 'notification.reminder_due';
     public const EVENT_TYPE_NOTIFICATION_THREAD_MESSAGE_NEW = 'notification.thread_message_new';
+    public const EVENT_TYPE_POLL_CLOSED = 'poll.closed';
+    public const EVENT_TYPE_POLL_DELETED = 'poll.deleted';
+    public const EVENT_TYPE_POLL_UPDATED = 'poll.updated';
+    public const EVENT_TYPE_POLL_VOTE_CASTED = 'poll.vote_casted';
+    public const EVENT_TYPE_POLL_VOTE_CHANGED = 'poll.vote_changed';
+    public const EVENT_TYPE_POLL_VOTE_REMOVED = 'poll.vote_removed';
     public const EVENT_TYPE_REACTION_DELETED = 'reaction.deleted';
     public const EVENT_TYPE_REACTION_NEW = 'reaction.new';
     public const EVENT_TYPE_REACTION_UPDATED = 'reaction.updated';
@@ -341,6 +366,8 @@ class Webhook
     public const EVENT_TYPE_REMINDER_UPDATED = 'reminder.updated';
     public const EVENT_TYPE_REVIEW_QUEUE_ITEM_NEW = 'review_queue_item.new';
     public const EVENT_TYPE_REVIEW_QUEUE_ITEM_UPDATED = 'review_queue_item.updated';
+    public const EVENT_TYPE_SCHEDULED_MESSAGE_FAILED = 'scheduled_message.failed';
+    public const EVENT_TYPE_SCHEDULED_MESSAGE_SENT = 'scheduled_message.sent';
     public const EVENT_TYPE_THREAD_UPDATED = 'thread.updated';
     public const EVENT_TYPE_USER_BANNED = 'user.banned';
     public const EVENT_TYPE_USER_DEACTIVATED = 'user.deactivated';
@@ -468,6 +495,7 @@ class Webhook
             'call.recording_stopped' => CallRecordingStoppedEvent::class,
             'call.rejected' => CallRejectedEvent::class,
             'call.ring' => CallRingEvent::class,
+            'call.ring_settled' => CallRingSettledEvent::class,
             'call.rtmp_broadcast_failed' => CallRtmpBroadcastFailedEvent::class,
             'call.rtmp_broadcast_started' => CallRtmpBroadcastStartedEvent::class,
             'call.rtmp_broadcast_stopped' => CallRtmpBroadcastStoppedEvent::class,
@@ -505,6 +533,8 @@ class Webhook
             'export.bulk_image_moderation.success' => AsyncBulkImageModerationEvent::class,
             'export.channels.error' => AsyncExportErrorEvent::class,
             'export.channels.success' => AsyncExportChannelsEvent::class,
+            'export.label_results.error' => AsyncExportErrorEvent::class,
+            'export.label_results.success' => AsyncExportLabelResultsEvent::class,
             'export.moderation_logs.error' => AsyncExportErrorEvent::class,
             'export.moderation_logs.success' => AsyncExportModerationLogsEvent::class,
             'export.review_queue.error' => AsyncExportErrorEvent::class,
@@ -530,6 +560,7 @@ class Webhook
             'feeds.bookmark_folder.updated' => BookmarkFolderUpdatedEvent::class,
             'feeds.comment.added' => CommentAddedEvent::class,
             'feeds.comment.deleted' => CommentDeletedEvent::class,
+            'feeds.comment.feedback' => CommentFeedbackEvent::class,
             'feeds.comment.reaction.added' => CommentReactionAddedEvent::class,
             'feeds.comment.reaction.deleted' => CommentReactionDeletedEvent::class,
             'feeds.comment.reaction.updated' => CommentReactionUpdatedEvent::class,
@@ -550,6 +581,8 @@ class Webhook
             'feeds.notification_feed.updated' => NotificationFeedUpdatedEvent::class,
             'feeds.stories_feed.updated' => StoriesFeedUpdatedEvent::class,
             'flag.updated' => FlagUpdatedEvent::class,
+            'import.error' => AsyncImportErrorEvent::class,
+            'import.success' => AsyncImportSuccessEvent::class,
             'ingress.error' => IngressErrorEvent::class,
             'ingress.started' => IngressStartedEvent::class,
             'ingress.stopped' => IngressStoppedEvent::class,
@@ -575,6 +608,12 @@ class Webhook
             'notification.mark_unread' => NotificationMarkUnreadEvent::class,
             'notification.reminder_due' => ReminderNotificationEvent::class,
             'notification.thread_message_new' => NotificationThreadMessageNewEvent::class,
+            'poll.closed' => PollClosedEvent::class,
+            'poll.deleted' => PollDeletedEvent::class,
+            'poll.updated' => PollUpdatedEvent::class,
+            'poll.vote_casted' => PollVoteCastedEvent::class,
+            'poll.vote_changed' => PollVoteChangedEvent::class,
+            'poll.vote_removed' => PollVoteRemovedEvent::class,
             'reaction.deleted' => ReactionDeletedEvent::class,
             'reaction.new' => ReactionNewEvent::class,
             'reaction.updated' => ReactionUpdatedEvent::class,
@@ -583,6 +622,8 @@ class Webhook
             'reminder.updated' => ReminderUpdatedEvent::class,
             'review_queue_item.new' => ReviewQueueItemNewEvent::class,
             'review_queue_item.updated' => ReviewQueueItemUpdatedEvent::class,
+            'scheduled_message.failed' => ScheduledMessageFailedEvent::class,
+            'scheduled_message.sent' => ScheduledMessageSentEvent::class,
             'thread.updated' => ThreadUpdatedEvent::class,
             'user.banned' => UserBannedEvent::class,
             'user.deactivated' => UserDeactivatedEvent::class,

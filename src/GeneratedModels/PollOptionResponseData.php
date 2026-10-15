@@ -8,6 +8,7 @@ class PollOptionResponseData extends BaseModel
     public function __construct(
         public ?string $id = null,
         public ?string $text = null,
+        public ?array $textI18n = null,
         public ?object $custom = null,
     ) {
     }

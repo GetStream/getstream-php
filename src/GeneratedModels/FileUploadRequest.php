@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-class FileUploadRequest extends BaseModel
+class FileUploadRequest extends BaseModel implements MultipartRequest
 {
     public function __construct(
         public ?string $file = null, // file field

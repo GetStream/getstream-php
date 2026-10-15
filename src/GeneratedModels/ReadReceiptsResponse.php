@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * The settings for the read receipt events.
+ */
 class ReadReceiptsResponse extends BaseModel
 {
     public function __construct(

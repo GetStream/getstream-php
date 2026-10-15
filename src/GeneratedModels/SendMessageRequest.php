@@ -15,6 +15,7 @@ class SendMessageRequest extends BaseModel
         public ?bool $keepChannelHidden = null,
         public ?bool $includeMentionedMembers = null, // When true, the response includes mentioned_members: for each mentioned user, whether that user is currently a channel member. Requires the ReadChannelMembers permission
         public ?bool $includeChannelContext = null, // When true, the response includes channel_context: a slim channel object with cid, type, id and created_by
+        public ?\DateTime $scheduledAt = null, // When set, the message is not sent now: it is stored and sent at this time (UTC). The response then carries scheduled_message. Must be at least 1 minute and at most the app's maximum lead time (120 days by default) from now. Slash commands cannot be scheduled
     ) {
     }
 
