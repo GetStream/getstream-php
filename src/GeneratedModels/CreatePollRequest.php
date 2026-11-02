@@ -15,13 +15,16 @@ class CreatePollRequest extends BaseModel
         /** @var array<PollOptionInput>|null */
         #[ArrayOf(PollOptionInput::class)]
         public ?array $options = null,
-        public ?string $votingVisibility = null,
+        public ?string $votingVisibility = null, // Represents the visibility of votes in a poll.
         public ?bool $enforceUniqueVote = null, // Indicates whether users can cast multiple votes
         public ?int $maxVotesAllowed = null, // Indicates the maximum amount of votes a user can cast
         public ?bool $allowUserSuggestedOptions = null,
         public ?bool $allowAnswers = null, // Indicates whether users can suggest user defined answers
         public ?bool $isClosed = null, // Indicates whether the poll is open for voting
+        public ?string $team = null,
         public ?object $custom = null, // Custom data for this object
+        public ?string $configKey = null, // Key of the moderation configuration to use. Server-side only.
+        public ?string $configTeam = null, // Team associated with the configuration. Server-side only.
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

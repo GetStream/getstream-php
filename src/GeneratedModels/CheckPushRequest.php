@@ -16,7 +16,7 @@ class CheckPushRequest extends BaseModel
         public ?bool $skipDevices = null, // Don't require existing devices to render templates
         public ?string $pushProviderType = null, // Push provider type. One of: firebase, apn, huawei, xiaomi
         public ?string $pushProviderName = null, // Name of push provider
-        public ?string $eventType = null, // Type of event for push templates (default: message.new). One of: message.new, message.updated, reaction.new, reaction.updated, notification.reminder_due
+        public ?string $eventType = null, // Type of event for push templates (default: message.new). One of: message.new, message.updated, reaction.new, reaction.updated, notification.reminder_due, feeds.activity.added, feeds.comment.added, feeds.activity.reaction.added, feeds.comment.reaction.added, feeds.follow.created, feeds.notification_feed.updated
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

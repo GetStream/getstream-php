@@ -15,6 +15,9 @@ class ActivitySelectorConfig extends BaseModel
         public ?string $cutoffWindow = null, // Flexible relative time window for activity selection (e.g., '1h', '3d', '1y'). Activities older than this duration will be filtered out. Cannot be used together with cutoff_time
         public ?int $minPopularity = null, // Minimum popularity threshold. For the 'popular' selector, omit to use the default (5); values below 1 are rejected
         public ?FeedGroupScope $feedGroups = null,
+        public ?int $rankingCandidateLimit = null, // Maximum number of candidate activities this selector contributes to a ranked feed (1-1000). Omit to use the default ranking buffer. Only supported on the popular, proximity, interest and query selectors, and ignored on feeds without ranking
+        public ?int $timeBudgetMs = null, // Maximum time in milliseconds this selector may take (25-5000). A selector that runs over its budget is dropped from that read instead of failing it, and stays out for the rest of that pagination session. The budget can only tighten the default, never extend it. Omit to use the default. Only supported on the popular, proximity, interest, query and follow_suggestion selectors
+        public ?float $viewerLocationRadiusKm = null, // Radius in kilometers the proximity selector searches around the viewer's location (the request's viewer_location, else the user's custom.location) when its filter has no near or within_bounds. Greater than 0 and at most 250. Omit to use the default (10). Only supported on the proximity selector
         public ?object $params = null,
     ) {
     }

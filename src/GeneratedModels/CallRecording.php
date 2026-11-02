@@ -14,7 +14,7 @@ class CallRecording extends BaseModel
         public ?\DateTime $startTime = null,
         public ?\DateTime $endTime = null,
         public ?string $sessionID = null,
-        public ?string $recordingType = null,
+        public ?string $recordingType = null, // The layout a call recording is produced in.
     ) {
     }
 

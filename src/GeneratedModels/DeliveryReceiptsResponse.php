@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * The settings for the delivery receipt events.
+ */
 class DeliveryReceiptsResponse extends BaseModel
 {
     public function __construct(

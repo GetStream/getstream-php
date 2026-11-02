@@ -27,7 +27,8 @@ class FeedsV3CommentResponse extends BaseModel
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
         public ?array $mentionedUsers = null,
-        public ?string $status = null,
+        public ?bool $hidden = null,
+        public ?string $status = null, // Moderation status of a comment.
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?\DateTime $editedAt = null,

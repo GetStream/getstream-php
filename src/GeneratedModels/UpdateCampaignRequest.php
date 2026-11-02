@@ -10,7 +10,7 @@ class UpdateCampaignRequest extends BaseModel
         public ?array $segmentIds = null,
         public ?array $userIds = null,
         public ?string $senderID = null,
-        public ?string $senderMode = null,
+        public ?string $senderMode = null, // Whether a campaign includes or excludes its sender.
         public ?string $name = null,
         public ?string $description = null,
         public ?bool $createChannels = null,
@@ -19,7 +19,7 @@ class UpdateCampaignRequest extends BaseModel
         public ?bool $skipWebhook = null,
         public ?CampaignMessageTemplate $messageTemplate = null,
         public ?CampaignChannelTemplate $channelTemplate = null,
-        public ?string $senderVisibility = null,
+        public ?string $senderVisibility = null, // How a campaign appears to its sender.
     ) {
     }
 

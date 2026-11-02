@@ -16,6 +16,9 @@ class AnalyzeImageField extends BaseModel
         #[ArrayOf(Classification::class)]
         public ?array $ocrClassifications = null, // Flat list of Bodyguard OCR text-moderation labels on the image's extracted text (e.g. VULGARITY, PII). Each entry: `name` + `severity`. Populated when BG's OCR pipeline returned non-empty results for this image.
         public ?string $error = null, // Set when moderation couldn't be determined for this image — action is absent.
+        /** @var array<DetectedURLResponse>|null */
+        #[ArrayOf(DetectedURLResponse::class)]
+        public ?array $detectedUrls = null, // URLs found in the image, as `{url, source}` objects: `source` is `qr` (decoded from a QR code) or `ocr` (in text visible in the image). Independent of the action; omitted when none were found.
     ) {
     }
 

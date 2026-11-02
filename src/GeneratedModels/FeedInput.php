@@ -8,7 +8,7 @@ class FeedInput extends BaseModel
     public function __construct(
         public ?string $name = null,
         public ?string $description = null,
-        public ?string $visibility = null,
+        public ?string $visibility = null, // Who can see and follow a feed.
         public ?object $custom = null,
         public ?Location $location = null,
         public ?array $filterTags = null,

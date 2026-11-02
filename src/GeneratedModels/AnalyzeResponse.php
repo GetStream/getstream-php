@@ -14,6 +14,8 @@ class AnalyzeResponse extends BaseModel
         #[MapOf(AnalyzeImageField::class)]
         public ?array $images = null, // Per-image moderation verdicts keyed by caller label.
         public ?string $duration = null,
+        public ?string $llmModel = null, // ID of the LLM model that scored the content (e.g. gpt-4o-mini). Omitted when no LLM verdict was used (e.g. Bodyguard-only, or `pending`).
+        public ?string $llmReasoningEffort = null, // reasoning_effort sent with the LLM request. Omitted when the request did not send one.
     ) {
     }
 

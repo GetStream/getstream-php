@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class RawRecordSettings extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null,
+        public ?string $mode = null, // Whether a call feature is available, disabled, or turned on automatically.
         public ?bool $audioOnly = null,
     ) {
     }

@@ -14,6 +14,7 @@ class ChannelGetOrCreateRequest extends BaseModel
         public ?PaginationParams $members = null,
         public ?PaginationParams $watchers = null,
         public ?array $memberCustomInclude = null, // Top-level keys of the message sender's channel-member custom data to include under member.custom (max 8 keys, 64 chars each)
+        public ?bool $includeScheduledMessages = null, // Adds scheduled_messages to the response: the acting user's own scheduled, sending and failed messages in this channel (server-side requests name the user with data.created_by_id or data.created_by; without one the field is omitted). Absent from the response when there are more than 100 or they could not be loaded; use the scheduled messages query then
     ) {
     }
 

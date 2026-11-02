@@ -9,6 +9,8 @@ class FloodIdenticalRuleParameters extends BaseModel
         public ?int $threshold = null,
         public ?string $timeWindow = null,
         public ?array $allowlist = null,
+        public ?bool $trackAcrossUsers = null,
+        public ?int $minTextLength = null,
     ) {
     }
 

@@ -13,6 +13,8 @@ class LLMConfig extends BaseModel
         public ?array $rules = null,
         public ?array $severityDescriptions = null,
         public ?string $appContext = null,
+        public ?array $contextCustomKeys = null,
+        public ?string $customKeysContextDescription = null,
     ) {
     }
 

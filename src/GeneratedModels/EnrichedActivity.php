@@ -12,6 +12,7 @@ class EnrichedActivity extends BaseModel
         public ?Data $object = null,
         public ?string $foreignID = null,
         public ?Data $target = null,
+        public ?string $time = null,
         public ?Data $origin = null,
         public ?array $to = null,
         public ?float $score = null,

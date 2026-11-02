@@ -17,7 +17,7 @@ class ChannelConfigOverrides extends BaseModel
         public ?bool $urlEnrichment = null, // Enables or disables URL enrichment
         public ?int $maxMessageLength = null, // Overrides max message length
         public ?string $blocklist = null,
-        public ?string $blocklistBehavior = null,
+        public ?string $blocklistBehavior = null, // What a blocklist does when it matches. shadow_block is not accepted on a channel override.
         public ?array $grants = null,
         public ?array $commands = null, // List of commands that channel supports
         public ?string $pushLevel = null, // Overrides the push notification level for this channel

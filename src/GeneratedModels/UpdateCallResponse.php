@@ -13,8 +13,6 @@ class UpdateCallResponse extends BaseModel
         /** @var array<MemberResponse>|null */
         #[ArrayOf(MemberResponse::class)]
         public ?array $members = null,
-        /** @var array<OwnCapability>|null */
-        #[ArrayOf(OwnCapability::class)]
         public ?array $ownCapabilities = null,
         public ?string $duration = null,
     ) {

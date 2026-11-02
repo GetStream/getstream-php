@@ -17,8 +17,8 @@ class EnrichedReaction extends BaseModel
         public ?array $ownChildren = null,
         public ?array $childrenCounts = null,
         public ?Data $user = null,
-        public ?Time $createdAt = null,
-        public ?Time $updatedAt = null,
+        public ?string $createdAt = null,
+        public ?string $updatedAt = null,
     ) {
     }
 

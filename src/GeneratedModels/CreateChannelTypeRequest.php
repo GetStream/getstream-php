@@ -13,12 +13,14 @@ class CreateChannelTypeRequest extends BaseModel
         public ?bool $deliveryEvents = null,
         public ?bool $reactions = null, // Reactions
         public ?bool $replies = null, // Replies
+        public ?bool $quotes = null, // Enables message quotes
         public ?bool $search = null, // Search
         public ?bool $mutes = null, // Mutes
         public ?bool $uploads = null, // Uploads
         public ?bool $urlEnrichment = null, // URL enrichment
         public ?bool $customEvents = null, // Custom events
         public ?bool $pushNotifications = null, // Push notifications
+        public ?bool $reminders = null, // Enables message reminders
         public ?bool $markMessagesPending = null, // Mark messages pending
         public ?bool $polls = null, // Polls
         public ?bool $userMessageReminders = null,
@@ -38,6 +40,7 @@ class CreateChannelTypeRequest extends BaseModel
         /** @var array<BlockListOptions>|null */
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null, // Blocklists
+        public ?Thresholds $automodThresholds = null, // Sets thresholds for AI moderation
         public ?int $partitionSize = null, // Partition size
         public ?string $partitionTtl = null, // Partition TTL
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,

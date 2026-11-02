@@ -10,7 +10,7 @@ class FeedGroup extends BaseModel
         public ?string $groupID = null,
         public ?NotificationConfig $notification = null,
         public ?PushNotificationConfig $pushNotification = null,
-        public ?string $defaultVisibility = null,
+        public ?string $defaultVisibility = null, // Who can see and follow a feed.
         public ?string $defaultFollowerRole = null,
         public ?object $custom = null,
         public ?\DateTime $createdAt = null,

@@ -59,6 +59,20 @@ trait VideoTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallMembersResponse::class);
     }
     /**
+     * Returns a call's ring attempts, newest first. A session can be rung more than once, and the session-level accepted_by / rejected_by / missed_by maps flatten every ring together; an attempt says which ring a user acted on, which devices it reached, and who settled it and why. Pass call_session_id to limit the read to one session.
+     *
+     * @param GeneratedModels\QueryCallRingAttemptsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryCallRingAttemptsResponse>
+     * @throws StreamException
+     */
+    public function queryCallRingAttempts(GeneratedModels\QueryCallRingAttemptsRequest $requestData): StreamResponse {
+        $path = '/api/v2/video/call/ring_attempts';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallRingAttemptsResponse::class);
+    }
+    /**
      *
      * @param GeneratedModels\QueryCallStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCallStatsResponse>

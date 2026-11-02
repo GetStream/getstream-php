@@ -11,6 +11,7 @@ class AppealRequest extends BaseModel
         public ?string $appealReason = null, // Explanation for why the content is being appealed
         public ?array $attachments = null, // Array of Attachment URLs(e.g., images)
         public ?string $reviewQueueItemID = null, // ID of the review queue item (flagged message) that triggered the ban. Applicable only for user ban appeals.
+        public ?string $channelCid = null, // CID of the channel ban being appealed. Only used when entity_type is stream:user; omit to appeal the global ban.
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

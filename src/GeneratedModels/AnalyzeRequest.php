@@ -15,8 +15,11 @@ class AnalyzeRequest extends BaseModel
         public ?\DateTime $contentPublishedAt = null, // Original timestamp when the content was produced. Used as the `published_at` timestamp on per-content log entries that surface in `matched_contents` on aggregation-rule webhooks.
         public ?array $contentIds = null, // Optional map from a content label (either a `texts` key or an `image:<key>` multipart label) to a caller-supplied per-instance identifier. Echoed on per-field verdicts and surfaced in `matched_contents` when an aggregation rule fires.
         public ?bool $asyncResponse = null, // When true, the response carries no verdicts (status `pending`) and per-modality results arrive via `moderation.text_analysis.complete` and `moderation.image_analysis.complete` webhooks. Image moderation runs on a background worker; text moderation runs synchronously and is then delivered via webhook.
+        /** @deprecated */
+        public ?string $countryCode = null, // ISO 3166-1 alpha-2 country the content is aimed at (e.g. US, DE). Ignored when country_codes is set, but an invalid value is still rejected with 400.
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
+        public ?array $countryCodes = null, // ISO 3166-1 alpha-2 countries the content is aimed at (e.g. US, DE), up to 300. The first is the primary country, which AI text providers receive as country context. Takes precedence over country_code.
     ) {
     }
 

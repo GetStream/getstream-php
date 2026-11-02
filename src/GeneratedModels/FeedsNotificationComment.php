@@ -12,6 +12,7 @@ class FeedsNotificationComment extends BaseModel
         /** @var array<Attachment>|null */
         #[ArrayOf(Attachment::class)]
         public ?array $attachments = null,
+        public ?string $parentID = null,
     ) {
     }
 

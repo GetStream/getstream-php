@@ -12,6 +12,7 @@ class MarkReviewedRequestPayload extends BaseModel
         public ?bool $disableMarkingContentAsReviewed = null, // Skip marking content as reviewed
         public ?int $contentToMarkAsReviewedLimit = null, // Maximum content items to mark as reviewed
         public ?string $decisionReason = null, // Reason for the appeal decision
+        public ?string $reason = null, // Internal moderator note, stored on the action log and returned by QueryModerationLogs. Not shown to the appealing user; use decision_reason for that
     ) {
     }
 

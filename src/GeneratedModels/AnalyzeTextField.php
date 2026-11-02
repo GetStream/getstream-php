@@ -14,6 +14,9 @@ class AnalyzeTextField extends BaseModel
         public ?string $severity = null, // Aggregate severity across the field: LOW | MEDIUM | HIGH | CRITICAL.
         public ?string $language = null, // Detected language code.
         public ?string $error = null, // Set when moderation couldn't be determined for this field — action is absent.
+        /** @var array<DetectedURLResponse>|null */
+        #[ArrayOf(DetectedURLResponse::class)]
+        public ?array $detectedUrls = null, // URLs found in the text, as `{url, source}` objects with `source` = `text`. Independent of the action; omitted when none were found.
     ) {
     }
 

@@ -12,6 +12,7 @@ class BlockListConfig extends BaseModel
         /** @var array<BlockListRule>|null */
         #[ArrayOf(BlockListRule::class)]
         public ?array $rules = null,
+        public ?bool $explicitUrlsOnly = null,
     ) {
     }
 

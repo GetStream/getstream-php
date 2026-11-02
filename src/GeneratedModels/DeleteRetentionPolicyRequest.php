@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class DeleteRetentionPolicyRequest extends BaseModel
 {
     public function __construct(
-        public ?string $policy = null,
+        public ?string $policy = null, // What a retention policy applies to.
     ) {
     }
 
