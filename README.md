@@ -10,6 +10,10 @@ Install via Composer:
 composer require getstream/getstream-php
 ```
 
+## Upgrading from v12?
+
+See [v12 → v13](MIGRATION_v12_to_v13.md). HTTP JSON is unchanged. `stopCampaign`, `commitMessage`, `getActivity`, and campaign responses changed.
+
 ## Migrating from stream-chat-php?
 
 If you are currently using [`stream-chat-php`](https://github.com/GetStream/stream-chat-php), we have a detailed migration guide with side-by-side code examples for common Chat use cases. See the [Migration Guide](docs/migration-from-stream-chat-php/README.md).
