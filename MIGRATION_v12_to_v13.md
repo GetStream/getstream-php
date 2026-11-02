@@ -55,27 +55,52 @@ These gained an optional argument at the end, so existing positional calls stay 
 - `deleteCollections($collectionRefs, $hardDelete = null)`
 - `getComments(..., $includeTopLevelCommentCount = null)`
 
-## Own capabilities
+## Named enums
 
-`ChannelOwnCapability`, `FeedOwnCapability`, and `OwnCapability` are classes of `public const` strings. They no longer extend `BaseModel`. Channel `ownCapabilities` is a list of strings.
+These values are named types now. **Properties stay `string`**, so `"all"` and `"flag"` still compile and still go out on the wire. Each type is a class of `public const` strings. Use the constants when you want a typo to fail in your editor. You do not have to.
 
 ```php
-// v13
-if (in_array(ChannelOwnCapability::SEND_MESSAGE, $channel->ownCapabilities ?? [], true)) {
+// v12
+$request = new CreateChannelTypeRequest(name: 'team', automodBehavior: 'flag', pushLevel: 'all');
+if ($channel->pushLevel === 'none') {
 }
-```
 
-## Named enum constants
-
-New types such as `PushLevel` and `ChannelModerationBehavior` are the same kind of constants class. Fields that use them are still `string`, so existing string assignments keep working.
-
-```php
+// v13 — string still works; constants are optional
 $request = new CreateChannelTypeRequest(
     name: 'team',
     automodBehavior: ChannelModerationBehavior::FLAG,
     pushLevel: PushLevel::ALL,
 );
+if ($channel->pushLevel === PushLevel::NONE) {
+}
 ```
+
+`ChannelOwnCapability`, `FeedOwnCapability`, and `OwnCapability` no longer extend `BaseModel`. They are constant classes. `ownCapabilities` was `array<ChannelOwnCapability>` and is now a plain `array` of strings.
+
+```php
+// v12 — entries were ChannelOwnCapability models
+// v13
+if (in_array(ChannelOwnCapability::SEND_MESSAGE, $channel->ownCapabilities ?? [], true)) {
+}
+if (in_array(OwnCapability::JOIN_CALL, $call->ownCapabilities ?? [], true)) {
+}
+```
+
+On `CampaignResponse`, `$senderMode` and `$senderVisibility` are still `?string`, documented as `CampaignSenderMode` and `CampaignSenderVisibility` (`"exclude"` / `"include"`, `"hidden"` / `"archived"`). A missing key is `null`, not `""`.
+
+### New constant classes
+
+`ActivitySelectorType`, `ActivityVisibility`, `AudioDefaultDevice`, `AutomodMode`, `BlocklistBehavior`, `CallLifecycleMode`, `CameraFacing`, `CampaignSenderMode`, `CampaignSenderVisibility`, `ChannelModerationBehavior`, `ChannelOwnCapability`, `CollectionStatus`, `CommentStatus`, `DeleteMessages`, `FeatureActivationMode`, `FeedMemberStatus`, `FeedOwnCapability`, `FeedVisibility`, `FollowPushPreference`, `FollowStatus`, `FriendReactionType`, `LayoutName`, `ModerationAction`, `OwnCapability`, `PushLevel`, `PushProviderName`, `RecordingType`, `RestrictReplies`, `RetentionPolicyType`, `ScheduledMessageFailureReason`, `ScheduledMessageQueryStatus`, `ScheduledMessageStatus`, `SetupStatus`, `SetupStep`, `SortParamType`, `TranscriptionLanguage`, `VideoCodec`, `VotingVisibility`.
+
+| Field | v12 | v13 property | Constants |
+|---|---|---|---|
+| `pushLevel` | `?string` | `?string` | `PushLevel::ALL`, `NONE`, `ALL_MENTIONS`, `DIRECT_MENTIONS`, `MENTIONS` |
+| `automodBehavior` | `?string` | `?string` | `ChannelModerationBehavior::FLAG`, `BLOCK`, `SHADOW_BLOCK` |
+| `blocklistBehavior` | `?string` | `?string` | `BlocklistBehavior::FLAG`, `BLOCK` |
+| feeds `visibility` | `?string` | `?string` | `FeedVisibility::*`, `ActivityVisibility::PUBLIC`, `PRIVATE`, `TAG` |
+| `votingVisibility` | `?string` | `?string` | `VotingVisibility::PUBLIC`, `ANONYMOUS` |
+| push provider | `?string` | `?string` | `PushProviderName::FIREBASE`, `APN`, `HUAWEI`, `XIAOMI` |
+| `ownCapabilities` | `array<ChannelOwnCapability>` | `array` of strings | `ChannelOwnCapability::SEND_MESSAGE`, `OwnCapability::JOIN_CALL`, … |
 
 ## AI video config
 

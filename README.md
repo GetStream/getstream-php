@@ -12,7 +12,7 @@ composer require getstream/getstream-php
 
 ## Upgrading from v12?
 
-See [v12 → v13](MIGRATION_v12_to_v13.md). HTTP JSON is unchanged. `stopCampaign`, `commitMessage`, `getActivity`, and campaign responses changed.
+See [v12 → v13](MIGRATION_v12_to_v13.md). HTTP JSON is unchanged. `getActivity`, campaign responses, and the new enum constants changed. Property types stay `string`.
 
 ## Migrating from stream-chat-php?
 
