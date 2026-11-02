@@ -8,7 +8,7 @@ class AutomodSemanticFiltersRule extends BaseModel
     public function __construct(
         public ?string $name = null,
         public ?float $threshold = null,
-        public ?string $action = null,
+        public ?string $action = null, // What a moderation rule does when it matches.
     ) {
     }
 

@@ -12,6 +12,9 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?array $grants = null,
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
+        public ?int $maxMessageLength = null,
+        public ?string $automod = null, // Automod level applied to a channel type.
+        public ?string $automodBehavior = null, // What automod or a blocklist does when it matches.
         public ?bool $typingEvents = null,
         public ?bool $readEvents = null,
         public ?bool $connectEvents = null,
@@ -32,18 +35,15 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?bool $sharedLocations = null,
         public ?bool $countMessages = null,
         public ?string $messageRetention = null,
-        public ?int $maxMessageLength = null,
-        public ?string $automod = null,
-        public ?string $automodBehavior = null,
         public ?string $blocklist = null,
-        public ?string $blocklistBehavior = null,
+        public ?string $blocklistBehavior = null, // What automod or a blocklist does when it matches.
         /** @var array<BlockListOptions>|null */
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
         public ?array $allowedFlagReasons = null,
         public ?Thresholds $automodThresholds = null, // Sets thresholds for AI moderation
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
         public ?array $commands = null, // List of commands that channel supports
     ) {

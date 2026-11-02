@@ -13,6 +13,7 @@ class ModerationDashboardPreferences extends BaseModel
         public ?OverviewDashboardConfig $overviewDashboard = null,
         public ?bool $asyncReviewQueueUpsert = null,
         public ?bool $disableAuditLogs = null,
+        public ?bool $disableActionLogs = null,
         public ?array $keyframeClassificationsMap = null,
         public ?array $escalationReasons = null,
         public ?bool $escalationQueueEnabled = null,
@@ -21,6 +22,8 @@ class ModerationDashboardPreferences extends BaseModel
         public ?bool $blockForeignCdnAttachments = null,
         public ?array $filterableCustomKeys = null,
         public ?bool $enforceShadowServerSide = null,
+        public ?array $mediaLabelDisplay = null,
+        public ?bool $textRedactionEnabled = null,
     ) {
     }
 

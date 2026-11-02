@@ -27,6 +27,7 @@ class CommentResponse extends BaseModel
         /** @var array<UserResponse>|null */
         #[ArrayOf(UserResponse::class)]
         public ?array $mentionedUsers = null, // Users mentioned in the comment
+        public ?bool $hidden = null, // Only true in QueryComments results filtered with hidden: true
         public ?string $status = null, // Status of the comment. One of: active, deleted, removed, hidden
         public ?\DateTime $createdAt = null, // When the comment was created
         public ?\DateTime $updatedAt = null, // When the comment was last updated

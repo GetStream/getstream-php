@@ -6,9 +6,9 @@ namespace GetStream\GeneratedModels;
 class TranscriptionSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null,
-        public ?string $closedCaptionMode = null,
-        public ?string $language = null,
+        public ?string $mode = null, // Whether a call feature is available, disabled, or turned on automatically.
+        public ?string $closedCaptionMode = null, // Whether a call feature is available, disabled, or turned on automatically.
+        public ?string $language = null, // Language a call is transcribed or captioned in.
         public ?TranslationSettings $translation = null,
         public ?SpeechSegmentConfig $speechSegmentConfig = null,
     ) {

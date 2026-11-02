@@ -34,10 +34,10 @@ class ChannelTypeConfig extends BaseModel
         public ?bool $countMessages = null,
         public ?string $messageRetention = null,
         public ?int $maxMessageLength = null,
-        public ?string $automod = null,
-        public ?string $automodBehavior = null,
+        public ?string $automod = null, // Automod level applied to a channel type.
+        public ?string $automodBehavior = null, // What automod or a blocklist does when it matches.
         public ?string $blocklist = null,
-        public ?string $blocklistBehavior = null,
+        public ?string $blocklistBehavior = null, // What automod or a blocklist does when it matches.
         /** @var array<BlockListOptions>|null */
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
@@ -46,7 +46,7 @@ class ChannelTypeConfig extends BaseModel
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
         /** @var array<Command>|null */
         #[ArrayOf(Command::class)]

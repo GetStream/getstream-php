@@ -348,6 +348,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CustomCheckResponse::class);
     }
     /**
+     * List moderation feedback submissions that have an item matching the filter, with those items, sorting and pagination. Server-side only.
+     *
+     * @param GeneratedModels\QueryModerationFeedbackRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryModerationFeedbackResponse>
+     * @throws StreamException
+     */
+    public function queryModerationFeedback(GeneratedModels\QueryModerationFeedbackRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/feedback_items';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryModerationFeedbackResponse::class);
+    }
+    /**
      * Delete a specific moderation template by its name
      *
      * @return StreamResponse<GeneratedModels\DeleteModerationTemplateResponse>
@@ -708,6 +722,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
     }
     /**
+     * Authorize revealing a review queue item's blurred media. CSAM can only be revealed by users with the RevealProtectedMedia permission. Reveals of blurred CSAM or gore are recorded in the moderation action logs.
+     *
+     * @param GeneratedModels\RevealMediaRequest $requestData
+     * @return StreamResponse<GeneratedModels\RevealMediaResponse>
+     * @throws StreamException
+     */
+    public function revealMedia(GeneratedModels\RevealMediaRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/reveal_media';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RevealMediaResponse::class);
+    }
+    /**
      * Query review queue items allows you to filter the review queue items. This is used for building a moderation dashboard.
      *
      * @param GeneratedModels\QueryReviewQueueRequest $requestData
@@ -778,7 +806,7 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SubmitActionResponse::class);
     }
     /**
-     * Forward a moderator-supplied correction to the moderation feedback pipeline. Server-side only.
+     * Forward a moderator-supplied correction to the moderation feedback pipeline, optionally marking the referenced flags as false positives. Server-side only.
      *
      * @param GeneratedModels\SubmitModerationFeedbackRequest $requestData
      * @return StreamResponse<GeneratedModels\SubmitModerationFeedbackResponse>

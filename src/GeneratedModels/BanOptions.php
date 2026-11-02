@@ -10,7 +10,7 @@ class BanOptions extends BaseModel
         public ?string $reason = null,
         public ?bool $shadowBan = null,
         public ?bool $ipBan = null,
-        public ?string $deleteMessages = null,
+        public ?string $deleteMessages = null, // How a ban or user deletion treats the user's messages.
     ) {
     }
 

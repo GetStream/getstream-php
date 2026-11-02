@@ -8,7 +8,7 @@ class GroupedQueryChannelsResponse extends BaseModel
     public function __construct(
         /** @var array<string, GroupedChannelsBucket>|null */
         #[MapOf(GroupedChannelsBucket::class)]
-        public ?array $groups = null, // Predefined channel groups keyed by group name
+        public ?array $groups = null, // Groups keyed by the requested stored group name
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }

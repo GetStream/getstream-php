@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class IngressVideoLayerRequest extends BaseModel
 {
     public function __construct(
-        public ?string $codec = null,
+        public ?string $codec = null, // The codec an ingress video layer is encoded with.
         public ?int $bitrate = null,
         public ?int $minDimension = null,
         public ?int $maxDimension = null,

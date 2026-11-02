@@ -10,6 +10,7 @@ class RestoreActionRequestPayload extends BaseModel
 {
     public function __construct(
         public ?string $decisionReason = null, // Reason for the appeal decision
+        public ?string $reason = null, // Internal moderator note, stored on the action log and returned by QueryModerationLogs. Not shown to the appealing user; use decision_reason for that
     ) {
     }
 

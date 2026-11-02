@@ -23,8 +23,8 @@ class OwnUserResponse extends BaseModel
         public ?\DateTime $revokeTokensIssuedBefore = null,
         public ?\DateTime $deactivatedAt = null,
         public ?int $avgResponseTime = null,
-        public ?PushPreferencesResponse $pushPreferences = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?PushPreferencesResponse $pushPreferences = null, // The push preference details.
+        public ?PrivacySettingsResponse $privacySettings = null, // The privacy settings of the user.
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null,
@@ -35,7 +35,8 @@ class OwnUserResponse extends BaseModel
         /** @var array<ChannelMute>|null */
         #[ArrayOf(ChannelMute::class)]
         public ?array $channelMutes = null,
-        public ?int $unreadCount = null,
+        /** @deprecated */
+        public ?int $unreadCount = null, // Deprecated: Use total_unread_count instead.
         public ?int $totalUnreadCount = null,
         public ?array $totalUnreadCountByTeam = null,
         public ?int $unreadChannels = null,

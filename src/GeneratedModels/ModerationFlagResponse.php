@@ -6,6 +6,7 @@ namespace GetStream\GeneratedModels;
 class ModerationFlagResponse extends BaseModel
 {
     public function __construct(
+        public ?string $id = null, // Unique identifier of the flag
         public ?string $type = null,
         public ?string $userID = null,
         public ?UserResponse $user = null, // User response object

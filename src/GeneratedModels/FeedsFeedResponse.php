@@ -14,7 +14,7 @@ class FeedsFeedResponse extends BaseModel
         public ?object $custom = null,
         public ?FeedsActivityLocation $location = null,
         public ?array $filterTags = null,
-        public ?string $visibility = null,
+        public ?string $visibility = null, // Who can see and follow a feed.
         public ?UserResponse $createdBy = null, // User response object
         public ?int $memberCount = null,
         public ?int $followerCount = null,

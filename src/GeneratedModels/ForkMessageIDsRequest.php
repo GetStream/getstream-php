@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+class ForkMessageIDsRequest extends BaseModel
+{
+    public function __construct(
+        public ?array $sourceMessageIds = null, // IDs of messages of the source channel, up to 1000
+        public ?string $userID = null,
+        public ?UserRequest $user = null, // User request object
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

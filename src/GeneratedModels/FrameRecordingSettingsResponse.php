@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class FrameRecordingSettingsResponse extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null,
+        public ?string $mode = null, // Whether a call feature is available, disabled, or turned on automatically.
         public ?string $quality = null,
         public ?int $captureIntervalInSeconds = null,
     ) {

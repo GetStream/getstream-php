@@ -10,6 +10,7 @@ class UpsertActivitiesResponse extends BaseModel
         #[ArrayOf(ActivityResponse::class)]
         public ?array $activities = null, // List of created or updated activities
         public ?int $mentionNotificationsCreated = null, // Total number of mention notification activities created for mentioned users across all activities
+        public ?array $skippedExisting = null, // IDs of activities left unchanged because they already existed. Only set when skip_existing is true.
         public ?string $duration = null,
     ) {
     }

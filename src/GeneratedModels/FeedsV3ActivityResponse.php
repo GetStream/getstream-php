@@ -10,9 +10,9 @@ class FeedsV3ActivityResponse extends BaseModel
         public ?string $type = null,
         public ?UserResponse $user = null, // User response object
         public ?array $feeds = null,
-        public ?string $visibility = null,
+        public ?string $visibility = null, // Who can see an activity.
         public ?string $visibilityTag = null,
-        public ?string $restrictReplies = null,
+        public ?string $restrictReplies = null, // Who is allowed to reply to an activity.
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         /** @var array<Attachment>|null */

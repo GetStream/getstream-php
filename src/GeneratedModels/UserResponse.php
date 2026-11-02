@@ -31,7 +31,7 @@ class UserResponse extends BaseModel
         public ?bool $bypassModeration = null,
         public ?\DateTime $banExpires = null, // Date when ban expires
         public ?PushNotificationSettingsResponse $pushNotifications = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?PrivacySettingsResponse $privacySettings = null, // The privacy settings of the user.
         /** @var array<DeviceResponse>|null */
         #[ArrayOf(DeviceResponse::class)]
         public ?array $devices = null, // List of devices user is using

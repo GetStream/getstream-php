@@ -13,8 +13,8 @@ class CampaignResponse extends BaseModel
         public ?array $segments = null,
         public ?string $senderID = null,
         public ?UserResponse $sender = null, // User response object
-        public ?string $senderMode = null,
-        public ?string $senderVisibility = null,
+        public ?string $senderMode = null, // Whether a campaign includes or excludes its sender.
+        public ?string $senderVisibility = null, // How a campaign appears to its sender.
         public ?string $name = null,
         public ?bool $createChannels = null,
         public ?bool $showChannels = null,

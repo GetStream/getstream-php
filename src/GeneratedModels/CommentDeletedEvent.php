@@ -15,7 +15,7 @@ class CommentDeletedEvent extends BaseModel
         public ?\DateTime $receivedAt = null,
         public ?object $custom = null,
         public ?string $fid = null,
-        public ?string $feedVisibility = null,
+        public ?string $feedVisibility = null, // Who can see and follow a feed.
         public ?UserResponseCommonFields $user = null,
     ) {
     }

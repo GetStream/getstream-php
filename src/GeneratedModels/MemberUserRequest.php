@@ -12,7 +12,7 @@ class MemberUserRequest extends BaseModel
         public ?object $custom = null,
         public ?string $language = null,
         public ?bool $invisible = null,
-        public ?PrivacySettingsResponse $privacySettings = null,
+        public ?PrivacySettingsResponse $privacySettings = null, // The privacy settings of the user.
         public ?string $role = null,
         public ?array $teamsRole = null,
         public ?array $teams = null,

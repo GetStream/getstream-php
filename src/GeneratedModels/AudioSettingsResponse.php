@@ -11,7 +11,7 @@ class AudioSettingsResponse extends BaseModel
         public ?bool $redundantCodingEnabled = null,
         public ?bool $micDefaultOn = null,
         public ?bool $speakerDefaultOn = null,
-        public ?string $defaultDevice = null,
+        public ?string $defaultDevice = null, // The device a call routes audio to by default.
         public ?NoiseCancellationSettings $noiseCancellation = null,
         public ?bool $hifiAudioEnabled = null,
     ) {

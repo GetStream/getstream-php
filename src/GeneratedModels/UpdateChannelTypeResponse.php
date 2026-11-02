@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
+/**
+ * Basic response information
+ */
 class UpdateChannelTypeResponse extends BaseModel
 {
     public function __construct(
@@ -32,10 +35,10 @@ class UpdateChannelTypeResponse extends BaseModel
         public ?bool $countMessages = null,
         public ?string $messageRetention = null,
         public ?int $maxMessageLength = null,
-        public ?string $automod = null,
-        public ?string $automodBehavior = null,
+        public ?string $automod = null, // Automod level applied to a channel type.
+        public ?string $automodBehavior = null, // What automod or a blocklist does when it matches.
         public ?string $blocklist = null,
-        public ?string $blocklistBehavior = null,
+        public ?string $blocklistBehavior = null, // What automod or a blocklist does when it matches.
         /** @var array<BlockListOptions>|null */
         #[ArrayOf(BlockListOptions::class)]
         public ?array $blocklists = null,
@@ -44,12 +47,12 @@ class UpdateChannelTypeResponse extends BaseModel
         public ?int $partitionSize = null,
         public ?string $partitionTtl = null,
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
         public ?array $commands = null,
-        public ?string $duration = null,
+        public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }
 

@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 namespace GetStream\GeneratedModels;
-/**
- * Basic response information
- */
 class GetOrCreateFeedResponse extends BaseModel
 {
     public function __construct(
@@ -32,6 +29,8 @@ class GetOrCreateFeedResponse extends BaseModel
         public ?PagerResponse $followersPagination = null,
         public ?PagerResponse $followingPagination = null,
         public ?NotificationStatusResponse $notificationStatus = null,
+        public ?array $degradedSelectors = null, // Activity selectors dropped from this read because they exceeded their time budget (see the time_budget_ms selector setting). Their activities are missing from this page, and they stay out for the rest of this pagination session. Omitted when every selector completed
+        public ?RankingConfig $rankingConfig = null,
         public ?bool $created = null,
         public ?string $next = null,
         public ?string $prev = null,

@@ -1,0 +1,51 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+class ForkChannelResponse extends BaseModel
+{
+    public function __construct(
+        public ?ChannelResponse $channel = null, // Represents channel in chat
+        /** @var array<MessageResponse>|null */
+        #[ArrayOf(MessageResponse::class)]
+        public ?array $messages = null, // List of channel messages
+        /** @var array<MessageResponse>|null */
+        #[ArrayOf(MessageResponse::class)]
+        public ?array $pinnedMessages = null, // List of pinned messages in the channel
+        public ?int $watcherCount = null, // Number of channel watchers
+        /** @var array<UserResponse>|null */
+        #[ArrayOf(UserResponse::class)]
+        public ?array $watchers = null, // List of user who is watching the channel
+        /** @var array<ReadStateResponse>|null */
+        #[ArrayOf(ReadStateResponse::class)]
+        public ?array $read = null, // List of read states
+        /** @var array<ChannelMemberResponse>|null */
+        #[ArrayOf(ChannelMemberResponse::class)]
+        public ?array $members = null, // List of channel members
+        public ?ChannelMemberResponse $membership = null,
+        public ?ChannelPushPreferencesResponse $pushPreferences = null, // The push preference details.
+        /** @var array<ThreadStateResponse>|null */
+        #[ArrayOf(ThreadStateResponse::class)]
+        public ?array $threads = null,
+        public ?bool $hidden = null, // Whether this channel is hidden or not
+        public ?\DateTime $hideMessagesBefore = null, // Messages before this date are hidden from the user
+        /** @var array<PendingMessageResponse>|null */
+        #[ArrayOf(PendingMessageResponse::class)]
+        public ?array $pendingMessages = null, // Pending messages that this user has sent
+        public ?DraftResponse $draft = null,
+        /** @var array<SharedLocationResponseData>|null */
+        #[ArrayOf(SharedLocationResponseData::class)]
+        public ?array $activeLiveLocations = null, // Active live locations in the channel
+        public ?int $cooldownRemainingMs = null, // Milliseconds until the current user's slow mode cool down period ends. Only set on client-side get or create channel and get channel requests while the user is under cool down
+        /** @var array<ScheduledMessageResponse>|null */
+        #[ArrayOf(ScheduledMessageResponse::class)]
+        public ?array $scheduledMessages = null, // The caller's own scheduled, sending and failed messages in this channel. Set only by a client-side GetOrCreateChannel or QueryChannels with include_scheduled_messages; absent when not requested or not known, in which case use the scheduled messages query
+        public ?ChannelForkResponse $fork = null, // A fork of an agent channel
+        public ?string $duration = null,
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

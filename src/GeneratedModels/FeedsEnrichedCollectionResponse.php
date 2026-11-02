@@ -12,7 +12,7 @@ class FeedsEnrichedCollectionResponse extends BaseModel
         public ?string $userID = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,
-        public ?string $status = null,
+        public ?string $status = null, // Enrichment status of a collection entry.
     ) {
     }
 

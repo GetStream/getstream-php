@@ -31,8 +31,6 @@ class ChannelResponse extends BaseModel
         public ?string $autoTranslationLanguage = null, // Language (or comma-separated list of languages) to translate to when auto translation is active
         public ?\DateTime $hideMessagesBefore = null, // Date since when the message history is accessible
         public ?int $cooldown = null, // Cooldown period after sending each message
-        /** @var array<ChannelOwnCapability>|null */
-        #[ArrayOf(ChannelOwnCapability::class)]
         public ?array $ownCapabilities = null, // List of channel capabilities of authenticated user
         public ?bool $hidden = null, // Whether this channel is hidden by current user or not
         public ?bool $blocked = null, // Whether this channel is blocked by current user or not
@@ -41,6 +39,8 @@ class ChannelResponse extends BaseModel
         public ?object $custom = null, // Custom data for this object
         public ?int $messageCount = null, // Number of messages in the channel
         public ?array $filterTags = null, // List of filter tags associated with the channel
+        public ?int $activeMemberCount = null, // Number of members who are not deactivated or deleted
+        public ?ChannelForkSummary $fork = null, // A fork of an agent channel
     ) {
     }
 

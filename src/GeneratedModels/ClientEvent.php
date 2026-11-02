@@ -28,6 +28,7 @@ class ClientEvent extends BaseModel
         public ?int $elapsedTime = null, // Milliseconds elapsed between the stage attempt's initiation and this event. 
         public ?string $callSessionID = null, // Call session ID associated with the attempt. Required on every event except CoordinatorJoin initiation and CoordinatorJoin failure (where the call session is not yet established); optional on MediaDevicePermission.
         public ?string $joinReason = null, // Reason the client initiated the join. Optional on CoordinatorJoin events; empty when not provided.
+        public ?string $source = null, // Source of the coordinator join. Optional on CoordinatorJoin events; omitted when not provided.
         public ?string $sfuID = null, // Identifier of the SFU the client was attempting to connect to. Required on WSJoin and PeerConnectionConnect failure, and on FirstAudioFrame and FirstVideoFrame.
         public ?string $trackID = null, // Identifier of the media track the frame belongs to. Required on FirstVideoFrame; optional on FirstAudioFrame.
         public ?string $retryFailureReason = null, // Failure reason string. Required on CoordinatorJoin, CoordinatorWS, WSJoin, and PeerConnectionConnect failure.
@@ -36,6 +37,8 @@ class ClientEvent extends BaseModel
         public ?string $screenShareStatus = null, // Screen-share permission status: INITIATED, FAILED, GRANTED, or NOT_INITIATED. Optional on MediaDevicePermission events.
         public ?string $microphonePermissionStatus = null, // Microphone permission status: INITIATED, FAILED, GRANTED, or NOT_INITIATED. Required on every MediaDevicePermission event.
         public ?string $cameraPermissionStatus = null, // Camera permission status: INITIATED, FAILED, GRANTED, or NOT_INITIATED. Required on every MediaDevicePermission event.
+        public ?string $leaveInitiator = null, // Source of the leave that aborted a join: user, app, callkit, remote_event, sdk_error, or unknown. Not validated against this set, so SDKs may report new values. Optional; sent on failure events. Maximum 32 characters.
+        public ?string $leaveReason = null, // Internal reason or triggering event for the leave that aborted a join. Optional; sent on failure events. Maximum 200 characters.
     ) {
     }
 

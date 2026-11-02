@@ -89,7 +89,7 @@ trait ChatTrait
      *
      * @param string $id
      * @param GeneratedModels\UpdateCampaignRequest $requestData
-     * @return StreamResponse<GeneratedModels\CampaignResponse>
+     * @return StreamResponse<GeneratedModels\UpdateCampaignResponse>
      * @throws StreamException
      */
     public function updateCampaign(string $id, GeneratedModels\UpdateCampaignRequest $requestData): StreamResponse {
@@ -98,7 +98,7 @@ trait ChatTrait
 
         $queryParams = [];
         // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\CampaignResponse::class);
+        return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateCampaignResponse::class);
     }
     /**
      * Starts or schedules a campaign
@@ -120,17 +120,16 @@ trait ChatTrait
      * Stops a campaign
      *
      * @param string $id
-     * @param GeneratedModels\StopCampaignRequest $requestData
-     * @return StreamResponse<GeneratedModels\CampaignResponse>
+     * @return StreamResponse<GeneratedModels\StopCampaignResponse>
      * @throws StreamException
      */
-    public function stopCampaign(string $id, GeneratedModels\StopCampaignRequest $requestData): StreamResponse {
+    public function stopCampaign(string $id): StreamResponse {
         $path = '/api/v2/chat/campaigns/{id}/stop';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
-        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CampaignResponse::class);
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StopCampaignResponse::class);
     }
     /**
      * Query channels with filter query
@@ -147,7 +146,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelsResponse::class);
     }
     /**
-     * Update channels in batch
+     * Update channels in batch. By default returns task_id for an asynchronous task. With synchronous: true, updateData and hide accept at most 100 explicit CIDs (hide also at most 10 distinct members) and return success_channels_count of channels selected after the database write completes, without task_id. A synchronous hide where none of the member users exist hides nothing and omits success_channels_count. Always poll a returned task_id, including when an older node ignores synchronous.
      * Sends events:
      * - channel.frozen
      * - channel.hidden
@@ -184,6 +183,20 @@ trait ChatTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteChannelsResponse::class);
+    }
+    /**
+     * Lists soft-deleted channels, ordered by created_at. Server-side only. Without a filter it lists every soft-deleted channel of the app; filter by team to scope it to one tenant. To permanently remove the returned channels, pass their cids to Delete channels (POST /channels/delete) with hard_delete set to true; the single-channel Delete channel endpoint does not accept soft-deleted channels.
+     *
+     * @param GeneratedModels\QueryDeletedChannelsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryDeletedChannelsResponse>
+     * @throws StreamException
+     */
+    public function queryDeletedChannels(GeneratedModels\QueryDeletedChannelsRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/deleted';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryDeletedChannelsResponse::class);
     }
     /**
      * Mark the status of a channel message delivered.
@@ -384,6 +397,24 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateChannelResponse::class);
     }
     /**
+     * Lists the users banned from a channel, by a ban on the channel or by a future channel ban issued by the channel's creator, with one entry per user
+     *
+     * @param string $type
+     * @param string $id
+     * @param GeneratedModels\QueryChannelBansRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryChannelBansResponse>
+     * @throws StreamException
+     */
+    public function queryChannelBans(string $type, string $id, GeneratedModels\QueryChannelBansRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}/bans/query';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelBansResponse::class);
+    }
+    /**
      * Deletes a draft
      * Sends events:
      * - draft.deleted
@@ -493,6 +524,45 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UploadChannelFileResponse::class);
     }
     /**
+     * Forks an agent channel at one of its messages: creates a new agent channel holding a copy of the messages a client sees up to it, itself included, with their replies up to it. The source channel is not changed. Reactions, pins, polls, read state, mutes, reminders, moderation flags and edit history are not copied. Fork only at a message the agent has finished writing. The request copies the newest 100 messages and their replies, so the fork is usable when it returns (fewer when the newest 1,000 messages are mostly deleted or hidden); older history is copied by a background task (`fork.status` is `backfilling`, `fork.task_id` names the task) and `channel.forked` is sent once every message is copied. A retry with the same channel ID and message returns the fork. Only available for the `agent` channel type.
+     * Sends events:
+     * - channel.created
+     * - channel.forked
+     *
+     * @param string $type
+     * @param string $id
+     * @param GeneratedModels\ForkChannelRequest $requestData
+     * @return StreamResponse<GeneratedModels\ForkChannelResponse>
+     * @throws StreamException
+     */
+    public function forkChannel(string $type, string $id, GeneratedModels\ForkChannelRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}/fork';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ForkChannelResponse::class);
+    }
+    /**
+     * Maps messages of a fork's source channel to their copies in the fork. Call it on the fork. A source message the fork holds no copy of is left out of the map.
+     *
+     * @param string $type
+     * @param string $id
+     * @param GeneratedModels\ForkMessageIDsRequest $requestData
+     * @return StreamResponse<GeneratedModels\ForkMessageIDsResponse>
+     * @throws StreamException
+     */
+    public function forkMessageIDs(string $type, string $id, GeneratedModels\ForkMessageIDsRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}/fork/message_ids';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ForkMessageIDsResponse::class);
+    }
+    /**
      * Marks channel as hidden for current user
      * Sends events:
      * - channel.hidden
@@ -578,6 +648,7 @@ trait ChatTrait
      * - channel.visible
      * - message.new
      * - message.updated
+     * - scheduled_message.created
      *
      * @param string $type
      * @param string $id
@@ -739,6 +810,26 @@ trait ChatTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MarkReadResponse::class);
+    }
+    /**
+     * Rewinds an agent channel to one of its messages: every message created after it, and the message itself when `inclusive` is set, is hidden from every read. The messages are kept and can still be exported. Only available for the `agent` channel type.
+     * Sends events:
+     * - channel.rewound
+     *
+     * @param string $type
+     * @param string $id
+     * @param GeneratedModels\RewindChannelRequest $requestData
+     * @return StreamResponse<GeneratedModels\RewindChannelResponse>
+     * @throws StreamException
+     */
+    public function rewindChannel(string $type, string $id, GeneratedModels\RewindChannelRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}/rewind';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RewindChannelResponse::class);
     }
     /**
      * Shows previously hidden channel
@@ -973,6 +1064,47 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportChannelsResponse::class);
     }
     /**
+     * Returns the app's default history window and the teams with full history. Only for apps with the history window enabled; other apps get 403. Server-side only.
+     *
+     * @return StreamResponse<GeneratedModels\GetHistoryWindowTeamsResponse>
+     * @throws StreamException
+     */
+    public function getHistoryWindowTeams(): StreamResponse {
+        $path = '/api/v2/chat/history_window/teams';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetHistoryWindowTeamsResponse::class);
+    }
+    /**
+     * Gives up to ten teams full history. Only for apps with the history window enabled; other apps get 403. Server-side only.
+     *
+     * @param GeneratedModels\SetHistoryWindowTeamsRequest $requestData
+     * @return StreamResponse<GeneratedModels\SetHistoryWindowTeamsResponse>
+     * @throws StreamException
+     */
+    public function setHistoryWindowTeams(GeneratedModels\SetHistoryWindowTeamsRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/history_window/teams';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SetHistoryWindowTeamsResponse::class);
+    }
+    /**
+     * Puts up to ten teams back on the app's default history window. Only for apps with the history window enabled; other apps get 403. Server-side only.
+     *
+     * @param GeneratedModels\DeleteHistoryWindowTeamsRequest $requestData
+     * @return StreamResponse<GeneratedModels\DeleteHistoryWindowTeamsResponse>
+     * @throws StreamException
+     */
+    public function deleteHistoryWindowTeams(GeneratedModels\DeleteHistoryWindowTeamsRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/history_window/teams/delete';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteHistoryWindowTeamsResponse::class);
+    }
+    /**
      * Find and filter channel members
      *
      * @param ?GeneratedModels\QueryMembersPayload $payload
@@ -1116,16 +1248,15 @@ trait ChatTrait
      * - message.updated
      *
      * @param string $id
-     * @param GeneratedModels\CommitMessageRequest $requestData
      * @return StreamResponse<GeneratedModels\MessageActionResponse>
      * @throws StreamException
      */
-    public function commitMessage(string $id, GeneratedModels\CommitMessageRequest $requestData): StreamResponse {
+    public function commitMessage(string $id): StreamResponse {
         $path = '/api/v2/chat/messages/{id}/commit';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MessageActionResponse::class);
     }
     /**
@@ -1336,7 +1467,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteReminderResponse::class);
     }
     /**
-     * Updates an existing reminder
+     * Updates an existing reminder. remind_at and expires_at are both replaced on every call: omitting either one clears it
      * Sends events:
      * - reminder.updated
      *
@@ -1354,7 +1485,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateReminderResponse::class);
     }
     /**
-     * Creates a new reminder
+     * Creates a new reminder. An optional expires_at hides the reminder from every read once it passes and stops it counting against the per-user reminder cap
      * Sends events:
      * - reminder.created
      *
@@ -1664,6 +1795,72 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyRunsResponse::class);
     }
     /**
+     * Lists the scheduled messages of one user across channels: pending ones first, then failed ones, each by scheduled_at. Client-side requests return the caller's own; server-side requests require user_id
+     *
+     * @param GeneratedModels\QueryScheduledMessagesRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryScheduledMessagesResponse>
+     * @throws StreamException
+     */
+    public function queryScheduledMessages(GeneratedModels\QueryScheduledMessagesRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryScheduledMessagesResponse::class);
+    }
+    /**
+     * Cancels a scheduled message so it is never sent, or removes a failed one. Returns 409 while the message is being sent
+     * Sends events:
+     * - scheduled_message.deleted
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\DeleteScheduledMessageResponse>
+     * @throws StreamException
+     */
+    public function deleteScheduledMessage(string $id): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteScheduledMessageResponse::class);
+    }
+    /**
+     * Replaces the message and/or the send time of a scheduled message. The scheduling checks run again, and the message is then sent, under the caller's auth mode. A request that changes only scheduled_at keeps the auth mode the message was scheduled with. Returns 409 while the message is being sent
+     * Sends events:
+     * - scheduled_message.updated
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateScheduledMessageRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateScheduledMessageResponse>
+     * @throws StreamException
+     */
+    public function updateScheduledMessage(string $id, GeneratedModels\UpdateScheduledMessageRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateScheduledMessageResponse::class);
+    }
+    /**
+     * Moves the send time of a scheduled message to now and queues the send. Every send check runs when it is sent. Returns 409 while the message is being sent
+     * Sends events:
+     * - scheduled_message.updated
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\SendScheduledMessageNowResponse>
+     * @throws StreamException
+     */
+    public function sendScheduledMessageNow(string $id): StreamResponse {
+        $path = '/api/v2/chat/scheduled_messages/{id}/send_now';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SendScheduledMessageNowResponse::class);
+    }
+    /**
      * Search messages across channels
      *
      * @param ?GeneratedModels\SearchPayload $payload
@@ -1909,15 +2106,19 @@ trait ChatTrait
      * Fetch unread counts for a single user
      *
      * @param ?string $userID
+     * @param ?bool $includeLargeChannels
      * @return StreamResponse<GeneratedModels\WrappedUnreadCountsResponse>
      * @throws StreamException
      */
-    public function unreadCounts(?string $userID = null): StreamResponse {
+    public function unreadCounts(?string $userID = null, ?bool $includeLargeChannels = null): StreamResponse {
         $path = '/api/v2/chat/unread';
 
         $queryParams = [];
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
+        }
+        if ($includeLargeChannels !== null) {
+            $queryParams['include_large_channels'] = $includeLargeChannels;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\WrappedUnreadCountsResponse::class);

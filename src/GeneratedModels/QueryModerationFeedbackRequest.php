@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+class QueryModerationFeedbackRequest extends BaseModel
+{
+    public function __construct(
+        public ?object $filter = null, // Filter conditions
+        /** @var array<SortParamRequest>|null */
+        #[ArrayOf(SortParamRequest::class)]
+        public ?array $sort = null, // Sorting parameters: created_at only, newest first by default
+        public ?int $itemLimit = null, // Maximum number of matching items returned per submission, 1 to 50; all by default
+        public ?int $limit = null,
+        public ?string $next = null,
+        public ?string $prev = null,
+        public ?string $userID = null,
+        public ?UserRequest $user = null, // User request object
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

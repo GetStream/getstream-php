@@ -7,6 +7,7 @@ class ReminderResponseData extends BaseModel
 {
     public function __construct(
         public ?\DateTime $remindAt = null,
+        public ?\DateTime $expiresAt = null,
         public ?string $channelCid = null,
         public ?ChannelResponse $channel = null, // Represents channel in chat
         public ?string $messageID = null,

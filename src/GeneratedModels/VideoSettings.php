@@ -10,7 +10,7 @@ class VideoSettings extends BaseModel
         public ?bool $accessRequestEnabled = null,
         public ?TargetResolution $targetResolution = null,
         public ?bool $cameraDefaultOn = null,
-        public ?string $cameraFacing = null,
+        public ?string $cameraFacing = null, // Which camera a call opens with.
     ) {
     }
 

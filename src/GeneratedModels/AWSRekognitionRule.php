@@ -7,7 +7,7 @@ class AWSRekognitionRule extends BaseModel
 {
     public function __construct(
         public ?string $label = null,
-        public ?string $action = null,
+        public ?string $action = null, // What a moderation rule does when it matches.
         public ?float $minConfidence = null,
         public ?object $subclassifications = null,
     ) {

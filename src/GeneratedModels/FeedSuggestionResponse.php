@@ -27,8 +27,6 @@ class FeedSuggestionResponse extends BaseModel
         /** @var array<FollowResponse>|null */
         #[ArrayOf(FollowResponse::class)]
         public ?array $ownFollowings = null, // Follow relationships where the feed owner’s feeds are following the current user's feeds
-        /** @var array<FeedOwnCapability>|null */
-        #[ArrayOf(FeedOwnCapability::class)]
         public ?array $ownCapabilities = null, // Capabilities the current user has for this feed
         public ?FeedMemberResponse $ownMembership = null,
         public ?\DateTime $createdAt = null, // When the feed was created

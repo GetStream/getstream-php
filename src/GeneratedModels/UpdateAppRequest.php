@@ -39,7 +39,7 @@ class UpdateAppRequest extends BaseModel
         public ?string $snsSecret = null,
         public ?FileUploadConfig $imageUploadConfig = null,
         public ?FileUploadConfig $fileUploadConfig = null,
-        public ?\DateTime $revokeTokensIssuedBefore = null,
+        public ?\DateTime $revokeTokensIssuedBefore = null, // Revokes tokens issued before this date
         public ?array $webhookEvents = null,
         public ?bool $channelHideMembersOnly = null,
         public ?array $grants = null,
@@ -68,6 +68,7 @@ class UpdateAppRequest extends BaseModel
         public ?string $chatPrimaryUseCase = null,
         public ?bool $memberCustomOnMentionedUsersEnabled = null,
         public ?bool $memberCustomOnTypingEventsEnabled = null,
+        public ?bool $twoWayBlockEffectEnabled = null,
     ) {
     }
 

@@ -20,6 +20,7 @@ class ConfigResponse extends BaseModel
         public ?AIAudioConfigResponse $aiAudioConfig = null,
         public ?VelocityFilterConfig $velocityFilterConfig = null,
         public ?FloodConfig $floodConfig = null,
+        public ?IntentConfigResponse $intentConfig = null,
         public ?\DateTime $createdAt = null, // When the configuration was created
         public ?\DateTime $updatedAt = null, // When the configuration was last updated
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,

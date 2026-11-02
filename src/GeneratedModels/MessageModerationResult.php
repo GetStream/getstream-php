@@ -15,7 +15,7 @@ class MessageModerationResult extends BaseModel
         public ?string $blockedWord = null, // Word that was blocked
         public ?string $blocklistName = null, // Name of the blocklist
         public ?Thresholds $moderationThresholds = null, // Sets thresholds for AI moderation
-        public ?ModerationResponse $aiModerationResponse = null,
+        public ?ModerationResponse $aiModerationResponse = null, // Response from AI moderation
         public ?float $userKarma = null, // Karma of the user
         public ?bool $userBadKarma = null, // Whether user has bad karma
         public ?\DateTime $createdAt = null, // Date/time of creation

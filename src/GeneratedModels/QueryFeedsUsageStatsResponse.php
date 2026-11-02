@@ -11,6 +11,9 @@ class QueryFeedsUsageStatsResponse extends BaseModel
         public ?DailyMetricStatsResponse $follows = null,
         public ?DailyMetricStatsResponse $apiRequests = null,
         public ?DailyMetricStatsResponse $openaiRequests = null,
+        public ?DailyMetricStatsResponse $comments = null,
+        public ?DailyMetricStatsResponse $reactions = null,
+        public ?DailyMetricStatsResponse $collections = null,
         public ?EMAUStatsResponse $emau = null,
     ) {
     }

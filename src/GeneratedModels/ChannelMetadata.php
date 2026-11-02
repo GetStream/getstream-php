@@ -14,7 +14,7 @@ class ChannelMetadata extends BaseModel
         public ?int $messageCount = null,
         public ?\DateTime $lastMessageAt = null,
         public ?object $custom = null,
-        public ?string $pushLevel = null,
+        public ?string $pushLevel = null, // How much a channel notifies its members.
     ) {
     }
 

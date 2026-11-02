@@ -15,6 +15,8 @@ class PushPreferenceInput extends BaseModel
         public ?FeedsPreferences $feedsPreferences = null,
         public ?\DateTime $disabledUntil = null, // Disable push notifications till a certain time
         public ?bool $removeDisable = null, // Remove the disabled until time. (IE stop snoozing notifications)
+        public ?PushScheduleInput $schedule = null, // A recurring quiet-hours schedule: while any quiet window is active, push notifications for the user are suppressed. Suppressed notifications are dropped, not delayed.
+        public ?bool $removeSchedule = null, // Remove the user's quiet-hours schedule, the counterpart of remove_disable. It is applied before schedule, so sending both in one item replaces the stored schedule instead of merging into it. Cannot be combined with channel_cid. To switch from a schedule to a snooze, send remove_schedule together with disabled_until.
     ) {
     }
 
