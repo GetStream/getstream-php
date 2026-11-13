@@ -365,6 +365,27 @@ class WebhookTest extends TestCase
         $this->assertSame($plain, Webhook::gunzipPayload($gz));
     }
 
+    /**
+     * @dataProvider gunzipTrailingDataProvider
+     */
+    public function testGunzipPayloadIgnoresDataAfterFirstMember(int $jsonLength, string $trailing): void
+    {
+        $plain = '{"type":"' . \str_repeat('a', $jsonLength - 11) . '"}';
+        $this->assertSame($plain, Webhook::gunzipPayload(\gzencode($plain, 0) . $trailing));
+    }
+
+    public static function gunzipTrailingDataProvider(): array
+    {
+        // A level-0 gzip member is 23 bytes longer than its input; gunzipPayload reads 1024 bytes at a time.
+        $second = \gzencode('{"type":"second"}');
+        return [
+            'zero padding' => [22, \str_repeat("\0", 2048)],
+            'second member in same chunk' => [22, $second],
+            'second member at chunk boundary' => [1001, $second],
+            'second member crossing chunk boundary' => [1000, $second],
+        ];
+    }
+
     public function testGunzipPayloadRaisesOnCorruptGzip(): void
     {
         // Two gzip magic bytes followed by garbage.
@@ -590,6 +611,19 @@ class WebhookTest extends TestCase
         $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
         $this->expectExceptionMessage('gzip decompression failed');
         Webhook::gunzipPayload($body);
+    }
+
+    public function testWebhookConformanceOversizedCompression(): void
+    {
+        $dir = __DIR__ . '/fixtures/webhooks/_invalid/oversized_compression';
+        if (!\is_dir($dir)) {
+            $this->markTestSkipped('fixtures not present');
+        }
+        $body = \file_get_contents($dir . '/body.gz');
+        $sig = \trim(\file_get_contents($dir . '/signature.txt'));
+        $this->expectException(\GetStream\Exceptions\InvalidWebhookException::class);
+        $this->expectExceptionMessage('payload exceeds');
+        Webhook::verifyAndParseWebhook($body, $sig, 'test_secret_do_not_use_in_production');
     }
 
     public function testWebhookConformanceBadBase64(): void

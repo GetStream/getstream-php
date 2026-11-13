@@ -202,6 +202,13 @@ class Webhook
      */
     private const GZIP_MAGIC = "\x1F\x8B";
 
+    /**
+     * Caps the decompressed size of a gzip webhook body. gunzipPayload runs
+     * before the signature check, so without a cap an unsigned gzip bomb could
+     * exhaust memory. Raise it if your events are larger.
+     */
+    public static int $maxPayloadBytes = 10 * 1024 * 1024;
+
     // Webhook event type constants
     public const EVENT_TYPE_WILDCARD = '*';
     public const EVENT_TYPE_APPEAL_ACCEPTED = 'appeal.accepted';
@@ -682,15 +689,36 @@ class Webhook
      * bodies are always JSON, and JSON cannot start with 0x1F.
      *
      * @throws InvalidWebhookException if the body has the gzip magic prefix but
-     *         isn't a valid gzip stream
+     *         isn't a valid gzip stream, or decompresses to more than
+     *         {@see self::$maxPayloadBytes}
      */
     public static function gunzipPayload(string $body): string
     {
         if (\strlen($body) < 2 || \substr($body, 0, 2) !== self::GZIP_MAGIC) {
             return $body;
         }
-        $result = @\gzdecode($body);
-        if ($result === false) {
+        $limit = self::$maxPayloadBytes;
+        $ctx = \inflate_init(\ZLIB_ENCODING_GZIP);
+        if ($ctx === false) {
+            throw new InvalidWebhookException(InvalidWebhookException::GZIP_FAILED);
+        }
+        $result = '';
+        // Small input chunks bound how far one inflate_add call can overshoot the cap.
+        for ($i = 0, $n = \strlen($body); $i < $n; $i += 1024) {
+            $piece = @\inflate_add($ctx, \substr($body, $i, 1024));
+            if ($piece === false) {
+                throw new InvalidWebhookException(InvalidWebhookException::GZIP_FAILED);
+            }
+            $result .= $piece;
+            if (\strlen($result) > $limit) {
+                throw new InvalidWebhookException(InvalidWebhookException::GZIP_FAILED . ": payload exceeds {$limit} bytes");
+            }
+            // inflate_add restarts after stream end, so stop here to ignore trailing bytes like gzdecode.
+            if (\inflate_get_status($ctx) === \ZLIB_STREAM_END) {
+                break;
+            }
+        }
+        if (\inflate_get_status($ctx) !== \ZLIB_STREAM_END) {
             throw new InvalidWebhookException(InvalidWebhookException::GZIP_FAILED);
         }
         return $result;
