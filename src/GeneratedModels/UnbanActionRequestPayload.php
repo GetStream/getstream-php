@@ -13,6 +13,7 @@ class UnbanActionRequestPayload extends BaseModel
         public ?string $channelCid = null, // Channel CID for channel-specific unban
         public ?string $decisionReason = null, // Reason for the appeal decision
         public ?bool $removeFutureChannelsBan = null, // Also remove the future channels ban for this user
+        public ?bool $restoreShadowedMessages = null, // When lifting a shadow ban, also restore the messages the user sent during it. Runs asynchronously; ignored for a regular ban
     ) {
     }
 

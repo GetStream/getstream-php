@@ -10,6 +10,7 @@ class SetRetentionPolicyResponse extends BaseModel
 {
     public function __construct(
         public ?RetentionPolicy $policy = null,
+        public ?ChannelTypeRuleResponse $channelTypeRule = null,
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }

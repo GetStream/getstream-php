@@ -11,6 +11,7 @@ class ClosedCaptionRuleParameters extends BaseModel
         public ?int $threshold = null,
         public ?string $timeWindow = null,
         public ?string $severity = null,
+        public ?array $severities = null,
     ) {
     }
 

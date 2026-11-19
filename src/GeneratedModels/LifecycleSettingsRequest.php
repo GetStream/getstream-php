@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class LifecycleSettingsRequest extends BaseModel
 {
     public function __construct(
-        public ?string $mode = null, // Call lifecycle mode. One of: reusable, single_use. A single_use call cannot be reused once it has ended; the server ends it when its ring settles without an answer (currently: when the caller cancels the ring). Fixed at call creation
+        public ?string $mode = null, // Call lifecycle mode. One of: reusable, single_use. A single_use call cannot be reused once it has ended; the server ends it when its ring settles without an answer: when the caller cancels the ring, or when the ring times out on the server (missed_call_timeout_ms) without anyone accepting or joining. Fixed at call creation
     ) {
     }
 

@@ -16,13 +16,15 @@ class EventHook extends BaseModel
         public ?string $sqsAuthType = null,
         public ?string $sqsKey = null,
         public ?string $sqsSecret = null,
-        public ?string $sqsRoleArn = null,
+        /** @deprecated */
+        public ?string $sqsRoleArn = null, // Deprecated: Role auth was never supported; use resource auth.
         public ?string $snsTopicArn = null,
         public ?string $snsRegion = null,
         public ?string $snsAuthType = null,
         public ?string $snsKey = null,
         public ?string $snsSecret = null,
-        public ?string $snsRoleArn = null,
+        /** @deprecated */
+        public ?string $snsRoleArn = null, // Deprecated: Role auth was never supported; use resource auth.
         public ?string $gcpPubsubTopic = null,
         public ?string $gcpPubsubAuthType = null,
         public ?string $gcpPubsubRegion = null,

@@ -18,6 +18,10 @@ class ActivitySelectorConfigResponse extends BaseModel
         public ?int $rankingCandidateLimit = null, // Maximum number of candidate activities this selector contributes to a ranked feed
         public ?int $timeBudgetMs = null, // Maximum time in milliseconds this selector may take before it is dropped from the read
         public ?float $viewerLocationRadiusKm = null, // Radius in kilometers the proximity selector searches around the viewer's location
+        public ?string $friendType = null, // Who counts as a friend for the friends_engaged selector
+        public ?int $maxFriends = null, // Maximum number of close friends the friends_engaged selector reads reactions from
+        public ?int $minFriends = null, // Minimum number of distinct close friends that must have reacted for friends_engaged to select an activity
+        public ?array $reactionTypes = null, // Reaction types that count for the friends_engaged selector
         public ?object $params = null, // Generic params for selector-specific configuration
     ) {
     }

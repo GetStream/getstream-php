@@ -25,6 +25,7 @@ class ConfigOverridesRequest extends BaseModel
         public ?bool $countMessages = null, // Enable/disable message counting
         public ?string $pushLevel = null, // Overrides the push notification level for this channel
         public ?ChatPreferences $chatPreferences = null,
+        public ?bool $voiceTranscription = null, // Enable/disable transcription of voice recordings in this channel
     ) {
     }
 

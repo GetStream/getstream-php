@@ -11,13 +11,14 @@ class ActionLogResponse extends BaseModel
         public ?string $type = null, // Type of moderation action
         public ?UserResponse $user = null, // User response object
         public ?string $userID = null, // ID of the user who performed the action
-        public ?string $reporterType = null, // Classification of who triggered the action (e.g. user, moderator, automod, api_integration)
+        public ?string $reporterType = null, // Classification of who triggered the action (e.g. user, moderator, automod, agent_reviewer, api_integration)
         public ?string $reason = null, // Reason for the moderation action
-        public ?object $custom = null, // Additional metadata about the action
+        public ?object $custom = null, // Additional metadata about the action. An agent_recommendation log keeps the suggested action under recommended_action
         public ?ReviewQueueItemResponse $reviewQueueItem = null,
         public ?UserResponse $targetUser = null, // User response object
         public ?string $targetUserID = null, // ID of the user who was the target of the action
         public ?array $aiProviders = null,
+        public ?AgentRecommendationResponse $agentRecommendation = null,
     ) {
     }
 

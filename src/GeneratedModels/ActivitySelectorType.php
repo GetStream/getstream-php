@@ -11,6 +11,7 @@ class ActivitySelectorType
     public const CURRENT_FEED = 'current_feed';
     public const FOLLOWING = 'following';
     public const FOLLOW_SUGGESTION = 'follow_suggestion';
+    public const FRIENDS_ENGAGED = 'friends_engaged';
     public const INTEREST = 'interest';
     public const POPULAR = 'popular';
     public const PROXIMITY = 'proximity';

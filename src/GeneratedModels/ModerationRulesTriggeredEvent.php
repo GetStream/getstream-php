@@ -34,6 +34,9 @@ class ModerationRulesTriggeredEvent extends BaseModel
         public ?string $channelCid = null, // CID of the channel the moderated content belongs to. Omitted when the content has no channel.
         public ?array $matchedLabels = null, // Harm labels on the moderated content that the rule's text label conditions (`text_content`, `text_rule`) matched. Omitted when the rule has no such condition.
         public ?string $severity = null, // Highest severity (`LOW` / `MEDIUM` / `HIGH` / `CRITICAL`) among the moderation results that carried a matched label. Omitted when no label matched or the provider reports no severity.
+        /** @var array<MatchedBlocklist>|null */
+        #[ArrayOf(MatchedBlocklist::class)]
+        public ?array $matchedBlocklists = null, // Blocklists that the rule's blocklist conditions (`text_content`, `text_rule`) matched, each with the text it matched in the content. Omitted when the rule has no such condition or none matched.
     ) {
     }
 

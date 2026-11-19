@@ -123,6 +123,54 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\InsertActionLogResponse::class);
     }
     /**
+     * List moderator corrections of Nora's reviews for this app, newest first
+     *
+     * @param ?int $limit
+     * @param ?string $next
+     * @return StreamResponse<GeneratedModels\ListAgentFeedbackResponse>
+     * @throws StreamException
+     */
+    public function listAgentFeedback(?int $limit = null, ?string $next = null): StreamResponse {
+        $path = '/api/v2/moderation/agent_feedback';
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($next !== null) {
+            $queryParams['next'] = $next;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListAgentFeedbackResponse::class);
+    }
+    /**
+     * Record a moderator correction when their action overturns Nora's review of a queue item
+     *
+     * @param GeneratedModels\SubmitAgentFeedbackRequest $requestData
+     * @return StreamResponse<GeneratedModels\SubmitAgentFeedbackResponse>
+     * @throws StreamException
+     */
+    public function submitAgentFeedback(GeneratedModels\SubmitAgentFeedbackRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/agent_feedback';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SubmitAgentFeedbackResponse::class);
+    }
+    /**
+     * Last error and 7-day counts for the app's agent moderator
+     *
+     * @return StreamResponse<GeneratedModels\GetAgentReviewStatusResponse>
+     * @throws StreamException
+     */
+    public function getAgentReviewStatus(): StreamResponse {
+        $path = '/api/v2/moderation/agent_review_status';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetAgentReviewStatusResponse::class);
+    }
+    /**
      * Moderate named text fields and raw image bytes via multipart/form-data. Returns a per-field lightweight verdict.
      *
      * @param GeneratedModels\AnalyzeRequest $requestData
@@ -278,6 +326,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertConfigResponse::class);
     }
     /**
+     * Save a moderation configuration as a new version without making it live. The version takes effect once it is published.
+     *
+     * @param GeneratedModels\SaveConfigVersionRequest $requestData
+     * @return StreamResponse<GeneratedModels\SaveConfigVersionResponse>
+     * @throws StreamException
+     */
+    public function saveConfigVersion(GeneratedModels\SaveConfigVersionRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/config/versions';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SaveConfigVersionResponse::class);
+    }
+    /**
      * Delete a specific moderation policy by its name
      *
      * @param string $key
@@ -318,6 +380,64 @@ trait ModerationTrait
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetConfigResponse::class);
+    }
+    /**
+     * List the retained versions of a moderation configuration, newest first, and which one is published.
+     *
+     * @param string $key
+     * @param ?string $team
+     * @return StreamResponse<GeneratedModels\ListConfigVersionsResponse>
+     * @throws StreamException
+     */
+    public function listConfigVersions(string $key, ?string $team = null): StreamResponse {
+        $path = '/api/v2/moderation/config/{key}/versions';
+        $path = str_replace('{key}', (string) $key, $path);
+
+        $queryParams = [];
+        if ($team !== null) {
+            $queryParams['team'] = $team;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListConfigVersionsResponse::class);
+    }
+    /**
+     * Retrieve the full moderation configuration stored in a specific version, whether or not it is published.
+     *
+     * @param string $key
+     * @param int $version
+     * @param ?string $team
+     * @return StreamResponse<GeneratedModels\GetConfigVersionResponse>
+     * @throws StreamException
+     */
+    public function getConfigVersion(string $key, int $version, ?string $team = null): StreamResponse {
+        $path = '/api/v2/moderation/config/{key}/versions/{version}';
+        $path = str_replace('{key}', (string) $key, $path);
+        $path = str_replace('{version}', (string) $version, $path);
+
+        $queryParams = [];
+        if ($team !== null) {
+            $queryParams['team'] = $team;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetConfigVersionResponse::class);
+    }
+    /**
+     * Make a stored version the moderation configuration in effect. Publishing an older version reverts to it without creating a new version.
+     *
+     * @param string $key
+     * @param int $version
+     * @param GeneratedModels\PublishConfigVersionRequest $requestData
+     * @return StreamResponse<GeneratedModels\PublishConfigVersionResponse>
+     * @throws StreamException
+     */
+    public function publishConfigVersion(string $key, int $version, GeneratedModels\PublishConfigVersionRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/config/{key}/versions/{version}/publish';
+        $path = str_replace('{key}', (string) $key, $path);
+        $path = str_replace('{version}', (string) $version, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PublishConfigVersionResponse::class);
     }
     /**
      * Search and filter moderation configurations across your application. This endpoint is designed for building moderation dashboards and managing multiple configuration sets.
@@ -364,13 +484,17 @@ trait ModerationTrait
     /**
      * Delete a specific moderation template by its name
      *
+     * @param ?string $name
      * @return StreamResponse<GeneratedModels\DeleteModerationTemplateResponse>
      * @throws StreamException
      */
-    public function v2DeleteTemplate(): StreamResponse {
+    public function v2DeleteTemplate(?string $name = null): StreamResponse {
         $path = '/api/v2/moderation/feeds_moderation_template';
 
         $queryParams = [];
+        if ($name !== null) {
+            $queryParams['name'] = $name;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteModerationTemplateResponse::class);
     }
@@ -577,13 +701,21 @@ trait ModerationTrait
     }
     /**
      *
+     * @param ?int $limit
+     * @param ?int $offset
      * @return StreamResponse<GeneratedModels\PolicyTestSetListResponse>
      * @throws StreamException
      */
-    public function listPolicyTestSets(): StreamResponse {
+    public function listPolicyTestSets(?int $limit = null, ?int $offset = null): StreamResponse {
         $path = '/api/v2/moderation/policy_tests/sets';
 
         $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($offset !== null) {
+            $queryParams['offset'] = $offset;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\PolicyTestSetListResponse::class);
     }
@@ -750,6 +882,20 @@ trait ModerationTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryReviewQueueResponse::class);
     }
     /**
+     * Count the review queue items matching a filter, so a moderation dashboard can show a total for a queue or view. Counts are kept up to date in the background while they are being requested.
+     *
+     * @param GeneratedModels\CountReviewQueueRequest $requestData
+     * @return StreamResponse<GeneratedModels\CountReviewQueueResponse>
+     * @throws StreamException
+     */
+    public function countReviewQueue(GeneratedModels\CountReviewQueueRequest $requestData): StreamResponse {
+        $path = '/api/v2/moderation/review_queue/count';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CountReviewQueueResponse::class);
+    }
+    /**
      * Retrieve a specific review queue item by its ID
      *
      * @param string $id
@@ -826,10 +972,11 @@ trait ModerationTrait
      * @param string $targetUserID
      * @param ?string $channelCid
      * @param ?string $createdBy
+     * @param ?bool $removeFutureChannelsBan
      * @return StreamResponse<GeneratedModels\UnbanResponse>
      * @throws StreamException
      */
-    public function unban(GeneratedModels\UnbanRequest $requestData, string $targetUserID, ?string $channelCid = null, ?string $createdBy = null): StreamResponse {
+    public function unban(GeneratedModels\UnbanRequest $requestData, string $targetUserID, ?string $channelCid = null, ?string $createdBy = null, ?bool $removeFutureChannelsBan = null): StreamResponse {
         $path = '/api/v2/moderation/unban';
 
         $queryParams = [];
@@ -841,6 +988,9 @@ trait ModerationTrait
         }
         if ($createdBy !== null) {
             $queryParams['created_by'] = $createdBy;
+        }
+        if ($removeFutureChannelsBan !== null) {
+            $queryParams['remove_future_channels_ban'] = $removeFutureChannelsBan;
         }
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnbanResponse::class);

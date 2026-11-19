@@ -12,6 +12,7 @@ class TextRuleParameters extends BaseModel
         public ?array $llmHarmLabels = null,
         public ?bool $containsUrl = null,
         public ?string $severity = null,
+        public ?array $severities = null,
         public ?array $blocklistMatch = null,
         public ?array $semanticFilterNames = null,
         public ?float $semanticFilterMinThreshold = null,

@@ -13,6 +13,8 @@ class ModerationQueueResponse extends BaseModel
         public ?array $sort = null,
         public ?string $description = null,
         public ?int $itemCount = null,
+        public ?bool $itemCountPending = null,
+        public ?bool $itemCountCapped = null,
         public ?string $createdBy = null,
         public ?\DateTime $createdAt = null,
         public ?\DateTime $updatedAt = null,

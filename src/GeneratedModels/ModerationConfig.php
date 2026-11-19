@@ -25,6 +25,7 @@ class ModerationConfig extends BaseModel
         public ?\DateTime $updatedAt = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
         public ?array $supportedVideoCallHarmTypes = null,
+        public ?int $publishedVersion = null,
     ) {
     }
 

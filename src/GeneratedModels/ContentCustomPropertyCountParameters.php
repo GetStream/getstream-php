@@ -8,6 +8,7 @@ class ContentCustomPropertyCountParameters extends BaseModel
     public function __construct(
         public ?string $propertyKey = null,
         public ?string $operator = null,
+        public mixed $expectedValue = null,
         public ?int $threshold = null,
         public ?string $timeWindow = null,
     ) {

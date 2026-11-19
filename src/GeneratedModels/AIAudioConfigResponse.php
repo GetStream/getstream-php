@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class AIAudioConfigResponse extends BaseModel
 {
     public function __construct(
-        public ?bool $enabled = null, // Whether the engine selected by the application's LLM configurability flag has a rule that does something. Derived, not stored
+        public ?bool $enabled = null, // Whether the policy's engine (engine.provider, else the application's LLM configurability flag) has a rule that does something. Derived, not stored
         public ?string $profile = null, // Bodyguard credentials profile transcripts are classified with. Applies to the NLP engine only
         /** @var array<BodyguardRule>|null */
         #[ArrayOf(BodyguardRule::class)]

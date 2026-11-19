@@ -296,7 +296,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteChannelResponse::class);
     }
     /**
-     * Returns a channel by its CID without creating it. Responds with 404 when the channel does not exist, so it doubles as an existence check. Pass state=true to also load messages, read state and watchers, and the messages_id_* parameters to page those messages by message ID.
+     * Returns a channel by its CID without creating it. Responds with 404 when the channel does not exist, so it doubles as an existence check. Pass state=true to also load messages, read state and watchers, and the messages_id_* parameters to page those messages by message ID. Server-side requests can set include_soft_deleted_channel to read a soft-deleted channel and the messages its deletion hid; members are not returned for a deleted channel.
      *
      * @param string $type
      * @param string $id
@@ -309,11 +309,12 @@ trait ChatTrait
      * @param ?string $messagesIDGt
      * @param ?string $messagesIDGte
      * @param ?string $messagesIDAround
+     * @param ?bool $includeSoftDeletedChannel
      * @param ?string $userID
      * @return StreamResponse<GeneratedModels\ChannelStateResponse>
      * @throws StreamException
      */
-    public function getChannel(string $type, string $id, ?bool $state = null, ?int $messagesLimit = null, ?int $membersLimit = null, ?int $watchersLimit = null, ?string $messagesIDLt = null, ?string $messagesIDLte = null, ?string $messagesIDGt = null, ?string $messagesIDGte = null, ?string $messagesIDAround = null, ?string $userID = null): StreamResponse {
+    public function getChannel(string $type, string $id, ?bool $state = null, ?int $messagesLimit = null, ?int $membersLimit = null, ?int $watchersLimit = null, ?string $messagesIDLt = null, ?string $messagesIDLte = null, ?string $messagesIDGt = null, ?string $messagesIDGte = null, ?string $messagesIDAround = null, ?bool $includeSoftDeletedChannel = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -345,6 +346,9 @@ trait ChatTrait
         }
         if ($messagesIDAround !== null) {
             $queryParams['messages_id_around'] = $messagesIDAround;
+        }
+        if ($includeSoftDeletedChannel !== null) {
+            $queryParams['include_soft_deleted_channel'] = $includeSoftDeletedChannel;
         }
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
@@ -1278,6 +1282,40 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMessagePartialResponse::class);
     }
     /**
+     * Marks a message for the acting user, for example played when the user played a voice note. A mark is written once: a repeat returns created false and the stored mark, and nothing else happens. The message author's own mark is a no-op. A message the user deleted for themselves answers as a first write does, created true, without storing anything. A mark on a message whose author is shadow-banned is stored hidden: the marker keeps it, the author never sees it. Only members of channels whose type lists the mark type can mark, and only messages with a matching attachment; a thread reply is marked like any other message
+     * Sends events:
+     * - message.mark_added
+     *
+     * @param string $id
+     * @param GeneratedModels\CreateMessageMarkRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateMessageMarkResponse>
+     * @throws StreamException
+     */
+    public function createMessageMark(string $id, GeneratedModels\CreateMessageMarkRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/messages/{id}/marks';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateMessageMarkResponse::class);
+    }
+    /**
+     * Lists the marks on a message one page at a time, newest first; the order cannot be changed. The message's mark_groups carry the count and the newest 100 markers per type, this endpoint lists every marker. Only the message author may list client-side; server-side, pass the author's user_id or no user_id. filter.type narrows the list to one mark type; without it every type the channel type lists is returned
+     *
+     * @param string $id
+     * @param GeneratedModels\QueryMessageMarksRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryMessageMarksResponse>
+     * @throws StreamException
+     */
+    public function queryMessageMarks(string $id, GeneratedModels\QueryMessageMarksRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/messages/{id}/marks/query';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryMessageMarksResponse::class);
+    }
+    /**
      * Sends reaction to specified message
      * Sends events:
      * - reaction.new
@@ -1740,7 +1778,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryRemindersResponse::class);
     }
     /**
-     * Returns all retention policies configured for the app. Server-side only.
+     * Returns all retention policies configured for the app. The per-channel-type rules of the 'inactive-channels-by-type' policy are returned in 'channel_type_rules' rather than in 'policies'. Server-side only.
      *
      * @return StreamResponse<GeneratedModels\GetRetentionPolicyResponse>
      * @throws StreamException
@@ -1753,7 +1791,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyResponse::class);
     }
     /**
-     * Creates or updates a retention policy for the app. Server-side only.
+     * Creates or updates a retention policy for the app. The 'inactive-channels-by-type' policy sets the 'max_age_hours' rule of the channel type given by 'channel_type', which overrides 'inactive-channels' for that type; its response carries the saved rule in 'channel_type_rule'. Server-side only.
      *
      * @param GeneratedModels\SetRetentionPolicyRequest $requestData
      * @return StreamResponse<GeneratedModels\SetRetentionPolicyResponse>
@@ -1767,7 +1805,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SetRetentionPolicyResponse::class);
     }
     /**
-     * Removes a retention policy for the app. Server-side only.
+     * Removes a retention policy for the app. For the 'inactive-channels-by-type' policy, 'channel_type' selects the rule to remove. Server-side only.
      *
      * @param GeneratedModels\DeleteRetentionPolicyRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteRetentionPolicyResponse>
@@ -1781,7 +1819,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteRetentionPolicyResponse::class);
     }
     /**
-     * Returns filtered and sorted retention cleanup run history for the app. Supports filter_conditions on 'policy' (possible values: 'old-messages', 'inactive-channels') and 'date' fields. Server-side only.
+     * Returns filtered and sorted retention cleanup run history for the app. Supports filter_conditions on 'policy' (possible values: 'old-messages', 'inactive-channels', 'inactive-channels@type:<channel type>', 'inactive-channels@blanket:<channel type>') and 'date' fields. Once the app has a per-channel-type rule, inactive-channels runs are recorded per channel type, under 'inactive-channels@type:<channel type>' for a type with its own rule and 'inactive-channels@blanket:<channel type>' for a type covered by the app-wide rule, and 'policy': 'inactive-channels' no longer matches new runs; filter with '$in' over the pass names of your channel types. Server-side only.
      *
      * @param GeneratedModels\GetRetentionPolicyRunsRequest $requestData
      * @return StreamResponse<GeneratedModels\GetRetentionPolicyRunsResponse>
@@ -1809,7 +1847,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryScheduledMessagesResponse::class);
     }
     /**
-     * Cancels a scheduled message so it is never sent, or removes a failed one. Returns 409 while the message is being sent
+     * Cancels a scheduled message so it is never sent, or removes a failed one. Returns 409 while the message is being sent. Returns 400 scheduled_message_already_sent (code 123) when the message was already sent and 400 scheduled_message_canceled (code 124) when it was deleted
      * Sends events:
      * - scheduled_message.deleted
      *
@@ -1826,7 +1864,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteScheduledMessageResponse::class);
     }
     /**
-     * Replaces the message and/or the send time of a scheduled message. The scheduling checks run again, and the message is then sent, under the caller's auth mode. A request that changes only scheduled_at keeps the auth mode the message was scheduled with. Returns 409 while the message is being sent
+     * Replaces the message and/or the send time of a scheduled message. The scheduling checks run again, and the message is then sent, under the caller's auth mode. A request that changes only scheduled_at keeps the auth mode the message was scheduled with. Returns 409 while the message is being sent. Returns 400 scheduled_message_already_sent (code 123) when the message was already sent and 400 scheduled_message_canceled (code 124) when it was deleted
      * Sends events:
      * - scheduled_message.updated
      *
@@ -1844,7 +1882,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateScheduledMessageResponse::class);
     }
     /**
-     * Moves the send time of a scheduled message to now and queues the send. Every send check runs when it is sent. Returns 409 while the message is being sent
+     * Moves the send time of a scheduled message to now and queues the send. Every send check runs when it is sent. Returns 409 while the message is being sent. Returns 400 scheduled_message_already_sent (code 123) when the message was already sent and 400 scheduled_message_canceled (code 124) when it was deleted
      * Sends events:
      * - scheduled_message.updated
      *
@@ -1880,6 +1918,20 @@ trait ChatTrait
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\SearchResponse::class);
+    }
+    /**
+     * Runs one free-text query across messages, users and channels and returns one envelope with a section per requested entity. The server picks the match operator, sort and scope for every section: messages are matched as full text in the channels the caller can read, users by name or username prefix, and channels by name prefix among the channels the caller is a member of. Each section carries its own opaque `next` cursor when more results exist; a section that fails is reported in its `error` field while the other sections return normally.
+     *
+     * @param GeneratedModels\SearchAllRequest $requestData
+     * @return StreamResponse<GeneratedModels\SearchAllResponse>
+     * @throws StreamException
+     */
+    public function searchAll(GeneratedModels\SearchAllRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/search/all';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SearchAllResponse::class);
     }
     /**
      * Create a segment

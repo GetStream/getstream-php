@@ -31,6 +31,7 @@ class GetOrCreateFeedResponse extends BaseModel
         public ?NotificationStatusResponse $notificationStatus = null,
         public ?array $degradedSelectors = null, // Activity selectors dropped from this read because they exceeded their time budget (see the time_budget_ms selector setting). Their activities are missing from this page, and they stay out for the rest of this pagination session. Omitted when every selector completed
         public ?RankingConfig $rankingConfig = null,
+        public ?string $requestID = null, // Signed token identifying this read. Pass it with activity metrics events to attribute them to this read. Only set on feed reads for paid plans with an authenticated user, when the app uses feed impressions (For You exploration, or a For You ranking that uses impressions_bucket)
         public ?bool $created = null,
         public ?string $next = null,
         public ?string $prev = null,

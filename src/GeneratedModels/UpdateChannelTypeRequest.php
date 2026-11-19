@@ -34,6 +34,7 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?bool $userMessageReminders = null,
         public ?bool $sharedLocations = null,
         public ?bool $countMessages = null,
+        public ?array $markTypes = null,
         public ?string $messageRetention = null,
         public ?string $blocklist = null,
         public ?string $blocklistBehavior = null, // What automod or a blocklist does when it matches.
@@ -45,6 +46,7 @@ class UpdateChannelTypeRequest extends BaseModel
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
+        public ?bool $voiceTranscription = null,
         public ?array $commands = null, // List of commands that channel supports
     ) {
     }

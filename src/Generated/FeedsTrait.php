@@ -364,10 +364,11 @@ trait FeedsTrait
      * @param ?bool $includeTopLevelCommentCount
      * @param ?bool $includeSoftDeletedActivities
      * @param ?bool $includeModeratedActivities
+     * @param ?bool $skipViewerVisibility
      * @return StreamResponse<GeneratedModels\GetActivityResponse>
      * @throws StreamException
      */
-    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?bool $skipOwnFollowings = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null, ?bool $includeTopLevelCommentCount = null, ?bool $includeSoftDeletedActivities = null, ?bool $includeModeratedActivities = null): StreamResponse {
+    public function getActivity(string $id, ?string $commentSort = null, ?int $commentLimit = null, ?bool $skipOwnFollowings = null, ?string $userID = null, ?string $language = null, ?bool $translateText = null, ?bool $includeTopLevelCommentCount = null, ?bool $includeSoftDeletedActivities = null, ?bool $includeModeratedActivities = null, ?bool $skipViewerVisibility = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -398,6 +399,9 @@ trait FeedsTrait
         }
         if ($includeModeratedActivities !== null) {
             $queryParams['include_moderated_activities'] = $includeModeratedActivities;
+        }
+        if ($skipViewerVisibility !== null) {
+            $queryParams['skip_viewer_visibility'] = $skipViewerVisibility;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetActivityResponse::class);
@@ -1075,14 +1079,15 @@ trait FeedsTrait
     /**
      * Starts an async task that exports all feeds data of the app in export format v1. Poll the task for the result
      *
+     * @param GeneratedModels\ExportFeedsAppRequest $requestData
      * @return StreamResponse<GeneratedModels\ExportFeedsResponse>
      * @throws StreamException
      */
-    public function exportFeedsApp(): StreamResponse {
+    public function exportFeedsApp(GeneratedModels\ExportFeedsAppRequest $requestData): StreamResponse {
         $path = '/api/v2/feeds/export/app';
 
         $queryParams = [];
-        $requestData = null;
+        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportFeedsResponse::class);
     }
     /**
@@ -1387,6 +1392,31 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RejectFeedMemberInviteResponse::class);
+    }
+    /**
+     * Returns the unread and unseen counts of a notification feed, along with the last seen and last read timestamps, without building a page.
+     *
+     * @param string $feedGroupID
+     * @param string $feedID
+     * @param ?string $view
+     * @param ?string $userID
+     * @return StreamResponse<GeneratedModels\GetNotificationStatusResponse>
+     * @throws StreamException
+     */
+    public function getNotificationStatus(string $feedGroupID, string $feedID, ?string $view = null, ?string $userID = null): StreamResponse {
+        $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/notification_status';
+        $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
+        $path = str_replace('{feed_id}', (string) $feedID, $path);
+
+        $queryParams = [];
+        if ($view !== null) {
+            $queryParams['view'] = $view;
+        }
+        if ($userID !== null) {
+            $queryParams['user_id'] = $userID;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetNotificationStatusResponse::class);
     }
     /**
      * Query pinned activities for a feed with filter query
@@ -1959,6 +1989,62 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMembershipLevelResponse::class);
     }
     /**
+     * Lists the app's active promotions, also while for_you.trending is off. Not paginated: an app holds at most 20. Server-side only.
+     *
+     * @return StreamResponse<GeneratedModels\ListPromotedTopicsResponse>
+     * @throws StreamException
+     */
+    public function listPromotedTopics(): StreamResponse {
+        $path = '/api/v2/feeds/promoted_topics';
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListPromotedTopicsResponse::class);
+    }
+    /**
+     * Promotes topic tags for the trend signal of feed groups with for_you.trending until the TTL passes. Clients watching a For You feed receive a feeds.promoted_topics.updated event. An app holds at most 20 active promotions. Server-side only.
+     *
+     * @param GeneratedModels\PromoteTopicsRequest $requestData
+     * @return StreamResponse<GeneratedModels\PromoteTopicsResponse>
+     * @throws StreamException
+     */
+    public function promoteTopics(GeneratedModels\PromoteTopicsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/promoted_topics';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PromoteTopicsResponse::class);
+    }
+    /**
+     * Ends a promotion before it expires, also while for_you.trending is off. Clients watching a For You feed receive a feeds.promoted_topics.updated event. Returns 404 when the promotion is not active. Server-side only.
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\UnpromoteTopicsResponse>
+     * @throws StreamException
+     */
+    public function unpromoteTopics(string $id): StreamResponse {
+        $path = '/api/v2/feeds/promoted_topics/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\UnpromoteTopicsResponse::class);
+    }
+    /**
+     * Lists a single user's activity or comment reactions, newest first by default, without activity or comment payloads
+     *
+     * @param GeneratedModels\QueryFeedsReactionsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryFeedsReactionsResponse>
+     * @throws StreamException
+     */
+    public function queryFeedsReactions(GeneratedModels\QueryFeedsReactionsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/reactions/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsReactionsResponse::class);
+    }
+    /**
      * Returns the feeds retention policies configured for the app. Server-side only.
      *
      * @return StreamResponse<GeneratedModels\GetFeedsRetentionPolicyResponse>
@@ -2026,6 +2112,95 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryRevisionHistoryResponse::class);
+    }
+    /**
+     * Schedule an activity to be published at a future time
+     *
+     * @param GeneratedModels\ScheduleActivityRequest $requestData
+     * @return StreamResponse<GeneratedModels\ScheduleActivityResponse>
+     * @throws StreamException
+     */
+    public function scheduleActivity(GeneratedModels\ScheduleActivityRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/scheduled_activities';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ScheduleActivityResponse::class);
+    }
+    /**
+     * Query scheduled activities ordered by scheduled time
+     *
+     * @param GeneratedModels\QueryScheduledActivitiesRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryScheduledActivitiesResponse>
+     * @throws StreamException
+     */
+    public function queryScheduledActivities(GeneratedModels\QueryScheduledActivitiesRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/scheduled_activities/query';
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryScheduledActivitiesResponse::class);
+    }
+    /**
+     * Cancel a scheduled activity so it is never published
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\DeleteScheduledActivityResponse>
+     * @throws StreamException
+     */
+    public function deleteScheduledActivity(string $id): StreamResponse {
+        $path = '/api/v2/feeds/scheduled_activities/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('DELETE', $path, $queryParams, $requestData), GeneratedModels\DeleteScheduledActivityResponse::class);
+    }
+    /**
+     * Get a scheduled activity by its ID
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\GetScheduledActivityResponse>
+     * @throws StreamException
+     */
+    public function getScheduledActivity(string $id): StreamResponse {
+        $path = '/api/v2/feeds/scheduled_activities/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetScheduledActivityResponse::class);
+    }
+    /**
+     * Change the activity or the publish time of a scheduled activity
+     *
+     * @param string $id
+     * @param GeneratedModels\UpdateScheduledActivityRequest $requestData
+     * @return StreamResponse<GeneratedModels\UpdateScheduledActivityResponse>
+     * @throws StreamException
+     */
+    public function updateScheduledActivity(string $id, GeneratedModels\UpdateScheduledActivityRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/scheduled_activities/{id}';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateScheduledActivityResponse::class);
+    }
+    /**
+     * Move the publish time of a scheduled activity to now
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\PublishScheduledActivityNowResponse>
+     * @throws StreamException
+     */
+    public function publishScheduledActivityNow(string $id): StreamResponse {
+        $path = '/api/v2/feeds/scheduled_activities/{id}/publish_now';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PublishScheduledActivityNowResponse::class);
     }
     /**
      * Retrieve usage statistics for feeds including activity count, follow count, and API request count.
@@ -2170,5 +2345,24 @@ trait FeedsTrait
         $queryParams = [];
         // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertUserInterestsResponse::class);
+    }
+    /**
+     * Returns the topics trending in the app, ranked for the user: the trend of a tag scaled by the user's interest weight in it. Tags the user has a negative weight for are left out. Empty for apps without for_you.trending. Client-side callers may only read their own.
+     *
+     * @param string $userID
+     * @param ?int $limit
+     * @return StreamResponse<GeneratedModels\GetTrendingTopicsResponse>
+     * @throws StreamException
+     */
+    public function getTrendingTopics(string $userID, ?int $limit = null): StreamResponse {
+        $path = '/api/v2/feeds/users/{user_id}/trending_topics';
+        $path = str_replace('{user_id}', (string) $userID, $path);
+
+        $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetTrendingTopicsResponse::class);
     }
 }

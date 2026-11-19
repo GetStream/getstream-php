@@ -12,6 +12,7 @@ class ImportV2TaskSettings extends BaseModel
         public ?bool $skipReferencesCheck = null,
         public ?bool $mergeCustom = null,
         public ?bool $useImportTimeAsOpTime = null,
+        public ?string $customFormat = null, // How custom fields are read from imported items: root (default) takes unknown root keys as custom data, nested reads them from a custom object and is only supported for feeds imports.
     ) {
     }
 

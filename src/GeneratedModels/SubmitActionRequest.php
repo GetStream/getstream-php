@@ -7,7 +7,7 @@ class SubmitActionRequest extends BaseModel
 {
     public function __construct(
         public ?string $itemID = null, // UUID of the review queue item to act on
-        public ?string $actionType = null, // Type of moderation action to perform. One of: mark_reviewed, delete_message, delete_activity, delete_comment, delete_reaction, delete_poll, delete_poll_option, delete_poll_answer, ban, custom, unban, restore, delete_user, delete_user_messages, unblock, block, shadow_block, unmask, kick_user, end_call, escalate, de_escalate
+        public ?string $actionType = null, // Type of moderation action to perform. One of: mark_reviewed, delete_message, delete_activity, delete_comment, delete_reaction, delete_poll, delete_poll_option, delete_poll_answer, ban, custom, unban, restore, delete_user, delete_user_messages, unblock, block, shadow_block, unmask, kick_user, end_call, escalate, de_escalate, agent_recommendation
         public ?string $appealID = null, // UUID of the appeal to act on (required for reject_appeal, optional for other actions)
         public ?DeleteMessageRequestPayload $deleteMessage = null, // Configuration for message deletion action
         public ?DeleteActivityRequestPayload $deleteActivity = null, // Configuration for activity deletion action
@@ -31,6 +31,7 @@ class SubmitActionRequest extends BaseModel
         public ?RejectAppealRequestPayload $rejectAppeal = null, // Configuration for rejecting an appeal
         public ?FlagRequest $flag = null,
         public ?EscalatePayload $escalate = null, // Configuration for escalation action
+        public ?AgentRecommendationPayload $agentRecommendation = null,
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

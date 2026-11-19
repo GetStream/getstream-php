@@ -14,7 +14,7 @@ class CallRejectedEvent extends BaseModel
         public ?string $callCid = null,
         public ?CallResponse $call = null, // Represents a call
         public ?UserResponse $user = null, // User response object
-        public ?string $reason = null, // Provides information about why the call was rejected. You can provide any value, but the Stream API and SDKs use these default values: rejected, cancel, timeout and busy
+        public ?string $reason = null, // Provides information about why the call was rejected. You can provide any value, but the Stream API and SDKs use these default values: decline, cancel, timeout and busy
     ) {
     }
 
