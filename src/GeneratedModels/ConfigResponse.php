@@ -9,8 +9,11 @@ class ConfigResponse extends BaseModel
         public ?string $key = null, // Unique identifier for the moderation configuration
         public ?string $team = null, // Team associated with the configuration
         public ?bool $async = null, // Whether moderation should be performed asynchronously
+        /** @deprecated */
         public ?AutomodToxicityConfig $automodToxicityConfig = null,
+        /** @deprecated */
         public ?AutomodPlatformCircumventionConfig $automodPlatformCircumventionConfig = null,
+        /** @deprecated */
         public ?AutomodSemanticFiltersConfig $automodSemanticFiltersConfig = null,
         public ?BlockListConfig $blockListConfig = null,
         public ?AITextConfig $aiTextConfig = null,
@@ -32,6 +35,8 @@ class ConfigResponse extends BaseModel
         /** @var array<BodyguardProfileSummary>|null */
         #[ArrayOf(BodyguardProfileSummary::class)]
         public ?array $availableBodyguardProfiles = null, // Names of Bodyguard credential profiles registered on this app. The dashboard uses this list to render the profile picker on the AI Text section.
+        public ?ModerationEngineConfigResponse $engine = null,
+        public ?int $publishedVersion = null, // The version of this configuration moderation currently runs
     ) {
     }
 

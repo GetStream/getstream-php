@@ -20,7 +20,7 @@ class CheckRequest extends BaseModel
         public ?string $countryCode = null, // ISO 3166-1 alpha-2 country the content is aimed at (e.g. US, DE). Ignored when country_codes is set, but an invalid value is still rejected with 400.
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
-        public ?array $countryCodes = null, // ISO 3166-1 alpha-2 countries the content is aimed at (e.g. US, DE), up to 300. The first is the primary country, which AI text providers receive as country context. Takes precedence over country_code.
+        public ?array $countryCodes = null, // ISO 3166-1 alpha-2 countries the content is aimed at (e.g. US, DE), up to 300. The first is the primary country. Every country is sent to the AI text and image harm detection engines as country context. Takes precedence over country_code.
     ) {
     }
 

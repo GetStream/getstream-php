@@ -12,6 +12,9 @@ class GetRetentionPolicyResponse extends BaseModel
         /** @var array<RetentionPolicy>|null */
         #[ArrayOf(RetentionPolicy::class)]
         public ?array $policies = null,
+        /** @var array<ChannelTypeRuleResponse>|null */
+        #[ArrayOf(ChannelTypeRuleResponse::class)]
+        public ?array $channelTypeRules = null,
         public ?string $duration = null, // Duration of the request in milliseconds
     ) {
     }

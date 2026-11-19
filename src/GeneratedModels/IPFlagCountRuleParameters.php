@@ -10,6 +10,7 @@ class IPFlagCountRuleParameters extends BaseModel
         public ?string $timeWindow = null,
         public ?array $harmLabels = null,
         public ?string $severity = null,
+        public ?array $severities = null,
     ) {
     }
 

@@ -71,6 +71,12 @@ class MessageResponse extends BaseModel
         public ?DraftResponse $draft = null,
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,
+        /** @var array<string, MarkGroupResponse>|null */
+        #[MapOf(MarkGroupResponse::class)]
+        public ?array $markGroups = null, // On the viewer's own messages: who marked them, per mark type (for example played). Omitted when marks are off for the channel type
+        /** @var array<OwnMarkResponse>|null */
+        #[ArrayOf(OwnMarkResponse::class)]
+        public ?array $ownMarks = null, // The viewer's own marks on this message, for example played. Omitted when marks are off for the channel type
         public ?bool $deletedForMe = null,
         /** @var array<string, ChannelMemberPartialResponse>|null */
         #[MapOf(ChannelMemberPartialResponse::class)]

@@ -26,7 +26,9 @@ class ActivityResponse extends BaseModel
         public ?int $popularity = null, // Popularity score of the activity
         public ?float $score = null, // Ranking score for this activity
         public ?object $scoreVars = null, // Variable values used at ranking time. Only included when include_score_vars is enabled in enrichment options.
-        public ?string $selectorSource = null, // Which activity selector provided this activity (e.g., 'following', 'popular', 'interest'). Only set when using multiple activity selectors with ranking.
+        public ?array $reasons = null, // Codes explaining why this activity was shown (e.g. 'following', 'popular', 'interest:nba'). Only included when include_reasons is enabled in enrichment options.
+        public ?string $selectorSource = null, // Which activity selector provided this activity (e.g., 'following', 'popular', 'interest'), or 'exploration' for the For You exploration slot. Only set when using multiple activity selectors with ranking.
+        public ?int $position = null, // 1-based position of this activity. On ranked feeds it is the activity's slot in the ranked feed, continuing across pages; activities filtered out for this user leave gaps. Otherwise it is relative to the returned page. Only set on feed reads for paid plans with an authenticated user, when the app uses feed impressions (For You exploration, or a For You ranking that uses impressions_bucket).
         /** @var array<CommentResponse>|null */
         #[ArrayOf(CommentResponse::class)]
         public ?array $comments = null, // Latest 5 comments of this activity (comment replies excluded)

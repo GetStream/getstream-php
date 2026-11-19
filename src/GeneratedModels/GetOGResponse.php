@@ -32,6 +32,7 @@ class GetOGResponse extends BaseModel
         public ?string $ogScrapeUrl = null, // extracted url from the text
         public ?int $originalWidth = null,
         public ?int $originalHeight = null,
+        public ?AttachmentTranscriptResponse $voiceTranscript = null,
         public ?string $duration = null,
     ) {
     }

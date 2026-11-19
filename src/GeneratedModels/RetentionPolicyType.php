@@ -9,5 +9,6 @@ namespace GetStream\GeneratedModels;
 class RetentionPolicyType
 {
     public const INACTIVE_CHANNELS = 'inactive-channels';
+    public const INACTIVE_CHANNELS_BY_TYPE = 'inactive-channels-by-type';
     public const OLD_MESSAGES = 'old-messages';
 }

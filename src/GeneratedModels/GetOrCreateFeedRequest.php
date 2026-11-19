@@ -9,6 +9,7 @@ class GetOrCreateFeedRequest extends BaseModel
         public ?FeedInput $data = null,
         public ?bool $watch = null,
         public ?string $view = null,
+        public ?bool $skipFeedCreation = null, // Default: false. When true, a missing feed returns 404 instead of being created. Cannot be combined with data.
         public ?object $externalRanking = null,
         public ?array $interestWeights = null,
         public ?bool $overwriteInterestWeights = null,

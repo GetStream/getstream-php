@@ -8,6 +8,7 @@ class RetentionRunResponse extends BaseModel
     public function __construct(
         public ?int $appPk = null,
         public ?string $policy = null,
+        public ?string $channelType = null,
         public ?string $date = null,
         public ?RunStats $stats = null,
     ) {

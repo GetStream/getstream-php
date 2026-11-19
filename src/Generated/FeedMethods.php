@@ -152,6 +152,18 @@ trait FeedMethods
         return $this->feedsV3Client->rejectFeedMemberInvite($this->feedGroup, $this->feedId, $requestData);
     }
     /**
+     * Returns the unread and unseen counts of a notification feed, along with the last seen and last read timestamps, without building a page.
+     *
+     * @param ?string $view
+     * @param ?string $userID
+     * @return StreamResponse<GeneratedModels\GetNotificationStatusResponse>
+     * @throws StreamException
+     */
+    public function getNotificationStatus(
+        ?string $view = null, ?string $userID = null): StreamResponse {
+        return $this->feedsV3Client->getNotificationStatus($this->feedGroup, $this->feedId,$view, $userID);
+    }
+    /**
      * Query pinned activities for a feed with filter query
      *
      * @param GeneratedModels\QueryPinnedActivitiesRequest $requestData

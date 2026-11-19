@@ -9,8 +9,11 @@ class UpsertConfigRequest extends BaseModel
         public ?string $key = null, // Unique identifier for the moderation configuration
         public ?string $team = null, // Team associated with the configuration
         public ?bool $async = null, // Whether moderation should be performed asynchronously
+        /** @deprecated */
         public ?AutomodToxicityConfig $automodToxicityConfig = null,
+        /** @deprecated */
         public ?AutomodPlatformCircumventionConfig $automodPlatformCircumventionConfig = null,
+        /** @deprecated */
         public ?AutomodSemanticFiltersConfig $automodSemanticFiltersConfig = null,
         public ?BlockListConfig $blockListConfig = null,
         public ?AITextConfig $aiTextConfig = null,
@@ -26,6 +29,7 @@ class UpsertConfigRequest extends BaseModel
         public ?AITextConfig $bodyguardConfig = null,
         public ?AIImageConfig $awsRekognitionConfig = null,
         public ?VideoCallRuleConfig $videoCallRuleConfig = null,
+        public ?ModerationEngineConfigRequest $engine = null,
         public ?string $userID = null, // Optional user ID to associate with the audit log entry
         public ?UserRequest $user = null, // User request object
     ) {

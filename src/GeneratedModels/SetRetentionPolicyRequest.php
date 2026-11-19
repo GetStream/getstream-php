@@ -8,6 +8,7 @@ class SetRetentionPolicyRequest extends BaseModel
     public function __construct(
         public ?string $policy = null, // What a retention policy applies to.
         public ?int $maxAgeHours = null,
+        public ?string $channelType = null,
     ) {
     }
 

@@ -68,6 +68,12 @@ class ChatMessageResponse extends BaseModel
         public ?ChatDraftResponse $draft = null,
         public ?ChatReminderResponseData $reminder = null,
         public ?ChatSharedLocationResponseData $sharedLocation = null,
+        /** @var array<string, ChatMarkGroupResponse>|null */
+        #[MapOf(ChatMarkGroupResponse::class)]
+        public ?array $markGroups = null,
+        /** @var array<ChatOwnMarkResponse>|null */
+        #[ArrayOf(ChatOwnMarkResponse::class)]
+        public ?array $ownMarks = null,
         public ?bool $deletedForMe = null,
     ) {
     }

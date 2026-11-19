@@ -6,7 +6,7 @@ namespace GetStream\GeneratedModels;
 class ActivitySelectorConfig extends BaseModel
 {
     public function __construct(
-        public ?string $type = null, // Type of selector. One of: popular, proximity, following, current_feed, query, interest, follow_suggestion
+        public ?string $type = null, // Type of selector. One of: popular, proximity, following, current_feed, query, interest, follow_suggestion, friends_engaged
         public ?object $filter = null, // Filter for activity selection
         /** @var array<SortParamRequest>|null */
         #[ArrayOf(SortParamRequest::class)]
@@ -18,6 +18,10 @@ class ActivitySelectorConfig extends BaseModel
         public ?int $rankingCandidateLimit = null, // Maximum number of candidate activities this selector contributes to a ranked feed (1-1000). Omit to use the default ranking buffer. Only supported on the popular, proximity, interest and query selectors, and ignored on feeds without ranking
         public ?int $timeBudgetMs = null, // Maximum time in milliseconds this selector may take (25-5000). A selector that runs over its budget is dropped from that read instead of failing it, and stays out for the rest of that pagination session. The budget can only tighten the default, never extend it. Omit to use the default. Only supported on the popular, proximity, interest, query and follow_suggestion selectors
         public ?float $viewerLocationRadiusKm = null, // Radius in kilometers the proximity selector searches around the viewer's location (the request's viewer_location, else the user's custom.location) when its filter has no near or within_bounds. Greater than 0 and at most 250. Omit to use the default (10). Only supported on the proximity selector
+        public ?string $friendType = null, // Who counts as a friend for the friends_engaged selector: 'mutual' (default, users the viewer and they follow each other) or 'following' (users the viewer follows). Only supported on the friends_engaged selector
+        public ?int $maxFriends = null, // Maximum number of close friends the friends_engaged selector reads reactions from (1-50, default 10). Only supported on the friends_engaged selector
+        public ?int $minFriends = null, // Minimum number of distinct close friends that must have reacted to an activity for friends_engaged to select it (1-10, default 1, not above max_friends). Only supported on the friends_engaged selector
+        public ?array $reactionTypes = null, // Reaction types that count for the friends_engaged selector (at most 10, default all types). Only supported on the friends_engaged selector
         public ?object $params = null,
     ) {
     }

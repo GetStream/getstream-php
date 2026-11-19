@@ -68,6 +68,12 @@ class SearchResultMessage extends BaseModel
         public ?DraftResponse $draft = null,
         public ?ReminderResponseData $reminder = null,
         public ?SharedLocationResponseData $sharedLocation = null,
+        /** @var array<string, MarkGroupResponse>|null */
+        #[MapOf(MarkGroupResponse::class)]
+        public ?array $markGroups = null,
+        /** @var array<OwnMarkResponse>|null */
+        #[ArrayOf(OwnMarkResponse::class)]
+        public ?array $ownMarks = null,
         public ?bool $deletedForMe = null,
         /** @var array<string, ChannelMemberPartialResponse>|null */
         #[MapOf(ChannelMemberPartialResponse::class)]

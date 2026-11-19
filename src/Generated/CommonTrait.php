@@ -381,13 +381,21 @@ trait CommonTrait
     /**
      * Gets an import
      *
+     * @param ?int $limit
+     * @param ?int $offset
      * @return StreamResponse<GeneratedModels\ListImportsResponse>
      * @throws StreamException
      */
-    public function listImports(): StreamResponse {
+    public function listImports(?int $limit = null, ?int $offset = null): StreamResponse {
         $path = '/api/v2/imports';
 
         $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($offset !== null) {
+            $queryParams['offset'] = $offset;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListImportsResponse::class);
     }

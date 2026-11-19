@@ -10,6 +10,7 @@ class TextContentParameters extends BaseModel
         public ?array $llmHarmLabels = null,
         public ?bool $containsUrl = null,
         public ?string $severity = null,
+        public ?array $severities = null,
         public ?array $blocklistMatch = null,
         public ?string $labelOperator = null,
         public ?int $textLength = null,

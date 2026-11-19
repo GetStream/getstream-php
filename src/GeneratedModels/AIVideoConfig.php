@@ -11,6 +11,12 @@ class AIVideoConfig extends BaseModel
         /** @var array<AWSRekognitionRule>|null */
         #[ArrayOf(AWSRekognitionRule::class)]
         public ?array $rules = null,
+        /** @var array<OCRRule>|null */
+        #[ArrayOf(OCRRule::class)]
+        public ?array $ocrRules = null,
+        /** @var array<BodyguardRule>|null */
+        #[ArrayOf(BodyguardRule::class)]
+        public ?array $ocrSeverityRules = null,
     ) {
     }
 
