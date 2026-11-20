@@ -174,4 +174,19 @@ class ClientTest extends TestCase
 
         $client->makeRequest('GET', '/api/v2/hooks/events', ['product' => ['chat', 'video'], 'limit' => 10]);
     }
+
+    /**
+     * @test
+     */
+    public function listQueryParamWithCommaIsRejected(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::never())->method('request');
+        $this->expectException(StreamException::class);
+
+        $client->makeRequest('DELETE', '/api/v2/feeds/users/u1/interests', ['tags' => ['rock', 'rock, pop']]);
+    }
 }
