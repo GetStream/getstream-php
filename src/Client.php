@@ -192,6 +192,16 @@ class Client
         // Build URL
         $url = $this->baseUrl . $path;
 
+        // The API reads a list query parameter as comma-separated values and ignores the key[0]= form.
+        foreach ($queryParams as $key => $value) {
+            if (is_array($value) && $value !== [] && array_is_list($value) && array_filter($value, 'is_scalar') === $value) {
+                if (array_filter($value, fn ($v) => is_string($v) && str_contains($v, ',')) !== []) {
+                    throw new StreamException("Query parameter '{$key}' has a value containing a comma, which the API would split into separate values");
+                }
+                $queryParams[$key] = implode(',', $value);
+            }
+        }
+
         // Add API key to query parameters
         $queryParams['api_key'] = $this->apiKey;
 
