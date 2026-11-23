@@ -365,6 +365,22 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateGuestResponse::class);
     }
     /**
+     *
+     * @param ?array $product
+     * @return StreamResponse<GeneratedModels\GetHookEventsResponse>
+     * @throws StreamException
+     */
+    public function getHookEvents(?array $product = null): StreamResponse {
+        $path = '/api/v2/hook/events';
+
+        $queryParams = [];
+        if ($product !== null) {
+            $queryParams['product'] = $product;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetHookEventsResponse::class);
+    }
+    /**
      * Creates a new import URL
      *
      * @param GeneratedModels\CreateImportURLRequest $requestData

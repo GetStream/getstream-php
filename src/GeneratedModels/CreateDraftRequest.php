@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GetStream\GeneratedModels;
+class CreateDraftRequest extends BaseModel
+{
+    public function __construct(
+        public ?MessageRequest $message = null, // Message data for creating or updating a message
+    ) {
+    }
+
+    // BaseModel automatically handles jsonSerialize(), toArray(), and fromJson() using constructor types!
+    // Use #[JsonKey('user_id')] to override field names if needed.
+}

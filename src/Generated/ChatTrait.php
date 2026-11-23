@@ -471,6 +471,26 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetDraftResponse::class);
     }
     /**
+     * Creates a draft
+     * Sends events:
+     * - draft.updated
+     *
+     * @param string $type
+     * @param string $id
+     * @param GeneratedModels\CreateDraftRequest $requestData
+     * @return StreamResponse<GeneratedModels\CreateDraftResponse>
+     * @throws StreamException
+     */
+    public function createDraft(string $type, string $id, GeneratedModels\CreateDraftRequest $requestData): StreamResponse {
+        $path = '/api/v2/chat/channels/{type}/{id}/draft';
+        $path = str_replace('{type}', (string) $type, $path);
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        // Use the provided request data array directly
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateDraftResponse::class);
+    }
+    /**
      * Sends event to the channel
      *
      * @param string $type
@@ -876,7 +896,7 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TruncateChannelResponse::class);
     }
     /**
-     * Marks channel as unread from a specific message
+     * Marks channel as unread from a specific message, or as soft unread (a dot without a counter) when no message_id, message_timestamp or thread_id is given
      *
      * @param string $type
      * @param string $id

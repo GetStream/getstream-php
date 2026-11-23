@@ -26,6 +26,7 @@ class NotificationMarkUnreadEvent extends BaseModel
         public ?string $firstUnreadMessageID = null, // The ID of the first unread message
         public ?\DateTime $lastReadAt = null, // The time when the channel/thread was marked as unread
         public ?string $lastReadMessageID = null, // The ID of the last read message
+        public ?bool $softUnread = null, // True when the channel was marked unread without a message: an unread dot with no counter
         public ?int $unreadMessages = null, // The number of unread messages in the channel/thread after first_unread_message_id
         public ?int $unreadCount = null, // The total number of unread messages
         public ?int $totalUnreadCount = null, // The total number of unread messages

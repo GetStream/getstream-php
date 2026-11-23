@@ -8,6 +8,7 @@ class UpdateBlockListRequest extends BaseModel
     public function __construct(
         public ?string $team = null,
         public ?array $words = null, // List of words to block
+        public ?bool $validate = null, // For regex block lists, reject any rule that matches 50% or more of a built-in sample dataset as too broad
         public ?bool $isLeetCheckEnabled = null,
         public ?bool $isPluralCheckEnabled = null,
         public ?bool $isConfusableFoldingEnabled = null,
