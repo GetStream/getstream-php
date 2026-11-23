@@ -32,7 +32,9 @@ jobs:
               : > "$RUNNER_TEMP/$2"
             fi
           }
-          read_version "$BASE_SHA" base-version
+          # The merge base, not the base tip: a branch cut before a regen merged still carries the older .spec-version, which is no downgrade.
+          base=$(gh api "repos/$GITHUB_REPOSITORY/compare/$BASE_SHA...$HEAD_SHA" --jq .merge_base_commit.sha)
+          read_version "$base" base-version
           read_version "$HEAD_SHA" head-version
           if [ ! -s "$RUNNER_TEMP/head-version" ]; then echo "the PR has no .spec-version"; exit 0; fi
           if cmp -s "$RUNNER_TEMP/base-version" "$RUNNER_TEMP/head-version"; then echo ".spec-version unchanged"; exit 0; fi
