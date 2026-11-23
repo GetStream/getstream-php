@@ -10,6 +10,7 @@ use GetStream\ClientBuilder;
 use GetStream\Exceptions\StreamException;
 use GetStream\Feed;
 use GetStream\Http\HttpClientInterface;
+use GetStream\StreamResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -155,5 +156,37 @@ class ClientTest extends TestCase
         self::assertSame('admin', $payload['role']);
         self::assertSame(['read', 'write'], $payload['permissions']);
         self::assertArrayHasKey('exp', $payload); // Should have expiration
+    }
+
+    /**
+     * @test
+     */
+    public function listQueryParamsAreSentCommaSeparated(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::once())
+            ->method('request')
+            ->with('GET', self::stringContains('?product=chat%2Cvideo&limit=10&api_key=env-key'))
+            ->willReturn(new StreamResponse(200, [], []));
+
+        $client->makeRequest('GET', '/api/v2/hooks/events', ['product' => ['chat', 'video'], 'limit' => 10]);
+    }
+
+    /**
+     * @test
+     */
+    public function listQueryParamWithCommaIsRejected(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::never())->method('request');
+        $this->expectException(StreamException::class);
+
+        $client->makeRequest('DELETE', '/api/v2/feeds/users/u1/interests', ['tags' => ['rock', 'rock, pop']]);
     }
 }
