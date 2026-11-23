@@ -213,6 +213,8 @@ class WebhookTest extends TestCase
             'feeds.follow.deleted' => ['feeds.follow.deleted', 'FollowDeletedEvent'],
             'feeds.follow.updated' => ['feeds.follow.updated', 'FollowUpdatedEvent'],
             'feeds.notification_feed.updated' => ['feeds.notification_feed.updated', 'NotificationFeedUpdatedEvent'],
+            'feeds.scheduled_activity.failed' => ['feeds.scheduled_activity.failed', 'ScheduledActivityFailedEvent'],
+            'feeds.scheduled_activity.published' => ['feeds.scheduled_activity.published', 'ScheduledActivityPublishedEvent'],
             'feeds.stories_feed.updated' => ['feeds.stories_feed.updated', 'StoriesFeedUpdatedEvent'],
             'flag.updated' => ['flag.updated', 'FlagUpdatedEvent'],
             'import.error' => ['import.error', 'AsyncImportErrorEvent'],

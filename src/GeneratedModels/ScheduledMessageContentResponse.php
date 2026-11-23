@@ -19,6 +19,7 @@ class ScheduledMessageContentResponse extends BaseModel
         public ?string $parentID = null, // ID of parent message (thread)
         public ?bool $showInChannel = null, // Whether thread reply should be shown in the channel as well
         public ?string $quotedMessageID = null,
+        public ?MessageResponse $quotedMessage = null, // Represents any chat message
         public ?array $mentionedUsers = null, // IDs of the users mentioned in the message
         public ?array $mentionedRoles = null, // Roles mentioned in the message
         public ?array $mentionedGroupIds = null, // IDs of the user groups mentioned in the message

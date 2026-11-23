@@ -26,6 +26,7 @@ class CreateChannelTypeRequest extends BaseModel
         public ?bool $userMessageReminders = null,
         public ?bool $sharedLocations = null, // Enables shared location messages
         public ?bool $countMessages = null, // Count messages in channel.
+        public ?array $markTypes = null, // Message mark types members can send in channels of this type, for example played
         public ?string $messageRetention = null, // Message retention. One of: infinite, numeric
         public ?int $maxMessageLength = null, // Max message length
         public ?string $automod = null, // Automod. One of: disabled, simple, AI
@@ -46,6 +47,7 @@ class CreateChannelTypeRequest extends BaseModel
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null, // Default push notification level for the channel type. One of: all, all_mentions, mentions, direct_mentions, none
         public ?ChatPreferences $chatPreferences = null,
+        public ?bool $voiceTranscription = null, // Transcribe voice recording attachments.
     ) {
     }
 

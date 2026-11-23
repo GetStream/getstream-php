@@ -12,6 +12,7 @@ class ReadStateResponse extends BaseModel
         public ?string $lastReadMessageID = null,
         public ?\DateTime $lastDeliveredAt = null,
         public ?string $lastDeliveredMessageID = null,
+        public ?bool $softUnread = null,
     ) {
     }
 

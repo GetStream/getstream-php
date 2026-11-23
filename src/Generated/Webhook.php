@@ -167,6 +167,8 @@ use GetStream\GeneratedModels\ReminderNotificationEvent;
 use GetStream\GeneratedModels\ReminderUpdatedEvent;
 use GetStream\GeneratedModels\ReviewQueueItemNewEvent;
 use GetStream\GeneratedModels\ReviewQueueItemUpdatedEvent;
+use GetStream\GeneratedModels\ScheduledActivityFailedEvent;
+use GetStream\GeneratedModels\ScheduledActivityPublishedEvent;
 use GetStream\GeneratedModels\ScheduledMessageFailedEvent;
 use GetStream\GeneratedModels\ScheduledMessageSentEvent;
 use GetStream\GeneratedModels\StoriesFeedUpdatedEvent;
@@ -338,6 +340,8 @@ class Webhook
     public const EVENT_TYPE_FEEDS_FOLLOW_DELETED = 'feeds.follow.deleted';
     public const EVENT_TYPE_FEEDS_FOLLOW_UPDATED = 'feeds.follow.updated';
     public const EVENT_TYPE_FEEDS_NOTIFICATION_FEED_UPDATED = 'feeds.notification_feed.updated';
+    public const EVENT_TYPE_FEEDS_SCHEDULED_ACTIVITY_FAILED = 'feeds.scheduled_activity.failed';
+    public const EVENT_TYPE_FEEDS_SCHEDULED_ACTIVITY_PUBLISHED = 'feeds.scheduled_activity.published';
     public const EVENT_TYPE_FEEDS_STORIES_FEED_UPDATED = 'feeds.stories_feed.updated';
     public const EVENT_TYPE_FLAG_UPDATED = 'flag.updated';
     public const EVENT_TYPE_IMPORT_ERROR = 'import.error';
@@ -599,6 +603,8 @@ class Webhook
             'feeds.follow.deleted' => FollowDeletedEvent::class,
             'feeds.follow.updated' => FollowUpdatedEvent::class,
             'feeds.notification_feed.updated' => NotificationFeedUpdatedEvent::class,
+            'feeds.scheduled_activity.failed' => ScheduledActivityFailedEvent::class,
+            'feeds.scheduled_activity.published' => ScheduledActivityPublishedEvent::class,
             'feeds.stories_feed.updated' => StoriesFeedUpdatedEvent::class,
             'flag.updated' => FlagUpdatedEvent::class,
             'import.error' => AsyncImportErrorEvent::class,

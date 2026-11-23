@@ -14,6 +14,10 @@ class ScheduledMessageChannelResponse extends BaseModel
         public ?string $id = null, // Channel ID
         public ?string $name = null, // Channel name, from its custom data
         public ?string $image = null, // Channel image, from its custom data
+        public ?int $memberCount = null, // Number of members of the channel. 0 when the channel is deleted
+        /** @var array<ChannelMemberResponse>|null */
+        #[ArrayOf(ChannelMemberResponse::class)]
+        public ?array $members = null, // Up to 4 members of the channel, oldest first. Empty when the channel is deleted
     ) {
     }
 

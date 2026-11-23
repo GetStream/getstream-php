@@ -8,6 +8,9 @@ class ForYouConfig extends BaseModel
     public function __construct(
         public ?bool $enabled = null, // Turns For You ranking on. Groups: only the non-aggregated 'foryou' group. Views: applies only when read on that group
         public ?string $preset = null, // Name of a registered ranking preset that stands in for 'score' when score is empty. One of: for_you_v2, hot
+        public ?ForYouExplorationConfig $exploration = null,
+        public ?ForYouDwellConfig $dwell = null,
+        public ?bool $trending = null, // Tracks trending tags and turns on the topic_trend ranking variable (0-1, the highest trend over a post's interest tags). Requires enabled
     ) {
     }
 

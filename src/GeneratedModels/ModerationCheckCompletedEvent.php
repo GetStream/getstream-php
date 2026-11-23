@@ -17,6 +17,7 @@ class ModerationCheckCompletedEvent extends BaseModel
         public ?string $entityType = null, // The type of the entity which was moderated
         public ?string $recommendedAction = null, // The recommended action
         public ?string $reviewQueueItemID = null, // The review queue item ID
+        public ?ModerationPayloadResponse $moderationPayload = null, // Content payload for moderation
     ) {
     }
 

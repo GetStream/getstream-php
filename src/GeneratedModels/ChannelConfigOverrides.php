@@ -25,6 +25,7 @@ class ChannelConfigOverrides extends BaseModel
         public ?bool $userMessageReminders = null, // Enable/disable user message reminders
         public ?bool $sharedLocations = null, // Enable/disable shared locations
         public ?bool $countMessages = null, // Enable/disable message counting
+        public ?bool $voiceTranscription = null, // Enables or disables transcription of voice recordings
     ) {
     }
 

@@ -365,6 +365,22 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateGuestResponse::class);
     }
     /**
+     *
+     * @param ?array $product
+     * @return StreamResponse<GeneratedModels\GetHookEventsResponse>
+     * @throws StreamException
+     */
+    public function getHookEvents(?array $product = null): StreamResponse {
+        $path = '/api/v2/hook/events';
+
+        $queryParams = [];
+        if ($product !== null) {
+            $queryParams['product'] = $product;
+        }
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetHookEventsResponse::class);
+    }
+    /**
      * Creates a new import URL
      *
      * @param GeneratedModels\CreateImportURLRequest $requestData
@@ -381,13 +397,21 @@ trait CommonTrait
     /**
      * Gets an import
      *
+     * @param ?int $limit
+     * @param ?int $offset
      * @return StreamResponse<GeneratedModels\ListImportsResponse>
      * @throws StreamException
      */
-    public function listImports(): StreamResponse {
+    public function listImports(?int $limit = null, ?int $offset = null): StreamResponse {
         $path = '/api/v2/imports';
 
         $queryParams = [];
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($offset !== null) {
+            $queryParams['offset'] = $offset;
+        }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\ListImportsResponse::class);
     }

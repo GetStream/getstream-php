@@ -9,6 +9,7 @@ class OCRContentParameters extends BaseModel
         public ?array $harmLabels = null,
         public ?string $labelOperator = null,
         public ?string $severity = null,
+        public ?array $severities = null,
     ) {
     }
 

@@ -25,6 +25,7 @@ class OwnCapability
     public const SCREENSHARE = 'screenshare';
     public const SEND_AUDIO = 'send-audio';
     public const SEND_CLOSED_CAPTIONS_CALL = 'send-closed-captions-call';
+    public const SEND_DATA = 'send-data';
     public const SEND_VIDEO = 'send-video';
     public const START_BROADCAST_CALL = 'start-broadcast-call';
     public const START_CLOSED_CAPTIONS_CALL = 'start-closed-captions-call';

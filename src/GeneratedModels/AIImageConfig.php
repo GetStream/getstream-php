@@ -14,6 +14,9 @@ class AIImageConfig extends BaseModel
         /** @var array<OCRRule>|null */
         #[ArrayOf(OCRRule::class)]
         public ?array $ocrRules = null,
+        /** @var array<BodyguardRule>|null */
+        #[ArrayOf(BodyguardRule::class)]
+        public ?array $ocrSeverityRules = null,
     ) {
     }
 

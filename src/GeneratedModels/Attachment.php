@@ -35,6 +35,7 @@ class Attachment extends BaseModel
         public ?string $ogScrapeUrl = null,
         public ?int $originalWidth = null,
         public ?int $originalHeight = null,
+        public ?AttachmentTranscriptResponse $voiceTranscript = null,
     ) {
     }
 

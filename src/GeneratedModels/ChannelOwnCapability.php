@@ -35,6 +35,7 @@ class ChannelOwnCapability
     public const SEND_CUSTOM_EVENTS = 'send-custom-events';
     public const SEND_LINKS = 'send-links';
     public const SEND_MESSAGE = 'send-message';
+    public const SEND_MESSAGE_MARK = 'send-message-mark';
     public const SEND_POLL = 'send-poll';
     public const SEND_REACTION = 'send-reaction';
     public const SEND_REPLY = 'send-reply';

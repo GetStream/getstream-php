@@ -14,6 +14,8 @@ class CallTranscription extends BaseModel
         public ?\DateTime $startTime = null,
         public ?\DateTime $endTime = null,
         public ?string $sessionID = null,
+        public ?string $language = null,
+        public ?bool $translated = null,
     ) {
     }
 

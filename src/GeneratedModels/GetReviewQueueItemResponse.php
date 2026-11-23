@@ -7,6 +7,7 @@ class GetReviewQueueItemResponse extends BaseModel
 {
     public function __construct(
         public ?ReviewQueueItemResponse $item = null,
+        public ?AgentReviewResponse $agentReview = null,
         public ?string $duration = null,
     ) {
     }

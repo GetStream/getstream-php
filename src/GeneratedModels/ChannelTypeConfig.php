@@ -32,6 +32,7 @@ class ChannelTypeConfig extends BaseModel
         public ?bool $userMessageReminders = null,
         public ?bool $sharedLocations = null,
         public ?bool $countMessages = null,
+        public ?array $markTypes = null,
         public ?string $messageRetention = null,
         public ?int $maxMessageLength = null,
         public ?string $automod = null, // Automod level applied to a channel type.
@@ -48,6 +49,7 @@ class ChannelTypeConfig extends BaseModel
         public ?bool $skipLastMsgUpdateForSystemMsgs = null,
         public ?string $pushLevel = null, // Sets the push notification level for a channel type
         public ?ChatPreferences $chatPreferences = null,
+        public ?bool $voiceTranscription = null,
         /** @var array<Command>|null */
         #[ArrayOf(Command::class)]
         public ?array $commands = null,

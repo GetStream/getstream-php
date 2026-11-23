@@ -48,6 +48,7 @@ class ReviewQueueItemResponse extends BaseModel
         public ?array $teams = null, // Teams associated with this item
         public ?string $configKey = null,
         public ?int $flagsCount = null,
+        public ?AgentReviewSummaryResponse $agentReview = null,
         public ?bool $escalated = null, // Whether the item has been escalated
         public ?EscalationMetadata $escalationMetadata = null,
         public ?string $escalatedBy = null, // ID of the moderator who escalated the item
