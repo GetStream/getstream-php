@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace GetStream\Http;
 
-/** Redaction helpers for the SDK's structured log events. Shallow by design. */
+/** Redaction helpers for the SDK's structured log events. */
 final class LogRedaction
 {
     public const REDACTED = '<redacted>';
     private const QUERY_PARAMS = ['api_key', 'api_secret', 'token'];
-    private const BODY_KEYS = ['api_secret', 'token', 'password'];
+    private const SENSITIVE_KEY_SUBSTRINGS = [
+        'secret',
+        'token',
+        'password',
+        'credential',
+        'private_key',
+        'auth_key',
+        'p12_cert',
+        'stream_key',
+    ];
 
     public static function redactQuery(string $query): string
     {
@@ -36,19 +45,45 @@ final class LogRedaction
             return $body;
         }
         $changed = false;
-        foreach (self::BODY_KEYS as $key) {
-            if (array_key_exists($key, $data)) {
-                $data[$key] = self::REDACTED;
-                $changed = true;
-            }
-        }
+        $redacted = self::redactArray($data, $changed);
 
         if (!$changed) {
             return $body;
         }
-        $encoded = json_encode($data);
+        $encoded = json_encode($redacted);
 
         return $encoded !== false ? $encoded : $body;
+    }
+
+    private static function isSensitiveKey(string $key): bool
+    {
+        $lower = strtolower($key);
+        foreach (self::SENSITIVE_KEY_SUBSTRINGS as $sub) {
+            if (str_contains($lower, $sub)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array<int|string, mixed> $data
+     *
+     * @return array<int|string, mixed>
+     */
+    private static function redactArray(array $data, bool &$changed): array
+    {
+        foreach ($data as $key => $value) {
+            if (is_string($key) && self::isSensitiveKey($key)) {
+                $data[$key] = self::REDACTED;
+                $changed = true;
+            } elseif (is_array($value)) {
+                $data[$key] = self::redactArray($value, $changed);
+            }
+        }
+
+        return $data;
     }
 
     /**
