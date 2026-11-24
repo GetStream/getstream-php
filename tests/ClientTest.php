@@ -189,4 +189,59 @@ class ClientTest extends TestCase
 
         $client->makeRequest('DELETE', '/api/v2/feeds/users/u1/interests', ['tags' => ['rock', 'rock, pop']]);
     }
+
+    /**
+     * @test
+     */
+    public function pathParamsArePercentEncoded(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::once())
+            ->method('request')
+            ->with(
+                'GET',
+                'https://chat.stream-io-api.com/api/v2/video/call/default/..%2Fother%3Fhard_delete%3Dtrue%23frag?api_key=env-key'
+            )
+            ->willReturn(new StreamResponse(200, [], []));
+
+        $client->makeRequest(
+            'GET',
+            '/api/v2/video/call/{type}/{id}',
+            [],
+            null,
+            ['type' => 'default', 'id' => '../other?hard_delete=true#frag']
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider invalidPathParamProvider
+     */
+    public function emptyAndDotSegmentPathParamsAreRejected(string $badValue): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::never())->method('request');
+        $this->expectException(StreamException::class);
+
+        $client->makeRequest('GET', '/api/v2/tasks/{id}', [], null, ['id' => $badValue]);
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function invalidPathParamProvider(): array
+    {
+        return [
+            'empty' => [''],
+            'single dot' => ['.'],
+            'double dot' => ['..'],
+        ];
+    }
 }

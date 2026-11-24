@@ -186,7 +186,11 @@ class Client
     ): StreamResponse {
         // Replace path parameters
         foreach ($pathParams as $key => $value) {
-            $path = str_replace('{' . $key . '}', (string) $value, $path);
+            $strValue = (string) $value;
+            if ($strValue === '' || $strValue === '.' || $strValue === '..') {
+                throw new StreamException("Invalid path parameter '{$key}': must not be empty or a dot-segment");
+            }
+            $path = str_replace('{' . $key . '}', rawurlencode($strValue), $path);
         }
 
         // Build URL
