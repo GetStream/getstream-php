@@ -220,7 +220,7 @@ jobs:
               | sort | awk -F'\t' '{ e = sprintf("feat: change %s\n\nBREAKING CHANGE: %s\n", $1, $2); if (size + length(e) > 40000) { more++; next } size += length(e); printf "%s", e }
                   END { if (more) printf "feat: change %d more APIs\n\nBREAKING CHANGE: %d more API changes are left out to fit the PR body\n", more, more }'
           }
-          # PHP callers pass arguments by position or by name, and a generator change alone moves neither in the spec. So the generated methods before and after are compared too: each removed method, and each method whose arguments were renamed, moved, lost a default or gained a required one, gets a footer. A default added to an existing argument, or a type made nullable, is compatible, unless an optional argument comes before it, which rebinds positional calls. Removals the spec diff already lists are left out.
+          # PHP callers pass required arguments by position and optional ones by name, as the README says, and a generator change alone shows in neither spec. So the generated methods before and after are compared too: each removed method, each method whose required arguments were renamed, reordered or added, and each method whose arguments changed type or whose optional arguments were renamed, removed or lost their default, gets a footer. A type made nullable, a default added, or a new optional argument wherever the generator puts it, is compatible. Removals the spec diff already lists are left out.
           surface() {
             # One line per method, "file TAB name TAB arguments", with signatures that span lines joined.
             defs() { awk -v f="$1" '/^ *public (static )?function / { s = ""; on = 1 } on { s = s " " $0; if ($0 ~ /[{;] *$/) { on = 0; gsub(/[ \t]+/, " ", s); gsub(/\( /, "(", s); gsub(/,? \)/, ")", s); if (match(s, /public (static )?function [A-Za-z0-9_]+\(/)) { m = substr(s, RSTART, RLENGTH - 1); a = substr(s, RSTART + RLENGTH); sub(/\)[^)]*$/, "", a); sub(/.* /, "", m); print f "\t" m "\t" a } } }'; }
@@ -229,7 +229,9 @@ jobs:
             removed op > "$RUNNER_TEMP/spec-removed"
             awk -F'\t' '
               function name(f, m) { return (f == "ChatTrait" ? "ChatClient" : f == "VideoTrait" ? "VideoClient" : f == "ModerationTrait" ? "ModerationClient" : f == "FeedsTrait" ? "FeedsV3Client" : f == "FeedMethods" ? "Feed" : f == "CommonTrait" ? "Client" : f) "::" m "()" }
-              function ext(o, n,   a, b, k, j, i, x, y, opt) { k = o == "" ? 0 : split(o, a, ", "); j = n == "" ? 0 : split(n, b, ", "); if (j < k) return 0; for (i = 1; i <= k; i++) { x = a[i]; sub(/ = .*/, "", x); y = b[i]; sub(/ = .*/, "", y); if ((x != y && "?" x != y) || (a[i] ~ / = / && b[i] !~ / = /) || (opt && a[i] !~ / = / && b[i] ~ / = /)) return 0; if (a[i] ~ / = /) opt = 1 } for (i = k + 1; i <= j; i++) if (b[i] !~ / = /) return 0; return 1 }
+              function arg(s) { sub(/ = .*/, "", s); return s }
+              function var(s) { s = arg(s); sub(/.* /, "", s); return s }
+              function ext(o, n,   a, b, k, j, i, v, seen, typ, opt) { k = o == "" ? 0 : split(o, a, ", "); j = n == "" ? 0 : split(n, b, ", "); for (i = 1; i <= j; i++) { typ[var(b[i])] = arg(b[i]); opt[var(b[i])] = b[i] ~ / = / } for (i = 1; i <= k; i++) { v = var(a[i]); seen[v] = 1; if (!(v in typ) || (arg(a[i]) != typ[v] && "?" arg(a[i]) != typ[v])) return 0; if (a[i] ~ / = / ? !opt[v] : i > j || var(b[i]) != v) return 0 } for (v in typ) if (!(v in seen) && !opt[v]) return 0; return 1 }
               FILENAME == ARGV[1] { old[$1 FS $2] = $3; next }
               { new[$1 FS $2] = $3 }
               END { for (k in old) { split(k, p, FS); if (!(k in new)) print "gone" FS p[2] FS name(p[1], p[2]); else if (!ext(old[k], new[k])) print "moved" FS p[2] FS name(p[1], p[2]) " takes (" new[k] ") instead of (" old[k] ")" } }' "$RUNNER_TEMP/old-defs" "$RUNNER_TEMP/new-defs" \

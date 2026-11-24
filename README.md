@@ -183,6 +183,11 @@ echo "Status: " . $response->getStatusCode();
 echo "Duration: " . $response->duration;
 ```
 
+## Method arguments
+
+> **Note:** Pass required arguments in order and optional ones as **named arguments** (e.g. `$chatClient->getChannel('messaging', 'general', state: true)`).
+> A new optional argument can appear anywhere in a method's signature, so passing optional arguments by position may send a value to the wrong parameter after an SDK update.
+
 ## Models
 
 > **Note:** When constructing models directly, always use **named arguments** (e.g. `new Message(text: 'hello')`).
@@ -234,7 +239,7 @@ The client regenerates itself on every chat production release:
 2. protocol notifies this repo, and the **Regenerate** workflow opens one PR from `regen/auto`, titled `feat: regenerate client from openapi-vX`. Its `BEGIN_COMMIT_OVERRIDE` block lists the changelog lines.
 3. Once the required checks pass and the **Regen integration** run passes on the PR's head commit, the PR merges itself, and release-please adds those lines to the Release PR. Merging the Release PR ships, as described below.
 
-A regen PR waits for a human when its changelog carries a `BREAKING CHANGE:` footer, when the `Breaking changes check` finds an approved breaking change in the new spec, or when a required check fails. For each approved breaking change with wire lines, the regen writes `BREAKING CHANGE:` footers from the lines chat allowlisted and titles the PR `feat!:`, so the check passes and the PR only waits for a human to merge it. A ticket chat approved for getstream-go only has no PHP lines, so the check fails until a human names it in the PR body, also on a `feat!:` PR. Because PHP callers pass arguments by position or by name, the regen also compares the generated methods before and after, and writes a footer for each removed method and each method whose arguments were renamed or moved, even when the spec did not change them. Only `getstream-sdk-bot` can push to `regen/**`.
+A regen PR waits for a human when its changelog carries a `BREAKING CHANGE:` footer, when the `Breaking changes check` finds an approved breaking change in the new spec, or when a required check fails. For each approved breaking change with wire lines, the regen writes `BREAKING CHANGE:` footers from the lines chat allowlisted and titles the PR `feat!:`, so the check passes and the PR only waits for a human to merge it. A ticket chat approved for getstream-go only has no PHP lines, so the check fails until a human names it in the PR body, also on a `feat!:` PR. Because callers pass required arguments by position and optional ones by name, the regen also compares the generated methods before and after, and writes a footer for each removed method, each method whose required arguments were renamed, reordered or added, and each method whose arguments changed type or whose optional arguments were renamed, removed or lost their default, even when the spec did not change them. A new optional argument is not breaking wherever the generator puts it. Only `getstream-sdk-bot` can push to `regen/**`.
 
 ### Manual cases
 
