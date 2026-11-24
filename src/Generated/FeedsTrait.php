@@ -25,7 +25,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/activities';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddActivityResponse::class);
     }
     /**
@@ -39,7 +38,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/activities/batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertActivitiesResponse::class);
     }
     /**
@@ -55,7 +53,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/activities/batch/partial';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateActivitiesPartialBatchResponse::class);
     }
     /**
@@ -69,7 +66,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/activities/delete';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteActivitiesResponse::class);
     }
     /**
@@ -83,19 +79,18 @@ trait FeedsTrait
         $path = '/api/v2/feeds/activities/metrics/track';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TrackActivityMetricsResponse::class);
     }
     /**
      * Query activities based on filters with pagination and sorting options
      *
-     * @param GeneratedModels\QueryActivitiesRequest $requestData
+     * @param ?GeneratedModels\QueryActivitiesRequest $requestData
      * @param ?string $language
      * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\QueryActivitiesResponse>
      * @throws StreamException
      */
-    public function queryActivities(GeneratedModels\QueryActivitiesRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+    public function queryActivities(?GeneratedModels\QueryActivitiesRequest $requestData = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/activities/query';
 
         $queryParams = [];
@@ -105,7 +100,7 @@ trait FeedsTrait
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryActivitiesRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryActivitiesResponse::class);
     }
     /**
@@ -119,7 +114,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/activities/reactions/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BatchQueryActivityReactionsResponse::class);
     }
     /**
@@ -149,48 +143,48 @@ trait FeedsTrait
      * Updates a bookmark for an activity
      *
      * @param string $activityID
-     * @param GeneratedModels\UpdateBookmarkRequest $requestData
+     * @param ?GeneratedModels\UpdateBookmarkRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateBookmarkResponse>
      * @throws StreamException
      */
-    public function updateBookmark(string $activityID, GeneratedModels\UpdateBookmarkRequest $requestData): StreamResponse {
+    public function updateBookmark(string $activityID, ?GeneratedModels\UpdateBookmarkRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/bookmarks';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateBookmarkRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateBookmarkResponse::class);
     }
     /**
      * Adds a bookmark to an activity
      *
      * @param string $activityID
-     * @param GeneratedModels\AddBookmarkRequest $requestData
+     * @param ?GeneratedModels\AddBookmarkRequest $requestData
      * @return StreamResponse<GeneratedModels\AddBookmarkResponse>
      * @throws StreamException
      */
-    public function addBookmark(string $activityID, GeneratedModels\AddBookmarkRequest $requestData): StreamResponse {
+    public function addBookmark(string $activityID, ?GeneratedModels\AddBookmarkRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/bookmarks';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\AddBookmarkRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddBookmarkResponse::class);
     }
     /**
      * Submit feedback for an activity including options to show less, hide, report, or mute the user
      *
      * @param string $activityID
-     * @param GeneratedModels\ActivityFeedbackRequest $requestData
+     * @param ?GeneratedModels\ActivityFeedbackRequest $requestData
      * @return StreamResponse<GeneratedModels\ActivityFeedbackResponse>
      * @throws StreamException
      */
-    public function activityFeedback(string $activityID, GeneratedModels\ActivityFeedbackRequest $requestData): StreamResponse {
+    public function activityFeedback(string $activityID, ?GeneratedModels\ActivityFeedbackRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/feedback';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\ActivityFeedbackRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ActivityFeedbackResponse::class);
     }
     /**
@@ -205,17 +199,17 @@ trait FeedsTrait
      *
      * @param string $activityID
      * @param string $pollID
-     * @param GeneratedModels\CastPollVoteRequest $requestData
+     * @param ?GeneratedModels\CastPollVoteRequest $requestData
      * @return StreamResponse<GeneratedModels\PollVoteResponse>
      * @throws StreamException
      */
-    public function castPollVote(string $activityID, string $pollID, GeneratedModels\CastPollVoteRequest $requestData): StreamResponse {
+    public function castPollVote(string $activityID, string $pollID, ?GeneratedModels\CastPollVoteRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/polls/{poll_id}/vote';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\CastPollVoteRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PollVoteResponse::class);
     }
     /**
@@ -257,23 +251,22 @@ trait FeedsTrait
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddReactionResponse::class);
     }
     /**
      * Query activity reactions
      *
      * @param string $activityID
-     * @param GeneratedModels\QueryActivityReactionsRequest $requestData
+     * @param ?GeneratedModels\QueryActivityReactionsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryActivityReactionsResponse>
      * @throws StreamException
      */
-    public function queryActivityReactions(string $activityID, GeneratedModels\QueryActivityReactionsRequest $requestData): StreamResponse {
+    public function queryActivityReactions(string $activityID, ?GeneratedModels\QueryActivityReactionsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{activity_id}/reactions/query';
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryActivityReactionsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryActivityReactionsResponse::class);
     }
     /**
@@ -412,16 +405,16 @@ trait FeedsTrait
      * - feeds.activity.updated
      *
      * @param string $id
-     * @param GeneratedModels\UpdateActivityPartialRequest $requestData
+     * @param ?GeneratedModels\UpdateActivityPartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateActivityPartialResponse>
      * @throws StreamException
      */
-    public function updateActivityPartial(string $id, GeneratedModels\UpdateActivityPartialRequest $requestData): StreamResponse {
+    public function updateActivityPartial(string $id, ?GeneratedModels\UpdateActivityPartialRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateActivityPartialRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateActivityPartialResponse::class);
     }
     /**
@@ -430,28 +423,28 @@ trait FeedsTrait
      * - feeds.activity.updated
      *
      * @param string $id
-     * @param GeneratedModels\UpdateActivityRequest $requestData
+     * @param ?GeneratedModels\UpdateActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateActivityResponse>
      * @throws StreamException
      */
-    public function updateActivity(string $id, GeneratedModels\UpdateActivityRequest $requestData): StreamResponse {
+    public function updateActivity(string $id, ?GeneratedModels\UpdateActivityRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateActivityRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateActivityResponse::class);
     }
     /**
      * Restores a soft-deleted, moderation-removed, or shadow-blocked activity by its ID. Deleted activities can be restored by the owner (client-side). Moderation-blocked activities can only be restored server-side.
      *
      * @param string $id
-     * @param GeneratedModels\RestoreActivityRequest $requestData
+     * @param ?GeneratedModels\RestoreActivityRequest $requestData
      * @param ?bool $enrichOwnFields
      * @return StreamResponse<GeneratedModels\RestoreActivityResponse>
      * @throws StreamException
      */
-    public function restoreActivity(string $id, GeneratedModels\RestoreActivityRequest $requestData, ?bool $enrichOwnFields = null): StreamResponse {
+    public function restoreActivity(string $id, ?GeneratedModels\RestoreActivityRequest $requestData = null, ?bool $enrichOwnFields = null): StreamResponse {
         $path = '/api/v2/feeds/activities/{id}/restore';
         $path = str_replace('{id}', (string) $id, $path);
 
@@ -459,7 +452,7 @@ trait FeedsTrait
         if ($enrichOwnFields !== null) {
             $queryParams['enrich_own_fields'] = $enrichOwnFields;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\RestoreActivityRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreActivityResponse::class);
     }
     /**
@@ -477,21 +470,20 @@ trait FeedsTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TranslateActivityResponse::class);
     }
     /**
      * Query bookmark folders with filter query
      *
-     * @param GeneratedModels\QueryBookmarkFoldersRequest $requestData
+     * @param ?GeneratedModels\QueryBookmarkFoldersRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryBookmarkFoldersResponse>
      * @throws StreamException
      */
-    public function queryBookmarkFolders(GeneratedModels\QueryBookmarkFoldersRequest $requestData): StreamResponse {
+    public function queryBookmarkFolders(?GeneratedModels\QueryBookmarkFoldersRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/bookmark_folders/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryBookmarkFoldersRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryBookmarkFoldersResponse::class);
     }
     /**
@@ -513,28 +505,28 @@ trait FeedsTrait
      * Update a bookmark folder by its ID
      *
      * @param string $folderID
-     * @param GeneratedModels\UpdateBookmarkFolderRequest $requestData
+     * @param ?GeneratedModels\UpdateBookmarkFolderRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateBookmarkFolderResponse>
      * @throws StreamException
      */
-    public function updateBookmarkFolder(string $folderID, GeneratedModels\UpdateBookmarkFolderRequest $requestData): StreamResponse {
+    public function updateBookmarkFolder(string $folderID, ?GeneratedModels\UpdateBookmarkFolderRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/bookmark_folders/{folder_id}';
         $path = str_replace('{folder_id}', (string) $folderID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateBookmarkFolderRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateBookmarkFolderResponse::class);
     }
     /**
      * Query bookmarks with filter query
      *
-     * @param GeneratedModels\QueryBookmarksRequest $requestData
+     * @param ?GeneratedModels\QueryBookmarksRequest $requestData
      * @param ?string $language
      * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\QueryBookmarksResponse>
      * @throws StreamException
      */
-    public function queryBookmarks(GeneratedModels\QueryBookmarksRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+    public function queryBookmarks(?GeneratedModels\QueryBookmarksRequest $requestData = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/bookmarks/query';
 
         $queryParams = [];
@@ -544,7 +536,7 @@ trait FeedsTrait
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryBookmarksRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryBookmarksResponse::class);
     }
     /**
@@ -600,7 +592,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCollectionsResponse::class);
     }
     /**
@@ -614,7 +605,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateCollectionsResponse::class);
     }
     /**
@@ -628,21 +618,20 @@ trait FeedsTrait
         $path = '/api/v2/feeds/collections';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertCollectionsResponse::class);
     }
     /**
      * Query collections with filter query
      *
-     * @param GeneratedModels\QueryCollectionsRequest $requestData
+     * @param ?GeneratedModels\QueryCollectionsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCollectionsResponse>
      * @throws StreamException
      */
-    public function queryCollections(GeneratedModels\QueryCollectionsRequest $requestData): StreamResponse {
+    public function queryCollections(?GeneratedModels\QueryCollectionsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/collections/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryCollectionsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCollectionsResponse::class);
     }
     /**
@@ -713,15 +702,15 @@ trait FeedsTrait
     /**
      * Adds a comment to an object (e.g., activity) or a reply to an existing comment, and broadcasts appropriate events
      *
-     * @param GeneratedModels\AddCommentRequest $requestData
+     * @param ?GeneratedModels\AddCommentRequest $requestData
      * @return StreamResponse<GeneratedModels\AddCommentResponse>
      * @throws StreamException
      */
-    public function addComment(GeneratedModels\AddCommentRequest $requestData): StreamResponse {
+    public function addComment(?GeneratedModels\AddCommentRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\AddCommentRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddCommentResponse::class);
     }
     /**
@@ -735,7 +724,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/comments/batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddCommentsBatchResponse::class);
     }
     /**
@@ -757,7 +745,6 @@ trait FeedsTrait
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
         }
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCommentsResponse::class);
     }
     /**
@@ -771,7 +758,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/comments/reactions/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BatchQueryCommentReactionsResponse::class);
     }
     /**
@@ -801,32 +787,32 @@ trait FeedsTrait
      * Updates a bookmark for a comment
      *
      * @param string $commentID
-     * @param GeneratedModels\UpdateCommentBookmarkRequest $requestData
+     * @param ?GeneratedModels\UpdateCommentBookmarkRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateCommentBookmarkResponse>
      * @throws StreamException
      */
-    public function updateCommentBookmark(string $commentID, GeneratedModels\UpdateCommentBookmarkRequest $requestData): StreamResponse {
+    public function updateCommentBookmark(string $commentID, ?GeneratedModels\UpdateCommentBookmarkRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
         $path = str_replace('{comment_id}', (string) $commentID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateCommentBookmarkRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentBookmarkResponse::class);
     }
     /**
      * Adds a bookmark to a comment
      *
      * @param string $commentID
-     * @param GeneratedModels\AddCommentBookmarkRequest $requestData
+     * @param ?GeneratedModels\AddCommentBookmarkRequest $requestData
      * @return StreamResponse<GeneratedModels\AddCommentBookmarkResponse>
      * @throws StreamException
      */
-    public function addCommentBookmark(string $commentID, GeneratedModels\AddCommentBookmarkRequest $requestData): StreamResponse {
+    public function addCommentBookmark(string $commentID, ?GeneratedModels\AddCommentBookmarkRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{comment_id}/bookmarks';
         $path = str_replace('{comment_id}', (string) $commentID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\AddCommentBookmarkRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddCommentBookmarkResponse::class);
     }
     /**
@@ -883,32 +869,32 @@ trait FeedsTrait
      * Updates a comment on an object (e.g., activity) and broadcasts appropriate events
      *
      * @param string $id
-     * @param GeneratedModels\UpdateCommentRequest $requestData
+     * @param ?GeneratedModels\UpdateCommentRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateCommentResponse>
      * @throws StreamException
      */
-    public function updateComment(string $id, GeneratedModels\UpdateCommentRequest $requestData): StreamResponse {
+    public function updateComment(string $id, ?GeneratedModels\UpdateCommentRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateCommentRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentResponse::class);
     }
     /**
      * Hide or unhide a comment for the current user
      *
      * @param string $id
-     * @param GeneratedModels\CommentFeedbackRequest $requestData
+     * @param ?GeneratedModels\CommentFeedbackRequest $requestData
      * @return StreamResponse<GeneratedModels\CommentFeedbackResponse>
      * @throws StreamException
      */
-    public function commentFeedback(string $id, GeneratedModels\CommentFeedbackRequest $requestData): StreamResponse {
+    public function commentFeedback(string $id, ?GeneratedModels\CommentFeedbackRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/feedback';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\CommentFeedbackRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CommentFeedbackResponse::class);
     }
     /**
@@ -918,16 +904,16 @@ trait FeedsTrait
      * - feeds.comment.updated
      *
      * @param string $id
-     * @param GeneratedModels\UpdateCommentPartialRequest $requestData
+     * @param ?GeneratedModels\UpdateCommentPartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateCommentPartialResponse>
      * @throws StreamException
      */
-    public function updateCommentPartial(string $id, GeneratedModels\UpdateCommentPartialRequest $requestData): StreamResponse {
+    public function updateCommentPartial(string $id, ?GeneratedModels\UpdateCommentPartialRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/partial';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateCommentPartialRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateCommentPartialResponse::class);
     }
     /**
@@ -943,23 +929,22 @@ trait FeedsTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AddCommentReactionResponse::class);
     }
     /**
      * Query comment reactions
      *
      * @param string $id
-     * @param GeneratedModels\QueryCommentReactionsRequest $requestData
+     * @param ?GeneratedModels\QueryCommentReactionsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCommentReactionsResponse>
      * @throws StreamException
      */
-    public function queryCommentReactions(string $id, GeneratedModels\QueryCommentReactionsRequest $requestData): StreamResponse {
+    public function queryCommentReactions(string $id, ?GeneratedModels\QueryCommentReactionsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/reactions/query';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryCommentReactionsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCommentReactionsResponse::class);
     }
     /**
@@ -1046,16 +1031,16 @@ trait FeedsTrait
      * Restores a soft-deleted, moderation-removed, or shadow-blocked comment by its ID. The comment and all its descendants are restored. Deleted comments can be restored client-side. Moderation-blocked comments can only be restored server-side.
      *
      * @param string $id
-     * @param GeneratedModels\RestoreCommentRequest $requestData
+     * @param ?GeneratedModels\RestoreCommentRequest $requestData
      * @return StreamResponse<GeneratedModels\RestoreCommentResponse>
      * @throws StreamException
      */
-    public function restoreComment(string $id, GeneratedModels\RestoreCommentRequest $requestData): StreamResponse {
+    public function restoreComment(string $id, ?GeneratedModels\RestoreCommentRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/comments/{id}/restore';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\RestoreCommentRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RestoreCommentResponse::class);
     }
     /**
@@ -1073,21 +1058,20 @@ trait FeedsTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TranslateCommentResponse::class);
     }
     /**
      * Starts an async task that exports all feeds data of the app in export format v1. Poll the task for the result
      *
-     * @param GeneratedModels\ExportFeedsAppRequest $requestData
+     * @param ?GeneratedModels\ExportFeedsAppRequest $requestData
      * @return StreamResponse<GeneratedModels\ExportFeedsResponse>
      * @throws StreamException
      */
-    public function exportFeedsApp(GeneratedModels\ExportFeedsAppRequest $requestData): StreamResponse {
+    public function exportFeedsApp(?GeneratedModels\ExportFeedsAppRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/export/app';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\ExportFeedsAppRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportFeedsResponse::class);
     }
     /**
@@ -1109,16 +1093,16 @@ trait FeedsTrait
      * Starts an async task that exports activities, comments, reactions or follows in export format v1, optionally filtered by user and creation time. Poll the task for the result
      *
      * @param string $type
-     * @param GeneratedModels\ExportFeedsByTypeRequest $requestData
+     * @param ?GeneratedModels\ExportFeedsByTypeRequest $requestData
      * @return StreamResponse<GeneratedModels\ExportFeedsResponse>
      * @throws StreamException
      */
-    public function exportFeedsByType(string $type, GeneratedModels\ExportFeedsByTypeRequest $requestData): StreamResponse {
+    public function exportFeedsByType(string $type, ?GeneratedModels\ExportFeedsByTypeRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/export/{type}';
         $path = str_replace('{type}', (string) $type, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\ExportFeedsByTypeRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportFeedsResponse::class);
     }
     /**
@@ -1149,7 +1133,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/feed_groups';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateFeedGroupResponse::class);
     }
     /**
@@ -1182,13 +1165,13 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
-     * @param GeneratedModels\GetOrCreateFeedRequest $requestData
+     * @param ?GeneratedModels\GetOrCreateFeedRequest $requestData
      * @param ?string $language
      * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedResponse>
      * @throws StreamException
      */
-    public function getOrCreateFeed(string $feedGroupID, string $feedID, GeneratedModels\GetOrCreateFeedRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+    public function getOrCreateFeed(string $feedGroupID, string $feedID, ?GeneratedModels\GetOrCreateFeedRequest $requestData = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -1200,7 +1183,7 @@ trait FeedsTrait
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GetOrCreateFeedRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateFeedResponse::class);
     }
     /**
@@ -1208,17 +1191,17 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
-     * @param GeneratedModels\UpdateFeedRequest $requestData
+     * @param ?GeneratedModels\UpdateFeedRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateFeedResponse>
      * @throws StreamException
      */
-    public function updateFeed(string $feedGroupID, string $feedID, GeneratedModels\UpdateFeedRequest $requestData): StreamResponse {
+    public function updateFeed(string $feedGroupID, string $feedID, ?GeneratedModels\UpdateFeedRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateFeedRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedResponse::class);
     }
     /**
@@ -1226,17 +1209,17 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
-     * @param GeneratedModels\MarkActivityRequest $requestData
+     * @param ?GeneratedModels\MarkActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function markActivity(string $feedGroupID, string $feedID, GeneratedModels\MarkActivityRequest $requestData): StreamResponse {
+    public function markActivity(string $feedGroupID, string $feedID, ?GeneratedModels\MarkActivityRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/activities/mark/batch';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\MarkActivityRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -1272,18 +1255,18 @@ trait FeedsTrait
      * @param string $feedGroupID
      * @param string $feedID
      * @param string $activityID
-     * @param GeneratedModels\PinActivityRequest $requestData
+     * @param ?GeneratedModels\PinActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\PinActivityResponse>
      * @throws StreamException
      */
-    public function pinActivity(string $feedGroupID, string $feedID, string $activityID, GeneratedModels\PinActivityRequest $requestData): StreamResponse {
+    public function pinActivity(string $feedGroupID, string $feedID, string $activityID, ?GeneratedModels\PinActivityRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/activities/{activity_id}/pin';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
         $path = str_replace('{activity_id}', (string) $activityID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\PinActivityRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PinActivityResponse::class);
     }
     /**
@@ -1301,7 +1284,6 @@ trait FeedsTrait
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ChangeFeedVisibilityResponse::class);
     }
     /**
@@ -1336,7 +1318,6 @@ trait FeedsTrait
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedMembersResponse::class);
     }
     /**
@@ -1344,17 +1325,17 @@ trait FeedsTrait
      *
      * @param string $feedID
      * @param string $feedGroupID
-     * @param GeneratedModels\AcceptFeedMemberInviteRequest $requestData
+     * @param ?GeneratedModels\AcceptFeedMemberInviteRequest $requestData
      * @return StreamResponse<GeneratedModels\AcceptFeedMemberInviteResponse>
      * @throws StreamException
      */
-    public function acceptFeedMemberInvite(string $feedID, string $feedGroupID, GeneratedModels\AcceptFeedMemberInviteRequest $requestData): StreamResponse {
+    public function acceptFeedMemberInvite(string $feedID, string $feedGroupID, ?GeneratedModels\AcceptFeedMemberInviteRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/members/accept';
         $path = str_replace('{feed_id}', (string) $feedID, $path);
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\AcceptFeedMemberInviteRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AcceptFeedMemberInviteResponse::class);
     }
     /**
@@ -1362,17 +1343,17 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
-     * @param GeneratedModels\QueryFeedMembersRequest $requestData
+     * @param ?GeneratedModels\QueryFeedMembersRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFeedMembersResponse>
      * @throws StreamException
      */
-    public function queryFeedMembers(string $feedGroupID, string $feedID, GeneratedModels\QueryFeedMembersRequest $requestData): StreamResponse {
+    public function queryFeedMembers(string $feedGroupID, string $feedID, ?GeneratedModels\QueryFeedMembersRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/members/query';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryFeedMembersRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedMembersResponse::class);
     }
     /**
@@ -1380,17 +1361,17 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
-     * @param GeneratedModels\RejectFeedMemberInviteRequest $requestData
+     * @param ?GeneratedModels\RejectFeedMemberInviteRequest $requestData
      * @return StreamResponse<GeneratedModels\RejectFeedMemberInviteResponse>
      * @throws StreamException
      */
-    public function rejectFeedMemberInvite(string $feedGroupID, string $feedID, GeneratedModels\RejectFeedMemberInviteRequest $requestData): StreamResponse {
+    public function rejectFeedMemberInvite(string $feedGroupID, string $feedID, ?GeneratedModels\RejectFeedMemberInviteRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/members/reject';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\RejectFeedMemberInviteRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RejectFeedMemberInviteResponse::class);
     }
     /**
@@ -1423,13 +1404,13 @@ trait FeedsTrait
      *
      * @param string $feedGroupID
      * @param string $feedID
-     * @param GeneratedModels\QueryPinnedActivitiesRequest $requestData
+     * @param ?GeneratedModels\QueryPinnedActivitiesRequest $requestData
      * @param ?string $language
      * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\QueryPinnedActivitiesResponse>
      * @throws StreamException
      */
-    public function queryPinnedActivities(string $feedGroupID, string $feedID, GeneratedModels\QueryPinnedActivitiesRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+    public function queryPinnedActivities(string $feedGroupID, string $feedID, ?GeneratedModels\QueryPinnedActivitiesRequest $requestData = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{feed_group_id}/feeds/{feed_id}/pinned_activities/query';
         $path = str_replace('{feed_group_id}', (string) $feedGroupID, $path);
         $path = str_replace('{feed_id}', (string) $feedID, $path);
@@ -1441,7 +1422,7 @@ trait FeedsTrait
         if ($translateText !== null) {
             $queryParams['translate_text'] = $translateText;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryPinnedActivitiesRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryPinnedActivitiesResponse::class);
     }
     /**
@@ -1524,32 +1505,32 @@ trait FeedsTrait
      * Get an existing feed group or create a new one if it doesn't exist
      *
      * @param string $id
-     * @param GeneratedModels\GetOrCreateFeedGroupRequest $requestData
+     * @param ?GeneratedModels\GetOrCreateFeedGroupRequest $requestData
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedGroupResponse>
      * @throws StreamException
      */
-    public function getOrCreateFeedGroup(string $id, GeneratedModels\GetOrCreateFeedGroupRequest $requestData): StreamResponse {
+    public function getOrCreateFeedGroup(string $id, ?GeneratedModels\GetOrCreateFeedGroupRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GetOrCreateFeedGroupRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateFeedGroupResponse::class);
     }
     /**
      * Update a feed group by ID
      *
      * @param string $id
-     * @param GeneratedModels\UpdateFeedGroupRequest $requestData
+     * @param ?GeneratedModels\UpdateFeedGroupRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateFeedGroupResponse>
      * @throws StreamException
      */
-    public function updateFeedGroup(string $id, GeneratedModels\UpdateFeedGroupRequest $requestData): StreamResponse {
+    public function updateFeedGroup(string $id, ?GeneratedModels\UpdateFeedGroupRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_groups/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateFeedGroupRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedGroupResponse::class);
     }
     /**
@@ -1576,7 +1557,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/feed_views';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateFeedViewResponse::class);
     }
     /**
@@ -1613,32 +1593,32 @@ trait FeedsTrait
      * Get an existing feed view or create a new one if it doesn't exist
      *
      * @param string $id
-     * @param GeneratedModels\GetOrCreateFeedViewRequest $requestData
+     * @param ?GeneratedModels\GetOrCreateFeedViewRequest $requestData
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedViewResponse>
      * @throws StreamException
      */
-    public function getOrCreateFeedView(string $id, GeneratedModels\GetOrCreateFeedViewRequest $requestData): StreamResponse {
+    public function getOrCreateFeedView(string $id, ?GeneratedModels\GetOrCreateFeedViewRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_views/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GetOrCreateFeedViewRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateFeedViewResponse::class);
     }
     /**
      * Update an existing custom feed view with new selectors, ranking, or aggregation options
      *
      * @param string $id
-     * @param GeneratedModels\UpdateFeedViewRequest $requestData
+     * @param ?GeneratedModels\UpdateFeedViewRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateFeedViewResponse>
      * @throws StreamException
      */
-    public function updateFeedView(string $id, GeneratedModels\UpdateFeedViewRequest $requestData): StreamResponse {
+    public function updateFeedView(string $id, ?GeneratedModels\UpdateFeedViewRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_views/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateFeedViewRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedViewResponse::class);
     }
     /**
@@ -1673,16 +1653,16 @@ trait FeedsTrait
      * Updates an existing predefined feed visibility configuration
      *
      * @param string $name
-     * @param GeneratedModels\UpdateFeedVisibilityRequest $requestData
+     * @param ?GeneratedModels\UpdateFeedVisibilityRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateFeedVisibilityResponse>
      * @throws StreamException
      */
-    public function updateFeedVisibility(string $name, GeneratedModels\UpdateFeedVisibilityRequest $requestData): StreamResponse {
+    public function updateFeedVisibility(string $name, ?GeneratedModels\UpdateFeedVisibilityRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feed_visibilities/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateFeedVisibilityRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateFeedVisibilityResponse::class);
     }
     /**
@@ -1696,7 +1676,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/feeds/batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateFeedsBatchResponse::class);
     }
     /**
@@ -1710,7 +1689,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/feeds/delete';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedsBatchResponse::class);
     }
     /**
@@ -1724,21 +1702,20 @@ trait FeedsTrait
         $path = '/api/v2/feeds/feeds/own/batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\OwnBatchResponse::class);
     }
     /**
      * Query feeds with filter query
      *
-     * @param GeneratedModels\QueryFeedsRequest $requestData
+     * @param ?GeneratedModels\QueryFeedsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFeedsResponse>
      * @throws StreamException
      */
-    public function queryFeeds(GeneratedModels\QueryFeedsRequest $requestData): StreamResponse {
+    public function queryFeeds(?GeneratedModels\QueryFeedsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/feeds/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryFeedsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsResponse::class);
     }
     /**
@@ -1798,7 +1775,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/follows';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateFollowResponse::class);
     }
     /**
@@ -1812,7 +1788,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/follows';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SingleFollowResponse::class);
     }
     /**
@@ -1826,7 +1801,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/follows/accept';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AcceptFollowResponse::class);
     }
     /**
@@ -1841,7 +1815,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/follows/batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FollowBatchResponse::class);
     }
     /**
@@ -1855,21 +1828,20 @@ trait FeedsTrait
         $path = '/api/v2/feeds/follows/batch/upsert';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FollowBatchResponse::class);
     }
     /**
      * Query follows based on filters with pagination and sorting options. Server-side callers may set include_group_counts to also receive accepted following counts keyed by followed feed group. Requires exactly one source_feed / source_fid string equality. HTTP 400 if target_feed appears, if two source FIDs are given, or if $in / $or mentions those keys.
      *
-     * @param GeneratedModels\QueryFollowsRequest $requestData
+     * @param ?GeneratedModels\QueryFollowsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFollowsResponse>
      * @throws StreamException
      */
-    public function queryFollows(GeneratedModels\QueryFollowsRequest $requestData): StreamResponse {
+    public function queryFollows(?GeneratedModels\QueryFollowsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/follows/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryFollowsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFollowsResponse::class);
     }
     /**
@@ -1883,7 +1855,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/follows/reject';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RejectFollowResponse::class);
     }
     /**
@@ -1897,7 +1868,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/follows/upsert';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateFollowResponse::class);
     }
     /**
@@ -1940,21 +1910,20 @@ trait FeedsTrait
         $path = '/api/v2/feeds/membership_levels';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateMembershipLevelResponse::class);
     }
     /**
      * Query membership levels with filter query
      *
-     * @param GeneratedModels\QueryMembershipLevelsRequest $requestData
+     * @param ?GeneratedModels\QueryMembershipLevelsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryMembershipLevelsResponse>
      * @throws StreamException
      */
-    public function queryMembershipLevels(GeneratedModels\QueryMembershipLevelsRequest $requestData): StreamResponse {
+    public function queryMembershipLevels(?GeneratedModels\QueryMembershipLevelsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/membership_levels/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryMembershipLevelsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryMembershipLevelsResponse::class);
     }
     /**
@@ -1976,16 +1945,16 @@ trait FeedsTrait
      * Update a membership level with partial updates. Only specified fields will be updated.
      *
      * @param string $id
-     * @param GeneratedModels\UpdateMembershipLevelRequest $requestData
+     * @param ?GeneratedModels\UpdateMembershipLevelRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateMembershipLevelResponse>
      * @throws StreamException
      */
-    public function updateMembershipLevel(string $id, GeneratedModels\UpdateMembershipLevelRequest $requestData): StreamResponse {
+    public function updateMembershipLevel(string $id, ?GeneratedModels\UpdateMembershipLevelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/membership_levels/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateMembershipLevelRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMembershipLevelResponse::class);
     }
     /**
@@ -2012,7 +1981,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/promoted_topics';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PromoteTopicsResponse::class);
     }
     /**
@@ -2041,7 +2009,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/reactions/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsReactionsResponse::class);
     }
     /**
@@ -2068,7 +2035,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/retention_policy';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SetFeedsRetentionPolicyResponse::class);
     }
     /**
@@ -2082,21 +2048,20 @@ trait FeedsTrait
         $path = '/api/v2/feeds/retention_policy/delete';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedsRetentionPolicyResponse::class);
     }
     /**
      * Returns filtered and sorted feeds retention cleanup run history for the app. Supports filter_conditions on 'policy' and 'date' fields. Server-side only.
      *
-     * @param GeneratedModels\GetFeedsRetentionPolicyRunsRequest $requestData
+     * @param ?GeneratedModels\GetFeedsRetentionPolicyRunsRequest $requestData
      * @return StreamResponse<GeneratedModels\GetFeedsRetentionPolicyRunsResponse>
      * @throws StreamException
      */
-    public function feedsGetRetentionPolicyRuns(GeneratedModels\GetFeedsRetentionPolicyRunsRequest $requestData): StreamResponse {
+    public function feedsGetRetentionPolicyRuns(?GeneratedModels\GetFeedsRetentionPolicyRunsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/retention_policy/runs';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GetFeedsRetentionPolicyRunsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetFeedsRetentionPolicyRunsResponse::class);
     }
     /**
@@ -2110,7 +2075,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/revisions/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryRevisionHistoryResponse::class);
     }
     /**
@@ -2124,21 +2088,20 @@ trait FeedsTrait
         $path = '/api/v2/feeds/scheduled_activities';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ScheduleActivityResponse::class);
     }
     /**
      * Query scheduled activities ordered by scheduled time
      *
-     * @param GeneratedModels\QueryScheduledActivitiesRequest $requestData
+     * @param ?GeneratedModels\QueryScheduledActivitiesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryScheduledActivitiesResponse>
      * @throws StreamException
      */
-    public function queryScheduledActivities(GeneratedModels\QueryScheduledActivitiesRequest $requestData): StreamResponse {
+    public function queryScheduledActivities(?GeneratedModels\QueryScheduledActivitiesRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/scheduled_activities/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryScheduledActivitiesRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryScheduledActivitiesResponse::class);
     }
     /**
@@ -2175,16 +2138,16 @@ trait FeedsTrait
      * Change the activity or the publish time of a scheduled activity
      *
      * @param string $id
-     * @param GeneratedModels\UpdateScheduledActivityRequest $requestData
+     * @param ?GeneratedModels\UpdateScheduledActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateScheduledActivityResponse>
      * @throws StreamException
      */
-    public function updateScheduledActivity(string $id, GeneratedModels\UpdateScheduledActivityRequest $requestData): StreamResponse {
+    public function updateScheduledActivity(string $id, ?GeneratedModels\UpdateScheduledActivityRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/scheduled_activities/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateScheduledActivityRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateScheduledActivityResponse::class);
     }
     /**
@@ -2207,15 +2170,15 @@ trait FeedsTrait
      * Returns data aggregated by day with pagination support via from/to date parameters.
      * This endpoint is server-side only.
      *
-     * @param GeneratedModels\QueryFeedsUsageStatsRequest $requestData
+     * @param ?GeneratedModels\QueryFeedsUsageStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFeedsUsageStatsResponse>
      * @throws StreamException
      */
-    public function queryFeedsUsageStats(GeneratedModels\QueryFeedsUsageStatsRequest $requestData): StreamResponse {
+    public function queryFeedsUsageStats(?GeneratedModels\QueryFeedsUsageStatsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/stats/usage';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryFeedsUsageStatsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsUsageStatsResponse::class);
     }
     /**
@@ -2230,7 +2193,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/unfollow/batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnfollowBatchResponse::class);
     }
     /**
@@ -2244,7 +2206,6 @@ trait FeedsTrait
         $path = '/api/v2/feeds/unfollow/batch/upsert';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnfollowBatchResponse::class);
     }
     /**
@@ -2258,23 +2219,22 @@ trait FeedsTrait
         $path = '/api/v2/feeds/unfollow/upsert';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateUnfollowResponse::class);
     }
     /**
      * Delete all feed data for a user including: feeds, activities, follows, comments, feed reactions, bookmark folders, bookmarks, and collections owned by the user
      *
      * @param string $userID
-     * @param GeneratedModels\DeleteFeedUserDataRequest $requestData
+     * @param ?GeneratedModels\DeleteFeedUserDataRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteFeedUserDataResponse>
      * @throws StreamException
      */
-    public function deleteFeedUserData(string $userID, GeneratedModels\DeleteFeedUserDataRequest $requestData): StreamResponse {
+    public function deleteFeedUserData(string $userID, ?GeneratedModels\DeleteFeedUserDataRequest $requestData = null): StreamResponse {
         $path = '/api/v2/feeds/users/{user_id}/delete';
         $path = str_replace('{user_id}', (string) $userID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\DeleteFeedUserDataRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteFeedUserDataResponse::class);
     }
     /**
@@ -2343,7 +2303,6 @@ trait FeedsTrait
         $path = str_replace('{user_id}', (string) $userID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpsertUserInterestsResponse::class);
     }
     /**

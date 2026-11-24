@@ -29,19 +29,19 @@ trait VideoTrait
     }
     /**
      *
-     * @param GeneratedModels\QueryUserFeedbackRequest $requestData
+     * @param ?GeneratedModels\QueryUserFeedbackRequest $requestData
      * @param ?bool $full
      * @return StreamResponse<GeneratedModels\QueryUserFeedbackResponse>
      * @throws StreamException
      */
-    public function queryUserFeedback(GeneratedModels\QueryUserFeedbackRequest $requestData, ?bool $full = null): StreamResponse {
+    public function queryUserFeedback(?GeneratedModels\QueryUserFeedbackRequest $requestData = null, ?bool $full = null): StreamResponse {
         $path = '/api/v2/video/call/feedback';
 
         $queryParams = [];
         if ($full !== null) {
             $queryParams['full'] = $full;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryUserFeedbackRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryUserFeedbackResponse::class);
     }
     /**
@@ -55,7 +55,6 @@ trait VideoTrait
         $path = '/api/v2/video/call/members';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallMembersResponse::class);
     }
     /**
@@ -69,20 +68,19 @@ trait VideoTrait
         $path = '/api/v2/video/call/ring_attempts';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallRingAttemptsResponse::class);
     }
     /**
      *
-     * @param GeneratedModels\QueryCallStatsRequest $requestData
+     * @param ?GeneratedModels\QueryCallStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCallStatsResponse>
      * @throws StreamException
      */
-    public function queryCallStats(GeneratedModels\QueryCallStatsRequest $requestData): StreamResponse {
+    public function queryCallStats(?GeneratedModels\QueryCallStatsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/stats';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryCallStatsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallStatsResponse::class);
     }
     /**
@@ -121,17 +119,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\UpdateCallRequest $requestData
+     * @param ?GeneratedModels\UpdateCallRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateCallResponse>
      * @throws StreamException
      */
-    public function updateCall(string $type, string $id, GeneratedModels\UpdateCallRequest $requestData): StreamResponse {
+    public function updateCall(string $type, string $id, ?GeneratedModels\UpdateCallRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateCallRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateCallResponse::class);
     }
     /**
@@ -143,17 +141,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\GetOrCreateCallRequest $requestData
+     * @param ?GeneratedModels\GetOrCreateCallRequest $requestData
      * @return StreamResponse<GeneratedModels\GetOrCreateCallResponse>
      * @throws StreamException
      */
-    public function getOrCreateCall(string $type, string $id, GeneratedModels\GetOrCreateCallRequest $requestData): StreamResponse {
+    public function getOrCreateCall(string $type, string $id, ?GeneratedModels\GetOrCreateCallRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GetOrCreateCallRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetOrCreateCallResponse::class);
     }
     /**
@@ -173,7 +171,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BlockUserResponse::class);
     }
     /**
@@ -193,24 +190,23 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SendClosedCaptionResponse::class);
     }
     /**
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\DeleteCallRequest $requestData
+     * @param ?GeneratedModels\DeleteCallRequest $requestData
      * @return StreamResponse<GeneratedModels\DeleteCallResponse>
      * @throws StreamException
      */
-    public function deleteCall(string $type, string $id, GeneratedModels\DeleteCallRequest $requestData): StreamResponse {
+    public function deleteCall(string $type, string $id, ?GeneratedModels\DeleteCallRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/delete';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\DeleteCallRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteCallResponse::class);
     }
     /**
@@ -220,17 +216,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\SendCallEventRequest $requestData
+     * @param ?GeneratedModels\SendCallEventRequest $requestData
      * @return StreamResponse<GeneratedModels\SendCallEventResponse>
      * @throws StreamException
      */
-    public function sendCallEvent(string $type, string $id, GeneratedModels\SendCallEventRequest $requestData): StreamResponse {
+    public function sendCallEvent(string $type, string $id, ?GeneratedModels\SendCallEventRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/event';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\SendCallEventRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SendCallEventResponse::class);
     }
     /**
@@ -247,24 +243,23 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CollectUserFeedbackResponse::class);
     }
     /**
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\GoLiveRequest $requestData
+     * @param ?GeneratedModels\GoLiveRequest $requestData
      * @return StreamResponse<GeneratedModels\GoLiveResponse>
      * @throws StreamException
      */
-    public function goLive(string $type, string $id, GeneratedModels\GoLiveRequest $requestData): StreamResponse {
+    public function goLive(string $type, string $id, ?GeneratedModels\GoLiveRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/go_live';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GoLiveRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GoLiveResponse::class);
     }
     /**
@@ -285,7 +280,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\KickUserResponse::class);
     }
     /**
@@ -308,17 +302,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\UpdateCallMembersRequest $requestData
+     * @param ?GeneratedModels\UpdateCallMembersRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateCallMembersResponse>
      * @throws StreamException
      */
-    public function updateCallMembers(string $type, string $id, GeneratedModels\UpdateCallMembersRequest $requestData): StreamResponse {
+    public function updateCallMembers(string $type, string $id, ?GeneratedModels\UpdateCallMembersRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/members';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateCallMembersRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateCallMembersResponse::class);
     }
     /**
@@ -326,17 +320,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\MuteUsersRequest $requestData
+     * @param ?GeneratedModels\MuteUsersRequest $requestData
      * @return StreamResponse<GeneratedModels\MuteUsersResponse>
      * @throws StreamException
      */
-    public function muteUsers(string $type, string $id, GeneratedModels\MuteUsersRequest $requestData): StreamResponse {
+    public function muteUsers(string $type, string $id, ?GeneratedModels\MuteUsersRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/mute_users';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\MuteUsersRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MuteUsersResponse::class);
     }
     /**
@@ -344,12 +338,12 @@ trait VideoTrait
      *
      * @param string $id
      * @param string $type
-     * @param GeneratedModels\QueryCallParticipantsRequest $requestData
+     * @param ?GeneratedModels\QueryCallParticipantsRequest $requestData
      * @param ?int $limit
      * @return StreamResponse<GeneratedModels\QueryCallParticipantsResponse>
      * @throws StreamException
      */
-    public function queryCallParticipants(string $id, string $type, GeneratedModels\QueryCallParticipantsRequest $requestData, ?int $limit = null): StreamResponse {
+    public function queryCallParticipants(string $id, string $type, ?GeneratedModels\QueryCallParticipantsRequest $requestData = null, ?int $limit = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/participants';
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{type}', (string) $type, $path);
@@ -358,7 +352,7 @@ trait VideoTrait
         if ($limit !== null) {
             $queryParams['limit'] = $limit;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryCallParticipantsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallParticipantsResponse::class);
     }
     /**
@@ -376,7 +370,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PinResponse::class);
     }
     /**
@@ -404,18 +397,18 @@ trait VideoTrait
      * @param string $type
      * @param string $id
      * @param string $recordingType
-     * @param GeneratedModels\StartRecordingRequest $requestData
+     * @param ?GeneratedModels\StartRecordingRequest $requestData
      * @return StreamResponse<GeneratedModels\StartRecordingResponse>
      * @throws StreamException
      */
-    public function startRecording(string $type, string $id, string $recordingType, GeneratedModels\StartRecordingRequest $requestData): StreamResponse {
+    public function startRecording(string $type, string $id, string $recordingType, ?GeneratedModels\StartRecordingRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/recordings/{recording_type}/start';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{recording_type}', (string) $recordingType, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StartRecordingRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StartRecordingResponse::class);
     }
     /**
@@ -426,18 +419,18 @@ trait VideoTrait
      * @param string $type
      * @param string $id
      * @param string $recordingType
-     * @param GeneratedModels\StopRecordingRequest $requestData
+     * @param ?GeneratedModels\StopRecordingRequest $requestData
      * @return StreamResponse<GeneratedModels\StopRecordingResponse>
      * @throws StreamException
      */
-    public function stopRecording(string $type, string $id, string $recordingType, GeneratedModels\StopRecordingRequest $requestData): StreamResponse {
+    public function stopRecording(string $type, string $id, string $recordingType, ?GeneratedModels\StopRecordingRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/recordings/{recording_type}/stop';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{recording_type}', (string) $recordingType, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StopRecordingRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StopRecordingResponse::class);
     }
     /**
@@ -467,17 +460,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\RingCallRequest $requestData
+     * @param ?GeneratedModels\RingCallRequest $requestData
      * @return StreamResponse<GeneratedModels\RingCallResponse>
      * @throws StreamException
      */
-    public function ringCall(string $type, string $id, GeneratedModels\RingCallRequest $requestData): StreamResponse {
+    public function ringCall(string $type, string $id, ?GeneratedModels\RingCallRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/ring';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\RingCallRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RingCallResponse::class);
     }
     /**
@@ -495,7 +488,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StartRTMPBroadcastsResponse::class);
     }
     /**
@@ -521,18 +513,18 @@ trait VideoTrait
      * @param string $type
      * @param string $id
      * @param string $name
-     * @param GeneratedModels\StopRTMPBroadcastsRequest $requestData
+     * @param ?GeneratedModels\StopRTMPBroadcastsRequest $requestData
      * @return StreamResponse<GeneratedModels\StopRTMPBroadcastsResponse>
      * @throws StreamException
      */
-    public function stopRTMPBroadcast(string $type, string $id, string $name, GeneratedModels\StopRTMPBroadcastsRequest $requestData): StreamResponse {
+    public function stopRTMPBroadcast(string $type, string $id, string $name, ?GeneratedModels\StopRTMPBroadcastsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/rtmp_broadcasts/{name}/stop';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StopRTMPBroadcastsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StopRTMPBroadcastsResponse::class);
     }
     /**
@@ -625,17 +617,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\StartClosedCaptionsRequest $requestData
+     * @param ?GeneratedModels\StartClosedCaptionsRequest $requestData
      * @return StreamResponse<GeneratedModels\StartClosedCaptionsResponse>
      * @throws StreamException
      */
-    public function startClosedCaptions(string $type, string $id, GeneratedModels\StartClosedCaptionsRequest $requestData): StreamResponse {
+    public function startClosedCaptions(string $type, string $id, ?GeneratedModels\StartClosedCaptionsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/start_closed_captions';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StartClosedCaptionsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StartClosedCaptionsResponse::class);
     }
     /**
@@ -645,17 +637,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\StartFrameRecordingRequest $requestData
+     * @param ?GeneratedModels\StartFrameRecordingRequest $requestData
      * @return StreamResponse<GeneratedModels\StartFrameRecordingResponse>
      * @throws StreamException
      */
-    public function startFrameRecording(string $type, string $id, GeneratedModels\StartFrameRecordingRequest $requestData): StreamResponse {
+    public function startFrameRecording(string $type, string $id, ?GeneratedModels\StartFrameRecordingRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/start_frame_recording';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StartFrameRecordingRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StartFrameRecordingResponse::class);
     }
     /**
@@ -663,17 +655,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\StartTranscriptionRequest $requestData
+     * @param ?GeneratedModels\StartTranscriptionRequest $requestData
      * @return StreamResponse<GeneratedModels\StartTranscriptionResponse>
      * @throws StreamException
      */
-    public function startTranscription(string $type, string $id, GeneratedModels\StartTranscriptionRequest $requestData): StreamResponse {
+    public function startTranscription(string $type, string $id, ?GeneratedModels\StartTranscriptionRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/start_transcription';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StartTranscriptionRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StartTranscriptionResponse::class);
     }
     /**
@@ -700,17 +692,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\StopClosedCaptionsRequest $requestData
+     * @param ?GeneratedModels\StopClosedCaptionsRequest $requestData
      * @return StreamResponse<GeneratedModels\StopClosedCaptionsResponse>
      * @throws StreamException
      */
-    public function stopClosedCaptions(string $type, string $id, GeneratedModels\StopClosedCaptionsRequest $requestData): StreamResponse {
+    public function stopClosedCaptions(string $type, string $id, ?GeneratedModels\StopClosedCaptionsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/stop_closed_captions';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StopClosedCaptionsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StopClosedCaptionsResponse::class);
     }
     /**
@@ -736,17 +728,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\StopLiveRequest $requestData
+     * @param ?GeneratedModels\StopLiveRequest $requestData
      * @return StreamResponse<GeneratedModels\StopLiveResponse>
      * @throws StreamException
      */
-    public function stopLive(string $type, string $id, GeneratedModels\StopLiveRequest $requestData): StreamResponse {
+    public function stopLive(string $type, string $id, ?GeneratedModels\StopLiveRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/stop_live';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StopLiveRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StopLiveResponse::class);
     }
     /**
@@ -756,17 +748,17 @@ trait VideoTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\StopTranscriptionRequest $requestData
+     * @param ?GeneratedModels\StopTranscriptionRequest $requestData
      * @return StreamResponse<GeneratedModels\StopTranscriptionResponse>
      * @throws StreamException
      */
-    public function stopTranscription(string $type, string $id, GeneratedModels\StopTranscriptionRequest $requestData): StreamResponse {
+    public function stopTranscription(string $type, string $id, ?GeneratedModels\StopTranscriptionRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call/{type}/{id}/stop_transcription';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StopTranscriptionRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StopTranscriptionResponse::class);
     }
     /**
@@ -803,7 +795,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnblockUserResponse::class);
     }
     /**
@@ -821,7 +812,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnpinResponse::class);
     }
     /**
@@ -841,7 +831,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateUserPermissionsResponse::class);
     }
     /**
@@ -897,20 +886,19 @@ trait VideoTrait
         $path = '/api/v2/video/call_client_event';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ReportClientEventResponse::class);
     }
     /**
      *
-     * @param GeneratedModels\QueryCallSessionStatsRequest $requestData
+     * @param ?GeneratedModels\QueryCallSessionStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCallSessionStatsResponse>
      * @throws StreamException
      */
-    public function queryCallSessionStats(GeneratedModels\QueryCallSessionStatsRequest $requestData): StreamResponse {
+    public function queryCallSessionStats(?GeneratedModels\QueryCallSessionStatsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/call_stats';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryCallSessionStatsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallSessionStatsResponse::class);
     }
     /**
@@ -1064,15 +1052,15 @@ trait VideoTrait
     /**
      * Query calls with filter query
      *
-     * @param GeneratedModels\QueryCallsRequest $requestData
+     * @param ?GeneratedModels\QueryCallsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCallsResponse>
      * @throws StreamException
      */
-    public function queryCalls(GeneratedModels\QueryCallsRequest $requestData): StreamResponse {
+    public function queryCalls(?GeneratedModels\QueryCallsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/calls';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryCallsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCallsResponse::class);
     }
     /**
@@ -1097,7 +1085,6 @@ trait VideoTrait
         $path = '/api/v2/video/calltypes';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateCallTypeResponse::class);
     }
     /**
@@ -1131,16 +1118,16 @@ trait VideoTrait
     /**
      *
      * @param string $name
-     * @param GeneratedModels\UpdateCallTypeRequest $requestData
+     * @param ?GeneratedModels\UpdateCallTypeRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateCallTypeResponse>
      * @throws StreamException
      */
-    public function updateCallType(string $name, GeneratedModels\UpdateCallTypeRequest $requestData): StreamResponse {
+    public function updateCallType(string $name, ?GeneratedModels\UpdateCallTypeRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/calltypes/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateCallTypeRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateCallTypeResponse::class);
     }
     /**
@@ -1167,7 +1154,6 @@ trait VideoTrait
         $path = '/api/v2/video/sip/auth';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ResolveSipAuthResponse::class);
     }
     /**
@@ -1194,7 +1180,6 @@ trait VideoTrait
         $path = '/api/v2/video/sip/inbound_routing_rules';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SIPInboundRoutingRuleResponse::class);
     }
     /**
@@ -1225,7 +1210,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateSIPInboundRoutingRuleResponse::class);
     }
     /**
@@ -1252,7 +1236,6 @@ trait VideoTrait
         $path = '/api/v2/video/sip/inbound_trunks';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateSIPTrunkResponse::class);
     }
     /**
@@ -1283,7 +1266,6 @@ trait VideoTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateSIPTrunkResponse::class);
     }
     /**
@@ -1297,20 +1279,19 @@ trait VideoTrait
         $path = '/api/v2/video/sip/resolve';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ResolveSipInboundResponse::class);
     }
     /**
      *
-     * @param GeneratedModels\QueryAggregateCallStatsRequest $requestData
+     * @param ?GeneratedModels\QueryAggregateCallStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryAggregateCallStatsResponse>
      * @throws StreamException
      */
-    public function queryAggregateCallStats(GeneratedModels\QueryAggregateCallStatsRequest $requestData): StreamResponse {
+    public function queryAggregateCallStats(?GeneratedModels\QueryAggregateCallStatsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/video/stats';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryAggregateCallStatsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryAggregateCallStatsResponse::class);
     }
     /**
