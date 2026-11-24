@@ -25,21 +25,20 @@ trait ChatTrait
         $path = '/api/v2/chat/campaigns';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateCampaignResponse::class);
     }
     /**
      * Query campaigns with filter query
      *
-     * @param GeneratedModels\QueryCampaignsRequest $requestData
+     * @param ?GeneratedModels\QueryCampaignsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryCampaignsResponse>
      * @throws StreamException
      */
-    public function queryCampaigns(GeneratedModels\QueryCampaignsRequest $requestData): StreamResponse {
+    public function queryCampaigns(?GeneratedModels\QueryCampaignsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/campaigns/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryCampaignsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryCampaignsResponse::class);
     }
     /**
@@ -97,23 +96,22 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateCampaignResponse::class);
     }
     /**
      * Starts or schedules a campaign
      *
      * @param string $id
-     * @param GeneratedModels\StartCampaignRequest $requestData
+     * @param ?GeneratedModels\StartCampaignRequest $requestData
      * @return StreamResponse<GeneratedModels\StartCampaignResponse>
      * @throws StreamException
      */
-    public function startCampaign(string $id, GeneratedModels\StartCampaignRequest $requestData): StreamResponse {
+    public function startCampaign(string $id, ?GeneratedModels\StartCampaignRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/campaigns/{id}/start';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\StartCampaignRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\StartCampaignResponse::class);
     }
     /**
@@ -134,15 +132,15 @@ trait ChatTrait
     /**
      * Query channels with filter query
      *
-     * @param GeneratedModels\QueryChannelsRequest $requestData
+     * @param ?GeneratedModels\QueryChannelsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryChannelsResponse>
      * @throws StreamException
      */
-    public function queryChannels(GeneratedModels\QueryChannelsRequest $requestData): StreamResponse {
+    public function queryChannels(?GeneratedModels\QueryChannelsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryChannelsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelsResponse::class);
     }
     /**
@@ -165,7 +163,6 @@ trait ChatTrait
         $path = '/api/v2/chat/channels/batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\ChannelBatchUpdateResponse::class);
     }
     /**
@@ -181,53 +178,52 @@ trait ChatTrait
         $path = '/api/v2/chat/channels/delete';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteChannelsResponse::class);
     }
     /**
      * Lists soft-deleted channels, ordered by created_at. Server-side only. Without a filter it lists every soft-deleted channel of the app; filter by team to scope it to one tenant. To permanently remove the returned channels, pass their cids to Delete channels (POST /channels/delete) with hard_delete set to true; the single-channel Delete channel endpoint does not accept soft-deleted channels.
      *
-     * @param GeneratedModels\QueryDeletedChannelsRequest $requestData
+     * @param ?GeneratedModels\QueryDeletedChannelsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryDeletedChannelsResponse>
      * @throws StreamException
      */
-    public function queryDeletedChannels(GeneratedModels\QueryDeletedChannelsRequest $requestData): StreamResponse {
+    public function queryDeletedChannels(?GeneratedModels\QueryDeletedChannelsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/deleted';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryDeletedChannelsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryDeletedChannelsResponse::class);
     }
     /**
      * Mark the status of a channel message delivered.
      *
-     * @param GeneratedModels\MarkDeliveredRequest $requestData
+     * @param ?GeneratedModels\MarkDeliveredRequest $requestData
      * @param ?string $userID
      * @return StreamResponse<GeneratedModels\MarkDeliveredResponse>
      * @throws StreamException
      */
-    public function markDelivered(GeneratedModels\MarkDeliveredRequest $requestData, ?string $userID = null): StreamResponse {
+    public function markDelivered(?GeneratedModels\MarkDeliveredRequest $requestData = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/delivered';
 
         $queryParams = [];
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\MarkDeliveredRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MarkDeliveredResponse::class);
     }
     /**
      * Query channels grouped into predefined buckets. Only available for enterprise apps.
      *
-     * @param GeneratedModels\GroupedQueryChannelsRequest $requestData
+     * @param ?GeneratedModels\GroupedQueryChannelsRequest $requestData
      * @return StreamResponse<GeneratedModels\GroupedQueryChannelsResponse>
      * @throws StreamException
      */
-    public function groupedQueryChannels(GeneratedModels\GroupedQueryChannelsRequest $requestData): StreamResponse {
+    public function groupedQueryChannels(?GeneratedModels\GroupedQueryChannelsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/grouped';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GroupedQueryChannelsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GroupedQueryChannelsResponse::class);
     }
     /**
@@ -235,15 +231,15 @@ trait ChatTrait
      * Sends events:
      * - message.read
      *
-     * @param GeneratedModels\MarkChannelsReadRequest $requestData
+     * @param ?GeneratedModels\MarkChannelsReadRequest $requestData
      * @return StreamResponse<GeneratedModels\MarkReadResponse>
      * @throws StreamException
      */
-    public function markChannelsRead(GeneratedModels\MarkChannelsReadRequest $requestData): StreamResponse {
+    public function markChannelsRead(?GeneratedModels\MarkChannelsReadRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/read';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\MarkChannelsReadRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MarkReadResponse::class);
     }
     /**
@@ -256,16 +252,16 @@ trait ChatTrait
      * - user.watching.start
      *
      * @param string $type
-     * @param GeneratedModels\ChannelGetOrCreateRequest $requestData
+     * @param ?GeneratedModels\ChannelGetOrCreateRequest $requestData
      * @return StreamResponse<GeneratedModels\ChannelStateResponse>
      * @throws StreamException
      */
-    public function getOrCreateDistinctChannel(string $type, GeneratedModels\ChannelGetOrCreateRequest $requestData): StreamResponse {
+    public function getOrCreateDistinctChannel(string $type, ?GeneratedModels\ChannelGetOrCreateRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/query';
         $path = str_replace('{type}', (string) $type, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\ChannelGetOrCreateRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ChannelStateResponse::class);
     }
     /**
@@ -363,17 +359,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\UpdateChannelPartialRequest $requestData
+     * @param ?GeneratedModels\UpdateChannelPartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateChannelPartialResponse>
      * @throws StreamException
      */
-    public function updateChannelPartial(string $type, string $id, GeneratedModels\UpdateChannelPartialRequest $requestData): StreamResponse {
+    public function updateChannelPartial(string $type, string $id, ?GeneratedModels\UpdateChannelPartialRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateChannelPartialRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateChannelPartialResponse::class);
     }
     /**
@@ -387,17 +383,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\UpdateChannelRequest $requestData
+     * @param ?GeneratedModels\UpdateChannelRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateChannelResponse>
      * @throws StreamException
      */
-    public function updateChannel(string $type, string $id, GeneratedModels\UpdateChannelRequest $requestData): StreamResponse {
+    public function updateChannel(string $type, string $id, ?GeneratedModels\UpdateChannelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateChannelRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateChannelResponse::class);
     }
     /**
@@ -405,17 +401,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\QueryChannelBansRequest $requestData
+     * @param ?GeneratedModels\QueryChannelBansRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryChannelBansResponse>
      * @throws StreamException
      */
-    public function queryChannelBans(string $type, string $id, GeneratedModels\QueryChannelBansRequest $requestData): StreamResponse {
+    public function queryChannelBans(string $type, string $id, ?GeneratedModels\QueryChannelBansRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/bans/query';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryChannelBansRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryChannelBansResponse::class);
     }
     /**
@@ -487,7 +483,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateDraftResponse::class);
     }
     /**
@@ -505,7 +500,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\EventResponse::class);
     }
     /**
@@ -534,17 +528,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\UploadChannelFileRequest $requestData
+     * @param ?GeneratedModels\UploadChannelFileRequest $requestData
      * @return StreamResponse<GeneratedModels\UploadChannelFileResponse>
      * @throws StreamException
      */
-    public function uploadChannelFile(string $type, string $id, GeneratedModels\UploadChannelFileRequest $requestData): StreamResponse {
+    public function uploadChannelFile(string $type, string $id, ?GeneratedModels\UploadChannelFileRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/file';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UploadChannelFileRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UploadChannelFileResponse::class);
     }
     /**
@@ -565,7 +559,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ForkChannelResponse::class);
     }
     /**
@@ -583,7 +576,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ForkMessageIDsResponse::class);
     }
     /**
@@ -593,17 +585,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\HideChannelRequest $requestData
+     * @param ?GeneratedModels\HideChannelRequest $requestData
      * @return StreamResponse<GeneratedModels\HideChannelResponse>
      * @throws StreamException
      */
-    public function hideChannel(string $type, string $id, GeneratedModels\HideChannelRequest $requestData): StreamResponse {
+    public function hideChannel(string $type, string $id, ?GeneratedModels\HideChannelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/hide';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\HideChannelRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\HideChannelResponse::class);
     }
     /**
@@ -632,29 +624,29 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\UploadChannelRequest $requestData
+     * @param ?GeneratedModels\UploadChannelRequest $requestData
      * @return StreamResponse<GeneratedModels\UploadChannelResponse>
      * @throws StreamException
      */
-    public function uploadChannelImage(string $type, string $id, GeneratedModels\UploadChannelRequest $requestData): StreamResponse {
+    public function uploadChannelImage(string $type, string $id, ?GeneratedModels\UploadChannelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/image';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UploadChannelRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UploadChannelResponse::class);
     }
     /**
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\UpdateMemberPartialRequest $requestData
+     * @param ?GeneratedModels\UpdateMemberPartialRequest $requestData
      * @param ?string $userID
      * @return StreamResponse<GeneratedModels\UpdateMemberPartialResponse>
      * @throws StreamException
      */
-    public function updateMemberPartial(string $type, string $id, GeneratedModels\UpdateMemberPartialRequest $requestData, ?string $userID = null): StreamResponse {
+    public function updateMemberPartial(string $type, string $id, ?GeneratedModels\UpdateMemberPartialRequest $requestData = null, ?string $userID = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/member';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
@@ -663,7 +655,7 @@ trait ChatTrait
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
         }
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateMemberPartialRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMemberPartialResponse::class);
     }
     /**
@@ -686,7 +678,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SendMessageResponse::class);
     }
     /**
@@ -802,17 +793,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\ChannelGetOrCreateRequest $requestData
+     * @param ?GeneratedModels\ChannelGetOrCreateRequest $requestData
      * @return StreamResponse<GeneratedModels\ChannelStateResponse>
      * @throws StreamException
      */
-    public function getOrCreateChannel(string $type, string $id, GeneratedModels\ChannelGetOrCreateRequest $requestData): StreamResponse {
+    public function getOrCreateChannel(string $type, string $id, ?GeneratedModels\ChannelGetOrCreateRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/query';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\ChannelGetOrCreateRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ChannelStateResponse::class);
     }
     /**
@@ -822,17 +813,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\MarkReadRequest $requestData
+     * @param ?GeneratedModels\MarkReadRequest $requestData
      * @return StreamResponse<GeneratedModels\MarkReadResponse>
      * @throws StreamException
      */
-    public function markRead(string $type, string $id, GeneratedModels\MarkReadRequest $requestData): StreamResponse {
+    public function markRead(string $type, string $id, ?GeneratedModels\MarkReadRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/read';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\MarkReadRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MarkReadResponse::class);
     }
     /**
@@ -852,7 +843,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RewindChannelResponse::class);
     }
     /**
@@ -862,17 +852,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\ShowChannelRequest $requestData
+     * @param ?GeneratedModels\ShowChannelRequest $requestData
      * @return StreamResponse<GeneratedModels\ShowChannelResponse>
      * @throws StreamException
      */
-    public function showChannel(string $type, string $id, GeneratedModels\ShowChannelRequest $requestData): StreamResponse {
+    public function showChannel(string $type, string $id, ?GeneratedModels\ShowChannelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/show';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\ShowChannelRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ShowChannelResponse::class);
     }
     /**
@@ -882,17 +872,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\TruncateChannelRequest $requestData
+     * @param ?GeneratedModels\TruncateChannelRequest $requestData
      * @return StreamResponse<GeneratedModels\TruncateChannelResponse>
      * @throws StreamException
      */
-    public function truncateChannel(string $type, string $id, GeneratedModels\TruncateChannelRequest $requestData): StreamResponse {
+    public function truncateChannel(string $type, string $id, ?GeneratedModels\TruncateChannelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/truncate';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\TruncateChannelRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TruncateChannelResponse::class);
     }
     /**
@@ -900,17 +890,17 @@ trait ChatTrait
      *
      * @param string $type
      * @param string $id
-     * @param GeneratedModels\MarkUnreadRequest $requestData
+     * @param ?GeneratedModels\MarkUnreadRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
-    public function markUnread(string $type, string $id, GeneratedModels\MarkUnreadRequest $requestData): StreamResponse {
+    public function markUnread(string $type, string $id, ?GeneratedModels\MarkUnreadRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channels/{type}/{id}/unread';
         $path = str_replace('{type}', (string) $type, $path);
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\MarkUnreadRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -937,7 +927,6 @@ trait ChatTrait
         $path = '/api/v2/chat/channeltypes';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateChannelTypeResponse::class);
     }
     /**
@@ -974,16 +963,16 @@ trait ChatTrait
      * Updates channel type
      *
      * @param string $name
-     * @param GeneratedModels\UpdateChannelTypeRequest $requestData
+     * @param ?GeneratedModels\UpdateChannelTypeRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateChannelTypeResponse>
      * @throws StreamException
      */
-    public function updateChannelType(string $name, GeneratedModels\UpdateChannelTypeRequest $requestData): StreamResponse {
+    public function updateChannelType(string $name, ?GeneratedModels\UpdateChannelTypeRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/channeltypes/{name}';
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateChannelTypeRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateChannelTypeResponse::class);
     }
     /**
@@ -1010,7 +999,6 @@ trait ChatTrait
         $path = '/api/v2/chat/commands';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateCommandResponse::class);
     }
     /**
@@ -1056,21 +1044,20 @@ trait ChatTrait
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateCommandResponse::class);
     }
     /**
      * Queries draft messages for a user
      *
-     * @param GeneratedModels\QueryDraftsRequest $requestData
+     * @param ?GeneratedModels\QueryDraftsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryDraftsResponse>
      * @throws StreamException
      */
-    public function queryDrafts(GeneratedModels\QueryDraftsRequest $requestData): StreamResponse {
+    public function queryDrafts(?GeneratedModels\QueryDraftsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/drafts/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryDraftsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryDraftsResponse::class);
     }
     /**
@@ -1084,7 +1071,6 @@ trait ChatTrait
         $path = '/api/v2/chat/export_channels';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ExportChannelsResponse::class);
     }
     /**
@@ -1111,7 +1097,6 @@ trait ChatTrait
         $path = '/api/v2/chat/history_window/teams';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SetHistoryWindowTeamsResponse::class);
     }
     /**
@@ -1125,7 +1110,6 @@ trait ChatTrait
         $path = '/api/v2/chat/history_window/teams/delete';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteHistoryWindowTeamsResponse::class);
     }
     /**
@@ -1160,7 +1144,6 @@ trait ChatTrait
         $path = '/api/v2/chat/messages/history';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryMessageHistoryResponse::class);
     }
     /**
@@ -1226,7 +1209,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateMessageResponse::class);
     }
     /**
@@ -1235,16 +1217,16 @@ trait ChatTrait
      * - message.updated
      *
      * @param string $id
-     * @param GeneratedModels\UpdateMessagePartialRequest $requestData
+     * @param ?GeneratedModels\UpdateMessagePartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateMessagePartialResponse>
      * @throws StreamException
      */
-    public function updateMessagePartial(string $id, GeneratedModels\UpdateMessagePartialRequest $requestData): StreamResponse {
+    public function updateMessagePartial(string $id, ?GeneratedModels\UpdateMessagePartialRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateMessagePartialRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateMessagePartialResponse::class);
     }
     /**
@@ -1262,7 +1244,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MessageActionResponse::class);
     }
     /**
@@ -1289,16 +1270,16 @@ trait ChatTrait
      * - message.updated
      *
      * @param string $id
-     * @param GeneratedModels\UpdateMessagePartialRequest $requestData
+     * @param ?GeneratedModels\UpdateMessagePartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateMessagePartialResponse>
      * @throws StreamException
      */
-    public function ephemeralMessageUpdate(string $id, GeneratedModels\UpdateMessagePartialRequest $requestData): StreamResponse {
+    public function ephemeralMessageUpdate(string $id, ?GeneratedModels\UpdateMessagePartialRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}/ephemeral';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateMessagePartialRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateMessagePartialResponse::class);
     }
     /**
@@ -1316,23 +1297,22 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateMessageMarkResponse::class);
     }
     /**
      * Lists the marks on a message one page at a time, newest first; the order cannot be changed. The message's mark_groups carry the count and the newest 100 markers per type, this endpoint lists every marker. Only the message author may list client-side; server-side, pass the author's user_id or no user_id. filter.type narrows the list to one mark type; without it every type the channel type lists is returned
      *
      * @param string $id
-     * @param GeneratedModels\QueryMessageMarksRequest $requestData
+     * @param ?GeneratedModels\QueryMessageMarksRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryMessageMarksResponse>
      * @throws StreamException
      */
-    public function queryMessageMarks(string $id, GeneratedModels\QueryMessageMarksRequest $requestData): StreamResponse {
+    public function queryMessageMarks(string $id, ?GeneratedModels\QueryMessageMarksRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}/marks/query';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryMessageMarksRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryMessageMarksResponse::class);
     }
     /**
@@ -1351,7 +1331,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SendReactionResponse::class);
     }
     /**
@@ -1404,16 +1383,16 @@ trait ChatTrait
      * Get reactions on a message
      *
      * @param string $id
-     * @param GeneratedModels\QueryReactionsRequest $requestData
+     * @param ?GeneratedModels\QueryReactionsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryReactionsResponse>
      * @throws StreamException
      */
-    public function queryReactions(string $id, GeneratedModels\QueryReactionsRequest $requestData): StreamResponse {
+    public function queryReactions(string $id, ?GeneratedModels\QueryReactionsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/messages/{id}/reactions';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryReactionsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryReactionsResponse::class);
     }
     /**
@@ -1431,7 +1410,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TranslateMessageResponse::class);
     }
     /**
@@ -1449,7 +1427,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UndeleteMessageResponse::class);
     }
     /**
@@ -1464,17 +1441,17 @@ trait ChatTrait
      *
      * @param string $messageID
      * @param string $pollID
-     * @param GeneratedModels\CastPollVoteRequest $requestData
+     * @param ?GeneratedModels\CastPollVoteRequest $requestData
      * @return StreamResponse<GeneratedModels\PollVoteResponse>
      * @throws StreamException
      */
-    public function castPollVote(string $messageID, string $pollID, GeneratedModels\CastPollVoteRequest $requestData): StreamResponse {
+    public function castPollVote(string $messageID, string $pollID, ?GeneratedModels\CastPollVoteRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/messages/{message_id}/polls/{poll_id}/vote';
         $path = str_replace('{message_id}', (string) $messageID, $path);
         $path = str_replace('{poll_id}', (string) $pollID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\CastPollVoteRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PollVoteResponse::class);
     }
     /**
@@ -1530,16 +1507,16 @@ trait ChatTrait
      * - reminder.updated
      *
      * @param string $messageID
-     * @param GeneratedModels\UpdateReminderRequest $requestData
+     * @param ?GeneratedModels\UpdateReminderRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateReminderResponse>
      * @throws StreamException
      */
-    public function updateReminder(string $messageID, GeneratedModels\UpdateReminderRequest $requestData): StreamResponse {
+    public function updateReminder(string $messageID, ?GeneratedModels\UpdateReminderRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/messages/{message_id}/reminders';
         $path = str_replace('{message_id}', (string) $messageID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateReminderRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateReminderResponse::class);
     }
     /**
@@ -1548,16 +1525,16 @@ trait ChatTrait
      * - reminder.created
      *
      * @param string $messageID
-     * @param GeneratedModels\CreateReminderRequest $requestData
+     * @param ?GeneratedModels\CreateReminderRequest $requestData
      * @return StreamResponse<GeneratedModels\CreateReminderResponse>
      * @throws StreamException
      */
-    public function createReminder(string $messageID, GeneratedModels\CreateReminderRequest $requestData): StreamResponse {
+    public function createReminder(string $messageID, ?GeneratedModels\CreateReminderRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/messages/{message_id}/reminders';
         $path = str_replace('{message_id}', (string) $messageID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\CreateReminderRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateReminderResponse::class);
     }
     /**
@@ -1633,15 +1610,15 @@ trait ChatTrait
      * Sends events:
      * - channel.muted
      *
-     * @param GeneratedModels\MuteChannelRequest $requestData
+     * @param ?GeneratedModels\MuteChannelRequest $requestData
      * @return StreamResponse<GeneratedModels\MuteChannelResponse>
      * @throws StreamException
      */
-    public function muteChannel(GeneratedModels\MuteChannelRequest $requestData): StreamResponse {
+    public function muteChannel(?GeneratedModels\MuteChannelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/moderation/mute/channel';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\MuteChannelRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MuteChannelResponse::class);
     }
     /**
@@ -1649,15 +1626,15 @@ trait ChatTrait
      * Sends events:
      * - channel.unmuted
      *
-     * @param GeneratedModels\UnmuteChannelRequest $requestData
+     * @param ?GeneratedModels\UnmuteChannelRequest $requestData
      * @return StreamResponse<GeneratedModels\UnmuteResponse>
      * @throws StreamException
      */
-    public function unmuteChannel(GeneratedModels\UnmuteChannelRequest $requestData): StreamResponse {
+    public function unmuteChannel(?GeneratedModels\UnmuteChannelRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/moderation/unmute/channel';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UnmuteChannelRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnmuteResponse::class);
     }
     /**
@@ -1692,7 +1669,6 @@ trait ChatTrait
         $path = '/api/v2/chat/predefined_filters';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreatePredefinedFilterResponse::class);
     }
     /**
@@ -1738,7 +1714,6 @@ trait ChatTrait
         $path = str_replace('{name}', (string) $name, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdatePredefinedFilterResponse::class);
     }
     /**
@@ -1786,15 +1761,15 @@ trait ChatTrait
     /**
      * Queries reminders
      *
-     * @param GeneratedModels\QueryRemindersRequest $requestData
+     * @param ?GeneratedModels\QueryRemindersRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryRemindersResponse>
      * @throws StreamException
      */
-    public function queryReminders(GeneratedModels\QueryRemindersRequest $requestData): StreamResponse {
+    public function queryReminders(?GeneratedModels\QueryRemindersRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/reminders/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryRemindersRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryRemindersResponse::class);
     }
     /**
@@ -1821,7 +1796,6 @@ trait ChatTrait
         $path = '/api/v2/chat/retention_policy';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SetRetentionPolicyResponse::class);
     }
     /**
@@ -1835,35 +1809,34 @@ trait ChatTrait
         $path = '/api/v2/chat/retention_policy/delete';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\DeleteRetentionPolicyResponse::class);
     }
     /**
      * Returns filtered and sorted retention cleanup run history for the app. Supports filter_conditions on 'policy' (possible values: 'old-messages', 'inactive-channels', 'inactive-channels@type:<channel type>', 'inactive-channels@blanket:<channel type>') and 'date' fields. Once the app has a per-channel-type rule, inactive-channels runs are recorded per channel type, under 'inactive-channels@type:<channel type>' for a type with its own rule and 'inactive-channels@blanket:<channel type>' for a type covered by the app-wide rule, and 'policy': 'inactive-channels' no longer matches new runs; filter with '$in' over the pass names of your channel types. Server-side only.
      *
-     * @param GeneratedModels\GetRetentionPolicyRunsRequest $requestData
+     * @param ?GeneratedModels\GetRetentionPolicyRunsRequest $requestData
      * @return StreamResponse<GeneratedModels\GetRetentionPolicyRunsResponse>
      * @throws StreamException
      */
-    public function getRetentionPolicyRuns(GeneratedModels\GetRetentionPolicyRunsRequest $requestData): StreamResponse {
+    public function getRetentionPolicyRuns(?GeneratedModels\GetRetentionPolicyRunsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/retention_policy/runs';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\GetRetentionPolicyRunsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetRetentionPolicyRunsResponse::class);
     }
     /**
      * Lists the scheduled messages of one user across channels: pending ones first, then failed ones, each by scheduled_at. Client-side requests return the caller's own; server-side requests require user_id
      *
-     * @param GeneratedModels\QueryScheduledMessagesRequest $requestData
+     * @param ?GeneratedModels\QueryScheduledMessagesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryScheduledMessagesResponse>
      * @throws StreamException
      */
-    public function queryScheduledMessages(GeneratedModels\QueryScheduledMessagesRequest $requestData): StreamResponse {
+    public function queryScheduledMessages(?GeneratedModels\QueryScheduledMessagesRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/scheduled_messages/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryScheduledMessagesRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryScheduledMessagesResponse::class);
     }
     /**
@@ -1889,16 +1862,16 @@ trait ChatTrait
      * - scheduled_message.updated
      *
      * @param string $id
-     * @param GeneratedModels\UpdateScheduledMessageRequest $requestData
+     * @param ?GeneratedModels\UpdateScheduledMessageRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateScheduledMessageResponse>
      * @throws StreamException
      */
-    public function updateScheduledMessage(string $id, GeneratedModels\UpdateScheduledMessageRequest $requestData): StreamResponse {
+    public function updateScheduledMessage(string $id, ?GeneratedModels\UpdateScheduledMessageRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/scheduled_messages/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateScheduledMessageRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateScheduledMessageResponse::class);
     }
     /**
@@ -1942,15 +1915,15 @@ trait ChatTrait
     /**
      * Runs one free-text query across messages, users and channels and returns one envelope with a section per requested entity. The server picks the match operator, sort and scope for every section: messages are matched as full text in the channels the caller can read, users by name or username prefix, and channels by name prefix among the channels the caller is a member of. Each section carries its own opaque `next` cursor when more results exist; a section that fails is reported in its `error` field while the other sections return normally.
      *
-     * @param GeneratedModels\SearchAllRequest $requestData
+     * @param ?GeneratedModels\SearchAllRequest $requestData
      * @return StreamResponse<GeneratedModels\SearchAllResponse>
      * @throws StreamException
      */
-    public function searchAll(GeneratedModels\SearchAllRequest $requestData): StreamResponse {
+    public function searchAll(?GeneratedModels\SearchAllRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/search/all';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\SearchAllRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SearchAllResponse::class);
     }
     /**
@@ -1964,7 +1937,6 @@ trait ChatTrait
         $path = '/api/v2/chat/segments';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CreateSegmentResponse::class);
     }
     /**
@@ -1978,7 +1950,6 @@ trait ChatTrait
         $path = '/api/v2/chat/segments/query';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QuerySegmentsResponse::class);
     }
     /**
@@ -2015,16 +1986,16 @@ trait ChatTrait
      * Update an existing segment
      *
      * @param string $id
-     * @param GeneratedModels\UpdateSegmentRequest $requestData
+     * @param ?GeneratedModels\UpdateSegmentRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateSegmentResponse>
      * @throws StreamException
      */
-    public function updateSegment(string $id, GeneratedModels\UpdateSegmentRequest $requestData): StreamResponse {
+    public function updateSegment(string $id, ?GeneratedModels\UpdateSegmentRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/segments/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateSegmentRequest();
         return StreamResponse::fromJson($this->makeRequest('PUT', $path, $queryParams, $requestData), GeneratedModels\UpdateSegmentResponse::class);
     }
     /**
@@ -2040,7 +2011,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -2056,7 +2026,6 @@ trait ChatTrait
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
     /**
@@ -2080,16 +2049,16 @@ trait ChatTrait
      * Query segment targets
      *
      * @param string $id
-     * @param GeneratedModels\QuerySegmentTargetsRequest $requestData
+     * @param ?GeneratedModels\QuerySegmentTargetsRequest $requestData
      * @return StreamResponse<GeneratedModels\QuerySegmentTargetsResponse>
      * @throws StreamException
      */
-    public function querySegmentTargets(string $id, GeneratedModels\QuerySegmentTargetsRequest $requestData): StreamResponse {
+    public function querySegmentTargets(string $id, ?GeneratedModels\QuerySegmentTargetsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/segments/{id}/targets/query';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QuerySegmentTargetsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QuerySegmentTargetsResponse::class);
     }
     /**
@@ -2104,29 +2073,29 @@ trait ChatTrait
      * - Mutually exclusive with the 'next' pagination cursor
      * This endpoint is server-side only.
      *
-     * @param GeneratedModels\QueryTeamUsageStatsRequest $requestData
+     * @param ?GeneratedModels\QueryTeamUsageStatsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryTeamUsageStatsResponse>
      * @throws StreamException
      */
-    public function queryTeamUsageStats(GeneratedModels\QueryTeamUsageStatsRequest $requestData): StreamResponse {
+    public function queryTeamUsageStats(?GeneratedModels\QueryTeamUsageStatsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/stats/team_usage';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryTeamUsageStatsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryTeamUsageStatsResponse::class);
     }
     /**
      * Returns the list of threads for specific user
      *
-     * @param GeneratedModels\QueryThreadsRequest $requestData
+     * @param ?GeneratedModels\QueryThreadsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryThreadsResponse>
      * @throws StreamException
      */
-    public function queryThreads(GeneratedModels\QueryThreadsRequest $requestData): StreamResponse {
+    public function queryThreads(?GeneratedModels\QueryThreadsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/threads';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryThreadsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryThreadsResponse::class);
     }
     /**
@@ -2162,16 +2131,16 @@ trait ChatTrait
      * - thread.updated
      *
      * @param string $messageID
-     * @param GeneratedModels\UpdateThreadPartialRequest $requestData
+     * @param ?GeneratedModels\UpdateThreadPartialRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateThreadPartialResponse>
      * @throws StreamException
      */
-    public function updateThreadPartial(string $messageID, GeneratedModels\UpdateThreadPartialRequest $requestData): StreamResponse {
+    public function updateThreadPartial(string $messageID, ?GeneratedModels\UpdateThreadPartialRequest $requestData = null): StreamResponse {
         $path = '/api/v2/chat/threads/{message_id}';
         $path = str_replace('{message_id}', (string) $messageID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateThreadPartialRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\UpdateThreadPartialResponse::class);
     }
     /**
@@ -2206,7 +2175,6 @@ trait ChatTrait
         $path = '/api/v2/chat/unread_batch';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnreadCountsBatchResponse::class);
     }
     /**
@@ -2224,7 +2192,6 @@ trait ChatTrait
         $path = str_replace('{user_id}', (string) $userID, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\Response::class);
     }
 }

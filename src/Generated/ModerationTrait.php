@@ -58,7 +58,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/action_config';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertActionConfigResponse::class);
     }
     /**
@@ -72,7 +71,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/action_config/bulk';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkUpsertActionConfigResponse::class);
     }
     /**
@@ -86,7 +84,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/action_config/bulk_delete';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkDeleteActionConfigResponse::class);
     }
     /**
@@ -119,7 +116,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/action_logs';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\InsertActionLogResponse::class);
     }
     /**
@@ -154,7 +150,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/agent_feedback';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SubmitAgentFeedbackResponse::class);
     }
     /**
@@ -173,15 +168,15 @@ trait ModerationTrait
     /**
      * Moderate named text fields and raw image bytes via multipart/form-data. Returns a per-field lightweight verdict.
      *
-     * @param GeneratedModels\AnalyzeRequest $requestData
+     * @param ?GeneratedModels\AnalyzeRequest $requestData
      * @return StreamResponse<GeneratedModels\AnalyzeResponse>
      * @throws StreamException
      */
-    public function analyze(GeneratedModels\AnalyzeRequest $requestData): StreamResponse {
+    public function analyze(?GeneratedModels\AnalyzeRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/analyze';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\AnalyzeRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AnalyzeResponse::class);
     }
     /**
@@ -195,7 +190,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/appeal';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\AppealResponse::class);
     }
     /**
@@ -216,15 +210,15 @@ trait ModerationTrait
     /**
      * Query Appeals
      *
-     * @param GeneratedModels\QueryAppealsRequest $requestData
+     * @param ?GeneratedModels\QueryAppealsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryAppealsResponse>
      * @throws StreamException
      */
-    public function queryAppeals(GeneratedModels\QueryAppealsRequest $requestData): StreamResponse {
+    public function queryAppeals(?GeneratedModels\QueryAppealsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/appeals';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryAppealsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryAppealsResponse::class);
     }
     /**
@@ -238,7 +232,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/appeals/bulk_action';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkActionAppealsResponse::class);
     }
     /**
@@ -252,7 +245,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/ban';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\ModerationBanResponse::class);
     }
     /**
@@ -266,7 +258,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/bulk_image_moderation';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BulkImageModerationResponse::class);
     }
     /**
@@ -280,7 +271,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/bypass';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\BypassResponse::class);
     }
     /**
@@ -294,21 +284,20 @@ trait ModerationTrait
         $path = '/api/v2/moderation/check';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckResponse::class);
     }
     /**
      * Verifies that the configured IAM role ARN can access private S3 images for moderation. Optionally accepts a stream+s3:// URL to check access to a specific object.
      *
-     * @param GeneratedModels\CheckS3AccessRequest $requestData
+     * @param ?GeneratedModels\CheckS3AccessRequest $requestData
      * @return StreamResponse<GeneratedModels\CheckS3AccessResponse>
      * @throws StreamException
      */
-    public function checkS3Access(GeneratedModels\CheckS3AccessRequest $requestData): StreamResponse {
+    public function checkS3Access(?GeneratedModels\CheckS3AccessRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/check_s3_access';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\CheckS3AccessRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CheckS3AccessResponse::class);
     }
     /**
@@ -322,7 +311,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/config';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertConfigResponse::class);
     }
     /**
@@ -336,7 +324,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/config/versions';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SaveConfigVersionResponse::class);
     }
     /**
@@ -426,31 +413,31 @@ trait ModerationTrait
      *
      * @param string $key
      * @param int $version
-     * @param GeneratedModels\PublishConfigVersionRequest $requestData
+     * @param ?GeneratedModels\PublishConfigVersionRequest $requestData
      * @return StreamResponse<GeneratedModels\PublishConfigVersionResponse>
      * @throws StreamException
      */
-    public function publishConfigVersion(string $key, int $version, GeneratedModels\PublishConfigVersionRequest $requestData): StreamResponse {
+    public function publishConfigVersion(string $key, int $version, ?GeneratedModels\PublishConfigVersionRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/config/{key}/versions/{version}/publish';
         $path = str_replace('{key}', (string) $key, $path);
         $path = str_replace('{version}', (string) $version, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\PublishConfigVersionRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PublishConfigVersionResponse::class);
     }
     /**
      * Search and filter moderation configurations across your application. This endpoint is designed for building moderation dashboards and managing multiple configuration sets.
      *
-     * @param GeneratedModels\QueryModerationConfigsRequest $requestData
+     * @param ?GeneratedModels\QueryModerationConfigsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationConfigsResponse>
      * @throws StreamException
      */
-    public function queryModerationConfigs(GeneratedModels\QueryModerationConfigsRequest $requestData): StreamResponse {
+    public function queryModerationConfigs(?GeneratedModels\QueryModerationConfigsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/configs';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryModerationConfigsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryModerationConfigsResponse::class);
     }
     /**
@@ -464,21 +451,20 @@ trait ModerationTrait
         $path = '/api/v2/moderation/custom_check';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CustomCheckResponse::class);
     }
     /**
      * List moderation feedback submissions that have an item matching the filter, with those items, sorting and pagination. Server-side only.
      *
-     * @param GeneratedModels\QueryModerationFeedbackRequest $requestData
+     * @param ?GeneratedModels\QueryModerationFeedbackRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationFeedbackResponse>
      * @throws StreamException
      */
-    public function queryModerationFeedback(GeneratedModels\QueryModerationFeedbackRequest $requestData): StreamResponse {
+    public function queryModerationFeedback(?GeneratedModels\QueryModerationFeedbackRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/feedback_items';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryModerationFeedbackRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryModerationFeedbackResponse::class);
     }
     /**
@@ -522,7 +508,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/feeds_moderation_template';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertModerationTemplateResponse::class);
     }
     /**
@@ -536,7 +521,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/flag';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\FlagItemResponse::class);
     }
     /**
@@ -550,21 +534,20 @@ trait ModerationTrait
         $path = '/api/v2/moderation/flag_count';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\GetFlagCountResponse::class);
     }
     /**
      * Query flags associated with moderation items. This is used for building a moderation dashboard.
      *
-     * @param GeneratedModels\QueryModerationFlagsRequest $requestData
+     * @param ?GeneratedModels\QueryModerationFlagsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationFlagsResponse>
      * @throws StreamException
      */
-    public function queryModerationFlags(GeneratedModels\QueryModerationFlagsRequest $requestData): StreamResponse {
+    public function queryModerationFlags(?GeneratedModels\QueryModerationFlagsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/flags';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryModerationFlagsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryModerationFlagsResponse::class);
     }
     /**
@@ -578,35 +561,34 @@ trait ModerationTrait
         $path = '/api/v2/moderation/labels';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\LabelsResponse::class);
     }
     /**
      * Search and filter moderation label results with support for pagination and sorting. View the history of moderation labels applied to content.
      *
-     * @param GeneratedModels\QueryLabelResultsRequest $requestData
+     * @param ?GeneratedModels\QueryLabelResultsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryLabelResultsResponse>
      * @throws StreamException
      */
-    public function queryLabelResults(GeneratedModels\QueryLabelResultsRequest $requestData): StreamResponse {
+    public function queryLabelResults(?GeneratedModels\QueryLabelResultsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/labels/results';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryLabelResultsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryLabelResultsResponse::class);
     }
     /**
      * Search and filter moderation action logs with support for pagination. View the history of moderation actions taken, including who performed them and when.
      *
-     * @param GeneratedModels\QueryModerationLogsRequest $requestData
+     * @param ?GeneratedModels\QueryModerationLogsRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationLogsResponse>
      * @throws StreamException
      */
-    public function queryModerationLogs(GeneratedModels\QueryModerationLogsRequest $requestData): StreamResponse {
+    public function queryModerationLogs(?GeneratedModels\QueryModerationLogsRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/logs';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryModerationLogsRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryModerationLogsResponse::class);
     }
     /**
@@ -620,7 +602,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/moderation_rule';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertModerationRuleResponse::class);
     }
     /**
@@ -660,15 +641,15 @@ trait ModerationTrait
     /**
      * Search and filter moderation rules across your application. This endpoint is designed for building moderation dashboards and managing multiple rule sets.
      *
-     * @param GeneratedModels\QueryModerationRulesRequest $requestData
+     * @param ?GeneratedModels\QueryModerationRulesRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryModerationRulesResponse>
      * @throws StreamException
      */
-    public function queryModerationRules(GeneratedModels\QueryModerationRulesRequest $requestData): StreamResponse {
+    public function queryModerationRules(?GeneratedModels\QueryModerationRulesRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/moderation_rules';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryModerationRulesRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryModerationRulesResponse::class);
     }
     /**
@@ -682,7 +663,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/mute';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\MuteResponse::class);
     }
     /**
@@ -730,7 +710,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/policy_tests/sets';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PolicyTestSetResponse::class);
     }
     /**
@@ -802,7 +781,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/queues';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
     }
     /**
@@ -826,31 +804,31 @@ trait ModerationTrait
     /**
      *
      * @param string $id
-     * @param GeneratedModels\UpdateQueueRequest $requestData
+     * @param ?GeneratedModels\UpdateQueueRequest $requestData
      * @return StreamResponse<GeneratedModels\QueueResponse>
      * @throws StreamException
      */
-    public function updateQueue(string $id, GeneratedModels\UpdateQueueRequest $requestData): StreamResponse {
+    public function updateQueue(string $id, ?GeneratedModels\UpdateQueueRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/queues/{id}';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\UpdateQueueRequest();
         return StreamResponse::fromJson($this->makeRequest('PATCH', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
     }
     /**
      *
      * @param string $id
-     * @param GeneratedModels\DeleteQueueRequest $requestData
+     * @param ?GeneratedModels\DeleteQueueRequest $requestData
      * @return StreamResponse<GeneratedModels\QueueResponse>
      * @throws StreamException
      */
-    public function deleteQueue(string $id, GeneratedModels\DeleteQueueRequest $requestData): StreamResponse {
+    public function deleteQueue(string $id, ?GeneratedModels\DeleteQueueRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/queues/{id}/delete';
         $path = str_replace('{id}', (string) $id, $path);
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\DeleteQueueRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueueResponse::class);
     }
     /**
@@ -864,35 +842,34 @@ trait ModerationTrait
         $path = '/api/v2/moderation/reveal_media';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\RevealMediaResponse::class);
     }
     /**
      * Query review queue items allows you to filter the review queue items. This is used for building a moderation dashboard.
      *
-     * @param GeneratedModels\QueryReviewQueueRequest $requestData
+     * @param ?GeneratedModels\QueryReviewQueueRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryReviewQueueResponse>
      * @throws StreamException
      */
-    public function queryReviewQueue(GeneratedModels\QueryReviewQueueRequest $requestData): StreamResponse {
+    public function queryReviewQueue(?GeneratedModels\QueryReviewQueueRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/review_queue';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\QueryReviewQueueRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryReviewQueueResponse::class);
     }
     /**
      * Count the review queue items matching a filter, so a moderation dashboard can show a total for a queue or view. Counts are kept up to date in the background while they are being requested.
      *
-     * @param GeneratedModels\CountReviewQueueRequest $requestData
+     * @param ?GeneratedModels\CountReviewQueueRequest $requestData
      * @return StreamResponse<GeneratedModels\CountReviewQueueResponse>
      * @throws StreamException
      */
-    public function countReviewQueue(GeneratedModels\CountReviewQueueRequest $requestData): StreamResponse {
+    public function countReviewQueue(?GeneratedModels\CountReviewQueueRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/review_queue/count';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\CountReviewQueueRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\CountReviewQueueResponse::class);
     }
     /**
@@ -934,7 +911,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/setup';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertSetupSessionResponse::class);
     }
     /**
@@ -948,21 +924,20 @@ trait ModerationTrait
         $path = '/api/v2/moderation/submit_action';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SubmitActionResponse::class);
     }
     /**
      * Forward a moderator-supplied correction to the moderation feedback pipeline, optionally marking the referenced flags as false positives. Server-side only.
      *
-     * @param GeneratedModels\SubmitModerationFeedbackRequest $requestData
+     * @param ?GeneratedModels\SubmitModerationFeedbackRequest $requestData
      * @return StreamResponse<GeneratedModels\SubmitModerationFeedbackResponse>
      * @throws StreamException
      */
-    public function submitModerationFeedback(GeneratedModels\SubmitModerationFeedbackRequest $requestData): StreamResponse {
+    public function submitModerationFeedback(?GeneratedModels\SubmitModerationFeedbackRequest $requestData = null): StreamResponse {
         $path = '/api/v2/moderation/submit_moderation_feedback';
 
         $queryParams = [];
-        // Use the provided request data array directly
+        $requestData ??= new GeneratedModels\SubmitModerationFeedbackRequest();
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\SubmitModerationFeedbackResponse::class);
     }
     /**
@@ -992,7 +967,6 @@ trait ModerationTrait
         if ($removeFutureChannelsBan !== null) {
             $queryParams['remove_future_channels_ban'] = $removeFutureChannelsBan;
         }
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnbanResponse::class);
     }
     /**
@@ -1006,7 +980,6 @@ trait ModerationTrait
         $path = '/api/v2/moderation/unmute';
 
         $queryParams = [];
-        // Use the provided request data array directly
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnmuteResponse::class);
     }
 }

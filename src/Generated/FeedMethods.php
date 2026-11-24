@@ -29,36 +29,36 @@ trait FeedMethods
     /**
      * Create a single feed for a given feed group
      *
-     * @param GeneratedModels\GetOrCreateFeedRequest $requestData
+     * @param ?GeneratedModels\GetOrCreateFeedRequest $requestData
      * @param ?string $language
      * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\GetOrCreateFeedResponse>
      * @throws StreamException
      */
     public function getOrCreateFeed(
-        GeneratedModels\GetOrCreateFeedRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+        ?GeneratedModels\GetOrCreateFeedRequest $requestData = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         return $this->feedsV3Client->getOrCreateFeed($this->feedGroup, $this->feedId, $requestData,$language, $translateText);
     }
     /**
      * Update an existing feed
      *
-     * @param GeneratedModels\UpdateFeedRequest $requestData
+     * @param ?GeneratedModels\UpdateFeedRequest $requestData
      * @return StreamResponse<GeneratedModels\UpdateFeedResponse>
      * @throws StreamException
      */
     public function updateFeed(
-        GeneratedModels\UpdateFeedRequest $requestData): StreamResponse {
+        ?GeneratedModels\UpdateFeedRequest $requestData = null): StreamResponse {
         return $this->feedsV3Client->updateFeed($this->feedGroup, $this->feedId, $requestData);
     }
     /**
      * Mark activities as read/seen/watched. Can mark by timestamp (seen), activity IDs (read), or all as read.
      *
-     * @param GeneratedModels\MarkActivityRequest $requestData
+     * @param ?GeneratedModels\MarkActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\Response>
      * @throws StreamException
      */
     public function markActivity(
-        GeneratedModels\MarkActivityRequest $requestData): StreamResponse {
+        ?GeneratedModels\MarkActivityRequest $requestData = null): StreamResponse {
         return $this->feedsV3Client->markActivity($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -78,12 +78,12 @@ trait FeedMethods
      * Pin an activity to a feed. Pinned activities are typically displayed at the top of a feed.
      *
      * @param string $activityID
-     * @param GeneratedModels\PinActivityRequest $requestData
+     * @param ?GeneratedModels\PinActivityRequest $requestData
      * @return StreamResponse<GeneratedModels\PinActivityResponse>
      * @throws StreamException
      */
     public function pinActivity(
-        string $activityID, GeneratedModels\PinActivityRequest $requestData): StreamResponse {
+        string $activityID, ?GeneratedModels\PinActivityRequest $requestData = null): StreamResponse {
         return $this->feedsV3Client->pinActivity($this->feedGroup, $this->feedId, $activityID, $requestData);
     }
     /**
@@ -121,34 +121,34 @@ trait FeedMethods
     /**
      * Accepts a pending feed member request
      *
-     * @param GeneratedModels\AcceptFeedMemberInviteRequest $requestData
+     * @param ?GeneratedModels\AcceptFeedMemberInviteRequest $requestData
      * @return StreamResponse<GeneratedModels\AcceptFeedMemberInviteResponse>
      * @throws StreamException
      */
     public function acceptFeedMemberInvite(
-        GeneratedModels\AcceptFeedMemberInviteRequest $requestData): StreamResponse {
+        ?GeneratedModels\AcceptFeedMemberInviteRequest $requestData = null): StreamResponse {
         return $this->feedsV3Client->acceptFeedMemberInvite($this->feedGroup, $this->feedId, $requestData);
     }
     /**
      * Query feed members based on filters with pagination and sorting options
      *
-     * @param GeneratedModels\QueryFeedMembersRequest $requestData
+     * @param ?GeneratedModels\QueryFeedMembersRequest $requestData
      * @return StreamResponse<GeneratedModels\QueryFeedMembersResponse>
      * @throws StreamException
      */
     public function queryFeedMembers(
-        GeneratedModels\QueryFeedMembersRequest $requestData): StreamResponse {
+        ?GeneratedModels\QueryFeedMembersRequest $requestData = null): StreamResponse {
         return $this->feedsV3Client->queryFeedMembers($this->feedGroup, $this->feedId, $requestData);
     }
     /**
      * Rejects a pending feed member request
      *
-     * @param GeneratedModels\RejectFeedMemberInviteRequest $requestData
+     * @param ?GeneratedModels\RejectFeedMemberInviteRequest $requestData
      * @return StreamResponse<GeneratedModels\RejectFeedMemberInviteResponse>
      * @throws StreamException
      */
     public function rejectFeedMemberInvite(
-        GeneratedModels\RejectFeedMemberInviteRequest $requestData): StreamResponse {
+        ?GeneratedModels\RejectFeedMemberInviteRequest $requestData = null): StreamResponse {
         return $this->feedsV3Client->rejectFeedMemberInvite($this->feedGroup, $this->feedId, $requestData);
     }
     /**
@@ -166,14 +166,14 @@ trait FeedMethods
     /**
      * Query pinned activities for a feed with filter query
      *
-     * @param GeneratedModels\QueryPinnedActivitiesRequest $requestData
+     * @param ?GeneratedModels\QueryPinnedActivitiesRequest $requestData
      * @param ?string $language
      * @param ?bool $translateText
      * @return StreamResponse<GeneratedModels\QueryPinnedActivitiesResponse>
      * @throws StreamException
      */
     public function queryPinnedActivities(
-        GeneratedModels\QueryPinnedActivitiesRequest $requestData, ?string $language = null, ?bool $translateText = null): StreamResponse {
+        ?GeneratedModels\QueryPinnedActivitiesRequest $requestData = null, ?string $language = null, ?bool $translateText = null): StreamResponse {
         return $this->feedsV3Client->queryPinnedActivities($this->feedGroup, $this->feedId, $requestData,$language, $translateText);
     }
 }
