@@ -224,18 +224,18 @@ class Client
             $multipart = [];
             $isImage = $body instanceof GeneratedModels\ImageUploadRequest;
 
-            // File field
+            // File field is always treated strictly as base64-encoded content.
+            // Callers uploading a local filesystem path must use uploadFileFromPath() or uploadImageFromPath().
             if ($body->file !== null) {
-                // Check if it's a file path that exists, otherwise treat as base64
-                $filePath = (string) $body->file;
-                $fileContent = file_exists($filePath)
-                    ? file_get_contents($filePath)
-                    : (base64_decode($filePath, true) ?: throw new StreamException('Failed to decode base64 file data'));
+                $fileContent = base64_decode((string) $body->file, true);
+                if ($fileContent === false) {
+                    throw new StreamException('Failed to decode base64 file data');
+                }
 
                 $multipart[] = [
                     'name' => 'file',
                     'contents' => $fileContent,
-                    'filename' => $isImage ? 'image.jpg' : (file_exists($filePath) ? basename($filePath) : 'file.pdf'),
+                    'filename' => $isImage ? 'image.jpg' : 'file.pdf',
                 ];
             }
 
@@ -254,6 +254,98 @@ class Client
 
         // Make the request
         return $this->httpClient->request($method, $url, $headers, $body);
+    }
+
+    /**
+     * Upload a local file from disk by explicit filesystem path.
+     *
+     * @param string                        $filePath Local filesystem path to upload
+     * @param ?GeneratedModels\OnlyUserID   $user     Optional user performing the upload
+     * @param string                        $endpoint Upload endpoint path (defaults to '/api/v2/uploads/file')
+     *
+     * @return StreamResponse<GeneratedModels\FileUploadResponse>
+     *
+     * @throws StreamException
+     */
+    public function uploadFileFromPath(
+        string $filePath,
+        ?GeneratedModels\OnlyUserID $user = null,
+        string $endpoint = '/api/v2/uploads/file'
+    ): StreamResponse {
+        $response = $this->uploadLocalMultipart($endpoint, $filePath, $user, null);
+
+        return StreamResponse::fromJson($response, GeneratedModels\FileUploadResponse::class);
+    }
+
+    /**
+     * Upload a local image from disk by explicit filesystem path.
+     *
+     * @param string                                      $filePath    Local filesystem path to upload
+     * @param ?GeneratedModels\OnlyUserID                 $user        Optional user performing the upload
+     * @param ?array<int, array<string, mixed>|GeneratedModels\ImageSize> $uploadSizes Optional image resize specs
+     * @param string                                      $endpoint    Upload endpoint path (defaults to '/api/v2/uploads/image')
+     *
+     * @return StreamResponse<GeneratedModels\ImageUploadResponse>
+     *
+     * @throws StreamException
+     */
+    public function uploadImageFromPath(
+        string $filePath,
+        ?GeneratedModels\OnlyUserID $user = null,
+        ?array $uploadSizes = null,
+        string $endpoint = '/api/v2/uploads/image'
+    ): StreamResponse {
+        $response = $this->uploadLocalMultipart($endpoint, $filePath, $user, $uploadSizes);
+
+        return StreamResponse::fromJson($response, GeneratedModels\ImageUploadResponse::class);
+    }
+
+    /**
+     * @param ?array<int, array<string, mixed>|GeneratedModels\ImageSize> $uploadSizes
+     *
+     * @return StreamResponse<mixed>
+     *
+     * @throws StreamException
+     */
+    private function uploadLocalMultipart(
+        string $endpoint,
+        string $filePath,
+        ?GeneratedModels\OnlyUserID $user,
+        ?array $uploadSizes
+    ): StreamResponse {
+        if ($filePath === '' || !is_file($filePath) || !is_readable($filePath)) {
+            throw new StreamException("File not found or not readable: {$filePath}");
+        }
+
+        $fileContent = file_get_contents($filePath);
+        if ($fileContent === false) {
+            throw new StreamException("Failed to read file: {$filePath}");
+        }
+
+        $url = $this->baseUrl . $endpoint . '?' . http_build_query(['api_key' => $this->apiKey]);
+        $headers = array_merge($this->defaultHeaders, [
+            'Authorization' => $this->jwtGenerator->generateServerToken(),
+            'stream-auth-type' => 'jwt',
+        ]);
+        unset($headers['Content-Type']);
+
+        $multipart = [
+            [
+                'name' => 'file',
+                'contents' => $fileContent,
+                'filename' => basename($filePath),
+            ],
+        ];
+
+        if ($user !== null) {
+            $multipart[] = ['name' => 'user', 'contents' => json_encode($user)];
+        }
+
+        if ($uploadSizes !== null && !empty($uploadSizes)) {
+            $multipart[] = ['name' => 'upload_sizes', 'contents' => json_encode($uploadSizes)];
+        }
+
+        return $this->httpClient->request('POST', $url, $headers, $multipart);
     }
 
     /**
