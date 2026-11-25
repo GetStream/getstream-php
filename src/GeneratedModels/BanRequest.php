@@ -17,6 +17,7 @@ class BanRequest extends BaseModel
         public ?string $deleteMessages = null, // How a ban or user deletion treats the user's messages.
         public ?bool $deleteReactions = null, // Whether to delete reactions by the banned user on other users' messages
         public ?bool $banFromFutureChannels = null, // Whether to also ban the user from future channels created by the banner
+        public ?string $channelType = null, // Ban the user from every channel of this type, including channels they join later. Cannot be combined with channel_cid, ip_ban, ban_from_future_channels, delete_messages or delete_reactions
     ) {
     }
 
