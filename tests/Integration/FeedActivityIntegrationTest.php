@@ -75,7 +75,7 @@ class FeedActivityIntegrationTest extends TestCase
     {
         foreach ($this->createdActivityIds as $activityId) {
             try {
-                $this->feedsV3Client->deleteActivity($activityId, true, false);
+                $this->feedsV3Client->deleteActivity($activityId, hardDelete: true, deleteNotificationActivity: false);
             } catch (\Exception $e) {
                 // best-effort
             }

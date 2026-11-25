@@ -76,14 +76,14 @@ class FeedReactionCommentIntegrationTest extends TestCase
     {
         foreach ($this->createdCommentIds as $commentId) {
             try {
-                $this->feedsV3Client->deleteComment($commentId, true, false);
+                $this->feedsV3Client->deleteComment($commentId, hardDelete: true, deleteNotificationActivity: false);
             } catch (\Exception $e) {
                 // best-effort
             }
         }
         foreach ($this->createdActivityIds as $activityId) {
             try {
-                $this->feedsV3Client->deleteActivity($activityId, true, false);
+                $this->feedsV3Client->deleteActivity($activityId, hardDelete: true, deleteNotificationActivity: false);
             } catch (\Exception $e) {
                 // best-effort
             }

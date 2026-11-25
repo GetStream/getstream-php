@@ -106,7 +106,7 @@ $response = $client->getDevices("user-123");
 **After (getstream-php):**
 
 ```php
-$response = $client->listDevices('user-123');
+$response = $client->listDevices(userID: 'user-123');
 ```
 
 > **Key differences:**
@@ -124,7 +124,7 @@ $client->deleteDevice("device-token-abc", "user-123");
 **After (getstream-php):**
 
 ```php
-$client->deleteDevice('device-token-abc', 'user-123');
+$client->deleteDevice('device-token-abc', userID: 'user-123');
 ```
 
 > **Key differences:**
