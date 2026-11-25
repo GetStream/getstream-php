@@ -433,7 +433,7 @@ class ModerationIntegrationTest extends TestCase
         if (!empty($this->createdConfigs)) {
             foreach ($this->createdConfigs as $configKey) {
                 try {
-                    $this->moderationClient->deleteConfig($configKey, 'default');
+                    $this->moderationClient->deleteConfig($configKey, team: 'default');
                     echo "✅ Cleaned up config: {$configKey}\n";
                 } catch (StreamApiException $e) {
                     echo "Warning: Failed to delete config {$configKey}: " . $e->getMessage() . "\n";
