@@ -1,0 +1,31 @@
+# Keep tests, CI config, docs and dev tooling out of the dist archives that
+# Composer downloads (git archive / GitHub zipballs). Consumers get src/, the
+# composer.json, README, CHANGELOG, SECURITY and the migration guides.
+
+# Tests
+/tests export-ignore
+/phpunit.xml export-ignore
+
+# CI and release tooling
+/.github export-ignore
+/.release-please-manifest.json export-ignore
+/release-please-config.json export-ignore
+
+# Code generation
+/generate.sh export-ignore
+/.spec-version export-ignore
+/composer-generated.json export-ignore
+
+# Dev tooling and local config
+/Makefile export-ignore
+/lint.sh export-ignore
+/phpstan.neon export-ignore
+/.env.example export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
+
+# Libraries don't ship their lockfile; Composer ignores it for dependencies anyway.
+/composer.lock export-ignore
+
+# Long-form docs live in the repository
+/docs export-ignore
