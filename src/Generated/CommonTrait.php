@@ -1362,18 +1362,26 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpdateUsersResponse::class);
     }
     /**
-     * Get list of blocked Users
+     * Returns users blocked by one user, oldest block first. Page with limit (default 500, max 500) and next.
      *
      * @param ?string $userID
+     * @param ?int $limit
+     * @param ?string $next
      * @return StreamResponse<GeneratedModels\GetBlockedUsersResponse>
      * @throws StreamException
      */
-    public function getBlockedUsers(?string $userID = null): StreamResponse {
+    public function getBlockedUsers(?string $userID = null, ?int $limit = null, ?string $next = null): StreamResponse {
         $path = '/api/v2/users/block';
 
         $queryParams = [];
         if ($userID !== null) {
             $queryParams['user_id'] = $userID;
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        if ($next !== null) {
+            $queryParams['next'] = $next;
         }
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetBlockedUsersResponse::class);

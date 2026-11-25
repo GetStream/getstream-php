@@ -8,8 +8,9 @@ class GetBlockedUsersResponse extends BaseModel
     public function __construct(
         /** @var array<BlockedUserResponse>|null */
         #[ArrayOf(BlockedUserResponse::class)]
-        public ?array $blocks = null, // Array of blocked user object
+        public ?array $blocks = null, // Blocked users on this page, oldest block first
         public ?string $duration = null, // Duration of the request in milliseconds
+        public ?string $next = null, // Cursor for the next page. Absent on the last page
     ) {
     }
 
