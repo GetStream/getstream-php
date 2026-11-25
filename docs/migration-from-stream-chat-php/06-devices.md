@@ -128,13 +128,13 @@ $client->deleteDevice('device-token-abc', userID: 'user-123');
 ```
 
 > **Key differences:**
-> - The method signature is the same: `deleteDevice(string $id, string $userID)`
-> - Parameter names changed from `$deviceId` to `$id` and `$userId` to `$userID`, but since both are positional strings this has no practical impact
+> - The signature is `deleteDevice(string $id, ?string $userID = null)`: `userID` is an optional query parameter, passed by name
+> - Parameter names are case-sensitive with named arguments: `userID:` works, `userId:` throws `Unknown named parameter $userId`
 
 ## Method Mapping Summary
 
 | Operation | stream-chat-php | getstream-php |
 |-----------|----------------|---------------|
 | Add device | `$client->addDevice($deviceId, $provider, $userId, $providerName)` | `$client->createDevice(new CreateDeviceRequest(...))` |
-| List devices | `$client->getDevices($userId)` | `$client->listDevices($userID)` |
-| Delete device | `$client->deleteDevice($deviceId, $userId)` | `$client->deleteDevice($id, $userID)` |
+| List devices | `$client->getDevices($userId)` | `$client->listDevices(userID: $userID)` |
+| Delete device | `$client->deleteDevice($deviceId, $userId)` | `$client->deleteDevice($id, userID: $userID)` |

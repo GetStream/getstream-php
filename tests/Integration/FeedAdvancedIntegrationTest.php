@@ -145,7 +145,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         $this->testFeed->pinActivity($activityId, new GeneratedModels\PinActivityRequest(userID: $this->testUserId));
 
         // snippet-start: UnpinActivity
-        $response = $this->testFeed->unpinActivity($activityId, false, $this->testUserId);
+        $response = $this->testFeed->unpinActivity($activityId, enrichOwnFields: false, userID: $this->testUserId);
         // snippet-end: UnpinActivity
 
         $this->assertResponseSuccess($response, 'unpin activity');
