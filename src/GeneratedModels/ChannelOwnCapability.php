@@ -45,6 +45,7 @@ class ChannelOwnCapability
     public const SHARE_LOCATION = 'share-location';
     public const SKIP_SLOW_MODE = 'skip-slow-mode';
     public const SLOW_MODE = 'slow-mode';
+    public const TRANSCRIBE_VOICE_MESSAGE = 'transcribe-voice-message';
     public const TYPING_EVENTS = 'typing-events';
     public const UPDATE_ANY_MESSAGE = 'update-any-message';
     public const UPDATE_CHANNEL = 'update-channel';

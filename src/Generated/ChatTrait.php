@@ -1396,6 +1396,23 @@ trait ChatTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryReactionsResponse::class);
     }
     /**
+     * Transcribes the voice recordings of a message that have no transcript yet. Transcription runs in the background: the transcript arrives in the attachment's voice_transcript field with message.updated. A recording that already has a transcript, or is already being transcribed, is not transcribed again
+     * Sends events:
+     * - message.updated
+     *
+     * @param string $id
+     * @return StreamResponse<GeneratedModels\TranscribeMessageResponse>
+     * @throws StreamException
+     */
+    public function transcribeMessage(string $id): StreamResponse {
+        $path = '/api/v2/chat/messages/{id}/transcribe';
+        $path = str_replace('{id}', (string) $id, $path);
+
+        $queryParams = [];
+        $requestData = null;
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\TranscribeMessageResponse::class);
+    }
+    /**
      * Translates message to a given language using automated translation software
      * Sends events:
      * - message.updated
