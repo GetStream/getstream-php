@@ -159,6 +159,72 @@ class ClientTest extends TestCase
     }
 
     /**
+     * @return array<string, array{string, mixed}>
+     */
+    public static function reservedUserTokenClaims(): array
+    {
+        return [
+            'empty user_id' => ['user_id', ''],
+            'other user_id' => ['user_id', 'other-user'],
+            'server true' => ['server', true],
+            'server false' => ['server', false],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider reservedUserTokenClaims
+     */
+    public function createUserTokenRejectsReservedClaims(string $claim, mixed $value): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->expectException(StreamException::class);
+        $this->expectExceptionMessage(sprintf('"%s" is reserved', $claim));
+
+        $client->createUserToken('user-123', [$claim => $value]);
+    }
+
+    /**
+     * @test
+     */
+    public function createUserTokenExpirationWinsOverCustomExp(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+        $before = time();
+
+        $token = $client->createUserToken('user-123', ['exp' => $before + 100 * 365 * 24 * 3600], 3600);
+
+        $payload = $client->getJWTGenerator()->verifyToken($token);
+        self::assertSame('user-123', $payload['user_id']);
+        self::assertGreaterThanOrEqual($before + 3600, $payload['exp']);
+        self::assertLessThanOrEqual(time() + 3600, $payload['exp']);
+    }
+
+    /**
+     * @test
+     */
+    public function createUserTokenKeepsCustomExpWithoutExpiration(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+        $exp = time() + 7200;
+
+        $token = $client->createUserToken('user-123', ['exp' => $exp, 'call_cids' => ['default:call']]);
+
+        $payload = $client->getJWTGenerator()->verifyToken($token);
+        self::assertSame($exp, $payload['exp']);
+        self::assertSame(['default:call'], $payload['call_cids']);
+        self::assertArrayNotHasKey('server', $payload);
+    }
+
+    /**
      * @test
      */
     public function listQueryParamsAreSentCommaSeparated(): void

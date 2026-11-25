@@ -13,6 +13,12 @@ use GetStream\Exceptions\StreamException;
  */
 class JWTGenerator
 {
+    /**
+     * Claims a user token's custom claims may not set: the token's identity comes only
+     * from the user ID argument.
+     */
+    private const RESERVED_USER_CLAIMS = ['user_id', 'server'];
+
     private string $secret;
     private string $algorithm;
 
@@ -60,15 +66,25 @@ class JWTGenerator
      * Generate a user token for client-side authentication.
      *
      * @param string   $userId     The user ID
-     * @param array    $claims     Additional claims to include
+     * @param array    $claims     Additional claims to include. They cannot set the reserved
+     *                             "user_id" or "server" claims. A custom "exp" is ignored when
+     *                             $expiration is given.
      * @param int|null $expiration Token expiration in seconds (null for no expiration)
      *
      * @return string JWT token
+     *
+     * @throws StreamException If the user ID is empty or $claims sets a reserved claim
      */
     public function generateUserToken(string $userId, array $claims = [], ?int $expiration = null): string
     {
         if (empty($userId)) {
             throw new StreamException('User ID cannot be empty');
+        }
+
+        foreach (self::RESERVED_USER_CLAIMS as $claim) {
+            if (array_key_exists($claim, $claims)) {
+                throw new StreamException(sprintf('Claim "%s" is reserved and cannot be set on a user token', $claim));
+            }
         }
 
         $now = time();

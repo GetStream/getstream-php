@@ -260,10 +260,13 @@ class Client
      * Generate a user token for client-side authentication.
      *
      * @param string   $userId     The user ID
-     * @param array    $claims     Additional claims
+     * @param array    $claims     Additional claims. They cannot set the reserved "user_id" or
+     *                             "server" claims. A custom "exp" is ignored when $expiration is given.
      * @param int|null $expiration Token expiration in seconds (null for no expiration)
      *
      * @return string JWT token
+     *
+     * @throws StreamException If the user ID is empty or $claims sets a reserved claim
      */
     public function createUserToken(string $userId, array $claims = [], ?int $expiration = null): string
     {
