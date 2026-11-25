@@ -11,11 +11,11 @@ use GetStream\Exceptions\StreamTransportException;
 use GetStream\StreamResponse;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Handler\CurlMultiHandler;
 use GuzzleHttp\HandlerStack;
+use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -73,12 +73,25 @@ class GuzzleHttpClient implements HttpClientInterface
         // ReactPHP, CLI daemons). Under PHP-FPM the PHP process exits per request and
         // the multi handle dies with it; the per-call request/connect timeouts still
         // apply but there is no cross-request connection reuse.
-        $multi = new CurlMultiHandler([
-            'options' => [
-                CURLMOPT_MAX_HOST_CONNECTIONS => $pool->maxConnsPerHost,
-                CURLMOPT_MAXCONNECTS => $pool->maxConnsPerHost,
-            ],
-        ]);
+        //
+        // Guzzle 7 accepts CURLMOPT_MAX_HOST_CONNECTIONS in `options`. Guzzle 8 rejects
+        // it and requires the named max_host_connections / max_total_connections keys.
+        try {
+            $multi = new CurlMultiHandler([
+                'options' => [
+                    CURLMOPT_MAX_HOST_CONNECTIONS => $pool->maxConnsPerHost,
+                    CURLMOPT_MAXCONNECTS => $pool->maxConnsPerHost,
+                ],
+            ]);
+        } catch (\InvalidArgumentException) {
+            $multi = new CurlMultiHandler([
+                'max_host_connections' => $pool->maxConnsPerHost,
+                'max_total_connections' => $pool->maxConnsPerHost,
+                'options' => [
+                    CURLMOPT_MAXCONNECTS => $pool->maxConnsPerHost,
+                ],
+            ]);
+        }
         $defaultHandler = HandlerStack::create($multi);
 
         $curlOptions = [
@@ -283,8 +296,10 @@ class GuzzleHttpClient implements HttpClientInterface
                     $rawBody = $this->emitResponseReceived($e->getResponse(), $durationMs);
 
                     return $this->createStreamResponse($e->getResponse(), $e, $rawBody);
-                } catch (ConnectException $e) {
-                    throw new StreamTransportException($e->getMessage(), self::mapConnectErrorType($e), $e);
+                } catch (NetworkExceptionInterface $e) {
+                    // Guzzle 7: ConnectException. Guzzle 8: NetworkException and subclasses
+                    // (ConnectException, NetworkTimeoutException, …) for no-response failures.
+                    throw new StreamTransportException($e->getMessage(), self::mapNetworkErrorType($e), $e);
                 } catch (GuzzleException $e) {
                     throw new StreamTransportException($e->getMessage(), StreamTransportException::ERROR_TYPE_UNKNOWN, $e);
                 }
@@ -546,13 +561,25 @@ class GuzzleHttpClient implements HttpClientInterface
     }
 
     /**
-     * Map a Guzzle ConnectException to a canonical transport-error type.
-     * Uses libcurl errno when available; falls back to message inspection.
+     * Map a no-response network failure to a canonical transport-error type.
+     *
+     * Guzzle 8 removed ConnectException::getHandlerContext(). Prefer curl errno from
+     * the handler context when present (Guzzle 7), then from the message ("cURL error N"),
+     * then Guzzle 8 timeout subclasses, then message inspection.
      */
-    private static function mapConnectErrorType(ConnectException $e): string
+    private static function mapNetworkErrorType(\Throwable $e): string
     {
-        $ctx = $e->getHandlerContext();
-        $errno = is_array($ctx) && isset($ctx['errno']) ? (int) $ctx['errno'] : 0;
+        $errno = 0;
+        if (method_exists($e, 'getHandlerContext')) {
+            /** @var mixed $ctx */
+            $ctx = $e->getHandlerContext();
+            if (is_array($ctx) && isset($ctx['errno'])) {
+                $errno = (int) $ctx['errno'];
+            }
+        }
+        if ($errno === 0 && preg_match('/curl error (\d+)/i', $e->getMessage(), $matches) === 1) {
+            $errno = (int) $matches[1];
+        }
 
         switch ($errno) {
             case 6: // CURLE_COULDNT_RESOLVE_HOST
@@ -570,6 +597,14 @@ class GuzzleHttpClient implements HttpClientInterface
                 return StreamTransportException::ERROR_TYPE_TLS_HANDSHAKE_FAILED;
         }
 
+        // Guzzle 8 timeout subclasses (absent on Guzzle 7).
+        if (
+            (class_exists(\GuzzleHttp\Exception\ConnectTimeoutException::class) && $e instanceof \GuzzleHttp\Exception\ConnectTimeoutException)
+            || (class_exists(\GuzzleHttp\Exception\NetworkTimeoutException::class) && $e instanceof \GuzzleHttp\Exception\NetworkTimeoutException)
+        ) {
+            return StreamTransportException::ERROR_TYPE_TIMEOUT;
+        }
+
         $msg = strtolower($e->getMessage());
         if (str_contains($msg, 'could not resolve') || str_contains($msg, 'name or service not known')) {
             return StreamTransportException::ERROR_TYPE_DNS_FAILURE;
@@ -580,7 +615,14 @@ class GuzzleHttpClient implements HttpClientInterface
         if (str_contains($msg, 'ssl') || str_contains($msg, 'tls') || str_contains($msg, 'certificate')) {
             return StreamTransportException::ERROR_TYPE_TLS_HANDSHAKE_FAILED;
         }
-        if (str_contains($msg, 'refused') || str_contains($msg, 'reset') || str_contains($msg, 'closed')) {
+        if (
+            str_contains($msg, 'refused')
+            || str_contains($msg, 'reset')
+            || str_contains($msg, 'closed')
+            || str_contains($msg, 'failed to connect')
+            || str_contains($msg, 'could not connect')
+            || str_contains($msg, "couldn't connect")
+        ) {
             return StreamTransportException::ERROR_TYPE_CONNECTION_RESET;
         }
 
