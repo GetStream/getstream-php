@@ -189,4 +189,96 @@ class ClientTest extends TestCase
 
         $client->makeRequest('DELETE', '/api/v2/feeds/users/u1/interests', ['tags' => ['rock', 'rock, pop']]);
     }
+
+    /**
+     * @test
+     */
+    public function uploadFileRejectsLocalFilesystemPathInBase64Field(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::never())->method('request');
+        $this->expectException(StreamException::class);
+        $this->expectExceptionMessage('Failed to decode base64 file data');
+
+        $client->uploadFile(new \GetStream\GeneratedModels\FileUploadRequest(file: __FILE__));
+    }
+
+    /**
+     * @test
+     */
+    public function uploadImageRejectsLocalFilesystemPathInBase64Field(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::never())->method('request');
+        $this->expectException(StreamException::class);
+        $this->expectExceptionMessage('Failed to decode base64 file data');
+
+        $client->uploadImage(new \GetStream\GeneratedModels\ImageUploadRequest(file: __FILE__));
+    }
+
+    /**
+     * @test
+     */
+    public function uploadFileDecodesValidBase64Payload(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->mockHttpClient->expects(self::once())
+            ->method('request')
+            ->with(
+                'POST',
+                self::stringContains('/api/v2/uploads/file?api_key=env-key'),
+                self::isType('array'),
+                self::callback(static function (mixed $multipart): bool {
+                    return is_array($multipart)
+                        && isset($multipart[0]['contents'])
+                        && $multipart[0]['contents'] === 'hello world';
+                })
+            )
+            ->willReturn(new StreamResponse(200, [], ['file' => 'https://cdn.example/file.pdf']));
+
+        $client->uploadFile(new \GetStream\GeneratedModels\FileUploadRequest(file: base64_encode('hello world')));
+    }
+
+    /**
+     * @test
+     */
+    public function uploadFileFromPathExplicitlyReadsLocalFile(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $tmpFile = tempnam(sys_get_temp_dir(), 'stream-upload-test-');
+        self::assertIsString($tmpFile);
+        file_put_contents($tmpFile, 'local-file-bytes');
+
+        try {
+            $this->mockHttpClient->expects(self::once())
+                ->method('request')
+                ->with(
+                    'POST',
+                    self::stringContains('/api/v2/uploads/file?api_key=env-key'),
+                    self::isType('array'),
+                    self::callback(static function (mixed $multipart) use ($tmpFile): bool {
+                        return is_array($multipart)
+                            && ($multipart[0]['contents'] ?? null) === 'local-file-bytes'
+                            && ($multipart[0]['filename'] ?? null) === basename($tmpFile);
+                    })
+                )
+                ->willReturn(new StreamResponse(200, [], ['file' => 'https://cdn.example/test']));
+
+            $client->uploadFileFromPath($tmpFile);
+        } finally {
+            @unlink($tmpFile);
+        }
+    }
 }
