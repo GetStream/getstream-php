@@ -17,6 +17,7 @@ class AIVideoConfigResponse extends BaseModel
         /** @var array<BodyguardRule>|null */
         #[ArrayOf(BodyguardRule::class)]
         public ?array $ocrSeverityRules = null,
+        public ?AIAudioConfigResponse $audioConfig = null,
     ) {
     }
 

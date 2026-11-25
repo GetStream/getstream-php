@@ -7,6 +7,7 @@ class MarkChannelsReadRequest extends BaseModel
 {
     public function __construct(
         public ?array $readByChannel = null, // Map of channel ID to last read message ID
+        public ?object $filterConditions = null, // Filter conditions to apply to the query
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {
