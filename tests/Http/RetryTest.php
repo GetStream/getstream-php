@@ -163,7 +163,7 @@ final class RetryTest extends TestCase
         $retries = self::retryRecords($logger);
         $this->assertCount(1, $retries);
         // ConnectException message inspection (no handler-context errno on the mock):
-        // "reset" matches the connection_reset branch in mapConnectErrorType().
+        // "reset" matches the connection_reset branch in mapNetworkErrorType().
         $this->assertSame(StreamTransportException::ERROR_TYPE_CONNECTION_RESET, $retries[0]['context']['error.type']);
         $this->assertSame(1, $retries[0]['context']['retry.attempt']);
     }

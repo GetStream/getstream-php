@@ -71,8 +71,10 @@ class GuzzleHttpClientPoolTest extends TestCase
     public function defaultHandlerIsPersistentCurlMultiHandler(): void
     {
         // When no handler is supplied, the default stack must wrap a CurlMultiHandler
-        // so the per-host connection cap (CURLMOPT_MAX_HOST_CONNECTIONS) is real
-        // across requests in long-running runtimes.
+        // so the per-host connection cap is real across requests in long-running
+        // runtimes. Guzzle 8 applies max_host_connections / max_total_connections as
+        // named constructor options (raw CURLMOPT_MAX_*_CONNECTIONS in `options` is
+        // rejected); both Guzzle 7 and 8 expose the resolved caps on `$options`.
         $sdk = new GuzzleHttpClient([], 0, new PoolConfig());
 
         $clientProp = (new \ReflectionObject($sdk))->getProperty('client');
@@ -93,10 +95,14 @@ class GuzzleHttpClientPoolTest extends TestCase
 
         $optionsProp = (new \ReflectionObject($multi))->getProperty('options');
         $optionsProp->setAccessible(true);
-        self::assertSame(
-            [CURLMOPT_MAX_HOST_CONNECTIONS => 100, CURLMOPT_MAXCONNECTS => 100],
-            $optionsProp->getValue($multi),
-        );
+        /** @var array<int, mixed> $options */
+        $options = $optionsProp->getValue($multi);
+        self::assertSame(100, $options[CURLMOPT_MAX_HOST_CONNECTIONS] ?? null);
+        self::assertSame(100, $options[CURLMOPT_MAXCONNECTS] ?? null);
+        // Guzzle 8 also applies max_total_connections via the named constructor option.
+        if (defined('CURLMOPT_MAX_TOTAL_CONNECTIONS') && array_key_exists(\constant('CURLMOPT_MAX_TOTAL_CONNECTIONS'), $options)) {
+            self::assertSame(100, $options[\constant('CURLMOPT_MAX_TOTAL_CONNECTIONS')]);
+        }
     }
 
     /** @test */
