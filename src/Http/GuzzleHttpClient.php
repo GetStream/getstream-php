@@ -301,7 +301,15 @@ class GuzzleHttpClient implements HttpClientInterface
                     // (ConnectException, NetworkTimeoutException, …) for no-response failures.
                     throw new StreamTransportException($e->getMessage(), self::mapNetworkErrorType($e), $e);
                 } catch (GuzzleException $e) {
-                    throw new StreamTransportException($e->getMessage(), StreamTransportException::ERROR_TYPE_UNKNOWN, $e);
+                    // Guzzle 8 reports a timeout after the response headers arrived as
+                    // ResponseTimeoutException, which is not a NetworkExceptionInterface.
+                    // Guzzle 7 reports the same failure as ConnectException (timeout above).
+                    $errorType = class_exists(\GuzzleHttp\Exception\ResponseTimeoutException::class)
+                        && $e instanceof \GuzzleHttp\Exception\ResponseTimeoutException
+                        ? StreamTransportException::ERROR_TYPE_TIMEOUT
+                        : StreamTransportException::ERROR_TYPE_UNKNOWN;
+
+                    throw new StreamTransportException($e->getMessage(), $errorType, $e);
                 }
 
                 $rawBody = $this->emitResponseReceived($response, self::elapsedMs($start));

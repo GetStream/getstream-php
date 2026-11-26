@@ -356,6 +356,32 @@ class ErrorHandlingTest extends TestCase
     }
 
     /** @test */
+    public function guzzle8ResponseTimeoutMapsToTimeoutErrorType(): void
+    {
+        if (!class_exists(\GuzzleHttp\Exception\ResponseTimeoutException::class)) {
+            $this->markTestSkipped('Guzzle 8 ResponseTimeoutException is not available');
+        }
+
+        $req = new Request('GET', 'https://example.invalid/');
+        // Guzzle 8 raises ResponseTimeoutException when the transfer times out after the
+        // response headers arrived. It is not a NetworkExceptionInterface.
+        $exc = new \GuzzleHttp\Exception\ResponseTimeoutException(
+            'cURL error 28: Operation timed out after 1001 milliseconds with 5 out of 100 bytes received',
+            $req,
+            new GuzzleResponse(200),
+        );
+        $client = $this->makeClient([$exc]);
+
+        try {
+            $client->request('GET', 'https://example.invalid/');
+            self::fail('expected StreamTransportException');
+        } catch (StreamTransportException $e) {
+            self::assertSame(StreamTransportException::ERROR_TYPE_TIMEOUT, $e->getErrorType());
+            self::assertInstanceOf(\GuzzleHttp\Exception\ResponseTimeoutException::class, $e->getPrevious());
+        }
+    }
+
+    /** @test */
     public function streamRateLimitExceptionDirectConstructionPreservesCauseChain(): void
     {
         $previous = new \RuntimeException('underlying parse error');
