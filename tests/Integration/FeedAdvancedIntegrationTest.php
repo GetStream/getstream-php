@@ -80,14 +80,14 @@ class FeedAdvancedIntegrationTest extends TestCase
     {
         foreach ($this->createdCommentIds as $commentId) {
             try {
-                $this->feedsV3Client->deleteComment($commentId, true, false);
+                $this->feedsV3Client->deleteComment($commentId, hardDelete: true, deleteNotificationActivity: false);
             } catch (\Exception $e) {
                 // best-effort
             }
         }
         foreach ($this->createdActivityIds as $activityId) {
             try {
-                $this->feedsV3Client->deleteActivity($activityId, true, false);
+                $this->feedsV3Client->deleteActivity($activityId, hardDelete: true, deleteNotificationActivity: false);
             } catch (\Exception $e) {
                 // best-effort
             }
@@ -145,7 +145,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         $this->testFeed->pinActivity($activityId, new GeneratedModels\PinActivityRequest(userID: $this->testUserId));
 
         // snippet-start: UnpinActivity
-        $response = $this->testFeed->unpinActivity($activityId, false, $this->testUserId);
+        $response = $this->testFeed->unpinActivity($activityId, enrichOwnFields: false, userID: $this->testUserId);
         // snippet-end: UnpinActivity
 
         $this->assertResponseSuccess($response, 'unpin activity');
@@ -182,7 +182,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         // snippet-start: DeleteBookmark
         $bookmarkData = $bookmarkResponse->getData();
         $folderId = $bookmarkData->bookmark->folder->id;
-        $response = $this->feedsV3Client->deleteBookmark($activityId, $folderId, $this->testUserId);
+        $response = $this->feedsV3Client->deleteBookmark($activityId, folderID: $folderId, userID: $this->testUserId);
         // snippet-end: DeleteBookmark
 
         $this->assertResponseSuccess($response, 'delete bookmark');
@@ -209,7 +209,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         );
 
         // snippet-start: DeleteActivityReaction
-        $response = $this->feedsV3Client->deleteActivityReaction($activityId, 'like', false, $this->testUserId);
+        $response = $this->feedsV3Client->deleteActivityReaction($activityId, 'like', deleteNotificationActivity: false, userID: $this->testUserId);
         // snippet-end: DeleteActivityReaction
 
         $this->assertResponseSuccess($response, 'delete reaction');
@@ -240,7 +240,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         $commentId = $commentResponse->getData()->comment->id ?? 'comment-id';
 
         // snippet-start: DeleteComment
-        $response = $this->feedsV3Client->deleteComment($commentId, false, false);
+        $response = $this->feedsV3Client->deleteComment($commentId, hardDelete: false, deleteNotificationActivity: false);
         // snippet-end: DeleteComment
 
         $this->assertResponseSuccess($response, 'delete comment');
@@ -267,9 +267,9 @@ class FeedAdvancedIntegrationTest extends TestCase
             $response = $this->feedsV3Client->unfollow(
                 self::USER_FEED_TYPE . $this->testUserId,
                 self::USER_FEED_TYPE . $this->testUserId2,
-                false,
-                false,
-                false
+                deleteNotificationActivity: false,
+                keepHistory: false,
+                enrichOwnFields: false
             );
             // snippet-end: Unfollow
 
@@ -301,7 +301,7 @@ class FeedAdvancedIntegrationTest extends TestCase
 
         foreach ($activitiesToDelete as $activityId) {
             // snippet-start: DeleteActivity
-            $response = $this->feedsV3Client->deleteActivity($activityId, false, false);
+            $response = $this->feedsV3Client->deleteActivity($activityId, hardDelete: false, deleteNotificationActivity: false);
             // snippet-end: DeleteActivity
 
             $this->assertResponseSuccess($response, 'delete activity');
@@ -675,7 +675,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         $feedGroupId = 'test-feed-group-' . substr(uniqid(), -8);
 
         // snippet-start: ListFeedGroups
-        $listResponse = $this->feedsV3Client->listFeedGroups(false);
+        $listResponse = $this->feedsV3Client->listFeedGroups(includeSoftDeleted: false);
         // snippet-end: ListFeedGroups
         $this->assertResponseSuccess($listResponse, 'list feed groups');
 
@@ -688,7 +688,7 @@ class FeedAdvancedIntegrationTest extends TestCase
         self::assertSame($feedGroupId, $createResponse->getData()->feedGroup->id);
 
         // snippet-start: GetFeedGroup
-        $getResponse = $this->feedsV3Client->getFeedGroup('foryou', false);
+        $getResponse = $this->feedsV3Client->getFeedGroup('foryou', includeSoftDeleted: false);
         // snippet-end: GetFeedGroup
         $this->assertResponseSuccess($getResponse, 'get feed group');
 

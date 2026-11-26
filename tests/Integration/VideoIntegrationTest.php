@@ -334,7 +334,7 @@ class VideoIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($blockResp, 'block user');
 
         // Verify blocked
-        $getResp = $this->client->getBlockedUsers($userIDs[0]);
+        $getResp = $this->client->getBlockedUsers(userID: $userIDs[0]);
         $this->assertResponseSuccess($getResp, 'get blocked users');
         $blocks = $getResp->getData()->blocks;
         self::assertCount(1, $blocks);
@@ -349,7 +349,7 @@ class VideoIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($unblockResp, 'unblock user');
 
         // Verify empty
-        $getResp2 = $this->client->getBlockedUsers($userIDs[0]);
+        $getResp2 = $this->client->getBlockedUsers(userID: $userIDs[0]);
         $this->assertResponseSuccess($getResp2, 'get blocked users after unblock');
         self::assertEmpty($getResp2->getData()->blocks);
     }

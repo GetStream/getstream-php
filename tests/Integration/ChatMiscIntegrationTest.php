@@ -46,7 +46,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
         }
 
         // List devices
-        $listResp = $this->client->listDevices($userID);
+        $listResp = $this->client->listDevices(userID: $userID);
         $this->assertResponseSuccess($listResp, 'list devices');
 
         $found = false;
@@ -59,11 +59,11 @@ class ChatMiscIntegrationTest extends ChatTestCase
         self::assertTrue($found, 'Created device should appear in list');
 
         // Delete device
-        $delResp = $this->client->deleteDevice($deviceID, $userID);
+        $delResp = $this->client->deleteDevice($deviceID, userID: $userID);
         $this->assertResponseSuccess($delResp, 'delete device');
 
         // Verify deleted
-        $listResp2 = $this->client->listDevices($userID);
+        $listResp2 = $this->client->listDevices(userID: $userID);
         $this->assertResponseSuccess($listResp2, 'list devices after delete');
 
         foreach ($listResp2->getData()->devices ?? [] as $device) {
@@ -94,7 +94,7 @@ class ChatMiscIntegrationTest extends ChatTestCase
             sleep(2);
 
             // List blocklists and verify found
-            $listResp = $this->client->listBlockLists('');
+            $listResp = $this->client->listBlockLists(team: '');
             $this->assertResponseSuccess($listResp, 'list blocklists');
 
             $found = false;
@@ -106,17 +106,17 @@ class ChatMiscIntegrationTest extends ChatTestCase
             self::assertTrue($found, 'Created blocklist should appear in list');
 
             // Get blocklist
-            $getResp = $this->client->getBlockList($blocklistName, '');
+            $getResp = $this->client->getBlockList($blocklistName, team: '');
             $this->assertResponseSuccess($getResp, 'get blocklist');
             self::assertSame($blocklistName, $getResp->getData()->blocklist->name);
 
             // Delete blocklist
-            $delResp = $this->client->deleteBlockList($blocklistName, '');
+            $delResp = $this->client->deleteBlockList($blocklistName, team: '');
             $this->assertResponseSuccess($delResp, 'delete blocklist');
         } catch (\Exception $e) {
             // Clean up on failure
             try {
-                $this->client->deleteBlockList($blocklistName, '');
+                $this->client->deleteBlockList($blocklistName, team: '');
             } catch (\Exception $ignore) {
             }
 
