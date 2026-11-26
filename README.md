@@ -155,8 +155,8 @@ require_once 'vendor/autoload.php';
 
 use GetStream\ClientBuilder;
 
-$client = ClientBuilder::fromEnv()->build();
-$feed = $client->feed('user', 'john-doe');
+$feedsClient = ClientBuilder::fromEnv()->buildFeedsClient();
+$feed = $feedsClient->feed('user', 'john-doe');
 ```
 
 ### Working with Activities
@@ -172,16 +172,20 @@ $activity = new AddActivityRequest(
     text: 'Hello World!'
 );
 
-$response = $client->addActivity($activity);
+$response = $feedsClient->addActivity($activity);
 
-// Access response data directly
-$createdActivity = $response->activity;
+// Access the typed response data
+$createdActivity = $response->getData()->activity;
 echo "Activity ID: " . $createdActivity->id;
 
 // Or access HTTP metadata
 echo "Status: " . $response->getStatusCode();
-echo "Duration: " . $response->duration;
 ```
+
+## Method arguments
+
+> **Note:** Pass required arguments and the request object in order, and optional query parameters as **named arguments** (e.g. `$feedsClient->deleteActivity('activity-id', hardDelete: true)`).
+> A new query parameter can appear anywhere among the optional ones, so passing them by position may send a value to the wrong parameter after an SDK update.
 
 ## Models
 
@@ -194,8 +198,8 @@ Generated models automatically handle JSON parsing and serialization:
 
 ```php
 // Models parse JSON based on constructor types
-$response = $client->addActivity($request);
-$activity = $response->activity;  // Fully typed object
+$response = $feedsClient->addActivity($request);
+$activity = $response->getData()->activity;  // Fully typed object
 ```
 
 ### Custom JSON Key Mapping
@@ -216,14 +220,13 @@ class CustomModel extends BaseModel {
 ### Response Access
 
 ```php
-$response = $client->addActivity($request);
+$response = $feedsClient->addActivity($request);
 
-// Direct access
-$activity = $response->activity;
+// Typed response data
+$activity = $response->getData()->activity;
 
 // HTTP metadata
 $statusCode = $response->getStatusCode();
-$duration = $response->duration;
 ```
 
 ## Code Generation

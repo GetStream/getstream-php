@@ -42,13 +42,13 @@ $id = $campaign->id;
 // v12
 $client->getActivity($id, null, null, $userID);
 
-// v13
-$client->getActivity($id, null, null, null, $userID);
+// v13, by name so a new optional argument cannot shift it again
+$client->getActivity($id, userID: $userID);
 ```
 
 `getActivity($id)` with no further arguments is unchanged.
 
-These gained an optional argument at the end, so existing positional calls stay valid:
+These gained an optional argument at the end, so existing positional calls stay valid. Pass optional arguments by name anyway, so the next new one cannot shift them:
 
 - `unreadCounts($userID, $includeLargeChannels = null)`
 - `getPollOption($pollID, $optionID, $userID = null)`

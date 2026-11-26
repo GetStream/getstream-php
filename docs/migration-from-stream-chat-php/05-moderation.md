@@ -174,7 +174,7 @@ $response = $client->unban(
 
 **Key differences:**
 - Old SDK: `unbanUser($targetId)` with optional options array
-- New SDK: `unban()` requires `targetUserID`, `channelCid` (empty string for app-level), `createdBy`, and an `UnbanRequest` object
+- New SDK: `unban()` requires an `UnbanRequest` object and `targetUserID`; `channelCid` (omit or empty for app-level) and `createdBy` are optional query parameters, passed by name
 - The new SDK requires explicitly specifying who is performing the unban (`createdBy`)
 
 ### Unbanning a User (Channel-level)
@@ -394,10 +394,10 @@ $response = $client->unmute(new GeneratedModels\UnmuteRequest(
 | Demote moderators | `$channel->demoteModerators($userIds)` | `$client->updateChannel($type, $id, new UpdateChannelRequest(demoteModerators: [...]))` |
 | Ban user (app) | `$client->banUser($targetId, $opts)` | `$client->ban(new BanRequest(targetUserID: ..., ...))` |
 | Ban user (channel) | `$channel->banUser($targetId, $opts)` | `$client->ban(new BanRequest(targetUserID: ..., channelCid: ..., ...))` |
-| Unban user (app) | `$client->unbanUser($targetId)` | `$client->unban($targetUserID, '', $createdBy, new UnbanRequest())` |
-| Unban user (channel) | `$channel->unbanUser($targetId)` | `$client->unban($targetUserID, $channelCid, $createdBy, new UnbanRequest())` |
+| Unban user (app) | `$client->unbanUser($targetId)` | `$client->unban(new UnbanRequest(), $targetUserID, createdBy: $createdBy)` |
+| Unban user (channel) | `$channel->unbanUser($targetId)` | `$client->unban(new UnbanRequest(), $targetUserID, channelCid: $channelCid, createdBy: $createdBy)` |
 | Shadow ban | `$client->shadowBan($targetId, $opts)` | `$client->ban(new BanRequest(targetUserID: ..., shadow: true, ...))` |
-| Remove shadow ban | `$client->removeShadowBan($targetId, $opts)` | `$client->unban($targetUserID, '', $createdBy, new UnbanRequest())` |
+| Remove shadow ban | `$client->removeShadowBan($targetId, $opts)` | `$client->unban(new UnbanRequest(), $targetUserID, createdBy: $createdBy)` |
 | Query banned users | `$client->queryBannedUsers($filter, $opts)` | `$client->queryBannedUsers(new QueryBannedUsersPayload(...))` |
 | Mute user | `$client->muteUser($targetId, $userId)` | `$client->mute(new MuteRequest(targetIds: [...], userID: ...))` |
 | Unmute user | `$client->unmuteUser($targetId, $userId)` | `$client->unmute(new UnmuteRequest(targetIds: [...], userID: ...))` |
