@@ -955,7 +955,7 @@ trait CommonTrait
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UpsertPushTemplateResponse::class);
     }
     /**
-     * Get rate limits usage and quotas
+     * Get rate limits usage and quotas, and the query budget status of budgeted endpoints
      *
      * @param ?bool $serverSide
      * @param ?bool $android

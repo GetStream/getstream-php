@@ -27,6 +27,7 @@ class GetRateLimitsResponse extends BaseModel
         /** @var array<string, LimitInfoResponse>|null */
         #[MapOf(LimitInfoResponse::class)]
         public ?array $unityConsole = null, // Map of endpoint rate limits for the Unity console platform
+        public ?BudgetsResponse $budgets = null,
         public ?string $duration = null,
     ) {
     }
