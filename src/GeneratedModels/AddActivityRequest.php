@@ -39,6 +39,7 @@ class AddActivityRequest extends BaseModel
         public ?bool $forceModeration = null,
         public ?bool $createUsers = null,
         public ?bool $skipExisting = null,
+        public ?bool $createSystemFeeds = null,
     ) {
     }
 
