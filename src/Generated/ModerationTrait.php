@@ -948,10 +948,11 @@ trait ModerationTrait
      * @param ?string $channelCid
      * @param ?string $createdBy
      * @param ?bool $removeFutureChannelsBan
+     * @param ?string $channelType
      * @return StreamResponse<GeneratedModels\UnbanResponse>
      * @throws StreamException
      */
-    public function unban(GeneratedModels\UnbanRequest $requestData, string $targetUserID, ?string $channelCid = null, ?string $createdBy = null, ?bool $removeFutureChannelsBan = null): StreamResponse {
+    public function unban(GeneratedModels\UnbanRequest $requestData, string $targetUserID, ?string $channelCid = null, ?string $createdBy = null, ?bool $removeFutureChannelsBan = null, ?string $channelType = null): StreamResponse {
         $path = '/api/v2/moderation/unban';
 
         $queryParams = [];
@@ -966,6 +967,9 @@ trait ModerationTrait
         }
         if ($removeFutureChannelsBan !== null) {
             $queryParams['remove_future_channels_ban'] = $removeFutureChannelsBan;
+        }
+        if ($channelType !== null) {
+            $queryParams['channel_type'] = $channelType;
         }
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\UnbanResponse::class);
     }

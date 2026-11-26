@@ -128,7 +128,7 @@ class ChatUserIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($response, 'block user');
 
         // Verify bob is in alice's blocked list
-        $blockedResp = $this->client->getBlockedUsers($alice);
+        $blockedResp = $this->client->getBlockedUsers(userID: $alice);
         $this->assertResponseSuccess($blockedResp, 'get blocked users');
         $blocks = $blockedResp->getData()->blocks;
         self::assertNotNull($blocks);
@@ -143,7 +143,7 @@ class ChatUserIntegrationTest extends ChatTestCase
         $this->assertResponseSuccess($response, 'unblock user');
 
         // Verify bob is no longer blocked
-        $blockedResp = $this->client->getBlockedUsers($alice);
+        $blockedResp = $this->client->getBlockedUsers(userID: $alice);
         $this->assertResponseSuccess($blockedResp, 'get blocked users after unblock');
         $blocks = $blockedResp->getData()->blocks ?? [];
         $blockedIDs = array_map(static fn ($b) => $b->blockedUserID, $blocks);
