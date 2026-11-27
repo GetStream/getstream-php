@@ -12,6 +12,7 @@ class ActivityFeedbackRequest extends BaseModel
         public ?bool $showLess = null, // Whether to show less content like this
         public ?bool $hide = null, // Whether to hide this activity
         public ?bool $showMore = null, // Whether to show more content like this
+        public ?string $requestID = null, // From the feed response; attributes the hide to the feed's view
         public ?string $userID = null,
         public ?UserRequest $user = null, // User request object
     ) {

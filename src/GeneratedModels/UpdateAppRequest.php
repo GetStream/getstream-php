@@ -71,6 +71,7 @@ class UpdateAppRequest extends BaseModel
         public ?bool $twoWayBlockEffectEnabled = null,
         public ?AgentReviewSettingsPayload $agentReview = null, // Settings for the moderation agent reviewer, which reviews moderation outcomes and proposes or applies an action.
         public ?MessageMarksConfig $messageMarks = null, // The app's message marks policy: the mark types it defines or overrides, and the privacy switch. The channel type's mark_types says which of them are on in its channels.
+        public ?MessageSchemaSettings $messageSchema = null, // The app's message schema settings: how strictly messages and reactions are checked, and the JSON Schemas they are checked against.
     ) {
     }
 

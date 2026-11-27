@@ -11,6 +11,8 @@ class ForYouConfig extends BaseModel
         public ?ForYouExplorationConfig $exploration = null,
         public ?ForYouDwellConfig $dwell = null,
         public ?bool $trending = null, // Tracks trending tags and turns on the topic_trend ranking variable (0-1, the highest trend over a post's interest tags). Requires enabled
+        public ?bool $analytics = null, // Counts engagement per feed view and experiment. Requires enabled and a plan with activity metrics
+        public ?ForYouExperimentConfig $experiment = null,
     ) {
     }
 
