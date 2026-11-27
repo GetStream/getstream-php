@@ -78,6 +78,7 @@ class SearchResultMessage extends BaseModel
         /** @var array<string, ChannelMemberPartialResponse>|null */
         #[MapOf(ChannelMemberPartialResponse::class)]
         public ?array $mentionedChannelMembers = null,
+        public ?UserResponse $deletedBy = null, // User response object
         public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }

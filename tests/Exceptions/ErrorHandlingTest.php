@@ -224,14 +224,30 @@ class ErrorHandlingTest extends TestCase
         self::assertCount(1, $history, 'retries are opt-in: default RetryConfig performs exactly one attempt');
     }
 
+    /**
+     * Build a ConnectException compatible with Guzzle 7 (optional handler context)
+     * and Guzzle 8 (no handler-context constructor argument).
+     *
+     * @param array<string, mixed> $handlerContext
+     */
+    private function makeConnectException(string $message, Request $req, array $handlerContext = []): ConnectException
+    {
+        $ref = new \ReflectionClass(ConnectException::class);
+        $params = $ref->getConstructor()?->getNumberOfParameters() ?? 2;
+        if ($params >= 4) {
+            return new ConnectException($message, $req, null, $handlerContext);
+        }
+
+        return new ConnectException($message, $req);
+    }
+
     /** @test */
     public function connectionResetMapsToConnectionResetErrorType(): void
     {
         $req = new Request('GET', 'https://example.invalid/');
-        $exc = new ConnectException(
+        $exc = $this->makeConnectException(
             'cURL error 7: Failed to connect',
             $req,
-            null,
             ['errno' => 7],
         );
         $client = $this->makeClient([$exc]);
@@ -249,10 +265,9 @@ class ErrorHandlingTest extends TestCase
     public function dnsFailureMapsToDnsFailureErrorType(): void
     {
         $req = new Request('GET', 'https://example.invalid/');
-        $exc = new ConnectException(
+        $exc = $this->makeConnectException(
             'cURL error 6: Could not resolve host',
             $req,
-            null,
             ['errno' => 6],
         );
         $client = $this->makeClient([$exc]);
@@ -269,10 +284,9 @@ class ErrorHandlingTest extends TestCase
     public function timeoutMapsToTimeoutErrorType(): void
     {
         $req = new Request('GET', 'https://example.invalid/');
-        $exc = new ConnectException(
+        $exc = $this->makeConnectException(
             'cURL error 28: Operation timed out',
             $req,
-            null,
             ['errno' => 28],
         );
         $client = $this->makeClient([$exc]);
@@ -289,10 +303,9 @@ class ErrorHandlingTest extends TestCase
     public function tlsFailureMapsToTlsHandshakeFailedErrorType(): void
     {
         $req = new Request('GET', 'https://example.invalid/');
-        $exc = new ConnectException(
+        $exc = $this->makeConnectException(
             'cURL error 35: SSL connect error',
             $req,
-            null,
             ['errno' => 35],
         );
         $client = $this->makeClient([$exc]);
@@ -309,7 +322,7 @@ class ErrorHandlingTest extends TestCase
     public function unknownTransportErrorMapsToUnknownErrorType(): void
     {
         $req = new Request('GET', 'https://example.invalid/');
-        $exc = new ConnectException('something weird', $req, null, []);
+        $exc = $this->makeConnectException('something weird', $req);
         $client = $this->makeClient([$exc]);
 
         try {
@@ -318,6 +331,53 @@ class ErrorHandlingTest extends TestCase
         } catch (StreamTransportException $e) {
             self::assertSame(StreamTransportException::ERROR_TYPE_UNKNOWN, $e->getErrorType());
             self::assertInstanceOf(StreamException::class, $e);
+        }
+    }
+
+    /** @test */
+    public function guzzle8NetworkExceptionMapsSendRecvToConnectionReset(): void
+    {
+        if (!class_exists(\GuzzleHttp\Exception\NetworkException::class)) {
+            $this->markTestSkipped('Guzzle 8 NetworkException is not available');
+        }
+
+        $req = new Request('GET', 'https://example.invalid/');
+        // Guzzle 8 classifies some send/recv failures as NetworkException rather than ConnectException.
+        $exc = new \GuzzleHttp\Exception\NetworkException('cURL error 56: Failure when receiving data', $req);
+        $client = $this->makeClient([$exc]);
+
+        try {
+            $client->request('GET', 'https://example.invalid/');
+            self::fail('expected StreamTransportException');
+        } catch (StreamTransportException $e) {
+            self::assertSame(StreamTransportException::ERROR_TYPE_CONNECTION_RESET, $e->getErrorType());
+            self::assertInstanceOf(\GuzzleHttp\Exception\NetworkException::class, $e->getPrevious());
+        }
+    }
+
+    /** @test */
+    public function guzzle8ResponseTimeoutMapsToTimeoutErrorType(): void
+    {
+        if (!class_exists(\GuzzleHttp\Exception\ResponseTimeoutException::class)) {
+            $this->markTestSkipped('Guzzle 8 ResponseTimeoutException is not available');
+        }
+
+        $req = new Request('GET', 'https://example.invalid/');
+        // Guzzle 8 raises ResponseTimeoutException when the transfer times out after the
+        // response headers arrived. It is not a NetworkExceptionInterface.
+        $exc = new \GuzzleHttp\Exception\ResponseTimeoutException(
+            'cURL error 28: Operation timed out after 1001 milliseconds with 5 out of 100 bytes received',
+            $req,
+            new GuzzleResponse(200),
+        );
+        $client = $this->makeClient([$exc]);
+
+        try {
+            $client->request('GET', 'https://example.invalid/');
+            self::fail('expected StreamTransportException');
+        } catch (StreamTransportException $e) {
+            self::assertSame(StreamTransportException::ERROR_TYPE_TIMEOUT, $e->getErrorType());
+            self::assertInstanceOf(\GuzzleHttp\Exception\ResponseTimeoutException::class, $e->getPrevious());
         }
     }
 

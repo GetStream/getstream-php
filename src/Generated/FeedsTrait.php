@@ -2025,7 +2025,7 @@ trait FeedsTrait
         return StreamResponse::fromJson($this->makeRequest('GET', $path, $queryParams, $requestData), GeneratedModels\GetFeedsRetentionPolicyResponse::class);
     }
     /**
-     * Creates or updates a feeds retention policy for the app (an app may have multiple, each scoped to feed groups). Server-side only.
+     * Creates or updates a feeds retention policy for the app (an app may have multiple, each scoped to feed groups and, except old-activities, optionally narrowed by filter_conditions). Server-side only.
      *
      * @param GeneratedModels\SetFeedsRetentionPolicyRequest $requestData
      * @return StreamResponse<GeneratedModels\SetFeedsRetentionPolicyResponse>
@@ -2164,6 +2164,24 @@ trait FeedsTrait
         $queryParams = [];
         $requestData = null;
         return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\PublishScheduledActivityNowResponse::class);
+    }
+    /**
+     * Retrieve For You engagement statistics (reads, users, impressions, clicks, dwell, hides) per view and experiment, aggregated by day.
+     * users.total counts user-days.
+     * Requires a paid Feeds plan (403 otherwise).
+     * limit is the maximum number of series (one per group, view and experiment), not rows; it never cuts a series. A metric's days with no events are omitted from its daily values.
+     * This endpoint is not paginated: it is a bounded report over one group's views and experiments for at most 396 days, and limit x days must not exceed 10,000 (the default limit always fits).
+     * This endpoint is server-side only.
+     *
+     * @param GeneratedModels\QueryFeedsEngagementStatsRequest $requestData
+     * @return StreamResponse<GeneratedModels\QueryFeedsEngagementStatsResponse>
+     * @throws StreamException
+     */
+    public function queryFeedsEngagementStats(GeneratedModels\QueryFeedsEngagementStatsRequest $requestData): StreamResponse {
+        $path = '/api/v2/feeds/stats/engagement';
+
+        $queryParams = [];
+        return StreamResponse::fromJson($this->makeRequest('POST', $path, $queryParams, $requestData), GeneratedModels\QueryFeedsEngagementStatsResponse::class);
     }
     /**
      * Retrieve usage statistics for feeds including activity count, follow count, and API request count.

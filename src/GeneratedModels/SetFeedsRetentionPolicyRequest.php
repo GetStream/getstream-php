@@ -9,6 +9,7 @@ class SetFeedsRetentionPolicyRequest extends BaseModel
         public ?string $policy = null,
         public ?int $maxAgeHours = null,
         public ?array $feedGroups = null,
+        public ?object $filterConditions = null, // Limits deletion to activities matching every condition; expires_at supports only $exists: true. Not allowed on old-activities. Omitted or null keeps the stored filter; {} removes it.
         public ?bool $enabled = null,
     ) {
     }
