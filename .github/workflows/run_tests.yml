@@ -49,3 +49,28 @@ jobs:
         run: |
           make lint
           make test-unit
+
+  # composer.lock pins Guzzle 7, so the matrix above never runs Guzzle 8. This leg
+  # resolves the newest Guzzle 8 and runs the same lint and unit lane against it.
+  test-guzzle-8:
+    name: 🧪 Test & lint (8.3, Guzzle 8)
+    runs-on: { group: github-public-amd64 }
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: curl, json
+          tools: composer:v2
+
+      - name: Install dependencies with Guzzle 8
+        run: composer update "guzzlehttp/guzzle:^8.0" --with-all-dependencies --prefer-dist --no-interaction
+
+      - name: Lint & unit tests
+        run: |
+          make lint
+          make test-unit

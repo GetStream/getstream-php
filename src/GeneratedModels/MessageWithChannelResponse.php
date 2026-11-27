@@ -81,6 +81,7 @@ class MessageWithChannelResponse extends BaseModel
         /** @var array<string, ChannelMemberPartialResponse>|null */
         #[MapOf(ChannelMemberPartialResponse::class)]
         public ?array $mentionedChannelMembers = null, // Channel member data for the users mentioned in the message, keyed by user id. Only present when the app has member custom on mentioned users enabled, and only for the first two mentioned users of each message
+        public ?UserResponse $deletedBy = null, // User response object
         public ?ChannelResponse $channel = null, // Represents channel in chat
     ) {
     }
