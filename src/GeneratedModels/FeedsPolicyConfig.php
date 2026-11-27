@@ -8,6 +8,7 @@ class FeedsPolicyConfig extends BaseModel
     public function __construct(
         public ?int $maxAgeHours = null,
         public ?array $feedGroups = null,
+        public ?object $filterConditions = null, // Activities must match every condition to be deleted.
     ) {
     }
 
