@@ -49,8 +49,8 @@ This guide explains how to set up automatic publishing to Packagist using GitHub
 Releases are driven by [release-please](https://github.com/googleapis/release-please).
 The Releases section of `README.md` is the reference; the short version is that merging
 a PR with a conventional title updates a bot-authored Release PR, and merging that
-Release PR runs the suite, creates the tag and the GitHub Release, and announces the tag
-to Packagist.
+Release PR, once a reviewer of the `release` environment approves the release run,
+creates the tag and the GitHub Release and announces the tag to Packagist.
 
 ### Manual Publishing (if needed)
 
