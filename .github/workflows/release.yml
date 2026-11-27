@@ -183,6 +183,8 @@ jobs:
       && (needs.tests.result == 'success' || needs.tests.result == 'skipped') }}
     runs-on: { group: github-public-amd64 }
     timeout-minutes: 5
+    # A person approves every release before it is tagged, since Packagist reads a tag as soon as it exists.
+    environment: release
     permissions:
       contents: write
       issues: write
