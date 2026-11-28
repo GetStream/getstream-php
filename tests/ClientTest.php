@@ -159,6 +159,172 @@ class ClientTest extends TestCase
     }
 
     /**
+     * @return array<string, array{string, mixed}>
+     */
+    public static function reservedUserTokenClaims(): array
+    {
+        return [
+            'empty user_id' => ['user_id', ''],
+            'other user_id' => ['user_id', 'other-user'],
+            'server true' => ['server', true],
+            'server false' => ['server', false],
+            'egress' => ['egress', true],
+        ];
+    }
+
+    /**
+     * Other spellings the backend's JSON decoder reads as a claim it uses: case variants,
+     * the long s (U+017F, folds to s) and the Kelvin sign (U+212A, folds to k).
+     *
+     * @return array<string, array{string}>
+     */
+    public static function foldedClaimNames(): array
+    {
+        $names = [
+            'USER_ID', 'User_Id', "u\u{017F}er_id", "\u{017F}erver", 'SERVER', 'Egress',
+            "egre\u{017F}\u{017F}", 'IAT', 'Exp', 'Role', 'Call_CIDs', "stream_chec\u{212A}_writes",
+        ];
+
+        return array_combine($names, array_map(fn ($name) => [$name], $names));
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider foldedClaimNames
+     */
+    public function createUserTokenRejectsFoldedClaimNames(string $claim): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->expectException(StreamException::class);
+        $this->expectExceptionMessage(sprintf('Claim "%s" is read by the backend as', $claim));
+
+        $client->createUserToken('user-123', [$claim => '']);
+    }
+
+    /**
+     * @return array<string, array{mixed}>
+     */
+    public static function invalidIatClaims(): array
+    {
+        return [
+            'zero' => [0],
+            'negative' => [-1],
+            'fraction' => [1.5],
+            'future' => [time() + 3600],
+            'string' => ['1700000000'],
+            'null' => [null],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider invalidIatClaims
+     */
+    public function createUserTokenRejectsInvalidIat(mixed $iat): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->expectException(StreamException::class);
+        $this->expectExceptionMessage('"iat"');
+
+        $client->createUserToken('user-123', ['iat' => $iat]);
+    }
+
+    /**
+     * @test
+     */
+    public function createUserTokenKeepsPastCustomIat(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+        $iat = time() - 60;
+
+        $token = $client->createUserToken('user-123', ['iat' => $iat]);
+
+        $payload = $client->getJWTGenerator()->verifyToken($token);
+        self::assertSame($iat, $payload['iat']);
+    }
+
+    /**
+     * @test
+     */
+    public function createUserTokenPutsUserIdLast(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $token = $client->createUserToken('user-123', ['role' => 'admin', 'zzz' => 'custom'], 3600);
+
+        // The backend's decoder lets the last matching key win, so nothing may follow user_id.
+        $parts = explode('.', $token);
+        $payload = json_decode(base64_decode(strtr($parts[1], '-_', '+/'), true), true);
+        self::assertSame('user-123', $payload['user_id']);
+        self::assertSame('user_id', array_key_last($payload));
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider reservedUserTokenClaims
+     */
+    public function createUserTokenRejectsReservedClaims(string $claim, mixed $value): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+
+        $this->expectException(StreamException::class);
+        $this->expectExceptionMessage(sprintf('"%s" is reserved', $claim));
+
+        $client->createUserToken('user-123', [$claim => $value]);
+    }
+
+    /**
+     * @test
+     */
+    public function createUserTokenExpirationWinsOverCustomExp(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+        $before = time();
+
+        $token = $client->createUserToken('user-123', ['exp' => $before + 100 * 365 * 24 * 3600], 3600);
+
+        $payload = $client->getJWTGenerator()->verifyToken($token);
+        self::assertSame('user-123', $payload['user_id']);
+        self::assertGreaterThanOrEqual($before + 3600, $payload['exp']);
+        self::assertLessThanOrEqual(time() + 3600, $payload['exp']);
+    }
+
+    /**
+     * @test
+     */
+    public function createUserTokenKeepsCustomExpWithoutExpiration(): void
+    {
+        $client = ClientBuilder::fromEnv()
+            ->httpClient($this->mockHttpClient)
+            ->build();
+        $exp = time() + 7200;
+
+        $token = $client->createUserToken('user-123', ['exp' => $exp, 'call_cids' => ['default:call']]);
+
+        $payload = $client->getJWTGenerator()->verifyToken($token);
+        self::assertSame($exp, $payload['exp']);
+        self::assertSame(['default:call'], $payload['call_cids']);
+        self::assertArrayNotHasKey('server', $payload);
+    }
+
+    /**
      * @test
      */
     public function listQueryParamsAreSentCommaSeparated(): void
